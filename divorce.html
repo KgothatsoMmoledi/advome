@@ -69,7 +69,19 @@
 
       state.next.forEach(step => {
         const btn = document.createElement("button");
-        btn.innerText = step;
+        const labels = {
+  plea: "I received a response from my spouse",
+  counterclaim: "My spouse is making their own claim",
+  reply: "I need to respond to their claim",
+  discovery: "We need to exchange documents",
+  preTrial: "Prepare for court discussion",
+  setDown: "Set the case for hearing",
+  trialPrep: "Prepare for court",
+  finalisation: "Finalize the divorce",
+  default: "My spouse did not respond"
+};
+
+btn.innerText = labels[step] || step;
         btn.onclick = () => {
           currentState = step;
           render();
