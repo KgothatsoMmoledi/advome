@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Divorce Navigator</title>
+</head>
+<body>
+
+  <h1>Divorce Navigator</h1>
+
+  <h2>Current Stage:</h2>
+  <p id="stage"></p>
+
+  <h2>Next Steps:</h2>
+  <div id="steps"></div>
+
+  <script>
+    const ruleMap = {
+      summons: {
+        label: "Divorce Summons",
+        next: ["plea", "counterclaim", "default"]
+      },
+      plea: {
+        label: "Plea Filed",
+        next: ["reply", "settlement"]
+      },
+      counterclaim: {
+        label: "Counterclaim Filed",
+        next: ["reply"]
+      },
+      reply: {
+        label: "Reply Filed",
+        next: ["discovery"]
+      },
+      discovery: {
+        label: "Discovery",
+        next: ["preTrial"]
+      },
+      preTrial: {
+        label: "Pre-Trial",
+        next: ["setDown"]
+      },
+      setDown: {
+        label: "Set Down",
+        next: ["trialPrep"]
+      },
+      trialPrep: {
+        label: "Trial Preparation",
+        next: ["finalisation"]
+      },
+      finalisation: {
+        label: "Finalisation",
+        next: []
+      },
+      default: {
+        label: "No Response (Default)",
+        next: ["finalisation"]
+      }
+    };
+
+    let currentState = "summons";
+
+    function render() {
+      const state = ruleMap[currentState];
+
+      document.getElementById("stage").innerText = state.label;
+
+      const stepsDiv = document.getElementById("steps");
+      stepsDiv.innerHTML = "";
+
+      state.next.forEach(step => {
+        const btn = document.createElement("button");
+        btn.innerText = step;
+        btn.onclick = () => {
+          currentState = step;
+          render();
+        };
+        stepsDiv.appendChild(btn);
+      });
+    }
+
+    render();
+  </script>
+
+</body>
+</html>
