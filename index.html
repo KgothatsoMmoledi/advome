@@ -1,10 +1,265 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Advome</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#1a1a1a;
+}
+
+header{
+background:white;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-size:30px;
+font-weight:bold;
+color:#0b2c5f;
+}
+
+nav a{
+text-decoration:none;
+margin-left:30px;
+color:#333;
+font-weight:bold;
+}
+
+.hero{
+padding:100px 8%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:80px;
+}
+
+.left{
+max-width:600px;
+}
+
+.left h1{
+font-size:60px;
+color:#0b2c5f;
+margin-bottom:20px;
+}
+
+.left p{
+font-size:22px;
+line-height:1.7;
+color:#555;
+margin-bottom:40px;
+}
+
+.button{
+display:inline-block;
+background:#0b2c5f;
+color:white;
+padding:18px 35px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+margin-right:15px;
+}
+
+.secondary{
+background:white;
+color:#0b2c5f;
+border:2px solid #0b2c5f;
+}
+
+.dashboard{
+background:white;
+padding:30px;
+border-radius:20px;
+width:500px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.health{
+background:#fff4f4;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.health h3{
+color:red;
+margin-bottom:10px;
+}
+
+.step{
+background:#eef5ff;
+padding:20px;
+border-radius:12px;
+}
+
+.cards{
+display:flex;
+gap:30px;
+padding:80px 8%;
+}
+
+.card{
+flex:1;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.card h2{
+margin-bottom:20px;
+color:#0b2c5f;
+}
+
+.card p{
+line-height:1.7;
+color:#555;
+}
+
+footer{
+background:#0b2c5f;
+color:white;
+padding:40px 8%;
+margin-top:80px;
+}
+
+</style>
 </head>
+
 <body>
-    <h1>Advome</h1>
-    <p>Legal workflow system for self-represented litigants</p>
+
+<header>
+
+<div class="logo">
+Advome
+</div>
+
+<nav>
+<a href="#">Features</a>
+<a href="#">Pricing</a>
+<a href="#">Find Attorneys</a>
+<a href="#">Login</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="left">
+
+<h1>Litigation Intelligence For Everyone.</h1>
+
+<p>
+Navigate court procedures, understand your next steps, manage deadlines and prepare documents with confidence.
+Built for self-represented litigants and legal practitioners.
+</p>
+
+<a class="button" href="#">
+Represent Yourself
+</a>
+
+<a class="button secondary" href="#">
+Attorney Portal
+</a>
+
+</div>
+
+<div class="dashboard">
+
+<div class="health">
+
+<h3>⚠ Case Health Alert</h3>
+
+Answer due in 3 days.<br><br>
+
+Missing:
+<ul>
+<li>Stamped copy confirmation</li>
+<li>Court Online access</li>
+</ul>
+
+</div>
+
+<div class="step">
+
+<h3>Next Step</h3>
+
+Request Court Online access.
+
+Bring your latest court document and ensure your case number is visible.
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cards">
+
+<div class="card">
+
+<h2>Represent Yourself</h2>
+
+<p>
+
+Procedural guidance, document drafting, case health monitoring and hearing preparation designed to promote access to justice.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Legal Practitioners</h2>
+
+<p>
+
+Manage multiple matters with procedural intelligence, deadline alerts and case health monitoring.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Attorney Marketplace</h2>
+
+<p>
+
+Compare attorneys, estimate costs and connect with professionals when representation becomes necessary.
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+Advome © 2026
+
+<br><br>
+
+This platform provides procedural assistance and legal information to promote access to justice. It does not provide legal advice and is not a substitute for a legal practitioner.
+
+</footer>
+
 </body>
 </html>
