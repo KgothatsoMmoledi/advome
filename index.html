@@ -9,58 +9,63 @@
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:#ffffff;
+background:#f5f7fb;
 color:#111;
 }
 
+/* HEADER */
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 8%;
-border-bottom:1px solid #eee;
+background:white;
+border-bottom:1px solid #e6e6e6;
 }
 
 .logo{
-font-size:24px;
+font-size:26px;
 font-weight:bold;
-color:#1a3d7c;
+color:#0b2c5f;
+letter-spacing:0.5px;
 }
 
 nav a{
-margin-left:20px;
+margin-left:18px;
 text-decoration:none;
-color:#444;
+color:#333;
 font-weight:500;
 }
 
+/* HERO */
 .hero{
-padding:80px 8%;
 display:flex;
 justify-content:space-between;
+align-items:flex-start;
+padding:90px 8%;
 gap:60px;
 }
 
-.hero-text{
-max-width:600px;
+.hero-left{
+max-width:620px;
 }
 
-.hero-text h1{
-font-size:52px;
+.hero-left h1{
+font-size:56px;
+color:#0b2c5f;
 margin-bottom:20px;
-color:#0f2f66;
 }
 
-.hero-text p{
+.hero-left p{
 font-size:20px;
-line-height:1.6;
+line-height:1.7;
 color:#555;
 margin-bottom:30px;
 }
 
 .buttons a{
 display:inline-block;
-padding:14px 24px;
+padding:14px 26px;
 margin-right:10px;
 border-radius:10px;
 text-decoration:none;
@@ -68,63 +73,76 @@ font-weight:bold;
 }
 
 .primary{
-background:#1a3d7c;
+background:#0b2c5f;
 color:white;
 }
 
 .secondary{
-border:1px solid #1a3d7c;
-color:#1a3d7c;
+border:2px solid #0b2c5f;
+color:#0b2c5f;
+background:white;
 }
 
+/* DASHBOARD PANEL */
 .panel{
-background:#f7f9fc;
+width:380px;
+background:white;
+border-radius:16px;
 padding:25px;
-border-radius:14px;
-width:350px;
-border:1px solid #e6eaf0;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.status{
+.alert{
+background:#fff1f1;
 padding:15px;
-background:#fff5f5;
-border-radius:10px;
+border-radius:12px;
 margin-bottom:15px;
+border:1px solid #ffd6d6;
 }
 
-.status h4{
+.alert h4{
 margin:0;
 color:#c0392b;
 }
 
-.next{
-padding:15px;
+.step{
 background:#eef4ff;
-border-radius:10px;
+padding:15px;
+border-radius:12px;
+border:1px solid #dbe6ff;
 }
 
+/* CARDS */
 .cards{
 display:flex;
 gap:20px;
-padding:60px 8%;
+padding:70px 8%;
 }
 
 .card{
 flex:1;
+background:white;
 padding:25px;
-border:1px solid #eee;
-border-radius:14px;
+border-radius:16px;
+border:1px solid #eaeaea;
+box-shadow:0 6px 18px rgba(0,0,0,0.04);
 }
 
 .card h3{
-color:#1a3d7c;
+color:#0b2c5f;
 }
 
+/* FOOTER */
 footer{
+background:#0b2c5f;
+color:white;
 padding:40px 8%;
-border-top:1px solid #eee;
-color:#666;
-font-size:14px;
+margin-top:60px;
+}
+
+footer p{
+opacity:0.9;
+line-height:1.6;
 }
 </style>
 
@@ -138,39 +156,39 @@ font-size:14px;
 <nav>
 <a href="#">Self Help</a>
 <a href="#">Attorney Portal</a>
-<a href="#">Cases</a>
+<a href="#">Case Dashboard</a>
 <a href="#">Pricing</a>
 </nav>
 </header>
 
 <section class="hero">
 
-<div class="hero-text">
+<div class="hero-left">
 
-<h1>Understand your case. Control your process.</h1>
+<h1>Legal clarity. Procedural control. Real outcomes.</h1>
 
 <p>
-Advome is a procedural intelligence system that helps self-represented litigants and legal practitioners navigate court processes, deadlines, and legal documentation.
+Advome is a jurisdiction-aware litigation system that helps self-represented litigants and legal practitioners understand case status, manage deadlines, and prepare court documents with precision.
 </p>
 
 <div class="buttons">
-<a href="#" class="primary">Start Case</a>
-<a href="#" class="secondary">Attorney Portal</a>
+<a href="#" class="primary">Start Your Case</a>
+<a href="#" class="secondary">Attorney Access</a>
 </div>
 
 </div>
 
 <div class="panel">
 
-<div class="status">
-<h4>Case Health: High Risk</h4>
-<p>Answer deadline in 3 days</p>
+<div class="alert">
+<h4>Case Health Alert</h4>
+<p><strong>Urgent:</strong> Response due in 3 days</p>
 <p>Missing: Stamped filing confirmation</p>
 </div>
 
-<div class="next">
+<div class="step">
 <strong>Next Step</strong>
-<p>Request Court Online access from registrar.</p>
+<p>Go to the registrar and request Court Online access using your latest served document and case number.</p>
 </div>
 
 </div>
@@ -180,25 +198,27 @@ Advome is a procedural intelligence system that helps self-represented litigants
 <section class="cards">
 
 <div class="card">
-<h3>Self-Represented Portal</h3>
-<p>Guided litigation support, document drafting, case tracking, and procedural assistance.</p>
+<h3>Self-Represented Litigants</h3>
+<p>Step-by-step procedural guidance, document drafting, and hearing preparation tailored to your jurisdiction.</p>
 </div>
 
 <div class="card">
 <h3>Legal Practitioners</h3>
-<p>Manage multiple cases with urgency tracking, case health scoring, and procedural workflow tools.</p>
+<p>Case management tools with urgency tracking, procedural intelligence, and multi-matter dashboards.</p>
 </div>
 
 <div class="card">
 <h3>Attorney Marketplace</h3>
-<p>Find and compare attorneys based on experience, specialization, and case relevance.</p>
+<p>Connect with verified attorneys, compare experience, and understand estimated legal costs.</p>
 </div>
 
 </section>
 
 <footer>
+<p>
 Advome © 2026<br><br>
-This platform provides procedural legal assistance and general information to support access to justice. It does not provide legal advice.
+This platform provides procedural assistance and legal information to promote access to justice. It does not provide legal advice.
+</p>
 </footer>
 
 </body>
