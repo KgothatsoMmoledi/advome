@@ -37,7 +37,7 @@
     <div class="row">
       <div>
         <label>Matrimonial Property System</label>
-        <select id="propertySystem">
+        <select id="propertySystem" onchange="onAnyChange()">
           <option value="">Select</option>
           <option value="inCommunity">In Community of Property</option>
           <option value="outCommunityAccrual">Out of Community with Accrual</option>
@@ -46,21 +46,21 @@
         </select>
 
         <label>Assets</label>
-        <input id="assets" type="text" placeholder="House, cars, business, savings" />
+        <input id="assets" type="text" placeholder="House, cars, business, savings" oninput="onAnyChange()" />
 
         <label>Pensions</label>
-        <input id="pensions" type="text" placeholder="Pension interests, retirement funds" />
+        <input id="pensions" type="text" placeholder="Pension interests, retirement funds" oninput="onAnyChange()" />
       </div>
 
       <div>
         <label>Division Proposal</label>
-        <input id="divisionProposal" type="text" placeholder="How should assets be divided?" />
+        <input id="divisionProposal" type="text" placeholder="How should assets be divided?" oninput="onAnyChange()" />
 
         <label>Maintenance</label>
-        <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" />
+        <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" oninput="onAnyChange()" />
 
         <label>Minor Children</label>
-        <select id="minorChildren" onchange="toggleChildrenBranch(); updateSettlementStatus(); updateChildrenStatus(); updateCaseHealth();">
+        <select id="minorChildren" onchange="toggleChildrenBranch(); onAnyChange();">
           <option value="">Select</option>
           <option value="yes">Yes</option>
           <option value="no">No</option>
@@ -69,7 +69,7 @@
     </div>
 
     <label>
-      <input id="familyAdvocateApproval" type="checkbox" onchange="updateSettlementStatus(); updateCaseHealth();" />
+      <input id="familyAdvocateApproval" type="checkbox" onchange="onAnyChange()" />
       Family Advocate approval / endorsement obtained
     </label>
 
@@ -85,28 +85,28 @@
     <div class="row">
       <div>
         <label>Care / Residence</label>
-        <input id="childCare" type="text" placeholder="Who will the children live with?" />
+        <input id="childCare" type="text" placeholder="Who will the children live with?" oninput="onAnyChange()" />
 
         <label>Contact / Access</label>
-        <input id="childContact" type="text" placeholder="Weekend, holiday, or shared contact arrangement" />
+        <input id="childContact" type="text" placeholder="Weekend, holiday, or shared contact arrangement" oninput="onAnyChange()" />
 
         <label>Guardianship</label>
-        <input id="childGuardianship" type="text" placeholder="Guardianship agreement or issue" />
+        <input id="childGuardianship" type="text" placeholder="Guardianship agreement or issue" oninput="onAnyChange()" />
       </div>
 
       <div>
         <label>Child Maintenance</label>
-        <input id="childMaintenance" type="text" placeholder="Monthly maintenance, school fees, medical aid" />
+        <input id="childMaintenance" type="text" placeholder="Monthly maintenance, school fees, medical aid" oninput="onAnyChange()" />
 
         <label>Family Advocate Required</label>
-        <select id="familyAdvocateRequired" onchange="updateChildrenStatus(); updateCaseHealth();">
+        <select id="familyAdvocateRequired" onchange="onAnyChange()">
           <option value="">Select</option>
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
 
         <label>
-          <input id="familyAdvocateChildrenApproval" type="checkbox" onchange="updateChildrenStatus(); updateCaseHealth();" />
+          <input id="familyAdvocateChildrenApproval" type="checkbox" onchange="onAnyChange()" />
           Family Advocate approval for children issues obtained
         </label>
       </div>
@@ -180,6 +180,7 @@
         btn.onclick = () => {
           currentState = step;
           render();
+          saveState();
         };
         stepsDiv.appendChild(btn);
       });
@@ -203,6 +204,7 @@
       toggleChildrenBranch();
       updateChildrenStatus();
       updateCaseHealth();
+      saveState();
     }
 
     function saveChildrenDetails() {
@@ -215,6 +217,7 @@
 
       updateChildrenStatus();
       updateCaseHealth();
+      saveState();
     }
 
     function toggleChildrenBranch() {
@@ -327,7 +330,58 @@
       document.getElementById("caseHealth").innerText = status;
     }
 
-    render();
+    function saveState() {
+      localStorage.setItem("advome_divorce_state", JSON.stringify({
+        currentState,
+        settlement,
+        children
+      }));
+    }
+
+    function loadState() {
+      const saved = localStorage.getItem("advome_divorce_state");
+      if (!saved) {
+        render();
+        return;
+      }
+
+      try {
+        const data = JSON.parse(saved);
+        currentState = data.currentState || "summons";
+
+        Object.assign(settlement, data.settlement || {});
+        Object.assign(children, data.children || {});
+
+        document.getElementById("propertySystem").value = settlement.propertySystem || "";
+        document.getElementById("assets").value = settlement.assets || "";
+        document.getElementById("divisionProposal").value = settlement.divisionProposal || "";
+        document.getElementById("pensions").value = settlement.pensions || "";
+        document.getElementById("maintenance").value = settlement.maintenance || "";
+        document.getElementById("minorChildren").value = settlement.minorChildren || "";
+        document.getElementById("familyAdvocateApproval").checked = !!settlement.familyAdvocateApproval;
+
+        document.getElementById("childCare").value = children.childCare || "";
+        document.getElementById("childContact").value = children.childContact || "";
+        document.getElementById("childGuardianship").value = children.childGuardianship || "";
+        document.getElementById("childMaintenance").value = children.childMaintenance || "";
+        document.getElementById("familyAdvocateRequired").value = children.familyAdvocateRequired || "";
+        document.getElementById("familyAdvocateChildrenApproval").checked = !!children.familyAdvocateChildrenApproval;
+
+        render();
+      } catch (e) {
+        render();
+      }
+    }
+
+    function onAnyChange() {
+      updateSettlementStatus();
+      toggleChildrenBranch();
+      updateChildrenStatus();
+      updateCaseHealth();
+      saveState();
+    }
+
+    loadState();
   </script>
 </body>
 </html>
