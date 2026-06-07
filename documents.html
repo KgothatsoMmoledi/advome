@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advome | Documents</title>
+
+<style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --text:#111827;
+  --muted:#6b7280;
+  --accent:#0b2c5f;
+  --accent-2:#eef4ff;
+  --danger:#fef2f2;
+  --warning:#fff7e6;
+  --success:#ecfdf5;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+header{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:20px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:700;
+  color:var(--accent);
+}
+
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:flex-end;
+}
+
+nav a{
+  text-decoration:none;
+  color:#374151;
+  font-weight:600;
+  padding:8px 10px;
+  border-radius:10px;
+}
+
+nav a:hover{
+  background:#f3f4f6;
+}
+
+.wrap{
+  max-width:1280px;
+  margin:0 auto;
+  padding:32px 8% 60px;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:20px;
+  align-items:start;
+  margin-bottom:18px;
+}
+
+.hero-left,
+.hero-right,
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(17,24,39,.04);
+}
+
+.hero-left{
+  padding:26px;
+}
+
+.hero-left h1{
+  margin:0 0 12px;
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:1.04;
+  color:var(--accent);
+  letter-spacing:-0.03em;
+}
+
+.hero-left p{
+  margin:0;
+  color:var(--muted);
+  max-width:820px;
+  font-size:1.02rem;
+  line-height:1.7;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn.primary{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.btn.soft{
+  background:var(--accent-2);
+  color:var(--accent);
+  border-color:#d8e3f5;
+}
+
+.hero-right{
+  padding:22px;
+}
+
+.health-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.health-title h2{
+  margin:0;
+  font-size:1.12rem;
+  color:var(--accent);
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.86rem;
+  white-space:nowrap;
+}
+
+.pill.red{ background:var(--danger); color:#b91c1c; }
+.pill.orange{ background:var(--warning); color:#b45309; }
+.pill.green{ background:var(--success); color:#047857; }
+
+.health-meter{
+  height:14px;
+  border-radius:999px;
+  background:#e5e7eb;
+  overflow:hidden;
+  margin:12px 0 14px;
+}
+
+.health-fill{
+  width:68%;
+  height:100%;
+  background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981);
+  border-radius:999px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:12px;
+}
+
+.stat{
+  padding:14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.stat .label{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:5px;
+}
+
+.stat .value{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--accent);
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+
+.sidebar,
+.section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(17,24,39,.04);
+}
+
+.sidebar{
+  padding:18px;
+  position:sticky;
+  top:96px;
+}
+
+.sidebar h2,
+.section h2{
+  margin:0 0 12px;
+  color:var(--accent);
+  font-size:1.18rem;
+}
+
+.sidebar p{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:.96rem;
+}
+
+.timeline{
+  display:grid;
+  gap:10px;
+}
+
+.step{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.step .name{
+  font-weight:700;
+  color:var(--text);
+}
+
+.step .status{
+  font-size:.84rem;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.step.active{
+  border-color:#cfe0ff;
+  background:var(--accent-2);
+}
+
+.step.active .status{
+  color:var(--accent);
+  font-weight:700;
+}
+
+.step.done{
+  background:var(--success);
+  border-color:#c9f0de;
+}
+
+.step.done .status{
+  color:#047857;
+  font-weight:700;
+}
+
+.step.blocked{
+  background:var(--danger);
+  border-color:#ffd5d5;
+}
+
+.step.blocked .status{
+  color:#b91c1c;
+  font-weight:700;
+}
+
+.section{
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.section p{
+  color:var(--muted);
+  margin-top:0;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.mini{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  background:#fff;
+}
+
+.mini h3{
+  margin:0 0 8px;
+  color:var(--accent);
+  font-size:1.02rem;
+}
+
+.mini ul{
+  margin:0;
+  padding-left:18px;
+  color:var(--text);
+}
+
+.mini li{ margin-bottom:5px; }
+
+.subtle{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+.tag{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-size:.86rem;
+  color:#374151;
+  font-weight:600;
+}
+
+.callout{
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.callout.red{ background:var(--danger); border-color:#ffd6d6; }
+.callout.orange{ background:var(--warning); border-color:#ffe0b2; }
+.callout.green{ background:var(--success); border-color:#c8eedb; }
+.callout.blue{ background:var(--accent-2); border-color:#dbe6ff; }
+
+.callout strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--accent);
+}
+
+.field-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.field{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px;
+  background:#fff;
+}
+
+.field .label{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:5px;
+}
+
+.field .value{
+  font-weight:700;
+  color:var(--text);
+}
+
+.upload-box{
+  border:2px dashed #cfd8e3;
+  background:#fbfcfe;
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.upload-box strong{
+  color:var(--accent);
+  display:block;
+  margin-bottom:8px;
+  font-size:1.02rem;
+}
+
+.docs-table{
+  width:100%;
+  border-collapse:collapse;
+  overflow:hidden;
+  border-radius:14px;
+  margin-top:10px;
+}
+
+.docs-table th,
+.docs-table td{
+  text-align:left;
+  padding:12px 10px;
+  border-bottom:1px solid var(--border);
+  vertical-align:top;
+}
+
+.docs-table th{
+  background:#fafafa;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.faq{
+  display:grid;
+  gap:10px;
+}
+
+.faq-item{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  background:#fff;
+}
+
+.faq-item summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+}
+
+.faq-item p{
+  margin:10px 0 0;
+  color:var(--muted);
+}
+
+.footer{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.6;
+}
+
+@media (max-width: 1100px){
+  .hero,
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    position:static;
+  }
+}
+
+@media (max-width: 760px){
+  .grid-2,
+  .field-grid,
+  .stat-grid{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    padding:18px 5%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .wrap{
+    padding:22px 5% 50px;
+  }
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Advome</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="start.html">Matter Portal</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="attorney.html">Attorney Portal</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Documents Centre</h1>
+        <p>
+          Upload, classify, and track court documents for the active matter. Advome uses the documents to identify the case stage, detect missing items, and keep the next-step panel accurate.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#upload">Upload Documents</a>
+          <a class="btn soft" href="#list">View Document List</a>
+          <a class="btn" href="#questions">Ask a Question</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="health-title">
+          <h2>Document Health</h2>
+          <span class="pill orange">Needs Review</span>
+        </div>
+        <div class="health-meter"><div class="health-fill"></div></div>
+        <div class="subtle">The system should warn if the file set is incomplete or if an important document is missing.</div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="label">Uploaded</div>
+            <div class="value">4</div>
+          </div>
+          <div class="stat">
+            <div class="label">Missing</div>
+            <div class="value">2</div>
+          </div>
+          <div class="stat">
+            <div class="label">Classified</div>
+            <div class="value">3</div>
+          </div>
+          <div class="stat">
+            <div class="label">Unreadable</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Document Stage Map</h2>
+        <p>The app uses document type to determine where the matter sits in the rule map.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Detected</span></div>
+          <div class="step done"><span class="name">Response</span><span class="status">Detected</span></div>
+          <div class="step active"><span class="name">Settlement</span><span class="status">Open</span></div>
+          <div class="step"><span class="name">Children / Family Advocate</span><span class="status">If needed</span></div>
+          <div class="step"><span class="name">Discovery</span><span class="status">Upcoming</span></div>
+          <div class="step"><span class="name">Pre-trial</span><span class="status">Upcoming</span></div>
+          <div class="step"><span class="name">Set-down</span><span class="status">Upcoming</span></div>
+          <div class="step"><span class="name">Trial Prep</span><span class="status">Upcoming</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next Step Panel</strong>
+          If a key document is missing, the dashboard should show exactly what still needs to be uploaded or confirmed.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="upload">
+          <h2>1. Upload documents</h2>
+          <p>
+            Users should be able to add the core documents for the current matter. The system can later read and classify each upload.
+          </p>
+
+          <div class="upload-box">
+            <strong>Drop files here</strong>
+            PDF, image, or scanned court document
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Expected file types</h3>
+              <ul>
+                <li>Summons</li>
+                <li>Plea</li>
+                <li>Counterclaim</li>
+                <li>Reply</li>
+                <li>Settlement agreement</li>
+                <li>Discovery documents</li>
+                <li>Pre-trial notices</li>
+                <li>Set-down notices</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>What the system extracts</h3>
+              <ul>
+                <li>Case number</li>
+                <li>Parties</li>
+                <li>Dates</li>
+                <li>Court name</li>
+                <li>Document type</li>
+                <li>Missing items</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="list">
+          <h2>2. Document list</h2>
+          <p>
+            The document list should show all uploaded items, their status, and what they affect in the case workflow.
+          </p>
+
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Status</th>
+                <th>Effect</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Summons</td>
+                <td><span class="tag">Classified</span></td>
+                <td>Opens the matter</td>
+                <td>Case number detected</td>
+              </tr>
+              <tr>
+                <td>Plea</td>
+                <td><span class="tag">Classified</span></td>
+                <td>Moves into response branch</td>
+                <td>Counterclaim possible</td>
+              </tr>
+              <tr>
+                <td>Settlement agreement</td>
+                <td><span class="tag">Pending</span></td>
+                <td>Can mark settlement-ready</td>
+                <td>Children review may still be required</td>
+              </tr>
+              <tr>
+                <td>Discovery affidavit</td>
+                <td><span class="tag">Missing</span></td>
+                <td>Needed for discovery branch</td>
+                <td>Should trigger warning</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tag-row">
+            <span class="tag">Missing docs tracked</span>
+            <span class="tag">Stage-linked</span>
+            <span class="tag">Readiness-aware</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>3. Settlement and children document branch</h2>
+          <p>
+            These documents determine whether the matter can move to an easier hearing-prep path.
+          </p>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">Matrimonial property system</div><div class="value">Captured from settlement</div></div>
+            <div class="field"><div class="label">Assets division</div><div class="value">Captured / pending</div></div>
+            <div class="field"><div class="label">Minor children</div><div class="value">Yes / No</div></div>
+            <div class="field"><div class="label">Family Advocate approval</div><div class="value">Pending / complete</div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout green">
+            <strong>Settlement-ready rule</strong>
+            If the settlement documents are complete and the children branch is satisfied where required, the matter can be marked as ready for a simplified path to hearing preparation.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>4. Court procedure support</h2>
+          <p>
+            The document centre should also guide the user on what to do if a paper is filed, stamped, rejected, or still missing.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Filing-related checks</h3>
+              <ul>
+                <li>Stamped copy available?</li>
+                <li>Court Online access confirmed?</li>
+                <li>Physical filing required?</li>
+                <li>Set-down email needed?</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Warnings</h3>
+              <ul>
+                <li>Deadline close</li>
+                <li>Missing signature</li>
+                <li>Unreadable scan</li>
+                <li>Wrong court format</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="questions">
+          <h2>5. Questions panel</h2>
+          <p>The user should be able to ask what each document means and what it affects in the case.</p>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>What document am I missing?</summary>
+              <p>The system should compare the active case stage to the uploads and highlight the missing item.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Why is my document unreadable?</summary>
+              <p>The system should flag poor scans, blurry text, or incomplete pages so the user can re-upload a better copy.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>What if settlement is complete?</summary>
+              <p>The dashboard can shift to a settlement-ready path and reduce the later hearing-prep burden.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="footer">
+          This document centre is part of procedural assistance and access-to-justice support. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
