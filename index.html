@@ -1,246 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --border: #dedede;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #111827;
+      --button: #f5f5f5;
+    }
 
-<style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#f5f7fb;
-color:#111;
-}
+    * { box-sizing: border-box; }
 
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:white;
-border-bottom:1px solid #e6e6e6;
-}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-color:#0b2c5f;
-}
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
 
-nav a{
-margin-left:18px;
-text-decoration:none;
-color:#333;
-font-weight:500;
-}
+    .hero {
+      padding: 24px 0 12px;
+    }
 
-/* HERO */
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-padding:90px 8%;
-gap:60px;
-}
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
 
-.hero-left{
-max-width:620px;
-}
+    .subtitle {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
 
-.hero-left h1{
-font-size:56px;
-color:#0b2c5f;
-margin-bottom:20px;
-}
+    .disclaimer {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
 
-.hero-left p{
-font-size:20px;
-line-height:1.7;
-color:#555;
-margin-bottom:30px;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
 
-/* BUTTONS */
-.buttons a{
-display:inline-block;
-padding:14px 26px;
-margin-right:10px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.primary{
-background:#0b2c5f;
-color:white;
-}
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
 
-.secondary{
-border:2px solid #0b2c5f;
-color:#0b2c5f;
-background:white;
-}
+    .card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
 
-/* DASHBOARD PANEL */
-.panel{
-width:380px;
-background:white;
-border-radius:16px;
-padding:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
 
-/* STATUS COLORS */
-.alert-red{
-background:#fff1f1;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
-border:1px solid #ffd6d6;
-}
+    a.button,
+    button.button {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #cfcfcf;
+      background: var(--button);
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
 
-.alert-red h4{
-margin:0;
-color:#c0392b;
-}
+    a.button:hover,
+    button.button:hover {
+      background: #ececec;
+    }
 
-.alert-orange{
-background:#fff7e6;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
-border:1px solid #ffe0b2;
-}
+    .section {
+      margin-top: 28px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
 
-.alert-orange h4{
-margin:0;
-color:#d35400;
-}
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
 
-.step{
-background:#eef4ff;
-padding:15px;
-border-radius:12px;
-border:1px solid #dbe6ff;
-}
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 18px;
+      padding-left: 18px;
+      margin: 0;
+    }
 
-/* CARDS */
-.cards{
-display:flex;
-gap:20px;
-padding:70px 8%;
-}
+    .features li {
+      color: var(--text);
+    }
 
-.card{
-flex:1;
-background:white;
-padding:25px;
-border-radius:16px;
-border:1px solid #eaeaea;
-box-shadow:0 6px 18px rgba(0,0,0,0.04);
-}
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-bottom: 10px;
+    }
 
-.card h3{
-color:#0b2c5f;
-}
-
-/* FOOTER */
-footer{
-background:#0b2c5f;
-color:white;
-padding:40px 8%;
-margin-top:60px;
-}
-
-footer p{
-opacity:0.9;
-line-height:1.6;
-}
-</style>
-
+    @media (max-width: 900px) {
+      .grid,
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Advome</h1>
+      <p class="subtitle">
+        A legal workflow platform for self-represented litigants. It helps users understand court papers, follow procedure, prepare documents, and get ready for hearing or trial.
+      </p>
+      <div class="disclaimer">
+        Information only, not legal advice. Users remain responsible for reviewing all documents and complying with the rules of the relevant court and jurisdiction.
+      </div>
+    </header>
 
-<header>
-<div class="logo">Advome</div>
+    <section class="grid" aria-label="Main actions">
+      <div class="card">
+        <div>
+          <h2>Divorce Navigator</h2>
+          <p>Track divorce procedure, settlement status, children issues, checklist items, and hearing readiness.</p>
+        </div>
+        <div class="btn-row">
+          <a class="button" href="/divorce.html">Open Divorce</a>
+        </div>
+      </div>
 
-<nav>
-<a href="start.html">Represent Myself</a>
-<a href="attorney.html">Attorney Portal</a>
-<a href="dashboard.html">Case Dashboard</a>
-<a href="#">Pricing</a>
-</nav>
-</header>
+      <div class="card">
+        <div>
+          <h2>Attorney Directory</h2>
+          <p>Collect attorney listings, practice areas, and contact details for future marketplace use.</p>
+        </div>
+        <div class="btn-row">
+          <a class="button" href="/attorney.html">Open Attorney Page</a>
+        </div>
+      </div>
 
-<section class="hero">
+      <div class="card">
+        <div>
+          <h2>CCMA Navigator</h2>
+          <p>Reserved for labour and CCMA workflow support. This page can be added next.</p>
+        </div>
+        <div class="btn-row">
+          <button class="button" type="button" disabled>Coming Soon</button>
+        </div>
+      </div>
+    </section>
 
-<div class="hero-left">
+    <section class="section">
+      <h2>What Advome does</h2>
+      <ul class="features">
+        <li>Identifies the current procedural stage</li>
+        <li>Shows the next legal step</li>
+        <li>Supports settlement tracking</li>
+        <li>Handles children-related divorce issues</li>
+        <li>Builds document checklists per stage</li>
+        <li>Tracks case health and readiness</li>
+        <li>Prepares hearing and trial notes</li>
+        <li>Creates a path to attorney referral later</li>
+      </ul>
+    </section>
 
-<h1>Legal clarity. Procedural control. Real outcomes.</h1>
+    <section class="section">
+      <h2>How to use the site</h2>
+      <p>
+        Start with the divorce module if you are building the first working version. Add attorney listings after that, then expand into CCMA and other workflows.
+      </p>
+    </section>
 
-<p>
-Advome is a jurisdiction-aware litigation system that helps self-represented litigants and legal practitioners understand case status, manage deadlines, and prepare court documents with precision.
-</p>
-
-<div class="buttons">
-<a href="start.html" class="primary">Represent Myself</a>
-<a href="attorney.html" class="secondary">Attorney Portal</a>
-</div>
-
-</div>
-
-<div class="panel">
-
-<div class="alert-red">
-<h4>Case Health: Critical</h4>
-<p><strong>Urgent:</strong> Response due in 3 days</p>
-<p>Missing: Stamped filing confirmation</p>
-</div>
-
-<div class="alert-orange">
-<h4>Attention</h4>
-<p>Court Online access not confirmed</p>
-</div>
-
-<div class="step">
-<strong>Next Step</strong>
-<p>
-Go to the registrar with your latest served document and case number to request Court Online access. Escalate to court manager if delayed.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="cards">
-
-<div class="card">
-<h3>Self-Represented Litigants</h3>
-<p>Step-by-step procedural guidance, document drafting, and hearing preparation tailored to your jurisdiction.</p>
-</div>
-
-<div class="card">
-<h3>Legal Practitioners</h3>
-<p>Case management tools with urgency tracking, procedural intelligence, and multi-matter dashboards.</p>
-</div>
-
-<div class="card">
-<h3>Attorney Marketplace</h3>
-<p>Connect with verified attorneys, compare experience, and understand estimated legal costs.</p>
-</div>
-
-</section>
-
-<footer>
-<p>
-Advome © 2026<br><br>
-This platform provides procedural assistance and legal information to promote access to justice. It does not provide legal advice.
-</p>
-</footer>
-
+    <div class="footer">
+      Advome is designed to support access to justice and reduce confusion around litigation procedure.
+    </div>
+  </div>
 </body>
 </html>
