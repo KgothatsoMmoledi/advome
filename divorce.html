@@ -3,17 +3,25 @@
 <head>
   <title>Divorce Navigator</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; }
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; background: #fafafa; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-top: 16px; background: #fff; }
     button { margin: 6px 6px 6px 0; padding: 10px 14px; cursor: pointer; border: 1px solid #999; border-radius: 8px; background: #f7f7f7; }
-    input, select { padding: 8px; margin: 6px 0 12px; width: 100%; max-width: 420px; }
+    input, select, textarea { padding: 8px; margin: 6px 0 12px; width: 100%; max-width: 520px; box-sizing: border-box; }
     label { display: block; margin-top: 10px; font-weight: bold; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .status { font-weight: bold; }
+    .hidden { display: none; }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-top: 0; }
   </style>
 </head>
 <body>
   <h1>Divorce Navigator</h1>
+
+  <div class="card">
+    <h2>Case Health</h2>
+    <p id="caseHealth">Checking...</p>
+  </div>
 
   <div class="card">
     <h2>Current Stage</h2>
@@ -52,7 +60,7 @@
         <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" />
 
         <label>Minor Children</label>
-        <select id="minorChildren">
+        <select id="minorChildren" onchange="toggleChildrenBranch(); updateSettlementStatus(); updateChildrenStatus(); updateCaseHealth();">
           <option value="">Select</option>
           <option value="yes">Yes</option>
           <option value="no">No</option>
@@ -61,7 +69,7 @@
     </div>
 
     <label>
-      <input id="familyAdvocateApproval" type="checkbox" />
+      <input id="familyAdvocateApproval" type="checkbox" onchange="updateSettlementStatus(); updateCaseHealth();" />
       Family Advocate approval / endorsement obtained
     </label>
 
@@ -71,52 +79,58 @@
     <p id="settlementSummary"></p>
   </div>
 
+  <div class="card hidden" id="childrenCard">
+    <h2>Children Branch</h2>
+
+    <div class="row">
+      <div>
+        <label>Care / Residence</label>
+        <input id="childCare" type="text" placeholder="Who will the children live with?" />
+
+        <label>Contact / Access</label>
+        <input id="childContact" type="text" placeholder="Weekend, holiday, or shared contact arrangement" />
+
+        <label>Guardianship</label>
+        <input id="childGuardianship" type="text" placeholder="Guardianship agreement or issue" />
+      </div>
+
+      <div>
+        <label>Child Maintenance</label>
+        <input id="childMaintenance" type="text" placeholder="Monthly maintenance, school fees, medical aid" />
+
+        <label>Family Advocate Required</label>
+        <select id="familyAdvocateRequired" onchange="updateChildrenStatus(); updateCaseHealth();">
+          <option value="">Select</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <label>
+          <input id="familyAdvocateChildrenApproval" type="checkbox" onchange="updateChildrenStatus(); updateCaseHealth();" />
+          Family Advocate approval for children issues obtained
+        </label>
+      </div>
+    </div>
+
+    <button onclick="saveChildrenDetails()">Save Children Details</button>
+
+    <p class="status" id="childrenStatus">Children status: not applicable</p>
+    <p id="childrenSummary"></p>
+  </div>
+
   <script>
     const ruleMap = {
-      summons: {
-        label: "Divorce Summons",
-        next: ["plea", "counterclaim", "default"]
-      },
-      plea: {
-        label: "Plea Filed",
-        next: ["reply", "settlement", "discovery"]
-      },
-      counterclaim: {
-        label: "Counterclaim Filed",
-        next: ["reply", "settlement"]
-      },
-      reply: {
-        label: "Reply Filed",
-        next: ["discovery", "settlement"]
-      },
-      discovery: {
-        label: "Discovery",
-        next: ["preTrial", "settlement"]
-      },
-      preTrial: {
-        label: "Pre-Trial",
-        next: ["setDown", "settlement"]
-      },
-      setDown: {
-        label: "Set Down",
-        next: ["trialPrep"]
-      },
-      trialPrep: {
-        label: "Trial Preparation",
-        next: ["finalisation"]
-      },
-      finalisation: {
-        label: "Finalisation",
-        next: []
-      },
-      default: {
-        label: "No Response (Default)",
-        next: ["finalisation"]
-      },
-      settlement: {
-        label: "Settlement",
-        next: ["preTrial", "finalisation"]
-      }
+      summons: { label: "Divorce Summons", next: ["plea", "counterclaim", "default"] },
+      plea: { label: "Plea Filed", next: ["reply", "settlement", "discovery"] },
+      counterclaim: { label: "Counterclaim Filed", next: ["reply", "settlement"] },
+      reply: { label: "Reply Filed", next: ["discovery", "settlement"] },
+      discovery: { label: "Discovery", next: ["preTrial", "settlement"] },
+      preTrial: { label: "Pre-Trial", next: ["setDown", "settlement"] },
+      setDown: { label: "Set Down", next: ["trialPrep"] },
+      trialPrep: { label: "Trial Preparation", next: ["finalisation"] },
+      finalisation: { label: "Finalisation", next: [] },
+      default: { label: "No Response (Default)", next: ["finalisation"] },
+      settlement: { label: "Settlement", next: ["preTrial", "finalisation"] }
     };
 
     const labels = {
@@ -144,6 +158,15 @@
       familyAdvocateApproval: false
     };
 
+    const children = {
+      childCare: "",
+      childContact: "",
+      childGuardianship: "",
+      childMaintenance: "",
+      familyAdvocateRequired: "",
+      familyAdvocateChildrenApproval: false
+    };
+
     function render() {
       const state = ruleMap[currentState];
       document.getElementById("stage").innerText = state.label;
@@ -162,6 +185,9 @@
       });
 
       updateSettlementStatus();
+      toggleChildrenBranch();
+      updateChildrenStatus();
+      updateCaseHealth();
     }
 
     function saveSettlement() {
@@ -174,6 +200,32 @@
       settlement.familyAdvocateApproval = document.getElementById("familyAdvocateApproval").checked;
 
       updateSettlementStatus();
+      toggleChildrenBranch();
+      updateChildrenStatus();
+      updateCaseHealth();
+    }
+
+    function saveChildrenDetails() {
+      children.childCare = document.getElementById("childCare").value;
+      children.childContact = document.getElementById("childContact").value;
+      children.childGuardianship = document.getElementById("childGuardianship").value;
+      children.childMaintenance = document.getElementById("childMaintenance").value;
+      children.familyAdvocateRequired = document.getElementById("familyAdvocateRequired").value;
+      children.familyAdvocateChildrenApproval = document.getElementById("familyAdvocateChildrenApproval").checked;
+
+      updateChildrenStatus();
+      updateCaseHealth();
+    }
+
+    function toggleChildrenBranch() {
+      const minorChildren = document.getElementById("minorChildren").value;
+      const card = document.getElementById("childrenCard");
+
+      if (minorChildren === "yes") {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
     }
 
     function updateSettlementStatus() {
@@ -196,10 +248,83 @@
 
       document.getElementById("settlementStatus").innerText = text;
 
+      const childrenFlag = settlement.minorChildren === "yes" ? "yes" : "no";
+
       document.getElementById("settlementSummary").innerText =
-        `Children: ${settlement.minorChildren || "not selected"} | ` +
+        `Children: ${childrenFlag || "not selected"} | ` +
         `Property system: ${settlement.propertySystem || "not selected"} | ` +
         `Family Advocate approval: ${settlement.familyAdvocateApproval ? "yes" : "no"}`;
+    }
+
+    function updateChildrenStatus() {
+      const visible = document.getElementById("minorChildren").value === "yes";
+      if (!visible) {
+        document.getElementById("childrenStatus").innerText = "Children status: not applicable";
+        document.getElementById("childrenSummary").innerText = "";
+        return;
+      }
+
+      const complete =
+        children.childCare &&
+        children.childContact &&
+        children.childGuardianship &&
+        children.childMaintenance &&
+        children.familyAdvocateRequired;
+
+      const approved = children.familyAdvocateChildrenApproval;
+
+      let text = "Children status: incomplete";
+      if (complete) {
+        text = approved
+          ? "Children status: complete and Family Advocate approved"
+          : "Children status: complete, awaiting Family Advocate approval where required";
+      }
+
+      document.getElementById("childrenStatus").innerText = text;
+
+      document.getElementById("childrenSummary").innerText =
+        `Care: ${children.childCare || "not selected"} | ` +
+        `Contact: ${children.childContact || "not selected"} | ` +
+        `Guardianship: ${children.childGuardianship || "not selected"} | ` +
+        `Maintenance: ${children.childMaintenance || "not selected"} | ` +
+        `Family Advocate required: ${children.familyAdvocateRequired || "not selected"}`;
+    }
+
+    function updateCaseHealth() {
+      const minorChildren = document.getElementById("minorChildren").value;
+
+      const settlementComplete =
+        settlement.propertySystem &&
+        settlement.assets &&
+        settlement.divisionProposal &&
+        settlement.pensions &&
+        settlement.maintenance &&
+        settlement.minorChildren;
+
+      const childrenVisible = minorChildren === "yes";
+
+      const childrenComplete =
+        children.childCare &&
+        children.childContact &&
+        children.childGuardianship &&
+        children.childMaintenance &&
+        children.familyAdvocateRequired;
+
+      let status = "Case status: incomplete";
+
+      if (settlementComplete && !childrenVisible) {
+        status = "Case status: ready for settlement (no children)";
+      }
+
+      if (settlementComplete && childrenVisible && childrenComplete && children.familyAdvocateChildrenApproval) {
+        status = "Case status: ready for Family Advocate / settlement";
+      }
+
+      if (settlementComplete && childrenVisible && !childrenComplete) {
+        status = "Case status: settlement complete, children details still missing";
+      }
+
+      document.getElementById("caseHealth").innerText = status;
     }
 
     render();
