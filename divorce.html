@@ -1,139 +1,484 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Divorce Navigator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Divorce Navigator</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; background: #fafafa; }
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-top: 16px; background: #fff; }
-    button { margin: 6px 6px 6px 0; padding: 10px 14px; cursor: pointer; border: 1px solid #999; border-radius: 8px; background: #f7f7f7; }
-    input, select, textarea { padding: 8px; margin: 6px 0 12px; width: 100%; max-width: 520px; box-sizing: border-box; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .status { font-weight: bold; }
-    .hidden { display: none; }
-    h1 { margin-bottom: 8px; }
-    h2 { margin-top: 0; }
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --border: #dddddd;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --button: #f7f7f7;
+      --button-border: #a1a1aa;
+      --accent: #111827;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .disclaimer {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      padding: 16px;
+      margin-top: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+    }
+
+    .card h3 {
+      margin: 16px 0 8px;
+      font-size: 1rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .summary-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fcfcfc;
+      min-height: 86px;
+    }
+
+    .summary-box .label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+
+    .summary-box .value {
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .status {
+      font-weight: 700;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cfcfcf;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      margin: 6px 6px 6px 0;
+      padding: 10px 14px;
+      border: 1px solid var(--button-border);
+      border-radius: 10px;
+      background: var(--button);
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    button:hover {
+      background: #efefef;
+    }
+
+    .next-step-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      background: #f9fafb;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .checklist {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .checklist li {
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    .checklist label {
+      display: inline;
+      font-weight: 400;
+      margin: 0 0 0 8px;
+    }
+
+    .small-btn {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid,
+      .row,
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Divorce Navigator</h1>
-
-  <div class="card">
-    <h2>Case Health</h2>
-    <p id="caseHealth">Checking...</p>
-  </div>
-
-  <div class="card">
-    <h2>Current Stage</h2>
-    <p id="stage"></p>
-
-    <h2>Next Steps</h2>
-    <div id="steps"></div>
-  </div>
-
-  <div class="card">
-    <h2>Settlement Tab</h2>
-
-    <div class="row">
-      <div>
-        <label>Matrimonial Property System</label>
-        <select id="propertySystem" onchange="onAnyChange()">
-          <option value="">Select</option>
-          <option value="inCommunity">In Community of Property</option>
-          <option value="outCommunityAccrual">Out of Community with Accrual</option>
-          <option value="outCommunityNoAccrual">Out of Community without Accrual</option>
-          <option value="unknown">Unknown</option>
-        </select>
-
-        <label>Assets</label>
-        <input id="assets" type="text" placeholder="House, cars, business, savings" oninput="onAnyChange()" />
-
-        <label>Pensions</label>
-        <input id="pensions" type="text" placeholder="Pension interests, retirement funds" oninput="onAnyChange()" />
-      </div>
-
-      <div>
-        <label>Division Proposal</label>
-        <input id="divisionProposal" type="text" placeholder="How should assets be divided?" oninput="onAnyChange()" />
-
-        <label>Maintenance</label>
-        <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" oninput="onAnyChange()" />
-
-        <label>Minor Children</label>
-        <select id="minorChildren" onchange="toggleChildrenBranch(); onAnyChange();">
-          <option value="">Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
+  <div class="wrap">
+    <div class="topbar">
+      <h1>Divorce Navigator</h1>
+      <p class="disclaimer">Information only, not legal advice. Designed for self-represented litigants to track procedure, settlement, and hearing preparation.</p>
     </div>
 
-    <label>
-      <input id="familyAdvocateApproval" type="checkbox" onchange="onAnyChange()" />
-      Family Advocate approval / endorsement obtained
-    </label>
-
-    <button onclick="saveSettlement()">Save Settlement Details</button>
-
-    <p class="status" id="settlementStatus">Settlement status: incomplete</p>
-    <p id="settlementSummary"></p>
-  </div>
-
-  <div class="card hidden" id="childrenCard">
-    <h2>Children Branch</h2>
-
-    <div class="row">
-      <div>
-        <label>Care / Residence</label>
-        <input id="childCare" type="text" placeholder="Who will the children live with?" oninput="onAnyChange()" />
-
-        <label>Contact / Access</label>
-        <input id="childContact" type="text" placeholder="Weekend, holiday, or shared contact arrangement" oninput="onAnyChange()" />
-
-        <label>Guardianship</label>
-        <input id="childGuardianship" type="text" placeholder="Guardianship agreement or issue" oninput="onAnyChange()" />
+    <div class="card">
+      <h2>Case Snapshot</h2>
+      <div class="summary-grid">
+        <div class="summary-box">
+          <div class="label">Current stage</div>
+          <div class="value" id="caseStage">Summons</div>
+        </div>
+        <div class="summary-box">
+          <div class="label">Next action</div>
+          <div class="value" id="caseNextAction">Review next procedural step</div>
+        </div>
+        <div class="summary-box">
+          <div class="label">Urgency</div>
+          <div class="value" id="caseUrgency">High</div>
+        </div>
+        <div class="summary-box">
+          <div class="label">Deadline focus</div>
+          <div class="value" id="caseDeadline">Check service and response dates</div>
+        </div>
       </div>
 
-      <div>
-        <label>Child Maintenance</label>
-        <input id="childMaintenance" type="text" placeholder="Monthly maintenance, school fees, medical aid" oninput="onAnyChange()" />
-
-        <label>Family Advocate Required</label>
-        <select id="familyAdvocateRequired" onchange="onAnyChange()">
-          <option value="">Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-
-        <label>
-          <input id="familyAdvocateChildrenApproval" type="checkbox" onchange="onAnyChange()" />
-          Family Advocate approval for children issues obtained
-        </label>
-      </div>
+      <h3>Case Health</h3>
+      <p class="status" id="caseHealth">Case status: incomplete</p>
+      <p class="muted" id="caseHealthDetail">Complete the settlement and children sections to improve readiness.</p>
+      <button class="small-btn" onclick="resetCase()">Reset Case</button>
     </div>
 
-    <button onclick="saveChildrenDetails()">Save Children Details</button>
+    <div class="grid">
+      <div>
+        <div class="card">
+          <h2>Workflow</h2>
+          <div id="stagePills"></div>
+          <div class="next-step-buttons" id="nextButtons"></div>
+        </div>
 
-    <p class="status" id="childrenStatus">Children status: not applicable</p>
-    <p id="childrenSummary"></p>
+        <div class="card">
+          <h2>Document Checklist</h2>
+          <p id="docChecklistTitle" class="muted"></p>
+          <ul class="checklist" id="docChecklist"></ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>Settlement Tab</h2>
+
+          <div class="row">
+            <div>
+              <label for="propertySystem">Matrimonial Property System</label>
+              <select id="propertySystem" onchange="onAnyChange()">
+                <option value="">Select</option>
+                <option value="inCommunity">In Community of Property</option>
+                <option value="outCommunityAccrual">Out of Community with Accrual</option>
+                <option value="outCommunityNoAccrual">Out of Community without Accrual</option>
+                <option value="unknown">Unknown</option>
+              </select>
+
+              <label for="assets">Assets</label>
+              <input id="assets" type="text" placeholder="House, cars, business, savings" oninput="onAnyChange()" />
+
+              <label for="pensions">Pensions</label>
+              <input id="pensions" type="text" placeholder="Pension interests, retirement funds" oninput="onAnyChange()" />
+            </div>
+
+            <div>
+              <label for="divisionProposal">Division Proposal</label>
+              <input id="divisionProposal" type="text" placeholder="How should assets be divided?" oninput="onAnyChange()" />
+
+              <label for="maintenance">Maintenance</label>
+              <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" oninput="onAnyChange()" />
+
+              <label for="minorChildren">Minor Children</label>
+              <select id="minorChildren" onchange="toggleChildrenBranch(); onAnyChange();">
+                <option value="">Select</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+          </div>
+
+          <label>
+            <input id="familyAdvocateApproval" type="checkbox" onchange="onAnyChange()" />
+            Family Advocate approval / endorsement obtained
+          </label>
+
+          <button onclick="saveSettlement()">Save Settlement Details</button>
+
+          <p class="status" id="settlementStatus">Settlement status: incomplete</p>
+          <p class="muted" id="settlementSummary"></p>
+        </div>
+
+        <div class="card hidden" id="childrenCard">
+          <h2>Children Branch</h2>
+
+          <div class="row">
+            <div>
+              <label for="childCare">Care / Residence</label>
+              <input id="childCare" type="text" placeholder="Who will the children live with?" oninput="onAnyChange()" />
+
+              <label for="childContact">Contact / Access</label>
+              <input id="childContact" type="text" placeholder="Weekend, holiday, or shared contact arrangement" oninput="onAnyChange()" />
+
+              <label for="childGuardianship">Guardianship</label>
+              <input id="childGuardianship" type="text" placeholder="Guardianship agreement or issue" oninput="onAnyChange()" />
+            </div>
+
+            <div>
+              <label for="childMaintenance">Child Maintenance</label>
+              <input id="childMaintenance" type="text" placeholder="Monthly maintenance, school fees, medical aid" oninput="onAnyChange()" />
+
+              <label for="familyAdvocateRequired">Family Advocate Required</label>
+              <select id="familyAdvocateRequired" onchange="onAnyChange()">
+                <option value="">Select</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+
+              <label>
+                <input id="familyAdvocateChildrenApproval" type="checkbox" onchange="onAnyChange()" />
+                Family Advocate approval for children issues obtained
+              </label>
+            </div>
+          </div>
+
+          <button onclick="saveChildrenDetails()">Save Children Details</button>
+
+          <p class="status" id="childrenStatus">Children status: not applicable</p>
+          <p class="muted" id="childrenSummary"></p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const ruleMap = {
-      summons: { label: "Divorce Summons", next: ["plea", "counterclaim", "default"] },
-      plea: { label: "Plea Filed", next: ["reply", "settlement", "discovery"] },
-      counterclaim: { label: "Counterclaim Filed", next: ["reply", "settlement"] },
-      reply: { label: "Reply Filed", next: ["discovery", "settlement"] },
-      discovery: { label: "Discovery", next: ["preTrial", "settlement"] },
-      preTrial: { label: "Pre-Trial", next: ["setDown", "settlement"] },
-      setDown: { label: "Set Down", next: ["trialPrep"] },
-      trialPrep: { label: "Trial Preparation", next: ["finalisation"] },
-      finalisation: { label: "Finalisation", next: [] },
-      default: { label: "No Response (Default)", next: ["finalisation"] },
-      settlement: { label: "Settlement", next: ["preTrial", "finalisation"] }
+    const storageKey = "advome_divorce_state_v3";
+
+    const stageMeta = {
+      summons: {
+        label: "Divorce Summons",
+        urgency: "High",
+        deadlineFocus: "Check service and response dates",
+        next: ["plea", "counterclaim", "default"],
+        checklist: [
+          "Combined Summons (Divorce Matters)",
+          "Particulars of Claim",
+          "Marriage details",
+          "Proof of service"
+        ]
+      },
+      plea: {
+        label: "Plea Filed",
+        urgency: "High",
+        deadlineFocus: "Track reply and next filing date",
+        next: ["reply", "settlement", "discovery"],
+        checklist: [
+          "Plea",
+          "Any counterclaim if filed",
+          "Relevant supporting facts"
+        ]
+      },
+      counterclaim: {
+        label: "Counterclaim Filed",
+        urgency: "High",
+        deadlineFocus: "Track reply deadline",
+        next: ["reply", "settlement"],
+        checklist: [
+          "Counterclaim",
+          "Marriage details",
+          "Any supporting documents"
+        ]
+      },
+      reply: {
+        label: "Reply Filed",
+        urgency: "Medium",
+        deadlineFocus: "Prepare for discovery and settlement",
+        next: ["discovery", "settlement"],
+        checklist: [
+          "Reply",
+          "Any amended pleadings",
+          "Supporting correspondence"
+        ]
+      },
+      discovery: {
+        label: "Discovery",
+        urgency: "Medium",
+        deadlineFocus: "Exchange and identify missing documents",
+        next: ["preTrial", "settlement"],
+        checklist: [
+          "Discovery documents",
+          "Financial records",
+          "Supporting correspondence"
+        ]
+      },
+      preTrial: {
+        label: "Pre-Trial",
+        urgency: "Medium",
+        deadlineFocus: "Prepare the pre-trial minute and issues list",
+        next: ["setDown", "settlement"],
+        checklist: [
+          "Pre-trial minute",
+          "Issues list",
+          "Chronology"
+        ]
+      },
+      setDown: {
+        label: "Set Down",
+        urgency: "High",
+        deadlineFocus: "Confirm hearing date and indexed bundle",
+        next: ["trialPrep"],
+        checklist: [
+          "Set-down notice",
+          "Indexed bundle"
+        ]
+      },
+      trialPrep: {
+        label: "Trial Preparation",
+        urgency: "High",
+        deadlineFocus: "Prepare witnesses, notes, and bundle",
+        next: ["finalisation"],
+        checklist: [
+          "Trial bundle",
+          "Witness list",
+          "Speaking notes"
+        ]
+      },
+      finalisation: {
+        label: "Finalisation",
+        urgency: "Low",
+        deadlineFocus: "Prepare order and final filing",
+        next: [],
+        checklist: [
+          "Draft order",
+          "Settlement agreement if any",
+          "Final filing copies"
+        ]
+      },
+      default: {
+        label: "No Response (Default)",
+        urgency: "High",
+        deadlineFocus: "Check service proof and expiry of response period",
+        next: ["finalisation"],
+        checklist: [
+          "Proof of service",
+          "Expiry of response period",
+          "Default judgment papers where applicable"
+        ]
+      },
+      settlement: {
+        label: "Settlement",
+        urgency: "Medium",
+        deadlineFocus: "Complete settlement terms and confirm approval",
+        next: ["preTrial", "finalisation"],
+        checklist: [
+          "Settlement terms",
+          "Property system",
+          "Assets and liabilities",
+          "Pension details",
+          "Maintenance terms",
+          "Children details if applicable"
+        ]
+      }
     };
 
-    const labels = {
+    const stageButtonLabels = {
       plea: "I received a response from my spouse",
       counterclaim: "My spouse is making their own claim",
       reply: "I need to respond to their claim",
@@ -167,28 +512,117 @@
       familyAdvocateChildrenApproval: false
     };
 
+    let checklistProgress = {};
+
+    function getMeta(state) {
+      return stageMeta[state] || stageMeta.summons;
+    }
+
+    function isSettlementComplete() {
+      return Boolean(
+        settlement.propertySystem &&
+        settlement.assets &&
+        settlement.divisionProposal &&
+        settlement.pensions &&
+        settlement.maintenance &&
+        settlement.minorChildren
+      );
+    }
+
+    function isChildrenVisible() {
+      return document.getElementById("minorChildren").value === "yes";
+    }
+
+    function isChildrenComplete() {
+      return Boolean(
+        children.childCare &&
+        children.childContact &&
+        children.childGuardianship &&
+        children.childMaintenance &&
+        children.familyAdvocateRequired
+      );
+    }
+
     function render() {
-      const state = ruleMap[currentState];
-      document.getElementById("stage").innerText = state.label;
+      const meta = getMeta(currentState);
 
-      const stepsDiv = document.getElementById("steps");
-      stepsDiv.innerHTML = "";
+      document.getElementById("caseStage").innerText = meta.label;
+      document.getElementById("caseUrgency").innerText = meta.urgency;
+      document.getElementById("caseDeadline").innerText = meta.deadlineFocus;
 
-      state.next.forEach(step => {
+      const nextAction = meta.next.length
+        ? meta.next.map(step => stageButtonLabels[step] || stageMeta[step]?.label || step).join(" / ")
+        : "No further stage";
+
+      document.getElementById("caseNextAction").innerText = nextAction;
+
+      const pills = document.getElementById("stagePills");
+      pills.innerHTML = "";
+      Object.keys(stageMeta).forEach(stage => {
+        const pill = document.createElement("span");
+        pill.className = "pill";
+        pill.innerText = stageMeta[stage].label;
+        pills.appendChild(pill);
+      });
+
+      const nextButtons = document.getElementById("nextButtons");
+      nextButtons.innerHTML = "";
+
+      meta.next.forEach(step => {
         const btn = document.createElement("button");
-        btn.innerText = labels[step] || step;
+        btn.innerText = stageButtonLabels[step] || stageMeta[step]?.label || step;
         btn.onclick = () => {
           currentState = step;
           render();
           saveState();
         };
-        stepsDiv.appendChild(btn);
+        nextButtons.appendChild(btn);
       });
 
       updateSettlementStatus();
       toggleChildrenBranch();
       updateChildrenStatus();
+      updateDocumentChecklist();
       updateCaseHealth();
+    }
+
+    function updateDocumentChecklist() {
+      const meta = getMeta(currentState);
+      const items = meta.checklist || [];
+      const title = document.getElementById("docChecklistTitle");
+      const list = document.getElementById("docChecklist");
+
+      title.innerText = `Required for: ${meta.label}`;
+      list.innerHTML = "";
+
+      if (!checklistProgress[currentState]) {
+        checklistProgress[currentState] = Array(items.length).fill(false);
+      }
+
+      if (checklistProgress[currentState].length !== items.length) {
+        const current = checklistProgress[currentState];
+        checklistProgress[currentState] = items.map((_, i) => Boolean(current[i]));
+      }
+
+      items.forEach((item, index) => {
+        const li = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = Boolean(checklistProgress[currentState][index]);
+        checkbox.onchange = () => {
+          checklistProgress[currentState][index] = checkbox.checked;
+          saveState();
+          updateCaseHealth();
+        };
+
+        const label = document.createElement("label");
+        label.innerText = item;
+
+        li.appendChild(checkbox);
+        li.appendChild(label);
+        list.appendChild(li);
+      });
     }
 
     function saveSettlement() {
@@ -221,25 +655,12 @@
     }
 
     function toggleChildrenBranch() {
-      const minorChildren = document.getElementById("minorChildren").value;
       const card = document.getElementById("childrenCard");
-
-      if (minorChildren === "yes") {
-        card.classList.remove("hidden");
-      } else {
-        card.classList.add("hidden");
-      }
+      card.classList.toggle("hidden", document.getElementById("minorChildren").value !== "yes");
     }
 
     function updateSettlementStatus() {
-      const complete =
-        settlement.propertySystem &&
-        settlement.assets &&
-        settlement.divisionProposal &&
-        settlement.pensions &&
-        settlement.maintenance &&
-        settlement.minorChildren;
-
+      const complete = isSettlementComplete();
       const approved = settlement.familyAdvocateApproval;
 
       let text = "Settlement status: incomplete";
@@ -254,26 +675,23 @@
       const childrenFlag = settlement.minorChildren === "yes" ? "yes" : "no";
 
       document.getElementById("settlementSummary").innerText =
-        `Children: ${childrenFlag || "not selected"} | ` +
+        `Children: ${settlement.minorChildren || "not selected"} | ` +
         `Property system: ${settlement.propertySystem || "not selected"} | ` +
-        `Family Advocate approval: ${settlement.familyAdvocateApproval ? "yes" : "no"}`;
+        `Family Advocate approval: ${settlement.familyAdvocateApproval ? "yes" : "no"} | ` +
+        `Complete: ${complete ? "yes" : "no"} | ` +
+        `Children flag: ${childrenFlag}`;
     }
 
     function updateChildrenStatus() {
-      const visible = document.getElementById("minorChildren").value === "yes";
+      const visible = isChildrenVisible();
+
       if (!visible) {
         document.getElementById("childrenStatus").innerText = "Children status: not applicable";
         document.getElementById("childrenSummary").innerText = "";
         return;
       }
 
-      const complete =
-        children.childCare &&
-        children.childContact &&
-        children.childGuardianship &&
-        children.childMaintenance &&
-        children.familyAdvocateRequired;
-
+      const complete = isChildrenComplete();
       const approved = children.familyAdvocateChildrenApproval;
 
       let text = "Children status: incomplete";
@@ -284,62 +702,93 @@
       }
 
       document.getElementById("childrenStatus").innerText = text;
-
       document.getElementById("childrenSummary").innerText =
         `Care: ${children.childCare || "not selected"} | ` +
         `Contact: ${children.childContact || "not selected"} | ` +
         `Guardianship: ${children.childGuardianship || "not selected"} | ` +
         `Maintenance: ${children.childMaintenance || "not selected"} | ` +
-        `Family Advocate required: ${children.familyAdvocateRequired || "not selected"}`;
+        `Family Advocate required: ${children.familyAdvocateRequired || "not selected"} | ` +
+        `Approved: ${children.familyAdvocateChildrenApproval ? "yes" : "no"}`;
     }
 
     function updateCaseHealth() {
-      const minorChildren = document.getElementById("minorChildren").value;
-
-      const settlementComplete =
-        settlement.propertySystem &&
-        settlement.assets &&
-        settlement.divisionProposal &&
-        settlement.pensions &&
-        settlement.maintenance &&
-        settlement.minorChildren;
-
-      const childrenVisible = minorChildren === "yes";
-
-      const childrenComplete =
-        children.childCare &&
-        children.childContact &&
-        children.childGuardianship &&
-        children.childMaintenance &&
-        children.familyAdvocateRequired;
+      const settlementComplete = isSettlementComplete();
+      const childrenVisible = isChildrenVisible();
+      const childrenComplete = isChildrenComplete();
+      const childrenApproved = children.familyAdvocateChildrenApproval;
 
       let status = "Case status: incomplete";
+      let detail = "Complete the settlement and checklist sections to improve readiness.";
+
+      if (currentState === "summons") {
+        status = "Case status: intake started";
+        detail = "Identify the summons, response deadline, and settlement position.";
+      }
 
       if (settlementComplete && !childrenVisible) {
         status = "Case status: ready for settlement (no children)";
+        detail = "Settlement is complete and the file can move toward pre-trial or finalisation.";
       }
 
-      if (settlementComplete && childrenVisible && childrenComplete && children.familyAdvocateChildrenApproval) {
+      if (settlementComplete && childrenVisible && childrenComplete && childrenApproved) {
         status = "Case status: ready for Family Advocate / settlement";
+        detail = "Children and settlement issues are completed and approved where required.";
       }
 
       if (settlementComplete && childrenVisible && !childrenComplete) {
         status = "Case status: settlement complete, children details still missing";
+        detail = "Children-related details must be completed before the file can move cleanly forward.";
+      }
+
+      if (currentState === "preTrial" || currentState === "setDown" || currentState === "trialPrep") {
+        status = "Case status: hearing preparation";
+        detail = "Focus on the checklist, bundle, chronology, and speaking notes.";
+      }
+
+      if (currentState === "finalisation") {
+        status = "Case status: finalisation";
+        detail = "Prepare the order, confirm settlement terms, and complete final filing.";
       }
 
       document.getElementById("caseHealth").innerText = status;
+      document.getElementById("caseHealthDetail").innerText = detail;
+    }
+
+    function onAnyChange() {
+      settlement.propertySystem = document.getElementById("propertySystem").value;
+      settlement.assets = document.getElementById("assets").value;
+      settlement.divisionProposal = document.getElementById("divisionProposal").value;
+      settlement.pensions = document.getElementById("pensions").value;
+      settlement.maintenance = document.getElementById("maintenance").value;
+      settlement.minorChildren = document.getElementById("minorChildren").value;
+      settlement.familyAdvocateApproval = document.getElementById("familyAdvocateApproval").checked;
+
+      children.childCare = document.getElementById("childCare").value;
+      children.childContact = document.getElementById("childContact").value;
+      children.childGuardianship = document.getElementById("childGuardianship").value;
+      children.childMaintenance = document.getElementById("childMaintenance").value;
+      children.familyAdvocateRequired = document.getElementById("familyAdvocateRequired").value;
+      children.familyAdvocateChildrenApproval = document.getElementById("familyAdvocateChildrenApproval").checked;
+
+      updateSettlementStatus();
+      toggleChildrenBranch();
+      updateChildrenStatus();
+      updateDocumentChecklist();
+      updateCaseHealth();
+      saveState();
     }
 
     function saveState() {
-      localStorage.setItem("advome_divorce_state", JSON.stringify({
+      localStorage.setItem(storageKey, JSON.stringify({
         currentState,
         settlement,
-        children
+        children,
+        checklistProgress
       }));
     }
 
     function loadState() {
-      const saved = localStorage.getItem("advome_divorce_state");
+      const saved = localStorage.getItem(storageKey);
       if (!saved) {
         render();
         return;
@@ -348,9 +797,9 @@
       try {
         const data = JSON.parse(saved);
         currentState = data.currentState || "summons";
-
         Object.assign(settlement, data.settlement || {});
         Object.assign(children, data.children || {});
+        checklistProgress = data.checklistProgress || {};
 
         document.getElementById("propertySystem").value = settlement.propertySystem || "";
         document.getElementById("assets").value = settlement.assets || "";
@@ -368,17 +817,48 @@
         document.getElementById("familyAdvocateChildrenApproval").checked = !!children.familyAdvocateChildrenApproval;
 
         render();
-      } catch (e) {
+      } catch (err) {
         render();
       }
     }
 
-    function onAnyChange() {
-      updateSettlementStatus();
-      toggleChildrenBranch();
-      updateChildrenStatus();
-      updateCaseHealth();
-      saveState();
+    function resetCase() {
+      localStorage.removeItem(storageKey);
+      currentState = "summons";
+
+      settlement.propertySystem = "";
+      settlement.assets = "";
+      settlement.divisionProposal = "";
+      settlement.pensions = "";
+      settlement.maintenance = "";
+      settlement.minorChildren = "";
+      settlement.familyAdvocateApproval = false;
+
+      children.childCare = "";
+      children.childContact = "";
+      children.childGuardianship = "";
+      children.childMaintenance = "";
+      children.familyAdvocateRequired = "";
+      children.familyAdvocateChildrenApproval = false;
+
+      checklistProgress = {};
+
+      document.getElementById("propertySystem").value = "";
+      document.getElementById("assets").value = "";
+      document.getElementById("divisionProposal").value = "";
+      document.getElementById("pensions").value = "";
+      document.getElementById("maintenance").value = "";
+      document.getElementById("minorChildren").value = "";
+      document.getElementById("familyAdvocateApproval").checked = false;
+
+      document.getElementById("childCare").value = "";
+      document.getElementById("childContact").value = "";
+      document.getElementById("childGuardianship").value = "";
+      document.getElementById("childMaintenance").value = "";
+      document.getElementById("familyAdvocateRequired").value = "";
+      document.getElementById("familyAdvocateChildrenApproval").checked = false;
+
+      render();
     }
 
     loadState();
