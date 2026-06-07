@@ -2,16 +2,74 @@
 <html>
 <head>
   <title>Divorce Navigator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    button { margin: 6px 6px 6px 0; padding: 10px 14px; cursor: pointer; border: 1px solid #999; border-radius: 8px; background: #f7f7f7; }
+    input, select { padding: 8px; margin: 6px 0 12px; width: 100%; max-width: 420px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .status { font-weight: bold; }
+  </style>
 </head>
 <body>
-
   <h1>Divorce Navigator</h1>
 
-  <h2>Current Stage:</h2>
-  <p id="stage"></p>
+  <div class="card">
+    <h2>Current Stage</h2>
+    <p id="stage"></p>
 
-  <h2>Next Steps:</h2>
-  <div id="steps"></div>
+    <h2>Next Steps</h2>
+    <div id="steps"></div>
+  </div>
+
+  <div class="card">
+    <h2>Settlement Tab</h2>
+
+    <div class="row">
+      <div>
+        <label>Matrimonial Property System</label>
+        <select id="propertySystem">
+          <option value="">Select</option>
+          <option value="inCommunity">In Community of Property</option>
+          <option value="outCommunityAccrual">Out of Community with Accrual</option>
+          <option value="outCommunityNoAccrual">Out of Community without Accrual</option>
+          <option value="unknown">Unknown</option>
+        </select>
+
+        <label>Assets</label>
+        <input id="assets" type="text" placeholder="House, cars, business, savings" />
+
+        <label>Pensions</label>
+        <input id="pensions" type="text" placeholder="Pension interests, retirement funds" />
+      </div>
+
+      <div>
+        <label>Division Proposal</label>
+        <input id="divisionProposal" type="text" placeholder="How should assets be divided?" />
+
+        <label>Maintenance</label>
+        <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" />
+
+        <label>Minor Children</label>
+        <select id="minorChildren">
+          <option value="">Select</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+
+    <label>
+      <input id="familyAdvocateApproval" type="checkbox" />
+      Family Advocate approval / endorsement obtained
+    </label>
+
+    <button onclick="saveSettlement()">Save Settlement Details</button>
+
+    <p class="status" id="settlementStatus">Settlement status: incomplete</p>
+    <p id="settlementSummary"></p>
+  </div>
 
   <script>
     const ruleMap = {
@@ -21,23 +79,23 @@
       },
       plea: {
         label: "Plea Filed",
-        next: ["reply", "settlement"]
+        next: ["reply", "settlement", "discovery"]
       },
       counterclaim: {
         label: "Counterclaim Filed",
-        next: ["reply"]
+        next: ["reply", "settlement"]
       },
       reply: {
         label: "Reply Filed",
-        next: ["discovery"]
+        next: ["discovery", "settlement"]
       },
       discovery: {
         label: "Discovery",
-        next: ["preTrial"]
+        next: ["preTrial", "settlement"]
       },
       preTrial: {
         label: "Pre-Trial",
-        next: ["setDown"]
+        next: ["setDown", "settlement"]
       },
       setDown: {
         label: "Set Down",
@@ -54,14 +112,40 @@
       default: {
         label: "No Response (Default)",
         next: ["finalisation"]
+      },
+      settlement: {
+        label: "Settlement",
+        next: ["preTrial", "finalisation"]
       }
+    };
+
+    const labels = {
+      plea: "I received a response from my spouse",
+      counterclaim: "My spouse is making their own claim",
+      reply: "I need to respond to their claim",
+      discovery: "We need to exchange documents",
+      preTrial: "Prepare for court discussion",
+      setDown: "Set the case for hearing",
+      trialPrep: "Prepare for court",
+      finalisation: "Finalize the divorce",
+      default: "My spouse did not respond",
+      settlement: "Open settlement questions"
     };
 
     let currentState = "summons";
 
+    const settlement = {
+      propertySystem: "",
+      assets: "",
+      divisionProposal: "",
+      pensions: "",
+      maintenance: "",
+      minorChildren: "",
+      familyAdvocateApproval: false
+    };
+
     function render() {
       const state = ruleMap[currentState];
-
       document.getElementById("stage").innerText = state.label;
 
       const stepsDiv = document.getElementById("steps");
@@ -69,29 +153,56 @@
 
       state.next.forEach(step => {
         const btn = document.createElement("button");
-        const labels = {
-  plea: "I received a response from my spouse",
-  counterclaim: "My spouse is making their own claim",
-  reply: "I need to respond to their claim",
-  discovery: "We need to exchange documents",
-  preTrial: "Prepare for court discussion",
-  setDown: "Set the case for hearing",
-  trialPrep: "Prepare for court",
-  finalisation: "Finalize the divorce",
-  default: "My spouse did not respond"
-};
-
-btn.innerText = labels[step] || step;
+        btn.innerText = labels[step] || step;
         btn.onclick = () => {
           currentState = step;
           render();
         };
         stepsDiv.appendChild(btn);
       });
+
+      updateSettlementStatus();
+    }
+
+    function saveSettlement() {
+      settlement.propertySystem = document.getElementById("propertySystem").value;
+      settlement.assets = document.getElementById("assets").value;
+      settlement.divisionProposal = document.getElementById("divisionProposal").value;
+      settlement.pensions = document.getElementById("pensions").value;
+      settlement.maintenance = document.getElementById("maintenance").value;
+      settlement.minorChildren = document.getElementById("minorChildren").value;
+      settlement.familyAdvocateApproval = document.getElementById("familyAdvocateApproval").checked;
+
+      updateSettlementStatus();
+    }
+
+    function updateSettlementStatus() {
+      const complete =
+        settlement.propertySystem &&
+        settlement.assets &&
+        settlement.divisionProposal &&
+        settlement.pensions &&
+        settlement.maintenance &&
+        settlement.minorChildren;
+
+      const approved = settlement.familyAdvocateApproval;
+
+      let text = "Settlement status: incomplete";
+      if (complete) {
+        text = approved
+          ? "Settlement status: complete and Family Advocate approved"
+          : "Settlement status: complete, awaiting Family Advocate approval where required";
+      }
+
+      document.getElementById("settlementStatus").innerText = text;
+
+      document.getElementById("settlementSummary").innerText =
+        `Children: ${settlement.minorChildren || "not selected"} | ` +
+        `Property system: ${settlement.propertySystem || "not selected"} | ` +
+        `Family Advocate approval: ${settlement.familyAdvocateApproval ? "yes" : "no"}`;
     }
 
     render();
   </script>
-
 </body>
 </html>
