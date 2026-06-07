@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advome | Children</title>
+
+<style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --text:#111827;
+  --muted:#6b7280;
+  --accent:#0b2c5f;
+  --accent-2:#eef4ff;
+  --danger:#fef2f2;
+  --warning:#fff7e6;
+  --success:#ecfdf5;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+header{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:20px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:700;
+  color:var(--accent);
+}
+
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:flex-end;
+}
+
+nav a{
+  text-decoration:none;
+  color:#374151;
+  font-weight:600;
+  padding:8px 10px;
+  border-radius:10px;
+}
+
+nav a:hover{
+  background:#f3f4f6;
+}
+
+.wrap{
+  max-width:1280px;
+  margin:0 auto;
+  padding:32px 8% 60px;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:20px;
+  align-items:start;
+  margin-bottom:18px;
+}
+
+.hero-left,
+.hero-right,
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(17,24,39,.04);
+}
+
+.hero-left{
+  padding:26px;
+}
+
+.hero-left h1{
+  margin:0 0 12px;
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:1.04;
+  color:var(--accent);
+  letter-spacing:-0.03em;
+}
+
+.hero-left p{
+  margin:0;
+  color:var(--muted);
+  max-width:820px;
+  font-size:1.02rem;
+  line-height:1.7;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn.primary{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.btn.soft{
+  background:var(--accent-2);
+  color:var(--accent);
+  border-color:#d8e3f5;
+}
+
+.hero-right{
+  padding:22px;
+}
+
+.health-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.health-title h2{
+  margin:0;
+  font-size:1.12rem;
+  color:var(--accent);
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.86rem;
+  white-space:nowrap;
+}
+
+.pill.red{ background:var(--danger); color:#b91c1c; }
+.pill.orange{ background:var(--warning); color:#b45309; }
+.pill.green{ background:var(--success); color:#047857; }
+
+.health-meter{
+  height:14px;
+  border-radius:999px;
+  background:#e5e7eb;
+  overflow:hidden;
+  margin:12px 0 14px;
+}
+
+.health-fill{
+  width:67%;
+  height:100%;
+  background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981);
+  border-radius:999px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:12px;
+}
+
+.stat{
+  padding:14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.stat .label{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:5px;
+}
+
+.stat .value{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--accent);
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+
+.sidebar,
+.section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(17,24,39,.04);
+}
+
+.sidebar{
+  padding:18px;
+  position:sticky;
+  top:96px;
+}
+
+.sidebar h2,
+.section h2{
+  margin:0 0 12px;
+  color:var(--accent);
+  font-size:1.18rem;
+}
+
+.sidebar p{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:.96rem;
+}
+
+.timeline{
+  display:grid;
+  gap:10px;
+}
+
+.step{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.step .name{
+  font-weight:700;
+  color:var(--text);
+}
+
+.step .status{
+  font-size:.84rem;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.step.active{
+  border-color:#cfe0ff;
+  background:var(--accent-2);
+}
+
+.step.active .status{
+  color:var(--accent);
+  font-weight:700;
+}
+
+.step.done{
+  background:var(--success);
+  border-color:#c9f0de;
+}
+
+.step.done .status{
+  color:#047857;
+  font-weight:700;
+}
+
+.step.blocked{
+  background:var(--danger);
+  border-color:#ffd5d5;
+}
+
+.step.blocked .status{
+  color:#b91c1c;
+  font-weight:700;
+}
+
+.section{
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.section p{
+  color:var(--muted);
+  margin-top:0;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.mini{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  background:#fff;
+}
+
+.mini h3{
+  margin:0 0 8px;
+  color:var(--accent);
+  font-size:1.02rem;
+}
+
+.mini ul{
+  margin:0;
+  padding-left:18px;
+  color:var(--text);
+}
+
+.mini li{ margin-bottom:5px; }
+
+.subtle{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+.tag{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-size:.86rem;
+  color:#374151;
+  font-weight:600;
+}
+
+.callout{
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.callout.red{ background:var(--danger); border-color:#ffd6d6; }
+.callout.orange{ background:var(--warning); border-color:#ffe0b2; }
+.callout.green{ background:var(--success); border-color:#c8eedb; }
+.callout.blue{ background:var(--accent-2); border-color:#dbe6ff; }
+
+.callout strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--accent);
+}
+
+.field-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.field{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px;
+  background:#fff;
+}
+
+.field .label{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:5px;
+}
+
+.field .value{
+  font-weight:700;
+  color:var(--text);
+}
+
+.progress{
+  height:18px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#0b2c5f,#10b981);
+}
+
+.summary-box{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  background:#fff;
+}
+
+.summary-box h3{
+  margin:0 0 10px;
+  color:var(--accent);
+}
+
+.summary-box ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.summary-box li{
+  margin-bottom:7px;
+}
+
+.faq{
+  display:grid;
+  gap:10px;
+}
+
+.faq-item{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  background:#fff;
+}
+
+.faq-item summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+}
+
+.faq-item p{
+  margin:10px 0 0;
+  color:var(--muted);
+}
+
+.footer{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.6;
+}
+
+@media (max-width: 1100px){
+  .hero,
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    position:static;
+  }
+}
+
+@media (max-width: 760px){
+  .grid-2,
+  .field-grid,
+  .stat-grid{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    padding:18px 5%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .wrap{
+    padding:22px 5% 50px;
+  }
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Advome</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="start.html">Matter Portal</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="documents.html">Documents</a>
+      <a href="settlement.html">Settlement</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="attorney.html">Attorney Portal</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Children Centre</h1>
+        <p>
+          Track everything that affects minor children in a divorce: care, contact, guardianship, maintenance, school fees, medical aid, and Family Advocate review. This page should stay open whenever children are involved.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#overview">View Children Health</a>
+          <a class="btn soft" href="#details">Open Children Details</a>
+          <a class="btn" href="#questions">Ask a Question</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="health-title">
+          <h2>Children Health</h2>
+          <span class="pill orange">Needs Review</span>
+        </div>
+        <div class="health-meter"><div class="health-fill"></div></div>
+        <div class="subtle">The page should show whether care, contact, and Family Advocate steps are complete.</div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="label">Children involved</div>
+            <div class="value">Yes</div>
+          </div>
+          <div class="stat">
+            <div class="label">Parenting plan</div>
+            <div class="value">Pending</div>
+          </div>
+          <div class="stat">
+            <div class="label">Family Advocate</div>
+            <div class="value">Required</div>
+          </div>
+          <div class="stat">
+            <div class="label">Ready for settlement</div>
+            <div class="value">No</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Children Timeline</h2>
+        <p>This branch stays active whenever minor children are involved.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Opened</span></div>
+          <div class="step active"><span class="name">Children branch</span><span class="status">Open now</span></div>
+          <div class="step"><span class="name">Parenting plan</span><span class="status">Needed</span></div>
+          <div class="step"><span class="name">Family Advocate</span><span class="status">If required</span></div>
+          <div class="step"><span class="name">Settlement</span><span class="status">Linked</span></div>
+          <div class="step"><span class="name">Discovery</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Pre-trial</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Set-down</span><span class="status">Later</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next Step Panel</strong>
+          The user should always see the next child-related action, especially if approval or endorsement is still missing.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="overview">
+          <h2>1. Overview</h2>
+          <p>
+            This page is the permanent place for all child-related divorce issues. It should never disappear once children are present in the matter.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Core child issues</h3>
+              <ul>
+                <li>Care / residence</li>
+                <li>Contact / access</li>
+                <li>Guardianship</li>
+                <li>Maintenance</li>
+                <li>School fees</li>
+                <li>Medical aid</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>What the page decides</h3>
+              <ul>
+                <li>Whether children are involved</li>
+                <li>Whether a parenting plan exists</li>
+                <li>Whether Family Advocate input is required</li>
+                <li>Whether the case can move to settlement-ready status</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="details">
+          <h2>2. Children details</h2>
+          <p>
+            This is the data model for the children branch. The page should let the user fill in the facts that affect settlement and finalisation.
+          </p>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">Children involved</div><div class="value">Yes / No</div></div>
+            <div class="field"><div class="label">Number of children</div><div class="value">1 / 2 / 3+</div></div>
+            <div class="field"><div class="label">Primary residence</div><div class="value">Parent A / Parent B / shared</div></div>
+            <div class="field"><div class="label">Contact arrangement</div><div class="value">Weekend / holiday / shared</div></div>
+            <div class="field"><div class="label">Maintenance</div><div class="value">Agreed / pending</div></div>
+            <div class="field"><div class="label">Medical aid</div><div class="value">Agreed / pending</div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Child details to capture</h3>
+              <ul>
+                <li>Names</li>
+                <li>Ages</li>
+                <li>School</li>
+                <li>Special needs</li>
+                <li>Current care pattern</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Practical support items</h3>
+              <ul>
+                <li>School fees clause</li>
+                <li>Medical aid clause</li>
+                <li>Holiday contact clause</li>
+                <li>Travel / relocation clause</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>3. Family Advocate branch</h2>
+          <p>
+            Where children rights or parenting arrangements need formal checking, this branch stays active until approval or endorsement is satisfied.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Status</h3>
+              <ul>
+                <li>Not applicable</li>
+                <li>Required</li>
+                <li>Submitted</li>
+                <li>Endorsed</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Checklist</h3>
+              <ul>
+                <li>Parenting plan attached</li>
+                <li>Children’s best interests addressed</li>
+                <li>Recommendation requested</li>
+                <li>Recommendation received</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout green">
+            <strong>Unopposed route rule</strong>
+            If the children matters are complete and the Family Advocate path is satisfied where needed, the divorce can move toward a simpler set-down or unopposed route.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>4. Readiness summary</h2>
+          <p>
+            This summary should explain whether the children branch is blocking settlement or whether the matter is ready to move on.
+          </p>
+
+          <div class="summary-box">
+            <h3>Example summary</h3>
+            <ul>
+              <li>Two minor children involved</li>
+              <li>Primary residence agreed</li>
+              <li>Maintenance still pending</li>
+              <li>Parenting plan attached</li>
+              <li>Family Advocate endorsement outstanding</li>
+            </ul>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout orange">
+            <strong>Attention</strong>
+            If any of the child-related items are incomplete, the dashboard should keep the matter amber and show the exact missing step.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>5. Questions panel</h2>
+          <p>The user should be able to ask questions directly from the children page.</p>
+
+          <div class="faq" id="questions">
+            <details class="faq-item">
+              <summary>Do I need a parenting plan?</summary>
+              <p>Yes, if minor children are involved and the settlement touches care, contact, guardianship, or maintenance.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Do I always need Family Advocate approval?</summary>
+              <p>It depends on the child-related issues in the matter, but the page should track it whenever it is needed.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>What if maintenance is still pending?</summary>
+              <p>The branch should stay active and the readiness meter should not move to green until that issue is resolved or clearly addressed.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="footer">
+          This children centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
