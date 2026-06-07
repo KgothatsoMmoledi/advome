@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advome | Settlement</title>
+
+<style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --text:#111827;
+  --muted:#6b7280;
+  --accent:#0b2c5f;
+  --accent-2:#eef4ff;
+  --danger:#fef2f2;
+  --warning:#fff7e6;
+  --success:#ecfdf5;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+header{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:20px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:700;
+  color:var(--accent);
+}
+
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:flex-end;
+}
+
+nav a{
+  text-decoration:none;
+  color:#374151;
+  font-weight:600;
+  padding:8px 10px;
+  border-radius:10px;
+}
+
+nav a:hover{
+  background:#f3f4f6;
+}
+
+.wrap{
+  max-width:1280px;
+  margin:0 auto;
+  padding:32px 8% 60px;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:20px;
+  align-items:start;
+  margin-bottom:18px;
+}
+
+.hero-left,
+.hero-right,
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(17,24,39,.04);
+}
+
+.hero-left{
+  padding:26px;
+}
+
+.hero-left h1{
+  margin:0 0 12px;
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:1.04;
+  color:var(--accent);
+  letter-spacing:-0.03em;
+}
+
+.hero-left p{
+  margin:0;
+  color:var(--muted);
+  max-width:820px;
+  font-size:1.02rem;
+  line-height:1.7;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn.primary{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.btn.soft{
+  background:var(--accent-2);
+  color:var(--accent);
+  border-color:#d8e3f5;
+}
+
+.hero-right{
+  padding:22px;
+}
+
+.health-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.health-title h2{
+  margin:0;
+  font-size:1.12rem;
+  color:var(--accent);
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.86rem;
+  white-space:nowrap;
+}
+
+.pill.red{ background:var(--danger); color:#b91c1c; }
+.pill.orange{ background:var(--warning); color:#b45309; }
+.pill.green{ background:var(--success); color:#047857; }
+
+.health-meter{
+  height:14px;
+  border-radius:999px;
+  background:#e5e7eb;
+  overflow:hidden;
+  margin:12px 0 14px;
+}
+
+.health-fill{
+  width:74%;
+  height:100%;
+  background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981);
+  border-radius:999px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:12px;
+}
+
+.stat{
+  padding:14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.stat .label{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:5px;
+}
+
+.stat .value{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--accent);
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+
+.sidebar,
+.section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(17,24,39,.04);
+}
+
+.sidebar{
+  padding:18px;
+  position:sticky;
+  top:96px;
+}
+
+.sidebar h2,
+.section h2{
+  margin:0 0 12px;
+  color:var(--accent);
+  font-size:1.18rem;
+}
+
+.sidebar p{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:.96rem;
+}
+
+.timeline{
+  display:grid;
+  gap:10px;
+}
+
+.step{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.step .name{
+  font-weight:700;
+  color:var(--text);
+}
+
+.step .status{
+  font-size:.84rem;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.step.active{
+  border-color:#cfe0ff;
+  background:var(--accent-2);
+}
+
+.step.active .status{
+  color:var(--accent);
+  font-weight:700;
+}
+
+.step.done{
+  background:var(--success);
+  border-color:#c9f0de;
+}
+
+.step.done .status{
+  color:#047857;
+  font-weight:700;
+}
+
+.step.blocked{
+  background:var(--danger);
+  border-color:#ffd5d5;
+}
+
+.step.blocked .status{
+  color:#b91c1c;
+  font-weight:700;
+}
+
+.section{
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.section p{
+  color:var(--muted);
+  margin-top:0;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.mini{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  background:#fff;
+}
+
+.mini h3{
+  margin:0 0 8px;
+  color:var(--accent);
+  font-size:1.02rem;
+}
+
+.mini ul{
+  margin:0;
+  padding-left:18px;
+  color:var(--text);
+}
+
+.mini li{ margin-bottom:5px; }
+
+.subtle{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+.tag{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-size:.86rem;
+  color:#374151;
+  font-weight:600;
+}
+
+.callout{
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.callout.red{ background:var(--danger); border-color:#ffd6d6; }
+.callout.orange{ background:var(--warning); border-color:#ffe0b2; }
+.callout.green{ background:var(--success); border-color:#c8eedb; }
+.callout.blue{ background:var(--accent-2); border-color:#dbe6ff; }
+
+.callout strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--accent);
+}
+
+.field-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.field{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px;
+  background:#fff;
+}
+
+.field .label{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:5px;
+}
+
+.field .value{
+  font-weight:700;
+  color:var(--text);
+}
+
+.progress{
+  height:18px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#0b2c5f,#10b981);
+}
+
+.summary-box{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  background:#fff;
+}
+
+.summary-box h3{
+  margin:0 0 10px;
+  color:var(--accent);
+}
+
+.summary-box ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.summary-box li{
+  margin-bottom:7px;
+}
+
+.faq{
+  display:grid;
+  gap:10px;
+}
+
+.faq-item{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  background:#fff;
+}
+
+.faq-item summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+}
+
+.faq-item p{
+  margin:10px 0 0;
+  color:var(--muted);
+}
+
+.footer{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.6;
+}
+
+@media (max-width: 1100px){
+  .hero,
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    position:static;
+  }
+}
+
+@media (max-width: 760px){
+  .grid-2,
+  .field-grid,
+  .stat-grid{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    padding:18px 5%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .wrap{
+    padding:22px 5% 50px;
+  }
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Advome</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="start.html">Matter Portal</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="documents.html">Documents</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="attorney.html">Attorney Portal</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Settlement Centre</h1>
+        <p>
+          Capture the agreement terms that decide whether the matter can move into an easier unopposed path. Settlement can happen at any stage, so this page stays open throughout the divorce flow.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#overview">View Settlement Health</a>
+          <a class="btn soft" href="#details">Open Settlement Details</a>
+          <a class="btn" href="#questions">Ask a Question</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="health-title">
+          <h2>Settlement Health</h2>
+          <span class="pill orange">Needs Review</span>
+        </div>
+        <div class="health-meter"><div class="health-fill"></div></div>
+        <div class="subtle">The meter should rise as property, children, pension, and Family Advocate items are completed.</div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="label">Completion</div>
+            <div class="value">74%</div>
+          </div>
+          <div class="stat">
+            <div class="label">Children status</div>
+            <div class="value">Pending</div>
+          </div>
+          <div class="stat">
+            <div class="label">Family Advocate</div>
+            <div class="value">Required</div>
+          </div>
+          <div class="stat">
+            <div class="label">Ready for unopposed</div>
+            <div class="value">No</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Settlement Timeline</h2>
+        <p>Settlement stays available from summons through finalisation.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Started</span></div>
+          <div class="step active"><span class="name">Settlement</span><span class="status">Open now</span></div>
+          <div class="step"><span class="name">Children / Family Advocate</span><span class="status">If needed</span></div>
+          <div class="step"><span class="name">Discovery</span><span class="status">Next branch</span></div>
+          <div class="step"><span class="name">Pre-trial</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Set-down</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Trial Prep</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Finalisation</span><span class="status">Outcome</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next Step Panel</strong>
+          This panel should show the one settlement issue that still blocks the unopposed route.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="overview">
+          <h2>1. Settlement overview</h2>
+          <p>
+            The purpose of this page is to capture everything that must be agreed before the divorce can be marked settlement-ready.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Settlement status</h3>
+              <ul>
+                <li>Not ready</li>
+                <li>Needs documents</li>
+                <li>In progress</li>
+                <li>Ready for review</li>
+                <li>Ready for unopposed set-down</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>What changes the health meter</h3>
+              <ul>
+                <li>Property division completed</li>
+                <li>Pension clause captured</li>
+                <li>Maintenance settled</li>
+                <li>Children issues resolved</li>
+                <li>Family Advocate endorsement captured</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="details">
+          <h2>2. Settlement details</h2>
+          <p>
+            This is the structured settlement intake that will eventually become the engine for drafting and compliance checks.
+          </p>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">Matrimonial property system</div><div class="value">In community / out of community / accrual</div></div>
+            <div class="field"><div class="label">Assets</div><div class="value">Property, vehicles, savings, business interests</div></div>
+            <div class="field"><div class="label">Debts</div><div class="value">Mortgage, cards, finance, loans</div></div>
+            <div class="field"><div class="label">Pension interests</div><div class="value">Included / not included</div></div>
+            <div class="field"><div class="label">Minor children</div><div class="value">Yes / No</div></div>
+            <div class="field"><div class="label">Family Advocate</div><div class="value">Not applicable / required / submitted / endorsed</div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Assets to capture</h3>
+              <ul>
+                <li>Immovable property</li>
+                <li>Vehicles</li>
+                <li>Bank accounts</li>
+                <li>Investments</li>
+                <li>Business interests</li>
+                <li>Personal property</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Debts to capture</h3>
+              <ul>
+                <li>Bond / mortgage</li>
+                <li>Vehicle finance</li>
+                <li>Credit cards</li>
+                <li>Personal loans</li>
+                <li>Other liabilities</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>3. Minor children</h2>
+          <p>
+            If there are minor children, the settlement must keep their care, contact, maintenance, and best interests visible.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Children questions</h3>
+              <ul>
+                <li>Names and ages</li>
+                <li>Primary residence</li>
+                <li>Care and contact</li>
+                <li>Maintenance amount</li>
+                <li>School fees</li>
+                <li>Medical aid</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Family Advocate checklist</h3>
+              <ul>
+                <li>Parenting plan attached</li>
+                <li>Recommendation requested</li>
+                <li>Recommendation received</li>
+                <li>Endorsement complete</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout green">
+            <strong>Unopposed route rule</strong>
+            When settlement is complete and the Family Advocate path is complete where needed, the page can mark the matter as suitable for an unopposed or simplified hearing route.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>4. Settlement summary</h2>
+          <p>
+            This summary is the plain-language view of the agreement and will later support drafting and user explanations.
+          </p>
+
+          <div class="summary-box">
+            <h3>Example summary</h3>
+            <ul>
+              <li>Property sold and proceeds divided equally</li>
+              <li>Vehicle retained by Defendant</li>
+              <li>Pension interests split as agreed</li>
+              <li>Maintenance included for minor children</li>
+              <li>Parenting plan attached</li>
+              <li>Family Advocate endorsement pending</li>
+            </ul>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout orange">
+            <strong>Readiness note</strong>
+            If the endorsement or a key clause is missing, the page should remain amber and show exactly what still needs to be completed.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>5. Settlement questions</h2>
+          <p>The user should be able to ask settlement-related questions from this page.</p>
+
+          <div class="faq" id="questions">
+            <details class="faq-item">
+              <summary>Can we settle after summons?</summary>
+              <p>Yes. Settlement can happen at almost any stage, and the system should always keep the settlement tab open.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Do I need Family Advocate approval?</summary>
+              <p>If minor children are involved, the Family Advocate path should be tracked and completed where required.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>What makes the matter ready for unopposed set-down?</summary>
+              <p>The settlement, children, pension, and endorsement items must be complete enough to move the dashboard to a simplified path.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="footer">
+          This settlement centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
