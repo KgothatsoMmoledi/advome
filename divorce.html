@@ -5,863 +5,782 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Advome | Divorce Navigator</title>
   <style>
-    :root {
-      --bg: #fafafa;
-      --card: #ffffff;
-      --border: #dddddd;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --button: #f7f7f7;
-      --button-border: #a1a1aa;
-      --accent: #111827;
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --accent:#0b2c5f;
+      --accent-2:#eef4ff;
+      --danger:#fef2f2;
+      --warning:#fff7e6;
+      --success:#ecfdf5;
+      --line:#dbe4f0;
     }
 
-    * { box-sizing: border-box; }
+    *{ box-sizing:border-box; }
 
-    body {
-      margin: 0;
-      padding: 24px;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+    html{ scroll-behavior:smooth; }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
     }
 
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
+    header{
+      background:var(--card);
+      border-bottom:1px solid var(--border);
+      padding:20px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:50;
     }
 
-    .topbar {
-      margin-bottom: 16px;
+    .logo{
+      font-size:26px;
+      font-weight:700;
+      color:var(--accent);
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 2rem;
-      line-height: 1.1;
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      justify-content:flex-end;
     }
 
-    .disclaimer {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin: 0;
+    nav a{
+      text-decoration:none;
+      color:#374151;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:10px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 16px;
+    nav a:hover{
+      background:#f3f4f6;
     }
 
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--card);
-      padding: 16px;
-      margin-top: 16px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:32px 8% 60px;
     }
 
-    .card h2 {
-      margin: 0 0 12px;
-      font-size: 1.15rem;
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:20px;
+      align-items:start;
+      margin-bottom:20px;
     }
 
-    .card h3 {
-      margin: 16px 0 8px;
-      font-size: 1rem;
+    .hero-left,
+    .hero-right,
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:0 10px 28px rgba(17,24,39,.04);
     }
 
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    .hero-left{
+      padding:26px;
     }
 
-    .summary-box {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      background: #fcfcfc;
-      min-height: 86px;
+    .hero-left h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3.5rem);
+      line-height:1.04;
+      color:var(--accent);
+      letter-spacing:-0.03em;
     }
 
-    .summary-box .label {
-      color: var(--muted);
-      font-size: 0.82rem;
-      margin-bottom: 6px;
+    .hero-left p{
+      margin:0;
+      color:var(--muted);
+      max-width:820px;
+      font-size:1.02rem;
+      line-height:1.7;
     }
 
-    .summary-box .value {
-      font-size: 0.98rem;
-      font-weight: 700;
-      line-height: 1.35;
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
     }
 
-    .status {
-      font-weight: 700;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
     }
 
-    .muted {
-      color: var(--muted);
-      font-size: 0.92rem;
+    .btn.primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .btn.soft{
+      background:var(--accent-2);
+      color:var(--accent);
+      border-color:#d8e3f5;
     }
 
-    label {
-      display: block;
-      margin: 10px 0 6px;
-      font-weight: 700;
-      font-size: 0.95rem;
+    .hero-right{
+      padding:22px;
     }
 
-    input, select, textarea {
-      width: 100%;
-      max-width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #cfcfcf;
-      border-radius: 10px;
-      background: #fff;
-      color: var(--text);
-      font-size: 0.95rem;
+    .health-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
     }
 
-    textarea {
-      min-height: 90px;
-      resize: vertical;
+    .health-title h2{
+      margin:0;
+      font-size:1.12rem;
+      color:var(--accent);
     }
 
-    button {
-      margin: 6px 6px 6px 0;
-      padding: 10px 14px;
-      border: 1px solid var(--button-border);
-      border-radius: 10px;
-      background: var(--button);
-      color: var(--accent);
-      cursor: pointer;
-      font-size: 0.95rem;
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.86rem;
+      white-space:nowrap;
     }
 
-    button:hover {
-      background: #efefef;
+    .pill.red{ background:var(--danger); color:#b91c1c; }
+    .pill.orange{ background:var(--warning); color:#b45309; }
+    .pill.green{ background:var(--success); color:#047857; }
+
+    .health-meter{
+      height:14px;
+      border-radius:999px;
+      background:#e5e7eb;
+      overflow:hidden;
+      margin:12px 0 14px;
     }
 
-    .next-step-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .health-fill{
+      width:72%;
+      height:100%;
+      background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981);
+      border-radius:999px;
     }
 
-    .pill {
-      display: inline-block;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 0.85rem;
-      background: #f9fafb;
-      margin-right: 8px;
-      margin-bottom: 8px;
+    .stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:12px;
     }
 
-    .hidden {
-      display: none !important;
+    .stat{
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
     }
 
-    .checklist {
-      margin: 0;
-      padding-left: 18px;
+    .stat .label{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:5px;
     }
 
-    .checklist li {
-      margin: 8px 0;
-      line-height: 1.4;
+    .stat .value{
+      font-size:1.15rem;
+      font-weight:700;
+      color:var(--accent);
     }
 
-    .checklist label {
-      display: inline;
-      font-weight: 400;
-      margin: 0 0 0 8px;
+    .layout{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:18px;
+      margin-top:18px;
+      align-items:start;
     }
 
-    .small-btn {
-      padding: 8px 12px;
-      font-size: 0.9rem;
+    .sidebar,
+    .section{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:0 10px 28px rgba(17,24,39,.04);
     }
 
-    .footer-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.9rem;
+    .sidebar{
+      padding:18px;
+      position:sticky;
+      top:96px;
     }
 
-    @media (max-width: 900px) {
-      .grid,
-      .row,
-      .summary-grid {
-        grid-template-columns: 1fr;
+    .sidebar h2,
+    .section h2{
+      margin:0 0 12px;
+      color:var(--accent);
+      font-size:1.18rem;
+    }
+
+    .sidebar p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    .timeline{
+      display:grid;
+      gap:10px;
+    }
+
+    .step{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+
+    .step .name{
+      font-weight:700;
+      color:var(--text);
+    }
+
+    .step .status{
+      font-size:.84rem;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .step.active{
+      border-color:#cfe0ff;
+      background:var(--accent-2);
+    }
+
+    .step.active .status{
+      color:var(--accent);
+      font-weight:700;
+    }
+
+    .step.done{
+      background:var(--success);
+      border-color:#c9f0de;
+    }
+
+    .step.done .status{
+      color:#047857;
+      font-weight:700;
+    }
+
+    .step.blocked{
+      background:var(--danger);
+      border-color:#ffd5d5;
+    }
+
+    .step.blocked .status{
+      color:#b91c1c;
+      font-weight:700;
+    }
+
+    .section{
+      padding:18px;
+      margin-bottom:18px;
+    }
+
+    .section p{
+      color:var(--muted);
+      margin-top:0;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .mini{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      background:#fff;
+    }
+
+    .mini h3{
+      margin:0 0 8px;
+      color:var(--accent);
+      font-size:1.02rem;
+    }
+
+    .mini ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--text);
+    }
+
+    .mini li{ margin-bottom:5px; }
+
+    .subtle{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .tag-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .tag{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:.86rem;
+      color:#374151;
+      font-weight:600;
+    }
+
+    .callout{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+
+    .callout.red{ background:var(--danger); border-color:#ffd6d6; }
+    .callout.orange{ background:var(--warning); border-color:#ffe0b2; }
+    .callout.green{ background:var(--success); border-color:#c8eedb; }
+    .callout.blue{ background:var(--accent-2); border-color:#dbe6ff; }
+
+    .callout strong{
+      display:block;
+      margin-bottom:8px;
+      color:var(--accent);
+    }
+
+    .field-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+
+    .field{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:13px;
+      background:#fff;
+    }
+
+    .field .label{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:5px;
+    }
+
+    .field .value{
+      font-weight:700;
+      color:var(--text);
+    }
+
+    .faq{
+      display:grid;
+      gap:10px;
+    }
+
+    .faq-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+
+    .faq-item summary{
+      cursor:pointer;
+      font-weight:700;
+      color:var(--text);
+    }
+
+    .faq-item p{
+      margin:10px 0 0;
+      color:var(--muted);
+    }
+
+    .footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.6;
+    }
+
+    @media (max-width: 1100px){
+      .hero,
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .sidebar{
+        position:static;
+      }
+    }
+
+    @media (max-width: 760px){
+      .grid-2,
+      .field-grid,
+      .stat-grid{
+        grid-template-columns:1fr;
+      }
+      header{
+        padding:18px 5%;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+      .wrap{
+        padding:22px 5% 50px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <h1>Divorce Navigator</h1>
-      <p class="disclaimer">Information only, not legal advice. Designed for self-represented litigants to track procedure, settlement, and hearing preparation.</p>
-    </div>
+  <header>
+    <div class="logo">Advome</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="start.html">Represent Myself</a>
+      <a href="attorney.html">Attorney Portal</a>
+      <a href="dashboard.html">Case Dashboard</a>
+    </nav>
+  </header>
 
-    <div class="card">
-      <h2>Case Snapshot</h2>
-      <div class="summary-grid">
-        <div class="summary-box">
-          <div class="label">Current stage</div>
-          <div class="value" id="caseStage">Summons</div>
-        </div>
-        <div class="summary-box">
-          <div class="label">Next action</div>
-          <div class="value" id="caseNextAction">Review next procedural step</div>
-        </div>
-        <div class="summary-box">
-          <div class="label">Urgency</div>
-          <div class="value" id="caseUrgency">High</div>
-        </div>
-        <div class="summary-box">
-          <div class="label">Deadline focus</div>
-          <div class="value" id="caseDeadline">Check service and response dates</div>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Divorce Navigator</h1>
+        <p>
+          Track the divorce journey from summons to finalisation. Settlement stays open at every stage, children-related issues are highlighted when relevant, and the system always shows the next permissible step.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#flow">View Case Flow</a>
+          <a class="btn soft" href="#settlement">Open Settlement</a>
+          <a class="btn" href="#questions">Ask a Question</a>
         </div>
       </div>
 
-      <h3>Case Health</h3>
-      <p class="status" id="caseHealth">Case status: incomplete</p>
-      <p class="muted" id="caseHealthDetail">Complete the settlement and children sections to improve readiness.</p>
-      <button class="small-btn" onclick="resetCase()">Reset Case</button>
-    </div>
-
-    <div class="grid">
-      <div>
-        <div class="card">
-          <h2>Workflow</h2>
-          <div id="stagePills"></div>
-          <div class="next-step-buttons" id="nextButtons"></div>
+      <div class="hero-right">
+        <div class="health-title">
+          <h2>Case Health</h2>
+          <span class="pill red">Critical</span>
         </div>
+        <div class="health-meter"><div class="health-fill"></div></div>
+        <div class="subtle">Deadline risk, missing documents, and settlement readiness are shown here.</div>
 
-        <div class="card">
-          <h2>Document Checklist</h2>
-          <p id="docChecklistTitle" class="muted"></p>
-          <ul class="checklist" id="docChecklist"></ul>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="label">Current stage</div>
+            <div class="value">Summons</div>
+          </div>
+          <div class="stat">
+            <div class="label">Next step</div>
+            <div class="value">Response / defence</div>
+          </div>
+          <div class="stat">
+            <div class="label">Settlement</div>
+            <div class="value">Open</div>
+          </div>
+          <div class="stat">
+            <div class="label">Family Advocate</div>
+            <div class="value">Pending</div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <section class="layout">
+      <aside class="sidebar" id="flow">
+        <h2>Case Timeline</h2>
+        <p>Each stage can be opened from the dashboard. The active stage is highlighted here.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Opened</span></div>
+          <div class="step active"><span class="name">Response</span><span class="status">Current</span></div>
+          <div class="step"><span class="name">Settlement</span><span class="status">Always available</span></div>
+          <div class="step"><span class="name">Children / Family Advocate</span><span class="status">If minors exist</span></div>
+          <div class="step"><span class="name">Discovery</span><span class="status">Next branch</span></div>
+          <div class="step"><span class="name">Pre-trial</span><span class="status">Later stage</span></div>
+          <div class="step"><span class="name">Set-down</span><span class="status">Later stage</span></div>
+          <div class="step"><span class="name">Trial Prep</span><span class="status">Later stage</span></div>
+          <div class="step"><span class="name">Finalisation</span><span class="status">Outcome</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next Step Panel</strong>
+          The user always sees one practical next action, with a button to ask what to do, what to take, and why it matters.
+        </div>
+      </aside>
 
       <div>
-        <div class="card">
-          <h2>Settlement Tab</h2>
+        <section class="section" id="summons">
+          <h2>1. Summons and response</h2>
+          <p>
+            This is the entry point for a defended or undefended divorce matter. The system identifies the document, confirms the parties, and then moves to the response branch.
+          </p>
 
-          <div class="row">
-            <div>
-              <label for="propertySystem">Matrimonial Property System</label>
-              <select id="propertySystem" onchange="onAnyChange()">
-                <option value="">Select</option>
-                <option value="inCommunity">In Community of Property</option>
-                <option value="outCommunityAccrual">Out of Community with Accrual</option>
-                <option value="outCommunityNoAccrual">Out of Community without Accrual</option>
-                <option value="unknown">Unknown</option>
-              </select>
-
-              <label for="assets">Assets</label>
-              <input id="assets" type="text" placeholder="House, cars, business, savings" oninput="onAnyChange()" />
-
-              <label for="pensions">Pensions</label>
-              <input id="pensions" type="text" placeholder="Pension interests, retirement funds" oninput="onAnyChange()" />
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Documents recognized</h3>
+              <ul>
+                <li>Summons</li>
+                <li>Particulars of claim</li>
+                <li>Plea</li>
+                <li>Counterclaim</li>
+                <li>Reply</li>
+              </ul>
             </div>
 
-            <div>
-              <label for="divisionProposal">Division Proposal</label>
-              <input id="divisionProposal" type="text" placeholder="How should assets be divided?" oninput="onAnyChange()" />
-
-              <label for="maintenance">Maintenance</label>
-              <input id="maintenance" type="text" placeholder="Spousal and/or child maintenance" oninput="onAnyChange()" />
-
-              <label for="minorChildren">Minor Children</label>
-              <select id="minorChildren" onchange="toggleChildrenBranch(); onAnyChange();">
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+            <div class="mini">
+              <h3>Response outcomes</h3>
+              <ul>
+                <li>Plea filed</li>
+                <li>Counterclaim filed</li>
+                <li>Reply required</li>
+                <li>No response yet</li>
+              </ul>
             </div>
           </div>
 
-          <label>
-            <input id="familyAdvocateApproval" type="checkbox" onchange="onAnyChange()" />
-            Family Advocate approval / endorsement obtained
-          </label>
+          <div class="tag-row">
+            <span class="tag">Summons opened</span>
+            <span class="tag">Response tracking</span>
+            <span class="tag">Deadline monitor</span>
+          </div>
+        </section>
 
-          <button onclick="saveSettlement()">Save Settlement Details</button>
+        <section class="section" id="settlement">
+          <h2>2. Settlement centre</h2>
+          <p>
+            Settlement can happen at any stage. This section stays open all the time and collects the core issues that usually decide whether the case can move to an unopposed track.
+          </p>
 
-          <p class="status" id="settlementStatus">Settlement status: incomplete</p>
-          <p class="muted" id="settlementSummary"></p>
-        </div>
+          <div class="field-grid">
+            <div class="field"><div class="label">Matrimonial property system</div><div class="value">In community / out of community / accrual</div></div>
+            <div class="field"><div class="label">Assets</div><div class="value">Property, vehicles, savings, investments</div></div>
+            <div class="field"><div class="label">Pensions</div><div class="value">Included / not included</div></div>
+            <div class="field"><div class="label">Maintenance</div><div class="value">Spousal and child maintenance</div></div>
+            <div class="field"><div class="label">Minor children</div><div class="value">Yes / No</div></div>
+            <div class="field"><div class="label">Family Advocate approval</div><div class="value">Pending / Approved</div></div>
+          </div>
 
-        <div class="card hidden" id="childrenCard">
-          <h2>Children Branch</h2>
+          <div style="height:14px"></div>
 
-          <div class="row">
-            <div>
-              <label for="childCare">Care / Residence</label>
-              <input id="childCare" type="text" placeholder="Who will the children live with?" oninput="onAnyChange()" />
+          <div class="callout green">
+            <strong>Settlement outcome rule</strong>
+            If settlement is complete and children-related approval is complete where needed, the dashboard can mark the matter as settlement-ready and simplify hearing preparation.
+          </div>
+        </section>
 
-              <label for="childContact">Contact / Access</label>
-              <input id="childContact" type="text" placeholder="Weekend, holiday, or shared contact arrangement" oninput="onAnyChange()" />
+        <section class="section" id="children">
+          <h2>3. Children / Family Advocate</h2>
+          <p>
+            This branch opens when minor children are involved. It tracks care, contact, guardianship, maintenance, and whether Family Advocate input is needed before finalisation.
+          </p>
 
-              <label for="childGuardianship">Guardianship</label>
-              <input id="childGuardianship" type="text" placeholder="Guardianship agreement or issue" oninput="onAnyChange()" />
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Children issues to capture</h3>
+              <ul>
+                <li>Care / residence</li>
+                <li>Contact / access</li>
+                <li>Guardianship</li>
+                <li>School costs</li>
+                <li>Medical aid</li>
+                <li>Maintenance</li>
+              </ul>
             </div>
 
-            <div>
-              <label for="childMaintenance">Child Maintenance</label>
-              <input id="childMaintenance" type="text" placeholder="Monthly maintenance, school fees, medical aid" oninput="onAnyChange()" />
-
-              <label for="familyAdvocateRequired">Family Advocate Required</label>
-              <select id="familyAdvocateRequired" onchange="onAnyChange()">
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-
-              <label>
-                <input id="familyAdvocateChildrenApproval" type="checkbox" onchange="onAnyChange()" />
-                Family Advocate approval for children issues obtained
-              </label>
+            <div class="mini">
+              <h3>Family Advocate status</h3>
+              <ul>
+                <li>Required: yes / no</li>
+                <li>Submission sent</li>
+                <li>Interview completed</li>
+                <li>Recommendation received</li>
+                <li>Approval marked complete</li>
+              </ul>
             </div>
           </div>
 
-          <button onclick="saveChildrenDetails()">Save Children Details</button>
+          <div style="height:14px"></div>
 
-          <p class="status" id="childrenStatus">Children status: not applicable</p>
-          <p class="muted" id="childrenSummary"></p>
+          <div class="callout orange">
+            <strong>Important</strong>
+            Where there are minor children and settlement touches their rights, the children branch should remain visible until the Family Advocate path is satisfied or the court can proceed lawfully.
+          </div>
+        </section>
+
+        <section class="section" id="discovery">
+          <h2>4. Discovery and compliance</h2>
+          <p>
+            This branch tracks what has been exchanged, what is still missing, and whether any compliance steps need to be forced or updated.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Discovery items</h3>
+              <ul>
+                <li>Document request list</li>
+                <li>Documents received</li>
+                <li>Missing records</li>
+                <li>Affidavits outstanding</li>
+                <li>Compel required</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Compliance warnings</h3>
+              <ul>
+                <li>Late response</li>
+                <li>Missing filing confirmation</li>
+                <li>Unstamped copy</li>
+                <li>Deadline close</li>
+                <li>Bundle incomplete</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout red">
+            <strong>Risk alert</strong>
+            If deadlines are missed or discovery is ignored, the case health meter should move to red and the next-step panel should prompt a compliance action.
+          </div>
+        </section>
+
+        <section class="section" id="pretrial">
+          <h2>5. Pre-trial and set-down readiness</h2>
+          <p>
+            Once pleadings and discovery are in order, the system switches to pre-trial, set-down, indexing, and hearing preparation.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Pre-trial outputs</h3>
+              <ul>
+                <li>Chronology</li>
+                <li>Issues in dispute</li>
+                <li>Settlement summary</li>
+                <li>Witness list</li>
+                <li>Missing document checklist</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Set-down outputs</h3>
+              <ul>
+                <li>Notice of set-down</li>
+                <li>Index and pagination</li>
+                <li>Hearing bundle</li>
+                <li>Trial notes</li>
+                <li>Readiness score</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout blue">
+            <strong>Readiness logic</strong>
+            The more complete the settlement and children branches are, the easier the hearing-prep and set-down path becomes.
+          </div>
+        </section>
+
+        <section class="section" id="finalisation">
+          <h2>6. Finalisation</h2>
+          <p>
+            This section closes the case when it is settled, ready for an unopposed hearing, or ready for defended finalisation.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Possible outcomes</h3>
+              <ul>
+                <li>Settled</li>
+                <li>Unopposed path</li>
+                <li>Defended hearing-ready</li>
+                <li>Post-order follow-up</li>
+              </ul>
+            </div>
+
+            <div class="mini">
+              <h3>Downloads</h3>
+              <ul>
+                <li>Settlement agreement</li>
+                <li>Parenting plan</li>
+                <li>Final order</li>
+                <li>Case summary</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="questions">
+          <h2>7. Questions panel</h2>
+          <p>
+            The user should be able to ask questions at any point, especially when the next step is procedural and time-sensitive.
+          </p>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>What do I take to the registrar?</summary>
+              <p>Use the latest served document, the case number, the party names, and any proof of filing or access request needed for that stage.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>How do I know if the case is unopposed?</summary>
+              <p>The system should only show this when there is no defence branch active and the settlement and children requirements are complete where relevant.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>What if Family Advocate approval is missing?</summary>
+              <p>The children branch should remain open, the health meter should warn the user, and the next-step panel should direct them to complete that path before finalisation.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="footer">
+          Advome Divorce Navigator is a procedural assistance tool. It should guide the user through the court process, not replace legal advice or court rules.
         </div>
       </div>
-    </div>
-  </div>
-
-  <script>
-    const storageKey = "advome_divorce_state_v3";
-
-    const stageMeta = {
-      summons: {
-        label: "Divorce Summons",
-        urgency: "High",
-        deadlineFocus: "Check service and response dates",
-        next: ["plea", "counterclaim", "default"],
-        checklist: [
-          "Combined Summons (Divorce Matters)",
-          "Particulars of Claim",
-          "Marriage details",
-          "Proof of service"
-        ]
-      },
-      plea: {
-        label: "Plea Filed",
-        urgency: "High",
-        deadlineFocus: "Track reply and next filing date",
-        next: ["reply", "settlement", "discovery"],
-        checklist: [
-          "Plea",
-          "Any counterclaim if filed",
-          "Relevant supporting facts"
-        ]
-      },
-      counterclaim: {
-        label: "Counterclaim Filed",
-        urgency: "High",
-        deadlineFocus: "Track reply deadline",
-        next: ["reply", "settlement"],
-        checklist: [
-          "Counterclaim",
-          "Marriage details",
-          "Any supporting documents"
-        ]
-      },
-      reply: {
-        label: "Reply Filed",
-        urgency: "Medium",
-        deadlineFocus: "Prepare for discovery and settlement",
-        next: ["discovery", "settlement"],
-        checklist: [
-          "Reply",
-          "Any amended pleadings",
-          "Supporting correspondence"
-        ]
-      },
-      discovery: {
-        label: "Discovery",
-        urgency: "Medium",
-        deadlineFocus: "Exchange and identify missing documents",
-        next: ["preTrial", "settlement"],
-        checklist: [
-          "Discovery documents",
-          "Financial records",
-          "Supporting correspondence"
-        ]
-      },
-      preTrial: {
-        label: "Pre-Trial",
-        urgency: "Medium",
-        deadlineFocus: "Prepare the pre-trial minute and issues list",
-        next: ["setDown", "settlement"],
-        checklist: [
-          "Pre-trial minute",
-          "Issues list",
-          "Chronology"
-        ]
-      },
-      setDown: {
-        label: "Set Down",
-        urgency: "High",
-        deadlineFocus: "Confirm hearing date and indexed bundle",
-        next: ["trialPrep"],
-        checklist: [
-          "Set-down notice",
-          "Indexed bundle"
-        ]
-      },
-      trialPrep: {
-        label: "Trial Preparation",
-        urgency: "High",
-        deadlineFocus: "Prepare witnesses, notes, and bundle",
-        next: ["finalisation"],
-        checklist: [
-          "Trial bundle",
-          "Witness list",
-          "Speaking notes"
-        ]
-      },
-      finalisation: {
-        label: "Finalisation",
-        urgency: "Low",
-        deadlineFocus: "Prepare order and final filing",
-        next: [],
-        checklist: [
-          "Draft order",
-          "Settlement agreement if any",
-          "Final filing copies"
-        ]
-      },
-      default: {
-        label: "No Response (Default)",
-        urgency: "High",
-        deadlineFocus: "Check service proof and expiry of response period",
-        next: ["finalisation"],
-        checklist: [
-          "Proof of service",
-          "Expiry of response period",
-          "Default judgment papers where applicable"
-        ]
-      },
-      settlement: {
-        label: "Settlement",
-        urgency: "Medium",
-        deadlineFocus: "Complete settlement terms and confirm approval",
-        next: ["preTrial", "finalisation"],
-        checklist: [
-          "Settlement terms",
-          "Property system",
-          "Assets and liabilities",
-          "Pension details",
-          "Maintenance terms",
-          "Children details if applicable"
-        ]
-      }
-    };
-
-    const stageButtonLabels = {
-      plea: "I received a response from my spouse",
-      counterclaim: "My spouse is making their own claim",
-      reply: "I need to respond to their claim",
-      discovery: "We need to exchange documents",
-      preTrial: "Prepare for court discussion",
-      setDown: "Set the case for hearing",
-      trialPrep: "Prepare for court",
-      finalisation: "Finalize the divorce",
-      default: "My spouse did not respond",
-      settlement: "Open settlement questions"
-    };
-
-    let currentState = "summons";
-
-    const settlement = {
-      propertySystem: "",
-      assets: "",
-      divisionProposal: "",
-      pensions: "",
-      maintenance: "",
-      minorChildren: "",
-      familyAdvocateApproval: false
-    };
-
-    const children = {
-      childCare: "",
-      childContact: "",
-      childGuardianship: "",
-      childMaintenance: "",
-      familyAdvocateRequired: "",
-      familyAdvocateChildrenApproval: false
-    };
-
-    let checklistProgress = {};
-
-    function getMeta(state) {
-      return stageMeta[state] || stageMeta.summons;
-    }
-
-    function isSettlementComplete() {
-      return Boolean(
-        settlement.propertySystem &&
-        settlement.assets &&
-        settlement.divisionProposal &&
-        settlement.pensions &&
-        settlement.maintenance &&
-        settlement.minorChildren
-      );
-    }
-
-    function isChildrenVisible() {
-      return document.getElementById("minorChildren").value === "yes";
-    }
-
-    function isChildrenComplete() {
-      return Boolean(
-        children.childCare &&
-        children.childContact &&
-        children.childGuardianship &&
-        children.childMaintenance &&
-        children.familyAdvocateRequired
-      );
-    }
-
-    function render() {
-      const meta = getMeta(currentState);
-
-      document.getElementById("caseStage").innerText = meta.label;
-      document.getElementById("caseUrgency").innerText = meta.urgency;
-      document.getElementById("caseDeadline").innerText = meta.deadlineFocus;
-
-      const nextAction = meta.next.length
-        ? meta.next.map(step => stageButtonLabels[step] || stageMeta[step]?.label || step).join(" / ")
-        : "No further stage";
-
-      document.getElementById("caseNextAction").innerText = nextAction;
-
-      const pills = document.getElementById("stagePills");
-      pills.innerHTML = "";
-      Object.keys(stageMeta).forEach(stage => {
-        const pill = document.createElement("span");
-        pill.className = "pill";
-        pill.innerText = stageMeta[stage].label;
-        pills.appendChild(pill);
-      });
-
-      const nextButtons = document.getElementById("nextButtons");
-      nextButtons.innerHTML = "";
-
-      meta.next.forEach(step => {
-        const btn = document.createElement("button");
-        btn.innerText = stageButtonLabels[step] || stageMeta[step]?.label || step;
-        btn.onclick = () => {
-          currentState = step;
-          render();
-          saveState();
-        };
-        nextButtons.appendChild(btn);
-      });
-
-      updateSettlementStatus();
-      toggleChildrenBranch();
-      updateChildrenStatus();
-      updateDocumentChecklist();
-      updateCaseHealth();
-    }
-
-    function updateDocumentChecklist() {
-      const meta = getMeta(currentState);
-      const items = meta.checklist || [];
-      const title = document.getElementById("docChecklistTitle");
-      const list = document.getElementById("docChecklist");
-
-      title.innerText = `Required for: ${meta.label}`;
-      list.innerHTML = "";
-
-      if (!checklistProgress[currentState]) {
-        checklistProgress[currentState] = Array(items.length).fill(false);
-      }
-
-      if (checklistProgress[currentState].length !== items.length) {
-        const current = checklistProgress[currentState];
-        checklistProgress[currentState] = items.map((_, i) => Boolean(current[i]));
-      }
-
-      items.forEach((item, index) => {
-        const li = document.createElement("li");
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.checked = Boolean(checklistProgress[currentState][index]);
-        checkbox.onchange = () => {
-          checklistProgress[currentState][index] = checkbox.checked;
-          saveState();
-          updateCaseHealth();
-        };
-
-        const label = document.createElement("label");
-        label.innerText = item;
-
-        li.appendChild(checkbox);
-        li.appendChild(label);
-        list.appendChild(li);
-      });
-    }
-
-    function saveSettlement() {
-      settlement.propertySystem = document.getElementById("propertySystem").value;
-      settlement.assets = document.getElementById("assets").value;
-      settlement.divisionProposal = document.getElementById("divisionProposal").value;
-      settlement.pensions = document.getElementById("pensions").value;
-      settlement.maintenance = document.getElementById("maintenance").value;
-      settlement.minorChildren = document.getElementById("minorChildren").value;
-      settlement.familyAdvocateApproval = document.getElementById("familyAdvocateApproval").checked;
-
-      updateSettlementStatus();
-      toggleChildrenBranch();
-      updateChildrenStatus();
-      updateCaseHealth();
-      saveState();
-    }
-
-    function saveChildrenDetails() {
-      children.childCare = document.getElementById("childCare").value;
-      children.childContact = document.getElementById("childContact").value;
-      children.childGuardianship = document.getElementById("childGuardianship").value;
-      children.childMaintenance = document.getElementById("childMaintenance").value;
-      children.familyAdvocateRequired = document.getElementById("familyAdvocateRequired").value;
-      children.familyAdvocateChildrenApproval = document.getElementById("familyAdvocateChildrenApproval").checked;
-
-      updateChildrenStatus();
-      updateCaseHealth();
-      saveState();
-    }
-
-    function toggleChildrenBranch() {
-      const card = document.getElementById("childrenCard");
-      card.classList.toggle("hidden", document.getElementById("minorChildren").value !== "yes");
-    }
-
-    function updateSettlementStatus() {
-      const complete = isSettlementComplete();
-      const approved = settlement.familyAdvocateApproval;
-
-      let text = "Settlement status: incomplete";
-      if (complete) {
-        text = approved
-          ? "Settlement status: complete and Family Advocate approved"
-          : "Settlement status: complete, awaiting Family Advocate approval where required";
-      }
-
-      document.getElementById("settlementStatus").innerText = text;
-
-      const childrenFlag = settlement.minorChildren === "yes" ? "yes" : "no";
-
-      document.getElementById("settlementSummary").innerText =
-        `Children: ${settlement.minorChildren || "not selected"} | ` +
-        `Property system: ${settlement.propertySystem || "not selected"} | ` +
-        `Family Advocate approval: ${settlement.familyAdvocateApproval ? "yes" : "no"} | ` +
-        `Complete: ${complete ? "yes" : "no"} | ` +
-        `Children flag: ${childrenFlag}`;
-    }
-
-    function updateChildrenStatus() {
-      const visible = isChildrenVisible();
-
-      if (!visible) {
-        document.getElementById("childrenStatus").innerText = "Children status: not applicable";
-        document.getElementById("childrenSummary").innerText = "";
-        return;
-      }
-
-      const complete = isChildrenComplete();
-      const approved = children.familyAdvocateChildrenApproval;
-
-      let text = "Children status: incomplete";
-      if (complete) {
-        text = approved
-          ? "Children status: complete and Family Advocate approved"
-          : "Children status: complete, awaiting Family Advocate approval where required";
-      }
-
-      document.getElementById("childrenStatus").innerText = text;
-      document.getElementById("childrenSummary").innerText =
-        `Care: ${children.childCare || "not selected"} | ` +
-        `Contact: ${children.childContact || "not selected"} | ` +
-        `Guardianship: ${children.childGuardianship || "not selected"} | ` +
-        `Maintenance: ${children.childMaintenance || "not selected"} | ` +
-        `Family Advocate required: ${children.familyAdvocateRequired || "not selected"} | ` +
-        `Approved: ${children.familyAdvocateChildrenApproval ? "yes" : "no"}`;
-    }
-
-    function updateCaseHealth() {
-      const settlementComplete = isSettlementComplete();
-      const childrenVisible = isChildrenVisible();
-      const childrenComplete = isChildrenComplete();
-      const childrenApproved = children.familyAdvocateChildrenApproval;
-
-      let status = "Case status: incomplete";
-      let detail = "Complete the settlement and checklist sections to improve readiness.";
-
-      if (currentState === "summons") {
-        status = "Case status: intake started";
-        detail = "Identify the summons, response deadline, and settlement position.";
-      }
-
-      if (settlementComplete && !childrenVisible) {
-        status = "Case status: ready for settlement (no children)";
-        detail = "Settlement is complete and the file can move toward pre-trial or finalisation.";
-      }
-
-      if (settlementComplete && childrenVisible && childrenComplete && childrenApproved) {
-        status = "Case status: ready for Family Advocate / settlement";
-        detail = "Children and settlement issues are completed and approved where required.";
-      }
-
-      if (settlementComplete && childrenVisible && !childrenComplete) {
-        status = "Case status: settlement complete, children details still missing";
-        detail = "Children-related details must be completed before the file can move cleanly forward.";
-      }
-
-      if (currentState === "preTrial" || currentState === "setDown" || currentState === "trialPrep") {
-        status = "Case status: hearing preparation";
-        detail = "Focus on the checklist, bundle, chronology, and speaking notes.";
-      }
-
-      if (currentState === "finalisation") {
-        status = "Case status: finalisation";
-        detail = "Prepare the order, confirm settlement terms, and complete final filing.";
-      }
-
-      document.getElementById("caseHealth").innerText = status;
-      document.getElementById("caseHealthDetail").innerText = detail;
-    }
-
-    function onAnyChange() {
-      settlement.propertySystem = document.getElementById("propertySystem").value;
-      settlement.assets = document.getElementById("assets").value;
-      settlement.divisionProposal = document.getElementById("divisionProposal").value;
-      settlement.pensions = document.getElementById("pensions").value;
-      settlement.maintenance = document.getElementById("maintenance").value;
-      settlement.minorChildren = document.getElementById("minorChildren").value;
-      settlement.familyAdvocateApproval = document.getElementById("familyAdvocateApproval").checked;
-
-      children.childCare = document.getElementById("childCare").value;
-      children.childContact = document.getElementById("childContact").value;
-      children.childGuardianship = document.getElementById("childGuardianship").value;
-      children.childMaintenance = document.getElementById("childMaintenance").value;
-      children.familyAdvocateRequired = document.getElementById("familyAdvocateRequired").value;
-      children.familyAdvocateChildrenApproval = document.getElementById("familyAdvocateChildrenApproval").checked;
-
-      updateSettlementStatus();
-      toggleChildrenBranch();
-      updateChildrenStatus();
-      updateDocumentChecklist();
-      updateCaseHealth();
-      saveState();
-    }
-
-    function saveState() {
-      localStorage.setItem(storageKey, JSON.stringify({
-        currentState,
-        settlement,
-        children,
-        checklistProgress
-      }));
-    }
-
-    function loadState() {
-      const saved = localStorage.getItem(storageKey);
-      if (!saved) {
-        render();
-        return;
-      }
-
-      try {
-        const data = JSON.parse(saved);
-        currentState = data.currentState || "summons";
-        Object.assign(settlement, data.settlement || {});
-        Object.assign(children, data.children || {});
-        checklistProgress = data.checklistProgress || {};
-
-        document.getElementById("propertySystem").value = settlement.propertySystem || "";
-        document.getElementById("assets").value = settlement.assets || "";
-        document.getElementById("divisionProposal").value = settlement.divisionProposal || "";
-        document.getElementById("pensions").value = settlement.pensions || "";
-        document.getElementById("maintenance").value = settlement.maintenance || "";
-        document.getElementById("minorChildren").value = settlement.minorChildren || "";
-        document.getElementById("familyAdvocateApproval").checked = !!settlement.familyAdvocateApproval;
-
-        document.getElementById("childCare").value = children.childCare || "";
-        document.getElementById("childContact").value = children.childContact || "";
-        document.getElementById("childGuardianship").value = children.childGuardianship || "";
-        document.getElementById("childMaintenance").value = children.childMaintenance || "";
-        document.getElementById("familyAdvocateRequired").value = children.familyAdvocateRequired || "";
-        document.getElementById("familyAdvocateChildrenApproval").checked = !!children.familyAdvocateChildrenApproval;
-
-        render();
-      } catch (err) {
-        render();
-      }
-    }
-
-    function resetCase() {
-      localStorage.removeItem(storageKey);
-      currentState = "summons";
-
-      settlement.propertySystem = "";
-      settlement.assets = "";
-      settlement.divisionProposal = "";
-      settlement.pensions = "";
-      settlement.maintenance = "";
-      settlement.minorChildren = "";
-      settlement.familyAdvocateApproval = false;
-
-      children.childCare = "";
-      children.childContact = "";
-      children.childGuardianship = "";
-      children.childMaintenance = "";
-      children.familyAdvocateRequired = "";
-      children.familyAdvocateChildrenApproval = false;
-
-      checklistProgress = {};
-
-      document.getElementById("propertySystem").value = "";
-      document.getElementById("assets").value = "";
-      document.getElementById("divisionProposal").value = "";
-      document.getElementById("pensions").value = "";
-      document.getElementById("maintenance").value = "";
-      document.getElementById("minorChildren").value = "";
-      document.getElementById("familyAdvocateApproval").checked = false;
-
-      document.getElementById("childCare").value = "";
-      document.getElementById("childContact").value = "";
-      document.getElementById("childGuardianship").value = "";
-      document.getElementById("childMaintenance").value = "";
-      document.getElementById("familyAdvocateRequired").value = "";
-      document.getElementById("familyAdvocateChildrenApproval").checked = false;
-
-      render();
-    }
-
-    loadState();
-  </script>
+    </section>
+  </main>
 </body>
 </html>
