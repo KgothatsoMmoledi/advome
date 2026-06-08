@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Finalisation Centre</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#111827;
+}
+
+header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+color:#0b2c5f;
+}
+
+nav{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+nav a{
+text-decoration:none;
+font-weight:600;
+color:#374151;
+}
+
+.wrap{
+max-width:1300px;
+margin:auto;
+padding:30px 8%;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+border:1px solid #e5e7eb;
+margin-bottom:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.04);
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.done{
+background:#ecfdf5;
+border:1px solid #c8eedb;
+}
+
+.blue{
+background:#eef4ff;
+border:1px solid #dbe6ff;
+}
+
+.orange{
+background:#fff7e6;
+border:1px solid #ffe0b2;
+}
+
+.timeline div{
+padding:12px;
+border:1px solid #e5e7eb;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+.question{
+padding:14px;
+border:1px solid #e5e7eb;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+.progress{
+height:24px;
+background:#e5e7eb;
+border-radius:999px;
+overflow:hidden;
+}
+
+.bar{
+height:100%;
+width:100%;
+background:#10b981;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+td,th{
+padding:12px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">Advome</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="trialprep.html">Trial Preparation</a>
+
+</nav>
+
+</header>
+
+<div class="wrap">
+
+<div class="card done">
+
+<h1>Finalisation Centre</h1>
+
+<h3>Case Completed</h3>
+
+<p>✓ Trial completed</p>
+
+<p>✓ Judgment delivered</p>
+
+<p>✓ Divorce granted</p>
+
+<p>✓ Matter finalised</p>
+
+</div>
+
+<div class="card">
+
+<h2>Timeline</h2>
+
+<div class="timeline">
+
+<div class="done">✓ Summons</div>
+
+<div class="done">✓ Pleadings</div>
+
+<div class="done">✓ Settlement</div>
+
+<div class="done">✓ Discovery</div>
+
+<div class="done">✓ Pre-Trial</div>
+
+<div class="done">✓ Set-Down</div>
+
+<div class="done">✓ Trial Preparation</div>
+
+<div class="done">✓ Finalisation</div>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Outcome Centre</h2>
+
+<p>Judgment granted : Yes</p>
+
+<p>Settlement agreement made order of court : Yes</p>
+
+<p>Decree of divorce issued : Yes</p>
+
+<p>Case status : Closed</p>
+
+</div>
+
+<div class="card">
+
+<h2>Pension Orders</h2>
+
+<p>Pension interest awarded : Yes</p>
+
+<p>Fund identified : Yes</p>
+
+<p>Endorsement wording verified : Pending</p>
+
+<p>Fund notified : Pending</p>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Children And Maintenance Orders</h2>
+
+<p>Care and contact order : Granted</p>
+
+<p>Maintenance order : Granted</p>
+
+<p>Family Advocate issues : Resolved</p>
+
+<p>Parenting plan : Incorporated</p>
+
+</div>
+
+<div class="card">
+
+<h2>Costs</h2>
+
+<p>Costs order granted : No</p>
+
+<p>Party and party costs : N/A</p>
+
+<p>Taxation required : No</p>
+
+</div>
+
+</div>
+
+<div class="card blue">
+
+<h2>Enforcement Centre</h2>
+
+<table>
+
+<tr>
+<th>Order</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Maintenance</td>
+<td>Active</td>
+</tr>
+
+<tr>
+<td>Pension Order</td>
+<td>Pending Fund Compliance</td>
+</tr>
+
+<tr>
+<td>Property Transfer</td>
+<td>Pending</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Appeal And Rescission</h2>
+
+<p>Appeal period expired : No</p>
+
+<p>Application for leave to appeal : None</p>
+
+<p>Rescission proceedings : None</p>
+
+</div>
+
+<div class="card orange">
+
+<h2>Case Health Meter</h2>
+
+<div class="progress">
+<div class="bar"></div>
+</div>
+
+<h3>100%</h3>
+
+<p>
+
+The litigation cycle has been completed successfully.
+
+</p>
+
+</div>
+
+<div class="card blue">
+
+<h2>Case Archive Summary</h2>
+
+<p>
+
+The matter progressed through pleadings, discovery, pre-trial procedures, set-down and trial preparation. Judgment was delivered and the matter has now been finalised.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Questions</h2>
+
+<div class="question">
+How do I obtain a copy of the decree of divorce?
+</div>
+
+<div class="question">
+How do I enforce a maintenance order?
+</div>
+
+<div class="question">
+How long does pension payment take?
+</div>
+
+<div class="question">
+Can the order be varied?
+</div>
+
+<div class="question">
+Can the matter be appealed?
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Disclaimer</h2>
+
+<p>
+
+Advome provides procedural assistance and workflow management. Users remain responsible for obtaining legal advice where necessary and complying with court rules and legislation.
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
