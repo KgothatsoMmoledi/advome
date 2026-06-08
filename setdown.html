@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Set-Down Centre</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#111827;
+}
+
+header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+color:#0b2c5f;
+}
+
+nav{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+nav a{
+text-decoration:none;
+color:#374151;
+font-weight:600;
+}
+
+.wrap{
+max-width:1300px;
+margin:auto;
+padding:30px 8%;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+border:1px solid #e5e7eb;
+margin-bottom:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.04);
+}
+
+.blue{
+background:#eef4ff;
+border:1px solid #dbe6ff;
+}
+
+.red{
+background:#fff1f1;
+border:1px solid #ffd7d7;
+}
+
+.orange{
+background:#fff7e6;
+border:1px solid #ffe0b2;
+}
+
+.green{
+background:#ecfdf5;
+border:1px solid #c8eedb;
+}
+
+h1,h2,h3{
+color:#0b2c5f;
+margin-top:0;
+}
+
+.timeline div{
+padding:12px;
+border:1px solid #e5e7eb;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+.done{
+background:#ecfdf5;
+}
+
+.active{
+background:#eef4ff;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+td,th{
+padding:12px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+.question{
+padding:15px;
+border:1px solid #e5e7eb;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Advome</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="health.html">Health</a>
+<a href="discovery.html">Discovery</a>
+<a href="pretrial.html">Pre-Trial</a>
+
+</nav>
+
+</header>
+
+<div class="wrap">
+
+<div class="card">
+
+<h1>Set-Down Centre</h1>
+
+<h3>Awaiting Allocation</h3>
+
+<p>✓ Pre-trial complete</p>
+
+<p>✓ Matter ready for enrolment</p>
+
+<p>⚠ Notice of Set Down not yet served</p>
+
+<p>⚠ Trial date not allocated</p>
+
+</div>
+
+<div class="card">
+
+<h2>Case Timeline</h2>
+
+<div class="timeline">
+
+<div class="done">✓ Summons</div>
+
+<div class="done">✓ Pleadings</div>
+
+<div class="done">✓ Settlement</div>
+
+<div class="done">✓ Children</div>
+
+<div class="done">✓ Discovery</div>
+
+<div class="done">✓ Pre-Trial</div>
+
+<div class="active">► Set-Down</div>
+
+<div>Trial Preparation</div>
+
+<div>Finalisation</div>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Trial Date Allocation Centre</h2>
+
+<table>
+
+<tr>
+<th>Item</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Trial Date Allocated</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Court Assigned</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Judge Allocated</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Judicial Case Manager</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Enrolled On Roll</td>
+<td>No</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card blue">
+
+<h2>Allocation Information</h2>
+
+<p>
+
+Allocation cannot occur until the matter is properly set down and registrar processes are completed.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card red">
+
+<h2>Notice Of Set Down Centre</h2>
+
+<p>☐ Notice drafted</p>
+
+<p>☐ Signed</p>
+
+<p>☐ Served on opponent</p>
+
+<p>☐ Proof of service uploaded</p>
+
+<p>☐ Filed with court</p>
+
+<p>☐ Matter enrolled</p>
+
+<hr>
+
+<h3>
+
+Failure to serve the Notice of Set Down correctly may affect enrolment.
+
+</h3>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Registrar Communication Centre</h2>
+
+<p>Email sent : No</p>
+
+<p>Awaiting response : Yes</p>
+
+<p>Follow-up sent : No</p>
+
+<p>Escalation to court manager : Not yet</p>
+
+</div>
+
+<div class="card">
+
+<h2>Court Online Centre</h2>
+
+<p>✓ Access confirmed</p>
+
+<p>✓ Matter visible</p>
+
+<p>✓ Documents uploaded</p>
+
+<p>Bundle upload : Not required yet</p>
+
+<p>Allocation received : Pending</p>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card orange">
+
+<h2>Deadline Centre</h2>
+
+<p>Days since registrar email : 5</p>
+
+<p>Follow-up required : Yes</p>
+
+<p>Trial date : Not allocated</p>
+
+<p>Urgency : Medium</p>
+
+</div>
+
+<div class="card green">
+
+<h2>Escalation Centre</h2>
+
+<p>
+
+If unreasonable delays occur, users should follow up and if necessary approach the court manager.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card blue">
+
+<h2>Your Next Step</h2>
+
+<h3>Draft and Serve Notice Of Set Down</h3>
+
+<p>
+
+Required:
+
+</p>
+
+<ul>
+
+<li>Case number</li>
+
+<li>Date allocated</li>
+
+<li>Opponent details</li>
+
+<li>Method of service</li>
+
+</ul>
+
+<p>
+
+After service, upload proof and continue monitoring allocation.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Questions</h2>
+
+<div class="question">
+How do I draft a Notice of Set Down?
+</div>
+
+<div class="question">
+Must the Notice of Set Down be served?
+</div>
+
+<div class="question">
+What proof of service is required?
+</div>
+
+<div class="question">
+What if the registrar ignores emails?
+</div>
+
+<div class="question">
+Can I speak to the court manager?
+</div>
+
+<div class="question">
+Who is the Judicial Case Manager?
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Set-Down Summary</h2>
+
+<p>
+
+The matter has progressed beyond pre-trial and is substantially ready for enrolment. A Notice of Set Down must be drafted, served and filed. Trial allocation remains outstanding and communication with the registrar should continue until a date is allocated.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Disclaimer</h2>
+
+<p>
+
+This platform promotes access to justice and procedural assistance. It does not provide legal advice. Users remain responsible for complying with applicable rules, directives and court practices.
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
