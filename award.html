@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Award Centre</title>
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --panel: #ffffff;
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f8fd 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.9); background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; font-size: 0.84rem; color: var(--muted); }
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
+    .hero {
+      margin-top: 28px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
+      align-items: stretch;
+    }
+    .card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main { padding: 34px; position: relative; overflow: hidden; }
+    .hero-main::after {
+      content: "";
+      position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 600;
+      border: 1px solid #d6e3ff;
+    }
+    .hero h1 {
+      margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
+    }
+    .hero p { margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 64ch; }
+    .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white;
+      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
+    }
+    .btn-secondary:hover { background: #f7fbff; }
+    .status-card { padding: 22px; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .status-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
+    .section { margin-top: 22px; padding: 24px; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
+    }
+    .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(160px, 1fr));
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .step {
+      min-width: 160px;
+      padding: 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+      position: relative;
+    }
+    .step.active {
+      border-color: #bfd1ff;
+      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+    }
+    .step .num {
+      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800;
+      background: #eef4ff; color: var(--brand-2); margin-bottom: 10px;
+    }
+    .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
+    .step strong { display: block; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 0.88rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .panel { padding: 22px; }
+    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
+    .panel p { margin: 0; color: var(--muted); }
+    .feature-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .feature-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
+    }
+    .dot {
+      width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
+      flex: 0 0 auto;
+    }
+    .feature-list strong { display: block; margin-bottom: 2px; }
+    .feature-list span { color: var(--muted); font-size: 0.92rem; }
+    .question-box { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .q-list { display: grid; gap: 10px; margin-top: 16px; }
+    .q-item {
+      padding: 14px 16px; background: white; border: 1px solid #e6eef8; border-radius: 16px;
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+    }
+    .q-item span { color: var(--muted); font-size: 0.92rem; }
+    .q-item strong { display: block; }
+    .footer-note {
+      margin: 22px 0 30px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid #e6eef8;
+      background: rgba(255,255,255,0.9);
+      color: var(--muted);
+      text-align: center;
+    }
+    .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
+    .success {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #effaf3;
+      border: 1px solid #ccefd8;
+      color: #146b37;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    @media (max-width: 1024px) {
+      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .timeline { grid-template-columns: repeat(6, 220px); }
+    }
+    @media (max-width: 640px) {
+      .shell { padding: 16px; }
+      .hero-main, .status-card, .section, .panel { padding: 18px; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .status-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="review.html">Review</a>
+        <a class="active" href="award.html">Award</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">Award Centre</div>
+        <h1>Capture the arbitration outcome and decide what happens next.</h1>
+        <p>
+          This page sits between arbitration and the review challenge centre. It should show the award clearly,
+          record the service date, and ask the user whether they are happy with the decision.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#award-start">Open Award</a>
+          <a class="btn btn-secondary" href="ccma.html">Back to CCMA</a>
+        </div>
+      </div>
+
+      <aside class="card status-card">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Case Health</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Award received</h2>
+          </div>
+          <span class="pill warn">Decision stage</span>
+        </div>
+        <div class="status-grid">
+          <div class="mini">
+            <span>Current stage</span>
+            <strong>Award</strong>
+          </div>
+          <div class="mini">
+            <span>Next step</span>
+            <strong>Accept or review</strong>
+          </div>
+          <div class="mini">
+            <span>Deadline risk</span>
+            <strong>Review clock active</strong>
+          </div>
+          <div class="mini">
+            <span>Missing items</span>
+            <strong>Reasons, service date</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card section" id="award-start">
+      <div class="section-header">
+        <div>
+          <div class="smallcaps">CCMA outcome</div>
+          <h2 class="section-title">The award is the pivot point</h2>
+        </div>
+        <p>Once the award is shown, the page should immediately guide the user into either finalisation or the review challenge centre.</p>
+      </div>
+
+      <div class="timeline" role="list" aria-label="Award and review timeline">
+        <div class="step" role="listitem">
+          <div class="num">1</div>
+          <strong>CCMA</strong>
+          <span>Referral, conciliation, arbitration.</span>
+        </div>
+        <div class="step active" role="listitem">
+          <div class="num">2</div>
+          <strong>Award</strong>
+          <span>Commissioner’s decision is received.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">3</div>
+          <strong>Review</strong>
+          <span>Challenge the award if the user is unhappy.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">4</div>
+          <strong>Motion</strong>
+          <span>Launch the Labour Court application.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">5</div>
+          <strong>Record</strong>
+          <span>Prepare transcript and bundle.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">6</div>
+          <strong>Finalise</strong>
+          <span>Close the matter if no review is launched.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <article class="card panel">
+        <div class="smallcaps">Award workspace</div>
+        <h3>What the page should show</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Award summary</strong><span>Track the outcome, remedy, and commissioner details.</span></div></li>
+          <li><div class="dot"></div><div><strong>Service date</strong><span>Record the date the award was served.</span></div></li>
+          <li><div class="dot"></div><div><strong>Reasons</strong><span>Note whether written reasons are available.</span></div></li>
+          <li><div class="dot"></div><div><strong>Decision choice</strong><span>Ask whether the user is happy with the result.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Outcome choice</div>
+        <h3>Neutral decision gate</h3>
+        <p>The page should simply ask whether the user accepts the award or wants to challenge it.</p>
+        <div class="success">Are you happy with the award?</div>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Yes</strong><span>Move to finalisation and close the matter.</span></div></li>
+          <li><div class="dot"></div><div><strong>No</strong><span>Open the review challenge centre.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid-3" style="margin-top:18px;">
+      <article class="card panel">
+        <div class="smallcaps">Questions panel</div>
+        <h3>Suggested prompts</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>What did the award say?</strong><span>Capture the result in a short summary.</span></div></li>
+          <li><div class="dot"></div><div><strong>When was it served?</strong><span>Start the review clock from service.</span></div></li>
+          <li><div class="dot"></div><div><strong>Do you want to challenge it?</strong><span>Use this to open the review page.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Missing items</div>
+        <h3>Keep these visible</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Award copy</strong><span>Pending or uploaded.</span></div></li>
+          <li><div class="dot"></div><div><strong>Reasons</strong><span>Written reasons or notes missing.</span></div></li>
+          <li><div class="dot"></div><div><strong>Service date</strong><span>Captured or pending.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Next step</div>
+        <h3>Choose the route</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Accept the award</strong><span>Proceed to finalisation.</span></div></li>
+          <li><div class="dot"></div><div><strong>Challenge the award</strong><span>Proceed to the review centre.</span></div></li>
+        </ul>
+        <div class="hero-actions" style="margin-top:18px;">
+          <a class="btn btn-primary" href="review.html">Challenge Award</a>
+          <a class="btn btn-secondary" href="labour-finalisation.html">Accept & Finalise</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="footer-note">
+      This platform provides procedural assistance only and does not provide legal advice.
+    </div>
+  </div>
+</body>
+</html>
