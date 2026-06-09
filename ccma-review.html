@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | CCMA Navigator</title>
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --panel: #ffffff;
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f8fd 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.9); background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
+
+    .brand {
+      display: flex; align-items: center; gap: 12px; min-width: 0;
+    }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; font-size: 0.84rem; color: var(--muted); }
+
+    .nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+    }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
+
+    .hero {
+      margin-top: 28px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main { padding: 34px; position: relative; overflow: hidden; }
+    .hero-main::after {
+      content: "";
+      position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 600;
+      border: 1px solid #d6e3ff;
+    }
+    .hero h1 {
+      margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
+    }
+    .hero p {
+      margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 62ch;
+    }
+
+    .hero-actions {
+      margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .btn {
+      border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white;
+      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
+    }
+    .btn-secondary:hover { background: #f7fbff; }
+
+    .hero-side {
+      padding: 22px;
+      display: grid; gap: 14px;
+    }
+
+    .status-card {
+      padding: 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+    .status-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
+
+    .section {
+      margin-top: 22px;
+      padding: 24px;
+    }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
+    }
+    .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(140px, 1fr));
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .step {
+      min-width: 160px;
+      padding: 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+      position: relative;
+    }
+    .step.active {
+      border-color: #bfd1ff;
+      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+    }
+    .step .num {
+      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800;
+      background: #eef4ff; color: var(--brand-2); margin-bottom: 10px;
+    }
+    .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
+    .step strong { display: block; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 0.88rem; }
+
+    .grid-2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    }
+    .grid-3 {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
+    .panel p { margin: 0; color: var(--muted); }
+
+    .feature-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .feature-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
+    }
+    .dot {
+      width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
+      flex: 0 0 auto;
+    }
+    .feature-list strong { display: block; margin-bottom: 2px; }
+    .feature-list span { color: var(--muted); font-size: 0.92rem; }
+
+    .question-box {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+    .q-list {
+      display: grid; gap: 10px; margin-top: 16px;
+    }
+    .q-item {
+      padding: 14px 16px; background: white; border: 1px solid #e6eef8; border-radius: 16px;
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+    }
+    .q-item span { color: var(--muted); font-size: 0.92rem; }
+    .q-item strong { display: block; }
+
+    .footer-note {
+      margin: 22px 0 30px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid #e6eef8;
+      background: rgba(255,255,255,0.9);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
+    .muted { color: var(--muted); }
+
+    @media (max-width: 1024px) {
+      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .timeline { grid-template-columns: repeat(10, 220px); }
+    }
+
+    @media (max-width: 640px) {
+      .shell { padding: 16px; }
+      .hero-main, .status-card, .section, .panel { padding: 18px; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .status-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="divorce.html">Divorce</a>
+        <a class="active" href="ccma.html">CCMA</a>
+        <a href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">CCMA Navigator</div>
+        <h1>Track the labour dispute from referral to review.</h1>
+        <p>
+          Advome guides the user through CCMA referral, conciliation, settlement, arbitration, award outcome,
+          and the Labour Court review path when needed. The page stays neutral, procedural, and deadline-aware.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#intake">Start / Continue Matter</a>
+          <a class="btn btn-secondary" href="#review">Challenge Award</a>
+        </div>
+      </div>
+
+      <aside class="card status-card">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Case Health</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Review-ready workflow</h2>
+          </div>
+          <span class="pill warn">High attention</span>
+        </div>
+        <div class="status-grid">
+          <div class="mini">
+            <span>Current stage</span>
+            <strong>Conciliation / arbitration</strong>
+          </div>
+          <div class="mini">
+            <span>Next step</span>
+            <strong>Prepare hearing file</strong>
+          </div>
+          <div class="mini">
+            <span>Deadline risk</span>
+            <strong>Referral / review clock</strong>
+          </div>
+          <div class="mini">
+            <span>Missing items</span>
+            <strong>Record, transcript, award</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card section" aria-labelledby="timeline-title">
+      <div class="section-header">
+        <div>
+          <div class="smallcaps">Procedural path</div>
+          <h2 id="timeline-title" class="section-title">One continuous journey</h2>
+        </div>
+        <p>The engine should always show the current stage, the next step, and what is still missing.</p>
+      </div>
+
+      <div class="timeline" role="list" aria-label="CCMA timeline">
+        <div class="step active" role="listitem">
+          <div class="num">1</div>
+          <strong>Intake</strong>
+          <span>Classify the dispute and capture dates.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">2</div>
+          <strong>Referral</strong>
+          <span>File the CCMA referral and prove service.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">3</div>
+          <strong>Conciliation</strong>
+          <span>Prepare for the hearing and settlement discussion.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">4</div>
+          <strong>Settlement</strong>
+          <span>Keep the settlement lane open at every stage.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">5</div>
+          <strong>Arbitration</strong>
+          <span>Build the evidence bundle and hearing file.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">6</div>
+          <strong>Award</strong>
+          <span>Show the result and ask if the user is satisfied.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">7</div>
+          <strong>Review</strong>
+          <span>Open the Labour Court challenge lane.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">8</div>
+          <strong>Motion</strong>
+          <span>Launch the review application and manage papers.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">9</div>
+          <strong>Set-down</strong>
+          <span>Track enrolment, heads, and hearing date.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">10</div>
+          <strong>Finalisation</strong>
+          <span>Close the matter after the hearing or settlement.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2" id="intake">
+      <article class="card panel">
+        <div class="smallcaps">Intake & referral</div>
+        <h3>What the user must tell the engine</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Dispute type</strong><span>Dismissal, unfair labour practice, discrimination, wages, probation, or mixed matter.</span></div></li>
+          <li><div class="dot"></div><div><strong>Key dates</strong><span>Dismissal date, act/omission date, date of knowledge, and whether the referral is late.</span></div></li>
+          <li><div class="dot"></div><div><strong>Forum check</strong><span>Confirm whether CCMA, a bargaining council, or another forum is the right route.</span></div></li>
+          <li><div class="dot"></div><div><strong>Service proof</strong><span>Require proof that the referral was served on the other party.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Conciliation & settlement</div>
+        <h3>How the page should behave</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Settlement stays visible</strong><span>Settlement should remain available at every stage, not just at the end.</span></div></li>
+          <li><div class="dot"></div><div><strong>Neutral wording</strong><span>Ask what happened and whether the user felt heard, not whether anyone acted unlawfully.</span></div></li>
+          <li><div class="dot"></div><div><strong>Readiness meter</strong><span>Show a simple readiness score with missing documents and urgent actions.</span></div></li>
+          <li><div class="dot"></div><div><strong>Outcome gate</strong><span>If the conciliation fails, unlock the award and review pathways.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid-2" id="arbitration" style="margin-top:18px;">
+      <article class="card panel">
+        <div class="smallcaps">Arbitration workspace</div>
+        <h3>Hearing prep cards</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Statement of case</strong><span>Write the version of events and requested remedy.</span></div></li>
+          <li><div class="dot"></div><div><strong>Evidence bundle</strong><span>Upload documents, letters, payslips, screenshots, and messages.</span></div></li>
+          <li><div class="dot"></div><div><strong>Witness list</strong><span>Track names, roles, and whether they can attend.</span></div></li>
+          <li><div class="dot"></div><div><strong>Transcript / audio</strong><span>Allow audio notes, voice-to-text drafting, and later transcription support.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel" id="review">
+        <div class="smallcaps">Review challenge centre</div>
+        <h3>After the award</h3>
+        <p>When the award is received, the first question should be simple and neutral: <strong>Are you happy with the award?</strong></p>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Choose the issue</strong><span>Procedural unfairness, ignored evidence, wrong jurisdiction, misconduct, or unreasonable result.</span></div></li>
+          <li><div class="dot"></div><div><strong>Deadline tracker</strong><span>Show the review clock immediately and highlight urgency.</span></div></li>
+          <li><div class="dot"></div><div><strong>Record and transcript</strong><span>Track audio, transcription, pagination, and indexing for the review file.</span></div></li>
+          <li><div class="dot"></div><div><strong>Motion sequence</strong><span>Notice of motion, founding affidavit, response, reply, record, heads, and set-down.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid-3" style="margin-top:18px;">
+      <article class="card panel">
+        <div class="smallcaps">Review grounds</div>
+        <h3>What the engine can help organise</h3>
+        <p>Use this as a checklist rather than legal advice.</p>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Misconduct</strong><span>What went wrong in the process?</span></div></li>
+          <li><div class="dot"></div><div><strong>Gross irregularity</strong><span>Was the hearing fundamentally unfair?</span></div></li>
+          <li><div class="dot"></div><div><strong>Excess of powers</strong><span>Did the decision-maker go beyond the role?</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Review file builder</div>
+        <h3>Documents to track</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Award and reasons</strong><span>The decision, date served, and any written reasons.</span></div></li>
+          <li><div class="dot"></div><div><strong>Founding affidavit</strong><span>Concise grounds of review and relief sought.</span></div></li>
+          <li><div class="dot"></div><div><strong>Record and transcript</strong><span>Audio, typed transcript, and indexed bundles.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Set-down control</div>
+        <h3>How the page should finish</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Opposed / unopposed</strong><span>Track whether the respondent filed answering papers.</span></div></li>
+          <li><div class="dot"></div><div><strong>Heads of argument</strong><span>Show when heads are due and whether they were filed.</span></div></li>
+          <li><div class="dot"></div><div><strong>Registrar-led set-down</strong><span>The page should never let the user invent a hearing date.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid-2" style="margin-top:18px;">
+      <article class="card panel question-box">
+        <div class="smallcaps">Questions panel</div>
+        <h3>Suggested prompts for the right-side panel</h3>
+        <div class="q-list">
+          <div class="q-item"><div><strong>What type of dispute is this?</strong><span>Dismissal, ULP, discrimination, wages, or probation?</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>When did it happen?</strong><span>Enter the key date so the deadline can be checked.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Was the referral served?</strong><span>Proof of service is required before moving on.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Was the award fair?</strong><span>Use the review lane if the user wants to challenge it.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Do you have audio or notes?</strong><span>Allow evidence capture without making legal conclusions.</span></div><span>→</span></div>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">UI behaviour rules</div>
+        <h3>Build principles for this page</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Always show the stage</strong><span>The user should never wonder where the matter is.</span></div></li>
+          <li><div class="dot"></div><div><strong>Always show the next step</strong><span>Make the path obvious and calm.</span></div></li>
+          <li><div class="dot"></div><div><strong>Always show urgency</strong><span>Deadlines and missing papers should be visible.</span></div></li>
+          <li><div class="dot"></div><div><strong>Always keep settlement available</strong><span>Settlement should remain open in every relevant state.</span></div></li>
+          <li><div class="dot"></div><div><strong>Stay neutral</strong><span>The platform can help organise a challenge without accusing anyone.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="footer-note">
+      This platform provides procedural assistance only and does not provide legal advice.
+    </div>
+  </div>
+</body>
+</html>
