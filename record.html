@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Record & Transcript Centre</title>
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --panel: #ffffff;
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f8fd 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.9); background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; font-size: 0.84rem; color: var(--muted); }
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
+    .hero {
+      margin-top: 28px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
+      align-items: stretch;
+    }
+    .card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main { padding: 34px; position: relative; overflow: hidden; }
+    .hero-main::after {
+      content: "";
+      position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 600;
+      border: 1px solid #d6e3ff;
+    }
+    .hero h1 {
+      margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
+    }
+    .hero p { margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 64ch; }
+    .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white;
+      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
+    }
+    .btn-secondary:hover { background: #f7fbff; }
+    .status-card { padding: 22px; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .status-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
+    .section { margin-top: 22px; padding: 24px; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
+    }
+    .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(160px, 1fr));
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .step {
+      min-width: 160px;
+      padding: 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+      position: relative;
+    }
+    .step.active {
+      border-color: #bfd1ff;
+      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+    }
+    .step .num {
+      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800;
+      background: #eef4ff; color: var(--brand-2); margin-bottom: 10px;
+    }
+    .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
+    .step strong { display: block; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 0.88rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .panel { padding: 22px; }
+    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
+    .panel p { margin: 0; color: var(--muted); }
+    .feature-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .feature-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
+    }
+    .dot {
+      width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
+      flex: 0 0 auto;
+    }
+    .feature-list strong { display: block; margin-bottom: 2px; }
+    .feature-list span { color: var(--muted); font-size: 0.92rem; }
+    .question-box { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .q-list { display: grid; gap: 10px; margin-top: 16px; }
+    .q-item {
+      padding: 14px 16px; background: white; border: 1px solid #e6eef8; border-radius: 16px;
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+    }
+    .q-item span { color: var(--muted); font-size: 0.92rem; }
+    .q-item strong { display: block; }
+    .meter {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+    }
+    .meter-bar {
+      height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px;
+    }
+    .meter-bar > div {
+      height: 100%; width: 50%; border-radius: inherit;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+    }
+    .footer-note {
+      margin: 22px 0 30px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid #e6eef8;
+      background: rgba(255,255,255,0.9);
+      color: var(--muted);
+      text-align: center;
+    }
+    .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
+    .callout {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #f5fbff;
+      border: 1px solid #cfe9fb;
+      color: #0d5c8b;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    @media (max-width: 1024px) {
+      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .timeline { grid-template-columns: repeat(6, 220px); }
+    }
+    @media (max-width: 640px) {
+      .shell { padding: 16px; }
+      .hero-main, .status-card, .section, .panel { padding: 18px; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .status-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="motion.html">Motion</a>
+        <a class="active" href="record.html">Record</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">Record &amp; Transcript Centre</div>
+        <h1>Manage the record, transcript, and review bundle.</h1>
+        <p>
+          This page carries the review record from arbitration into Labour Court format. It keeps the audio,
+          transcript, indexing, pagination, and bundle preparation visible in one place.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#record-start">Continue Record Preparation</a>
+          <a class="btn btn-secondary" href="motion.html">Back to Motion</a>
+        </div>
+      </div>
+
+      <aside class="card status-card">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Case Health</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Record required</h2>
+          </div>
+          <span class="pill warn">Urgent</span>
+        </div>
+        <div class="status-grid">
+          <div class="mini">
+            <span>Current stage</span>
+            <strong>Record and transcript</strong>
+          </div>
+          <div class="mini">
+            <span>Next step</span>
+            <strong>Prepare review bundle</strong>
+          </div>
+          <div class="mini">
+            <span>Deadline risk</span>
+            <strong>Transcript / record clock</strong>
+          </div>
+          <div class="mini">
+            <span>Missing items</span>
+            <strong>Audio, transcript, pages</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card section" id="record-start">
+      <div class="section-header">
+        <div>
+          <div class="smallcaps">Review chain</div>
+          <h2 class="section-title">The record is the backbone of the review</h2>
+        </div>
+        <p>The page should show progress at a glance and guide the user through the steps needed before heads of argument.</p>
+      </div>
+
+      <div class="timeline" role="list" aria-label="Review timeline">
+        <div class="step" role="listitem">
+          <div class="num">1</div>
+          <strong>Review</strong>
+          <span>Choose to challenge the award.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">2</div>
+          <strong>Motion</strong>
+          <span>Launch the Labour Court application.</span>
+        </div>
+        <div class="step active" role="listitem">
+          <div class="num">3</div>
+          <strong>Record</strong>
+          <span>Collect, transcribe, and organise the hearing record.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">4</div>
+          <strong>Heads</strong>
+          <span>Prepare arguments and authorities.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">5</div>
+          <strong>Set-down</strong>
+          <span>Track enrolment and hearing allocation.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">6</div>
+          <strong>Finalisation</strong>
+          <span>Close after judgment or settlement.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <article class="card panel">
+        <div class="smallcaps">Record workspace</div>
+        <h3>What must be tracked</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Arbitration audio</strong><span>Upload the raw recording or note that it is still pending.</span></div></li>
+          <li><div class="dot"></div><div><strong>Transcript</strong><span>Track whether transcription is complete or needs editing.</span></div></li>
+          <li><div class="dot"></div><div><strong>Indexing and pagination</strong><span>Show whether the bundle is in proper Labour Court order.</span></div></li>
+          <li><div class="dot"></div><div><strong>Annexures and exhibits</strong><span>Keep documents linked to the places they appear in the record.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Record readiness meter</div>
+        <h3>Simple progress indicator</h3>
+        <p>Make missing pieces visible so the user knows exactly what still needs to be done.</p>
+        <div class="meter">
+          <strong>Record readiness</strong>
+          <div class="meter-bar"><div></div></div>
+          <p style="margin-top:10px;">50% complete</p>
+        </div>
+        <div class="callout">
+          If the record is incomplete or unclear, the review cannot move cleanly to argument and set-down.
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-3" style="margin-top:18px;">
+      <article class="card panel">
+        <div class="smallcaps">Transcript centre</div>
+        <h3>Transcript actions</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Speech-to-text</strong><span>Future feature for automatic transcription.</span></div></li>
+          <li><div class="dot"></div><div><strong>Editable transcript</strong><span>Allow the user to clean up the transcript text.</span></div></li>
+          <li><div class="dot"></div><div><strong>Search transcript</strong><span>Find witnesses, evidence, and dates quickly.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Questions panel</div>
+        <h3>Suggested prompts</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Was the arbitration recorded?</strong><span>Yes, no, or partial.</span></div></li>
+          <li><div class="dot"></div><div><strong>Do you have audio?</strong><span>Upload raw audio or flag missing files.</span></div></li>
+          <li><div class="dot"></div><div><strong>Has the transcript been edited?</strong><span>Track whether the draft is ready.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Next step</div>
+        <h3>Move to heads of argument</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Once the record is ready</strong><span>The next page should handle heads of argument and authorities.</span></div></li>
+          <li><div class="dot"></div><div><strong>Bundle quality matters</strong><span>The page should keep the review file neat and readable.</span></div></li>
+        </ul>
+        <div class="hero-actions" style="margin-top:18px;">
+          <a class="btn btn-primary" href="heads.html">Continue to Heads</a>
+          <a class="btn btn-secondary" href="motion.html">Back to Motion</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-2" style="margin-top:18px;">
+      <article class="card panel question-box">
+        <div class="smallcaps">Missing documents</div>
+        <h3>Keep this visible</h3>
+        <div class="q-list">
+          <div class="q-item"><div><strong>Audio</strong><span>Uploaded or pending.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Transcript</strong><span>Missing, drafted, or complete.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Index</strong><span>Complete or missing.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Pagination</strong><span>Complete or missing.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Annexures</strong><span>Linked and filed.</span></div><span>→</span></div>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Build rule</div>
+        <h3>What this page must do</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Show progress clearly</strong><span>The user should know how complete the record is.</span></div></li>
+          <li><div class="dot"></div><div><strong>Keep the record tied to the review</strong><span>This is not a separate document store; it belongs to the review chain.</span></div></li>
+          <li><div class="dot"></div><div><strong>Prepare the next page</strong><span>After the record is ready, the workflow moves to heads of argument.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="footer-note">
+      This platform provides procedural assistance only and does not provide legal advice.
+    </div>
+  </div>
+</body>
+</html>
