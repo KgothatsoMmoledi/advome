@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Motion Proceedings Centre</title>
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --panel: #ffffff;
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f8fd 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.9); background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; font-size: 0.84rem; color: var(--muted); }
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
+    .hero {
+      margin-top: 28px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
+      align-items: stretch;
+    }
+    .card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main { padding: 34px; position: relative; overflow: hidden; }
+    .hero-main::after {
+      content: "";
+      position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 600;
+      border: 1px solid #d6e3ff;
+    }
+    .hero h1 {
+      margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
+    }
+    .hero p { margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 64ch; }
+    .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white;
+      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
+    }
+    .btn-secondary:hover { background: #f7fbff; }
+    .status-card { padding: 22px; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .status-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
+    .section { margin-top: 22px; padding: 24px; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
+    }
+    .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(160px, 1fr));
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .step {
+      min-width: 160px;
+      padding: 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+      position: relative;
+    }
+    .step.active {
+      border-color: #bfd1ff;
+      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+    }
+    .step .num {
+      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800;
+      background: #eef4ff; color: var(--brand-2); margin-bottom: 10px;
+    }
+    .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
+    .step strong { display: block; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 0.88rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .panel { padding: 22px; }
+    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
+    .panel p { margin: 0; color: var(--muted); }
+    .feature-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .feature-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
+    }
+    .dot {
+      width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
+      flex: 0 0 auto;
+    }
+    .feature-list strong { display: block; margin-bottom: 2px; }
+    .feature-list span { color: var(--muted); font-size: 0.92rem; }
+    .question-box { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .q-list { display: grid; gap: 10px; margin-top: 16px; }
+    .q-item {
+      padding: 14px 16px; background: white; border: 1px solid #e6eef8; border-radius: 16px;
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+    }
+    .q-item span { color: var(--muted); font-size: 0.92rem; }
+    .q-item strong { display: block; }
+    .meter {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+    }
+    .meter-bar {
+      height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px;
+    }
+    .meter-bar > div {
+      height: 100%; width: 62%; border-radius: inherit;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+    }
+    .footer-note {
+      margin: 22px 0 30px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid #e6eef8;
+      background: rgba(255,255,255,0.9);
+      color: var(--muted);
+      text-align: center;
+    }
+    .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
+    .muted { color: var(--muted); }
+    .callout {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #fffaf1;
+      border: 1px solid #f3dfb4;
+      color: #8a5a00;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    @media (max-width: 1024px) {
+      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .timeline { grid-template-columns: repeat(6, 220px); }
+    }
+    @media (max-width: 640px) {
+      .shell { padding: 16px; }
+      .hero-main, .status-card, .section, .panel { padding: 18px; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .status-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="review.html">Review</a>
+        <a class="active" href="motion.html">Motion</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">Motion Proceedings Centre</div>
+        <h1>Prepare and launch the Labour Court review application.</h1>
+        <p>
+          This page begins the formal court motion sequence after the user decides to challenge the award.
+          It tracks the notice of motion, founding affidavit, service, and the opposition state.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#motion-start">Continue Review</a>
+          <a class="btn btn-secondary" href="review.html">Back to Review</a>
+        </div>
+      </div>
+
+      <aside class="card status-card">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Case Health</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Review motion active</h2>
+          </div>
+          <span class="pill danger">Critical</span>
+        </div>
+        <div class="status-grid">
+          <div class="mini">
+            <span>Current stage</span>
+            <strong>Motion proceedings</strong>
+          </div>
+          <div class="mini">
+            <span>Next step</span>
+            <strong>Serve and launch</strong>
+          </div>
+          <div class="mini">
+            <span>Deadline risk</span>
+            <strong>6-week review clock</strong>
+          </div>
+          <div class="mini">
+            <span>Missing items</span>
+            <strong>Service, case number, affidavit</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card section" id="motion-start">
+      <div class="section-header">
+        <div>
+          <div class="smallcaps">Motion sequence</div>
+          <h2 class="section-title">The review begins here</h2>
+        </div>
+        <p>The motion page should make the filing sequence obvious and keep track of opposition, records, and later set-down.</p>
+      </div>
+
+      <div class="timeline" role="list" aria-label="Motion timeline">
+        <div class="step" role="listitem">
+          <div class="num">1</div>
+          <strong>Review</strong>
+          <span>Decision made to challenge the award.</span>
+        </div>
+        <div class="step active" role="listitem">
+          <div class="num">2</div>
+          <strong>Motion</strong>
+          <span>Launch the Labour Court application.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">3</div>
+          <strong>Record</strong>
+          <span>Collect and transcribe the arbitration record.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">4</div>
+          <strong>Heads</strong>
+          <span>Prepare argument and authorities.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">5</div>
+          <strong>Set-down</strong>
+          <span>Track enrolment and hearing allocation.</span>
+        </div>
+        <div class="step" role="listitem">
+          <div class="num">6</div>
+          <strong>Finalisation</strong>
+          <span>Close the matter after judgment or settlement.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <article class="card panel">
+        <div class="smallcaps">Motion workspace</div>
+        <h3>Core filing cards</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Notice of motion</strong><span>Track the relief requested: set aside, remit, or substitute.</span></div></li>
+          <li><div class="dot"></div><div><strong>Founding affidavit</strong><span>Capture background facts, grounds of review, and concise relief.</span></div></li>
+          <li><div class="dot"></div><div><strong>Service tracker</strong><span>Show whether the application has been served and proof uploaded.</span></div></li>
+          <li><div class="dot"></div><div><strong>Case number</strong><span>Track the Labour Court allocation and filing status.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Motion readiness meter</div>
+        <h3>Simple filing health</h3>
+        <p>Keep the user aware of what is still missing before the matter can progress to the record stage.</p>
+        <div class="meter">
+          <strong>Motion readiness</strong>
+          <div class="meter-bar"><div></div></div>
+          <p style="margin-top:10px;">62% complete</p>
+        </div>
+        <div class="callout">
+          The review window is urgent. If the filing is delayed, the workflow should flag risk immediately.
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-3" style="margin-top:18px;">
+      <article class="card panel">
+        <div class="smallcaps">Opposition tracker</div>
+        <h3>Response state</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>Notice of intention to oppose</strong><span>Status: pending / received.</span></div></li>
+          <li><div class="dot"></div><div><strong>Answering affidavit</strong><span>Status: pending / filed / overdue.</span></div></li>
+          <li><div class="dot"></div><div><strong>Replying affidavit</strong><span>Status: pending / filed.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Questions panel</div>
+        <h3>Suggested prompts</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>What relief do you want?</strong><span>Set aside, remit, or substitute the award.</span></div></li>
+          <li><div class="dot"></div><div><strong>Was service completed?</strong><span>Proof of service should be uploaded.</span></div></li>
+          <li><div class="dot"></div><div><strong>Did the other side oppose?</strong><span>Track whether the matter is opposed or unopposed.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Next step</div>
+        <h3>Move to the record centre</h3>
+        <ul class="feature-list" style="margin-top:16px;">
+          <li><div class="dot"></div><div><strong>After filing</strong><span>The next page should handle the arbitration record and transcript.</span></div></li>
+          <li><div class="dot"></div><div><strong>Record control</strong><span>Audio, transcript, indexing, and pagination belong on the next page.</span></div></li>
+        </ul>
+        <div class="hero-actions" style="margin-top:18px;">
+          <a class="btn btn-primary" href="record.html">Continue to Record</a>
+          <a class="btn btn-secondary" href="review.html">Back to Review</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-2" style="margin-top:18px;">
+      <article class="card panel question-box">
+        <div class="smallcaps">Missing documents</div>
+        <h3>What the page should keep visible</h3>
+        <div class="q-list">
+          <div class="q-item"><div><strong>Notice of motion</strong><span>Drafted or still missing.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Founding affidavit</strong><span>Drafted or still missing.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Proof of service</strong><span>Uploaded or pending.</span></div><span>→</span></div>
+          <div class="q-item"><div><strong>Case number</strong><span>Allocated or pending.</span></div><span>→</span></div>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="smallcaps">Build rule</div>
+        <h3>What this page must not do</h3>
+        <ul class="feature-list">
+          <li><div class="dot"></div><div><strong>Do not skip the record</strong><span>The review cannot move forward without record management.</span></div></li>
+          <li><div class="dot"></div><div><strong>Do not invent dates</strong><span>Set-down must be registrar-led later in the chain.</span></div></li>
+          <li><div class="dot"></div><div><strong>Do not accuse in UI text</strong><span>Keep the wording neutral and procedural.</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="footer-note">
+      This platform provides procedural assistance only and does not provide legal advice.
+    </div>
+  </div>
+</body>
+</html>
