@@ -5,398 +5,453 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Advome | Attorney Portal</title>
   <style>
-    :root{
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --border:#e5e7eb;
-      --text:#111827;
-      --muted:#6b7280;
-      --accent:#0b2c5f;
-      --accent-2:#eef4ff;
-      --danger:#fef2f2;
-      --warning:#fff7e6;
-      --success:#ecfdf5;
+    :root {
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1180px;
     }
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      line-height: 1.5;
     }
 
-    header{
-      background:var(--card);
-      border-bottom:1px solid var(--border);
-      padding:20px 8%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
     }
 
-    .logo{
-      font-size:26px;
-      font-weight:700;
-      color:var(--accent);
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
+
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
     }
 
-    nav a{
-      margin-left:18px;
-      text-decoration:none;
-      color:#374151;
-      font-weight:600;
+    .hero {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
+      border: 1px solid rgba(219,231,245,0.95);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -90px; top: -90px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
+      pointer-events: none;
     }
 
-    .wrap{
-      max-width:1200px;
-      margin:0 auto;
-      padding:32px 8% 56px;
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
+      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
+      border: 1px solid #d6e3ff;
     }
 
-    .hero{
-      display:flex;
-      gap:24px;
-      justify-content:space-between;
-      align-items:flex-start;
-      margin-bottom:24px;
-      flex-wrap:wrap;
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 14ch;
     }
 
-    .hero h1{
-      margin:0 0 10px;
-      font-size:clamp(2rem,4vw,3.2rem);
-      color:var(--accent);
-      line-height:1.05;
+    .subtitle {
+      max-width: 820px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
     }
 
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      max-width:760px;
-      font-size:1.02rem;
-      line-height:1.7;
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
+      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-1px); background: #f7fbff; }
+    .button.primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
+
+    .disclaimer {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid #e6eef8;
+      color: var(--muted);
+      font-size: 0.93rem;
     }
 
-    .badge-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:16px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
     }
 
-    .badge{
-      background:#fff;
-      border:1px solid var(--border);
-      color:#374151;
-      border-radius:999px;
-      padding:8px 12px;
-      font-size:.92rem;
-      font-weight:600;
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+    .icon {
+      width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center;
+      background: #eef4ff; color: var(--brand-2); font-weight: 800; flex: 0 0 auto;
+    }
+    .card h2 { margin: 0; font-size: 1.15rem; letter-spacing: -0.03em; }
+    .card p { margin: 0; color: var(--muted); }
+    .card .button { margin-top: auto; width: fit-content; }
+
+    .pill-row {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+    }
+    .pill {
+      padding: 7px 10px; border-radius: 999px; background: #fff; border: 1px solid #e6eef8;
+      color: #374151; font-size: 0.86rem; font-weight: 600;
+    }
+    .pill.green { background: #edfdf3; border-color: #caeed8; color: var(--good); }
+    .pill.orange { background: #fff7e8; border-color: #ffe1a8; color: var(--warn); }
+    .pill.blue { background: #eef4ff; border-color: #d7e4f8; color: var(--brand-2); }
+
+    .section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:18px;
-      margin-top:18px;
+    .section-head {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
+    }
+    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 18px;
     }
 
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:20px;
-      box-shadow:0 8px 24px rgba(17,24,39,.04);
+    .box {
+      border: 1px solid #e6eef8;
+      border-radius: 20px;
+      padding: 18px;
+      background: #fff;
     }
 
-    .card h2{
-      margin:0 0 14px;
-      color:var(--accent);
-      font-size:1.2rem;
+    .box h3 { margin: 0 0 10px; color: var(--brand-2); font-size: 1.04rem; }
+    .box p { margin: 0; color: var(--muted); }
+
+    .list { margin: 0; padding-left: 18px; color: var(--text); }
+    .list li { margin-bottom: 8px; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+    .kpi {
+      padding: 14px;
+      background: #fff;
+      border: 1px solid #e6eef8;
+      border-radius: 18px;
+    }
+    .kpi .label { color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .kpi .value { font-size: 1.05rem; font-weight: 800; color: var(--brand-2); }
+
+    .table-like {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 0.7fr;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid #e6eef8;
+      border-radius: 16px;
+    }
+    .row.head { background: #eef4ff; border-color: #d7e4f8; font-weight: 800; color: var(--brand-2); }
+    .muted { color: var(--muted); }
+
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding-bottom: 10px;
+      line-height: 1.6;
     }
 
-    .mini-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
+    @media (max-width: 980px) {
+      .grid, .split, .kpi-grid { grid-template-columns: 1fr; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .row { grid-template-columns: 1fr; }
     }
 
-    .metric{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      background:#fff;
-    }
-
-    .metric .label{
-      color:var(--muted);
-      font-size:.88rem;
-      margin-bottom:8px;
-    }
-
-    .metric .value{
-      font-size:1.5rem;
-      font-weight:700;
-      color:var(--accent);
-    }
-
-    .table{
-      width:100%;
-      border-collapse:collapse;
-      overflow:hidden;
-      border-radius:14px;
-    }
-
-    .table th,
-    .table td{
-      text-align:left;
-      padding:12px 10px;
-      border-bottom:1px solid var(--border);
-      vertical-align:top;
-    }
-
-    .table th{
-      color:var(--muted);
-      font-size:.9rem;
-      font-weight:700;
-      background:#fafafa;
-    }
-
-    .health{
-      display:inline-block;
-      padding:7px 10px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:.84rem;
-    }
-
-    .red{ background:var(--danger); color:#b91c1c; }
-    .orange{ background:var(--warning); color:#b45309; }
-    .green{ background:var(--success); color:#047857; }
-
-    .profile{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-    }
-
-    .field{
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:14px;
-      background:#fff;
-    }
-
-    .field .name{
-      color:var(--muted);
-      font-size:.86rem;
-      margin-bottom:6px;
-    }
-
-    .field .val{
-      font-weight:700;
-      color:var(--text);
-    }
-
-    .stack{
-      display:grid;
-      gap:14px;
-    }
-
-    .panel{
-      padding:16px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:#fff;
-    }
-
-    .panel.red{ background:var(--danger); }
-    .panel.orange{ background:var(--warning); }
-    .panel.blue{ background:var(--accent-2); }
-
-    .panel strong{
-      display:block;
-      margin-bottom:8px;
-      color:var(--accent);
-    }
-
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .btn{
-      display:inline-block;
-      text-decoration:none;
-      border-radius:10px;
-      padding:11px 14px;
-      font-weight:700;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-    }
-
-    .btn.primary{
-      background:var(--accent);
-      color:#fff;
-      border-color:var(--accent);
-    }
-
-    .footer{
-      margin-top:26px;
-      color:var(--muted);
-      font-size:.92rem;
-      line-height:1.6;
-    }
-
-    @media (max-width: 980px){
-      .grid{ grid-template-columns:1fr; }
-      .mini-grid{ grid-template-columns:1fr; }
+    @media (max-width: 640px) {
+      .wrap { padding: 16px; }
+      .hero { padding: 20px; }
+      .card, .section { padding: 18px; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+      h1 { max-width: none; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Advome</div>
-    <nav>
-  <a href="index.html">Home</a>
-  <a href="divorce.html">Divorce</a>
-  <a href="ccma.html">CCMA</a>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="attorney.html">Attorney Portal</a>
-    </nav>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <div>
-        <h1>Attorney Portal</h1>
-        <p>
-          Manage multiple matters with urgency tracking, procedural intelligence, document visibility, and a case-health view that helps you stay ahead of deadlines.
-        </p>
-        <div class="badge-row">
-          <span class="badge">R20 Basic</span>
-          <span class="badge">R150 Premium</span>
-          <span class="badge">Case Health</span>
-          <span class="badge">Multi-Matter Dashboard</span>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>Attorney portal</span>
         </div>
       </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Matter Portal</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="estates.html">Estates</a>
+        <a class="active" href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div class="eyebrow">Attorney portal</div>
+      <h1>Professional visibility for firms, candidate attorneys, and legal assistants.</h1>
+      <p class="subtitle">
+        Advome’s attorney portal supports practice profiles, response times, practice areas, rankings, and referral visibility while staying connected to the matter workflow engine.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="#portal-overview">Open Portal</a>
+        <a class="button" href="#pricing">View Tiers</a>
+        <a class="button" href="#questions">Ask a Question</a>
+      </div>
+
+      <div class="disclaimer">
+        This portal provides procedural and workflow support. It does not provide legal advice.
+      </div>
+    </main>
+
+    <section class="grid" aria-label="Portal highlights">
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">P</div>
+          <div>
+            <h2>Practice Profile</h2>
+            <p>Show firm name, province, practice areas, experience, and profile details.</p>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill blue">Visibility</span>
+          <span class="pill">Practice area</span>
+          <span class="pill">Location</span>
+        </div>
+        <a class="button primary" href="#portal-overview">Open Profile</a>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">R</div>
+          <div>
+            <h2>Response Time</h2>
+            <p>Track how quickly the attorney responds to potential clients and referrals.</p>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill green">Fast</span>
+          <span class="pill orange">Average</span>
+          <span class="pill blue">Priority</span>
+        </div>
+        <a class="button" href="#portal-overview">Manage Response</a>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">T</div>
+          <div>
+            <h2>Tiered Visibility</h2>
+            <p>Built for a basic tier and premium tier with higher placement and more detail.</p>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Basic tier</span>
+          <span class="pill blue">Premium tier</span>
+          <span class="pill green">Featured</span>
+        </div>
+        <a class="button" href="#pricing">View Pricing</a>
+      </article>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h2>Practice Overview</h2>
-        <div class="mini-grid">
-          <div class="metric">
-            <div class="label">Active matters</div>
-            <div class="value">50</div>
-          </div>
-          <div class="metric">
-            <div class="label">Urgent matters</div>
-            <div class="value">7</div>
-          </div>
-          <div class="metric">
-            <div class="label">Ready for hearing</div>
-            <div class="value">12</div>
+    <section class="split" id="portal-overview">
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Portal overview</h2>
+            <p>The attorney portal should connect the profile to active matter types and future referral features.</p>
           </div>
         </div>
 
-        <div style="height:16px"></div>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="label">Profile status</div><div class="value">Active</div></div>
+          <div class="kpi"><div class="label">Practice areas</div><div class="value">Family / Labour / Estates</div></div>
+          <div class="kpi"><div class="label">Visibility tier</div><div class="value">Premium ready</div></div>
+          <div class="kpi"><div class="label">Lead response</div><div class="value">Tracked</div></div>
+        </div>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Matter</th>
-              <th>Stage</th>
-              <th>Health</th>
-              <th>Next step</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Divorce v Mokoena</td>
-              <td>Discovery</td>
-              <td><span class="health red">Critical</span></td>
-              <td>Prepare compel or complete discovery</td>
-            </tr>
-            <tr>
-              <td>Labour v Dlamini</td>
-              <td>Set-down</td>
-              <td><span class="health orange">Attention</span></td>
-              <td>Index bundle and confirm notice</td>
-            </tr>
-            <tr>
-              <td>Civil Claim v Ndlovu</td>
-              <td>Pre-trial</td>
-              <td><span class="health green">Stable</span></td>
-              <td>Finalize pre-trial agenda</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div style="height:14px"></div>
 
-      <div class="stack">
-        <div class="card">
-          <h2>Attorney Profile</h2>
-          <div class="profile">
-            <div class="field">
-              <div class="name">Attorney name</div>
-              <div class="val">Your Name</div>
-            </div>
-            <div class="field">
-              <div class="name">Practice area</div>
-              <div class="val">Divorce / Labour / Civil</div>
-            </div>
-            <div class="field">
-              <div class="name">Location</div>
-              <div class="val">Pretoria, Gauteng</div>
-            </div>
-            <div class="field">
-              <div class="name">Contact details</div>
-              <div class="val">email@example.com · 012 000 0000</div>
-            </div>
-            <div class="field">
-              <div class="name">Subscription tier</div>
-              <div class="val">Premium Listing — R150/month</div>
-            </div>
+        <div class="box">
+          <h3>What this portal should eventually do</h3>
+          <ul class="list">
+            <li>Display attorney profiles by province and practice area</li>
+            <li>Highlight response time and visibility tier</li>
+            <li>Show whether the firm handles divorce, labour, estates, or civil matters</li>
+            <li>Connect clients to the correct matter workflow</li>
+            <li>Allow premium listing and ranking later</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="pricing">
+        <div class="section-head">
+          <div>
+            <h2>Pricing tiers</h2>
+            <p>These are the planned tiers already defined in the product direction.</p>
           </div>
         </div>
 
-        <div class="card">
-          <h2>Visibility Metrics</h2>
-          <div class="stack">
-            <div class="panel blue">
-              <strong>Profile visibility</strong>
-              High in your selected practice area.
-            </div>
-            <div class="panel orange">
-              <strong>Lead flow</strong>
-              Requests from self-represented litigants will appear here.
-            </div>
-            <div class="panel red">
-              <strong>Urgent matters</strong>
-              Matters with deadlines close to expiry are pushed to the top.
-            </div>
+        <div class="table-like">
+          <div class="row head">
+            <div>Tier</div>
+            <div>Monthly price</div>
+            <div>Visibility</div>
+            <div>Priority</div>
+          </div>
+          <div class="row">
+            <div><strong>Attorney basic</strong><div class="muted">Standard profile</div></div>
+            <div>R20</div>
+            <div>Listed</div>
+            <div>Normal</div>
+          </div>
+          <div class="row">
+            <div><strong>Attorney premium</strong><div class="muted">Featured and ranked</div></div>
+            <div>R150</div>
+            <div>Higher visibility</div>
+            <div>Priority</div>
+          </div>
+          <div class="row">
+            <div><strong>Future custom tier</strong><div class="muted">Advanced profile tools</div></div>
+            <div>Planned</div>
+            <div>Enhanced</div>
+            <div>Featured</div>
           </div>
         </div>
+      </section>
+    </section>
 
-        <div class="card">
-          <h2>Actions</h2>
-          <div class="actions">
-            <a class="btn primary" href="#">Upgrade to Premium</a>
-            <a class="btn" href="#">Edit Profile</a>
-            <a class="btn" href="#">View Case Dashboard</a>
+    <section class="split" style="margin-top:18px;">
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Fields to capture</h2>
+            <p>These are the profile fields the portal should eventually manage.</p>
           </div>
         </div>
-      </div>
+        <div class="grid" style="margin-top:0; grid-template-columns:repeat(2, minmax(0,1fr));">
+          <div class="box"><h3>Firm name</h3><p>Display the name clearly and consistently.</p></div>
+          <div class="box"><h3>Province</h3><p>Let users filter by province and region.</p></div>
+          <div class="box"><h3>Practice area</h3><p>Family, labour, estates, civil, and more.</p></div>
+          <div class="box"><h3>Response time</h3><p>Show how quickly the attorney typically responds.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="questions">
+        <div class="section-head">
+          <div>
+            <h2>Questions panel</h2>
+            <p>The portal should support simple user questions about the firm and its services.</p>
+          </div>
+        </div>
+        <div class="box" style="background:#eef4ff; border-color:#d7e4f8;">
+          <h3>Suggested prompts</h3>
+          <ul class="list">
+            <li>Which attorney handles divorce matters?</li>
+            <li>Which firms work in labour law in my province?</li>
+            <li>Who responds fastest to urgent matters?</li>
+            <li>Is this attorney on the premium tier?</li>
+          </ul>
+        </div>
+      </section>
     </section>
 
     <div class="footer">
-      This portal supports procedural assistance, case management, and attorney visibility. It does not replace professional judgment or court rules.
+      Advome is designed to support access to justice, procedural clarity, and practical case navigation across matters.
     </div>
-  </main>
+  </div>
 </body>
 </html>
