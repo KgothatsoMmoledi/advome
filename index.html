@@ -3,246 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome</title>
+  <title>Advome | Legal Workflow Platform</title>
   <style>
     :root {
-      --bg: #fafafa;
-      --card: #ffffff;
-      --border: #dedede;
-      --text: #111827;
-      --muted: #6b7280;
-      --accent: #111827;
-      --button: #f5f5f5;
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1180px;
     }
 
     * { box-sizing: border-box; }
-
+    html, body { margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.12), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       line-height: 1.5;
     }
 
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px;
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
+
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
     }
 
     .hero {
-      padding: 24px 0 12px;
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(248,251,255,0.98));
+      border: 1px solid rgba(219,231,245,0.95);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -80px; top: -80px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
+      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
+      border: 1px solid #d6e3ff;
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
     }
-
     .subtitle {
       max-width: 760px;
       margin: 0;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 1.04rem;
     }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px;
+    }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
+      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+    .button:hover { transform: translateY(-1px); background: #f7fbff; }
+    .button.primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
 
     .disclaimer {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
       background: #fff;
+      border: 1px solid #e6eef8;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+    }
+    .card-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .icon {
+      width: 42px; height: 42px; border-radius: 14px; flex: 0 0 auto;
+      display: grid; place-items: center;
+      background: #eef4ff; color: var(--brand-2); font-weight: 800;
+    }
+    .card h2 { margin: 0; font-size: 1.18rem; letter-spacing: -0.03em; }
+    .card p { margin: 0; color: var(--muted); }
+    .card .button { margin-top: auto; width: fit-content; }
+
+    .section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section h2 { margin: 0 0 12px; font-size: 1.2rem; letter-spacing: -0.03em; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 18px;
+      padding-left: 18px;
+      margin: 0;
+      color: var(--text);
+    }
+    .features li { margin: 0; }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 2px 8px;
       color: var(--muted);
       font-size: 0.92rem;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
+    @media (max-width: 980px) {
+      .cards, .features { grid-template-columns: 1fr; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .hero { padding: 24px; }
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card h2 {
-      margin: 0 0 8px;
-      font-size: 1.15rem;
-    }
-
-    .card p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: auto;
-    }
-
-    a.button,
-    button.button {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid #cfcfcf;
-      background: var(--button);
-      color: var(--accent);
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    a.button:hover,
-    button.button:hover {
-      background: #ececec;
-    }
-
-    .section {
-      margin-top: 28px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-    }
-
-    .section h2 {
-      margin: 0 0 10px;
-      font-size: 1.15rem;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px 18px;
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    .features li {
-      color: var(--text);
-    }
-
-    .footer {
-      margin-top: 30px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      padding-bottom: 10px;
-    }
-
-    @media (max-width: 900px) {
-      .grid,
-      .features {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 640px) {
+      .wrap { padding: 16px; }
+      .hero { padding: 18px; }
+      .card, .section { padding: 18px; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+      h1 { max-width: none; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:50px;">
-
-<div>
-<h1>Advome</h1>
-
-<p class="subtitle">
-Legal clarity. Procedural control. Real outcomes.
-</p>
-</div>
-
-<nav style="display:flex;gap:18px;flex-wrap:wrap;">
-
-<a class="button" href="index.html">Home</a>
-
-<a class="button" href="divorce.html">Divorce</a>
-
-<a class="button" href="ccma.html">CCMA</a>
-
-<a class="button" href="dashboard.html">Dashboard</a>
-
-<a class="button" href="attorney.html">Attorney Portal</a>
-
-</nav>
-
-</div>
-
-<p class="subtitle">
-A legal workflow platform for self-represented litigants and legal practitioners. Advome helps users understand court papers, follow procedure, prepare documents, monitor case health, and get ready for hearings and trials.
-</p>
-
-<div class="disclaimer">
-This platform promotes access to justice through procedural assistance and legal information. It does not provide legal advice. Users remain responsible for complying with the rules of the relevant court and jurisdiction.
-</div>
-
-<div style="margin-top:30px;display:flex;gap:15px;flex-wrap:wrap;">
-
-<a class="button" href="start.html"
-style="background:#0b2c5f;color:white;border:none;">
-Represent Myself
-</a>
-
-<a class="button"
-href="attorney.html">
-Attorney Portal
-</a>
-
-<a class="button"
-href="dashboard.html">
-Case Dashboard
-</a>
-
-</div>
-
-</header>
-
-    <section class="grid" aria-label="Main actions">
-      <div class="card">
-        <div>
-          <h2>Divorce Navigator</h2>
-          <p>Track divorce procedure, settlement status, children issues, checklist items, and hearing readiness.</p>
-        </div>
-        <div class="btn-row">
-          <a class="button" href="/divorce.html">Open Divorce</a>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>Legal workflow platform</span>
         </div>
       </div>
+      <nav class="nav" aria-label="Primary">
+        <a class="active" href="index.html">Home</a>
+        <a href="start.html">Represent Myself</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="divorce.html">Divorce</a>
+        <a href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
 
-      <div class="card">
-        <div>
-          <h2>Attorney Directory</h2>
-          <p>Collect attorney listings, practice areas, and contact details for future marketplace use.</p>
-        </div>
-        <div class="btn-row">
-          <a class="button" href="/attorney.html">Open Attorney Page</a>
-        </div>
+    <main class="hero">
+      <div class="eyebrow">South African procedural guidance</div>
+      <h1>Legal clarity. Procedural control. Real outcomes.</h1>
+      <p class="subtitle">
+        Advome helps self-represented litigants and legal practitioners track stage, next step, missing documents,
+        urgency, settlement options, and hearing readiness across key court and labour workflows.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="start.html">Represent Myself</a>
+        <a class="button" href="dashboard.html">Case Dashboard</a>
+        <a class="button" href="ccma.html">CCMA Navigator</a>
+        <a class="button" href="divorce.html">Divorce Navigator</a>
       </div>
 
-      <div class="card">
-        <div>
-          <h2>CCMA Navigator</h2>
-          <p>Reserved for labour and CCMA workflow support. This page can be added next.</p>
-        </div>
-        <div class="btn-row">
-          <button class="button" type="button" disabled>Coming Soon</button>
-        </div>
+      <div class="disclaimer">
+        This platform provides procedural assistance and legal information. It does not provide legal advice.
       </div>
+    </main>
+
+    <section class="cards" aria-label="Main actions">
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">D</div>
+          <div>
+            <h2>Divorce Navigator</h2>
+            <p>Track divorce procedure, settlement, children issues, discovery, pre-trial, set-down, and finalisation.</p>
+          </div>
+        </div>
+        <a class="button" href="divorce.html">Open Divorce</a>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">C</div>
+          <div>
+            <h2>CCMA Navigator</h2>
+            <p>Follow the labour dispute flow from referral to conciliation, award, and review.</p>
+          </div>
+        </div>
+        <a class="button" href="ccma.html">Open CCMA</a>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">A</div>
+          <div>
+            <h2>Attorney Portal</h2>
+            <p>Access the attorney-facing portal for practice visibility, future listings, and case workflow tools.</p>
+          </div>
+        </div>
+        <a class="button" href="attorney.html">Open Attorney Page</a>
+      </article>
     </section>
 
     <section class="section">
@@ -262,7 +290,7 @@ Case Dashboard
     <section class="section">
       <h2>How to use the site</h2>
       <p>
-        Start with the divorce module if you are building the first working version. Add attorney listings after that, then expand into CCMA and other workflows.
+        Start with the relevant workflow, then follow the stage cards and the next-step prompts. The dashboard is the best place to see status, missing items, and urgency at a glance.
       </p>
     </section>
 
