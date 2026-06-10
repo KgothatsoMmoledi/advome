@@ -1,382 +1,644 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Pre-Trial Centre</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Pre-Trial Centre</title>
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1240px;
+    }
 
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f5f7fb;
-color:#111827;
-}
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      line-height: 1.5;
+    }
 
-header{
-background:white;
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid #e5e7eb;
-}
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-color:#0b2c5f;
-}
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
 
-nav{
-display:flex;
-gap:18px;
-flex-wrap:wrap;
-}
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
 
-nav a{
-text-decoration:none;
-color:#374151;
-font-weight:600;
-}
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
 
-.wrap{
-max-width:1300px;
-margin:auto;
-padding:30px 8%;
-}
+    .hero {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
+      border: 1px solid rgba(219,231,245,0.95);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -90px; top: -90px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
+      pointer-events: none;
+    }
 
-.card{
-background:white;
-border-radius:18px;
-padding:25px;
-border:1px solid #e5e7eb;
-margin-bottom:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.04);
-}
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
+      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
+      border: 1px solid #d6e3ff;
+    }
 
-h1,h2,h3{
-color:#0b2c5f;
-}
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 16ch;
+    }
 
-.timeline div{
-padding:12px;
-margin-bottom:10px;
-border-radius:12px;
-border:1px solid #e5e7eb;
-}
+    .subtitle {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
 
-.done{
-background:#ecfdf5;
-}
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
+      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-1px); background: #f7fbff; }
+    .button.primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
 
-.active{
-background:#eef4ff;
-}
+    .disclaimer {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid #e6eef8;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
 
-table{
-width:100%;
-border-collapse:collapse;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
 
-td,th{
-padding:12px;
-border-bottom:1px solid #eee;
-text-align:left;
-}
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
 
-.progress{
-height:20px;
-background:#e5e7eb;
-border-radius:999px;
-overflow:hidden;
-}
+    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
+    .panel p { color: var(--muted); margin: 0; }
 
-.bar{
-height:100%;
-width:65%;
-background:#0b2c5f;
-}
+    .status-top {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
 
-.blue{
-background:#eef4ff;
-border:1px solid #dbe6ff;
-}
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
 
-.question{
-padding:14px;
-border:1px solid #e5e7eb;
-border-radius:12px;
-margin-bottom:10px;
-}
+    .section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
+    }
+    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
 
-@media(max-width:900px){
-.grid{
-grid-template-columns:1fr;
-}
-}
-</style>
+    .sidebar {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
+    .sidebar p { margin: 0 0 14px; color: var(--muted); }
+
+    .timeline { display: grid; gap: 10px; }
+    .step {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .step .name { font-weight: 700; color: var(--text); }
+    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
+    .step.active { border-color: #cfe0ff; background: #eef4ff; }
+    .step.active .status { color: var(--brand-2); font-weight: 700; }
+    .step.done { background: #edfdf3; border-color: #caeed8; }
+    .step.done .status { color: var(--good); font-weight: 700; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+
+    .mini-card {
+      border: 1px solid #e6eef8;
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+    }
+    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
+    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .mini-card li { margin-bottom: 6px; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
+      font-size: 0.86rem; color: #374151; font-weight: 600;
+    }
+
+    .callout {
+      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
+    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
+    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
+    .callout.green { background: #edfdf3; border-color: #caeed8; }
+    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
+
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .field {
+      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
+    }
+    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
+    .field .value { font-weight: 700; color: var(--text); }
+
+    .meter {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+    }
+    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
+    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
+
+    .faq { display: grid; gap: 10px; }
+    .faq-item {
+      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
+    }
+    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
+    .faq-item p { margin: 10px 0 0; color: var(--muted); }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 760px) {
+      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
+      .wrap { padding: 22px 5% 50px; }
+      .hero { padding: 20px; }
+      .panel, .section { padding: 18px; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+    }
+  </style>
 </head>
-
 <body>
-
-<header>
-
-<div class="logo">Advome</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="health.html">Health</a>
-<a href="discovery.html">Discovery</a>
-</nav>
-
-</header>
-
-<div class="wrap">
-
-<div class="card">
-
-<h1>Pre-Trial Conference Centre</h1>
-
-<h3>Preparation Required</h3>
-
-<p>Discovery complete: Yes</p>
-
-<p>Settlement attempted: Yes</p>
-
-<p>Outstanding issues: 3</p>
-
-<p>Ready for set-down: No</p>
-
-</div>
-
-<div class="card">
-
-<h2>Case Timeline</h2>
-
-<div class="timeline">
-
-<div class="done">✓ Summons</div>
-
-<div class="done">✓ Pleadings</div>
-
-<div class="done">✓ Children</div>
-
-<div class="done">✓ Settlement</div>
-
-<div class="done">✓ Discovery</div>
-
-<div class="active">► Pre-Trial</div>
-
-<div>Set-Down</div>
-
-<div>Trial Preparation</div>
-
-<div>Finalisation</div>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-
-<h2>Pre-Trial Checklist</h2>
-
-<p>✓ Discovery complete</p>
-
-<p>✓ Documents exchanged</p>
-
-<p>Expert witnesses: Not applicable</p>
-
-<p>✓ Settlement discussions attempted</p>
-
-<p>⚠ Issues in dispute identified</p>
-
-<p>⚠ Admissions pending</p>
-
-<p>❌ Witness list incomplete</p>
-
-<p>❌ Trial bundle incomplete</p>
-
-</div>
-
-<div class="card">
-
-<h2>Matters Still in Dispute</h2>
-
-<p><strong>Care and contact</strong><br>Still disputed</p>
-
-<hr>
-
-<p><strong>Pension interest</strong><br>Agreed</p>
-
-<hr>
-
-<p><strong>Maintenance</strong><br>Still disputed</p>
-
-<hr>
-
-<p><strong>Costs</strong><br>Not agreed</p>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-
-<h2>Witness Centre</h2>
-
-<table>
-
-<tr>
-<th>Witness</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>Plaintiff</td>
-<td>Ready</td>
-</tr>
-
-<tr>
-<td>Defendant</td>
-<td>Ready</td>
-</tr>
-
-<tr>
-<td>Family Member</td>
-<td>Pending</td>
-</tr>
-
-<tr>
-<td>Expert Witness</td>
-<td>Not Required</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>Evidence Centre</h2>
-
-<p>✓ Bank statements</p>
-
-<p>✓ Pension records</p>
-
-<p>✓ School records</p>
-
-<p>⚠ Medical records pending</p>
-
-<p>⚠ WhatsApp evidence pending</p>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Trial Bundle Readiness</h2>
-
-<div class="progress">
-<div class="bar"></div>
-</div>
-
-<h3>65%</h3>
-
-<p>Missing:</p>
-
-<ul>
-
-<li>Paginating documents</li>
-
-<li>Indexing</li>
-
-<li>Bundle numbering</li>
-
-<li>Witness statements</li>
-
-</ul>
-
-</div>
-
-<div class="card blue">
-
-<h2>Settlement Opportunity</h2>
-
-<p>Settlement remains possible.</p>
-
-<p>Continue negotiating</p>
-
-<p>Proceed to trial</p>
-
-<p>Partial settlement</p>
-
-</div>
-
-<div class="card blue">
-
-<h2>Next Step Engine</h2>
-
-<h3>Prepare Set-Down</h3>
-
-<p>Discovery and pre-trial are substantially complete.</p>
-
-<p>Outstanding items:</p>
-
-<ul>
-
-<li>Witness list</li>
-
-<li>Trial bundle</li>
-
-</ul>
-
-<p>Urgency: Medium</p>
-
-</div>
-
-<div class="card">
-
-<h2>Questions</h2>
-
-<div class="question">What happens during pre-trial?</div>
-
-<div class="question">Can we settle now?</div>
-
-<div class="question">Do I need witnesses?</div>
-
-<div class="question">What documents go into the trial bundle?</div>
-
-<div class="question">What if the other side refuses to cooperate?</div>
-
-</div>
-
-<div class="card">
-
-<h2>Pre-Trial Summary</h2>
-
-<p>
-
-Discovery has substantially been completed. Settlement discussions have taken place. Certain issues remain disputed and witness preparation remains incomplete. The matter is not yet ready for set-down.
-
-</p>
-
-</div>
-
-</div>
-
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="documents.html">Documents</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="estates.html">Estates</a>
+        <a href="divorce.html">Divorce</a>
+        <a class="active" href="pretrial.html">Pre-trial</a>
+        <a href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div>
+        <div class="eyebrow">Pre-trial centre</div>
+        <h1>Prepare the matter for trial readiness and final settlement checks.</h1>
+        <p class="subtitle">
+          This page comes after discovery and before set-down. It should show whether the matter is ready, what remains in dispute, and what still needs to be completed before the file can move forward.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#overview">View Pre-trial Health</a>
+          <a class="button" href="#checklist">Open Checklist</a>
+          <a class="button" href="#questions">Ask a Question</a>
+        </div>
+
+        <div class="disclaimer">
+          Advome provides procedural assistance and legal information. It does not provide legal advice.
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Pre-trial status</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Preparation required</h2>
+          </div>
+          <span class="pill warn">Not ready</span>
+        </div>
+
+        <div class="meter">
+          <strong>Pre-trial readiness</strong>
+          <div class="meter-bar"><div style="width:65%"></div></div>
+        </div>
+
+        <div class="status-grid">
+          <div class="mini">
+            <span>Discovery complete</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Settlement attempted</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Outstanding issues</span>
+            <strong>3</strong>
+          </div>
+          <div class="mini">
+            <span>Ready for set-down</span>
+            <strong>No</strong>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Timeline</h2>
+        <p>The timeline shows the case moving from pleadings through discovery into pre-trial.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Pleadings</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Children</span><span class="status">Tracked</span></div>
+          <div class="step done"><span class="name">Settlement</span><span class="status">Attempted</span></div>
+          <div class="step done"><span class="name">Discovery</span><span class="status">Complete</span></div>
+          <div class="step active"><span class="name">Pre-trial</span><span class="status">Current</span></div>
+          <div class="step"><span class="name">Set-down</span><span class="status">Next</span></div>
+          <div class="step"><span class="name">Trial preparation</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Finalisation</span><span class="status">Later</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next step panel</strong>
+          Pre-trial should prepare the file for set-down by showing what is still disputed, who will testify, and what still belongs in the bundle.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="overview">
+          <div class="section-head">
+            <div>
+              <h2>Pre-trial overview</h2>
+              <p>The page should confirm whether the matter is moving cleanly toward set-down or whether more work is still needed.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Current position</h3>
+              <ul>
+                <li>Discovery complete</li>
+                <li>Settlement attempted</li>
+                <li>Some issues still in dispute</li>
+                <li>Witness and bundle work incomplete</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What pre-trial affects</h3>
+              <ul>
+                <li>Set-down readiness</li>
+                <li>Trial bundle quality</li>
+                <li>Witness list clarity</li>
+                <li>Settlement opportunities</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Pre-trial checklist</h2>
+              <p>Use this to show what is done, what is pending, and what still blocks the file from advancing.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">Discovery complete</div><div class="value">Yes</div></div>
+            <div class="field"><div class="label">Documents exchanged</div><div class="value">Yes</div></div>
+            <div class="field"><div class="label">Settlement discussions</div><div class="value">Attempted</div></div>
+            <div class="field"><div class="label">Admissions</div><div class="value">Pending</div></div>
+            <div class="field"><div class="label">Witness list</div><div class="value">Incomplete</div></div>
+            <div class="field"><div class="label">Trial bundle</div><div class="value">Incomplete</div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Checklist summary</h3>
+              <ul>
+                <li>Discovery complete</li>
+                <li>Issues identified</li>
+                <li>Admissions pending</li>
+                <li>Witness list incomplete</li>
+                <li>Trial bundle incomplete</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Why it matters</h3>
+              <p>Pre-trial is the stage where the case is cleaned up before set-down. Missing items here will delay the next phase.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Matters still in dispute</h2>
+              <p>Keep the dispute list visible so the user can see what still needs either agreement or trial determination.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Dispute list</h3>
+              <ul>
+                <li>Care and contact — still disputed</li>
+                <li>Pension interest — agreed</li>
+                <li>Maintenance — still disputed</li>
+                <li>Costs — not agreed</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What to show</h3>
+              <ul>
+                <li>What remains unresolved</li>
+                <li>What is already agreed</li>
+                <li>Whether settlement is still possible</li>
+                <li>What will go to trial if needed</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Witness and evidence centres</h2>
+              <p>These two blocks help the user prepare for the hearing and build the trial file.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Witness centre</h3>
+              <table style="width:100%;border-collapse:collapse;margin-top:10px;">
+                <tr>
+                  <th style="text-align:left;padding:10px;border-bottom:1px solid #e5e7eb;">Witness</th>
+                  <th style="text-align:left;padding:10px;border-bottom:1px solid #e5e7eb;">Status</th>
+                </tr>
+                <tr><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Plaintiff</td><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Ready</td></tr>
+                <tr><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Defendant</td><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Ready</td></tr>
+                <tr><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Family member</td><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Pending</td></tr>
+                <tr><td style="padding:10px;">Expert witness</td><td style="padding:10px;">Not required</td></tr>
+              </table>
+            </div>
+
+            <div class="mini-card">
+              <h3>Evidence centre</h3>
+              <ul>
+                <li>Bank statements — uploaded</li>
+                <li>Pension records — uploaded</li>
+                <li>School records — uploaded</li>
+                <li>Medical records — pending</li>
+                <li>WhatsApp evidence — pending</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Trial bundle readiness</h2>
+              <p>Show a simple percentage and the things still blocking set-down.</p>
+            </div>
+          </div>
+
+          <div class="meter">
+            <strong>Trial bundle readiness</strong>
+            <div class="meter-bar"><div style="width:65%"></div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Current score</h3>
+              <p><strong>65%</strong></p>
+            </div>
+            <div class="mini-card">
+              <h3>Still missing</h3>
+              <ul>
+                <li>Paginating documents</li>
+                <li>Indexing</li>
+                <li>Bundle numbering</li>
+                <li>Witness statements</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Settlement opportunity</h2>
+              <p>Keep settlement visible at every stage, even when the matter is close to trial.</p>
+            </div>
+          </div>
+
+          <div class="callout green">
+            <strong>Settlement remains possible</strong>
+            Continue negotiating, or move to trial if the remaining issues cannot be resolved. Partial settlement should still be visible.
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Next step engine</h2>
+              <p>The page should tell the user exactly what comes next.</p>
+            </div>
+            <span class="pill warn">Medium urgency</span>
+          </div>
+
+          <div class="callout blue">
+            <strong>Prepare set-down</strong>
+            Discovery and pre-trial are substantially complete, but the witness list and trial bundle still need work before set-down.
+          </div>
+        </section>
+
+        <section class="section" id="questions">
+          <div class="section-head">
+            <div>
+              <h2>Questions</h2>
+              <p>The user should be able to ask practical pre-trial questions from this page.</p>
+            </div>
+          </div>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>What happens during pre-trial?</summary>
+              <p>The page should explain the narrowing of issues, settlement checks, witness preparation, and trial bundle readiness.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can we settle now?</summary>
+              <p>Yes. Settlement should always remain available and visible, even at pre-trial stage.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do I need witnesses?</summary>
+              <p>The witness centre should show whether witnesses are required, ready, or still missing.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What documents go into the trial bundle?</summary>
+              <p>The evidence centre and bundle checklist should show the documents that must be included before set-down.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Pre-trial summary</h2>
+              <p>Keep a clear plain-language summary visible at the bottom of the page.</p>
+            </div>
+          </div>
+
+          <p>
+            Discovery has substantially been completed. Settlement discussions have taken place. Certain issues remain disputed and witness preparation remains incomplete. The matter is not yet ready for set-down.
+          </p>
+        </section>
+
+        <div class="footer">
+          This pre-trial centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </div>
 </body>
 </html>
