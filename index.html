@@ -155,34 +155,71 @@
     .card p { margin: 0; color: var(--muted); }
     .card .button { margin-top: auto; width: fit-content; }
 
-    .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
     }
-    .section h2 { margin: 0 0 12px; font-size: 1.2rem; letter-spacing: -0.03em; }
-    .features {
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.86rem;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .two-col {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 18px;
-      padding-left: 18px;
-      margin: 0;
-      color: var(--text);
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 18px;
     }
-    .features li { margin: 0; }
+    .listbox {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+    .listbox h3 {
+      margin: 0 0 10px;
+      color: var(--brand-2);
+      font-size: 1.05rem;
+    }
+    .listbox ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .listbox li { margin-bottom: 8px; }
+
+    .callout {
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .callout.blue { background: var(--accent-2); border-color: #dbe6ff; }
+    .callout.green { background: var(--success); border-color: #c9f0de; }
+    .callout.orange { background: var(--warning); border-color: #ffe0b2; }
+    .callout strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
 
     .footer {
-      margin-top: 28px;
-      padding: 18px 2px 8px;
+      margin-top: 24px;
       color: var(--muted);
       font-size: 0.92rem;
+      padding-bottom: 10px;
+      line-height: 1.6;
     }
 
     @media (max-width: 980px) {
-      .cards, .features { grid-template-columns: 1fr; }
+      .cards,
+      .two-col,
+      .features {
+        grid-template-columns: 1fr;
+      }
       .topbar { border-radius: 22px; position: static; }
       .nav { justify-content: flex-start; }
       .hero { padding: 24px; }
@@ -214,6 +251,7 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="ccma.html">CCMA</a>
         <a href="divorce.html">Divorce</a>
+        <a href="estates.html">Estates</a>
         <a href="attorney.html">Attorney Portal</a>
       </nav>
     </header>
@@ -231,6 +269,7 @@
         <a class="button" href="dashboard.html">Case Dashboard</a>
         <a class="button" href="ccma.html">CCMA Navigator</a>
         <a class="button" href="divorce.html">Divorce Navigator</a>
+        <a class="button" href="estates.html">Estates Administration</a>
       </div>
 
       <div class="disclaimer">
@@ -271,31 +310,85 @@
         </div>
         <a class="button" href="attorney.html">Open Attorney Page</a>
       </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">E</div>
+          <div>
+            <h2>Estates Administration</h2>
+            <p>Report death, prepare the reporting pack, draft the covering letter, obtain letters of executorship or authority, and move through the L&amp;D process.</p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Executorship</span>
+          <span class="tag">L&amp;D account</span>
+          <span class="tag">Master's Office</span>
+        </div>
+        <a class="button primary" href="estates.html">Open Estates</a>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">D</div>
+          <div>
+            <h2>Dashboard</h2>
+            <p>See current stage, next step, missing documents, urgency, and all active matters in one place.</p>
+          </div>
+        </div>
+        <a class="button" href="dashboard.html">Open Dashboard</a>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon">C</div>
+          <div>
+            <h2>Civil / Motion matters</h2>
+            <p>Reserved for summons, pleadings, applications, affidavits, and other court-linked procedures.</p>
+          </div>
+        </div>
+        <a class="button" href="#">Coming Soon</a>
+      </article>
+    </section>
+
+    <section class="two-col">
+      <div class="listbox">
+        <h3>What the portal will do</h3>
+        <ul>
+          <li>Identify the current procedural stage</li>
+          <li>Show the next step in plain language</li>
+          <li>Track missing documents and deadlines</li>
+          <li>Show settlement and children flags where relevant</li>
+          <li>Support a case-health score for each matter</li>
+          <li>Prepare users for hearing or trial</li>
+        </ul>
+      </div>
+
+      <div class="callout blue">
+        <strong>Best current path</strong>
+        For the live build, use Divorce, CCMA / Labour, and Estates as the active self-represented workflows, then use the dashboard to monitor every matter.
+      </div>
+    </section>
+
+    <section class="two-col" style="margin-top:16px;">
+      <div class="callout green">
+        <strong>What to do first</strong>
+        Pick the matter type, then use the linked workflow page to move through the case state.
+      </div>
+      <div class="callout orange">
+        <strong>What to avoid</strong>
+        Do not leave core workflow buttons as “Coming Soon” for modules that already exist.
+      </div>
     </section>
 
     <section class="section">
-      <h2>What Advome does</h2>
-      <ul class="features">
-        <li>Identifies the current procedural stage</li>
-        <li>Shows the next legal step</li>
-        <li>Supports settlement tracking</li>
-        <li>Handles children-related divorce issues</li>
-        <li>Builds document checklists per stage</li>
-        <li>Tracks case health and readiness</li>
-        <li>Prepares hearing and trial notes</li>
-        <li>Creates a path to attorney referral later</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>How to use the site</h2>
+      <h2>Roadmap</h2>
       <p>
-        Start with the relevant workflow, then follow the stage cards and the next-step prompts. The dashboard is the best place to see status, missing items, and urgency at a glance.
+        The first working modules are Divorce, CCMA / Labour, Estates Administration, Dashboard, and Attorney Portal. Other matters can be added later without changing the main structure.
       </p>
     </section>
 
     <div class="footer">
-      Advome is designed to support access to justice and reduce confusion around litigation procedure.
+      Advome supports access to justice, procedural clarity, and practical case navigation across matters.
     </div>
   </div>
 </body>
