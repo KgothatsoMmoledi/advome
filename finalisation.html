@@ -1,363 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Finalisation Centre</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Finalisation Centre</title>
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1240px;
+    }
 
-<style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      line-height: 1.5;
+    }
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f5f7fb;
-color:#111827;
-}
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
 
-header{
-background:white;
-border-bottom:1px solid #e5e7eb;
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-color:#0b2c5f;
-}
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
 
-nav{
-display:flex;
-gap:18px;
-flex-wrap:wrap;
-}
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
 
-nav a{
-text-decoration:none;
-font-weight:600;
-color:#374151;
-}
+    .hero {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
+      border: 1px solid rgba(219,231,245,0.95);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -90px; top: -90px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
+      pointer-events: none;
+    }
 
-.wrap{
-max-width:1300px;
-margin:auto;
-padding:30px 8%;
-}
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
+      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
+      border: 1px solid #d6e3ff;
+    }
 
-.card{
-background:white;
-padding:25px;
-border-radius:18px;
-border:1px solid #e5e7eb;
-margin-bottom:20px;
-box-shadow:0 8px 20px rgba(0,0,0,.04);
-}
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 16ch;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+    .subtitle {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
 
-.done{
-background:#ecfdf5;
-border:1px solid #c8eedb;
-}
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
+      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-1px); background: #f7fbff; }
+    .button.primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
 
-.blue{
-background:#eef4ff;
-border:1px solid #dbe6ff;
-}
+    .disclaimer {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid #e6eef8;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
 
-.orange{
-background:#fff7e6;
-border:1px solid #ffe0b2;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
 
-.timeline div{
-padding:12px;
-border:1px solid #e5e7eb;
-border-radius:12px;
-margin-bottom:10px;
-}
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
 
-.question{
-padding:14px;
-border:1px solid #e5e7eb;
-border-radius:12px;
-margin-bottom:10px;
-}
+    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
+    .panel p { color: var(--muted); margin: 0; }
 
-.progress{
-height:24px;
-background:#e5e7eb;
-border-radius:999px;
-overflow:hidden;
-}
+    .status-top {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
 
-.bar{
-height:100%;
-width:100%;
-background:#10b981;
-}
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
 
-table{
-width:100%;
-border-collapse:collapse;
-}
+    .section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
+    }
+    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
 
-td,th{
-padding:12px;
-border-bottom:1px solid #eee;
-text-align:left;
-}
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
 
-@media(max-width:900px){
+    .sidebar {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: sticky;
+      top: 96px;
+    }
 
-.grid{
-grid-template-columns:1fr;
-}
+    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
+    .sidebar p { margin: 0 0 14px; color: var(--muted); }
 
-}
+    .timeline { display: grid; gap: 10px; }
+    .step {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .step .name { font-weight: 700; color: var(--text); }
+    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
+    .step.active { border-color: #cfe0ff; background: #eef4ff; }
+    .step.active .status { color: var(--brand-2); font-weight: 700; }
+    .step.done { background: #edfdf3; border-color: #caeed8; }
+    .step.done .status { color: var(--good); font-weight: 700; }
 
-</style>
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .mini-card {
+      border: 1px solid #e6eef8;
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+    }
+    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
+    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .mini-card li { margin-bottom: 6px; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
+      font-size: 0.86rem; color: #374151; font-weight: 600;
+    }
+
+    .callout {
+      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
+    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
+    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
+    .callout.green { background: #edfdf3; border-color: #caeed8; }
+    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
+
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .field {
+      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
+    }
+    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
+    .field .value { font-weight: 700; color: var(--text); }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .check-item {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+      padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
+    }
+    .check-item strong { display: block; }
+    .check-item span { color: var(--muted); font-size: 0.9rem; }
+
+    .meter {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+    }
+    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
+    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
+
+    .faq { display: grid; gap: 10px; }
+    .faq-item {
+      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
+    }
+    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
+    .faq-item p { margin: 10px 0 0; color: var(--muted); }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 760px) {
+      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
+      .wrap { padding: 22px 5% 50px; }
+      .hero { padding: 20px; }
+      .panel, .section { padding: 18px; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-
-<div class="logo">Advome</div>
-
-<nav>
-
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="trialprep.html">Trial Preparation</a>
-
-</nav>
-
-</header>
-
-<div class="wrap">
-
-<div class="card done">
-
-<h1>Finalisation Centre</h1>
-
-<h3>Case Completed</h3>
-
-<p>✓ Trial completed</p>
-
-<p>✓ Judgment delivered</p>
-
-<p>✓ Divorce granted</p>
-
-<p>✓ Matter finalised</p>
-
-</div>
-
-<div class="card">
-
-<h2>Timeline</h2>
-
-<div class="timeline">
-
-<div class="done">✓ Summons</div>
-
-<div class="done">✓ Pleadings</div>
-
-<div class="done">✓ Settlement</div>
-
-<div class="done">✓ Discovery</div>
-
-<div class="done">✓ Pre-Trial</div>
-
-<div class="done">✓ Set-Down</div>
-
-<div class="done">✓ Trial Preparation</div>
-
-<div class="done">✓ Finalisation</div>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-
-<h2>Outcome Centre</h2>
-
-<p>Judgment granted : Yes</p>
-
-<p>Settlement agreement made order of court : Yes</p>
-
-<p>Decree of divorce issued : Yes</p>
-
-<p>Case status : Closed</p>
-
-</div>
-
-<div class="card">
-
-<h2>Pension Orders</h2>
-
-<p>Pension interest awarded : Yes</p>
-
-<p>Fund identified : Yes</p>
-
-<p>Endorsement wording verified : Pending</p>
-
-<p>Fund notified : Pending</p>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-
-<h2>Children And Maintenance Orders</h2>
-
-<p>Care and contact order : Granted</p>
-
-<p>Maintenance order : Granted</p>
-
-<p>Family Advocate issues : Resolved</p>
-
-<p>Parenting plan : Incorporated</p>
-
-</div>
-
-<div class="card">
-
-<h2>Costs</h2>
-
-<p>Costs order granted : No</p>
-
-<p>Party and party costs : N/A</p>
-
-<p>Taxation required : No</p>
-
-</div>
-
-</div>
-
-<div class="card blue">
-
-<h2>Enforcement Centre</h2>
-
-<table>
-
-<tr>
-<th>Order</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>Maintenance</td>
-<td>Active</td>
-</tr>
-
-<tr>
-<td>Pension Order</td>
-<td>Pending Fund Compliance</td>
-</tr>
-
-<tr>
-<td>Property Transfer</td>
-<td>Pending</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>Appeal And Rescission</h2>
-
-<p>Appeal period expired : No</p>
-
-<p>Application for leave to appeal : None</p>
-
-<p>Rescission proceedings : None</p>
-
-</div>
-
-<div class="card orange">
-
-<h2>Case Health Meter</h2>
-
-<div class="progress">
-<div class="bar"></div>
-</div>
-
-<h3>100%</h3>
-
-<p>
-
-The litigation cycle has been completed successfully.
-
-</p>
-
-</div>
-
-<div class="card blue">
-
-<h2>Case Archive Summary</h2>
-
-<p>
-
-The matter progressed through pleadings, discovery, pre-trial procedures, set-down and trial preparation. Judgment was delivered and the matter has now been finalised.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>Questions</h2>
-
-<div class="question">
-How do I obtain a copy of the decree of divorce?
-</div>
-
-<div class="question">
-How do I enforce a maintenance order?
-</div>
-
-<div class="question">
-How long does pension payment take?
-</div>
-
-<div class="question">
-Can the order be varied?
-</div>
-
-<div class="question">
-Can the matter be appealed?
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Disclaimer</h2>
-
-<p>
-
-Advome provides procedural assistance and workflow management. Users remain responsible for obtaining legal advice where necessary and complying with court rules and legislation.
-
-</p>
-
-</div>
-
-</div>
-
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="trialprep.html">Trial Prep</a>
+        <a href="trialday.html">Trial Day</a>
+        <a href="judgment.html">Judgment</a>
+        <a href="estates.html">Estates</a>
+        <a href="divorce.html">Divorce</a>
+        <a class="active" href="finalisation.html">Finalisation</a>
+        <a href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div>
+        <div class="eyebrow">Finalisation centre</div>
+        <h1>Close the matter after judgment and track any remaining follow-up.</h1>
+        <p class="subtitle">
+          This page records the end state, any enforcement or compliance steps, and the final archive status of the case.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#overview">View Final Status</a>
+          <a class="button" href="#enforcement">Open Enforcement</a>
+          <a class="button" href="#questions">Ask a Question</a>
+        </div>
+
+        <div class="disclaimer">
+          Advome provides procedural assistance and legal information. It does not provide legal advice.
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Case status</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Case completed</h2>
+          </div>
+          <span class="pill good">100%</span>
+        </div>
+
+        <div class="meter">
+          <strong>Completion</strong>
+          <div class="meter-bar"><div style="width:100%"></div></div>
+        </div>
+
+        <div class="status-grid">
+          <div class="mini">
+            <span>Trial completed</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Judgment delivered</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Matter finalised</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Archive ready</span>
+            <strong>Yes</strong>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Case timeline</h2>
+        <p>The timeline should make it obvious that the matter is now finished.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Pleadings</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Discovery</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Pre-trial</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Set-down</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Trial prep</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Trial day</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Judgment</span><span class="status">Done</span></div>
+          <div class="step active"><span class="name">Finalisation</span><span class="status">Current</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next step panel</strong>
+          Finalisation should show what is already finished, what still needs follow-up, and whether enforcement or archive handling is required.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="overview">
+          <div class="section-head">
+            <div>
+              <h2>Final status overview</h2>
+              <p>The user should see that the matter has reached the end of the workflow.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Current position</h3>
+              <ul>
+                <li>Trial completed</li>
+                <li>Judgment delivered</li>
+                <li>Divorce granted</li>
+                <li>Matter finalised</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What finalisation affects</h3>
+              <ul>
+                <li>Case closure</li>
+                <li>Archive status</li>
+                <li>Compliance follow-up</li>
+                <li>Enforcement tracking</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Outcome centre</h2>
+              <p>Record the final result and the main orders that now govern the matter.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">Judgment granted</div><div class="value">Yes</div></div>
+            <div class="field"><div class="label">Settlement agreement made order of court</div><div class="value">Yes</div></div>
+            <div class="field"><div class="label">Decree of divorce issued</div><div class="value">Yes</div></div>
+            <div class="field"><div class="label">Case status</div><div class="value">Closed</div></div>
+          </div>
+        </section>
+
+        <section class="section" id="enforcement">
+          <div class="section-head">
+            <div>
+              <h2>Enforcement centre</h2>
+              <p>Even after finalisation, some orders may still need follow-through.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Orders and status</h3>
+              <table style="width:100%;border-collapse:collapse;margin-top:10px;">
+                <tr>
+                  <th style="text-align:left;padding:10px;border-bottom:1px solid #e5e7eb;">Order</th>
+                  <th style="text-align:left;padding:10px;border-bottom:1px solid #e5e7eb;">Status</th>
+                </tr>
+                <tr><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Maintenance</td><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Active</td></tr>
+                <tr><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Pension order</td><td style="padding:10px;border-bottom:1px solid #e5e7eb;">Pending fund compliance</td></tr>
+                <tr><td style="padding:10px;">Property transfer</td><td style="padding:10px;">Pending</td></tr>
+              </table>
+            </div>
+
+            <div class="mini-card">
+              <h3>Follow-up items</h3>
+              <ul>
+                <li>Pension endorsement wording verification</li>
+                <li>Fund notification</li>
+                <li>Property transfer steps</li>
+                <li>Maintenance compliance check</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Pension orders</h2>
+              <p>Pension orders often need follow-up after judgment, so keep them visible here.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Status</h3>
+              <ul>
+                <li>Pension interest awarded: Yes</li>
+                <li>Fund identified: Yes</li>
+                <li>Endorsement wording verified: Pending</li>
+                <li>Fund notified: Pending</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What the page should show</h3>
+              <ul>
+                <li>Whether the fund has been identified</li>
+                <li>Whether the wording is correct</li>
+                <li>Whether notice has been sent</li>
+                <li>Whether compliance is complete</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Children and maintenance orders</h2>
+              <p>Finalisation should keep family-related orders visible too.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Family orders</h3>
+              <ul>
+                <li>Care and contact order: Granted</li>
+                <li>Maintenance order: Granted</li>
+                <li>Family Advocate issues: Resolved</li>
+                <li>Parenting plan: Incorporated</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Why this matters</h3>
+              <ul>
+                <li>Child-related orders may still need compliance tracking</li>
+                <li>Parenting plans should remain accessible</li>
+                <li>Maintenance should stay visible after finalisation</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Costs and appeal controls</h2>
+              <p>Even finished matters may still have appeal or rescission windows.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Costs</h3>
+              <ul>
+                <li>Costs order granted: No</li>
+                <li>Party and party costs: N/A</li>
+                <li>Taxation required: No</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Appeal and rescission</h3>
+              <ul>
+                <li>Appeal period expired: No</li>
+                <li>Application for leave to appeal: None</li>
+                <li>Rescission proceedings: None</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Case health meter</h2>
+              <p>The page should show that the litigation cycle is complete.</p>
+            </div>
+          </div>
+
+          <div class="meter">
+            <strong>Finalisation status</strong>
+            <div class="meter-bar"><div style="width:100%"></div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Health score</h3>
+              <p><strong>100%</strong></p>
+            </div>
+            <div class="mini-card">
+              <h3>Meaning</h3>
+              <p>The litigation cycle has been completed successfully.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Archive summary</h2>
+              <p>Keep a short record of the completed journey.</p>
+            </div>
+          </div>
+
+          <div class="callout blue">
+            <strong>Case archive summary</strong>
+            The matter progressed through pleadings, discovery, pre-trial, set-down, trial preparation, hearing, and judgment. It has now been finalised.
+          </div>
+        </section>
+
+        <section class="section" id="questions">
+          <div class="section-head">
+            <div>
+              <h2>Questions</h2>
+              <p>Keep practical post-judgment questions visible here.</p>
+            </div>
+          </div>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>How do I obtain a copy of the decree of divorce?</summary>
+              <p>The page should guide the user to the court or file record where the decree can be requested.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I enforce a maintenance order?</summary>
+              <p>The page should keep enforcement visible and explain that the order may still need monitoring.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How long does pension payment take?</summary>
+              <p>The page should show pension compliance as pending until the fund acts on the order.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can the order be varied?</summary>
+              <p>The page should explain that variation is a separate procedural route if applicable.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can the matter be appealed?</summary>
+              <p>The page should show the appeal and rescission controls clearly.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Disclaimer</h2>
+              <p>Keep the legal disclaimer visible at the bottom of the page.</p>
+            </div>
+          </div>
+
+          <p>
+            Advome provides procedural assistance and workflow management. Users remain responsible for obtaining legal advice where necessary and complying with court rules and legislation.
+          </p>
+        </section>
+
+        <div class="footer">
+          This finalisation centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </div>
 </body>
 </html>
