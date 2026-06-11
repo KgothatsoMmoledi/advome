@@ -1,453 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Trial Preparation Centre</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | Trial Preparation Centre</title>
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1240px;
+    }
 
-<style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      line-height: 1.5;
+    }
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f5f7fb;
-color:#111827;
-}
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
 
-header{
-background:white;
-border-bottom:1px solid #e5e7eb;
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-color:#0b2c5f;
-}
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
 
-nav{
-display:flex;
-gap:18px;
-flex-wrap:wrap;
-}
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
 
-nav a{
-text-decoration:none;
-font-weight:600;
-color:#374151;
-}
+    .hero {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
+      border: 1px solid rgba(219,231,245,0.95);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -90px; top: -90px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
+      pointer-events: none;
+    }
 
-.wrap{
-max-width:1300px;
-margin:auto;
-padding:30px 8%;
-}
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
+      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
+      border: 1px solid #d6e3ff;
+    }
 
-.card{
-background:white;
-border:1px solid #e5e7eb;
-border-radius:18px;
-padding:25px;
-margin-bottom:20px;
-box-shadow:0 8px 20px rgba(0,0,0,.04);
-}
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 18ch;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+    .subtitle {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
 
-.blue{
-background:#eef4ff;
-border:1px solid #dbe6ff;
-}
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
+      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-1px); background: #f7fbff; }
+    .button.primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
 
-.green{
-background:#ecfdf5;
-border:1px solid #c8eedb;
-}
+    .disclaimer {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid #e6eef8;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
 
-.orange{
-background:#fff7e6;
-border:1px solid #ffe0b2;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
 
-.red{
-background:#fff1f1;
-border:1px solid #ffd7d7;
-}
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
 
-.timeline div{
-padding:12px;
-border:1px solid #e5e7eb;
-border-radius:12px;
-margin-bottom:10px;
-}
+    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
+    .panel p { color: var(--muted); margin: 0; }
 
-.done{
-background:#ecfdf5;
-}
+    .status-top {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
 
-.active{
-background:#eef4ff;
-}
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
 
-.progress{
-height:22px;
-background:#e5e7eb;
-border-radius:999px;
-overflow:hidden;
-}
+    .section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
+    }
+    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
 
-.bar{
-height:100%;
-width:82%;
-background:#0b2c5f;
-}
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
 
-.question{
-padding:15px;
-border:1px solid #e5e7eb;
-border-radius:12px;
-margin-bottom:10px;
-}
+    .sidebar {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: sticky;
+      top: 96px;
+    }
 
-table{
-width:100%;
-border-collapse:collapse;
-}
+    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
+    .sidebar p { margin: 0 0 14px; color: var(--muted); }
 
-td,th{
-padding:12px;
-border-bottom:1px solid #eee;
-text-align:left;
-}
+    .timeline { display: grid; gap: 10px; }
+    .step {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .step .name { font-weight: 700; color: var(--text); }
+    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
+    .step.active { border-color: #cfe0ff; background: #eef4ff; }
+    .step.active .status { color: var(--brand-2); font-weight: 700; }
+    .step.done { background: #edfdf3; border-color: #caeed8; }
+    .step.done .status { color: var(--good); font-weight: 700; }
 
-@media(max-width:900px){
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .mini-card {
+      border: 1px solid #e6eef8;
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+    }
+    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
+    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .mini-card li { margin-bottom: 6px; }
 
-.grid{
-grid-template-columns:1fr;
-}
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
+      font-size: 0.86rem; color: #374151; font-weight: 600;
+    }
 
-}
+    .callout {
+      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
+    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
+    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
+    .callout.green { background: #edfdf3; border-color: #caeed8; }
+    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
 
-</style>
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .field {
+      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
+    }
+    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
+    .field .value { font-weight: 700; color: var(--text); }
 
+    .meter {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+    }
+    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
+    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
+
+    .faq { display: grid; gap: 10px; }
+    .faq-item {
+      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
+    }
+    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
+    .faq-item p { margin: 10px 0 0; color: var(--muted); }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 760px) {
+      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
+      .wrap { padding: 22px 5% 50px; }
+      .hero { padding: 20px; }
+      .panel, .section { padding: 18px; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+    }
+  </style>
 </head>
-
 <body>
-
-<header>
-
-<div class="logo">Advome</div>
-
-<nav>
-
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="health.html">Health</a>
-<a href="setdown.html">Set-Down</a>
-
-</nav>
-
-</header>
-
-<div class="wrap">
-
-<div class="card">
-
-<h1>Trial Preparation Centre</h1>
-
-<h3>Preparation In Progress</h3>
-
-<p>✓ Matter enrolled</p>
-
-<p>✓ Trial date allocated</p>
-
-<p>⚠ Trial bundle incomplete</p>
-
-<p>⚠ Witness preparation outstanding</p>
-
-</div>
-
-<div class="card">
-
-<h2>Case Timeline</h2>
-
-<div class="timeline">
-
-<div class="done">✓ Summons</div>
-
-<div class="done">✓ Pleadings</div>
-
-<div class="done">✓ Discovery</div>
-
-<div class="done">✓ Pre-Trial</div>
-
-<div class="done">✓ Set-Down</div>
-
-<div class="active">► Trial Preparation</div>
-
-<div>Finalisation</div>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-
-<h2>Bundle Centre</h2>
-
-<p>✓ Bundle created</p>
-
-<p>⚠ Pagination incomplete</p>
-
-<p>⚠ Indexing incomplete</p>
-
-<p>✓ Bundle numbering completed</p>
-
-<p>⚠ Annexures outstanding</p>
-
-</div>
-
-<div class="card">
-
-<h2>Exhibits Centre</h2>
-
-<p>Bank statements ✓</p>
-
-<p>Pension records ✓</p>
-
-<p>Medical records ✓</p>
-
-<p>Photographs ✓</p>
-
-<p>WhatsApp messages ⚠</p>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-
-<h2>Witness Centre</h2>
-
-<table>
-
-<tr>
-<th>Witness</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>Plaintiff</td>
-<td>Ready</td>
-</tr>
-
-<tr>
-<td>Defendant</td>
-<td>Ready</td>
-</tr>
-
-<tr>
-<td>Expert Witness</td>
-<td>Not Required</td>
-</tr>
-
-<tr>
-<td>Family Member</td>
-<td>Pending</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>Chronology Centre</h2>
-
-<p>✓ Marriage date</p>
-
-<p>✓ Separation date</p>
-
-<p>✓ Birth of children</p>
-
-<p>✓ Asset acquisitions</p>
-
-<p>✓ Settlement discussions</p>
-
-<p>✓ Litigation history</p>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card blue">
-
-<h2>Practice Notes & Directives</h2>
-
-<p>Practice note prepared : No</p>
-
-<p>Judge directives uploaded : No</p>
-
-<p>Special requirements : None</p>
-
-</div>
-
-<div class="card orange">
-
-<h2>Countdown Centre</h2>
-
-<h3>Trial Date</h3>
-
-<p>14 October 2026</p>
-
-<h3>Days Remaining</h3>
-
-<p>28 Days</p>
-
-<h3>Urgency</h3>
-
-<p>Medium</p>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Trial Readiness Meter</h2>
-
-<div class="progress">
-
-<div class="bar"></div>
-
-</div>
-
-<h3>82%</h3>
-
-<p>Outstanding:</p>
-
-<ul>
-
-<li>Indexing</li>
-
-<li>Pagination</li>
-
-<li>Witness preparation</li>
-
-<li>Practice note</li>
-
-<li>Judge directives</li>
-
-</ul>
-
-</div>
-
-<div class="card red">
-
-<h2>Morning Of Trial Checklist</h2>
-
-<ul>
-
-<li>Bundle printed or uploaded</li>
-
-<li>Witnesses informed</li>
-
-<li>Authorities ready</li>
-
-<li>Practice note available</li>
-
-<li>Courtroom confirmed</li>
-
-<li>Arrive early</li>
-
-</ul>
-
-</div>
-
-<div class="card blue">
-
-<h2>Your Next Step</h2>
-
-<h3>Complete Trial Bundle</h3>
-
-<p>
-
-The matter has been enrolled. Bundle preparation and witness readiness remain outstanding.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>Questions</h2>
-
-<div class="question">
-How do I index a trial bundle?
-</div>
-
-<div class="question">
-What is pagination?
-</div>
-
-<div class="question">
-Do I need witness statements?
-</div>
-
-<div class="question">
-What is a practice note?
-</div>
-
-<div class="question">
-What if I receive directives from the judge?
-</div>
-
-<div class="question">
-What should I bring to court?
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Trial Preparation Summary</h2>
-
-<p>
-
-The matter has been enrolled and is approaching trial. Certain aspects of bundle preparation and witness readiness remain incomplete. Trial readiness currently stands at 82%.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>Disclaimer</h2>
-
-<p>
-
-This platform promotes access to justice and procedural assistance. It does not provide legal advice.
-
-</p>
-
-</div>
-
-</div>
-
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="documents.html">Documents</a>
+        <a href="ccma.html">CCMA</a>
+        <a href="estates.html">Estates</a>
+        <a href="divorce.html">Divorce</a>
+        <a class="active" href="trialprep.html">Trial Preparation</a>
+        <a href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div>
+        <div class="eyebrow">Trial preparation centre</div>
+        <h1>Prepare the bundle, witnesses, directives, and trial notes.</h1>
+        <p class="subtitle">
+          This page comes after set-down and before the hearing date. It should make trial readiness visible and tell the user exactly what still needs to be completed.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#overview">View Trial Health</a>
+          <a class="button" href="#bundle">Open Bundle Centre</a>
+          <a class="button" href="#questions">Ask a Question</a>
+        </div>
+
+        <div class="disclaimer">
+          Advome provides procedural assistance and legal information. It does not provide legal advice.
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="status-top">
+          <div>
+            <div class="status-label">Trial readiness</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Preparation in progress</h2>
+          </div>
+          <span class="pill warn">Medium urgency</span>
+        </div>
+
+        <div class="meter">
+          <strong>Trial readiness score</strong>
+          <div class="meter-bar"><div style="width:82%"></div></div>
+        </div>
+
+        <div class="status-grid">
+          <div class="mini">
+            <span>Matter enrolled</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Trial date allocated</span>
+            <strong>Yes</strong>
+          </div>
+          <div class="mini">
+            <span>Bundle complete</span>
+            <strong>No</strong>
+          </div>
+          <div class="mini">
+            <span>Witnesses ready</span>
+            <strong>Partly</strong>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Case timeline</h2>
+        <p>The matter has moved from set-down into trial preparation and is now being readied for hearing.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Summons</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Pleadings</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Discovery</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Pre-trial</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Set-down</span><span class="status">Done</span></div>
+          <div class="step active"><span class="name">Trial preparation</span><span class="status">Current</span></div>
+          <div class="step"><span class="name">Hearing / trial day</span><span class="status">Next</span></div>
+          <div class="step"><span class="name">Judgment</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Finalisation</span><span class="status">Later</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout blue">
+          <strong>Next step panel</strong>
+          Trial preparation should focus on bundle completeness, witness readiness, and any judge directives or practice notes.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="overview">
+          <div class="section-head">
+            <div>
+              <h2>Trial preparation overview</h2>
+              <p>The page should show whether the matter is genuinely ready for the hearing date or still needs cleanup work.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Current position</h3>
+              <ul>
+                <li>Matter enrolled</li>
+                <li>Trial date allocated</li>
+                <li>Bundle incomplete</li>
+                <li>Witness preparation partly outstanding</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What trial prep affects</h3>
+              <ul>
+                <li>Hearing readiness</li>
+                <li>Morning-of-trial control</li>
+                <li>Witness coordination</li>
+                <li>Document order and directions</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="bundle">
+          <div class="section-head">
+            <div>
+              <h2>Bundle centre</h2>
+              <p>Keep the bundle, pagination, indexing, and annexures visible.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">Bundle created</div><div class="value">Yes</div></div>
+            <div class="field"><div class="label">Pagination</div><div class="value">Incomplete</div></div>
+            <div class="field"><div class="label">Indexing</div><div class="value">Incomplete</div></div>
+            <div class="field"><div class="label">Bundle numbering</div><div class="value">Completed</div></div>
+            <div class="field"><div class="label">Annexures</div><div class="value">Outstanding</div></div>
+            <div class="field"><div class="label">Authorities folder</div><div class="value">Pending review</div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Missing bundle work</h3>
+              <ul>
+                <li>Indexing</li>
+                <li>Pagination</li>
+                <li>Annexures</li>
+                <li>Final bundle check</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Why this matters</h3>
+              <p>The hearing file needs to be clean and readable before the matter can be presented properly.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Exhibits and witness centres</h2>
+              <p>These are the practical hearing-prep controls that make the trial day smoother.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Exhibits centre</h3>
+              <ul>
+                <li>Bank statements ✓</li>
+                <li>Pension records ✓</li>
+                <li>Medical records ✓</li>
+                <li>Photographs ✓</li>
+                <li>WhatsApp messages ⚠</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Witness centre</h3>
+              <ul>
+                <li>Plaintiff — Ready</li>
+                <li>Defendant — Ready</li>
+                <li>Expert witness — Not required</li>
+                <li>Family member — Pending</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Chronology and procedural controls</h2>
+              <p>These pages should help the user keep the case story and court-facing requirements aligned.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Chronology centre</h3>
+              <ul>
+                <li>Marriage date</li>
+                <li>Separation date</li>
+                <li>Birth of children</li>
+                <li>Asset acquisitions</li>
+                <li>Settlement discussions</li>
+                <li>Litigation history</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Practice notes and directives</h3>
+              <ul>
+                <li>Practice note prepared: No</li>
+                <li>Judge directives uploaded: No</li>
+                <li>Special requirements: None</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Countdown centre</h2>
+              <p>Show the hearing date and how close the user is to trial day.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Trial date</h3>
+              <p><strong>14 October 2026</strong></p>
+            </div>
+            <div class="mini-card">
+              <h3>Days remaining</h3>
+              <p><strong>28 days</strong></p>
+            </div>
+            <div class="mini-card">
+              <h3>Urgency</h3>
+              <p><strong>Medium</strong></p>
+            </div>
+            <div class="mini-card">
+              <h3>Morning-of-trial checklist</h3>
+              <p><strong>Bundle, witnesses, authorities, courtroom</strong></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Trial readiness meter</h2>
+              <p>The page should keep the user honest about what is still outstanding.</p>
+            </div>
+          </div>
+
+          <div class="meter">
+            <strong>Trial readiness</strong>
+            <div class="meter-bar"><div style="width:82%"></div></div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Current score</h3>
+              <p><strong>82%</strong></p>
+            </div>
+            <div class="mini-card">
+              <h3>Outstanding</h3>
+              <ul>
+                <li>Indexing</li>
+                <li>Pagination</li>
+                <li>Witness preparation</li>
+                <li>Practice note</li>
+                <li>Judge directives</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Morning of trial checklist</h2>
+              <p>Keep the user focused on the practical arrival requirements.</p>
+            </div>
+          </div>
+
+          <div class="callout red">
+            <strong>Morning of trial</strong>
+            Bundle printed or uploaded, witnesses informed, authorities ready, practice note available, courtroom confirmed, and arrive early.
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Your next step</h2>
+              <p>This should stay as the clearest instruction on the page.</p>
+            </div>
+            <span class="pill danger">Action needed</span>
+          </div>
+
+          <div class="callout blue">
+            <strong>Complete the trial bundle</strong>
+            The matter has been enrolled. Bundle preparation and witness readiness remain outstanding.
+          </div>
+        </section>
+
+        <section class="section" id="questions">
+          <div class="section-head">
+            <div>
+              <h2>Questions</h2>
+              <p>The user should be able to ask simple hearing-prep questions directly here.</p>
+            </div>
+          </div>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>How do I index a trial bundle?</summary>
+              <p>The page should explain the order of documents and how the index should match the bundle.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is pagination?</summary>
+              <p>The page should explain numbering the bundle pages clearly so the court can follow the file.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do I need witness statements?</summary>
+              <p>The witness centre should show whether witness statements are required and whether each witness is ready.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is a practice note?</summary>
+              <p>The page should show whether a practice note is required by the court or judge.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What if I receive directives from the judge?</summary>
+              <p>The directives section should allow uploads and make any special requirements visible.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What should I bring to court?</summary>
+              <p>The morning-of-trial checklist should show the bundle, witnesses, authorities, and courtroom confirmation.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Trial preparation summary</h2>
+              <p>Keep the summary short and procedural.</p>
+            </div>
+          </div>
+
+          <p>
+            The matter has been enrolled and is approaching trial. Certain aspects of bundle preparation and witness readiness remain incomplete. Trial readiness currently stands at 82%.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Disclaimer</h2>
+              <p>Keep the legal disclaimer visible at the bottom of the page.</p>
+            </div>
+          </div>
+
+          <p>
+            This platform promotes access to justice and procedural assistance. It does not provide legal advice.
+          </p>
+        </section>
+
+        <div class="footer">
+          This trial preparation centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </div>
 </body>
-
 </html>
+
