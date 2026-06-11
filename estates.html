@@ -20,7 +20,7 @@
       --danger: #dc2626;
       --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
       --radius: 24px;
-      --max: 1180px;
+      --max: 1240px;
     }
 
     * { box-sizing: border-box; }
@@ -252,6 +252,28 @@
     .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
     .field .value { font-weight: 700; color: var(--text); }
 
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .check-item {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+      padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
+    }
+    .check-item strong { display: block; }
+    .check-item span { color: var(--muted); font-size: 0.9rem; }
+
+    .meter {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e6eef8;
+    }
+    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
+    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
+
     .faq { display: grid; gap: 10px; }
     .faq-item {
       border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
@@ -265,6 +287,16 @@
       font-size: 0.92rem;
       line-height: 1.6;
     }
+
+    .quick-actions {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
+    }
+    .quick-actions .chip {
+      display: inline-flex; align-items: center; justify-content: center; padding: 9px 12px;
+      border-radius: 999px; border: 1px solid #d7e4f8; background: #fff; color: var(--brand-2);
+      font-size: 0.86rem; font-weight: 700;
+    }
+    .quick-actions .chip:hover { background: #f7fbff; }
 
     @media (max-width: 1100px) {
       .hero-grid, .layout { grid-template-columns: 1fr; }
@@ -305,7 +337,7 @@
     <main class="hero">
       <div>
         <div class="eyebrow">Deceased estates / estate administration</div>
-        <h1>Guide the family through estate reporting, executorship, and finalisation.</h1>
+        <h1>Guide the family through reporting, executorship, and finalisation.</h1>
         <p class="subtitle">
           Advome helps the user report the death, identify the correct estate route, prepare the Master’s Office pack, draft the covering letter, track stamped proof of lodgement, and move through the Liquidation and Distribution process step by step.
         </p>
@@ -314,6 +346,14 @@
           <a class="button primary" href="#reporting-pack">Start Estate</a>
           <a class="button" href="#forms">View Forms</a>
           <a class="button" href="#questions">Ask a Question</a>
+        </div>
+
+        <div class="quick-actions" aria-label="Quick links">
+          <a class="chip" href="#reporting-pack">Reporting pack</a>
+          <a class="chip" href="#forms">Forms</a>
+          <a class="chip" href="#bank">Estate bank</a>
+          <a class="chip" href="#ld">L&D account</a>
+          <a class="chip" href="#questions">Help</a>
         </div>
 
         <div class="disclaimer">
@@ -328,6 +368,11 @@
             <h2 style="margin-top:6px; font-size:1.45rem;">Reporting pack needed</h2>
           </div>
           <span class="pill warn">Attention</span>
+        </div>
+
+        <div class="meter">
+          <strong>Estate readiness</strong>
+          <div class="meter-bar"><div style="width:54%"></div></div>
         </div>
 
         <div class="status-grid">
@@ -518,7 +563,7 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="bank">
           <div class="section-head">
             <div>
               <h2>5. Administration and bank account</h2>
@@ -549,7 +594,7 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="ld">
           <div class="section-head">
             <div>
               <h2>6. Advertising, creditor claims, and L&amp;D account</h2>
@@ -588,10 +633,24 @@
           </div>
         </section>
 
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>7. Future permissions</h2>
+              <p>Leave this as a future enhancement rather than a blocker.</p>
+            </div>
+          </div>
+
+          <div class="callout blue">
+            <strong>Attorney access option</strong>
+            If a client selects an attorney, the attorney can later be given access only to the matters and workflow the client explicitly shares.
+          </div>
+        </section>
+
         <section class="section" id="questions">
           <div class="section-head">
             <div>
-              <h2>7. Questions panel</h2>
+              <h2>8. Questions panel</h2>
               <p>The user should be able to ask what to do next at reporting, lodgement, administration, or finalisation.</p>
             </div>
             <span class="pill green">Help panel</span>
@@ -628,3 +687,4 @@
   </div>
 </body>
 </html>
+
