@@ -22,7 +22,6 @@
       --radius: 24px;
       --max: 1240px;
     }
-
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -35,17 +34,14 @@
         linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       line-height: 1.5;
     }
-
     a { color: inherit; text-decoration: none; }
     .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
-
     .topbar {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
       padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
       backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
       position: sticky; top: 14px; z-index: 20;
     }
-
     .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
     .brand-mark {
       width: 44px; height: 44px; border-radius: 14px;
@@ -56,7 +52,6 @@
     }
     .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
     .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
-
     .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
     .nav a {
       padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
@@ -65,7 +60,6 @@
     .nav a:hover, .nav a.active {
       color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
     }
-
     .hero {
       margin-top: 28px;
       padding: 34px;
@@ -83,14 +77,12 @@
       background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
       pointer-events: none;
     }
-
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 7px 12px; border-radius: 999px; background: #eef4ff;
       color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
       border: 1px solid #d6e3ff;
     }
-
     h1 {
       margin: 16px 0 10px;
       font-size: clamp(2.2rem, 5vw, 4rem);
@@ -98,14 +90,7 @@
       letter-spacing: -0.05em;
       max-width: 16ch;
     }
-
-    .subtitle {
-      max-width: 860px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
-
+    .subtitle { max-width: 860px; margin: 0; color: var(--muted); font-size: 1.03rem; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
     .button {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -120,38 +105,18 @@
       color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
     }
     .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
-
     .disclaimer {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      color: var(--muted);
-      font-size: 0.93rem;
+      margin-top: 16px; padding: 14px 16px; border-radius: 16px; background: #fff;
+      border: 1px solid #e6eef8; color: var(--muted); font-size: 0.93rem;
     }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 16px;
-      margin-top: 22px;
-    }
-
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; margin-top: 22px; }
     .panel {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
+      background: var(--panel); border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px; padding: 20px; box-shadow: var(--shadow);
     }
-
     .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
     .panel p { color: var(--muted); margin: 0; }
-
-    .status-top {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
-    }
+    .status-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
     .status-label {
       font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
     }
@@ -163,55 +128,28 @@
     .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
     .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
     .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
-
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
+    .status-grid { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .mini { padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8; }
     .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
     .mini strong { font-size: 1rem; }
-
     .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+      margin-top: 22px; padding: 22px; background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95); border-radius: 24px; box-shadow: var(--shadow);
     }
-    .section-head {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
-    }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
     .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
     .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 18px;
-      margin-top: 18px;
-      align-items: start;
-    }
-
+    .layout { display: grid; grid-template-columns: 320px 1fr; gap: 18px; margin-top: 18px; align-items: start; }
     .sidebar {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-      position: sticky;
-      top: 96px;
+      background: var(--panel); border: 1px solid rgba(219,231,245,0.95); border-radius: 24px;
+      box-shadow: var(--shadow); padding: 18px; position: sticky; top: 96px;
     }
-
     .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
     .sidebar p { margin: 0 0 14px; color: var(--muted); }
-
     .timeline { display: grid; gap: 10px; }
     .step {
-      display: flex; justify-content: space-between; gap: 10px;
-      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
+      display: flex; justify-content: space-between; gap: 10px; padding: 12px 12px;
+      border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
     }
     .step .name { font-weight: 700; color: var(--text); }
     .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
@@ -219,81 +157,39 @@
     .step.active .status { color: var(--brand-2); font-weight: 700; }
     .step.done { background: #edfdf3; border-color: #caeed8; }
     .step.done .status { color: var(--good); font-weight: 700; }
-
     .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    .mini-card {
-      border: 1px solid #e6eef8;
-      border-radius: 18px;
-      padding: 14px;
-      background: #fff;
-    }
+    .mini-card { border: 1px solid #e6eef8; border-radius: 18px; padding: 14px; background: #fff; }
     .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
     .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
     .mini-card li { margin-bottom: 6px; }
-
     .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .tag {
-      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
-      font-size: 0.86rem; color: #374151; font-weight: 600;
-    }
-
-    .callout {
-      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
-    }
+    .tag { padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff; font-size: 0.86rem; color: #374151; font-weight: 600; }
+    .callout { padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff; }
     .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
     .callout.red { background: #fff1f1; border-color: #ffd6d6; }
     .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
     .callout.green { background: #edfdf3; border-color: #caeed8; }
     .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
-
     .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .field {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
-    }
+    .field { border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff; }
     .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
     .field .value { font-weight: 700; color: var(--text); }
-
-    .checklist {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .checklist { display: grid; gap: 10px; margin-top: 10px; }
     .check-item {
       display: flex; justify-content: space-between; gap: 12px; align-items: center;
       padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
     }
     .check-item strong { display: block; }
     .check-item span { color: var(--muted); font-size: 0.9rem; }
-
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-    }
+    .meter { margin-top: 14px; padding: 14px 16px; border-radius: 18px; background: white; border: 1px solid #e6eef8; }
     .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
     .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
-
     .faq { display: grid; gap: 10px; }
-    .faq-item {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
-    }
+    .faq-item { border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff; }
     .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
     .faq-item p { margin: 10px 0 0; color: var(--muted); }
-
-    .footer {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 1100px) {
-      .hero-grid, .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
-
+    .footer { margin-top: 18px; color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+    @media (max-width: 1100px) { .hero-grid, .layout { grid-template-columns: 1fr; } .sidebar { position: static; } }
     @media (max-width: 760px) {
       .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
       .wrap { padding: 22px 5% 50px; }
@@ -320,33 +216,31 @@
         <a href="index.html">Home</a>
         <a href="start.html">Start Matter</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="divorce.html">Divorce</a>
-        <a href="ccma.html">CCMA</a>
-        <a class="active" href="estates.html">Estates</a>
+        <a href="estates.html">Estates</a>
+        <a class="active" href="estates-reporting.html">Reporting</a>
+        <a href="estates-lodgement.html">Lodgement</a>
+        <a href="estates-appointment.html">Appointment</a>
+        <a href="estates-inventory.html">Inventory</a>
+        <a href="estates-bank.html">Bank Account</a>
+        <a href="estates-advertising.html">Advertising</a>
+        <a href="estates-ld-account.html">L&amp;D Account</a>
+        <a href="estates-distribution.html">Distribution</a>
         <a href="attorney.html">Attorney Portal</a>
       </nav>
     </header>
 
     <main class="hero">
       <div>
-        <div class="eyebrow">Deceased estates / estate administration</div>
-        <h1>Guide the family through reporting, executorship, and finalisation.</h1>
+        <div class="eyebrow">Reporting pack</div>
+        <h1>Report the death and gather the Master’s Office pack.</h1>
         <p class="subtitle">
-          Advome helps the user report the death, identify the correct estate route, prepare the Master’s Office pack, draft the covering letter, track stamped proof of lodgement, and move through the liquidation and distribution process step by step.
+          This page helps the family capture the basic estate details, confirm whether there is a will, identify the executor or next of kin, and prepare the documents needed before lodgement.
         </p>
 
         <div class="hero-actions">
-          <a class="button primary" href="#reporting-pack">Start Estate</a>
+          <a class="button primary" href="#pack">Build Pack</a>
           <a class="button" href="#forms">View Forms</a>
           <a class="button" href="#questions">Ask a Question</a>
-        </div>
-
-        <div class="quick-actions" aria-label="Quick links">
-          <a class="chip" href="#reporting-pack">Reporting pack</a>
-          <a class="chip" href="#forms">Forms</a>
-          <a class="chip" href="#bank">Estate bank</a>
-          <a class="chip" href="#ld">L&amp;D account</a>
-          <a class="chip" href="#questions">Help</a>
         </div>
 
         <div class="disclaimer">
@@ -357,15 +251,15 @@
       <aside class="panel">
         <div class="status-top">
           <div>
-            <div class="status-label">Estate health</div>
+            <div class="status-label">Reporting health</div>
             <h2 style="margin-top:6px; font-size:1.45rem;">Reporting pack needed</h2>
           </div>
           <span class="pill warn">Attention</span>
         </div>
 
         <div class="meter">
-          <strong>Estate readiness</strong>
-          <div class="meter-bar"><div style="width:54%"></div></div>
+          <strong>Reporting readiness</strong>
+          <div class="meter-bar"><div style="width:38%"></div></div>
         </div>
 
         <div class="status-grid">
@@ -375,14 +269,14 @@
           </div>
           <div class="mini">
             <span>Next step</span>
-            <strong>Draft covering letter</strong>
+            <strong>Covering letter</strong>
           </div>
           <div class="mini">
             <span>Documents</span>
             <strong>Partially complete</strong>
           </div>
           <div class="mini">
-            <span>Proof of application</span>
+            <span>Proof of lodgement</span>
             <strong>Stamped copy pending</strong>
           </div>
         </div>
@@ -390,37 +284,37 @@
     </main>
 
     <section class="layout">
-      <aside class="sidebar" id="flow">
-        <h2>Estate timeline</h2>
-        <p>The matter should move through reporting, appointment, administration, advertising, L&amp;D, inspection, and final distribution.</p>
+      <aside class="sidebar">
+        <h2>Estate reporting timeline</h2>
+        <p>The reporting stage comes first and leads into lodgement, appointment, and administration.</p>
 
         <div class="timeline">
           <div class="step active"><span class="name">Report death</span><span class="status">Current</span></div>
-          <div class="step"><span class="name">Reporting pack</span><span class="status">Collect documents</span></div>
-          <div class="step"><span class="name">Master’s application</span><span class="status">Lodge pack</span></div>
+          <div class="step"><span class="name">Reporting pack</span><span class="status">Build pack</span></div>
+          <div class="step"><span class="name">Master’s lodgement</span><span class="status">Next</span></div>
           <div class="step"><span class="name">Letter of executorship / authority</span><span class="status">Outcome</span></div>
-          <div class="step"><span class="name">Inventory & valuations</span><span class="status">Capture assets</span></div>
-          <div class="step"><span class="name">Advertising & creditors</span><span class="status">Section 29 notice</span></div>
-          <div class="step"><span class="name">Estate bank account</span><span class="status">Open / manage</span></div>
-          <div class="step"><span class="name">Liquidation & Distribution account</span><span class="status">Draft and lodge</span></div>
-          <div class="step"><span class="name">Inspection, objections, distribution</span><span class="status">Final route</span></div>
+          <div class="step"><span class="name">Inventory & valuations</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Advertising & creditors</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Estate bank account</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">L&amp;D account</span><span class="status">Later</span></div>
+          <div class="step"><span class="name">Distribution & closure</span><span class="status">Later</span></div>
         </div>
 
         <div style="height:14px"></div>
         <div class="callout blue">
           <strong>Next step panel</strong>
-          The page should tell the user what to submit to the Master, what still needs to be attached, and whether the estate is ready to be lodged.
+          The page should tell the user what documents the Master needs, what is still missing, and what must be lodged next.
         </div>
       </aside>
 
       <div>
-        <section class="section" id="reporting-pack">
+        <section class="section" id="pack">
           <div class="section-head">
             <div>
-              <h2>1. Report the death and prepare the reporting pack</h2>
-              <p>Start with the basic estate identity, then assemble the documents the Master will need to open the file.</p>
+              <h2>1. Build the reporting pack</h2>
+              <p>Start with the core family and estate details before moving to the reporting forms.</p>
             </div>
-            <span class="pill warn">Reporting stage</span>
+            <span class="pill blue">Pack builder</span>
           </div>
 
           <div class="grid-2">
@@ -429,14 +323,14 @@
               <ul>
                 <li>Is there a will?</li>
                 <li>Who is the nominated executor?</li>
-                <li>Has the death been reported already?</li>
-                <li>Is the estate large or small?</li>
+                <li>Has the death already been reported?</li>
                 <li>Are there minor heirs or dependants?</li>
+                <li>Is the estate large or small?</li>
               </ul>
             </div>
 
             <div class="mini-card">
-              <h3>Reporting pack</h3>
+              <h3>Reporting pack documents</h3>
               <ul>
                 <li>Death certificate</li>
                 <li>Death notice</li>
@@ -446,260 +340,78 @@
               </ul>
             </div>
           </div>
-
-          <div class="tag-row">
-            <span class="tag">Will / no will</span>
-            <span class="tag">Executor identified</span>
-            <span class="tag">Master’s Office ready</span>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>2. Covering letter and lodgement proof</h2>
-              <p>The user should be told exactly what the estate is being lodged for, what is attached, and how to keep proof of application.</p>
-            </div>
-            <span class="pill good">Proof step</span>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Covering letter should say</h3>
-              <ul>
-                <li>What is being applied for</li>
-                <li>Which documents are attached</li>
-                <li>Who the deceased is</li>
-                <li>Who the applicant is</li>
-                <li>Contact details and estate reference</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>Proof of application</h3>
-              <ul>
-                <li>Print two copies</li>
-                <li>Lodge one copy</li>
-                <li>Keep one stamped copy</li>
-                <li>Track office / queue / appointment</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style="height:14px"></div>
-          <div class="callout green">
-            <strong>Self-help tip</strong>
-            If the Master’s Office stamps a copy of the covering letter, that stamped copy becomes the user’s proof of application.
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>3. Route selector: letters of executorship or authority</h2>
-              <p>Branch the workflow according to whether the estate requires full executorship or a simpler authority route.</p>
-            </div>
-            <span class="pill blue">Branch point</span>
-          </div>
-
-          <div class="field-grid">
-            <div class="field"><div class="label">Will present</div><div class="value">Yes / No</div></div>
-            <div class="field"><div class="label">Executor route</div><div class="value">Letter of Executorship</div></div>
-            <div class="field"><div class="label">Small estate route</div><div class="value">Letter of Authority</div></div>
-            <div class="field"><div class="label">Master’s Office file</div><div class="value">Open / Pending</div></div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          <div class="callout blue">
-            <strong>Branch logic</strong>
-            Let the engine choose the correct route and then show the user the exact forms and documents that must be completed for that path.
-          </div>
         </section>
 
         <section class="section" id="forms">
           <div class="section-head">
             <div>
-              <h2>4. Forms and documents</h2>
-              <p>These are the items Advome should help the user fill in or explain how to complete.</p>
-            </div>
-            <span class="pill warn">Forms</span>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Core forms</h3>
-              <ul>
-                <li>Death notice / reporting forms</li>
-                <li>J192 Next-of-kin affidavit</li>
-                <li>J243 Inventory</li>
-                <li>Acceptance of trust as executor</li>
-                <li>Security or directions forms where required</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>Supporting documents</h3>
-              <ul>
-                <li>Death certificate</li>
-                <li>Will / codicils</li>
-                <li>ID copies</li>
-                <li>Marriage / divorce proof if relevant</li>
-                <li>Asset and liability details</li>
-              </ul>
+              <h2>2. Forms and supporting documents</h2>
+              <p>Show the forms the user must complete or allow the platform to help fill them in from the user’s answers.</p>
             </div>
           </div>
 
-          <div style="height:14px"></div>
-          <div class="callout orange">
-            <strong>Missing items</strong>
-            If any form or support document is missing, the dashboard should mark the estate as incomplete before the user lodges.
-          </div>
-        </section>
-
-        <section class="section" id="bank">
-          <div class="section-head">
-            <div>
-              <h2>5. Administration and bank account</h2>
-              <p>Once the letters are issued, the estate must be managed in a separate estate bank account and all assets and liabilities must be captured.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>What to do next</h3>
-              <ul>
-                <li>Open the estate bank account</li>
-                <li>Collect valuations</li>
-                <li>List all debts and creditors</li>
-                <li>Gather receipts and proof of payments</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>What the page should show</h3>
-              <ul>
-                <li>Bank account status</li>
-                <li>Assets captured</li>
-                <li>Liabilities captured</li>
-                <li>Executor action pending</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="ld">
-          <div class="section-head">
-            <div>
-              <h2>6. Advertising, creditor claims, and L&amp;D account</h2>
-              <p>The module should guide the user through advertisement, waiting periods, creditor claims, and the drafting of the Liquidation and Distribution account.</p>
-            </div>
-            <span class="pill danger">Important</span>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Sequence</h3>
-              <ul>
-                <li>Advertise for creditors</li>
-                <li>Wait for claims</li>
-                <li>Capture objections or queries</li>
-                <li>Draft the L&amp;D account</li>
-                <li>Lodge the L&amp;D with the Master</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>Inspection and objections</h3>
-              <ul>
-                <li>21-day inspection period</li>
-                <li>Track objections</li>
-                <li>Respond to Master queries</li>
-                <li>Update the file before distribution</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style="height:14px"></div>
-          <div class="callout red">
-            <strong>Drafting support</strong>
-            Advome should be able to explain what goes into the L&amp;D account and, later, fill in the data from the user’s answers.
+          <div class="field-grid">
+            <div class="field"><div class="label">Death notice / reporting forms</div><div class="value">Missing / pending</div></div>
+            <div class="field"><div class="label">J192 next-of-kin affidavit</div><div class="value">Missing / pending</div></div>
+            <div class="field"><div class="label">J243 inventory</div><div class="value">Missing / pending</div></div>
+            <div class="field"><div class="label">Acceptance of trust as executor</div><div class="value">Missing / pending</div></div>
+            <div class="field"><div class="label">Security / directions forms</div><div class="value">If required</div></div>
+            <div class="field"><div class="label">Master’s Office copy</div><div class="value">Pending lodgement</div></div>
           </div>
         </section>
 
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>7. Final distribution and closure</h2>
-              <p>After inspection and objection periods, the estate can move toward distribution and final closure.</p>
+              <h2>3. Who is reporting?</h2>
+              <p>Help the user identify the correct reporting path before they lodge.</p>
             </div>
           </div>
 
           <div class="grid-2">
             <div class="mini-card">
-              <h3>What remains</h3>
+              <h3>Will present</h3>
               <ul>
-                <li>Distribution according to will or law</li>
-                <li>Transfer of assets</li>
-                <li>Settlement of creditors</li>
-                <li>Final estate closure</li>
+                <li>Yes — start executorship route</li>
+                <li>No — check authority route</li>
               </ul>
             </div>
-
             <div class="mini-card">
               <h3>What the page should show</h3>
               <ul>
-                <li>Distribution ready</li>
-                <li>Outstanding objections</li>
-                <li>Master’s approval status</li>
-                <li>File closure status</li>
+                <li>Executor identified</li>
+                <li>Master’s Office ready</li>
+                <li>Missing forms</li>
+                <li>Required supporting documents</li>
               </ul>
             </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>8. Future permissions</h2>
-              <p>Leave this as a future enhancement rather than a blocker.</p>
-            </div>
-          </div>
-
-          <div class="callout blue">
-            <strong>Attorney access option</strong>
-            If a client selects an attorney, the attorney can later be given access only to the matters and workflow the client explicitly shares.
           </div>
         </section>
 
         <section class="section" id="questions">
           <div class="section-head">
             <div>
-              <h2>9. Questions panel</h2>
-              <p>The user should be able to ask what to do next at reporting, lodgement, administration, or finalisation.</p>
+              <h2>4. Questions panel</h2>
+              <p>The user should be able to ask what to do next at the reporting stage.</p>
             </div>
-            <span class="pill green">Help panel</span>
           </div>
 
           <div class="faq">
             <details class="faq-item">
-              <summary>What goes into the covering letter?</summary>
-              <p>Say what you are applying for, list the attachments, and keep a stamped copy for proof of lodgement.</p>
+              <summary>What documents go into the reporting pack?</summary>
+              <p>The reporting pack should include the death certificate, death notice, family details, IDs, and any will or codicils.</p>
             </details>
-
             <details class="faq-item">
-              <summary>What if the Master asks for more documents?</summary>
-              <p>The dashboard should mark the estate as incomplete and show exactly what still needs to be added.</p>
+              <summary>How do I know whether to use executorship or authority?</summary>
+              <p>The page should branch based on whether there is a will and the route the Master requires.</p>
             </details>
-
             <details class="faq-item">
-              <summary>How do I know if I need executorship or authority?</summary>
-              <p>The engine should branch the user based on the estate route, the will, and the size or complexity of the estate.</p>
+              <summary>What if the death has already been reported?</summary>
+              <p>Mark the reporting stage as partly complete and move to the lodge pack as soon as the remaining items are ready.</p>
             </details>
-
             <details class="faq-item">
-              <summary>What happens after the L&amp;D account is lodged?</summary>
-              <p>The system should track inspection, objections, distribution, and final closure of the estate file.</p>
+              <summary>What comes after reporting?</summary>
+              <p>The workflow should move to the covering letter and lodgement stage, then to the Master’s appointment outcome.</p>
             </details>
           </div>
         </section>
@@ -712,3 +424,4 @@
   </div>
 </body>
 </html>
+
