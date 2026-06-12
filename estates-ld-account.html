@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advome | L&amp;D Account Centre</title>
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: #f8fbff;
+      --text: #0f172a;
+      --muted: #5b6b84;
+      --line: #dbe7f5;
+      --brand: #1e5eff;
+      --brand-2: #0f3fbf;
+      --accent: #0ea5e9;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      position: sticky; top: 14px; z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: white; display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
+      flex: 0 0 auto;
+    }
+    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
+    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
+    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav a {
+      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
+      border: 1px solid transparent; transition: 0.2s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
+    }
+    .hero {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
+      border: 1px solid rgba(219,231,245,0.95);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -90px; top: -90px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
+      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
+      border: 1px solid #d6e3ff;
+    }
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 16ch;
+    }
+    .subtitle { max-width: 860px; margin: 0; color: var(--muted); font-size: 1.03rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
+      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-1px); background: #f7fbff; }
+    .button.primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
+    }
+    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
+    .disclaimer {
+      margin-top: 16px; padding: 14px 16px; border-radius: 16px; background: #fff;
+      border: 1px solid #e6eef8; color: var(--muted); font-size: 0.93rem;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; margin-top: 22px; }
+    .panel {
+      background: var(--panel); border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px; padding: 20px; box-shadow: var(--shadow);
+    }
+    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
+    .panel p { color: var(--muted); margin: 0; }
+    .status-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
+    .status-grid { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .mini { padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8; }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
+    .section {
+      margin-top: 22px; padding: 22px; background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95); border-radius: 24px; box-shadow: var(--shadow);
+    }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
+    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+    .layout { display: grid; grid-template-columns: 320px 1fr; gap: 18px; margin-top: 18px; align-items: start; }
+    .sidebar {
+      background: var(--panel); border: 1px solid rgba(219,231,245,0.95); border-radius: 24px;
+      box-shadow: var(--shadow); padding: 18px; position: sticky; top: 96px;
+    }
+    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
+    .sidebar p { margin: 0 0 14px; color: var(--muted); }
+    .timeline { display: grid; gap: 10px; }
+    .step {
+      display: flex; justify-content: space-between; gap: 10px; padding: 12px 12px;
+      border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
+    }
+    .step .name { font-weight: 700; color: var(--text); }
+    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
+    .step.active { border-color: #cfe0ff; background: #eef4ff; }
+    .step.active .status { color: var(--brand-2); font-weight: 700; }
+    .step.done { background: #edfdf3; border-color: #caeed8; }
+    .step.done .status { color: var(--good); font-weight: 700; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .mini-card { border: 1px solid #e6eef8; border-radius: 18px; padding: 14px; background: #fff; }
+    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
+    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .mini-card li { margin-bottom: 6px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag { padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff; font-size: 0.86rem; color: #374151; font-weight: 600; }
+    .callout { padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff; }
+    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
+    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
+    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
+    .callout.green { background: #edfdf3; border-color: #caeed8; }
+    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .field { border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff; }
+    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
+    .field .value { font-weight: 700; color: var(--text); }
+    .checklist { display: grid; gap: 10px; margin-top: 10px; }
+    .check-item {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+      padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
+    }
+    .check-item strong { display: block; }
+    .check-item span { color: var(--muted); font-size: 0.9rem; }
+    .meter { margin-top: 14px; padding: 14px 16px; border-radius: 18px; background: white; border: 1px solid #e6eef8; }
+    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
+    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
+    .faq { display: grid; gap: 10px; }
+    .faq-item { border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff; }
+    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
+    .faq-item p { margin: 10px 0 0; color: var(--muted); }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+    @media (max-width: 1100px) { .hero-grid, .layout { grid-template-columns: 1fr; } .sidebar { position: static; } }
+    @media (max-width: 760px) {
+      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
+      .wrap { padding: 22px 5% 50px; }
+      .hero { padding: 20px; }
+      .panel, .section { padding: 18px; }
+      .topbar { border-radius: 22px; position: static; }
+      .nav { justify-content: flex-start; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Advome</strong>
+          <span>South African legal workflow intelligence</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="start.html">Start Matter</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="estates.html">Estates</a>
+        <a href="estates-reporting.html">Reporting</a>
+        <a href="estates-lodgement.html">Lodgement</a>
+        <a href="estates-appointment.html">Appointment</a>
+        <a href="estates-inventory.html">Inventory</a>
+        <a href="estates-bank.html">Bank Account</a>
+        <a class="active" href="estates-advertising.html">Advertising</a>
+        <a href="attorney.html">Attorney Portal</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div>
+        <div class="eyebrow">L&amp;D account</div>
+        <h1>Draft, lodge, inspect, and finalise the Liquidation and Distribution account.</h1>
+        <p class="subtitle">
+          This page guides the user from claims and objections into the Liquidation and Distribution account, the inspection period, Master queries, and the final distribution stage.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#draft">Draft L&amp;D</a>
+          <a class="button" href="#inspection">Inspection</a>
+          <a class="button" href="#questions">Ask a Question</a>
+        </div>
+
+        <div class="disclaimer">
+          This module provides procedural assistance and legal information for estate administration. It does not provide legal advice.
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="status-top">
+          <div>
+            <div class="status-label">L&amp;D health</div>
+            <h2 style="margin-top:6px; font-size:1.45rem;">Draft in progress</h2>
+          </div>
+          <span class="pill warn">Attention</span>
+        </div>
+
+        <div class="meter">
+          <strong>L&amp;D readiness</strong>
+          <div class="meter-bar"><div style="width:56%"></div></div>
+        </div>
+
+        <div class="status-grid">
+          <div class="mini">
+            <span>Current stage</span>
+            <strong>Liquidation & distribution</strong>
+          </div>
+          <div class="mini">
+            <span>Next step</span>
+            <strong>Inspection period</strong>
+          </div>
+          <div class="mini">
+            <span>Draft</span>
+            <strong>Being prepared</strong>
+          </div>
+          <div class="mini">
+            <span>Master queries</span>
+            <strong>None / pending</strong>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <h2>Estate administration timeline</h2>
+        <p>The L&amp;D account comes after advertising and creditor claims, and before distribution.</p>
+
+        <div class="timeline">
+          <div class="step done"><span class="name">Report death</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Reporting pack</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Lodgement</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Appointment letter</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Inventory & valuations</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Estate bank account</span><span class="status">Done</span></div>
+          <div class="step done"><span class="name">Advertising & creditors</span><span class="status">Done / running</span></div>
+          <div class="step active"><span class="name">L&amp;D account</span><span class="status">Current</span></div>
+          <div class="step"><span class="name">Distribution & closure</span><span class="status">Next</span></div>
+        </div>
+
+        <div style="height:14px"></div>
+        <div class="callout blue">
+          <strong>Next step panel</strong>
+          The page should tell the user what goes into the L&amp;D account, when to lodge it, and how the inspection and objection period works.
+        </div>
+      </aside>
+
+      <div>
+        <section class="section" id="draft">
+          <div class="section-head">
+            <div>
+              <h2>1. Draft the Liquidation and Distribution account</h2>
+              <p>Use the estate inventory, claims, liabilities, and beneficiaries to build the draft account.</p>
+            </div>
+            <span class="pill blue">Drafting</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>What the L&amp;D should contain</h3>
+              <ul>
+                <li>Assets and values</li>
+                <li>Debts and liabilities</li>
+                <li>Creditor claims</li>
+                <li>Beneficiary entitlements</li>
+                <li>Proposed distribution</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Draft status checks</h3>
+              <ul>
+                <li>Assets confirmed</li>
+                <li>Claims recorded</li>
+                <li>Objections reviewed</li>
+                <li>Distribution calculations prepared</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="inspection">
+          <div class="section-head">
+            <div>
+              <h2>2. Lodge and inspect</h2>
+              <p>The account should be lodged with the Master and then opened for inspection and objections.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field"><div class="label">L&amp;D lodged</div><div class="value">No / yes</div></div>
+            <div class="field"><div class="label">Inspection period</div><div class="value">21 days</div></div>
+            <div class="field"><div class="label">Objections</div><div class="value">None / pending</div></div>
+            <div class="field"><div class="label">Master queries</div><div class="value">None / pending</div></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>3. Respond to issues</h2>
+              <p>Keep the file open until any objection or Master query is resolved.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Common issues</h3>
+              <ul>
+                <li>Incorrect beneficiary share</li>
+                <li>Missing valuation</li>
+                <li>Unresolved claim</li>
+                <li>Document mismatch</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What the user should do</h3>
+              <ul>
+                <li>Correct the account</li>
+                <li>Resubmit if required</li>
+                <li>Track the inspection period</li>
+                <li>Prepare for approval</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>4. Distribution readiness</h2>
+              <p>Once the inspection period ends with no unresolved issues, the estate can move to distribution and closure.</p>
+            </div>
+            <span class="pill warn">Pending approval</span>
+          </div>
+
+          <div class="callout orange">
+            <strong>Distribution readiness</strong>
+            The L&amp;D account is not yet final. The user still needs to complete the inspection stage and resolve any remaining objections or queries.
+          </div>
+        </section>
+
+        <section class="section" id="questions">
+          <div class="section-head">
+            <div>
+              <h2>5. Questions panel</h2>
+              <p>The user should be able to ask practical L&amp;D account questions directly from this page.</p>
+            </div>
+          </div>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>What goes into the L&amp;D account?</summary>
+              <p>It should set out estate assets, liabilities, claims, and how the estate will be distributed.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What happens during inspection?</summary>
+              <p>The account is available for inspection so interested parties can object if they need to.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What if the Master asks for changes?</summary>
+              <p>Keep the account open, correct the issue, and resubmit as needed until approval is possible.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What happens after approval?</summary>
+              <p>The workflow should move into final distribution and closure of the estate.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="footer">
+          This module is built to support procedural assistance and legal information for estate administration. It does not provide legal advice.
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
