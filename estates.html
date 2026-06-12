@@ -131,6 +131,16 @@
       font-size: 0.93rem;
     }
 
+    .quick-actions {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
+    }
+    .quick-actions .chip {
+      display: inline-flex; align-items: center; justify-content: center; padding: 9px 12px;
+      border-radius: 999px; border: 1px solid #d7e4f8; background: #fff; color: var(--brand-2);
+      font-size: 0.86rem; font-weight: 700;
+    }
+    .quick-actions .chip:hover { background: #f7fbff; }
+
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -162,6 +172,7 @@
     .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
     .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
     .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
 
     .status-grid {
       margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
@@ -288,16 +299,6 @@
       line-height: 1.6;
     }
 
-    .quick-actions {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
-    }
-    .quick-actions .chip {
-      display: inline-flex; align-items: center; justify-content: center; padding: 9px 12px;
-      border-radius: 999px; border: 1px solid #d7e4f8; background: #fff; color: var(--brand-2);
-      font-size: 0.86rem; font-weight: 700;
-    }
-    .quick-actions .chip:hover { background: #f7fbff; }
-
     @media (max-width: 1100px) {
       .hero-grid, .layout { grid-template-columns: 1fr; }
       .sidebar { position: static; }
@@ -329,6 +330,8 @@
         <a href="index.html">Home</a>
         <a href="start.html">Start Matter</a>
         <a href="dashboard.html">Dashboard</a>
+        <a href="divorce.html">Divorce</a>
+        <a href="ccma.html">CCMA</a>
         <a class="active" href="estates.html">Estates</a>
         <a href="attorney.html">Attorney Portal</a>
       </nav>
@@ -339,7 +342,7 @@
         <div class="eyebrow">Deceased estates / estate administration</div>
         <h1>Guide the family through reporting, executorship, and finalisation.</h1>
         <p class="subtitle">
-          Advome helps the user report the death, identify the correct estate route, prepare the Master’s Office pack, draft the covering letter, track stamped proof of lodgement, and move through the Liquidation and Distribution process step by step.
+          Advome helps the user report the death, identify the correct estate route, prepare the Master’s Office pack, draft the covering letter, track stamped proof of lodgement, and move through the liquidation and distribution process step by step.
         </p>
 
         <div class="hero-actions">
@@ -352,7 +355,7 @@
           <a class="chip" href="#reporting-pack">Reporting pack</a>
           <a class="chip" href="#forms">Forms</a>
           <a class="chip" href="#bank">Estate bank</a>
-          <a class="chip" href="#ld">L&D account</a>
+          <a class="chip" href="#ld">L&amp;D account</a>
           <a class="chip" href="#questions">Help</a>
         </div>
 
@@ -402,12 +405,13 @@
         <p>The matter should move through reporting, appointment, administration, advertising, L&amp;D, inspection, and final distribution.</p>
 
         <div class="timeline">
-          <div class="step done"><span class="name">Report death</span><span class="status">Completed / pending</span></div>
-          <div class="step active"><span class="name">Reporting pack</span><span class="status">Current</span></div>
-          <div class="step"><span class="name">Letter of executorship / authority</span><span class="status">Master’s outcome</span></div>
-          <div class="step"><span class="name">Inventory & valuations</span><span class="status">Estate assets</span></div>
+          <div class="step active"><span class="name">Report death</span><span class="status">Current</span></div>
+          <div class="step"><span class="name">Reporting pack</span><span class="status">Collect documents</span></div>
+          <div class="step"><span class="name">Master’s application</span><span class="status">Lodge pack</span></div>
+          <div class="step"><span class="name">Letter of executorship / authority</span><span class="status">Outcome</span></div>
+          <div class="step"><span class="name">Inventory & valuations</span><span class="status">Capture assets</span></div>
           <div class="step"><span class="name">Advertising & creditors</span><span class="status">Section 29 notice</span></div>
-          <div class="step"><span class="name">Estate bank account</span><span class="status">Late estate account</span></div>
+          <div class="step"><span class="name">Estate bank account</span><span class="status">Open / manage</span></div>
           <div class="step"><span class="name">Liquidation & Distribution account</span><span class="status">Draft and lodge</span></div>
           <div class="step"><span class="name">Inspection, objections, distribution</span><span class="status">Final route</span></div>
         </div>
@@ -426,7 +430,7 @@
               <h2>1. Report the death and prepare the reporting pack</h2>
               <p>Start with the basic estate identity, then assemble the documents the Master will need to open the file.</p>
             </div>
-            <span class="pill orange">Reporting stage</span>
+            <span class="pill warn">Reporting stage</span>
           </div>
 
           <div class="grid-2">
@@ -600,7 +604,7 @@
               <h2>6. Advertising, creditor claims, and L&amp;D account</h2>
               <p>The module should guide the user through advertisement, waiting periods, creditor claims, and the drafting of the Liquidation and Distribution account.</p>
             </div>
-            <span class="pill red">Important</span>
+            <span class="pill danger">Important</span>
           </div>
 
           <div class="grid-2">
@@ -636,7 +640,38 @@
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>7. Future permissions</h2>
+              <h2>7. Final distribution and closure</h2>
+              <p>After inspection and objection periods, the estate can move toward distribution and final closure.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>What remains</h3>
+              <ul>
+                <li>Distribution according to will or law</li>
+                <li>Transfer of assets</li>
+                <li>Settlement of creditors</li>
+                <li>Final estate closure</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>What the page should show</h3>
+              <ul>
+                <li>Distribution ready</li>
+                <li>Outstanding objections</li>
+                <li>Master’s approval status</li>
+                <li>File closure status</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>8. Future permissions</h2>
               <p>Leave this as a future enhancement rather than a blocker.</p>
             </div>
           </div>
@@ -650,7 +685,7 @@
         <section class="section" id="questions">
           <div class="section-head">
             <div>
-              <h2>8. Questions panel</h2>
+              <h2>9. Questions panel</h2>
               <p>The user should be able to ask what to do next at reporting, lodgement, administration, or finalisation.</p>
             </div>
             <span class="pill green">Help panel</span>
