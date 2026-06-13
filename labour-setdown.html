@@ -6,8 +6,8 @@
   <title>Advome | Labour Set-down Centre</title>
   <style>
     :root {
-      --bg: #f5f9ff;
-      --panel: #ffffff;
+      --bg: #f4f8ff;
+      --panel: rgba(255,255,255,0.92);
       --panel-2: #f8fbff;
       --text: #0f172a;
       --muted: #5b6b84;
@@ -18,40 +18,46 @@
       --good: #0f9d58;
       --warn: #d97706;
       --danger: #dc2626;
+      --success: #ecfdf5;
+      --warning: #fff8e7;
       --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 22px;
+      --radius: 24px;
       --max: 1240px;
     }
+
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
       background:
         radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
         radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, #f4f8fd 100%);
-      color: var(--text);
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       line-height: 1.5;
     }
+
     a { color: inherit; text-decoration: none; }
     .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
+
     .topbar {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.9); background: rgba(255,255,255,0.85);
+      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
       backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
       position: sticky; top: 14px; z-index: 20;
     }
+
     .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
     .brand-mark {
-      width: 42px; height: 42px; border-radius: 14px;
+      width: 44px; height: 44px; border-radius: 14px;
       background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
       color: white; display: grid; place-items: center; font-weight: 800;
       box-shadow: 0 12px 24px rgba(30,94,255,0.24);
       flex: 0 0 auto;
     }
-    .brand-text { min-width: 0; }
     .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
     .brand-text span { display: block; font-size: 0.84rem; color: var(--muted); }
+
     .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
     .nav a {
       padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
@@ -60,17 +66,20 @@
     .nav a:hover, .nav a.active {
       color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
     }
+
     .hero {
       margin-top: 28px;
       display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
       align-items: stretch;
     }
+
     .card {
       background: rgba(255,255,255,0.92);
       border: 1px solid rgba(219,231,245,0.95);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
+
     .hero-main { padding: 34px; position: relative; overflow: hidden; }
     .hero-main::after {
       content: "";
@@ -78,16 +87,21 @@
       background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
       pointer-events: none;
     }
+
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
-      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 600;
+      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
       border: 1px solid #d6e3ff;
     }
+
     .hero h1 {
       margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
     }
+
     .hero p { margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 64ch; }
+
     .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+
     .btn {
       border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
       display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
@@ -101,8 +115,9 @@
       background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
     }
     .btn-secondary:hover { background: #f7fbff; }
+
     .status-card { padding: 22px; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
-    .status-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .status-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
     .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
     .status-label {
       font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
@@ -122,11 +137,13 @@
     }
     .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
     .mini strong { font-size: 1rem; }
+
     .section { margin-top: 22px; padding: 24px; }
     .section-header {
       display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
     }
     .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
+
     .timeline {
       display: grid;
       grid-template-columns: repeat(6, minmax(160px, 1fr));
@@ -154,11 +171,14 @@
     .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
     .step strong { display: block; margin-bottom: 4px; }
     .step span { color: var(--muted); font-size: 0.88rem; }
+
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+
     .panel { padding: 22px; }
     .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
     .panel p { margin: 0; color: var(--muted); }
+
     .feature-list {
       margin: 16px 0 0;
       padding: 0;
@@ -177,6 +197,7 @@
     }
     .feature-list strong { display: block; margin-bottom: 2px; }
     .feature-list span { color: var(--muted); font-size: 0.92rem; }
+
     .question-box { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
     .q-list { display: grid; gap: 10px; margin-top: 16px; }
     .q-item {
@@ -185,6 +206,7 @@
     }
     .q-item span { color: var(--muted); font-size: 0.92rem; }
     .q-item strong { display: block; }
+
     .meter {
       margin-top: 14px;
       padding: 14px 16px;
@@ -199,6 +221,7 @@
       height: 100%; width: 88%; border-radius: inherit;
       background: linear-gradient(90deg, var(--brand), var(--accent));
     }
+
     .footer-note {
       margin: 22px 0 30px;
       padding: 18px 20px;
@@ -209,6 +232,7 @@
       text-align: center;
     }
     .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
+
     .callout {
       padding: 16px 18px;
       border-radius: 18px;
@@ -218,6 +242,7 @@
       margin-top: 16px;
       font-weight: 600;
     }
+
     @media (max-width: 1024px) {
       .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
       .topbar { border-radius: 22px; position: static; }
@@ -424,7 +449,9 @@
     </section>
 
     <div class="footer-note">
-      This platform provides procedural assistance only and does not provide legal advice.
+      Advome provides self-representation assistance, procedural guidance, workflow management and access to legal information through structured templates and stage-based workflows. It does not provide legal advice. Users remain responsible for complying with applicable legislation, rules, directives and obtaining professional advice where necessary.<br><br>
+      "Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing before a court or, where appropriate, another independent and impartial tribunal or forum."<br>
+      — Section 34, Constitution of the Republic of South Africa, 1996.
     </div>
   </div>
 </body>
