@@ -1,648 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Dashboard</title>
-  <style>
-    :root {
-      --bg: #f4f8ff;
-      --panel: rgba(255,255,255,0.92);
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --success: #ecfdf5;
-      --warning: #fff7e7;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      line-height: 1.5;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
-
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
-      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky; top: 14px; z-index: 20;
-    }
-
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: white; display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
-    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
-
-    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .nav a {
-      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
-      border: 1px solid transparent; transition: 0.2s ease;
-    }
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
-    }
-
-    .hero {
-      margin-top: 28px;
-      padding: 34px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
-      border: 1px solid rgba(219,231,245,0.95);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: "";
-      position: absolute; right: -90px; top: -90px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
-      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
-      border: 1px solid #d6e3ff;
-    }
-
-    h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 12ch;
-    }
-
-    .subtitle {
-      max-width: 840px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
-      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-      white-space: nowrap;
-    }
-    .button:hover { transform: translateY(-1px); background: #f7fbff; }
-    .button.primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
-
-    .disclaimer {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
-    .panel p { color: var(--muted); margin: 0; }
-
-    .status-top {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
-    }
-    .status-label {
-      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
-    .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
-
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
-    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
-    .mini strong { font-size: 1rem; }
-
-    .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-    .section-head {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
-    }
-    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
-    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-      min-height: 238px;
-      display: flex;
-      flex-direction: column;
-    }
-    .card-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
-    .icon {
-      width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center;
-      background: #eef4ff; color: var(--brand-2); font-weight: 800; flex: 0 0 auto;
-    }
-    .card h2 { margin: 0; font-size: 1.15rem; letter-spacing: -0.03em; }
-    .card p { margin: 0; color: var(--muted); }
-    .card .button { margin-top: auto; width: fit-content; }
-
-    .pill-row {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
-    }
-    .pill-tag {
-      padding: 7px 10px; border-radius: 999px; background: #fff; border: 1px solid #e6eef8;
-      color: #374151; font-size: 0.86rem; font-weight: 600;
-    }
-    .pill-tag.red { background: #fff1f1; border-color: #ffd4d4; color: #a61b1b; }
-    .pill-tag.orange { background: #fff7e8; border-color: #ffe1a8; color: #9a5800; }
-    .pill-tag.green { background: #edfdf3; border-color: #caeed8; color: #146b37; }
-    .pill-tag.blue { background: #eef4ff; border-color: #d7e4f8; color: var(--brand-2); }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .box {
-      border: 1px solid #e6eef8;
-      border-radius: 20px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    .box h3 { margin: 0 0 10px; color: var(--brand-2); font-size: 1.04rem; }
-    .box p { margin: 0; color: var(--muted); }
-
-    .matter-list { display: grid; gap: 12px; }
-    .matter-item {
-      display: flex; justify-content: space-between; gap: 16px; align-items: center;
-      padding: 14px 16px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
-    }
-    .matter-item strong { display: block; margin-bottom: 2px; }
-    .matter-item span { display: block; color: var(--muted); font-size: 0.92rem; }
-
-    .status {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .status.red { background: rgba(220,38,38,0.10); color: var(--danger); }
-    .status.orange { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .status.green { background: rgba(15,157,88,0.10); color: var(--good); }
-    .status.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
-
-    .progress-wrap { display: grid; gap: 14px; }
-    .progress-item {
-      padding: 14px 16px;
-      border-radius: 18px;
-      border: 1px solid #e6eef8;
-      background: #fff;
-    }
-    .progress-item header {
-      display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px;
-      font-weight: 700;
-    }
-    .meter {
-      height: 12px; background: #eaf1fb; border-radius: 999px; overflow: hidden;
-    }
-    .meter > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
-
-    .activity {
-      display: grid; gap: 10px;
-      margin: 0; padding-left: 18px;
-      color: var(--text);
-    }
-    .activity li { margin: 0; }
-
-    .taskbar {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .task {
-      border: 1px solid #e6eef8;
-      border-radius: 18px;
-      padding: 14px;
-      background: #fff;
-    }
-    .task strong { display: block; margin-bottom: 4px; }
-    .task span { color: var(--muted); font-size: 0.92rem; }
-
-    .footer {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      padding-bottom: 10px;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 980px) {
-      .grid, .split, .hero-grid, .taskbar { grid-template-columns: 1fr; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      h1 { max-width: none; }
-    }
-
-    @media (max-width: 640px) {
-      .wrap { padding: 16px; }
-      .hero { padding: 20px; }
-      .card, .section { padding: 18px; }
-      .hero-actions { flex-direction: column; }
-      .button { width: 100%; }
-      .matter-item { flex-direction: column; align-items: flex-start; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Dashboard</title>
+<link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>Case command centre</span>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a class="active" href="dashboard.html">Dashboard</a>
-        <a href="index.html">Home</a>
-        <a href="start.html">Matter Portal</a>
-        <a href="documents.html">Documents</a>
-        <a href="ccma.html">CCMA</a>
-        <a href="estates-hub.html">Estates</a>
-        <a href="divorce.html">Divorce</a>
-        <a href="attorney.html">Attorney Portal</a>
-      </nav>
-    </header>
 
-    <main class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Command centre</div>
-          <h1>Case Dashboard</h1>
-          <p class="subtitle">
-            Monitor active matters, current stage, next step, missing documents, deadlines, and hearing readiness in one view.
-          </p>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Self-representation assistance</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="start.html" class="nav-link">Start</a>
+    <a href="dashboard.html" class="nav-link active">Dashboard</a>
+    <a href="ccma.html" class="nav-link">CCMA</a>
+    <a href="divorce.html" class="nav-link">Divorce</a>
+    <a href="estates-hub.html" class="nav-link">Estates</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
 
-          <div class="hero-actions">
-            <a class="button primary" href="start.html">Open Matter Portal</a>
-            <a class="button" href="ccma.html">Go to CCMA</a>
-            <a class="button" href="estates-hub.html">Go to Estates</a>
-            <a class="button" href="divorce.html">Go to Divorce</a>
-            <a class="button" href="attorney.html">Attorney Portal</a>
-          </div>
+<div class="container">
 
-          <div class="disclaimer">
-            Advome provides procedural assistance and legal information. It does not provide legal advice.
-          </div>
-        </div>
+  <div class="page-header">
+    <h1>Case Dashboard</h1>
+    <p>Monitor all active matters, deadlines, document status, and next steps in one view.</p>
+  </div>
 
-        <aside class="panel">
-          <div class="status-top">
-            <div>
-              <div class="status-label">Portfolio health</div>
-              <h2 style="margin-top:6px; font-size:1.45rem;">Mixed attention</h2>
-            </div>
-            <span class="pill warn">Needs focus</span>
-          </div>
-
-          <div class="status-grid">
-            <div class="mini">
-              <span>Active matters</span>
-              <strong>4</strong>
-            </div>
-            <div class="mini">
-              <span>Urgent items</span>
-              <strong>3</strong>
-            </div>
-            <div class="mini">
-              <span>Ready matters</span>
-              <strong>1</strong>
-            </div>
-            <div class="mini">
-              <span>Fee / access</span>
-              <strong>Free tier</strong>
-            </div>
-          </div>
-
-          <div class="meter" style="margin-top:14px;">
-            <strong>Platform readiness</strong>
-            <div class="meter"><div style="width:72%"></div></div>
-          </div>
-        </aside>
-      </div>
-
-      <div class="taskbar" aria-label="Task bar">
-        <div class="task">
-          <strong>1. Review matters</strong>
-          <span>Open the most urgent file first.</span>
-        </div>
-        <div class="task">
-          <strong>2. Check documents</strong>
-          <span>Confirm what is missing or unreadable.</span>
-        </div>
-        <div class="task">
-          <strong>3. Confirm next step</strong>
-          <span>Use the dashboard to move the file forward.</span>
-        </div>
-        <div class="task">
-          <strong>4. Ask a question</strong>
-          <span>Use the built-in help panel for guidance.</span>
-        </div>
-      </div>
-    </main>
-
-    <section class="grid" aria-label="Top matters">
-      <article class="card">
-        <div class="card-head">
-          <div class="icon">D</div>
-          <div>
-            <h2>Divorce Matter</h2>
-            <p>Current stage: Plea / Counterclaim. Next step: prepare response and settlement position.</p>
-          </div>
-        </div>
-        <div class="pill-row">
-          <span class="pill-tag red">Critical</span>
-          <span class="pill-tag blue">Plea due</span>
-          <span class="pill-tag">Children involved</span>
-        </div>
-        <a class="button primary" href="divorce.html">Open Divorce</a>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <div class="icon">C</div>
-          <div>
-            <h2>CCMA Matter</h2>
-            <p>Current stage: Award / review decision. Next step: decide whether to challenge the award.</p>
-          </div>
-        </div>
-        <div class="pill-row">
-          <span class="pill-tag orange">Attention</span>
-          <span class="pill-tag blue">Review clock</span>
-          <span class="pill-tag">Record pending</span>
-        </div>
-        <a class="button primary" href="award.html">Open CCMA Award</a>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <div class="icon">E</div>
-          <div>
-            <h2>Estates Matter</h2>
-            <p>Current stage: Reporting pack. Next step: draft covering letter and lodge at the Master.</p>
-          </div>
-        </div>
-        <div class="pill-row">
-          <span class="pill-tag orange">Attention</span>
-          <span class="pill-tag blue">Master’s Office</span>
-          <span class="pill-tag">Stamped copy pending</span>
-        </div>
-        <a class="button primary" href="estates-hub.html">Open Estates</a>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <div class="icon">A</div>
-          <div>
-            <h2>Attorney Portal</h2>
-            <p>Visibility, practice area, response time, and attorney listing tools for the future marketplace.</p>
-          </div>
-        </div>
-        <div class="pill-row">
-          <span class="pill-tag green">Healthy</span>
-          <span class="pill-tag">Profile</span>
-          <span class="pill-tag">Promotion tier</span>
-        </div>
-        <a class="button" href="attorney.html">Open Attorney Portal</a>
-      </article>
-    </section>
-
-    <section class="split">
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <h2>Case health</h2>
-            <p>Show the state of each matter so the user knows what needs attention first.</p>
-          </div>
-        </div>
-
-        <div class="progress-wrap">
-          <div class="progress-item">
-            <header>
-              <span>Divorce</span>
-              <span class="status red">Critical</span>
-            </header>
-            <div class="meter"><div style="width:60%"></div></div>
-            <p style="margin-top:10px; color:var(--muted);">Response and settlement work still required.</p>
-          </div>
-
-          <div class="progress-item">
-            <header>
-              <span>CCMA / Labour</span>
-              <span class="status orange">Attention</span>
-            </header>
-            <div class="meter"><div style="width:80%"></div></div>
-            <p style="margin-top:10px; color:var(--muted);">Review decision and record preparation are active.</p>
-          </div>
-
-          <div class="progress-item">
-            <header>
-              <span>Estates</span>
-              <span class="status orange">Attention</span>
-            </header>
-            <div class="meter"><div style="width:35%"></div></div>
-            <p style="margin-top:10px; color:var(--muted);">Reporting pack and covering letter are the next focus.</p>
-          </div>
-
-          <div class="progress-item">
-            <header>
-              <span>Attorney Portal</span>
-              <span class="status green">Healthy</span>
-            </header>
-            <div class="meter"><div style="width:100%"></div></div>
-            <p style="margin-top:10px; color:var(--muted);">Ready for future listing and visibility work.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <h2>Next steps</h2>
-            <p>The dashboard should guide the user to the next visible action, not leave them guessing.</p>
-          </div>
-        </div>
-
-        <div class="matter-list">
-          <div class="matter-item">
-            <div>
-              <strong>Divorce matter</strong>
-              <span>Prepare response to counterclaim and check settlement options.</span>
-            </div>
-            <a class="status blue" href="divorce.html">Continue</a>
-          </div>
-          <div class="matter-item">
-            <div>
-              <strong>CCMA matter</strong>
-              <span>Review award, then open review if the user wants to challenge it.</span>
-            </div>
-            <a class="status blue" href="award.html">Continue</a>
-          </div>
-          <div class="matter-item">
-            <div>
-              <strong>Estates matter</strong>
-              <span>Draft covering letter, attach the reporting pack, and lodge at the Master.</span>
-            </div>
-            <a class="status blue" href="estates-hub.html">Continue</a>
-          </div>
-          <div class="matter-item">
-            <div>
-              <strong>Documents centre</strong>
-              <span>Upload or review pending papers for active matters.</span>
-            </div>
-            <a class="status blue" href="documents.html">Open</a>
-          </div>
-        </div>
-      </section>
-    </section>
-
-    <section class="split" style="margin-top:18px;">
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <h2>Deadlines and urgency</h2>
-            <p>Keep a short queue of deadlines visible so the most urgent matter comes first.</p>
-          </div>
-        </div>
-        <div class="progress-wrap">
-          <div class="progress-item">
-            <header><span>Reply to counterclaim</span><span class="status red">3 days</span></header>
-            <p style="margin:0; color:var(--muted);">Divorce matter needs immediate action.</p>
-          </div>
-          <div class="progress-item">
-            <header><span>CCMA award review decision</span><span class="status orange">Active</span></header>
-            <p style="margin:0; color:var(--muted);">Use the award page to choose accept or challenge.</p>
-          </div>
-          <div class="progress-item">
-            <header><span>Estate reporting pack</span><span class="status orange">Active</span></header>
-            <p style="margin:0; color:var(--muted);">The covering letter and stamped copy are the next steps.</p>
-          </div>
-          <div class="progress-item">
-            <header><span>Labour record work</span><span class="status blue">In progress</span></header>
-            <p style="margin:0; color:var(--muted);">Record, heads, set-down and finalisation are linked.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <h2>Recent activity</h2>
-            <p>Recent changes and completed items in the workspace.</p>
-          </div>
-        </div>
-        <ul class="activity">
-          <li>Today — Estates module added to the front door.</li>
-          <li>Today — CCMA award flow connected to review chain.</li>
-          <li>Yesterday — Start page upgraded to surface active matters.</li>
-          <li>2 days ago — Divorce settlement section updated.</li>
-          <li>3 days ago — Documents centre and children module reviewed.</li>
-        </ul>
-      </section>
-    </section>
-
-    <section class="section" style="margin-top:18px;">
-      <div class="section-head">
-        <div>
-          <h2>Question box</h2>
-          <p>Future AI support should answer practical next-step questions from the dashboard itself.</p>
-        </div>
-      </div>
-
-      <div class="box" style="background:#eef4ff; border-color:#d7e4f8;">
-        <strong>Example question</strong>
-        <p>How do I know if my CCMA award should be challenged?</p>
-        <hr style="border:none;border-top:1px solid #dbe7f5;margin:14px 0;" />
-        <p>Check the award page. If the decision is not acceptable, open the review flow. The dashboard should then show the matter as a review track with record, heads, and set-down steps.</p>
-      </div>
-    </section>
-
-    <div class="footer">
-      Advome provides self-representation assistance, procedural guidance, workflow management and access to legal information through structured templates and stage-based workflows. It does not provide legal advice. Users remain responsible for complying with applicable legislation, rules, directives and obtaining professional advice where necessary.<br><br>
-      "Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing before a court or, where appropriate, another independent and impartial tribunal or forum."<br>
-      — Section 34, Constitution of the Republic of South Africa, 1996.
+  <!-- Subscription Banner -->
+  <div class="sub-banner">
+    <div class="sub-banner-text">
+      <strong>Free Plan</strong> — You are on the limited free tier. Upgrade for unlimited matters and template generation.
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="sub-banner-price">R30/month</span>
+      <a href="pricing.html" class="btn btn-sm" style="background:white;color:var(--primary);">Upgrade</a>
     </div>
   </div>
+
+  <!-- Stats Row -->
+  <div class="grid-4">
+    <div class="card text-center" style="margin-bottom:0;">
+      <div style="font-size:32px;font-weight:700;color:var(--primary);">3</div>
+      <div style="font-size:13px;color:var(--text-muted);">Active Matters</div>
+    </div>
+    <div class="card text-center" style="margin-bottom:0;">
+      <div style="font-size:32px;font-weight:700;color:var(--danger);">2</div>
+      <div style="font-size:13px;color:var(--text-muted);">Urgent Deadlines</div>
+    </div>
+    <div class="card text-center" style="margin-bottom:0;">
+      <div style="font-size:32px;font-weight:700;color:var(--warning);">5</div>
+      <div style="font-size:13px;color:var(--text-muted);">Missing Documents</div>
+    </div>
+    <div class="card text-center" style="margin-bottom:0;">
+      <div style="font-size:32px;font-weight:700;color:var(--secondary);">68%</div>
+      <div style="font-size:13px;color:var(--text-muted);">Average Readiness</div>
+    </div>
+  </div>
+
+  <!-- Active Matters -->
+  <div class="card" style="margin-top:24px;">
+    <div class="card-title">
+      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📊</span>
+      Active Matters
+    </div>
+
+    <!-- Divorce Matter -->
+    <div class="matter-item">
+      <div class="matter-info">
+        <div class="matter-title">Divorce — Mmoledi v Mmoledi</div>
+        <div class="matter-meta">Current stage: Plea / Counterclaim • Next: Prepare response and settlement position</div>
+      </div>
+      <div class="matter-status">
+        <span class="pill pill-red">Critical</span>
+        <span class="pill pill-amber">Plea due</span>
+        <span class="pill pill-blue">Children involved</span>
+        <a href="divorce.html" class="btn btn-sm btn-primary">Open</a>
+      </div>
+    </div>
+
+    <!-- CCMA Matter -->
+    <div class="matter-item">
+      <div class="matter-info">
+        <div class="matter-title">CCMA Review — Unfair Dismissal Award Challenge</div>
+        <div class="matter-meta">Current stage: Review Decision • Next: File motion and founding affidavit</div>
+      </div>
+      <div class="matter-status">
+        <span class="pill pill-amber">Attention</span>
+        <span class="pill pill-red">Review clock</span>
+        <span class="pill pill-neutral">Record pending</span>
+        <a href="ccma-review.html" class="btn btn-sm btn-primary">Open</a>
+      </div>
+    </div>
+
+    <!-- Estates Matter -->
+    <div class="matter-item">
+      <div class="matter-info">
+        <div class="matter-title">Estate — Deceased Estate of K. Mmoledi</div>
+        <div class="matter-meta">Current stage: Reporting pack • Next: Draft covering letter and lodge at Master</div>
+      </div>
+      <div class="matter-status">
+        <span class="pill pill-amber">Attention</span>
+        <span class="pill pill-neutral">Master's Office</span>
+        <span class="pill pill-neutral">Stamped copy pending</span>
+        <a href="estates-hub.html" class="btn btn-sm btn-primary">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deadlines & Urgency -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#fde8e8;color:#c01c28;">⏰</span>
+        Upcoming Deadlines
+      </div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text"><strong>Reply to counterclaim</strong> — 3 days remaining<br><span style="font-size:12px;color:var(--text-muted);">Divorce matter needs immediate action</span></div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text"><strong>CCMA award review decision</strong> — Active<br><span style="font-size:12px;color:var(--text-muted);">Use award page to choose accept or challenge</span></div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text"><strong>Estate reporting pack</strong> — Active<br><span style="font-size:12px;color:var(--text-muted);">Covering letter and stamped copy are next steps</span></div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text"><strong>Labour record work</strong> — In progress<br><span style="font-size:12px;color:var(--text-muted);">Record, heads, set-down and finalisation linked</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
+        Document Checklist
+      </div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-box checked"></div>
+          <div class="checklist-text done">Divorce summons uploaded</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">CCMA award copy pending</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Estate death certificate pending</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box checked"></div>
+          <div class="checklist-text done">CCMA referral form uploaded</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Founding affidavit draft pending</div>
+        </div>
+      </div>
+      <div class="mt-2">
+        <a href="documents.html" class="btn btn-secondary btn-sm">Open Document Centre</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Health Summary -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#e6f4ea;color:var(--secondary);">💚</span>
+      Case Health Summary
+    </div>
+    <div class="grid-3">
+      <div style="text-align:center;padding:16px;">
+        <div style="font-size:24px;font-weight:700;color:var(--danger);margin-bottom:4px;">Critical</div>
+        <div style="font-size:13px;color:var(--text-muted);">Divorce — Response and settlement work still required</div>
+      </div>
+      <div style="text-align:center;padding:16px;">
+        <div style="font-size:24px;font-weight:700;color:var(--warning);margin-bottom:4px;">Attention</div>
+        <div style="font-size:13px;color:var(--text-muted);">CCMA — Review decision and record preparation are active</div>
+      </div>
+      <div style="text-align:center;padding:16px;">
+        <div style="font-size:24px;font-weight:700;color:var(--warning);margin-bottom:4px;">Attention</div>
+        <div style="font-size:13px;color:var(--text-muted);">Estates — Reporting pack and covering letter are next focus</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fee Summary -->
+  <div class="fee-meter">
+    <div class="fee-meter-header">
+      <div class="fee-meter-title">
+        <span>💰</span> Total Estimated Matter Costs
+      </div>
+      <div class="fee-total">R 7,500</div>
+    </div>
+    <div class="fee-breakdown">
+      <div class="fee-item paid">
+        <div class="fee-item-label">Divorce (to date)</div>
+        <div class="fee-item-value">R 2,000</div>
+      </div>
+      <div class="fee-item estimated">
+        <div class="fee-item-label">CCMA Review (est.)</div>
+        <div class="fee-item-value">R 4,500</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Estates (pending)</div>
+        <div class="fee-item-value">R 1,000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attorney Connection -->
+  <div class="client-connect">
+    <div class="client-connect-header">
+      <span style="font-size:24px;">👔</span>
+      <div class="client-connect-title">Connect with an Attorney</div>
+    </div>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:12px;">
+      Need professional help? Connect your matter to a registered attorney. They can access your workflow, documents, and progress — but only for matters you explicitly share.
+    </p>
+    <div style="display:flex;gap:12px;">
+      <a href="attorney.html" class="btn btn-primary">Find an Attorney</a>
+      <button class="btn btn-secondary" onclick="alert('Share feature: select which matters and documents to share with your attorney')">Share Matter</button>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📜</span>
+      Recent Activity
+    </div>
+    <div class="checklist">
+      <div class="checklist-item">
+        <div class="checklist-text"><strong>Today</strong> — Estates module added to dashboard<br><span style="font-size:12px;color:var(--text-muted);">New estate matter created and linked</span></div>
+      </div>
+      <div class="checklist-item">
+        <div class="checklist-text"><strong>Today</strong> — CCMA award flow connected to review chain<br><span style="font-size:12px;color:var(--text-muted);">Review decision page activated</span></div>
+      </div>
+      <div class="checklist-item">
+        <div class="checklist-text"><strong>Yesterday</strong> — Start page upgraded with document detection<br><span style="font-size:12px;color:var(--text-muted);">Auto-detect matter type from upload</span></div>
+      </div>
+      <div class="checklist-item">
+        <div class="checklist-text"><strong>2 days ago</strong> — Divorce settlement section updated<br><span style="font-size:12px;color:var(--text-muted);">Family Advocate tracking improved</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div class="questions-panel">
+    <h3>Dashboard Questions</h3>
+    <div class="question-item">
+      <div class="question-q">How do I know if my CCMA award should be challenged?</div>
+      <div class="question-a">Check the award page. If the decision is not acceptable, open the review flow. The dashboard will then show the matter as a review track.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">What does the readiness score mean?</div>
+      <div class="question-a">It measures document completeness, deadline proximity, and stage progression. Critical = immediate action needed. Attention = monitor closely. Healthy = on track.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Can I share my dashboard with an attorney?</div>
+      <div class="question-a">Yes. Use the Attorney Connection feature. You choose which matters and documents to share. The attorney sees only what you permit.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    Advome provides procedural assistance and legal information. It does not provide legal advice. Users remain responsible for checking the rules and directives of the relevant court, tribunal, or commission.
+    <div class="access-message">
+      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information.
+    </div>
+  </div>
+
+</div>
+
 </body>
 </html>
