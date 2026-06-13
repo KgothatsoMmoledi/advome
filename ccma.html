@@ -18,14 +18,17 @@
       --good: #0f9d58;
       --warn: #d97706;
       --danger: #dc2626;
+      --success: #ecfdf5;
+      --warning: #fff7e7;
       --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
       --radius: 24px;
-      --max: 1180px;
+      --max: 1240px;
     }
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
@@ -96,17 +99,20 @@
       font-size: clamp(2.2rem, 5vw, 4rem);
       line-height: 1.02;
       letter-spacing: -0.05em;
-      max-width: 12ch;
+      max-width: 14ch;
     }
 
     .subtitle {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0;
       color: var(--muted);
       font-size: 1.03rem;
     }
 
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px;
+    }
+
     .button {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
@@ -162,6 +168,7 @@
     .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
     .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
     .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
 
     .status-grid {
       margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
@@ -221,8 +228,6 @@
     .step.active .status { color: var(--brand-2); font-weight: 700; }
     .step.done { background: #edfdf3; border-color: #caeed8; }
     .step.done .status { color: var(--good); font-weight: 700; }
-    .step.blocked { background: #fff1f1; border-color: #ffd6d6; }
-    .step.blocked .status { color: var(--danger); font-weight: 700; }
 
     .grid-2 {
       display: grid;
@@ -310,58 +315,67 @@
         <a href="dashboard.html">Dashboard</a>
         <a class="active" href="ccma.html">CCMA</a>
         <a href="award.html">Award</a>
+        <a href="ccma-review.html">CCMA Review</a>
         <a href="review.html">Review</a>
+        <a href="record.html">Record</a>
+        <a href="heads.html">Heads</a>
+        <a href="motion.html">Motion</a>
+        <a href="labour-setdown.html">Labour Set-Down</a>
+        <a href="labour-finalisation.html">Labour Finalisation</a>
         <a href="attorney.html">Attorney Portal</a>
       </nav>
     </header>
 
     <main class="hero">
-      <div>
-        <div class="eyebrow">CCMA navigator</div>
-        <h1>Track the labour dispute from referral to award.</h1>
-        <p class="subtitle">
-          Advome helps the user understand the current CCMA stage, the next step, the missing documents, and whether the matter is heading toward settlement, arbitration, or review.
-        </p>
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">CCMA navigator</div>
+          <h1>Track the labour dispute from referral to award, review, and final court outcome.</h1>
+          <p class="subtitle">
+            Advome helps the user understand the current CCMA stage, the next step, the missing documents, and whether the matter is heading toward settlement, arbitration, award, review, record, heads, motion, set-down, or labour finalisation.
+          </p>
 
-        <div class="hero-actions">
-          <a class="button primary" href="#referral">Open Referral</a>
-          <a class="button" href="award.html">Receive Arbitration Award</a>
-          <a class="button" href="#questions">Ask a Question</a>
+          <div class="hero-actions">
+            <a class="button primary" href="#referral">Open Referral</a>
+            <a class="button" href="award.html">Open Award Centre</a>
+            <a class="button" href="ccma-review.html">Open Review Branch</a>
+            <a class="button" href="#questions">Ask a Question</a>
+          </div>
+
+          <div class="disclaimer">
+            This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice.
+          </div>
         </div>
 
-        <div class="disclaimer">
-          This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice.
-        </div>
+        <aside class="panel">
+          <div class="status-top">
+            <div>
+              <div class="status-label">Case health</div>
+              <h2 style="margin-top:6px; font-size:1.45rem;">Attention required</h2>
+            </div>
+            <span class="pill warn">Active</span>
+          </div>
+
+          <div class="status-grid">
+            <div class="mini">
+              <span>Current stage</span>
+              <strong>Referral / conciliation</strong>
+            </div>
+            <div class="mini">
+              <span>Next step</span>
+              <strong>Arbitration / award</strong>
+            </div>
+            <div class="mini">
+              <span>Documents</span>
+              <strong>Pending</strong>
+            </div>
+            <div class="mini">
+              <span>Hearing ready</span>
+              <strong>No</strong>
+            </div>
+          </div>
+        </aside>
       </div>
-
-      <aside class="panel">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Case health</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Attention required</h2>
-          </div>
-          <span class="pill orange">Active</span>
-        </div>
-
-        <div class="status-grid">
-          <div class="mini">
-            <span>Current stage</span>
-            <strong>Referral</strong>
-          </div>
-          <div class="mini">
-            <span>Next step</span>
-            <strong>Conciliation</strong>
-          </div>
-          <div class="mini">
-            <span>Documents</span>
-            <strong>Pending</strong>
-          </div>
-          <div class="mini">
-            <span>Hearing ready</span>
-            <strong>No</strong>
-          </div>
-        </div>
-      </aside>
     </main>
 
     <section class="layout">
@@ -372,19 +386,21 @@
         <div class="timeline">
           <div class="step done"><span class="name">Referral</span><span class="status">Completed</span></div>
           <div class="step active"><span class="name">Conciliation</span><span class="status">Current</span></div>
-          <div class="step"><span class="name">Outcome of conciliation</span><span class="status">Branch point</span></div>
           <div class="step"><span class="name">Arbitration</span><span class="status">If unresolved</span></div>
           <div class="step"><span class="name">Award</span><span class="status">Decision delivered</span></div>
-          <div class="step"><span class="name">Review</span><span class="status">If challenged</span></div>
-          <div class="step"><span class="name">Motion</span><span class="status">Section 145</span></div>
-          <div class="step"><span class="name">Record / heads / set-down</span><span class="status">Court path</span></div>
+          <div class="step"><span class="name">CCMA review</span><span class="status">If challenged</span></div>
+          <div class="step"><span class="name">Record</span><span class="status">Court bundle</span></div>
+          <div class="step"><span class="name">Heads</span><span class="status">Arguments</span></div>
+          <div class="step"><span class="name">Motion</span><span class="status">Labour Court process</span></div>
+          <div class="step"><span class="name">Labour set-down</span><span class="status">Enrolment</span></div>
+          <div class="step"><span class="name">Labour finalisation</span><span class="status">Closure</span></div>
         </div>
 
         <div style="height:14px"></div>
 
         <div class="callout blue">
           <strong>Next step panel</strong>
-          The page should tell the user what to submit, where to go, and whether the matter is ready for the next CCMA stage.
+          The page should tell the user what to submit, where to go, and whether the matter is ready for the next CCMA or Labour Court stage.
         </div>
       </aside>
 
@@ -432,7 +448,7 @@
           <div class="section-head">
             <div>
               <h2>2. Conciliation branch</h2>
-              <p>The conciliation stage tests whether the dispute can settle before arbitration or later review steps.</p>
+              <p>The conciliation stage tests whether the dispute can settle before arbitration, award, or later review steps.</p>
             </div>
             <span class="pill orange">Settlement possible</span>
           </div>
@@ -523,10 +539,51 @@
           </div>
         </section>
 
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>5. Labour Court pathway</h2>
+              <p>The award can move into review, record, heads, motion, set-down, and finalisation.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h3>Review chain</h3>
+              <ul>
+                <li>CCMA review</li>
+                <li>Record</li>
+                <li>Heads</li>
+                <li>Motion</li>
+                <li>Labour set-down</li>
+                <li>Labour finalisation</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Path buttons</h3>
+              <ul>
+                <li><a href="ccma-review.html">Open CCMA review</a></li>
+                <li><a href="review.html">Open review</a></li>
+                <li><a href="record.html">Open record</a></li>
+                <li><a href="heads.html">Open heads</a></li>
+                <li><a href="motion.html">Open motion</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="callout orange">
+            <strong>Important</strong>
+            CCMA does not end at arbitration. The award can lead to review and then the Labour Court branch.
+          </div>
+        </section>
+
         <section class="section" id="questions">
           <div class="section-head">
             <div>
-              <h2>5. Questions panel</h2>
+              <h2>6. Questions panel</h2>
               <p>The user should be able to ask what to do next at conciliation, arbitration, or after the award.</p>
             </div>
             <span class="pill green">Help panel</span>
@@ -540,7 +597,7 @@
 
             <details class="faq-item">
               <summary>What if the matter does not settle?</summary>
-              <p>The workflow should move the file into arbitration and then the award stage, where the review option becomes available.</p>
+              <p>The workflow should move the file into arbitration, then award, then review if the award is challenged.</p>
             </details>
 
             <details class="faq-item">
@@ -551,7 +608,7 @@
         </section>
 
         <div class="footer">
-          This module is built to support procedural assistance and legal information for labour disputes. It is not legal advice.
+          This module is built to support procedural assistance and legal information for labour disputes. It does not provide legal advice.
         </div>
       </div>
     </section>
