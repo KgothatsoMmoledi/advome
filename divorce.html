@@ -1,681 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Divorce Navigator</title>
-  <style>
-    :root {
-      --bg: #f4f8ff;
-      --panel: rgba(255,255,255,0.92);
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      line-height: 1.5;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
-
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
-      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky; top: 14px; z-index: 20;
-    }
-
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: white; display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
-    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
-
-    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .nav a {
-      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
-      border: 1px solid transparent; transition: 0.2s ease;
-    }
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
-    }
-
-    .hero {
-      margin-top: 28px;
-      padding: 34px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
-      border: 1px solid rgba(219,231,245,0.95);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: "";
-      position: absolute; right: -90px; top: -90px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
-      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
-      border: 1px solid #d6e3ff;
-    }
-
-    h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 16ch;
-    }
-
-    .subtitle {
-      max-width: 860px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
-
-    $1
-
-    .quick-actions {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
-    }
-    .quick-actions .chip {
-      display: inline-flex; align-items: center; justify-content: center; padding: 9px 12px;
-      border-radius: 999px; border: 1px solid #d7e4f8; background: #fff; color: var(--brand-2);
-      font-size: 0.86rem; font-weight: 700;
-    }
-    .quick-actions .chip:hover { background: #f7fbff; }
-
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
-      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-      white-space: nowrap;
-    }
-    .button:hover { transform: translateY(-1px); background: #f7fbff; }
-    .button.primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
-
-    .disclaimer {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
-    .panel p { color: var(--muted); margin: 0; }
-
-    .status-top {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
-    }
-    .status-label {
-      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
-
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
-    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
-    .mini strong { font-size: 1rem; }
-
-    .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-    .section-head {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
-    }
-    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
-    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 18px;
-      margin-top: 18px;
-      align-items: start;
-    }
-
-    .sidebar {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-      position: sticky;
-      top: 96px;
-    }
-
-    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
-    .sidebar p { margin: 0 0 14px; color: var(--muted); }
-
-    .timeline { display: grid; gap: 10px; }
-    .step {
-      display: flex; justify-content: space-between; gap: 10px;
-      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
-    }
-    .step .name { font-weight: 700; color: var(--text); }
-    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
-    .step.active { border-color: #cfe0ff; background: #eef4ff; }
-    .step.active .status { color: var(--brand-2); font-weight: 700; }
-    .step.done { background: #edfdf3; border-color: #caeed8; }
-    .step.done .status { color: var(--good); font-weight: 700; }
-
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    .mini-card {
-      border: 1px solid #e6eef8;
-      border-radius: 18px;
-      padding: 14px;
-      background: #fff;
-    }
-    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
-    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
-    .mini-card li { margin-bottom: 6px; }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .tag {
-      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
-      font-size: 0.86rem; color: #374151; font-weight: 600;
-    }
-
-    .callout {
-      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
-    }
-    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
-    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
-    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
-    .callout.green { background: #edfdf3; border-color: #caeed8; }
-    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
-
-    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .field {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
-    }
-    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
-    .field .value { font-weight: 700; color: var(--text); }
-
-    .checklist {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .check-item {
-      display: flex; justify-content: space-between; gap: 12px; align-items: center;
-      padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
-    }
-    .check-item strong { display: block; }
-    .check-item span { color: var(--muted); font-size: 0.9rem; }
-
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-    }
-    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
-    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
-
-    .faq { display: grid; gap: 10px; }
-    .faq-item {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
-    }
-    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
-    .faq-item p { margin: 10px 0 0; color: var(--muted); }
-
-    .footer {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 1100px) {
-      .hero-grid, .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
-
-    @media (max-width: 760px) {
-      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
-      .wrap { padding: 22px 5% 50px; }
-      .hero { padding: 20px; }
-      .panel, .section { padding: 18px; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      .hero-actions { flex-direction: column; }
-      .button { width: 100%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Divorce Navigator</title>
+<link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>South African legal workflow intelligence</span>
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Self-representation assistance</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="start.html" class="nav-link">Start</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="ccma.html" class="nav-link">CCMA</a>
+    <a href="divorce.html" class="nav-link active">Divorce</a>
+    <a href="estates-hub.html" class="nav-link">Estates</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Divorce Navigator</h1>
+    <p>Track divorce procedure from summons to finalisation. Includes defended and undefended branch logic, settlement, children, discovery, and trial.</p>
+  </div>
+
+  <!-- Compliance Banner -->
+  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
+    <div class="card-title">
+      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
+      Procedural Guidance Only — Not Legal Advice
+    </div>
+    <p style="font-size:14px;color:#713f12;">
+      Advome guides you through the divorce process step by step. We do not advise on whether you should divorce, what settlement to accept, or what custody arrangement is best. 
+      <strong>Those are legal and personal decisions. Consult an attorney or the Family Advocate if you need advice on your specific situation.</strong>
+    </p>
+  </div>
+
+  <!-- Divorce Timeline -->
+  <div class="timeline">
+    <div class="timeline-step completed"><span class="num">1</span>Summons</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">2</span>Pleadings</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">3</span>Settlement</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">4</span>Children</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">5</span>Discovery</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">6</span>Pre-Trial</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">8</span>Trial</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">9</span>Judgment</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">10</span>Finalisation</div>
+  </div>
+
+  <!-- Health Meter -->
+  <div class="meter-container">
+    <div class="meter-header">
+      <span class="meter-label">Divorce Readiness</span>
+      <span class="meter-value" style="color:var(--warning);">55%</span>
+    </div>
+    <div class="meter-bar-bg">
+      <div class="meter-bar-fill medium" style="width:55%"></div>
+    </div>
+    <div class="meter-status attention">
+      <span>⚠️</span> Pleadings complete — settlement/children phase active
+    </div>
+  </div>
+
+  <!-- Defended / Undefended Branch -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#fef3cd;color:#856404;">⚖️</span>
+      Matter Status: Defended or Undefended?
+    </div>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">
+      The divorce path changes significantly depending on whether the other party defends the action. 
+      Advome tracks this based on document detection or your manual selection.
+    </p>
+    <div class="grid-2">
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Undefended Divorce</div>
+        <p style="font-size:13px;color:var(--text-muted);">The other party does not oppose the divorce. Faster, simpler path. Settlement agreement and parenting plan can be filed together.</p>
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-box checked"></div>
+            <div class="checklist-text done">Summons served</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box checked"></div>
+            <div class="checklist-text done">No plea filed within 10 days</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Settlement agreement drafted</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Parenting plan (if children)</div>
+          </div>
         </div>
+        <div class="mt-2"><span class="pill pill-green">Undefended path</span></div>
       </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="start.html">Start Matter</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="documents.html">Documents</a>
-        <a href="estates.html">Estates</a>
-        <a class="active" href="divorce.html">Divorce</a>
-        <a href="discovery.html">Discovery</a>
-        <a href="pretrial.html">Pre-trial</a>
-        <a href="setdown.html">Set-down</a>
-        <a href="trialprep.html">Trial Prep</a>
-        <a href="trialday.html">Trial Day</a>
-        <a href="judgment.html">Judgment</a>
-        <a href="finalisation.html">Finalisation</a>
-        <a href="attorney.html">Attorney Portal</a>
-      </nav>
-    </header>
-
-    <main class="hero">
-      <div>
-        <div class="eyebrow">Divorce navigator</div>
-        <h1>Track the divorce journey from summons to finalisation.</h1>
-        <p class="subtitle">
-          Settlement stays open at every stage, children-related issues are highlighted when relevant, and the system always shows the next permissible step.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button primary" href="#flow">View Case Flow</a>
-          <a class="button" href="#settlement">Open Settlement</a>
-          <a class="button" href="#questions">Ask a Question</a>
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Defended Divorce</div>
+        <p style="font-size:13px;color:var(--text-muted);">The other party opposes the divorce or disputes terms. Full litigation path: pleadings, discovery, pre-trial, trial.</p>
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-box checked"></div>
+            <div class="checklist-text done">Summons served</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box checked"></div>
+            <div class="checklist-text done">Plea filed</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Counterclaim (if any)</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Discovery and inspection</div>
+          </div>
         </div>
-
-        $1
-
-        <div class="quick-actions" aria-label="Quick links">
-          <a class="chip" href="#summons">Summons</a>
-          <a class="chip" href="#settlement">Settlement</a>
-          <a class="chip" href="#children">Children</a>
-          <a class="chip" href="#discovery">Discovery</a>
-          <a class="chip" href="#pretrial">Pre-trial</a>
-          <a class="chip" href="#finalisation">Finalisation</a>
-        </div>
+        <div class="mt-2"><span class="pill pill-red">Defended path</span></div>
       </div>
+    </div>
+  </div>
 
-      <aside class="panel">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Case health</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Critical</h2>
-          </div>
-          <span class="pill danger">Deadline risk</span>
-        </div>
-
-        <div class="meter">
-          <strong>Case health meter</strong>
-          <div class="meter-bar"><div style="width:72%"></div></div>
-        </div>
-
-        <div class="status-grid">
-          <div class="mini">
-            <span>Current stage</span>
-            <strong>Summons</strong>
-          </div>
-          <div class="mini">
-            <span>Next step</span>
-            <strong>Response / defence</strong>
-          </div>
-          <div class="mini">
-            <span>Settlement</span>
-            <strong>Open</strong>
-          </div>
-          <div class="mini">
-            <span>Family Advocate</span>
-            <strong>Pending</strong>
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <section class="layout">
-      <aside class="sidebar" id="flow">
-        <h2>Case timeline</h2>
-        <p>Each stage can be opened from the dashboard. The active stage is highlighted here.</p>
-
-        <div class="timeline">
-          <div class="step active"><span class="name">Summons</span><span class="status">Current</span></div>
-          <div class="step"><span class="name">Response</span><span class="status">Next</span></div>
-          <div class="step"><span class="name">Settlement</span><span class="status">Always available</span></div>
-          <div class="step"><span class="name">Children / Family Advocate</span><span class="status">If minors exist</span></div>
-          <div class="step"><span class="name">Discovery</span><span class="status">Next branch</span></div>
-          <div class="step"><span class="name">Pre-trial</span><span class="status">Later stage</span></div>
-          <div class="step"><span class="name">Set-down</span><span class="status">Later stage</span></div>
-          <div class="step"><span class="name">Trial prep</span><span class="status">Later stage</span></div>
-          <div class="step"><span class="name">Trial day</span><span class="status">Hearing</span></div>
-          <div class="step"><span class="name">Judgment</span><span class="status">Outcome</span></div>
-          <div class="step"><span class="name">Finalisation</span><span class="status">Close-out</span></div>
-        </div>
-
-        <div style="height:14px"></div>
-
-        $1
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="button primary" href="finalisation.html">Finalisation</a>
-            <a class="button" href="index.html">Home</a>
-          </div>
-      </aside>
-
-      <div>
-        <section class="section" id="summons">
-          <h2>1. Summons and response</h2>
-          <p>
-            This is the entry point for a defended or undefended divorce matter. The system identifies the document, confirms the parties, and then moves to the response branch.
-          </p>
-
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Documents recognized</h3>
-              <ul>
-                <li>Summons</li>
-                <li>Particulars of claim</li>
-                <li>Plea</li>
-                <li>Counterclaim</li>
-                <li>Reply</li>
-              </ul>
-            </div>
-
-            <div class="mini">
-              <h3>Response outcomes</h3>
-              <ul>
-                <li>Plea filed</li>
-                <li>Counterclaim filed</li>
-                <li>Reply required</li>
-                <li>No response yet</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="tag-row">
-            <span class="tag">Summons opened</span>
-            <span class="tag">Response tracking</span>
-            <span class="tag">Deadline monitor</span>
-          </div>
-        </section>
-
-        <section class="section" id="settlement">
-          <h2>2. Settlement centre</h2>
-          <p>
-            Settlement can happen at any stage. This section stays open all the time and collects the core issues that usually decide whether the case can move to an unopposed track.
-          </p>
-
-          <div class="field-grid">
-            <div class="field"><div class="label">Matrimonial property system</div><div class="value">In community / out of community / accrual</div></div>
-            <div class="field"><div class="label">Assets</div><div class="value">Property, vehicles, savings, investments</div></div>
-            <div class="field"><div class="label">Pensions</div><div class="value">Included / not included</div></div>
-            <div class="field"><div class="label">Maintenance</div><div class="value">Spousal and child maintenance</div></div>
-            <div class="field"><div class="label">Minor children</div><div class="value">Yes / No</div></div>
-            <div class="field"><div class="label">Family Advocate approval</div><div class="value">Pending / Approved</div></div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          $1
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="button primary" href="documents.html">Open Documents</a>
-            <a class="button" href="discovery.html">Go to Discovery</a>
-          </div>
-        </section>
-
-        <section class="section" id="children">
-          <h2>3. Children / Family Advocate</h2>
-          <p>
-            This branch opens when minor children are involved. It tracks care, contact, guardianship, maintenance, and whether Family Advocate input is needed before finalisation.
-          </p>
-
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Children issues to capture</h3>
-              <ul>
-                <li>Care / residence</li>
-                <li>Contact / access</li>
-                <li>Guardianship</li>
-                <li>School costs</li>
-                <li>Medical aid</li>
-                <li>Maintenance</li>
-              </ul>
-            </div>
-
-            <div class="mini">
-              <h3>Family Advocate status</h3>
-              <ul>
-                <li>Required: yes / no</li>
-                <li>Submission sent</li>
-                <li>Interview completed</li>
-                <li>Recommendation received</li>
-                <li>Approval marked complete</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          $1
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="button primary" href="pretrial.html">Open Pre-trial</a>
-            <a class="button" href="setdown.html">Go to Set-down</a>
-          </div>
-        </section>
-
-        <section class="section" id="discovery">
-          <h2>4. Discovery and compliance</h2>
-          <p>
-            This branch tracks what has been exchanged, what is still missing, and whether any compliance steps need to be forced or updated.
-          </p>
-
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Discovery items</h3>
-              <ul>
-                <li>Document request list</li>
-                <li>Documents received</li>
-                <li>Missing records</li>
-                <li>Affidavits outstanding</li>
-                <li>Compel required</li>
-              </ul>
-            </div>
-
-            <div class="mini">
-              <h3>Compliance warnings</h3>
-              <ul>
-                <li>Late response</li>
-                <li>Missing filing confirmation</li>
-                <li>Unstamped copy</li>
-                <li>Deadline close</li>
-                <li>Bundle incomplete</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          $1
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="button primary" href="trialprep.html">Open Trial Prep</a>
-            <a class="button" href="dashboard.html">Back to Dashboard</a>
-          </div>
-        </section>
-
-        <section class="section" id="pretrial">
-          <h2>5. Pre-trial and set-down readiness</h2>
-          <p>
-            Once pleadings and discovery are in order, the system switches to pre-trial, set-down, indexing, and hearing preparation.
-          </p>
-
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Pre-trial outputs</h3>
-              <ul>
-                <li>Chronology</li>
-                <li>Issues in dispute</li>
-                <li>Settlement summary</li>
-                <li>Witness list</li>
-                <li>Missing document checklist</li>
-              </ul>
-            </div>
-
-            <div class="mini">
-              <h3>Set-down outputs</h3>
-              <ul>
-                <li>Notice of set-down</li>
-                <li>Index and pagination</li>
-                <li>Hearing bundle</li>
-                <li>Trial notes</li>
-                <li>Readiness score</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          $1
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="button primary" href="trialday.html">Trial Day</a>
-            <a class="button" href="judgment.html">Judgment</a>
-          </div>
-        </section>
-
-        <section class="section" id="finalisation">
-          <h2>6. Finalisation</h2>
-          <p>
-            This section closes the case when it is settled, ready for an unopposed hearing, or ready for defended finalisation.
-          </p>
-
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Possible outcomes</h3>
-              <ul>
-                <li>Settled</li>
-                <li>Unopposed path</li>
-                <li>Defended hearing-ready</li>
-                <li>Post-order follow-up</li>
-              </ul>
-            </div>
-
-            <div class="mini">
-              <h3>Downloads</h3>
-              <ul>
-                <li>Settlement agreement</li>
-                <li>Parenting plan</li>
-                <li>Final order</li>
-                <li>Case summary</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="questions">
-          <h2>7. Questions panel</h2>
-          <p>
-            The user should be able to ask questions at any point, especially when the next step is procedural and time-sensitive.
-          </p>
-
-          <div class="faq">
-            <details class="faq-item">
-              <summary>What do I take to the registrar?</summary>
-              <p>Use the latest served document, the case number, the party names, and any proof of filing or access request needed for that stage.</p>
-            </details>
-
-            <details class="faq-item">
-              <summary>How do I know if the case is unopposed?</summary>
-              <p>The system should only show this when there is no defence branch active and the settlement and children requirements are complete where relevant.</p>
-            </details>
-
-            <details class="faq-item">
-              <summary>What if Family Advocate approval is missing?</summary>
-              <p>The children branch should remain open, the health meter should warn the user, and the next-step panel should direct them to complete that path before finalisation.</p>
-            </details>
-          </div>
-        </section>
-
-        <div class="footer">
-          Advome Divorce Navigator is a procedural assistance tool. It should guide the user through the court process, not replace legal advice or court rules.
-        </div>
+  <!-- Document Detection for Divorce -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#fef3cd;color:#856404;">📄</span>
+      Detect Divorce Documents
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+      Upload your summons, plea, settlement agreement, or parenting plan to detect the stage and next steps.
+    </p>
+    <div class="doc-detector" onclick="document.getElementById('divorceUpload').click()">
+      <div class="doc-detector-icon">📤</div>
+      <div class="doc-detector-title">Upload Divorce Document</div>
+      <div class="doc-detector-sub">Summons, plea, settlement, or parenting plan</div>
+      <input type="file" id="divorceUpload" class="doc-detector-input" accept=".pdf,.doc,.docx" onchange="handleDivorceUpload(this)">
+    </div>
+    <div id="divorceResult" class="doc-result">
+      <div class="doc-result-header">
+        <span class="doc-result-badge detected" id="divorceBadge">DETECTED</span>
+        <span class="doc-result-title" id="divorceTitle">Document Type</span>
       </div>
-    </section>
-  </main>
+      <div class="doc-result-meta" id="divorceMeta"></div>
+      <div class="doc-next-steps">
+        <div class="doc-next-steps-title">Detected Next Steps</div>
+        <div id="divorceNextSteps"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Template Generators -->
+  <div class="grid-2">
+    <!-- Settlement Agreement Generator -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📝</span>
+        Settlement Agreement Generator
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+        Generate a draft settlement agreement. Both parties must review and agree before signing.
+      </p>
+      <div class="template-engine">
+        <div class="template-field">
+          <label>Plaintiff Name</label>
+          <input type="text" id="setPlaintiff" placeholder="Full name">
+        </div>
+        <div class="template-field">
+          <label>Defendant Name</label>
+          <input type="text" id="setDefendant" placeholder="Full name">
+        </div>
+        <div class="template-field">
+          <label>Marriage Date</label>
+          <input type="date" id="setMarriageDate">
+        </div>
+        <div class="template-field">
+          <label>Settlement Terms (one per line)</label>
+          <textarea id="setTerms" rows="3" placeholder="e.g. Property division: Plaintiff keeps house"></textarea>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="generateSettlement()">Generate Draft</button>
+        <div id="setOutput" class="template-output hidden"></div>
+      </div>
+    </div>
+
+    <!-- Parenting Plan Generator -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">👶</span>
+        Parenting Plan Generator
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+        Generate a draft parenting plan. Must be in the best interests of the child and approved by the Family Advocate.
+      </p>
+      <div class="template-engine">
+        <div class="template-field">
+          <label>Father Name</label>
+          <input type="text" id="ppFather" placeholder="Full name">
+        </div>
+        <div class="template-field">
+          <label>Mother Name</label>
+          <input type="text" id="ppMother" placeholder="Full name">
+        </div>
+        <div class="template-field">
+          <label>Child/Children Names</label>
+          <input type="text" id="ppChildren" placeholder="e.g. Child A (age 8), Child B (age 5)">
+        </div>
+        <div class="template-field">
+          <label>Contact Arrangement</label>
+          <select id="ppContact">
+            <option value="">Select arrangement</option>
+            <option value="shared">Shared / alternating</option>
+            <option value="primary">Primary with one parent</option>
+            <option value="supervised">Supervised contact</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="generateParentingPlan()">Generate Draft</button>
+        <div id="ppOutput" class="template-output hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rule 43 / Maintenance -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">💰</span>
+      Rule 43 / Maintenance Pending Litigation
+    </div>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:12px;">
+      Apply for interim maintenance, custody, or access orders pending final divorce. Rule 43 of the High Court Rules governs this procedure.
+    </p>
+    <div class="grid-3">
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Interim Maintenance</div>
+        <p style="font-size:13px;color:var(--text-muted);">Spousal and child maintenance pending final order.</p>
+        <div class="mt-2"><span class="pill pill-blue">Rule 43</span></div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Interim Custody</div>
+        <p style="font-size:13px;color:var(--text-muted);">Temporary custody arrangement pending trial.</p>
+        <div class="mt-2"><span class="pill pill-blue">Rule 43</span></div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Interim Access</div>
+        <p style="font-size:13px;color:var(--text-muted);">Temporary contact schedule pending final parenting plan.</p>
+        <div class="mt-2"><span class="pill pill-blue">Rule 43</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fee Meter -->
+  <div class="fee-meter">
+    <div class="fee-meter-header">
+      <div class="fee-meter-title">
+        <span>💰</span> Divorce Matter Costs
+      </div>
+      <div class="fee-total">R 5,000</div>
+    </div>
+    <div class="fee-breakdown">
+      <div class="fee-item paid">
+        <div class="fee-item-label">Summons & Service</div>
+        <div class="fee-item-value">R 1,500</div>
+      </div>
+      <div class="fee-item estimated">
+        <div class="fee-item-label">Settlement Drafting</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Trial (if defended)</div>
+        <div class="fee-item-value">R 3,500</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Family Advocate</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Steps -->
+  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
+    <div class="card-title">
+      <span class="icon" style="background:var(--primary);color:white;">🚀</span>
+      Next Steps
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="settlement.html" class="btn btn-primary btn-lg">Settlement →</a>
+      <a href="children.html" class="btn btn-primary btn-lg">Children →</a>
+      <a href="discovery.html" class="btn btn-primary btn-lg">Discovery →</a>
+      <a href="attorney.html" class="btn btn-outline btn-lg">👔 Find Attorney</a>
+    </div>
+  </div>
+
+  <!-- Legislation Reference -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📚</span>
+      Relevant Legislation
+    </div>
+    <div class="legal-card">
+      <div class="legal-card-header">
+        <span class="legal-card-title">Divorce Act 70 of 1979</span>
+        <span class="legal-card-citation">Section 4-8</span>
+      </div>
+      <div class="legal-card-text">
+        Governs the grounds for divorce, division of assets, and maintenance. Irretrievable breakdown of marriage is the primary ground.
+      </div>
+      <div class="legal-card-tags">
+        <span class="pill pill-blue">Primary Legislation</span>
+      </div>
+    </div>
+    <div class="legal-card">
+      <div class="legal-card-header">
+        <span class="legal-card-title">Children's Act 38 of 2005</span>
+        <span class="legal-card-citation">Section 18-33</span>
+      </div>
+      <div class="legal-card-text">
+        Governs parental responsibilities and rights, parenting plans, and the best interests of the child standard. The Family Advocate must approve parenting plans in contested matters.
+      </div>
+      <div class="legal-card-tags">
+        <span class="pill pill-blue">Primary Legislation</span>
+        <span class="pill pill-neutral">Family Advocate</span>
+      </div>
+    </div>
+    <div class="legal-card">
+      <div class="legal-card-header">
+        <span class="legal-card-title">Maintenance Act 99 of 1998</span>
+        <span class="legal-card-citation">Section 6-15</span>
+      </div>
+      <div class="legal-card-text">
+        Governs maintenance claims for spouses and children. Includes interim maintenance (Rule 43) and final maintenance orders.
+      </div>
+      <div class="legal-card-tags">
+        <span class="pill pill-blue">Primary Legislation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div class="questions-panel">
+    <h3>Divorce Questions</h3>
+    <div class="question-item">
+      <div class="question-q">Is the divorce defended or undefended?</div>
+      <div class="question-a">Check if a plea was filed within 10 days of service. No plea = undefended. Plea filed = defended.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">What about the children?</div>
+      <div class="question-a">If there are minor children, a parenting plan is required. The Family Advocate must approve it in contested matters.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Can we settle?</div>
+      <div class="question-a">Settlement is always possible, even in defended matters. A signed settlement agreement can be made an order of court.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    This module provides procedural assistance and legal information for divorce matters. It does not provide legal advice. All generated templates must be reviewed before filing. Users remain responsible for complying with the Divorce Act, Children's Act, and High Court Rules. 
+    <strong>Consult an attorney or the Family Advocate for advice on custody, maintenance, and property division.</strong>
+    <div class="access-message">
+      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function handleDivorceUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const resultDiv = document.getElementById('divorceResult');
+  const fname = file.name.toLowerCase();
+  let docType = 'Divorce Document';
+  let nextSteps = [];
+
+  if (fname.includes('summons')) {
+    docType = 'Divorce Summons';
+    nextSteps = ['Check service proof', 'Wait 10 days for plea', 'Track defended/undefended status'];
+  } else if (fname.includes('plea')) {
+    docType = 'Plea / Defence';
+    nextSteps = ['Review plea contents', 'Check counterclaim', 'Prepare discovery', 'Consider settlement'];
+  } else if (fname.includes('settlement')) {
+    docType = 'Settlement Agreement';
+    nextSteps = ['Review terms carefully', 'Ensure both parties agree', 'File with court for approval'];
+  } else if (fname.includes('parenting')) {
+    docType = 'Parenting Plan';
+    nextSteps = ['Check best interests of child', 'Submit to Family Advocate', 'File with settlement or separately'];
+  } else {
+    docType = 'Divorce-Related Document';
+    nextSteps = ['Review document type', 'Link to correct workflow stage', 'Check next steps'];
+  }
+
+  document.getElementById('divorceTitle').textContent = docType;
+  document.getElementById('divorceMeta').innerHTML = `
+    <div class="doc-meta-item"><div class="doc-meta-label">File</div><div class="doc-meta-value">${file.name}</div></div>
+    <div class="doc-meta-item"><div class="doc-meta-label">Size</div><div class="doc-meta-value">${(file.size/1024).toFixed(1)} KB</div></div>
+  `;
+  document.getElementById('divorceNextSteps').innerHTML = nextSteps.map((step, i) => 
+    `<div class="doc-next-step"><span class="step-num">${i+1}</span>${step}</div>`
+  ).join('');
+  resultDiv.classList.add('show');
+}
+
+function generateSettlement() {
+  const plaintiff = document.getElementById('setPlaintiff').value || '[PLAINTIFF]';
+  const defendant = document.getElementById('setDefendant').value || '[DEFENDANT]';
+  const marriageDate = document.getElementById('setMarriageDate').value || '[DATE]';
+  const terms = document.getElementById('setTerms').value || '[TERMS TO BE COMPLETED]';
+
+  const termList = terms.split('
+').filter(t => t.trim()).map(t => `• ${t.trim()}`).join('
+');
+
+  const output = `SETTLEMENT AGREEMENT
+
+Between:
+
+${plaintiff} (hereinafter "the Plaintiff")
+
+and
+
+${defendant} (hereinafter "the Defendant")
+
+---
+
+1.  MARRIAGE
+
+The parties were married to each other on ${marriageDate} in community of property / out of community of property [delete whichever is inapplicable].
+
+2.  IRRETRIEVABLE BREAKDOWN
+
+The marriage has broken down irretrievably. Both parties agree that the marriage should be dissolved.
+
+3.  SETTLEMENT TERMS
+
+${termList}
+
+4.  CHILDREN
+
+[To be completed: Custody, access, and maintenance arrangements for any minor children.]
+
+5.  DIVISION OF ASSETS
+
+[To be completed: Detailed list of assets and liabilities and how they will be divided.]
+
+6.  MAINTENANCE
+
+[To be completed: Any maintenance obligations, including amount, duration, and review dates.]
+
+7.  COSTS
+
+Each party shall bear their own costs / The [Plaintiff/Defendant] shall pay the costs of [the other party/both parties]. [Delete whichever is inapplicable]
+
+8.  GENERAL
+
+This agreement constitutes the full and final settlement of all claims between the parties arising from the marriage.
+
+---
+
+Signed at ________________ on this ______ day of ________________ 2026.
+
+_________________________        _________________________
+Plaintiff                          Defendant
+
+WITNESSES:
+
+1. _________________________
+   Name: _________________________
+   Address: _________________________
+
+2. _________________________
+   Name: _________________________
+   Address: _________________________
+
+---
+
+⚠️ IMPORTANT: This is a draft template generated by Advome. Both parties must review it carefully, preferably with independent legal advice, before signing. Once signed, this agreement can be made an order of court.`;
+
+  const outputDiv = document.getElementById('setOutput');
+  outputDiv.textContent = output;
+  outputDiv.classList.remove('hidden');
+}
+
+function generateParentingPlan() {
+  const father = document.getElementById('ppFather').value || '[FATHER]';
+  const mother = document.getElementById('ppMother').value || '[MOTHER]';
+  const children = document.getElementById('ppChildren').value || '[CHILDREN]';
+  const contact = document.getElementById('ppContact').value;
+
+  let contactText = '[CONTACT ARRANGEMENT TO BE COMPLETED]';
+  if (contact === 'shared') contactText = 'The children shall reside alternately with each parent, with specific dates and times to be agreed upon and recorded in a calendar.';
+  if (contact === 'primary') contactText = 'The children shall primarily reside with [PRIMARY PARENT], with the other parent having contact on specified days and times.';
+  if (contact === 'supervised') contactText = 'Contact shall be supervised by [SUPERVISOR] at [VENUE] for [DURATION] until [REVIEW DATE].';
+
+  const output = `PARENTING PLAN
+
+In the matter between:
+
+${father} (Father)
+
+and
+
+${mother} (Mother)
+
+Children: ${children}
+
+---
+
+1.  LIVING ARRANGEMENTS
+
+${contactText}
+
+2.  CONTACT SCHEDULE
+
+[To be completed: Specific days, times, holidays, and special occasions.]
+
+3.  DECISION-MAKING
+
+Both parents shall consult on major decisions regarding the children's education, health, religion, and welfare.
+
+4.  COMMUNICATION
+
+The parents shall communicate respectfully and in the best interests of the children.
+
+5.  DISPUTE RESOLUTION
+
+Any disputes shall first be referred to mediation. If mediation fails, the Family Advocate or court may be approached.
+
+6.  REVIEW
+
+This plan shall be reviewed annually or when circumstances change significantly.
+
+---
+
+Signed at ________________ on this ______ day of ________________ 2026.
+
+_________________________        _________________________
+Father                           Mother
+
+---
+
+⚠️ IMPORTANT: This is a draft template generated by Advome. A parenting plan must be in the best interests of the child. In contested matters, the Family Advocate must approve the plan. Both parents should seek legal advice before signing.`;
+
+  const outputDiv = document.getElementById('ppOutput');
+  outputDiv.textContent = output;
+  outputDiv.classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
 </body>
 </html>
 
