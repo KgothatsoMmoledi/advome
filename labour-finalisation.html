@@ -1,662 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Labour Finalisation Centre</title>
-  <style>
-    :root {
-      --bg: #f4f8ff;
-      --panel: rgba(255,255,255,0.92);
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --success: #ecfdf5;
-      --warning: #fff8e7;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      line-height: 1.5;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 18px;
-      border: 1px solid rgba(219,231,245,0.95);
-      background: rgba(255,255,255,0.86);
-      backdrop-filter: blur(14px);
-      border-radius: 999px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky;
-      top: 14px;
-      z-index: 20;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-text span {
-      display: block;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .nav a {
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      color: var(--muted);
-      border: 1px solid transparent;
-      transition: 0.2s ease;
-    }
-
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2);
-      background: #eef4ff;
-      border-color: #d6e3ff;
-    }
-
-    .hero {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-main {
-      padding: 34px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-main::after {
-      content: "";
-      position: absolute;
-      inset: auto -60px -60px auto;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: #eef4ff;
-      color: var(--brand-2);
-      font-size: 0.85rem;
-      font-weight: 700;
-      border: 1px solid #d6e3ff;
-    }
-
-    .hero h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      line-height: 1.03;
-      letter-spacing: -0.05em;
-    }
-
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.03rem;
-      max-width: 64ch;
-    }
-
-    .hero-actions {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 16px;
-      padding: 13px 18px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: 0.2s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: #fff;
-      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-
-    .btn-primary:hover { transform: translateY(-1px); }
-
-    .btn-secondary {
-      background: #fff;
-      color: var(--brand-2);
-      border: 1px solid #d7e4f8;
-    }
-
-    .btn-secondary:hover { background: #f7fbff; }
-
-    .status-card {
-      padding: 22px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-
-    .status-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
-
-    .status-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-weight: 700;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      font-weight: 700;
-    }
-
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
-
-    .status-grid {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 12px;
-    }
-
-    .mini {
-      padding: 14px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-    }
-
-    .mini span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.84rem;
-      margin-bottom: 6px;
-    }
-
-    .mini strong { font-size: 1rem; }
-
-    .section { margin-top: 22px; padding: 24px; }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .section-header p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 70ch;
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(160px, 1fr));
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-
-    .step {
-      min-width: 160px;
-      padding: 16px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      position: relative;
-    }
-
-    .step.active {
-      border-color: #bfd1ff;
-      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
-      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
-    }
-
-    .step .num {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      background: #eef4ff;
-      color: var(--brand-2);
-      margin-bottom: 10px;
-    }
-
-    .step.active .num {
-      background: linear-gradient(135deg, var(--brand), var(--accent));
-      color: #fff;
-    }
-
-    .step strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .step span {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 18px;
-    }
-
-    .panel { padding: 22px; }
-
-    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
-    .panel p { margin: 0; color: var(--muted); }
-
-    .feature-list {
-      margin: 16px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .feature-list li {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 14px;
-      border-radius: 16px;
-      background: #fbfdff;
-      border: 1px solid #ebf2fa;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      margin-top: 6px;
-      border-radius: 999px;
-      background: var(--brand);
-      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
-      flex: 0 0 auto;
-    }
-
-    .feature-list strong { display: block; margin-bottom: 2px; }
-    .feature-list span { color: var(--muted); font-size: 0.92rem; }
-
-    .question-box { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
-
-    .q-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .q-item {
-      padding: 14px 16px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      border-radius: 16px;
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .q-item span { color: var(--muted); font-size: 0.92rem; }
-    .q-item strong { display: block; }
-
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-    }
-
-    .meter-bar {
-      height: 12px;
-      border-radius: 999px;
-      background: #eaf1fb;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    .meter-bar > div {
-      height: 100%;
-      width: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand), var(--accent));
-    }
-
-    .success {
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: var(--success);
-      border: 1px solid #ccefd8;
-      color: #146b37;
-      margin-top: 16px;
-      font-weight: 600;
-    }
-
-    .footer-note {
-      margin: 22px 0 30px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      border: 1px solid #e6eef8;
-      background: rgba(255,255,255,0.9);
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    .smallcaps {
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--brand-2);
-    }
-
-    @media (max-width: 1024px) {
-      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      .timeline { grid-template-columns: repeat(6, 220px); }
-    }
-
-    @media (max-width: 640px) {
-      .shell { padding: 16px; }
-      .hero-main, .status-card, .section, .panel { padding: 18px; }
-      .hero-actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-      .status-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Labour Finalisation</title>
+<link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>South African legal workflow intelligence</span>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="start.html">Start Matter</a>
-        <a href="ccma.html">CCMA</a>
-        <a href="heads.html">Heads</a>
-        <a href="labour-setdown.html">Set-down</a>
-        <a class="active" href="labour-finalisation.html">Finalisation</a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <div class="card hero-main">
-        <div class="eyebrow">Labour Finalisation Centre</div>
-        <h1>Close the review after judgment, settlement, or withdrawal.</h1>
-        <p>
-          This is the final page in the Labour Court review chain. It should show the outcome, any remaining compliance
-          steps, and the final status of the matter after the hearing has been dealt with.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#final-start">Open Finalisation</a>
-          <a class="btn btn-secondary" href="labour-setdown.html">Back to Set-down</a>
-        </div>
-      </div>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Self-representation assistance</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="start.html" class="nav-link">Start</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="ccma.html" class="nav-link">CCMA</a>
+    <a href="award.html" class="nav-link">Award</a>
+    <a href="ccma-review.html" class="nav-link">Review</a>
+    <a href="motion.html" class="nav-link">Motion</a>
+    <a href="record.html" class="nav-link">Record</a>
+    <a href="heads.html" class="nav-link">Heads</a>
+    <a href="labour-setdown.html" class="nav-link">Set-Down</a>
+    <a href="labour-finalisation.html" class="nav-link active">Finalisation</a>
+    <a href="divorce.html" class="nav-link">Divorce</a>
+    <a href="estates-hub.html" class="nav-link">Estates</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
 
-      <aside class="card status-card">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Case Health</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Final state</h2>
-          </div>
-          <span class="pill good">Ready to close</span>
-        </div>
-        <div class="status-grid">
-          <div class="mini">
-            <span>Current stage</span>
-            <strong>Finalisation</strong>
-          </div>
-          <div class="mini">
-            <span>Next step</span>
-            <strong>Track outcome</strong>
-          </div>
-          <div class="mini">
-            <span>Deadline risk</span>
-            <strong>Low / outcome-based</strong>
-          </div>
-          <div class="mini">
-            <span>Missing items</span>
-            <strong>Judgment / order / costs</strong>
-          </div>
-        </div>
-      </aside>
-    </section>
+<div class="container">
 
-    <section class="card section" id="final-start">
-      <div class="section-header">
-        <div>
-          <div class="smallcaps">Review chain</div>
-          <h2 class="section-title">The labour review path is now complete</h2>
-        </div>
-        <p>The page should show the outcome clearly and keep any finishing steps visible until the file is truly closed.</p>
-      </div>
+  <div class="page-header">
+    <h1>Labour Finalisation</h1>
+    <p>Close the review after judgment, settlement, or withdrawal. The final page in the Labour Court review chain.</p>
+  </div>
 
-      <div class="timeline" role="list" aria-label="Review timeline">
-        <div class="step" role="listitem">
-          <div class="num">1</div>
-          <strong>Review</strong>
-          <span>Choose to challenge the award.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">2</div>
-          <strong>Motion</strong>
-          <span>Launch the Labour Court application.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">3</div>
-          <strong>Record</strong>
-          <span>Collect and transcribe the hearing record.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">4</div>
-          <strong>Heads</strong>
-          <span>Prepare the written argument and authorities.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">5</div>
-          <strong>Set-down</strong>
-          <span>Request enrolment and hearing allocation.</span>
-        </div>
-        <div class="step active" role="listitem">
-          <div class="num">6</div>
-          <strong>Finalisation</strong>
-          <span>Track the result and close the file.</span>
-        </div>
-      </div>
-    </section>
+  <!-- Compliance Banner -->
+  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
+    <div class="card-title">
+      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
+      Matter Closure — Retain Records
+    </div>
+    <p style="font-size:14px;color:#713f12;">
+      Closing a matter on Advome does not affect the actual court file. You must retain all court documents, correspondence, and records for at least 5 years in case of appeal, review, or enforcement proceedings. 
+      <strong>Advome archives your workflow data but does not store original court documents on your behalf.</strong>
+    </p>
+  </div>
 
-    <section class="grid-2">
-      <article class="card panel">
-        <div class="smallcaps">Outcome tracker</div>
-        <h3>Possible end states</h3>
-        <ul class="feature-list">
-          <li><div class="dot"></div><div><strong>Judgment delivered</strong><span>The Labour Court issues an order and reasons.</span></div></li>
-          <li><div class="dot"></div><div><strong>Settlement reached</strong><span>The parties resolve the matter before or during the hearing.</span></div></li>
-          <li><div class="dot"></div><div><strong>Withdrawal or abandonment</strong><span>The matter ends without a final contested judgment.</span></div></li>
-          <li><div class="dot"></div><div><strong>Compliance tracked</strong><span>Show whether any order must still be followed up.</span></div></li>
-        </ul>
-      </article>
+  <!-- Timeline — Finalisation is step 8, FINAL -->
+  <div class="timeline">
+    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">2</span>Award</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">3</span>Review Decision</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">4</span>Motion & Affidavit</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">5</span>Record</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">6</span>Heads</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">7</span>Set-Down</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step active"><span class="num">8</span>Finalisation</div>
+  </div>
 
-      <article class="card panel">
-        <div class="smallcaps">Final state meter</div>
-        <h3>Completion indicator</h3>
-        <p>This page should make it obvious that the matter is practically done, while still showing any remaining compliance steps.</p>
-        <div class="meter">
-          <strong>Finalisation readiness</strong>
-          <div class="meter-bar"><div></div></div>
-          <p style="margin-top:10px;">100% complete</p>
-        </div>
-        <div class="success">
-          The labour review chain is complete. The case can now be archived, monitored for compliance, or linked to any follow-up step.
-        </div>
-      </article>
-    </section>
-
-    <section class="grid-3" style="margin-top:18px;">
-      <article class="card panel">
-        <div class="smallcaps">Final checks</div>
-        <h3>Close-out items</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>Judgment copy</strong><span>Uploaded or pending.</span></div></li>
-          <li><div class="dot"></div><div><strong>Costs order</strong><span>Tracked where relevant.</span></div></li>
-          <li><div class="dot"></div><div><strong>Compliance deadline</strong><span>Any later obligation is visible here.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Questions panel</div>
-        <h3>Suggested prompts</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>What was the final outcome?</strong><span>Judgment, settlement, or withdrawal.</span></div></li>
-          <li><div class="dot"></div><div><strong>Is anything still outstanding?</strong><span>Check compliance, costs, or follow-up steps.</span></div></li>
-          <li><div class="dot"></div><div><strong>Should this matter be archived?</strong><span>Mark the file as complete once nothing remains.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Navigation</div>
-        <h3>Return paths</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>Back to set-down</strong><span>Use this if the hearing allocation is still in progress.</span></div></li>
-          <li><div class="dot"></div><div><strong>Back to review</strong><span>Use this if the user wants to revisit the challenge stage.</span></div></li>
-          <li><div class="dot"></div><div><strong>Back to CCMA</strong><span>Use this for the broader labour entry page.</span></div></li>
-        </ul>
-        <div class="hero-actions" style="margin-top:18px;">
-          <a class="btn btn-primary" href="ccma.html">Return to CCMA</a>
-          <a class="btn btn-secondary" href="review.html">Return to Review</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="card section" style="margin-top:18px;">
-      <div class="section-header">
-        <div>
-          <div class="smallcaps">Build rule</div>
-          <h2 class="section-title">What this page must do</h2>
-        </div>
-        <p>Finalisation should not hide the result. It should present the outcome and any remaining obligations clearly.</p>
-      </div>
-      <ul class="feature-list">
-        <li><div class="dot"></div><div><strong>Show the result</strong><span>Make the judgment or settlement outcome obvious.</span></div></li>
-        <li><div class="dot"></div><div><strong>Track any follow-up</strong><span>Compliance, costs, or archiving should remain visible.</span></div></li>
-        <li><div class="dot"></div><div><strong>Close the chain</strong><span>Mark the labour review flow as complete when nothing is outstanding.</span></div></li>
-      </ul>
-    </section>
-
-    <div class="footer-note">
-      Advome provides self-representation assistance, procedural guidance, workflow management and access to legal information through structured templates and stage-based workflows. It does not provide legal advice. Users remain responsible for complying with applicable legislation, rules, directives and obtaining professional advice where necessary.<br><br>
-      "Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing before a court or, where appropriate, another independent and impartial tribunal or forum."<br>
-      — Section 34, Constitution of the Republic of South Africa, 1996.
+  <!-- Health Meter — 100% -->
+  <div class="meter-container">
+    <div class="meter-header">
+      <span class="meter-label">Finalisation Status</span>
+      <span class="meter-value" style="color:var(--secondary);">100%</span>
+    </div>
+    <div class="meter-bar-bg">
+      <div class="meter-bar-fill high" style="width:100%"></div>
+    </div>
+    <div class="meter-status healthy">
+      <span>✅</span> Review chain complete — matter ready for archive
     </div>
   </div>
+
+  <div class="grid-2">
+    <!-- Outcome Tracker -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e6f4ea;color:var(--secondary);">🏁</span>
+        Outcome Tracker
+      </div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Judgment delivered</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Settlement reached</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Withdrawal or abandonment</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Compliance tracked</div>
+        </div>
+      </div>
+      <div class="mt-2">
+        <span class="pill pill-neutral">Select outcome</span>
+      </div>
+    </div>
+
+    <!-- Final Checks -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
+        Close-Out Items
+      </div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Judgment copy uploaded</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Costs order tracked</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Compliance deadline set</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Matter archived</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Return Paths -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#fef3cd;color:#856404;">↩️</span>
+      Return Paths
+    </div>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">
+      If the matter is not yet complete, return to the relevant stage without losing progress.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="labour-setdown.html" class="btn btn-secondary">← Back to Set-Down</a>
+      <a href="heads.html" class="btn btn-secondary">← Back to Heads</a>
+      <a href="ccma-review.html" class="btn btn-secondary">← Back to Review</a>
+      <a href="ccma.html" class="btn btn-outline">← CCMA Home</a>
+    </div>
+  </div>
+
+  <!-- Fee Meter -->
+  <div class="fee-meter">
+    <div class="fee-meter-header">
+      <div class="fee-meter-title">
+        <span>💰</span> Finalisation Costs
+      </div>
+      <div class="fee-total">R 0</div>
+    </div>
+    <div class="fee-breakdown">
+      <div class="fee-item pending">
+        <div class="fee-item-label">Compliance Costs</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Enforcement</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div class="questions-panel">
+    <h3>Finalisation Questions</h3>
+    <div class="question-item">
+      <div class="question-q">What was the final outcome?</div>
+      <div class="question-a">Judgment, settlement, or withdrawal. Each triggers different close-out steps.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Is anything still outstanding?</div>
+      <div class="question-a">Check compliance, costs, or follow-up steps before archiving.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Should this matter be archived?</div>
+      <div class="question-a">Mark the file as complete once nothing remains. The dashboard will move it to closed matters. Retain original court documents for 5 years.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. Users remain responsible for complying with Labour Court Rules and the Labour Relations Act. 
+    <strong>Closing a matter on Advome does not close the court file. Retain all original documents for at least 5 years.</strong>
+    <div class="access-message">
+      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
+    </div>
+  </div>
+
+</div>
+
 </body>
 </html>
