@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Pricing</title>
+<link rel="stylesheet" href="shared-styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Self-representation assistance</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="start.html" class="nav-link">Start</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="ccma.html" class="nav-link">CCMA</a>
+    <a href="divorce.html" class="nav-link">Divorce</a>
+    <a href="estates-hub.html" class="nav-link">Estates</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="page-header text-center">
+    <h1>Choose Your Plan</h1>
+    <p>Affordable access to procedural guidance and legal workflow tools. Cancel anytime.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Self-Represented</div>
+      <div class="pricing-price">R30<span>/month</span></div>
+      <div class="pricing-desc">For individuals navigating divorce, CCMA, estates, or civil matters on their own.</div>
+      <ul class="pricing-features">
+        <li>Unlimited matter tracking</li>
+        <li>Document detection & stage ID</li>
+        <li>Template generation (all workflows)</li>
+        <li>Deadline & urgency alerts</li>
+        <li>Case health & readiness scores</li>
+        <li>South African legislation library</li>
+        <li>Precedent search & matching</li>
+        <li>Email support</li>
+      </ul>
+      <button class="btn btn-primary btn-block" onclick="showSubscribe('self')">Subscribe — R30/month</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-tier">Attorney / Firm</div>
+      <div class="pricing-price">R50<span>/month</span></div>
+      <div class="pricing-desc">For law firms, candidate attorneys, and legal practitioners managing multiple matters.</div>
+      <ul class="pricing-features">
+        <li>Everything in Self-Represented</li>
+        <li>Multi-matter firm dashboard</li>
+        <li>Client connection & matter sharing</li>
+        <li>Advanced template customisation</li>
+        <li>Billing & time tracking per matter</li>
+        <li>Practice visibility & lead generation</li>
+        <li>Attorney-client workflow bridge</li>
+        <li>Priority email & chat support</li>
+      </ul>
+      <button class="btn btn-primary btn-block" onclick="showSubscribe('attorney')">Subscribe — R50/month</button>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise / Legal Aid</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-desc">For legal aid organisations, NGOs, university clinics, and large firms.</div>
+      <ul class="pricing-features">
+        <li>Everything in Attorney</li>
+        <li>White-label deployment</li>
+        <li>API access for integrations</li>
+        <li>Bulk user & matter management</li>
+        <li>Custom workflow development</li>
+        <li>Advanced analytics & reporting</li>
+        <li>Dedicated account manager</li>
+        <li>SLA & training included</li>
+      </ul>
+      <button class="btn btn-outline btn-block" onclick="showContact()">Contact Sales</button>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="card" style="margin-top:40px;">
+    <div class="card-title">Feature Comparison</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left;padding:12px;font-weight:600;">Feature</th>
+            <th style="text-align:center;padding:12px;font-weight:600;">Self-Rep<br>R30/mo</th>
+            <th style="text-align:center;padding:12px;font-weight:600;">Attorney<br>R50/mo</th>
+            <th style="text-align:center;padding:12px;font-weight:600;">Enterprise<br>Custom</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Matter tracking</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Document detection</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Template generation</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Legislation library</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Precedent search</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Multi-matter dashboard</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Client connection</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Billing & time tracking</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">Practice visibility</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">White-label</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px;">API access</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td></tr>
+          <tr><td style="padding:10px;">Priority support</td><td style="text-align:center;padding:10px;">—</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">✅</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="questions-panel" style="margin-top:32px;">
+    <h3>Pricing Questions</h3>
+    <div class="question-item">
+      <div class="question-q">Can I cancel anytime?</div>
+      <div class="question-a">Yes. Monthly subscriptions can be cancelled at any time. Your access continues until the end of the billing period.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Is there a free trial?</div>
+      <div class="question-a">We offer a 7-day free trial for the Self-Represented plan. No credit card required to start.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Can I upgrade or downgrade?</div>
+      <div class="question-a">Yes. You can switch plans at any time. Changes take effect at the next billing cycle.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Do you offer refunds?</div>
+      <div class="question-a">If you are unsatisfied, contact us within 14 days for a full refund of your first month.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    Advome provides procedural assistance and legal information. It does not provide legal advice. Subscription fees cover platform access and tool usage, not legal representation.
+  </div>
+
+</div>
+
+<!-- Subscribe Modal -->
+<div class="modal-overlay" id="subscribeModal">
+  <div class="modal">
+    <div class="modal-title">Subscribe to Advome</div>
+    <div class="modal-text" id="modalText">Complete your subscription to unlock full platform access.</div>
+    <div class="template-engine" style="margin:16px 0;">
+      <div class="template-field">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your full name">
+      </div>
+      <div class="template-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="template-field">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+27 __ ___ ____">
+      </div>
+      <div class="template-field">
+        <label>Plan</label>
+        <select id="planSelect">
+          <option value="self">Self-Represented — R30/month</option>
+          <option value="attorney">Attorney / Firm — R50/month</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="processSubscribe()">Confirm Subscription</button>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <div class="modal-title">Contact Sales</div>
+    <div class="modal-text">Tell us about your organisation and we'll prepare a custom quote.</div>
+    <div class="template-engine" style="margin:16px 0;">
+      <div class="template-field">
+        <label>Organisation Name</label>
+        <input type="text" placeholder="Your firm or organisation">
+      </div>
+      <div class="template-field">
+        <label>Contact Email</label>
+        <input type="email" placeholder="contact@organisation.co.za">
+      </div>
+      <div class="template-field">
+        <label>Number of Users</label>
+        <input type="number" placeholder="Approximate number of users">
+      </div>
+      <div class="template-field">
+        <label>Message</label>
+        <textarea rows="3" placeholder="Tell us what you need..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal()">Send Request</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showSubscribe(plan) {
+  document.getElementById('planSelect').value = plan;
+  document.getElementById('modalText').textContent = plan === 'attorney' 
+    ? 'Subscribe to the Attorney plan for R50/month. Unlock firm dashboard, client connection, and advanced tools.'
+    : 'Subscribe to the Self-Represented plan for R30/month. Unlock unlimited matter tracking and template generation.';
+  document.getElementById('subscribeModal').classList.add('show');
+}
+function showContact() {
+  document.getElementById('contactModal').classList.add('show');
+}
+function closeModal() {
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
+}
+function processSubscribe() {
+  alert('In production, this would connect to a payment gateway (PayFast, Stripe, or similar). For now, this is a prototype.');
+  closeModal();
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', function(e) { if(e.target === this) closeModal(); });
+});
+</script>
+
+</body>
+</html>
