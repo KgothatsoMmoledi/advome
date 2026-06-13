@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Guided Matter Wizard</title>
+<link rel="stylesheet" href="shared-styles.css">
+<style>
+.wizard-container { max-width: 900px; margin: 0 auto; padding: 24px; }
+.wizard-progress { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 32px; padding: 20px; background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); }
+.wizard-step-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; background: var(--bg); color: var(--text-muted); border: 2px solid var(--border); transition: var(--transition); }
+.wizard-step-dot.active { background: var(--primary-gradient); color: white; border-color: var(--primary); transform: scale(1.1); }
+.wizard-step-dot.completed { background: var(--secondary); color: white; border-color: var(--secondary); }
+.wizard-step-label { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 6px; max-width: 80px; }
+.wizard-step-connector { width: 40px; height: 2px; background: var(--border); transition: var(--transition); }
+.wizard-step-connector.completed { background: var(--secondary); }
+.wizard-content { background: var(--card-bg); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 40px; min-height: 500px; box-shadow: var(--shadow); }
+.wizard-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.wizard-subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+.wizard-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+.wizard-nav-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; }
+.wizard-nav-btn.prev { background: var(--bg); color: var(--text-muted); }
+.wizard-nav-btn.prev:hover { background: var(--border); color: var(--text); }
+.wizard-nav-btn.next { background: var(--primary-gradient); color: white; }
+.wizard-nav-btn.next:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.wizard-nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.guide-card { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid var(--primary-light); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
+.guide-card-title { font-size: 16px; font-weight: 600; color: var(--primary-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.guide-card-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.guide-card-action { margin-top: 16px; }
+.wizard-upload { border: 2px dashed var(--primary-light); border-radius: var(--radius); padding: 48px 24px; text-align: center; cursor: pointer; transition: var(--transition); background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+.wizard-upload:hover { border-color: var(--primary); background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%); }
+.wizard-upload-icon { font-size: 48px; margin-bottom: 16px; }
+.wizard-upload-title { font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 8px; }
+.wizard-upload-sub { font-size: 14px; color: var(--text-muted); }
+.detection-result { background: var(--bg); border-radius: var(--radius); padding: 24px; margin-top: 20px; animation: fadeIn 0.4s ease; }
+.detection-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.detection-badge { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+.detection-badge.detected { background: #e6f4ea; color: var(--secondary); }
+.detection-badge.unknown { background: #fef3cd; color: #856404; }
+.detection-title { font-size: 18px; font-weight: 600; }
+.detection-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+.detection-meta-item { background: white; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+.detection-meta-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.detection-meta-value { font-size: 14px; font-weight: 600; color: var(--text); }
+.action-steps { display: flex; flex-direction: column; gap: 12px; }
+.action-step { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: white; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; transition: var(--transition); }
+.action-step:hover { border-color: var(--primary); box-shadow: var(--shadow); transform: translateX(4px); }
+.action-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.action-step-content { flex: 1; }
+.action-step-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.action-step-desc { font-size: 12px; color: var(--text-muted); }
+.action-step-arrow { color: var(--primary); font-size: 18px; font-weight: 700; }
+.template-form { display: flex; flex-direction: column; gap: 20px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field label { font-size: 13px; font-weight: 600; color: var(--text); }
+.form-field input, .form-field select, .form-field textarea { padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; font-family: var(--font); transition: var(--transition); }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1); }
+.template-output-box { background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 24px; margin-top: 20px; font-family: 'Georgia', serif; line-height: 1.8; white-space: pre-wrap; max-height: 500px; overflow-y: auto; font-size: 13px; }
+.context-sidebar { position: fixed; right: 24px; top: 100px; width: 260px; background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); z-index: 50; }
+.context-sidebar-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.context-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 12px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+.context-item:last-child { border-bottom: none; }
+.context-item.active { color: var(--primary); font-weight: 600; }
+.context-item.completed { color: var(--secondary); }
+.context-item .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+.context-item.active .dot { background: var(--primary); }
+.context-item.completed .dot { background: var(--secondary); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.hidden { display: none !important; }
+@media (max-width: 1200px) { .context-sidebar { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Guided self-representation</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="wizard.html" class="nav-link active">Wizard</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
+
+<div class="wizard-container">
+
+  <div class="wizard-progress" id="wizardProgress"></div>
+
+  <div class="wizard-content" id="wizardContent"></div>
+
+  <div class="wizard-actions" id="wizardActions">
+    <button class="wizard-nav-btn prev" id="btnPrev" onclick="prevStep()">
+      <span>&larr;</span> Back
+    </button>
+    <button class="wizard-nav-btn next" id="btnNext" onclick="nextStep()">
+      Next <span>&rarr;</span>
+    </button>
+  </div>
+
+</div>
+
+<div class="context-sidebar" id="contextSidebar">
+  <div class="context-sidebar-title">Your Matter</div>
+  <div id="contextItems"></div>
+</div>
+
+<script>
+let currentStep = 0;
+let matterData = { type: null, detectedDocument: null, stage: null, userInputs: {}, generatedTemplate: null, documents: [] };
+
+const workflows = {
+  labour: [
+    { id: 'upload', title: 'Upload Document', label: 'Upload' },
+    { id: 'detect', title: 'Detect and Review', label: 'Detect' },
+    { id: 'decision', title: 'Make Decision', label: 'Decide' },
+    { id: 'generate', title: 'Generate Documents', label: 'Draft' },
+    { id: 'review', title: 'Review and Edit', label: 'Review' },
+    { id: 'next', title: 'Next Steps', label: 'Next' }
+  ],
+  divorce: [
+    { id: 'upload', title: 'Upload Document', label: 'Upload' },
+    { id: 'detect', title: 'Detect and Review', label: 'Detect' },
+    { id: 'status', title: 'Matter Status', label: 'Status' },
+    { id: 'generate', title: 'Generate Documents', label: 'Draft' },
+    { id: 'children', title: 'Children and Settlement', label: 'Children' },
+    { id: 'next', title: 'Next Steps', label: 'Next' }
+  ],
+  estates: [
+    { id: 'upload', title: 'Upload Document', label: 'Upload' },
+    { id: 'detect', title: 'Detect and Review', label: 'Detect' },
+    { id: 'reporting', title: 'Reporting Pack', label: 'Report' },
+    { id: 'generate', title: 'Generate Documents', label: 'Draft' },
+    { id: 'lodgement', title: 'Lodgement', label: 'Lodge' },
+    { id: 'next', title: 'Next Steps', label: 'Next' }
+  ]
+};
+
+let currentWorkflow = null;
+
+function renderProgress() {
+  if (!currentWorkflow) return;
+  const container = document.getElementById('wizardProgress');
+  let html = '';
+  currentWorkflow.forEach((step, index) => {
+    const isCompleted = index < currentStep;
+    const isActive = index === currentStep;
+    if (index > 0) html += '<div class="wizard-step-connector ' + (isCompleted ? 'completed' : '') + '"></div>';
+    html += '<div style="display:flex;flex-direction:column;align-items:center;"><div class="wizard-step-dot ' + (isActive ? 'active' : '') + ' ' + (isCompleted ? 'completed' : '') + '">' + (isCompleted ? '&#10003;' : index + 1) + '</div><div class="wizard-step-label">' + step.label + '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function renderContext() {
+  if (!currentWorkflow) return;
+  const container = document.getElementById('contextItems');
+  let html = '';
+  currentWorkflow.forEach((step, index) => {
+    let status = '';
+    if (index < currentStep) status = 'completed';
+    else if (index === currentStep) status = 'active';
+    html += '<div class="context-item ' + status + '"><div class="dot"></div><span>' + step.title + '</span></div>';
+  });
+  container.innerHTML = html;
+}
+
+function renderStep() {
+  if (!currentWorkflow) { renderMatterSelection(); return; }
+  const step = currentWorkflow[currentStep];
+  renderProgress();
+  renderContext();
+  document.getElementById('btnPrev').disabled = currentStep === 0;
+  document.getElementById('btnNext').innerHTML = currentStep === currentWorkflow.length - 1 ? 'Finish &#10003;' : 'Next &rarr;';
+  const contentDiv = document.getElementById('wizardContent');
+  switch(step.id) {
+    case 'upload': renderUploadStep(contentDiv); break;
+    case 'detect': renderDetectStep(contentDiv); break;
+    case 'decision': renderDecisionStep(contentDiv); break;
+    case 'status': renderStatusStep(contentDiv); break;
+    case 'reporting': renderReportingStep(contentDiv); break;
+    case 'generate': renderGenerateStep(contentDiv); break;
+    case 'children': renderChildrenStep(contentDiv); break;
+    case 'lodgement': renderLodgementStep(contentDiv); break;
+    case 'review': renderReviewStep(contentDiv); break;
+    case 'next': renderNextStepsStep(contentDiv); break;
+    default: renderUploadStep(contentDiv);
+  }
+}
+
+function renderMatterSelection() {
+  const contentDiv = document.getElementById('wizardContent');
+  contentDiv.innerHTML = '<div class="text-center" style="padding:40px 0;"><div style="font-size:48px;margin-bottom:16px;">&#128196;</div><div class="wizard-title">What legal matter are you dealing with?</div><div class="wizard-subtitle">Select your matter type to begin the guided process. You can also upload a document and we will detect it automatically.</div><div class="grid-2" style="margin-top:32px;"><div class="card" style="cursor:pointer;" onclick="startWorkflow('labour')"><div style="font-size:32px;margin-bottom:12px;">&#9878;</div><div style="font-size:16px;font-weight:600;margin-bottom:8px;">CCMA / Labour Dispute</div><div style="font-size:13px;color:var(--text-muted);">Unfair dismissal, arbitration awards, Labour Court review</div></div><div class="card" style="cursor:pointer;" onclick="startWorkflow('divorce')"><div style="font-size:32px;margin-bottom:12px;">&#128148;</div><div style="font-size:16px;font-weight:600;margin-bottom:8px;">Divorce and Family Law</div><div style="font-size:13px;color:var(--text-muted);">Divorce proceedings, settlement, children, maintenance</div></div><div class="card" style="cursor:pointer;" onclick="startWorkflow('estates')"><div style="font-size:32px;margin-bottom:12px;">&#127963;</div><div style="font-size:16px;font-weight:600;margin-bottom:8px;">Deceased Estate</div><div style="font-size:13px;color:var(--text-muted);">Estate administration, Master's Office, distribution</div></div><div class="card" style="cursor:pointer;" onclick="startWorkflow('labour')"><div style="font-size:32px;margin-bottom:12px;">&#128269;</div><div style="font-size:16px;font-weight:600;margin-bottom:8px;">I Don't Know / Detect for Me</div><div style="font-size:13px;color:var(--text-muted);">Upload any document and we will identify the matter type</div></div></div></div>';
+  document.getElementById('btnPrev').disabled = true;
+  document.getElementById('btnNext').style.display = 'none';
+  document.getElementById('wizardProgress').style.display = 'none';
+  document.getElementById('contextSidebar').style.display = 'none';
+}
+
+function startWorkflow(type) {
+  matterData.type = type;
+  currentWorkflow = workflows[type] || workflows.labour;
+  currentStep = 0;
+  document.getElementById('wizardProgress').style.display = 'flex';
+  document.getElementById('contextSidebar').style.display = 'block';
+  document.getElementById('btnNext').style.display = 'flex';
+  renderStep();
+}
+
+function renderUploadStep(container) {
+  container.innerHTML = '<div class="wizard-title">Upload Your Document</div><div class="wizard-subtitle">Upload any legal document — a summons, CCMA award, death notice, or court letter. We will analyze it and guide you forward.</div><div class="wizard-upload" onclick="document.getElementById('wizardFileInput').click()"><div class="wizard-upload-icon">&#128228;</div><div class="wizard-upload-title">Click to Upload or Drag and Drop</div><div class="wizard-upload-sub">PDF, Word, or image files accepted (max 10MB)</div><input type="file" id="wizardFileInput" style="display:none;" accept=".pdf,.doc,.docx,.png,.jpg" onchange="handleWizardUpload(this)"></div><div class="guide-card" style="margin-top:24px;"><div class="guide-card-title">&#128203; What documents can I upload?</div><div class="guide-card-text"><strong>Labour matters:</strong> CCMA referral form, arbitration award, notice of motion, Labour Court correspondence<br><strong>Divorce matters:</strong> Summons, plea, settlement agreement, parenting plan, Rule 43 application<br><strong>Estate matters:</strong> Death notice (J294), inventory (J192), L and D account (J243), Master's Office letter</div></div><div class="guide-card"><div class="guide-card-title">&#9888; Important</div><div class="guide-card-text">Advome analyzes your document to identify the type and stage, but <strong>does not store or share your document content</strong> beyond what is needed for the analysis. Your document remains your property. We recommend removing sensitive personal information (ID numbers, bank details) before uploading if you are concerned about privacy.</div></div>';
+}
+
+function handleWizardUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  simulateDetection(file);
+}
+
+function simulateDetection(file) {
+  const fname = file.name.toLowerCase();
+  let result = { document_type: 'Unknown Document', confidence: 'Medium', detected_stage: 'Requires Manual Review', matter_category: 'unknown', next_steps: ['Review document manually', 'Select correct matter type'], extracted_data: {}, recommended_workflow: 'start.html', urgency: 'neutral' };
+  if (fname.includes('award') || fname.includes('arbitration')) {
+    result = { document_type: 'CCMA Arbitration Award', confidence: 'High', detected_stage: 'Award Received', matter_category: 'labour', next_steps: ['Record the service date', 'Read the award carefully', 'Decide: accept or challenge within 6 weeks'], extracted_data: { award_date: '2026-05-15', commissioner: 'Commissioner Smith', outcome: 'Dismissal upheld' }, recommended_workflow: 'award.html', urgency: 'attention' };
+  } else if (fname.includes('summons') || fname.includes('divorce')) {
+    result = { document_type: 'Divorce Summons', confidence: 'High', detected_stage: 'Pleadings', matter_category: 'divorce', next_steps: ['Check service proof', 'Wait 10 days for plea or response', 'Track defended/undefended status'], extracted_data: { court: 'High Court', date: '2026-06-01' }, recommended_workflow: 'divorce.html', urgency: 'attention' };
+  } else if (fname.includes('death') || fname.includes('j294')) {
+    result = { document_type: 'Death Notice (J294)', confidence: 'High', detected_stage: 'Reporting', matter_category: 'estates', next_steps: ['Complete reporting pack', 'Draft covering letter', 'Lodge at Master's Office'], extracted_data: { form: 'J294', status: 'Initial reporting' }, recommended_workflow: 'estates-hub.html', urgency: 'neutral' };
+  }
+  matterData.detectedDocument = result;
+  currentStep = 1;
+  renderStep();
+}
+
+function renderDetectStep(container) {
+  const doc = matterData.detectedDocument;
+  if (!doc) { container.innerHTML = '<div class="wizard-title">No document detected</div><div class="wizard-subtitle">Please go back and upload a document.</div>'; return; }
+  container.innerHTML = '<div class="wizard-title">Document Analysis Complete</div><div class="wizard-subtitle">We analyzed your document. Here is what we found and what you should do next.</div><div class="detection-result"><div class="detection-header"><span class="detection-badge ' + (doc.confidence === 'High' ? 'detected' : 'unknown') + '">' + doc.confidence + ' Confidence</span><span class="detection-title">' + doc.document_type + '</span></div><div class="detection-meta"><div class="detection-meta-item"><div class="detection-meta-label">Detected Stage</div><div class="detection-meta-value">' + doc.detected_stage + '</div></div><div class="detection-meta-item"><div class="detection-meta-label">Matter Category</div><div class="detection-meta-value">' + doc.matter_category + '</div></div><div class="detection-meta-item"><div class="detection-meta-label">Urgency</div><div class="detection-meta-value"><span class="pill ' + (doc.urgency === 'critical' ? 'pill-red' : doc.urgency === 'attention' ? 'pill-amber' : 'pill-neutral') + '">' + doc.urgency.toUpperCase() + '</span></div></div><div class="detection-meta-item"><div class="detection-meta-label">Recommended Page</div><div class="detection-meta-value">' + doc.recommended_workflow + '</div></div></div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;">What You Need to Do Next:</div><div class="action-steps">' + doc.next_steps.map((step, i) => '<div class="action-step" onclick="handleActionStep(' + i + ')"><div class="action-step-num">' + (i + 1) + '</div><div class="action-step-content"><div class="action-step-title">' + step + '</div><div class="action-step-desc">Click to proceed with this step</div></div><div class="action-step-arrow">&rarr;</div></div>').join('') + '</div></div><div class="guide-card" style="margin-top:20px;"><div class="guide-card-title">&#9888; Is this detection correct?</div><div class="guide-card-text">If the document type or stage is wrong, you can <strong>manually select the correct matter type</strong> below. The detection is based on filename and content patterns and may not be 100% accurate for complex documents.</div><div class="guide-card-action"><select id="manualMatterSelect" onchange="manualSelectMatter(this.value)" style="padding:8px 12px;border-radius:6px;border:1px solid var(--border);"><option value="">-- Select correct matter type --</option><option value="labour">CCMA / Labour Dispute</option><option value="divorce">Divorce and Family Law</option><option value="estates">Deceased Estate</option></select></div></div>';
+}
+
+function handleActionStep(index) {
+  currentStep = 2;
+  renderStep();
+}
+
+function manualSelectMatter(type) {
+  if (!type) return;
+  matterData.type = type;
+  currentWorkflow = workflows[type];
+  currentStep = 1;
+  renderStep();
+}
+
+function renderDecisionStep(container) {
+  container.innerHTML = '<div class="wizard-title">Make Your Decision</div><div class="wizard-subtitle">The CCMA award has been served on you. You have 6 weeks from the service date to decide what to do. This is a critical deadline.</div><div class="grid-2"><div class="card" style="cursor:pointer;border:2px solid var(--secondary);" onclick="selectDecision('accept')"><div style="font-size:32px;margin-bottom:12px;">&#9989;</div><div style="font-size:16px;font-weight:700;margin-bottom:8px;">Accept the Award</div><div style="font-size:13px;color:var(--text-muted);">You are satisfied with the commissioner's decision. The matter will move to closure and finalisation.</div><div class="mt-2"><span class="pill pill-green">No further action needed</span></div></div><div class="card" style="cursor:pointer;border:2px solid var(--primary);" onclick="selectDecision('challenge')"><div style="font-size:32px;margin-bottom:12px;">&#9876;</div><div style="font-size:16px;font-weight:700;margin-bottom:8px;">Challenge the Award</div><div style="font-size:13px;color:var(--text-muted);">You believe the award is flawed. Open the Section 145 review path: motion, record, heads, set-down, and Labour Court hearing.</div><div class="mt-2"><span class="pill pill-red">6-week deadline applies</span></div></div></div><div class="guide-card" style="margin-top:20px;"><div class="guide-card-title">&#9200; Critical Deadline</div><div class="guide-card-text"><strong>Section 145(1) of the LRA:</strong> A review application must be lodged within <strong>6 weeks</strong> of the award being served. If you miss this deadline, you may lose your right to challenge the award.<br><br><strong>Service date:</strong> Not yet recorded<br><strong>Days remaining:</strong> 42 days (if served today)<br><strong>Status:</strong> <span class="pill pill-amber">URGENT</span></div></div><div class="guide-card"><div class="guide-card-title">&#128084; Not Sure What to Do?</div><div class="guide-card-text">If you are unsure whether to accept or challenge the award, <strong>consult an attorney immediately</strong>. Do not rely solely on this platform for legal advice. You can connect with an attorney through the Attorney Portal.</div><div class="guide-card-action"><a href="attorney.html" class="btn btn-outline btn-sm" target="_blank">Find an Attorney &rarr;</a></div></div>';
+}
+
+function selectDecision(decision) {
+  matterData.decision = decision;
+  if (decision === 'accept') {
+    alert('You have chosen to accept the award. The matter will be marked for finalisation. You can track this in your Dashboard.');
+    currentStep = 5;
+  } else {
+    currentStep = 3;
+  }
+  renderStep();
+}
+
+function renderStatusStep(container) {
+  container.innerHTML = '<div class="wizard-title">Matter Status</div><div class="wizard-subtitle">Your divorce matter is currently in the pleadings stage. Here is what that means and what happens next.</div><div class="card"><div class="card-title">&#128203; Current Status: Defended Divorce</div><div class="checklist"><div class="checklist-item"><div class="checklist-box checked"></div><div class="checklist-text done">Summons served on defendant</div></div><div class="checklist-item"><div class="checklist-box checked"></div><div class="checklist-text done">Defendant filed a plea (opposed)</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Counterclaim filed (if any)</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Discovery and inspection</div></div></div></div><div class="guide-card"><div class="guide-card-title">&#9878; What is a "defended" divorce?</div><div class="guide-card-text">The other party has filed a plea opposing the divorce or disputing terms. This means the matter will proceed through the full litigation process: pleadings, discovery, pre-trial conference, and potentially a trial. This is more complex and time-consuming than an undefended divorce.</div></div><div class="guide-card"><div class="guide-card-title">&#128161; Can we settle instead?</div><div class="guide-card-text">Yes. Even in a defended divorce, you can reach a settlement agreement at any time. If both parties agree, the settlement can be made an order of court, avoiding a trial. This is usually faster, cheaper, and less stressful.</div></div>';
+}
+
+function renderReportingStep(container) {
+  container.innerHTML = '<div class="wizard-title">Estate Reporting Pack</div><div class="wizard-subtitle">To administer a deceased estate, you must first report the death to the Master's Office. Here is what you need.</div><div class="card"><div class="card-title">&#128203; Required Documents</div><div class="checklist"><div class="checklist-item"><div class="checklist-box checked"></div><div class="checklist-text done">Death Notice (Form J294)</div></div><div class="checklist-item"><div class="checklist-box checked"></div><div class="checklist-text done">Death Certificate</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Marriage Certificate (if applicable)</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Identity Documents (deceased and applicant)</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Will (if the deceased left one)</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Covering Letter to Master's Office</div></div></div></div><div class="guide-card"><div class="guide-card-title">&#127963; Which Master's Office?</div><div class="guide-card-text">You must lodge at the Master's Office in the jurisdiction where the deceased lived. If you are unsure, call the Master's Office and confirm their requirements before lodging — they vary by region.</div></div>';
+}
+
+function renderGenerateStep(container) {
+  const isLabour = matterData.type === 'labour';
+  const isDivorce = matterData.type === 'divorce';
+  const isEstates = matterData.type === 'estates';
+  let title = 'Generate Documents';
+  let subtitle = 'Answer the questions below and we will draft the document for you.';
+  let formHtml = '';
+  if (isLabour) {
+    title = 'Generate Notice of Motion';
+    subtitle = 'This is the formal court document that starts your Labour Court review. We need some basic information to draft it.';
+    formHtml = '<div class="template-form"><div class="form-field"><label>Your Full Name (Applicant)</label><input type="text" id="genApplicant" placeholder="e.g. John Doe"></div><div class="form-field"><label>Respondent Name (Employer/Other Party)</label><input type="text" id="genRespondent" placeholder="e.g. ABC Company"></div><div class="form-field"><label>What relief do you want?</label><select id="genRelief"><option value="">Select relief</option><option value="setaside">Set aside the award (quash it)</option><option value="remit">Remit to CCMA (send back)</option><option value="substitute">Substitute with preferred order</option></select></div><div class="form-field"><label>Labour Court Division</label><select id="genCourt"><option value="">Select division</option><option value="johannesburg">Johannesburg</option><option value="pretoria">Pretoria</option><option value="durban">Durban</option><option value="capetown">Cape Town</option></select></div><button class="btn btn-primary" onclick="generateLabourDoc()">Generate Notice of Motion</button></div>';
+  } else if (isDivorce) {
+    title = 'Generate Settlement Agreement';
+    subtitle = 'A settlement agreement can save you time, money, and stress. Both parties must agree to the terms.';
+    formHtml = '<div class="template-form"><div class="form-field"><label>Your Full Name</label><input type="text" id="genPlaintiff" placeholder="e.g. Jane Doe"></div><div class="form-field"><label>Spouse's Full Name</label><input type="text" id="genDefendant" placeholder="e.g. John Doe"></div><div class="form-field"><label>Marriage Date</label><input type="date" id="genMarriageDate"></div><div class="form-field"><label>Key Settlement Terms (one per line)</label><textarea id="genTerms" rows="4" placeholder="e.g. Property: Wife keeps matrimonial home&#10;Maintenance: Husband pays R5,000/month for 2 years"></textarea></div><button class="btn btn-primary" onclick="generateDivorceDoc()">Generate Settlement Agreement</button></div>';
+  } else if (isEstates) {
+    title = 'Generate Covering Letter';
+    subtitle = 'This letter accompanies your reporting pack when you lodge it at the Master's Office.';
+    formHtml = '<div class="template-form"><div class="form-field"><label>Deceased Full Name</label><input type="text" id="genDeceased" placeholder="e.g. John Smith"></div><div class="form-field"><label>Deceased ID Number</label><input type="text" id="genID" placeholder="e.g. 7601011234087"></div><div class="form-field"><label>Date of Death</label><input type="date" id="genDeathDate"></div><div class="form-field"><label>Your Name (Applicant/Executor)</label><input type="text" id="genApplicantName" placeholder="e.g. Mary Smith"></div><div class="form-field"><label>Relationship to Deceased</label><input type="text" id="genRelationship" placeholder="e.g. Spouse, Child, Executor"></div><button class="btn btn-primary" onclick="generateEstateDoc()">Generate Covering Letter</button></div>';
+  }
+  container.innerHTML = '<div class="wizard-title">' + title + '</div><div class="wizard-subtitle">' + subtitle + '</div>' + formHtml + '<div id="templateOutput" class="template-output-box hidden"></div>';
+}
+
+function generateLabourDoc() {
+  const applicant = document.getElementById('genApplicant').value || '[APPLICANT]';
+  const respondent = document.getElementById('genRespondent').value || '[RESPONDENT]';
+  const relief = document.getElementById('genRelief').value;
+  const court = document.getElementById('genCourt').value;
+  let reliefText = 'the award be reviewed and set aside';
+  if (relief === 'remit') reliefText = 'the matter be remitted to the CCMA for reconsideration';
+  if (relief === 'substitute') reliefText = 'the award be substituted with an order in terms sought by the applicant';
+  const output = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' + (court.toUpperCase() || '[DIVISION]') + '
+
+CASE NUMBER: [TO BE ALLOCATED]
+
+In the matter between:
+
+' + applicant + '                                              Applicant
+
+and
+
+' + respondent + '                                           Respondent
+
+NOTICE OF MOTION
+
+TAKE NOTICE that the above Honourable Court will be moved on a date and time to be assigned by the Registrar, or as soon thereafter as Counsel may be heard, for an order in the following terms:
+
+1. That ' + reliefText + ';
+2. That the Respondent pays the costs of this application;
+3. Such further and alternative relief as this Honourable Court may deem fit.
+
+TAKE FURTHER NOTICE that the affidavit of the Applicant and annexures thereto will be used in support of this application.
+
+DATED at [CITY] on this ______ day of ____________ 2026.
+
+_________________________
+Applicant / Legal Representative
+
+[ADDRESS FOR SERVICE]
+
+TO: The Registrar
+Labour Court
+' + (court.charAt(0).toUpperCase() + court.slice(1) || '[DIVISION]') + '
+
+AND TO: ' + respondent + '
+[Address for service]
+
+---
+
+&#9888; IMPORTANT: This is a template generated by Advome based on your inputs. It must be reviewed, verified, and adapted before filing. Advome does not guarantee compliance with current Labour Court Rules.';
+  showTemplateOutput(output);
+}
+
+function generateDivorceDoc() {
+  const plaintiff = document.getElementById('genPlaintiff').value || '[PLAINTIFF]';
+  const defendant = document.getElementById('genDefendant').value || '[DEFENDANT]';
+  const marriageDate = document.getElementById('genMarriageDate').value || '[DATE]';
+  const terms = document.getElementById('genTerms').value || '[TERMS TO BE COMPLETED]';
+  const termList = terms.split('
+').filter(t => t.trim()).map(t => '&#8226; ' + t.trim()).join('
+');
+  const output = 'SETTLEMENT AGREEMENT
+
+Between:
+
+' + plaintiff + ' (hereinafter "the Plaintiff")
+
+and
+
+' + defendant + ' (hereinafter "the Defendant")
+
+---
+
+1.  MARRIAGE
+
+The parties were married to each other on ' + marriageDate + ' in community of property / out of community of property [delete whichever is inapplicable].
+
+2.  IRRETRIEVABLE BREAKDOWN
+
+The marriage has broken down irretrievably. Both parties agree that the marriage should be dissolved.
+
+3.  SETTLEMENT TERMS
+
+' + termList + '
+
+4.  CHILDREN
+
+[To be completed: Custody, access, and maintenance arrangements for any minor children.]
+
+5.  DIVISION OF ASSETS
+
+[To be completed: Detailed list of assets and liabilities and how they will be divided.]
+
+6.  MAINTENANCE
+
+[To be completed: Any maintenance obligations, including amount, duration, and review dates.]
+
+7.  COSTS
+
+Each party shall bear their own costs / The [Plaintiff/Defendant] shall pay the costs of [the other party/both parties]. [Delete whichever is inapplicable]
+
+8.  GENERAL
+
+This agreement constitutes the full and final settlement of all claims between the parties arising from the marriage.
+
+---
+
+Signed at ________________ on this ______ day of ________________ 2026.
+
+_________________________        _________________________
+Plaintiff                          Defendant
+
+WITNESSES:
+
+1. _________________________
+   Name: _________________________
+   Address: _________________________
+
+2. _________________________
+   Name: _________________________
+   Address: _________________________
+
+---
+
+&#9888; IMPORTANT: This is a draft template generated by Advome. Both parties must review it carefully, preferably with independent legal advice, before signing. Once signed, this agreement can be made an order of court.';
+  showTemplateOutput(output);
+}
+
+function generateEstateDoc() {
+  const deceased = document.getElementById('genDeceased').value || '[DECEASED]';
+  const id = document.getElementById('genID').value || '[ID]';
+  const deathDate = document.getElementById('genDeathDate').value || '[DATE]';
+  const applicant = document.getElementById('genApplicantName').value || '[APPLICANT]';
+  const relationship = document.getElementById('genRelationship').value || '[RELATIONSHIP]';
+  const output = 'COVERING LETTER
+
+Master of the High Court
+[Address]
+
+Date: ' + new Date().toLocaleDateString('en-ZA') + '
+
+Dear Sir/Madam,
+
+RE: ESTATE LATE: ' + deceased + '
+IDENTITY NUMBER: ' + id + '
+DATE OF DEATH: ' + deathDate + '
+
+I, ' + applicant + ', being the ' + relationship.toLowerCase() + ' of the deceased, hereby lodge the following documents in respect of the above-mentioned estate:
+
+1.  Death Notice (Form J294)
+2.  Death Certificate
+3.  Marriage Certificate (if applicable)
+4.  Identity Documents of deceased and applicant
+5.  Will (if applicable)
+6.  [Any other required documents]
+
+I request that Letters of Executorship / Letters of Administration [delete whichever is inapplicable] be issued to me in respect of this estate.
+
+I declare that the information provided is true and correct to the best of my knowledge.
+
+Yours faithfully,
+
+_________________________
+' + applicant + '
+
+Contact Details:
+Address: [Your address]
+Phone: [Your phone]
+Email: [Your email]
+
+---
+
+&#9888; IMPORTANT: This is a template generated by Advome. You must verify the current requirements with the specific Master's Office before lodging. Requirements vary by region and change over time.';
+  showTemplateOutput(output);
+}
+
+function showTemplateOutput(content) {
+  const outputDiv = document.getElementById('templateOutput');
+  outputDiv.textContent = content;
+  outputDiv.classList.remove('hidden');
+  outputDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderChildrenStep(container) {
+  container.innerHTML = '<div class="wizard-title">Children and Parenting Plan</div><div class="wizard-subtitle">If you have minor children, you need a parenting plan. This is required by law and must be in the best interests of the child.</div><div class="template-form"><div class="form-field"><label>Father's Full Name</label><input type="text" id="ppFather" placeholder="Full name"></div><div class="form-field"><label>Mother's Full Name</label><input type="text" id="ppMother" placeholder="Full name"></div><div class="form-field"><label>Child/Children Names and Ages</label><input type="text" id="ppChildren" placeholder="e.g. Child A (age 8), Child B (age 5)"></div><div class="form-field"><label>Primary Residence</label><select id="ppResidence"><option value="">Select arrangement</option><option value="mother">With mother primarily</option><option value="father">With father primarily</option><option value="shared">Shared / alternating</option></select></div><div class="form-field"><label>Contact Schedule for Non-Resident Parent</label><textarea id="ppContact" rows="3" placeholder="e.g. Every second weekend, half of school holidays"></textarea></div><button class="btn btn-primary" onclick="generateParentingPlan()">Generate Parenting Plan</button></div><div id="ppOutput" class="template-output-box hidden"></div><div class="guide-card" style="margin-top:24px;"><div class="guide-card-title">&#128104;&#8205;&#9878;&#65039; Family Advocate Approval</div><div class="guide-card-text">In contested matters, the <strong>Family Advocate</strong> must approve the parenting plan. The Family Advocate investigates and makes recommendations in the best interests of the child. You can contact the Family Advocate's office at your local Magistrate's Court.</div></div>';
+}
+
+function generateParentingPlan() {
+  const father = document.getElementById('ppFather').value || '[FATHER]';
+  const mother = document.getElementById('ppMother').value || '[MOTHER]';
+  const children = document.getElementById('ppChildren').value || '[CHILDREN]';
+  const residence = document.getElementById('ppResidence').value;
+  const contact = document.getElementById('ppContact').value || '[CONTACT SCHEDULE]';
+  let residenceText = '[RESIDENCE ARRANGEMENT TO BE COMPLETED]';
+  if (residence === 'mother') residenceText = 'The children shall primarily reside with the mother, with the father having contact as set out below.';
+  if (residence === 'father') residenceText = 'The children shall primarily reside with the father, with the mother having contact as set out below.';
+  if (residence === 'shared') residenceText = 'The children shall reside alternately with each parent, with specific dates and times to be agreed upon and recorded in a calendar.';
+  const output = 'PARENTING PLAN
+
+In the matter between:
+
+' + father + ' (Father)
+
+and
+
+' + mother + ' (Mother)
+
+Children: ' + children + '
+
+---
+
+1.  LIVING ARRANGEMENTS
+
+' + residenceText + '
+
+2.  CONTACT SCHEDULE
+
+' + contact + '
+
+3.  DECISION-MAKING
+
+Both parents shall consult on major decisions regarding the children's education, health, religion, and welfare.
+
+4.  COMMUNICATION
+
+The parents shall communicate respectfully and in the best interests of the children.
+
+5.  DISPUTE RESOLUTION
+
+Any disputes shall first be referred to mediation. If mediation fails, the Family Advocate or court may be approached.
+
+6.  REVIEW
+
+This plan shall be reviewed annually or when circumstances change significantly.
+
+---
+
+Signed at ________________ on this ______ day of ________________ 2026.
+
+_________________________        _________________________
+Father                           Mother
+
+---
+
+&#9888; IMPORTANT: This is a draft template generated by Advome. A parenting plan must be in the best interests of the child. In contested matters, the Family Advocate must approve the plan. Both parents should seek legal advice before signing.';
+  const outputDiv = document.getElementById('ppOutput');
+  outputDiv.textContent = output;
+  outputDiv.classList.remove('hidden');
+  outputDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderLodgementStep(container) {
+  container.innerHTML = '<div class="wizard-title">Lodgement at Master's Office</div><div class="wizard-subtitle">You are now ready to lodge the reporting pack. Here is what happens next.</div><div class="action-steps"><div class="action-step"><div class="action-step-num">1</div><div class="action-step-content"><div class="action-step-title">Prepare the complete pack</div><div class="action-step-desc">Ensure all documents are complete, certified where required, and in the correct order.</div></div></div><div class="action-step"><div class="action-step-num">2</div><div class="action-step-content"><div class="action-step-title">Print the covering letter</div><div class="action-step-desc">Use the covering letter generated in the previous step. Sign it.</div></div></div><div class="action-step"><div class="action-step-num">3</div><div class="action-step-content"><div class="action-step-title">Go to the Master's Office</div><div class="action-step-desc">Take the pack to the correct Master's Office. Arrive early — queues can be long.</div></div></div><div class="action-step"><div class="action-step-num">4</div><div class="action-step-content"><div class="action-step-title">Submit and get a receipt</div><div class="action-step-desc">The Master's Office will give you a receipt. Keep this safe — it has your reference number.</div></div></div><div class="action-step"><div class="action-step-num">5</div><div class="action-step-content"><div class="action-step-title">Wait for Letters of Executorship</div><div class="action-step-desc">This can take 2-8 weeks. You will be notified when ready for collection.</div></div></div></div><div class="guide-card" style="margin-top:24px;"><div class="guide-card-title">&#128222; Master's Office Contact</div><div class="guide-card-text">Before going, call the Master's Office to confirm:<br>&#8226; Current requirements (they change)<br>&#8226; Operating hours<br>&#8226; Whether you need an appointment<br>&#8226; Exact fees payable<br><br><strong>Pretoria:</strong> 012 315 1756<br><strong>Johannesburg:</strong> 011 375 1000<br><strong>Durban:</strong> 031 372 5200<br><strong>Cape Town:</strong> 021 441 8000</div></div>';
+}
+
+function renderReviewStep(container) {
+  container.innerHTML = '<div class="wizard-title">Review Your Document</div><div class="wizard-subtitle">Before you file or use this document, you must review it carefully. Check every detail.</div><div class="guide-card"><div class="guide-card-title">&#9989; Review Checklist</div><div class="guide-card-text"><div class="checklist"><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">All names spelled correctly</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Dates and amounts are accurate</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Case numbers and references are correct</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Addresses and contact details are current</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">All [bracketed placeholders] have been replaced</div></div><div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">The document complies with current court rules</div></div></div></div></div><div class="guide-card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;"><div class="guide-card-title">&#9888; Critical Warning</div><div class="guide-card-text"><strong>This document was generated by a computer, not a lawyer.</strong> It is a starting point only. You must verify every fact, check every legal reference, and ensure compliance with current rules before filing. <strong>If you are unsure about anything, consult an attorney before proceeding.</strong></div></div><div class="guide-card"><div class="guide-card-title">&#128190; Save Your Document</div><div class="guide-card-text">Copy the generated document from the output box above and paste it into a Word document or Google Doc. Edit it there, save it as a PDF, and keep a backup copy.</div></div>';
+}
+
+function renderNextStepsStep(container) {
+  const isLabour = matterData.type === 'labour';
+  const isDivorce = matterData.type === 'divorce';
+  const isEstates = matterData.type === 'estates';
+  let steps = [];
+  if (isLabour) {
+    steps = [
+      { title: 'File the Notice of Motion', desc: 'Take the generated document to the Labour Court or file via Court Online', action: 'File' },
+      { title: 'Serve the Respondent', desc: 'The respondent must be properly served. Keep proof of service.', action: 'Serve' },
+      { title: 'Prepare the Record', desc: 'Request the arbitration recording from CCMA and transcribe it', action: 'Prepare' },
+      { title: 'Draft Heads of Argument', desc: 'Structure your legal argument with authorities and record references', action: 'Draft' },
+      { title: 'Set Down for Hearing', desc: 'Enrol the matter with the Registrar and wait for a hearing date', action: 'Enrol' }
+    ];
+  } else if (isDivorce) {
+    steps = [
+      { title: 'File Settlement Agreement', desc: 'If settled, file the agreement with the court for approval', action: 'File' },
+      { title: 'Submit Parenting Plan', desc: 'Submit to the Family Advocate for approval (if contested)', action: 'Submit' },
+      { title: 'Discovery and Inspection', desc: 'Exchange documents and information with the other party', action: 'Exchange' },
+      { title: 'Pre-Trial Conference', desc: 'Meet with the judge to narrow issues and explore settlement', action: 'Attend' },
+      { title: 'Trial (if not settled)', desc: 'Present evidence and arguments in court', action: 'Prepare' }
+    ];
+  } else if (isEstates) {
+    steps = [
+      { title: 'Receive Letters of Executorship', desc: 'Collect from Master's Office when ready', action: 'Collect' },
+      { title: 'Open Estate Bank Account', desc: 'Use the Letters to open a dedicated account', action: 'Open' },
+      { title: 'Advertise for Creditors', desc: 'Place advertisements in newspapers and Government Gazette', action: 'Advertise' },
+      { title: 'Prepare L and D Account', desc: 'List all assets, liabilities, and proposed distribution', action: 'Prepare' },
+      { title: 'Distribute and Close', desc: 'Pay heirs and creditors, then close the estate', action: 'Distribute' }
+    ];
+  }
+  container.innerHTML = '<div class="wizard-title">Your Next Steps</div><div class="wizard-subtitle">Here is your roadmap. Each step builds on the previous one. Take them one at a time.</div><div class="action-steps">' + steps.map((step, i) => '<div class="action-step"><div class="action-step-num">' + (i + 1) + '</div><div class="action-step-content"><div class="action-step-title">' + step.title + '</div><div class="action-step-desc">' + step.desc + '</div></div><span class="pill pill-blue">' + step.action + '</span></div>').join('') + '</div><div class="guide-card" style="margin-top:24px;"><div class="guide-card-title">&#128202; Track Your Progress</div><div class="guide-card-text">Return to your <strong>Dashboard</strong> to track deadlines, upload documents, and monitor your matter's health score. The platform will remind you of upcoming deadlines.</div><div class="guide-card-action"><a href="dashboard.html" class="btn btn-primary btn-sm">Open Dashboard &rarr;</a></div></div><div class="guide-card"><div class="guide-card-title">&#128084; Need Professional Help?</div><div class="guide-card-text">At any point, you can connect with a registered attorney through the Attorney Portal. They can review your documents, advise on strategy, or represent you if needed.</div><div class="guide-card-action"><a href="attorney.html" class="btn btn-outline btn-sm">Find an Attorney &rarr;</a></div></div><div class="text-center" style="margin-top:32px;"><button class="btn btn-success btn-lg" onclick="finishWizard()">&#9989; Finish and Save to Dashboard</button></div>';
+}
+
+function finishWizard() {
+  alert('Your matter has been saved to your Dashboard. You can track progress, set deadlines, and upload documents there.');
+  window.location.href = 'dashboard.html';
+}
+
+function nextStep() {
+  if (!currentWorkflow) return;
+  if (currentStep < currentWorkflow.length - 1) {
+    currentStep++;
+    renderStep();
+  } else {
+    finishWizard();
+  }
+}
+
+function prevStep() {
+  if (!currentWorkflow) return;
+  if (currentStep > 0) {
+    currentStep--;
+    renderStep();
+  }
+}
+
+renderMatterSelection();
+</script>
+
+</body>
+</html>
