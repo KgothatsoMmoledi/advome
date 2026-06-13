@@ -18,6 +18,8 @@
       --good: #0f9d58;
       --warn: #d97706;
       --danger: #dc2626;
+      --success: #ecfdf5;
+      --warning: #fff7e7;
       --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
       --radius: 24px;
       --max: 1240px;
@@ -130,6 +132,62 @@
       font-size: 0.93rem;
     }
 
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
+    .panel p { color: var(--muted); margin: 0; }
+
+    .status-top {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .status-label {
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      font-size: 0.84rem; font-weight: 700;
+    }
+    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
+    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
+    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
+
+    .status-grid {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
+    }
+    .mini {
+      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+    }
+    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
+    .mini strong { font-size: 1rem; }
+
+    .section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid rgba(219,231,245,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
+    }
+    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -159,29 +217,14 @@
     .pill-row {
       display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
     }
-    .pill {
+    .pill-tag {
       padding: 7px 10px; border-radius: 999px; background: #fff; border: 1px solid #e6eef8;
       color: #374151; font-size: 0.86rem; font-weight: 600;
     }
-    .pill.red { background: #fff1f1; border-color: #ffd4d4; color: #a61b1b; }
-    .pill.orange { background: #fff7e8; border-color: #ffe1a8; color: #9a5800; }
-    .pill.green { background: #edfdf3; border-color: #caeed8; color: #146b37; }
-    .pill.blue { background: #eef4ff; border-color: #d7e4f8; color: var(--brand-2); }
-
-    .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .section-head {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
-    }
-    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
-    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+    .pill-tag.red { background: #fff1f1; border-color: #ffd4d4; color: #a61b1b; }
+    .pill-tag.orange { background: #fff7e8; border-color: #ffe1a8; color: #9a5800; }
+    .pill-tag.green { background: #edfdf3; border-color: #caeed8; color: #146b37; }
+    .pill-tag.blue { background: #eef4ff; border-color: #d7e4f8; color: var(--brand-2); }
 
     .split {
       display: grid;
@@ -240,6 +283,21 @@
     }
     .activity li { margin: 0; }
 
+    .taskbar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .task {
+      border: 1px solid #e6eef8;
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+    }
+    .task strong { display: block; margin-bottom: 4px; }
+    .task span { color: var(--muted); font-size: 0.92rem; }
+
     .footer {
       margin-top: 28px;
       color: var(--muted);
@@ -249,7 +307,7 @@
     }
 
     @media (max-width: 980px) {
-      .grid, .split { grid-template-columns: 1fr; }
+      .grid, .split, .hero-grid, .taskbar { grid-template-columns: 1fr; }
       .topbar { border-radius: 22px; position: static; }
       .nav { justify-content: flex-start; }
       h1 { max-width: none; }
@@ -281,29 +339,86 @@
         <a href="start.html">Matter Portal</a>
         <a href="documents.html">Documents</a>
         <a href="ccma.html">CCMA</a>
-        <a href="estates.html">Estates</a>
+        <a href="estates-hub.html">Estates</a>
         <a href="divorce.html">Divorce</a>
         <a href="attorney.html">Attorney Portal</a>
       </nav>
     </header>
 
     <main class="hero">
-      <div class="eyebrow">Command centre</div>
-      <h1>Case Dashboard</h1>
-      <p class="subtitle">
-        Monitor active matters, current stage, next step, missing documents, deadlines, and hearing readiness in one view.
-      </p>
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Command centre</div>
+          <h1>Case Dashboard</h1>
+          <p class="subtitle">
+            Monitor active matters, current stage, next step, missing documents, deadlines, and hearing readiness in one view.
+          </p>
 
-      <div class="hero-actions">
-        <a class="button primary" href="start.html">Open Matter Portal</a>
-        <a class="button" href="ccma.html">Go to CCMA</a>
-        <a class="button" href="estates.html">Go to Estates</a>
-        <a class="button" href="divorce.html">Go to Divorce</a>
-        <a class="button" href="attorney.html">Attorney Portal</a>
+          <div class="hero-actions">
+            <a class="button primary" href="start.html">Open Matter Portal</a>
+            <a class="button" href="ccma.html">Go to CCMA</a>
+            <a class="button" href="estates-hub.html">Go to Estates</a>
+            <a class="button" href="divorce.html">Go to Divorce</a>
+            <a class="button" href="attorney.html">Attorney Portal</a>
+          </div>
+
+          <div class="disclaimer">
+            Advome provides procedural assistance and legal information. It does not provide legal advice.
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="status-top">
+            <div>
+              <div class="status-label">Portfolio health</div>
+              <h2 style="margin-top:6px; font-size:1.45rem;">Mixed attention</h2>
+            </div>
+            <span class="pill warn">Needs focus</span>
+          </div>
+
+          <div class="status-grid">
+            <div class="mini">
+              <span>Active matters</span>
+              <strong>4</strong>
+            </div>
+            <div class="mini">
+              <span>Urgent items</span>
+              <strong>3</strong>
+            </div>
+            <div class="mini">
+              <span>Ready matters</span>
+              <strong>1</strong>
+            </div>
+            <div class="mini">
+              <span>Fee / access</span>
+              <strong>Free tier</strong>
+            </div>
+          </div>
+
+          <div class="meter" style="margin-top:14px;">
+            <strong>Platform readiness</strong>
+            <div class="meter"><div style="width:72%"></div></div>
+          </div>
+        </aside>
       </div>
 
-      <div class="disclaimer">
-        Advome provides procedural assistance and legal information. It does not provide legal advice.
+      <div class="taskbar" aria-label="Task bar">
+        <div class="task">
+          <strong>1. Review matters</strong>
+          <span>Open the most urgent file first.</span>
+        </div>
+        <div class="task">
+          <strong>2. Check documents</strong>
+          <span>Confirm what is missing or unreadable.</span>
+        </div>
+        <div class="task">
+          <strong>3. Confirm next step</strong>
+          <span>Use the dashboard to move the file forward.</span>
+        </div>
+        <div class="task">
+          <strong>4. Ask a question</strong>
+          <span>Use the built-in help panel for guidance.</span>
+        </div>
       </div>
     </main>
 
@@ -317,9 +432,9 @@
           </div>
         </div>
         <div class="pill-row">
-          <span class="pill red">Critical</span>
-          <span class="pill blue">Plea due</span>
-          <span class="pill">Children involved</span>
+          <span class="pill-tag red">Critical</span>
+          <span class="pill-tag blue">Plea due</span>
+          <span class="pill-tag">Children involved</span>
         </div>
         <a class="button primary" href="divorce.html">Open Divorce</a>
       </article>
@@ -333,9 +448,9 @@
           </div>
         </div>
         <div class="pill-row">
-          <span class="pill orange">Attention</span>
-          <span class="pill blue">Review clock</span>
-          <span class="pill">Record pending</span>
+          <span class="pill-tag orange">Attention</span>
+          <span class="pill-tag blue">Review clock</span>
+          <span class="pill-tag">Record pending</span>
         </div>
         <a class="button primary" href="award.html">Open CCMA Award</a>
       </article>
@@ -349,11 +464,11 @@
           </div>
         </div>
         <div class="pill-row">
-          <span class="pill orange">Attention</span>
-          <span class="pill blue">Master’s Office</span>
-          <span class="pill">Stamped copy pending</span>
+          <span class="pill-tag orange">Attention</span>
+          <span class="pill-tag blue">Master’s Office</span>
+          <span class="pill-tag">Stamped copy pending</span>
         </div>
-        <a class="button primary" href="estates.html">Open Estates</a>
+        <a class="button primary" href="estates-hub.html">Open Estates</a>
       </article>
 
       <article class="card">
@@ -365,9 +480,9 @@
           </div>
         </div>
         <div class="pill-row">
-          <span class="pill green">Healthy</span>
-          <span class="pill">Profile</span>
-          <span class="pill">Promotion tier</span>
+          <span class="pill-tag green">Healthy</span>
+          <span class="pill-tag">Profile</span>
+          <span class="pill-tag">Promotion tier</span>
         </div>
         <a class="button" href="attorney.html">Open Attorney Portal</a>
       </article>
@@ -449,7 +564,7 @@
               <strong>Estates matter</strong>
               <span>Draft covering letter, attach the reporting pack, and lodge at the Master.</span>
             </div>
-            <a class="status blue" href="estates.html">Continue</a>
+            <a class="status blue" href="estates-hub.html">Continue</a>
           </div>
           <div class="matter-item">
             <div>
@@ -524,7 +639,9 @@
     </section>
 
     <div class="footer">
-      Advome is designed to support access to justice and reduce confusion around litigation procedure.
+      Advome provides self-representation assistance, procedural guidance, workflow management and access to legal information through structured templates and stage-based workflows. It does not provide legal advice. Users remain responsible for complying with applicable legislation, rules, directives and obtaining professional advice where necessary.<br><br>
+      "Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing before a court or, where appropriate, another independent and impartial tribunal or forum."<br>
+      — Section 34, Constitution of the Republic of South Africa, 1996.
     </div>
   </div>
 </body>
