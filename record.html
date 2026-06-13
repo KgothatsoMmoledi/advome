@@ -1,510 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Record &amp; Transcript Centre</title>
-  <style>
-    :root {
-      --bg: #f4f8ff;
-      --panel: rgba(255,255,255,0.92);
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --success: #ecfdf5;
-      --warning: #fff8e7;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      line-height: 1.5;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
-
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
-      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky; top: 14px; z-index: 20;
-    }
-
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: white; display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
-    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
-
-    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .nav a {
-      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
-      border: 1px solid transparent; transition: 0.2s ease;
-    }
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
-    }
-
-    .hero {
-      margin-top: 28px;
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
-      align-items: stretch;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-main { padding: 34px; position: relative; overflow: hidden; }
-    .hero-main::after {
-      content: "";
-      position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
-      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
-      border: 1px solid #d6e3ff;
-    }
-
-    .hero h1 {
-      margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
-    }
-
-    .hero p {
-      margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 66ch;
-    }
-
-    .hero-actions {
-      margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;
-    }
-
-    .btn {
-      border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white;
-      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-    .btn-primary:hover { transform: translateY(-1px); }
-
-    .btn-secondary {
-      background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
-    }
-    .btn-secondary:hover { background: #f7fbff; }
-
-    .status-card { padding: 22px; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
-
-    .status-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
-
-    .status-label {
-      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
-    }
-
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
-    .pill.blue { background: rgba(30,94,255,0.10); color: var(--brand-2); }
-
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
-
-    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
-    .mini strong { font-size: 1rem; }
-
-    .section {
-      margin-top: 22px;
-      padding: 24px;
-    }
-
-    .section-header {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
-    }
-
-    .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(160px, 1fr));
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-
-    .step {
-      min-width: 160px;
-      padding: 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-      position: relative;
-    }
-
-    .step.active {
-      border-color: #bfd1ff;
-      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
-      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
-    }
-
-    .step .num {
-      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800;
-      background: #eef4ff; color: var(--brand-2); margin-bottom: 10px;
-    }
-
-    .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
-
-    .step strong { display: block; margin-bottom: 4px; }
-    .step span { color: var(--muted); font-size: 0.88rem; }
-
-    .grid-2 {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
-    }
-
-    .grid-3 {
-      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px;
-    }
-
-    .panel {
-      padding: 22px;
-    }
-
-    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
-    .panel p { margin: 0; color: var(--muted); }
-
-    .feature-list {
-      margin: 16px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .feature-list li {
-      display: flex; gap: 12px; align-items: flex-start;
-      padding: 14px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
-    }
-
-    .dot {
-      width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; background: var(--brand);
-      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
-      flex: 0 0 auto;
-    }
-
-    .feature-list strong { display: block; margin-bottom: 2px; }
-    .feature-list span { color: var(--muted); font-size: 0.92rem; }
-
-    .question-box {
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-
-    .q-list {
-      display: grid; gap: 10px; margin-top: 16px;
-    }
-
-    .q-item {
-      padding: 14px 16px; background: white; border: 1px solid #e6eef8; border-radius: 16px;
-      display: flex; justify-content: space-between; gap: 14px; align-items: center;
-    }
-
-    .q-item span { color: var(--muted); font-size: 0.92rem; }
-    .q-item strong { display: block; }
-
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-    }
-
-    .meter-bar {
-      height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px;
-    }
-
-    .meter-bar > div {
-      height: 100%; width: 50%; border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand), var(--accent));
-    }
-
-    .footer-note {
-      margin: 22px 0 30px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      border: 1px solid #e6eef8;
-      background: rgba(255,255,255,0.9);
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
-    .callout {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: #f5fbff;
-      border: 1px solid #cfe9fb;
-      color: #0d5c8b;
-      margin-top: 16px;
-      font-weight: 600;
-    }
-
-    @media (max-width: 1024px) {
-      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      .timeline { grid-template-columns: repeat(6, 220px); }
-    }
-
-    @media (max-width: 640px) {
-      .shell { padding: 16px; }
-      .hero-main, .status-card, .section, .panel { padding: 18px; }
-      .hero-actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-      .status-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Record & Transcript</title>
+<link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>South African legal workflow intelligence</span>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="start.html">Start Matter</a>
-        <a href="ccma.html">CCMA</a>
-        <a href="motion.html">Motion</a>
-        <a class="active" href="record.html">Record</a>
-        <a href="heads.html">Heads</a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <div class="card hero-main">
-        <div class="eyebrow">Record &amp; Transcript Centre</div>
-        <h1>Manage the review record under Labour Court Rule 37(12) and Rule 37(13).</h1>
-        <p>
-          This page carries the review record from arbitration into Labour Court format. The workflow should
-          distinguish between the necessary portions of the record and, where the challenge turns on
-          unreasonableness or irrationality, the full record. The page should also make clear that the record
-          must be properly prepared, paginated, and uploaded on Court Online.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#record-start">Continue Record Preparation</a>
-          <a class="btn btn-secondary" href="motion.html">Back to Motion</a>
-        </div>
-      </div>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Self-representation assistance</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="start.html" class="nav-link">Start</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="ccma.html" class="nav-link">CCMA</a>
+    <a href="award.html" class="nav-link">Award</a>
+    <a href="ccma-review.html" class="nav-link">Review</a>
+    <a href="motion.html" class="nav-link">Motion</a>
+    <a href="record.html" class="nav-link active">Record</a>
+    <a href="divorce.html" class="nav-link">Divorce</a>
+    <a href="estates-hub.html" class="nav-link">Estates</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
 
-      <aside class="card status-card">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Case Health</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Record required</h2>
-          </div>
-          <span class="pill warn">Urgent</span>
-        </div>
-        <div class="status-grid">
-          <div class="mini">
-            <span>Current stage</span>
-            <strong>Record and transcript</strong>
-          </div>
-          <div class="mini">
-            <span>Next step</span>
-            <strong>Prepare review bundle</strong>
-          </div>
-          <div class="mini">
-            <span>Deadline risk</span>
-            <strong>Transcript / record clock</strong>
-          </div>
-          <div class="mini">
-            <span>Missing items</span>
-            <strong>Audio, transcript, pages</strong>
-          </div>
-        </div>
-      </aside>
-    </section>
+<div class="container">
 
-    <section class="card section" id="record-start">
-      <div class="section-header">
-        <div>
-          <div class="smallcaps">Review chain</div>
-          <h2 class="section-title">The record is the backbone of the review</h2>
-        </div>
-        <p>The page should show progress at a glance and guide the user through the steps needed before heads of argument.</p>
-      </div>
+  <div class="page-header">
+    <h1>Record & Transcript</h1>
+    <p>Manage the review record under Labour Court Rule 37(12) and Rule 37(13). The record is the foundation of your review argument.</p>
+  </div>
 
-      <div class="callout">
-        In section 145 review proceedings, the Commissioner's digital recording is the base material for the record. The page should make the transcription rules visible, then move the user to the next stage once the record is ready.
-      </div>
+  <!-- Compliance Banner -->
+  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
+    <div class="card-title">
+      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
+      Record Requirements Under Labour Court Rules
+    </div>
+    <p style="font-size:14px;color:#713f12;">
+      Advome provides the procedural framework for record preparation. You remain responsible for ensuring the record complies with 
+      <strong>Rule 37(12)</strong> (necessary portions vs complete record) and <strong>Rule 37(13)</strong> (Court Online upload requirements). 
+      Check the current version of the Labour Court Rules before filing.
+    </p>
+  </div>
 
-      <div class="timeline" role="list" aria-label="Review timeline" style="margin-top:16px;">
-        <div class="step" role="listitem">
-          <div class="num">1</div>
-          <strong>Review</strong>
-          <span>Choose to challenge the award.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">2</div>
-          <strong>Motion</strong>
-          <span>Launch the Labour Court application.</span>
-        </div>
-        <div class="step active" role="listitem">
-          <div class="num">3</div>
-          <strong>Record</strong>
-          <span>Prepare the necessary portions or the full record.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">4</div>
-          <strong>Heads</strong>
-          <span>Prepare arguments and authorities.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">5</div>
-          <strong>Set-down</strong>
-          <span>Track enrolment and hearing allocation.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">6</div>
-          <strong>Finalisation</strong>
-          <span>Close after judgment or settlement.</span>
-        </div>
-      </div>
-    </section>
+  <!-- Timeline — CORRECTED: Record is step 5 -->
+  <div class="timeline">
+    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">2</span>Award</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">3</span>Review Decision</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">4</span>Motion & Affidavit</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step active"><span class="num">5</span>Record</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">6</span>Heads</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">8</span>Finalisation</div>
+  </div>
 
-    <section class="grid-2">
-      <article class="card panel">
-        <div class="smallcaps">Rule 37 workflow</div>
-        <h3>What must be tracked</h3>
-        <ul class="feature-list">
-          <li><div class="dot"></div><div><strong>Rule 37(12): necessary portions</strong><span>Where the review turns on ordinary record issues, the applicant should transcribe the necessary portions needed for the review.</span></div></li>
-          <li><div class="dot"></div><div><strong>Rule 37(12): complete record when required</strong><span>If the applicant argues the decision was unreasonable or irrational, the complete record should be transcribed and certified true and correct.</span></div></li>
-          <li><div class="dot"></div><div><strong>Rule 37(13): preparation</strong><span>The record must be properly prepared for filing.</span></div></li>
-          <li><div class="dot"></div><div><strong>Rule 37(13): pagination and upload</strong><span>The transcribed record and PDF documents should be paginated and uploaded onto Court Online.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Record readiness meter</div>
-        <h3>Simple progress indicator</h3>
-        <p>Make missing pieces visible so the user knows exactly what still needs to be done.</p>
-        <div class="meter">
-          <strong>Record readiness</strong>
-          <div class="meter-bar"><div></div></div>
-          <p style="margin-top:10px;">50% complete</p>
-        </div>
-        <div class="callout">
-          If the record is incomplete or unclear, the review cannot move cleanly to argument and set-down.
-        </div>
-      </article>
-    </section>
-
-    <section class="grid-3" style="margin-top:18px;">
-      <article class="card panel">
-        <div class="smallcaps">Transcript centre</div>
-        <h3>Transcript actions</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>Speech-to-text</strong><span>Future feature for automatic transcription.</span></div></li>
-          <li><div class="dot"></div><div><strong>Editable transcript</strong><span>Allow the user to clean up the transcript text.</span></div></li>
-          <li><div class="dot"></div><div><strong>Search transcript</strong><span>Find witnesses, evidence, and dates quickly.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Questions panel</div>
-        <h3>Suggested prompts</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>Was the arbitration recorded?</strong><span>Yes, no, or partial.</span></div></li>
-          <li><div class="dot"></div><div><strong>Do you have audio?</strong><span>Upload raw audio or flag missing files.</span></div></li>
-          <li><div class="dot"></div><div><strong>Has the transcript been edited?</strong><span>Track whether the draft is ready.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Next step</div>
-        <h3>Move to heads of argument</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>Once the record is ready</strong><span>The next page should handle heads of argument and authorities.</span></div></li>
-          <li><div class="dot"></div><div><strong>Bundle quality matters</strong><span>The page should keep the review file neat and readable.</span></div></li>
-        </ul>
-        <div class="hero-actions" style="margin-top:18px;">
-          <a class="btn btn-primary" href="heads.html">Continue to Heads</a>
-          <a class="btn btn-secondary" href="motion.html">Back to Motion</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="grid-2" style="margin-top:18px;">
-      <article class="card panel question-box">
-        <div class="smallcaps">Missing documents</div>
-        <h3>Keep this visible</h3>
-        <div class="q-list">
-          <div class="q-item"><div><strong>Audio</strong><span>Uploaded or pending.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Transcript</strong><span>Missing, drafted, or complete.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Index</strong><span>Complete or missing.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Pagination</strong><span>Complete or missing.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Annexures</strong><span>Linked and filed.</span></div><span>→</span></div>
-        </div>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Build rule</div>
-        <h3>What this page must do</h3>
-        <ul class="feature-list">
-          <li><div class="dot"></div><div><strong>Show progress clearly</strong><span>The user should know how complete the record is.</span></div></li>
-          <li><div class="dot"></div><div><strong>Keep the record tied to the review</strong><span>This is not a separate document store; it belongs to the review chain.</span></div></li>
-          <li><div class="dot"></div><div><strong>Prepare the next page</strong><span>After the record is ready, the workflow moves to heads of argument.</span></div></li>
-        </ul>
-      </article>
-    </section>
-
-    <div class="footer-note">
-      Advome provides self-representation assistance, procedural guidance, workflow management and access to legal information through structured templates and stage-based workflows. It does not provide legal advice. Users remain responsible for complying with applicable legislation, rules, directives and obtaining professional advice where necessary.<br><br>
-      "Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing before a court or, where appropriate, another independent and impartial tribunal or forum."<br>
-      — Section 34, Constitution of the Republic of South Africa, 1996.
+  <!-- Health Meter -->
+  <div class="meter-container">
+    <div class="meter-header">
+      <span class="meter-label">Record Readiness</span>
+      <span class="meter-value" style="color:var(--warning);">45%</span>
+    </div>
+    <div class="meter-bar-bg">
+      <div class="meter-bar-fill medium" style="width:45%"></div>
+    </div>
+    <div class="meter-status attention">
+      <span>⚠️</span> Audio received — transcript pending
     </div>
   </div>
+
+  <div class="grid-2">
+    <!-- Rule 37 Workflow -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
+        Rule 37 Record Requirements
+      </div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-box checked"></div>
+          <div class="checklist-text done">Audio recording received from CCMA</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Transcription completed (Rule 37(12))</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Necessary portions identified</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Complete record prepared (if required)</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Pagination and indexing complete</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Uploaded to Court Online (Rule 37(13))</div>
+        </div>
+      </div>
+      <div class="mt-2">
+        <span class="pill pill-amber">Transcript pending</span>
+        <span class="pill pill-neutral">Index missing</span>
+      </div>
+    </div>
+
+    <!-- Transcript Centre -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#fef3cd;color:#856404;">🎙️</span>
+        Transcript Centre
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+        The Commissioner's digital recording is the base material. It must be transcribed, edited, and certified.
+      </p>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-box checked"></div>
+          <div class="checklist-text done">Audio file uploaded</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Transcription ordered or completed</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Transcript edited and cleaned</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-box"></div>
+          <div class="checklist-text">Certified true and correct</div>
+        </div>
+      </div>
+      <div class="mt-2">
+        <button class="btn btn-secondary btn-sm">Upload Audio</button>
+        <button class="btn btn-outline btn-sm">Order Transcription</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document Detector for Record -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#fef3cd;color:#856404;">📄</span>
+      Detect Record Documents
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+      Upload your transcript, index, or pagination file to verify completeness and detect missing items.
+    </p>
+    <div class="doc-detector" onclick="document.getElementById('recordUpload').click()">
+      <div class="doc-detector-icon">📤</div>
+      <div class="doc-detector-title">Upload Record Document</div>
+      <div class="doc-detector-sub">Transcript, index, or pagination proof</div>
+      <input type="file" id="recordUpload" class="doc-detector-input" accept=".pdf,.doc,.docx" onchange="handleRecordUpload(this)">
+    </div>
+    <div id="recordResult" class="doc-result">
+      <div class="doc-result-header">
+        <span class="doc-result-badge detected" id="recordBadge">DETECTED</span>
+        <span class="doc-result-title" id="recordTitle">Document Type</span>
+      </div>
+      <div class="doc-result-meta" id="recordMeta"></div>
+      <div class="doc-next-steps">
+        <div class="doc-next-steps-title">Detected Status</div>
+        <div id="recordNextSteps"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Record Index Generator -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📑</span>
+      Record Index Generator
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+      Generate a standard index for your review record. Add your documents and the index will auto-number.
+    </p>
+    <div class="template-engine">
+      <div class="template-field">
+        <label>Case Number</label>
+        <input type="text" id="idxCaseNo" placeholder="e.g. JR1234/26">
+      </div>
+      <div class="template-field">
+        <label>Parties</label>
+        <input type="text" id="idxParties" placeholder="e.g. Applicant v Respondent">
+      </div>
+      <div class="template-field">
+        <label>Documents in Record (one per line)</label>
+        <textarea id="idxDocs" rows="4" placeholder="Notice of Motion&#10;Founding Affidavit&#10;Annexure A: Award&#10;Annexure B: Transcript"></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="generateIndex()">Generate Index</button>
+      <div id="idxOutput" class="template-output hidden"></div>
+    </div>
+  </div>
+
+  <!-- Fee Meter -->
+  <div class="fee-meter">
+    <div class="fee-meter-header">
+      <div class="fee-meter-title">
+        <span>💰</span> Record Preparation Costs
+      </div>
+      <div class="fee-total">R 3,500</div>
+    </div>
+    <div class="fee-breakdown">
+      <div class="fee-item paid">
+        <div class="fee-item-label">CCMA Audio Request</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item estimated">
+        <div class="fee-item-label">Transcription</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Certification</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Court Online Upload</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Step -->
+  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
+    <div class="card-title">
+      <span class="icon" style="background:var(--primary);color:white;">🚀</span>
+      Next Step: Heads of Argument
+    </div>
+    <p style="font-size:14px;color:var(--text);margin-bottom:16px;">
+      Once the record is properly prepared, paginated, and uploaded, the workflow moves to <strong>heads of argument and authorities</strong>. 
+      This is where legal argument is structured and case law is attached.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="heads.html" class="btn btn-primary btn-lg">
+        Proceed to Heads of Argument →
+      </a>
+      <a href="motion.html" class="btn btn-secondary btn-lg">
+        ← Back to Motion
+      </a>
+      <a href="attorney.html" class="btn btn-outline btn-lg">
+        👔 Find an Attorney
+      </a>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div class="questions-panel">
+    <h3>Record Questions</h3>
+    <div class="question-item">
+      <div class="question-q">Was the arbitration recorded?</div>
+      <div class="question-a">CCMA arbitrations are digitally recorded. Request the audio from the CCMA regional office.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Do I need the full record or necessary portions?</div>
+      <div class="question-a">Rule 37(12): necessary portions for ordinary review issues. Complete record if arguing unreasonableness or irrationality.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Has the transcript been edited?</div>
+      <div class="question-a">The draft transcript must be checked for accuracy, especially witness names, dates, and technical terms.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. Users remain responsible for complying with Labour Court Rules and the Labour Relations Act. 
+    <strong>Verify all record requirements against the current version of the Labour Court Rules before filing.</strong>
+    <div class="access-message">
+      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function handleRecordUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const resultDiv = document.getElementById('recordResult');
+  const fname = file.name.toLowerCase();
+  let docType = 'Record Document';
+  let status = 'Uploaded';
+  let nextSteps = [];
+
+  if (fname.includes('transcript')) {
+    docType = 'Arbitration Transcript';
+    nextSteps = ['Check for accuracy', 'Edit names and dates', 'Certify true and correct'];
+  } else if (fname.includes('index')) {
+    docType = 'Record Index';
+    nextSteps = ['Verify page numbers', 'Link to transcript sections', 'Check annexure references'];
+  } else if (fname.includes('paginat')) {
+    docType = 'Pagination Proof';
+    nextSteps = ['Verify continuous numbering', 'Check Court Online requirements', 'Upload to system'];
+  } else {
+    docType = 'Record-Related Document';
+    nextSteps = ['Review document type', 'Check completeness', 'Link to record workflow'];
+  }
+
+  document.getElementById('recordTitle').textContent = docType;
+  document.getElementById('recordMeta').innerHTML = `
+    <div class="doc-meta-item"><div class="doc-meta-label">Status</div><div class="doc-meta-value">${status}</div></div>
+    <div class="doc-meta-item"><div class="doc-meta-label">File</div><div class="doc-meta-value">${file.name}</div></div>
+    <div class="doc-meta-item"><div class="doc-meta-label">Size</div><div class="doc-meta-value">${(file.size/1024).toFixed(1)} KB</div></div>
+  `;
+  document.getElementById('recordNextSteps').innerHTML = nextSteps.map((step, i) => 
+    `<div class="doc-next-step"><span class="step-num">${i+1}</span>${step}</div>`
+  ).join('');
+  resultDiv.classList.add('show');
+}
+
+function generateIndex() {
+  const caseNo = document.getElementById('idxCaseNo').value || '[CASE NUMBER]';
+  const parties = document.getElementById('idxParties').value || '[PARTIES]';
+  const docs = document.getElementById('idxDocs').value || 'Notice of Motion
+Founding Affidavit';
+
+  const docList = docs.split('
+').filter(d => d.trim()).map((d, i) => 
+    `${(i + 1).toString().padStart(2, '0')}.  ${d.trim()} .................................................... Page ${(i * 10 + 1)}`
+  ).join('
+');
+
+  const output = `INDEX TO THE RECORD
+
+In the matter between:
+
+${parties}
+
+Case Number: ${caseNo}
+
+${docList}
+
+---
+
+⚠️ IMPORTANT: This index is generated by Advome as a template. You must verify page numbers, add annexure references, and ensure compliance with Labour Court Rule 37 before filing.`;
+
+  const outputDiv = document.getElementById('idxOutput');
+  outputDiv.textContent = output;
+  outputDiv.classList.remove('hidden');
+}
+</script>
+
 </body>
 </html>
