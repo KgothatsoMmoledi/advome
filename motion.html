@@ -1,432 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Motion Proceedings Centre</title>
-  <style>
-    :root {
-      --bg: #f5f9ff;
-      --panel: #ffffff;
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 22px;
-      --max: 1240px;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, #f4f8fd 100%);
-      color: var(--text);
-      line-height: 1.5;
-    }
-    a { color: inherit; text-decoration: none; }
-    .shell { max-width: var(--max); margin: 0 auto; padding: 24px; }
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.9); background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky; top: 14px; z-index: 20;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 42px; height: 42px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: white; display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-    .brand-text { min-width: 0; }
-    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
-    .brand-text span { display: block; font-size: 0.84rem; color: var(--muted); }
-    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .nav a {
-      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
-      border: 1px solid transparent; transition: 0.2s ease;
-    }
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
-    }
-    .hero {
-      margin-top: 28px;
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px;
-      align-items: stretch;
-    }
-    .card {
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .hero-main { padding: 34px; position: relative; overflow: hidden; }
-    .hero-main::after {
-      content: "";
-      position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.13), rgba(30,94,255,0));
-      pointer-events: none;
-    }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
-      background: #eef4ff; color: var(--brand-2); font-size: 0.85rem; font-weight: 600;
-      border: 1px solid #d6e3ff;
-    }
-    .hero h1 {
-      margin: 16px 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.05em;
-    }
-    .hero p { margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 64ch; }
-    .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 700; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s ease;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white;
-      box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-    .btn-primary:hover { transform: translateY(-1px); }
-    .btn-secondary {
-      background: white; color: var(--brand-2); border: 1px solid #d7e4f8;
-    }
-    .btn-secondary:hover { background: #f7fbff; }
-    .status-card { padding: 22px; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
-    .status-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    .status-top h2, .section-title { margin: 0; letter-spacing: -0.03em; }
-    .status-label {
-      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
-    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
-    .mini strong { font-size: 1rem; }
-    .section { margin-top: 22px; padding: 24px; }
-    .section-header {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px;
-    }
-    .section-header p { margin: 0; color: var(--muted); max-width: 70ch; }
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(160px, 1fr));
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-    .step {
-      min-width: 160px;
-      padding: 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-      position: relative;
-    }
-    .step.active {
-      border-color: #bfd1ff;
-      box-shadow: 0 14px 28px rgba(30,94,255,0.08);
-      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
-    }
-    .step .num {
-      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800;
-      background: #eef4ff; color: var(--brand-2); margin-bottom: 10px;
-    }
-    .step.active .num { background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; }
-    .step strong { display: block; margin-bottom: 4px; }
-    .step span { color: var(--muted); font-size: 0.88rem; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
-    .panel { padding: 22px; }
-    .panel h3 { margin: 0 0 10px; letter-spacing: -0.03em; }
-    .panel p { margin: 0; color: var(--muted); }
-    .feature-list {
-      margin: 16px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-    .feature-list li {
-      display: flex; gap: 12px; align-items: flex-start;
-      padding: 14px; border-radius: 16px; background: #fbfdff; border: 1px solid #ebf2fa;
-    }
-    .dot {
-      width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; background: var(--brand);
-      box-shadow: 0 0 0 6px rgba(30,94,255,0.08);
-      flex: 0 0 auto;
-    }
-    .feature-list strong { display: block; margin-bottom: 2px; }
-    .feature-list span { color: var(--muted); font-size: 0.92rem; }
-    .question-box { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
-    .q-list { display: grid; gap: 10px; margin-top: 16px; }
-    .q-item {
-      padding: 14px 16px; background: white; border: 1px solid #e6eef8; border-radius: 16px;
-      display: flex; justify-content: space-between; gap: 14px; align-items: center;
-    }
-    .q-item span { color: var(--muted); font-size: 0.92rem; }
-    .q-item strong { display: block; }
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-    }
-    .meter-bar {
-      height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px;
-    }
-    .meter-bar > div {
-      height: 100%; width: 62%; border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand), var(--accent));
-    }
-    .footer-note {
-      margin: 22px 0 30px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      border: 1px solid #e6eef8;
-      background: rgba(255,255,255,0.9);
-      color: var(--muted);
-      text-align: center;
-    }
-    .smallcaps { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 800; color: var(--brand-2); }
-    .muted { color: var(--muted); }
-    .callout {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: #fffaf1;
-      border: 1px solid #f3dfb4;
-      color: #8a5a00;
-      margin-top: 16px;
-      font-weight: 600;
-    }
-    @media (max-width: 1024px) {
-      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      .timeline { grid-template-columns: repeat(6, 220px); }
-    }
-    @media (max-width: 640px) {
-      .shell { padding: 16px; }
-      .hero-main, .status-card, .section, .panel { padding: 18px; }
-      .hero-actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-      .status-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advome | Motion & Founding Affidavit</title>
+<link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>South African legal workflow intelligence</span>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="start.html">Start Matter</a>
-        <a href="ccma.html">CCMA</a>
-        <a href="review.html">Review</a>
-        <a class="active" href="motion.html">Motion</a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <div class="card hero-main">
-        <div class="eyebrow">Motion Proceedings Centre</div>
-        <h1>Prepare and launch the Labour Court review application.</h1>
-        <p>
-          This page begins the formal court motion sequence after the user decides to challenge the award.
-          It tracks the notice of motion, founding affidavit, service, and the opposition state.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#motion-start">Continue Review</a>
-          <a class="btn btn-secondary" href="review.html">Back to Review</a>
-        </div>
-      </div>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-text">Advome</div>
+      <div class="brand-sub">Self-representation assistance</div>
+    </div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="start.html" class="nav-link">Start</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="ccma.html" class="nav-link">CCMA</a>
+    <a href="award.html" class="nav-link">Award</a>
+    <a href="ccma-review.html" class="nav-link">Review</a>
+    <a href="motion.html" class="nav-link active">Motion</a>
+    <a href="divorce.html" class="nav-link">Divorce</a>
+    <a href="estates-hub.html" class="nav-link">Estates</a>
+    <a href="attorney.html" class="nav-link">Attorney</a>
+    <a href="pricing.html" class="nav-premium">Pricing</a>
+  </nav>
+</header>
 
-      <aside class="card status-card">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Case Health</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Review motion active</h2>
-          </div>
-          <span class="pill danger">Critical</span>
-        </div>
-        <div class="status-grid">
-          <div class="mini">
-            <span>Current stage</span>
-            <strong>Motion proceedings</strong>
-          </div>
-          <div class="mini">
-            <span>Next step</span>
-            <strong>Serve and launch</strong>
-          </div>
-          <div class="mini">
-            <span>Deadline risk</span>
-            <strong>6-week review clock</strong>
-          </div>
-          <div class="mini">
-            <span>Missing items</span>
-            <strong>Service, case number, affidavit</strong>
-          </div>
-        </div>
-      </aside>
-    </section>
+<div class="container">
 
-    <section class="card section" id="motion-start">
-      <div class="section-header">
-        <div>
-          <div class="smallcaps">Motion sequence</div>
-          <h2 class="section-title">The review begins here</h2>
-        </div>
-        <p>The motion page should make the filing sequence obvious and keep track of opposition, records, and later set-down.</p>
-      </div>
+  <div class="page-header">
+    <h1>Motion & Founding Affidavit</h1>
+    <p>Prepare and launch the Labour Court review application. This is the legal commencement of the Section 145 review.</p>
+  </div>
 
-      <div class="timeline" role="list" aria-label="Motion timeline">
-        <div class="step" role="listitem">
-          <div class="num">1</div>
-          <strong>Review</strong>
-          <span>Decision made to challenge the award.</span>
-        </div>
-        <div class="step active" role="listitem">
-          <div class="num">2</div>
-          <strong>Motion</strong>
-          <span>Launch the Labour Court application.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">3</div>
-          <strong>Record</strong>
-          <span>Collect and transcribe the arbitration record.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">4</div>
-          <strong>Heads</strong>
-          <span>Prepare argument and authorities.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">5</div>
-          <strong>Set-down</strong>
-          <span>Track enrolment and hearing allocation.</span>
-        </div>
-        <div class="step" role="listitem">
-          <div class="num">6</div>
-          <strong>Finalisation</strong>
-          <span>Close the matter after judgment or settlement.</span>
-        </div>
-      </div>
-    </section>
+  <!-- Compliance Banner -->
+  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
+    <div class="card-title">
+      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
+      Template Generation Only — Review Before Filing
+    </div>
+    <p style="font-size:14px;color:#713f12;">
+      The templates below are generated based on your answers. They are <strong>starting points only</strong> and must be reviewed for accuracy, completeness, and compliance with current Labour Court Rules before filing. 
+      Advome does not file documents on your behalf. Filing is your responsibility.
+    </p>
+  </div>
 
-    <section class="grid-2">
-      <article class="card panel">
-        <div class="smallcaps">Motion workspace</div>
-        <h3>Core filing cards</h3>
-        <ul class="feature-list">
-          <li><div class="dot"></div><div><strong>Notice of motion</strong><span>Track the relief requested: set aside, remit, or substitute.</span></div></li>
-          <li><div class="dot"></div><div><strong>Founding affidavit</strong><span>Capture background facts, grounds of review, and concise relief.</span></div></li>
-          <li><div class="dot"></div><div><strong>Service tracker</strong><span>Show whether the application has been served and proof uploaded.</span></div></li>
-          <li><div class="dot"></div><div><strong>Case number</strong><span>Track the Labour Court allocation and filing status.</span></div></li>
-        </ul>
-      </article>
+  <!-- Timeline — CORRECTED: Motion is step 4 -->
+  <div class="timeline">
+    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">2</span>Award</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step completed"><span class="num">3</span>Review Decision</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step active"><span class="num">4</span>Motion & Affidavit</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">5</span>Record</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">6</span>Heads</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
+    <div class="timeline-arrow">→</div>
+    <div class="timeline-step"><span class="num">8</span>Finalisation</div>
+  </div>
 
-      <article class="card panel">
-        <div class="smallcaps">Motion readiness meter</div>
-        <h3>Simple filing health</h3>
-        <p>Keep the user aware of what is still missing before the matter can progress to the record stage.</p>
-        <div class="meter">
-          <strong>Motion readiness</strong>
-          <div class="meter-bar"><div></div></div>
-          <p style="margin-top:10px;">62% complete</p>
-        </div>
-        <div class="callout">
-          The review window is urgent. If the filing is delayed, the workflow should flag risk immediately.
-        </div>
-      </article>
-    </section>
-
-    <section class="grid-3" style="margin-top:18px;">
-      <article class="card panel">
-        <div class="smallcaps">Opposition tracker</div>
-        <h3>Response state</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>Notice of intention to oppose</strong><span>Status: pending / received.</span></div></li>
-          <li><div class="dot"></div><div><strong>Answering affidavit</strong><span>Status: pending / filed / overdue.</span></div></li>
-          <li><div class="dot"></div><div><strong>Replying affidavit</strong><span>Status: pending / filed.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Questions panel</div>
-        <h3>Suggested prompts</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>What relief do you want?</strong><span>Set aside, remit, or substitute the award.</span></div></li>
-          <li><div class="dot"></div><div><strong>Was service completed?</strong><span>Proof of service should be uploaded.</span></div></li>
-          <li><div class="dot"></div><div><strong>Did the other side oppose?</strong><span>Track whether the matter is opposed or unopposed.</span></div></li>
-        </ul>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Next step</div>
-        <h3>Move to the record centre</h3>
-        <ul class="feature-list" style="margin-top:16px;">
-          <li><div class="dot"></div><div><strong>After filing</strong><span>The next page should handle the arbitration record and transcript.</span></div></li>
-          <li><div class="dot"></div><div><strong>Record control</strong><span>Audio, transcript, indexing, and pagination belong on the next page.</span></div></li>
-        </ul>
-        <div class="hero-actions" style="margin-top:18px;">
-          <a class="btn btn-primary" href="record.html">Continue to Record</a>
-          <a class="btn btn-secondary" href="review.html">Back to Review</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="grid-2" style="margin-top:18px;">
-      <article class="card panel question-box">
-        <div class="smallcaps">Missing documents</div>
-        <h3>What the page should keep visible</h3>
-        <div class="q-list">
-          <div class="q-item"><div><strong>Notice of motion</strong><span>Drafted or still missing.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Founding affidavit</strong><span>Drafted or still missing.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Proof of service</strong><span>Uploaded or pending.</span></div><span>→</span></div>
-          <div class="q-item"><div><strong>Case number</strong><span>Allocated or pending.</span></div><span>→</span></div>
-        </div>
-      </article>
-
-      <article class="card panel">
-        <div class="smallcaps">Build rule</div>
-        <h3>What this page must not do</h3>
-        <ul class="feature-list">
-          <li><div class="dot"></div><div><strong>Do not skip the record</strong><span>The review cannot move forward without record management.</span></div></li>
-          <li><div class="dot"></div><div><strong>Do not invent dates</strong><span>Set-down must be registrar-led later in the chain.</span></div></li>
-          <li><div class="dot"></div><div><strong>Do not accuse in UI text</strong><span>Keep the wording neutral and procedural.</span></div></li>
-        </ul>
-      </article>
-    </section>
-
-    <div class="footer-note">
-      This platform provides procedural assistance only and does not provide legal advice.
+  <!-- Health Meter -->
+  <div class="meter-container">
+    <div class="meter-header">
+      <span class="meter-label">Motion Filing Readiness</span>
+      <span class="meter-value" style="color:var(--warning);">55%</span>
+    </div>
+    <div class="meter-bar-bg">
+      <div class="meter-bar-fill medium" style="width:55%"></div>
+    </div>
+    <div class="meter-status attention">
+      <span>⚠️</span> Notice drafted — affidavit pending
     </div>
   </div>
+
+  <div class="grid-2">
+    <!-- Notice of Motion Template -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
+        Notice of Motion Generator
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+        Answer the questions below. Advome will generate a Notice of Motion template based on Labour Court format. 
+        <strong>You must review and edit before filing.</strong>
+      </p>
+      <div class="template-engine">
+        <div class="template-field">
+          <label>Applicant Name</label>
+          <input type="text" id="nomApplicant" placeholder="Full name of applicant">
+        </div>
+        <div class="template-field">
+          <label>Respondent Name</label>
+          <input type="text" id="nomRespondent" placeholder="Full name of respondent">
+        </div>
+        <div class="template-field">
+          <label>Relief Sought</label>
+          <select id="nomRelief">
+            <option value="">Select relief</option>
+            <option value="setaside">Set aside the award</option>
+            <option value="remit">Remit to CCMA</option>
+            <option value="substitute">Substitute with preferred order</option>
+          </select>
+        </div>
+        <div class="template-field">
+          <label>Labour Court Division</label>
+          <select id="nomCourt">
+            <option value="">Select division</option>
+            <option value="johannesburg">Johannesburg</option>
+            <option value="pretoria">Pretoria</option>
+            <option value="durban">Durban</option>
+            <option value="capetown">Cape Town</option>
+            <option value="portelizabeth">Port Elizabeth</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="generateNoticeOfMotion()">Generate Notice of Motion</button>
+        <div id="nomOutput" class="template-output hidden"></div>
+      </div>
+    </div>
+
+    <!-- Founding Affidavit Template -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📝</span>
+        Founding Affidavit Generator
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+        Answer the questions below. Advome will generate a Founding Affidavit template. 
+        <strong>You must verify all facts before deposing to the affidavit.</strong>
+      </p>
+      <div class="template-engine">
+        <div class="template-field">
+          <label>Deponent Name</label>
+          <input type="text" id="affDeponent" placeholder="Full name of person deposing">
+        </div>
+        <div class="template-field">
+          <label>Occupation</label>
+          <input type="text" id="affOccupation" placeholder="e.g. Former Employee">
+        </div>
+        <div class="template-field">
+          <label>Grounds of Review (select all that apply)</label>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;">
+              <input type="checkbox" value="misconduct"> Misconduct by commissioner
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;">
+              <input type="checkbox" value="irregularity"> Gross irregularity in proceedings
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;">
+              <input type="checkbox" value="excess"> Excess of powers
+            </label>
+          </div>
+        </div>
+        <div class="template-field">
+          <label>Brief Background Facts</label>
+          <textarea id="affFacts" rows="3" placeholder="Summarise the key facts of the dispute"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="generateAffidavit()">Generate Founding Affidavit</button>
+        <div id="affOutput" class="template-output hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service & Opposition Tracker -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon" style="background:#fef3cd;color:#856404;">⚖️</span>
+      Service & Opposition Tracker
+    </div>
+    <div class="grid-3">
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Service</div>
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Served on respondent</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Proof of service uploaded</div>
+          </div>
+        </div>
+        <div class="mt-2"><span class="pill pill-amber">Pending</span></div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Case Number</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">
+          Labour Court case number allocated upon filing.
+        </div>
+        <div style="background:var(--bg);padding:12px;border-radius:8px;text-align:center;">
+          <span style="font-size:14px;font-weight:600;color:var(--text-muted);">Pending allocation</span>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title">Opposition Status</div>
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Notice of intention to oppose</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-box"></div>
+            <div class="checklist-text">Answering affidavit filed</div>
+          </div>
+        </div>
+        <div class="mt-2"><span class="pill pill-neutral">Awaiting response</span></div>
+      </div>
+    </div>
+    <div class="mt-2" style="background:var(--bg);border-radius:8px;padding:12px;font-size:13px;color:var(--text-muted);">
+      <strong>Important:</strong> A notice of intention to oppose does not automatically mean the matter is fully opposed in substance. 
+      An answering affidavit filed means the matter is properly opposed. The workflow will adapt accordingly.
+    </div>
+  </div>
+
+  <!-- Fee Meter -->
+  <div class="fee-meter">
+    <div class="fee-meter-header">
+      <div class="fee-meter-title">
+        <span>💰</span> Review Application Costs
+      </div>
+      <div class="fee-total">R 2,500</div>
+    </div>
+    <div class="fee-breakdown">
+      <div class="fee-item paid">
+        <div class="fee-item-label">Filing Fee</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item estimated">
+        <div class="fee-item-label">Service Costs</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Notice of Motion</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+      <div class="fee-item pending">
+        <div class="fee-item-label">Founding Affidavit</div>
+        <div class="fee-item-value">R 0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Step -->
+  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
+    <div class="card-title">
+      <span class="icon" style="background:var(--primary);color:white;">🚀</span>
+      Next Step: Prepare the Record
+    </div>
+    <p style="font-size:14px;color:var(--text);margin-bottom:16px;">
+      After filing the motion and founding affidavit, the review cannot proceed without the <strong>arbitration record and transcript</strong>. 
+      The record must be properly prepared, paginated, and uploaded on Court Online.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="record.html" class="btn btn-primary btn-lg">
+        Proceed to Record & Transcript →
+      </a>
+      <a href="ccma-review.html" class="btn btn-secondary btn-lg">
+        ← Back to Review Decision
+      </a>
+      <a href="attorney.html" class="btn btn-outline btn-lg">
+        👔 Find an Attorney
+      </a>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div class="questions-panel">
+    <h3>Motion Questions</h3>
+    <div class="question-item">
+      <div class="question-q">What relief do you want?</div>
+      <div class="question-a">Set aside (quash the award), remit (send back to CCMA), or substitute (replace with your preferred order).</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Was service completed?</div>
+      <div class="question-a">Proof of service must be uploaded. The respondent must be properly served to start the opposition clock.</div>
+    </div>
+    <div class="question-item">
+      <div class="question-q">Did the other side oppose?</div>
+      <div class="question-a">Track notice of intention to oppose and answering affidavit separately. Only the latter means full opposition.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. All generated templates must be reviewed before filing. Users remain responsible for complying with Labour Court Rules and the Labour Relations Act.
+    <div class="access-message">
+      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function generateNoticeOfMotion() {
+  const applicant = document.getElementById('nomApplicant').value || '[APPLICANT NAME]';
+  const respondent = document.getElementById('nomRespondent').value || '[RESPONDENT NAME]';
+  const relief = document.getElementById('nomRelief').value;
+  const court = document.getElementById('nomCourt').value;
+
+  let reliefText = 'the award be reviewed and set aside';
+  if (relief === 'remit') reliefText = 'the matter be remitted to the CCMA for reconsideration';
+  if (relief === 'substitute') reliefText = 'the award be substituted with an order in terms sought by the applicant';
+
+  const output = `IN THE LABOUR COURT OF SOUTH AFRICA
+${court.toUpperCase()}
+
+CASE NUMBER: [TO BE ALLOCATED]
+
+In the matter between:
+
+${applicant}                                              Applicant
+
+and
+
+${respondent}                                           Respondent
+
+NOTICE OF MOTION
+
+TAKE NOTICE that the above Honourable Court will be moved on a date and time to be assigned by the Registrar, or as soon thereafter as Counsel may be heard, for an order in the following terms:
+
+1. That ${reliefText};
+2. That the Respondent pays the costs of this application;
+3. Such further and alternative relief as this Honourable Court may deem fit.
+
+TAKE FURTHER NOTICE that the affidavit of the Applicant and annexures thereto will be used in support of this application.
+
+DATED at [CITY] on this ______ day of ____________ 2026.
+
+_________________________
+Applicant / Legal Representative
+
+[ADDRESS FOR SERVICE]
+
+TO: The Registrar
+Labour Court
+${court.charAt(0).toUpperCase() + court.slice(1)}
+
+AND TO: ${respondent}
+[Address for service]
+
+---
+
+⚠️ IMPORTANT: This is a template generated by Advome based on your inputs. It must be reviewed, verified, and adapted before filing. Advome does not guarantee compliance with current Labour Court Rules.`;
+
+  const outputDiv = document.getElementById('nomOutput');
+  outputDiv.textContent = output;
+  outputDiv.classList.remove('hidden');
+}
+
+function generateAffidavit() {
+  const deponent = document.getElementById('affDeponent').value || '[DEPONENT NAME]';
+  const occupation = document.getElementById('affOccupation').value || '[OCCUPATION]';
+  const facts = document.getElementById('affFacts').value || '[BACKGROUND FACTS TO BE COMPLETED]';
+
+  const grounds = [];
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+    if (cb.value === 'misconduct') grounds.push('the commissioner committed misconduct in the conduct of the arbitration proceedings');
+    if (cb.value === 'irregularity') grounds.push('there was a gross irregularity in the conduct of the arbitration proceedings');
+    if (cb.value === 'excess') grounds.push('the commissioner exceeded their powers in making the award');
+  });
+
+  const groundsText = grounds.length > 0 ? grounds.join('; ') : '[GROUNDS OF REVIEW TO BE COMPLETED]';
+
+  const output = `FOUNDING AFFIDAVIT
+
+I, the undersigned,
+
+${deponent}
+
+do hereby make oath and state that:
+
+1. I am the Applicant in this matter. I am ${occupation.toLowerCase()} and have personal knowledge of the facts deposed to herein, except where the context indicates otherwise.
+
+2. The facts set out below are true and correct.
+
+BACKGROUND
+
+3. ${facts}
+
+4. On [DATE], the CCMA issued an arbitration award in the above matter.
+
+5. The award was served on me on [DATE].
+
+GROUNDS OF REVIEW
+
+6. I seek to review the award on the following grounds:
+   ${groundsText}.
+
+7. [DETAILED FACTS SUPPORTING EACH GROUND TO BE ADDED HERE]
+
+RELIEF SOUGHT
+
+8. I accordingly pray for the relief set out in the Notice of Motion.
+
+I certify that the contents of this affidavit are true and correct.
+
+_________________________
+${deponent}
+
+DEPONENT
+
+Sworn to and signed before me at [PLACE] on this ______ day of ____________ 2026, the deponent having acknowledged that they know and understand the contents of this affidavit, that they have no objection to taking the prescribed oath, and that they consider the oath binding on their conscience.
+
+_________________________
+COMMISSIONER OF OATHS
+
+---
+
+⚠️ IMPORTANT: This is a template generated by Advome based on your inputs. You must verify all facts before deposing to this affidavit. False statements in an affidavit constitute perjury. Advome does not guarantee compliance with current Labour Court Rules.`;
+
+  const outputDiv = document.getElementById('affOutput');
+  outputDiv.textContent = output;
+  outputDiv.classList.remove('hidden');
+}
+</script>
+
 </body>
 </html>
