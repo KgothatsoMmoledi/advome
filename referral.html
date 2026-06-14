@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="File your CCMA dispute referral. Complete LRA Form 7.11 step-by-step with deadline calculator and filing instructions.">
+  <meta name="description" content="File your CCMA dispute referral. Use the online CCMA portal, or let us help you draft LRA Form 7.11 for hand delivery.">
   <title>File Your Dispute | CCMA | Advome</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="shared-styles.css">
-<base target="_blank">
 </head>
 <body>
 
@@ -45,7 +44,7 @@
     </div>
     <div class="adv-hero__badge adv-hero__badge--critical">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      30-Day Deadline
+      30-Day Deadline (LRA s191)
     </div>
   </section>
 
@@ -55,20 +54,96 @@
 
       <!-- DEADLINE BANNER -->
       <div class="adv-deadline" style="margin-bottom: 1.5rem;">
-        <div class="adv-deadline__label">When were you dismissed?</div>
-        <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; margin: 0.75rem 0;">
-          <input type="date" class="adv-input" id="dismissal-date" style="max-width: 200px; text-align: center;" aria-label="Dismissal date">
+        <div class="adv-deadline__label">When did your employment end or conditions become unbearable?</div>
+        <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; margin: 0.75rem 0; flex-wrap: wrap;">
+          <input type="date" class="adv-input" id="dismissal-date" style="max-width: 200px; text-align: center;" aria-label="Date of dismissal or resignation">
         </div>
         <div id="deadline-display" class="adv-deadline__date">Select a date to see your deadline</div>
         <span id="deadline-status" style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; background: var(--text-muted); color: white;">Enter date above</span>
       </div>
 
-      <!-- PRIMARY: LRA 7.11 Wizard -->
-      <section class="adv-card adv-card--primary" aria-labelledby="wizard-title">
+      <!-- PRIMARY: Filing Method Selection -->
+      <section class="adv-card adv-card--primary" aria-labelledby="filing-title">
         <div class="adv-card__header">
           <div>
-            <h2 id="wizard-title" class="adv-card__title">LRA Form 7.11 Wizard</h2>
-            <p class="adv-card__subtitle">Answer these questions — we will generate your referral form</p>
+            <h2 id="filing-title" class="adv-card__title">Choose Your Filing Method</h2>
+            <p class="adv-card__subtitle">We recommend the online portal for speed and reliability</p>
+          </div>
+        </div>
+        <div class="adv-card__body">
+
+          <!-- Method 1: Online (RECOMMENDED) -->
+          <div class="adv-card" style="border-left: 4px solid var(--success); margin-bottom: 1rem;">
+            <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.5rem 0;">
+              <div style="width: 48px; height: 48px; background: rgba(56,161,105,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                  <h3 style="font-size: 1.1rem; margin: 0;">Option 1: CCMA Online Portal</h3>
+                  <span style="background: var(--success); color: white; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">RECOMMENDED</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Fastest, most reliable, instant confirmation. File directly on the CCMA website.</p>
+                <a href="https://efiling.ccma.org.za" target="_blank" rel="noopener" class="adv-btn adv-btn--success adv-btn--sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.3rem;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Go to CCMA Online Portal
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Method 2: Hand Delivery -->
+          <div class="adv-card" style="border-left: 4px solid var(--primary); margin-bottom: 1rem;">
+            <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.5rem 0;">
+              <div style="width: 48px; height: 48px; background: rgba(26,54,93,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Option 2: Hand Delivery</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Guaranteed receipt. Deliver to your nearest CCMA office and get a stamped copy. Use the wizard below to draft your form.</p>
+                <button class="adv-btn adv-btn--primary adv-btn--sm" onclick="document.getElementById('wizard-section').scrollIntoView({behavior:'smooth'})" type="button">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.3rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Draft My Form for Hand Delivery
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Method 3: Email (NOT RECOMMENDED) -->
+          <div class="adv-card" style="border-left: 4px solid var(--warning); opacity: 0.85;">
+            <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.5rem 0;">
+              <div style="width: 48px; height: 48px; background: rgba(214,158,46,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                  <h3 style="font-size: 1.1rem; margin: 0;">Option 3: Email</h3>
+                  <span style="background: var(--warning); color: white; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">NOT RECOMMENDED</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Emails can be ignored or claimed undelivered. No proof of receipt. Only use if online portal is unavailable and hand delivery is impossible.</p>
+                <div class="adv-alert adv-alert--warning adv-alert--minimal" style="margin-bottom: 0.75rem;">
+                  <div class="adv-alert__content">
+                    <div class="adv-alert__title">Warning</div>
+                    If you must email, request a read receipt and follow up within 48 hours. Save all correspondence.
+                  </div>
+                </div>
+                <div style="background: var(--bg-page); padding: 0.75rem; border-radius: 6px; font-family: monospace; font-size: 0.85rem;">
+                  referrals@ccma.org.za<br>
+                  <span style="color: var(--text-muted);">Subject: LRA 7.11 — [Your Name] vs [Employer Name]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- WIZARD SECTION -->
+      <section class="adv-card adv-mt-2" id="wizard-section" aria-labelledby="wizard-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="wizard-title" class="adv-card__title">LRA Form 7.11 Drafting Wizard</h2>
+            <p class="adv-card__subtitle">Answer these questions — we will generate your referral form for printing and hand delivery</p>
           </div>
         </div>
         <div class="adv-card__body">
@@ -125,32 +200,35 @@
               <label>Type of Dispute <span class="required">*</span></label>
               <select class="adv-select" name="dispute_type" required>
                 <option value="">Select dispute type...</option>
-                <option value="unfair_dismissal">Unfair Dismissal (Section 188)</option>
-                <option value="unfair_labour_practice">Unfair Labour Practice</option>
+                <option value="unfair_dismissal">Unfair Dismissal (LRA s188)</option>
+                <option value="automatically_unfair">Automatically Unfair Dismissal (LRA s187)</option>
+                <option value="constructive_dismissal">Constructive Dismissal (LRA s186(e))</option>
+                <option value="unfair_labour_practice">Unfair Labour Practice (LRA s186(2))</option>
                 <option value="wage_dispute">Wage / Salary Dispute</option>
-                <option value="discrimination">Discrimination</option>
-                <option value="constructive_dismissal">Constructive Dismissal</option>
+                <option value="discrimination">Discrimination (EEA)</option>
+                <option value="sexual_harassment">Sexual Harassment</option>
                 <option value="other">Other</option>
               </select>
             </div>
 
             <div class="adv-form-group">
-              <label>Date of Dismissal / Dispute <span class="required">*</span></label>
+              <label>Date Employment Ended / Conditions Became Unbearable <span class="required">*</span></label>
               <input type="date" class="adv-input" name="dispute_date" required>
+              <div class="adv-form-hint">For constructive dismissal, this is the date you resigned.</div>
             </div>
 
             <div class="adv-form-group">
               <label>Brief Description of Dispute <span class="required">*</span></label>
-              <textarea class="adv-textarea" name="dispute_details" rows="4" placeholder="Describe what happened, when, and why you believe it was unfair. Be factual and concise." required></textarea>
-              <div class="adv-form-hint">This will appear on your referral form. Keep it under 500 words.</div>
+              <textarea class="adv-textarea" name="dispute_details" rows="4" placeholder="Describe what happened, when, and why you believe it was unfair. Be factual and concise. For constructive dismissal, explain how conditions became unbearable and why resignation was the only option." required></textarea>
+              <div class="adv-form-hint">This will appear on your referral form. Keep it under 500 words. Focus on facts, not emotions.</div>
             </div>
 
             <div class="adv-form-group">
               <label>Relief Sought (What you want) <span class="required">*</span></label>
               <select class="adv-select" name="relief_sought" required>
                 <option value="">Select what you are asking for...</option>
-                <option value="reinstatement">Reinstatement with back pay</option>
-                <option value="compensation">Compensation only</option>
+                <option value="reinstatement">Reinstatement with back pay (LRA s193)</option>
+                <option value="compensation">Compensation (max 12 months, LRA s194)</option>
                 <option value="reinstatement_alt">Reinstatement OR compensation</option>
                 <option value="apology">Formal apology + compensation</option>
                 <option value="other_relief">Other (specify in details)</option>
@@ -167,7 +245,7 @@
                 <option value="centurion">Centurion</option>
                 <option value="sandton">Sandton</option>
                 <option value="midrand">Midrand</option>
-                <option value=" Germiston">Germiston</option>
+                <option value="germiston">Germiston</option>
                 <option value="benoni">Benoni</option>
                 <option value="vereeniging">Vereeniging</option>
                 <option value="rustenburg">Rustenburg</option>
@@ -188,34 +266,14 @@
         </div>
         <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
           <button class="adv-btn adv-btn--accent adv-btn--block" id="generate-form-btn" type="button">
-            Generate My Referral Form
+            Generate My Referral Form for Printing
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </button>
         </div>
       </section>
 
-      <!-- PREP: Filing Instructions -->
-      <section class="adv-mt-3" aria-label="Filing instructions">
-        <div class="adv-accordion" data-group="prep">
-          <button class="adv-accordion__header" aria-expanded="false">
-            <span>How to File Your Referral</span>
-            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="adv-accordion__body">
-            <p><strong>Method 1: Email (Fastest)</strong></p>
-            <div style="background: var(--bg-page); padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; font-family: monospace; font-size: 0.85rem;">
-              referrals@ccma.org.za<br>
-              <span style="color: var(--text-muted);">Subject: LRA 7.11 — [Your Name] vs [Employer Name]</span>
-            </div>
-            <p><strong>Method 2: Fax</strong></p>
-            <div style="background: var(--bg-page); padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; font-family: monospace; font-size: 0.85rem;">
-              086 000 0000 (Check your local CCMA office for exact fax)
-            </div>
-            <p><strong>Method 3: In-Person</strong></p>
-            <p style="margin-bottom: 0;">Hand-deliver to your nearest CCMA office. Bring a copy for yourself and a copy for the employer.</p>
-          </div>
-        </div>
-
+      <!-- PREP: What Happens After Filing -->
+      <section class="adv-mt-3" aria-label="Post-filing guidance">
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
             <span>What Happens After Filing?</span>
@@ -224,10 +282,11 @@
           <div class="adv-accordion__body">
             <ol style="margin-left: 1.25rem; color: var(--text-body);">
               <li>CCMA sends you a <strong>case number</strong> within 48 hours</li>
-              <li>CCMA notifies your employer (respondent)</li>
-              <li>A <strong>conciliation date</strong> is set (usually within 30 days)</li>
+              <li>CCMA notifies your employer (respondent) via registered mail or email</li>
+              <li>A <strong>conciliation date</strong> is set (usually within 30 days, LRA s135)</li>
               <li>You receive a <strong>Notice of Set Down</strong> with date, time, and venue</li>
-              <li>Both parties must attend conciliation</li>
+              <li>Both parties must attend conciliation (LRA s135)</li>
+              <li>If no settlement: matter proceeds to arbitration (LRA s138)</li>
             </ol>
           </div>
         </div>
@@ -240,8 +299,8 @@
           <div class="adv-accordion__body">
             <ul class="adv-checklist" data-checklist-id="referral_docs">
               <li class="adv-checklist__item" data-item-id="id_copy"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Certified copy of your ID</div><div class="adv-checklist__meta">Must be certified within last 3 months</div></div></li>
-              <li class="adv-checklist__item" data-item-id="dismissal_letter"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Dismissal letter / notice</div><div class="adv-checklist__meta">Or any written communication about termination</div></div></li>
-              <li class="adv-checklist__item" data-item-id="contract"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Employment contract</div></div></li>
+              <li class="adv-checklist__item" data-item-id="dismissal_letter"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Dismissal letter / notice / resignation letter</div><div class="adv-checklist__meta">Or any written communication about termination</div></div></li>
+              <li class="adv-checklist__item" data-item_id="contract"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Employment contract (if available)</div><div class="adv-checklist__meta">No written contract? Verbal agreements are valid under South African common law. Use payslips, bank statements, or colleague testimony.</div></div></li>
               <li class="adv-checklist__item" data-item-id="payslips"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Last 3 months payslips</div></div></li>
               <li class="adv-checklist__item" data-item-id="form_complete"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Completed LRA 7.11 form</div><div class="adv-checklist__meta">Generated above or downloaded from CCMA website</div></div></li>
             </ul>
@@ -258,11 +317,11 @@
         <h3 class="adv-sidebar__widget-title">Deadline Calculator</h3>
         <div class="adv-deadline-calculator">
           <div class="adv-form-group" style="margin-bottom: 0.75rem;">
-            <label style="font-size: 0.85rem; color: white; opacity: 0.9;">Dismissal Date</label>
+            <label style="font-size: 0.85rem; color: white; opacity: 0.9;">Date of Dismissal / Resignation</label>
             <input type="date" class="adv-input adv-deadline__input" id="sidebar-dismissal-date" aria-label="Dismissal date">
           </div>
           <div class="adv-form-group" style="margin-bottom: 0.75rem;">
-            <label style="font-size: 0.85rem; color: white; opacity: 0.9;">Days to File</label>
+            <label style="font-size: 0.85rem; color: white; opacity: 0.9;">Days to File (LRA s191)</label>
             <input type="number" class="adv-input adv-deadline__days" value="30" min="1" max="365" aria-label="Days to file">
           </div>
           <div class="adv-deadline__display" id="sidebar-deadline-display">
@@ -277,7 +336,7 @@
           AI Assistant
         </h3>
         <div class="adv-chat__messages" role="log" aria-live="polite">
-          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Need help with your referral? Ask me about deadlines, forms, or what to include.</div>
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Need help with your referral? Ask me about deadlines, constructive dismissal, dispute types, or filing methods.</div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
@@ -395,7 +454,7 @@
       display.textContent = fmt(deadline);
 
       if (remaining < 0) {
-        status.textContent = Math.abs(remaining) + ' DAYS OVERDUE — Apply for condonation';
+        status.textContent = Math.abs(remaining) + ' DAYS OVERDUE — Apply for condonation (LRA s191)';
         status.style.background = 'var(--danger)';
       } else if (remaining <= 7) {
         status.textContent = 'URGENT: ' + remaining + ' days left';
@@ -408,7 +467,6 @@
         status.style.background = 'var(--success)';
       }
 
-      // Sidebar
       if (sidebarDisplay) {
         sidebarDisplay.innerHTML = `
           <div class="adv-deadline__label">File by: ${fmt(deadline)}</div>
@@ -429,7 +487,6 @@
       updateDisplay(e.target.value);
     });
 
-    // Restore from storage
     const saved = Advome?.storage?.get('form_referral_wizard', {});
     if (saved.dispute_date) {
       mainDate.value = saved.dispute_date;

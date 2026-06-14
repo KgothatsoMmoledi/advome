@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Prepare for your CCMA conciliation hearing. Interactive checklist, settlement calculator, and what-to-expect guidance.">
+  <meta name="description" content="Prepare for your CCMA conciliation hearing. Interactive checklist, settlement calculator focused on months of remuneration, and guidance on recording and resisting pressure.">
   <title>Prepare for Conciliation | CCMA | Advome</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="shared-styles.css">
-<base target="_blank">
 </head>
 <body>
 
@@ -45,13 +44,22 @@
     </div>
     <div class="adv-hero__badge">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      In-Person Hearing
+      In-Person Hearing (LRA s135)
     </div>
   </section>
 
   <!-- MAIN CONTAINER -->
   <main class="adv-container" id="main-content">
     <div class="adv-workspace">
+
+      <!-- RECORDING ALERT — Prominent at top -->
+      <div class="adv-alert adv-alert--warning" style="margin-bottom: 1.5rem;">
+        <svg class="adv-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        <div class="adv-alert__content">
+          <div class="adv-alert__title">Record the Conciliation (LRA s135)</div>
+          <p style="margin-bottom: 0;">You have a right to record the conciliation hearing. Notify the commissioner and the other party in advance. Bring a digital voice recorder. This protects you from being pressured into an unfair settlement and ensures you have a record if the matter proceeds to arbitration.</p>
+        </div>
+      </div>
 
       <!-- PRIMARY: Interactive Checklist -->
       <section class="adv-card adv-card--primary" aria-labelledby="checklist-title">
@@ -60,7 +68,7 @@
             <h2 id="checklist-title" class="adv-card__title">Conciliation Checklist</h2>
             <p class="adv-card__subtitle">Check off items as you prepare — your progress saves automatically</p>
           </div>
-          <span class="adv-checklist__progress" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">0/8 (0%)</span>
+          <span class="adv-checklist__progress" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">0/10 (0%)</span>
         </div>
         <div class="adv-card__body">
           <ul class="adv-checklist" data-checklist-id="conciliation_prep">
@@ -88,8 +96,8 @@
             <li class="adv-checklist__item" data-item-id="contract_copy">
               <div class="adv-checklist__checkbox"></div>
               <div>
-                <div class="adv-checklist__text">Employment contract and payslips</div>
-                <div class="adv-checklist__meta">Last 3 months at minimum</div>
+                <div class="adv-checklist__text">Employment contract (if available) and payslips</div>
+                <div class="adv-checklist__meta">No written contract? Verbal agreements are valid. Bring payslips, bank statements, or colleague testimony as proof of employment.</div>
               </div>
             </li>
             <li class="adv-checklist__item" data-item-id="dismissal_evidence">
@@ -99,18 +107,32 @@
                 <div class="adv-checklist__meta">Any written warnings, minutes, emails</div>
               </div>
             </li>
-            <li class="adv-checklist__item" data-item-id="settlement_amount">
+            <li class="adv-checklist__item" data-item-id="recording_device">
               <div class="adv-checklist__checkbox"></div>
               <div>
-                <div class="adv-checklist__text">Calculated your settlement demand</div>
-                <div class="adv-checklist__meta">Use the calculator in the sidebar →</div>
+                <div class="adv-checklist__text">Digital voice recorder (fully charged + tested)</div>
+                <div class="adv-checklist__meta">You are legally entitled to record (LRA s135). Notify commissioner in advance.</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="settlement_months">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Calculated your settlement demand in MONTHS</div>
+                <div class="adv-checklist__meta">CCMA awards compensation in months of remuneration (LRA s194). Use the calculator →</div>
               </div>
             </li>
             <li class="adv-checklist__item" data-item-id="opening_statement">
               <div class="adv-checklist__checkbox"></div>
               <div>
                 <div class="adv-checklist__text">Prepared opening statement (2-3 minutes)</div>
-                <div class="adv-checklist__meta">What happened, what you want, why it's fair</div>
+                <div class="adv-checklist__meta">What happened, what you want, why it's fair. Facts, not emotions.</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="no_pressure">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Mentally prepared to resist pressure</div>
+                <div class="adv-checklist__meta">Commissioners may push for settlement. You can say "I need time to consider" or "I want to proceed to arbitration."</div>
               </div>
             </li>
             <li class="adv-checklist__item" data-item-id="arrive_early">
@@ -139,11 +161,11 @@
       <section class="adv-mt-3" aria-label="Preparation resources">
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
-            <span>What to Expect at Conciliation</span>
+            <span>What to Expect at Conciliation (LRA s135)</span>
             <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="adv-accordion__body">
-            <p><strong>The conciliation process is informal and confidential.</strong> What is said here cannot be used in arbitration later.</p>
+            <p><strong>The conciliation process is informal and confidential.</strong> What is said here cannot be used in arbitration later (LRA s135).</p>
             <p style="margin-bottom: 0.5rem;"><strong>Typical flow:</strong></p>
             <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
               <li>Commissioner introduces themselves and explains the process</li>
@@ -152,7 +174,7 @@
               <li>Private caucuses — commissioner speaks to each side separately</li>
               <li>Settlement negotiations begin</li>
               <li>If settled: sign a binding settlement agreement</li>
-              <li>If not settled: commissioner issues a certificate and the matter proceeds to arbitration</li>
+              <li>If not settled: commissioner issues a certificate and the matter proceeds to arbitration (LRA s136)</li>
             </ol>
             <p style="margin-bottom: 0;"><strong>Duration:</strong> Usually 2-4 hours. Some resolve in 30 minutes; others take a full day.</p>
           </div>
@@ -160,7 +182,7 @@
 
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
-            <span>How to Behave at Conciliation</span>
+            <span>How to Behave & Resist Pressure</span>
             <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="adv-accordion__body">
@@ -168,17 +190,20 @@
               <li><strong>Be respectful</strong> — even if you feel wronged, aggression hurts your case</li>
               <li><strong>Stick to facts</strong> — avoid emotional language or personal attacks</li>
               <li><strong>Listen carefully</strong> — the employer may reveal useful information</li>
-              <li><strong>Be flexible</strong> — settlement is about compromise, not winning everything</li>
+              <li><strong>Be flexible but not desperate</strong> — settlement is about compromise, not surrender</li>
               <li><strong>Do not interrupt</strong> — let the commissioner manage the process</li>
               <li><strong>Bring a support person</strong> — you are allowed one observer (not a lawyer at conciliation)</li>
               <li><strong>Dress professionally</strong> — business casual is appropriate</li>
+              <li><strong>You can say NO</strong> — "I am not prepared to settle at this amount" is a valid response</li>
+              <li><strong>Ask for time</strong> — "I need 24 hours to consider this offer" is reasonable</li>
+              <li><strong>Know your walk-away point</strong> — calculate your minimum acceptable settlement before arriving</li>
             </ul>
           </div>
         </div>
 
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
-            <span>Settlement Agreement Template</span>
+            <span>Settlement Agreement Template (LRA s138)</span>
             <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="adv-accordion__body">
@@ -187,7 +212,7 @@
               <li>Names of parties and case number</li>
               <li>Amount and payment terms (lump sum or installments)</li>
               <li>Payment deadline (usually 30-60 days)</li>
-              <li>Confidentiality clause (if requested)</li>
+              <li>Confidentiality clause (if requested — you can refuse)</li>
               <li>Reinstatement terms (if applicable)</li>
               <li>Reference letter terms (if applicable)</li>
               <li>Clause stating "this settles all disputes between the parties"</li>
@@ -195,9 +220,30 @@
             <div class="adv-alert adv-alert--warning adv-alert--minimal">
               <div class="adv-alert__content">
                 <div class="adv-alert__title">Important</div>
-                Once signed, a settlement agreement is binding and enforceable as if it were a court order. You cannot later claim you did not understand it.
+                Once signed, a settlement agreement is binding and enforceable as if it were a court order (LRA s138). You cannot later claim you did not understand it. Read every word before signing. If unsure, say "I need time to review this."
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>CCMA Compensation: Why Months Matter (LRA s194)</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <p>The CCMA does not award arbitrary Rand amounts. It awards <strong>compensation in months of remuneration</strong> (LRA s194).</p>
+            <ul style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
+              <li><strong>Ordinary unfair dismissal:</strong> Up to 12 months' remuneration</li>
+              <li><strong>Automatically unfair dismissal (LRA s187):</strong> Up to 24 months' remuneration</li>
+              <li><strong>Unfair labour practice:</strong> Up to 12 months' remuneration</li>
+            </ul>
+            <p style="margin-bottom: 0.5rem;"><strong>Strategy:</strong> Argue for months, not Rand. Example:</p>
+            <div style="background: var(--bg-page); padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem;">
+              <p style="margin-bottom: 0.25rem; font-style: italic;">❌ Weak: "I want R150,000"</p>
+              <p style="margin-bottom: 0; font-style: italic;">✅ Strong: "I seek 10 months' remuneration. I was employed for 5 years, dismissed without a fair procedure, and have been unemployed for 3 months."</p>
+            </div>
+            <p style="margin-bottom: 0;">The commissioner will calculate the Rand value based on your proven monthly remuneration.</p>
           </div>
         </div>
       </section>
@@ -208,21 +254,29 @@
     <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
 
       <div class="adv-sidebar__widget">
-        <h3 class="adv-sidebar__widget-title">Settlement Calculator</h3>
+        <h3 class="adv-sidebar__widget-title">Settlement Calculator (Months)</h3>
         <form data-form-id="settlement_calc" id="settlement-form">
           <div class="adv-form-group" style="margin-bottom: 0.75rem;">
-            <label style="font-size: 0.85rem;">Monthly Salary (Gross)</label>
+            <label style="font-size: 0.85rem;">Monthly Remuneration (Gross)</label>
             <input type="number" class="adv-input" name="monthly_salary" placeholder="e.g., 15000" min="0" step="100">
           </div>
           <div class="adv-form-group" style="margin-bottom: 0.75rem;">
-            <label style="font-size: 0.85rem;">Months Employed</label>
-            <input type="number" class="adv-input" name="months_employed" placeholder="e.g., 24" min="0">
+            <label style="font-size: 0.85rem;">Years of Service</label>
+            <input type="number" class="adv-input" name="years_service" placeholder="e.g., 3" min="0" step="0.5">
           </div>
           <div class="adv-form-group" style="margin-bottom: 0.75rem;">
-            <label style="font-size: 0.85rem;">Months Since Dismissal</label>
-            <input type="number" class="adv-input" name="months_dismissed" placeholder="e.g., 3" min="0">
+            <label style="font-size: 0.85rem;">Months Unemployed</label>
+            <input type="number" class="adv-input" name="months_unemployed" placeholder="e.g., 2" min="0">
           </div>
           <div class="adv-form-group" style="margin-bottom: 0.75rem;">
+            <label style="font-size: 0.85rem;">Dismissal Type</label>
+            <select class="adv-select" name="dismissal_type">
+              <option value="ordinary">Ordinary Unfair (max 12 months, s194)</option>
+              <option value="automatic">Automatically Unfair (max 24 months, s187)</option>
+              <option value="practice">Unfair Labour Practice (max 12 months)</option>
+            </select>
+          </div>
+          <div class="adv-form-group" style="margin-bottom: 0;">
             <label style="font-size: 0.85rem;">Reinstatement?</label>
             <select class="adv-select" name="reinstatement">
               <option value="no">No — compensation only</option>
@@ -232,8 +286,9 @@
         </form>
         <div style="background: var(--bg-page); padding: 1rem; border-radius: 6px; margin-top: 0.75rem; text-align: center;">
           <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem;">Suggested Demand</div>
-          <div id="settlement-amount" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--accent);">R0</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Based on 12-month cap for compensation</div>
+          <div id="settlement-months" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--accent);">0 months</div>
+          <div id="settlement-rand" style="font-size: 1rem; color: var(--text-body); font-weight: 600; margin-top: 0.25rem;">R0</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Argue for months at conciliation. CCMA calculates Rand value.</div>
         </div>
       </div>
 
@@ -243,7 +298,7 @@
           AI Assistant
         </h3>
         <div class="adv-chat__messages" role="log" aria-live="polite">
-          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about settlement amounts, what to bring, or how conciliation works.</div>
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about settlement months, recording rights, resisting pressure, or what to expect at conciliation.</div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
@@ -323,37 +378,50 @@
 
   <script src="shared-scripts.js"></script>
   <script>
-  // Page-specific: Settlement calculator
+  // Page-specific: Settlement calculator (MONTHS-focused)
   (function() {
     const form = document.getElementById('settlement-form');
-    const display = document.getElementById('settlement-amount');
+    const monthsDisplay = document.getElementById('settlement-months');
+    const randDisplay = document.getElementById('settlement-rand');
 
     function calculate() {
       const salary = parseFloat(form.querySelector('[name="monthly_salary"]').value) || 0;
-      const monthsEmployed = parseFloat(form.querySelector('[name="months_employed"]').value) || 0;
-      const monthsDismissed = parseFloat(form.querySelector('[name="months_dismissed"]').value) || 0;
+      const years = parseFloat(form.querySelector('[name="years_service"]').value) || 0;
+      const monthsUnemployed = parseFloat(form.querySelector('[name="months_unemployed"]').value) || 0;
+      const dismissalType = form.querySelector('[name="dismissal_type"]').value;
       const reinstatement = form.querySelector('[name="reinstatement"]').value === 'yes';
 
-      let amount = 0;
+      let maxMonths = 12;
+      if (dismissalType === 'automatic') maxMonths = 24;
+
+      let suggestedMonths = 0;
 
       if (reinstatement) {
-        // Back pay calculation
-        amount = salary * monthsDismissed;
+        suggestedMonths = monthsUnemployed; // Back pay only
       } else {
-        // Compensation: capped at 12 months remuneration
-        const maxComp = salary * 12;
-        // Rough estimate: 1-3 months per year of service, plus back pay
-        const serviceFactor = Math.min(monthsEmployed / 12, 10); // cap at 10 years
-        amount = Math.min((salary * serviceFactor * 1.5) + (salary * monthsDismissed), maxComp);
+        // Base: 1 month per year of service, minimum 3 months
+        const baseMonths = Math.max(years, 3);
+        // Add unemployment months
+        const totalMonths = baseMonths + monthsUnemployed;
+        // Cap at max
+        suggestedMonths = Math.min(totalMonths, maxMonths);
       }
 
-      display.textContent = 'R' + Math.round(amount).toLocaleString('en-ZA');
+      const randAmount = salary * suggestedMonths;
+
+      monthsDisplay.textContent = suggestedMonths + ' months';
+      randDisplay.textContent = 'R' + Math.round(randAmount).toLocaleString('en-ZA');
+
+      if (suggestedMonths >= maxMonths) {
+        monthsDisplay.style.color = 'var(--danger)';
+      } else {
+        monthsDisplay.style.color = 'var(--accent)';
+      }
     }
 
     form.addEventListener('input', calculate);
     form.addEventListener('change', calculate);
 
-    // Calculate on load if data exists
     const saved = Advome?.storage?.get('form_settlement_calc', {});
     if (saved.monthly_salary) calculate();
   })();

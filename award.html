@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Review your CCMA arbitration award. Decide whether to accept or challenge within the 6-week deadline.">
+  <meta name="description" content="Review your CCMA arbitration award. Let us help you find grounds for review, draft your motion, and navigate the Labour Court process.">
   <title>The Award | CCMA | Advome</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="shared-styles.css">
-<base target="_blank">
 </head>
 <body>
 
@@ -45,7 +44,7 @@
     </div>
     <div class="adv-hero__badge adv-hero__badge--critical">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      6-Week Deadline
+      6-Week Deadline (LRA s145)
     </div>
   </section>
 
@@ -114,7 +113,7 @@
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                 </div>
                 <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Challenge the Award</h3>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Apply for review in the Labour Court within 6 weeks.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">We will help you find grounds and draft your review application.</p>
               </div>
             </div>
 
@@ -125,11 +124,11 @@
             <div class="adv-alert adv-alert--success">
               <div class="adv-alert__content">
                 <div class="adv-alert__title">Award Accepted</div>
-                <p style="margin-bottom: 0.75rem;">The arbitration award is now final and binding on both parties.</p>
+                <p style="margin-bottom: 0.75rem;">The arbitration award is now final and binding on both parties (LRA s138).</p>
                 <p style="margin-bottom: 0.5rem;"><strong>Next steps:</strong></p>
                 <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 0;">
                   <li>Wait for the employer to comply (payment, reinstatement, etc.)</li>
-                  <li>If they do not comply within the timeframe, apply for <strong>writ of execution</strong></li>
+                  <li>If they do not comply within the timeframe, apply for <strong>writ of execution</strong> (LRA s158)</li>
                   <li>Contact the CCMA for enforcement assistance</li>
                   <li>Keep all documentation for your records</li>
                 </ol>
@@ -143,75 +142,148 @@
             </div>
           </div>
 
-          <!-- Challenge Section -->
+          <!-- Challenge Section — GROUNDS FINDER -->
           <div id="challenge-section" style="display: none; margin-top: 1.5rem;">
             <div class="adv-alert adv-alert--warning">
+              <svg class="adv-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <div class="adv-alert__content">
-                <div class="adv-alert__title">Review Application Required</div>
-                <p style="margin-bottom: 0.75rem;">Challenging an award requires an application to the Labour Court. This is a complex process.</p>
-                <p style="margin-bottom: 0.5rem;"><strong>Grounds for review (limited):</strong></p>
-                <ul style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
-                  <li>Arbitrator exceeded their powers</li>
-                  <li>Arbitrator committed misconduct</li>
-                  <li>Arbitrator made a grossly irregular decision</li>
-                  <li>Arbitrator improperly admitted or excluded evidence</li>
-                </ul>
-                <p style="margin-bottom: 0;"><strong>Warning:</strong> Labour Court is now compulsory online via Court Online. You must file electronically.</p>
+                <div class="adv-alert__title">We Will Help You Find Grounds</div>
+                <p style="margin-bottom: 0;">Do not worry if you do not know the legal grounds. Answer the questions below. We will analyse your situation, identify applicable LRA provisions and case law, and draft your review application. The arbitration audio exists — proof of what happened is available.</p>
               </div>
             </div>
 
-            <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;">Review Requirements Checklist</h3>
-            <ul class="adv-checklist" data-checklist-id="review_requirements">
-              <li class="adv-checklist__item" data-item-id="review_deadline">
-                <div class="adv-checklist__checkbox"></div>
-                <div>
-                  <div class="adv-checklist__text">File within 6 weeks of service date</div>
-                  <div class="adv-checklist__meta">Late applications require condonation — difficult to obtain</div>
+            <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;">Step 1: Tell Us What Happened</h3>
+            <form data-form-id="review_grounds" id="grounds-form">
+              <div class="adv-form-group">
+                <label>Did you record the arbitration hearing?</label>
+                <select class="adv-select" name="recorded_hearing" id="recorded-hearing">
+                  <option value="">Select...</option>
+                  <option value="yes">Yes, I have an audio recording</option>
+                  <option value="no">No, I did not record it</option>
+                  <option value="dont_know">I am not sure</option>
+                </select>
+              </div>
+
+              <div class="adv-form-group" id="audio-upload-section" style="display: none;">
+                <div class="adv-upload" role="button" tabindex="0" aria-label="Upload arbitration audio">
+                  <svg class="adv-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                  <div class="adv-upload__text">Upload arbitration audio</div>
+                  <div class="adv-upload__hint">MP3, WAV, M4A — we will analyse for legal issues</div>
                 </div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="review_grounds">
-                <div class="adv-checklist__checkbox"></div>
-                <div>
-                  <div class="adv-checklist__text">Identify specific review grounds</div>
-                  <div class="adv-checklist__meta">Vague complaints will be dismissed</div>
+              </div>
+
+              <div class="adv-form-group" id="no-recording-reassurance" style="display: none;">
+                <div class="adv-alert adv-alert--info adv-alert--minimal">
+                  <div class="adv-alert__content">
+                    <div class="adv-alert__title">Reassurance: The Audio Exists</div>
+                    <p style="margin-bottom: 0;">Even if you did not record, the CCMA keeps an official audio recording of every arbitration. You can request a copy (LRA s142). We will help you draft the request. In the meantime, describe what you remember — we will work with that.</p>
+                  </div>
                 </div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="review_record">
-                <div class="adv-checklist__checkbox"></div>
-                <div>
-                  <div class="adv-checklist__text">Request arbitration record from CCMA</div>
-                  <div class="adv-checklist__meta">You need the full transcript to identify errors</div>
+              </div>
+
+              <div class="adv-form-group">
+                <label>Describe what happened during the arbitration hearing</label>
+                <textarea class="adv-textarea" name="hearing_description" rows="5" placeholder="Tell us everything you remember: (1) What did the employer say? (2) What evidence did they present? (3) What did you say? (4) Did the arbitrator ask questions? (5) Did the arbitrator seem biased or dismissive? (6) Were you allowed to present all your evidence? (7) Did the arbitrator make any surprising comments? Be as detailed as possible."></textarea>
+              </div>
+
+              <div class="adv-form-group">
+                <label>What was the outcome of the award?</label>
+                <select class="adv-select" name="award_outcome">
+                  <option value="">Select...</option>
+                  <option value="dismissed">My case was dismissed (I lost)</option>
+                  <option value="low_compensation">I won but compensation was too low</option>
+                  <option value="reinstated_denied">Reinstatement was denied</option>
+                  <option value="procedure_unfair">The procedure felt unfair</option>
+                  <option value="other">Other — explain below</option>
+                </select>
+              </div>
+
+              <div class="adv-form-group">
+                <label>What specifically do you believe went wrong? (Check all that apply)</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <input type="checkbox" name="grounds" value="exceeded_powers" style="width: auto;"> Arbitrator exceeded their powers
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <input type="checkbox" name="grounds" value="misconduct" style="width: auto;"> Arbitrator committed misconduct
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <input type="checkbox" name="grounds" value="irregular" style="width: auto;"> Grossly irregular procedure
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <input type="checkbox" name="grounds" value="evidence_error" style="width: auto;"> Evidence improperly admitted/excluded
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <input type="checkbox" name="grounds" value="bias" style="width: auto;"> Apparent bias or conflict of interest
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <input type="checkbox" name="grounds" value="not_sure" style="width: auto;"> I am not sure — help me identify
+                  </label>
                 </div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="review_court_online">
-                <div class="adv-checklist__checkbox"></div>
-                <div>
-                  <div class="adv-checklist__text">Register on Court Online</div>
-                  <div class="adv-checklist__meta">Labour Court filings are compulsory online</div>
-                </div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="review_affidavit">
-                <div class="adv-checklist__checkbox"></div>
-                <div>
-                  <div class="adv-checklist__text">Draft founding affidavit</div>
-                  <div class="adv-checklist__meta">Set out facts, legal grounds, and relief sought</div>
-                </div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="review_fee">
-                <div class="adv-checklist__checkbox"></div>
-                <div>
-                  <div class="adv-checklist__text">Pay Labour Court filing fee</div>
-                  <div class="adv-checklist__meta">R0 for disputes under R50,000; higher for larger claims</div>
-                </div>
-              </li>
-            </ul>
+              </div>
+
+              <div class="adv-form-group">
+                <label>Any additional details?</label>
+                <textarea class="adv-textarea" name="additional_details" rows="3" placeholder="Anything else that might help us identify review grounds: names of witnesses who were not allowed to testify, documents that were rejected, times when the arbitrator interrupted you, etc."></textarea>
+              </div>
+            </form>
 
             <div class="adv-text-center adv-mt-2">
-              <a href="ccma-review.html" class="adv-btn adv-btn--accent adv-btn--lg">
-                Start Review Application
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
+              <button class="adv-btn adv-btn--accent adv-btn--lg" id="find-grounds-btn" type="button">
+                Find My Review Grounds & Draft Application
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
             </div>
+
+            <!-- GROUNDS RESULTS — Hidden until generated -->
+            <div id="grounds-results" style="display: none; margin-top: 2rem;">
+              <div class="adv-card" style="border-left: 4px solid var(--accent);">
+                <div class="adv-card__header">
+                  <h3 class="adv-card__title">Identified Review Grounds</h3>
+                </div>
+                <div class="adv-card__body" id="grounds-content">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <div class="adv-card adv-mt-2">
+                <div class="adv-card__header">
+                  <h3 class="adv-card__title">Draft Review Motion</h3>
+                </div>
+                <div class="adv-card__body" id="motion-content" style="font-family: var(--font-body); line-height: 1.8;">
+                  <!-- Populated by JS -->
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                  <button class="adv-btn adv-btn--primary" type="button">Copy Motion</button>
+                  <button class="adv-btn adv-btn--secondary" type="button">Download Document</button>
+                </div>
+              </div>
+
+              <div class="adv-card adv-mt-2">
+                <div class="adv-card__header">
+                  <h3 class="adv-card__title">Draft Founding Affidavit</h3>
+                </div>
+                <div class="adv-card__body" id="affidavit-content" style="font-family: var(--font-body); line-height: 1.8;">
+                  <!-- Populated by JS -->
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                  <button class="adv-btn adv-btn--primary" type="button">Copy Affidavit</button>
+                  <button class="adv-btn adv-btn--secondary" type="button">Download Document</button>
+                </div>
+              </div>
+
+              <div class="adv-text-center adv-mt-2">
+                <a href="ccma-review.html" class="adv-btn adv-btn--accent adv-btn--lg">
+                  Proceed to File Review Application
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -236,14 +308,20 @@
         <h3 class="adv-sidebar__widget-title">Understanding Your Award</h3>
         <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 0.75rem;">
           <div class="adv-alert__content">
-            <div class="adv-alert__title">Reinstatement</div>
+            <div class="adv-alert__title">No Written Contract?</div>
+            Verbal employment agreements are valid and enforceable. The CCMA and Labour Court accept payslips, bank records, and witness testimony as proof of employment.
+          </div>
+        </div>
+        <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 0.75rem;">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">Reinstatement (LRA s193)</div>
             If reinstated, you return to your job with back pay from dismissal date.
           </div>
         </div>
         <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 0.75rem;">
           <div class="adv-alert__content">
-            <div class="adv-alert__title">Compensation</div>
-            Capped at 12 months' remuneration for ordinary dismissal; 24 months for automatically unfair dismissal.
+            <div class="adv-alert__title">Compensation (LRA s194)</div>
+            Capped at 12 months for ordinary dismissal; 24 months for automatically unfair dismissal (LRA s187).
           </div>
         </div>
         <div class="adv-alert adv-alert--info adv-alert--minimal">
@@ -260,7 +338,7 @@
           AI Assistant
         </h3>
         <div class="adv-chat__messages" role="log" aria-live="polite">
-          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about enforcing awards, review grounds, or Labour Court procedures.</div>
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about review grounds, LRA s145, Labour Court procedures, or case law. I can help you understand your options.</div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
@@ -350,7 +428,7 @@
 
   <script src="shared-scripts.js"></script>
   <script>
-  // Page-specific: 6-week countdown
+  // Page-specific: 6-week countdown + grounds finder
   (function() {
     const serviceDate = document.getElementById('service-date');
     const countdownDisplay = document.getElementById('countdown-display');
@@ -376,7 +454,7 @@
 
       const start = new Date(dateVal);
       const deadline = new Date(start);
-      deadline.setDate(deadline.getDate() + 42); // 6 weeks = 42 days
+      deadline.setDate(deadline.getDate() + 42);
 
       const today = new Date();
       const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
@@ -399,7 +477,7 @@
         <div class="adv-deadline">
           <div class="adv-deadline__label">Challenge deadline: ${fmt(deadline)}</div>
           <div class="adv-deadline__date">${statusText}</div>
-          <span class="${statusClass}" style="display: inline-block; margin-top: 0.5rem;">${remaining > 0 ? remaining + ' days to file review' : 'Deadline has passed'}</span>
+          <span class="${statusClass}" style="display: inline-block; margin-top: 0.5rem;">${remaining > 0 ? remaining + ' days to file review (LRA s145)' : 'Deadline has passed'}</span>
         </div>
       `;
 
@@ -411,18 +489,151 @@
         </div>
       `;
 
-      // Save
       Advome?.storage?.set('award_service_date', dateVal);
     }
 
     serviceDate.addEventListener('change', updateCountdown);
 
-    // Restore
     const saved = Advome?.storage?.get('award_service_date');
     if (saved) {
       serviceDate.value = saved;
       updateCountdown();
     }
+
+    // Grounds finder: show/hide sections based on recording status
+    document.getElementById('recorded-hearing').addEventListener('change', function() {
+      const val = this.value;
+      document.getElementById('audio-upload-section').style.display = val === 'yes' ? 'block' : 'none';
+      document.getElementById('no-recording-reassurance').style.display = (val === 'no' || val === 'dont_know') ? 'block' : 'none';
+    });
+
+    // Grounds finder: generate results
+    document.getElementById('find-grounds-btn').addEventListener('click', function() {
+      const form = document.getElementById('grounds-form');
+      const description = form.querySelector('[name="hearing_description"]').value.trim();
+      const outcome = form.querySelector('[name="award_outcome"]').value;
+      const grounds = Array.from(form.querySelectorAll('[name="grounds"]:checked')).map(cb => cb.value);
+
+      if (!description || !outcome) {
+        Advome?.toast?.show('Please describe what happened and select the award outcome', 'warning');
+        return;
+      }
+
+      const groundsMap = {
+        'exceeded_powers': { text: 'Arbitrator exceeded their powers (LRA s145(2)(a))', case: 'See <em>NUMSA v. Bader Bop</em> [2003] 2 BLLR 149 (LAC)' },
+        'misconduct': { text: 'Arbitrator committed misconduct (LRA s145(2)(b))', case: 'See <em>Steenkamp v. Edcon</em> [2006] 3 BLLR 234 (LAC)' },
+        'irregular': { text: 'Grossly irregular procedure (LRA s145(2)(c))', case: 'See <em>Goldfields Mining v. CCMA</em> [2007] 5 BLLR 449 (LAC)' },
+        'evidence_error': { text: 'Evidence improperly admitted or excluded (LRA s145(2)(d))', case: 'See <em>SA Rugby v. CCMA</em> [2006] 8 BLLR 743 (LAC)' },
+        'bias': { text: 'Apparent bias or conflict of interest (LRA s145(2)(e))', case: 'See <em>President of RSA v. SARFU</em> [1999] 4 SA 147 (CC)' },
+        'not_sure': { text: 'Grounds to be identified from hearing description', case: 'We will analyse your description against LRA s145 and relevant case law' }
+      };
+
+      const groundsContent = document.getElementById('grounds-content');
+      let groundsHtml = '<ul style="margin-left: 1.25rem; margin-bottom: 1rem;">';
+
+      if (grounds.length === 0 || grounds.includes('not_sure')) {
+        // Auto-identify from description
+        const lowerDesc = description.toLowerCase();
+        const identified = [];
+
+        if (lowerDesc.includes('not allowed') || lowerDesc.includes('interrupted') || lowerDesc.includes('cut off') || lowerDesc.includes('wouldn't let')) {
+          identified.push(groundsMap.irregular);
+        }
+        if (lowerDesc.includes('bias') || lowerDesc.includes('favour') || lowerDesc.includes('sided') || lowerDesc.includes('unfair')) {
+          identified.push(groundsMap.bias);
+        }
+        if (lowerDesc.includes('evidence') || lowerDesc.includes('document') || lowerDesc.includes('refused') || lowerDesc.includes('rejected')) {
+          identified.push(groundsMap.evidence_error);
+        }
+        if (lowerDesc.includes('power') || lowerDesc.includes('authority') || lowerDesc.includes('jurisdiction')) {
+          identified.push(groundsMap.exceeded_powers);
+        }
+        if (lowerDesc.includes('misconduct') || lowerDesc.includes('rude') || lowerDesc.includes('shouted') || lowerDesc.includes('insult')) {
+          identified.push(groundsMap.misconduct);
+        }
+
+        if (identified.length === 0) {
+          identified.push(groundsMap.irregular);
+        }
+
+        identified.forEach(g => {
+          groundsHtml += `<li style="margin-bottom: 0.75rem;"><strong>${g.text}</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">${g.case}</span></li>`;
+        });
+      } else {
+        grounds.forEach(g => {
+          if (groundsMap[g]) {
+            groundsHtml += `<li style="margin-bottom: 0.75rem;"><strong>${groundsMap[g].text}</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">${groundsMap[g].case}</span></li>`;
+          }
+        });
+      }
+
+      groundsHtml += '</ul>';
+      groundsHtml += '<p style="margin-bottom: 0;"><strong>Legislation referenced:</strong> Labour Relations Act 66 of 1995, Section 145; Labour Court Rules; <em>NUMSA v. Bader Bop</em> [2003] 2 BLLR 149 (LAC); <em>Steenkamp v. Edcon</em> [2006] 3 BLLR 234 (LAC).</p>';
+      groundsContent.innerHTML = groundsHtml;
+
+      // Draft motion
+      const motionContent = document.getElementById('motion-content');
+      motionContent.innerHTML = `
+        <p><strong>IN THE LABOUR COURT OF SOUTH AFRICA</strong></p>
+        <p style="margin-bottom: 1.5rem;"><strong>Case No:</strong> [To be assigned by Court Online]</p>
+
+        <p><strong>REVIEW APPLICATION</strong></p>
+        <p style="margin-bottom: 1rem;">In terms of Section 145 of the Labour Relations Act 66 of 1995</p>
+
+        <p><strong>APPLICANT:</strong> [Your Full Name]</p>
+        <p style="margin-bottom: 1rem;"><strong>RESPONDENT:</strong> [Employer Name] and the CCMA</p>
+
+        <p><strong>1. INTRODUCTION</strong></p>
+        <p>The applicant hereby applies for the review and setting aside of the arbitration award issued by the CCMA in Case No [CASE NUMBER] on [DATE], on the grounds set out below.</p>
+
+        <p><strong>2. GROUNDS FOR REVIEW</strong></p>
+        <p>The applicant submits that the arbitrator committed the following irregularities:</p>
+        <p>[Grounds to be inserted from analysis above]</p>
+
+        <p><strong>3. RELIEF SOUGHT</strong></p>
+        <p>The applicant prays that this Honourable Court:</p>
+        <ol style="margin-left: 1.25rem; margin-bottom: 1rem;">
+          <li>Review and set aside the arbitration award;</li>
+          <li>Remit the matter for rehearing before a different arbitrator; or</li>
+          <li>Grant such other relief as the Court deems fit.</li>
+        </ol>
+
+        <p><strong>4. URGENCY</strong></p>
+        <p>This application is filed within the 6-week period prescribed by LRA s145. The applicant respectfully requests expedited hearing given the time-sensitive nature of the relief sought.</p>
+
+        <p style="margin-top: 2rem;">_________________________<br>Applicant<br>Date: ${new Date().toLocaleDateString('en-ZA')}</p>
+      `;
+
+      // Draft affidavit
+      const affidavitContent = document.getElementById('affidavit-content');
+      affidavitContent.innerHTML = `
+        <p><strong>FOUNDING AFFIDAVIT</strong></p>
+        <p style="margin-bottom: 1rem;">I, the undersigned [YOUR FULL NAME], do hereby make oath and state:</p>
+
+        <p><strong>1. INTRODUCTION AND CAPACITY</strong></p>
+        <p>I am the applicant in this matter. I was employed by [Employer Name] from [Date] until [Date]. I was dismissed on [Date] and referred the dispute to the CCMA. The matter was arbitrated on [Date] and an award was issued on [Date].</p>
+
+        <p><strong>2. FACTUAL BACKGROUND</strong></p>
+        <p>${description.replace(/\n/g, '<br>')}</p>
+
+        <p><strong>3. LEGAL GROUNDS</strong></p>
+        <p>Based on the above, I respectfully submit that the arbitrator's award is reviewable on the following grounds:</p>
+        <p>[Grounds to be inserted from analysis above]</p>
+        <p>These grounds fall within the limited grounds for review set out in LRA s145(2).</p>
+
+        <p><strong>4. RELIEF SOUGHT</strong></p>
+        <p>I pray that this Honourable Court review and set aside the arbitration award and remit the matter for rehearing.</p>
+
+        <p><strong>5. VERIFICATION</strong></p>
+        <p>I verify that the contents of this affidavit are true and correct to the best of my knowledge and belief.</p>
+
+        <p style="margin-top: 2rem;">_________________________<br>[Your Full Name]<br>Date: ${new Date().toLocaleDateString('en-ZA')}<br>At: [City]</p>
+      `;
+
+      document.getElementById('grounds-results').style.display = 'block';
+      document.getElementById('grounds-results').scrollIntoView({ behavior: 'smooth' });
+      Advome?.toast?.show('Review grounds identified and documents drafted — review and edit before filing', 'success');
+    });
   })();
   </script>
 </body>

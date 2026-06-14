@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Prepare for your CCMA arbitration hearing. Build your evidence bundle, manage witnesses, and get day-of hearing guidance.">
+  <meta name="description" content="Prepare for your CCMA arbitration hearing. Build evidence bundles, manage witnesses, draft closing arguments, and get day-of guidance.">
   <title>Prepare for Arbitration | CCMA | Advome</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="shared-styles.css">
-<base target="_blank">
 </head>
 <body>
 
@@ -41,11 +40,11 @@
   <section class="adv-hero" aria-labelledby="page-title">
     <div class="adv-hero__content">
       <h1 id="page-title">Prepare for Arbitration</h1>
-      <p>Build your evidence bundle and prepare for your formal CCMA hearing</p>
+      <p>Build your evidence bundle, prepare witnesses, and draft closing arguments</p>
     </div>
     <div class="adv-hero__badge">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Formal Hearing
+      Formal Hearing (LRA s138)
     </div>
   </section>
 
@@ -73,7 +72,6 @@
           </div>
 
           <div id="evidence-list" style="margin-top: 1rem;">
-            <!-- Dynamically populated -->
             <div style="text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom: 0.5rem; opacity: 0.5;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               <p style="margin-bottom: 0;">No documents uploaded yet. Use the zone above or add manually below.</p>
@@ -87,7 +85,7 @@
             <div class="adv-form-group" style="margin-bottom: 0;">
               <select class="adv-select" id="doc-type">
                 <option value="">Select type...</option>
-                <option value="contract">Employment Contract</option>
+                <option value="contract">Employment Contract (written or verbal proof)</option>
                 <option value="payslip">Payslip</option>
                 <option value="dismissal">Dismissal Letter</option>
                 <option value="disciplinary">Disciplinary Record</option>
@@ -140,6 +138,91 @@
           <button class="adv-btn adv-btn--secondary adv-btn--sm" style="margin-top: 0.75rem;" id="add-witness-btn" type="button">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.3rem;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Add Witness
+          </button>
+        </div>
+      </section>
+
+      <!-- CLOSING ARGUMENTS BUILDER — NEW -->
+      <section class="adv-card adv-mt-2" aria-labelledby="closing-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="closing-title" class="adv-card__title">Closing Arguments Builder</h2>
+            <p class="adv-card__subtitle">Commissioners often request written closing arguments. Tell us what happened — we will draft a template.</p>
+          </div>
+        </div>
+        <div class="adv-card__body">
+          <div class="adv-alert adv-alert--info" style="margin-bottom: 1rem;">
+            <svg class="adv-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">How This Works</div>
+              <p style="margin-bottom: 0;">Describe what happened during the hearing, or upload the audio recording. We will identify key legal issues and draft closing arguments referencing relevant LRA sections and case law. You review, edit, and submit.</p>
+            </div>
+          </div>
+
+          <form data-form-id="closing_args" id="closing-form">
+            <div class="adv-form-group">
+              <label>What happened during the arbitration hearing?</label>
+              <textarea class="adv-textarea" name="hearing_summary" rows="4" placeholder="Describe: (1) What the employer said, (2) What evidence they presented, (3) What you said, (4) What evidence you presented, (5) Any inconsistencies or gaps in their case. Be factual and detailed."></textarea>
+            </div>
+            <div class="adv-form-group">
+              <label>Did you record the hearing?</label>
+              <select class="adv-select" name="recorded" id="recorded-select">
+                <option value="no">No, I did not record</option>
+                <option value="yes">Yes, I have an audio recording</option>
+              </select>
+            </div>
+            <div class="adv-form-group" id="audio-upload" style="display: none;">
+              <div class="adv-upload" role="button" tabindex="0" aria-label="Upload hearing audio">
+                <svg class="adv-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <div class="adv-upload__text">Upload hearing audio (MP3, WAV, M4A)</div>
+                <div class="adv-upload__hint">We will analyze the transcript and identify legal issues</div>
+              </div>
+            </div>
+            <div class="adv-form-group">
+              <label>What is the main legal issue?</label>
+              <select class="adv-select" name="legal_issue">
+                <option value="">Select the primary issue...</option>
+                <option value="no_fair_reason">No fair reason for dismissal (LRA s188)</option>
+                <option value="no_fair_procedure">No fair procedure (LRA s188)</option>
+                <option value="automatically_unfair">Automatically unfair dismissal (LRA s187)</option>
+                <option value="constructive">Constructive dismissal (LRA s186(e))</option>
+                <option value="unfair_practice">Unfair labour practice (LRA s186(2))</option>
+                <option value="discrimination">Discrimination (EEA)</option>
+                <option value="other">Other / Multiple issues</option>
+              </select>
+            </div>
+            <div class="adv-form-group">
+              <label>What relief are you seeking?</label>
+              <select class="adv-select" name="relief_sought">
+                <option value="">Select relief...</option>
+                <option value="reinstatement">Reinstatement with back pay (LRA s193)</option>
+                <option value="compensation_12">Compensation — up to 12 months (LRA s194)</option>
+                <option value="compensation_24">Compensation — up to 24 months (LRA s187 + s194)</option>
+                <option value="both">Reinstatement OR compensation</option>
+              </select>
+            </div>
+          </form>
+
+          <div id="closing-preview" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-page); border-radius: 8px; border: 1px solid var(--border);">
+            <h3 style="margin-bottom: 1rem;">Draft Closing Arguments</h3>
+            <div id="closing-content" style="font-family: var(--font-body); line-height: 1.8; color: var(--text-body);">
+              <!-- Populated by JS -->
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+              <button class="adv-btn adv-btn--primary" type="button">Copy to Clipboard</button>
+              <button class="adv-btn adv-btn--secondary" type="button">Download as Document</button>
+              <button class="adv-btn adv-btn--ghost" type="button" onclick="document.getElementById('closing-preview').style.display='none'">Edit Again</button>
+            </div>
+          </div>
+        </div>
+        <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="adv-btn adv-btn--accent adv-btn--block" id="draft-closing-btn" type="button">
+            Draft My Closing Arguments
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </button>
         </div>
       </section>
@@ -204,11 +287,11 @@
       <section class="adv-mt-3" aria-label="Arbitration guidance">
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
-            <span>What to Expect at Arbitration</span>
+            <span>What to Expect at Arbitration (LRA s138)</span>
             <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="adv-accordion__body">
-            <p>Arbitration is a <strong>formal hearing</strong> where an arbitrator hears evidence and makes a binding decision (an "award"). Unlike conciliation, arbitration follows court-like procedures.</p>
+            <p>Arbitration is a <strong>formal hearing</strong> where an arbitrator hears evidence and makes a binding decision (an "award"). Unlike conciliation, arbitration follows court-like procedures (LRA s138).</p>
             <p style="margin-bottom: 0.5rem;"><strong>Typical structure:</strong></p>
             <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
               <li><strong>Opening statements</strong> — Each party outlines their case (5-10 min)</li>
@@ -225,33 +308,34 @@
 
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
-            <span>Recording the Hearing</span>
+            <span>Recording the Hearing (LRA s138)</span>
             <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="adv-accordion__body">
             <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 1rem;">
               <div class="adv-alert__content">
                 <div class="adv-alert__title">Your Right to Record</div>
-                You are entitled to record the arbitration hearing. You must notify the CCMA and the other party in advance. Bring your own recording device.
+                You are entitled to record the arbitration hearing (LRA s138). You must notify the CCMA and the other party in advance. Bring your own recording device. This is critical for review applications and for drafting accurate closing arguments.
               </div>
             </div>
-            <p style="margin-bottom: 0;"><strong>Tip:</strong> A digital voice recorder (R300-R800) is sufficient. Test it before the hearing. Bring spare batteries or a power bank.</p>
+            <p style="margin-bottom: 0;"><strong>Tip:</strong> A digital voice recorder (R300-R800) is sufficient. Test it before the hearing. Bring spare batteries or a power bank. If you cannot afford one, ask the CCMA if they provide recording — some offices do.</p>
           </div>
         </div>
 
         <div class="adv-accordion" data-group="prep">
           <button class="adv-accordion__header" aria-expanded="false">
-            <span>Evidence Rules</span>
+            <span>Evidence Rules (LRA s138)</span>
             <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="adv-accordion__body">
             <ul style="margin-left: 1.25rem; color: var(--text-body);">
               <li><strong>Relevance only</strong> — Evidence must relate directly to the dispute</li>
               <li><strong>Original documents preferred</strong> — Bring originals, keep copies</li>
+              <li><strong>No written contract?</strong> — Verbal employment agreements are valid. Prove terms with payslips, bank statements, WhatsApp messages, or colleague testimony.</li>
               <li><strong>Chain of custody</strong> — Be able to explain where each document came from</li>
               <li><strong>Witnesses must attend</strong> — Written statements alone are weak; live testimony is stronger</li>
               <li><strong>Hearsay is limited</strong> — What someone told you is generally not admissible unless they testify</li>
-              <li><strong>Subpoenas available</strong> — If a witness refuses, request a subpoena from the CCMA</li>
+              <li><strong>Subpoenas available</strong> — If a witness refuses, request a subpoena from the CCMA (LRA s142)</li>
             </ul>
           </div>
         </div>
@@ -294,7 +378,7 @@
           AI Assistant
         </h3>
         <div class="adv-chat__messages" role="log" aria-live="polite">
-          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about evidence rules, witness preparation, or what to expect at arbitration.</div>
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about evidence rules, witness preparation, closing arguments, or what to expect at arbitration.</div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
@@ -384,7 +468,7 @@
 
   <script src="shared-scripts.js"></script>
   <script>
-  // Page-specific: Evidence bundle and witness manager
+  // Page-specific: Evidence bundle, witness manager, closing arguments
   (function() {
     let evidenceCount = 0;
     let witnessCount = 0;
@@ -461,6 +545,82 @@
       document.getElementById('witness-phone').value = '';
       document.getElementById('witness-rel').value = '';
       Advome?.toast?.show('Witness added', 'success');
+    });
+
+    // Closing arguments builder
+    document.getElementById('recorded-select').addEventListener('change', function() {
+      document.getElementById('audio-upload').style.display = this.value === 'yes' ? 'block' : 'none';
+    });
+
+    document.getElementById('draft-closing-btn').addEventListener('click', function() {
+      const form = document.getElementById('closing-form');
+      const summary = form.querySelector('[name="hearing_summary"]').value.trim();
+      const issue = form.querySelector('[name="legal_issue"]').value;
+      const relief = form.querySelector('[name="relief_sought"]').value;
+
+      if (!summary || !issue || !relief) {
+        Advome?.toast?.show('Please fill in all fields to draft closing arguments', 'warning');
+        return;
+      }
+
+      const issueMap = {
+        'no_fair_reason': 'no fair reason for dismissal (LRA s188(1)(a))',
+        'no_fair_procedure': 'no fair procedure (LRA s188(1)(b))',
+        'automatically_unfair': 'automatically unfair dismissal (LRA s187)',
+        'constructive': 'constructive dismissal (LRA s186(e))',
+        'unfair_practice': 'unfair labour practice (LRA s186(2))',
+        'discrimination': 'discrimination (Employment Equity Act)',
+        'other': 'unfair dismissal and related issues'
+      };
+
+      const reliefMap = {
+        'reinstatement': 'reinstatement with back pay in terms of LRA s193',
+        'compensation_12': 'compensation not exceeding 12 months' remuneration in terms of LRA s194',
+        'compensation_24': 'compensation not exceeding 24 months' remuneration in terms of LRA s187 read with s194',
+        'both': 'reinstatement alternatively compensation'
+      };
+
+      const preview = document.getElementById('closing-preview');
+      const content = document.getElementById('closing-content');
+
+      content.innerHTML = `
+        <p><strong>IN THE COMMISSION FOR CONCILIATION, MEDIATION AND ARBITRATION</strong></p>
+        <p style="margin-bottom: 1.5rem;"><strong>Case No:</strong> [Your Case Number]</p>
+
+        <p><strong>CLOSING ARGUMENTS ON BEHALF OF THE APPLICANT</strong></p>
+
+        <p><strong>1. INTRODUCTION</strong></p>
+        <p>The applicant respectfully submits these closing arguments in support of their claim for ${reliefMap[relief] || 'appropriate relief'}.</p>
+
+        <p><strong>2. FACTUAL BACKGROUND</strong></p>
+        <p>${summary.replace(/
+/g, '<br>')}</p>
+
+        <p><strong>3. LEGAL ISSUE</strong></p>
+        <p>The central issue before this Honourable Arbitrator is whether the respondent's conduct constitutes ${issueMap[issue] || 'unfair conduct'}.</p>
+
+        <p><strong>4. LEGAL SUBMISSIONS</strong></p>
+        <p>In terms of the Labour Relations Act 66 of 1995, the respondent bears the onus of proving that the dismissal was both substantively and procedurally fair (LRA s192).</p>
+        <p>The respondent has failed to discharge this onus for the following reasons:</p>
+        <ul style="margin-left: 1.25rem; margin-bottom: 1rem;">
+          <li>[To be completed based on specific evidence gaps]</li>
+          <li>[To be completed based on procedural irregularities]</li>
+          <li>[To be completed based on witness inconsistencies]</li>
+        </ul>
+
+        <p><strong>5. RELIEF SOUGHT</strong></p>
+        <p>The applicant respectfully prays that this Honourable Arbitrator grant the following relief:</p>
+        <p>${reliefMap[relief] || 'Appropriate relief as permitted by the LRA'}.</p>
+
+        <p><strong>6. CONCLUSION</strong></p>
+        <p>For the reasons set out above, the applicant respectfully submits that the award should be made in their favour.</p>
+
+        <p style="margin-top: 2rem;">_________________________<br>Applicant / Representative<br>Date: ${new Date().toLocaleDateString('en-ZA')}</p>
+      `;
+
+      preview.style.display = 'block';
+      preview.scrollIntoView({ behavior: 'smooth' });
+      Advome?.toast?.show('Closing arguments drafted — review and edit before submitting', 'success');
     });
   })();
   </script>
