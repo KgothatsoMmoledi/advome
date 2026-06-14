@@ -1,225 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Award Centre</title>
-<link rel="stylesheet" href="shared-styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review your CCMA arbitration award. Decide whether to accept or challenge within the 6-week deadline.">
+  <title>The Award | CCMA | Advome</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="shared-styles.css">
 <base target="_blank">
 </head>
 <body>
 
-<header class="site-header">
-  <a href="index.html" class="brand">
-    <div class="brand-mark">A</div>
-    <div>
-      <div class="brand-text">Advome</div>
-      <div class="brand-sub">Self-representation assistance</div>
+  <!-- HEADER -->
+  <header class="adv-header" role="banner">
+    <a href="index.html" class="adv-header__logo" aria-label="Advome Home">
+      Ad<span>vome</span>
+    </a>
+    <nav class="adv-header__nav" role="navigation" aria-label="Main navigation">
+      <a href="ccma.html" style="color: white; font-weight: 700;">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Find Attorney</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar" aria-label="User profile">U</div>
+      <span>My Cases</span>
     </div>
-  </a>
-  <nav class="main-nav">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="start.html" class="nav-link">Start</a>
-    <a href="dashboard.html" class="nav-link">Dashboard</a>
-    <a href="ccma.html" class="nav-link">CCMA</a>
-    <a href="award.html" class="nav-link active">Award</a>
-    <a href="divorce.html" class="nav-link">Divorce</a>
-    <a href="estates-hub.html" class="nav-link">Estates</a>
-    <a href="attorney.html" class="nav-link">Attorney</a>
-  </nav>
-</header>
+    <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </header>
 
-<div class="container">
+  <!-- PROGRESS BAR -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="award" role="navigation" aria-label="Workflow progress"></div>
 
-  <div class="page-header">
-    <h1>Award Centre</h1>
-    <p>Capture the arbitration outcome and decide what happens next. The award is the gateway to either closure or Labour Court review.</p>
+  <!-- HERO -->
+  <section class="adv-hero" aria-labelledby="page-title">
+    <div class="adv-hero__content">
+      <h1 id="page-title">The Arbitration Award</h1>
+      <p>Review the decision and choose your next step within 6 weeks</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--critical">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      6-Week Deadline
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="adv-container" id="main-content">
+    <div class="adv-workspace">
+
+      <!-- SERVICE DATE INPUT -->
+      <section class="adv-card" aria-labelledby="service-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="service-title" class="adv-card__title">When Were You Served?</h2>
+            <p class="adv-card__subtitle">Enter the date you received the award to start the countdown</p>
+          </div>
+        </div>
+        <div class="adv-card__body">
+          <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <div class="adv-form-group" style="margin-bottom: 0;">
+              <label style="font-size: 0.85rem;">Date of Service <span class="required">*</span></label>
+              <input type="date" class="adv-input" id="service-date" style="min-width: 200px;" aria-label="Date of service">
+            </div>
+            <div id="countdown-display" style="flex: 1; min-width: 250px;">
+              <div class="adv-deadline">
+                <div class="adv-deadline__label">Enter service date to see countdown</div>
+                <div class="adv-deadline__date" style="font-size: 1.25rem;">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIMARY: Binary Decision -->
+      <section class="adv-card adv-card--primary adv-mt-2" aria-labelledby="decision-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="decision-title" class="adv-card__title">Your Decision</h2>
+            <p class="adv-card__subtitle">Choose one path. You cannot undo this decision.</p>
+          </div>
+        </div>
+        <div class="adv-card__body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+            <!-- Accept -->
+            <div class="adv-card" style="border-left: 4px solid var(--success); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" 
+                 onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(56,161,105,0.15)'" 
+                 onmouseout="this.style.transform=''; this.style.boxShadow=''"
+                 onclick="document.getElementById('accept-section').style.display='block'; document.getElementById('challenge-section').style.display='none';"
+                 role="button" tabindex="0" aria-label="Accept the award">
+              <div style="text-align: center; padding: 1rem 0;">
+                <div style="width: 48px; height: 48px; background: rgba(56,161,105,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3 style="color: var(--success); margin-bottom: 0.5rem;">Accept the Award</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">The matter is concluded. Enforce payment or compliance.</p>
+              </div>
+            </div>
+
+            <!-- Challenge -->
+            <div class="adv-card" style="border-left: 4px solid var(--primary); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" 
+                 onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(26,54,93,0.15)'" 
+                 onmouseout="this.style.transform=''; this.style.boxShadow=''"
+                 onclick="document.getElementById('challenge-section').style.display='block'; document.getElementById('accept-section').style.display='none';"
+                 role="button" tabindex="0" aria-label="Challenge the award">
+              <div style="text-align: center; padding: 1rem 0;">
+                <div style="width: 48px; height: 48px; background: rgba(26,54,93,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Challenge the Award</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Apply for review in the Labour Court within 6 weeks.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Accept Section -->
+          <div id="accept-section" style="display: none; margin-top: 1.5rem;">
+            <div class="adv-alert adv-alert--success">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">Award Accepted</div>
+                <p style="margin-bottom: 0.75rem;">The arbitration award is now final and binding on both parties.</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Next steps:</strong></p>
+                <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 0;">
+                  <li>Wait for the employer to comply (payment, reinstatement, etc.)</li>
+                  <li>If they do not comply within the timeframe, apply for <strong>writ of execution</strong></li>
+                  <li>Contact the CCMA for enforcement assistance</li>
+                  <li>Keep all documentation for your records</li>
+                </ol>
+              </div>
+            </div>
+            <div class="adv-text-center adv-mt-2">
+              <a href="finalisation.html" class="adv-btn adv-btn--success adv-btn--lg">
+                Proceed to Finalisation
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Challenge Section -->
+          <div id="challenge-section" style="display: none; margin-top: 1.5rem;">
+            <div class="adv-alert adv-alert--warning">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">Review Application Required</div>
+                <p style="margin-bottom: 0.75rem;">Challenging an award requires an application to the Labour Court. This is a complex process.</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Grounds for review (limited):</strong></p>
+                <ul style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
+                  <li>Arbitrator exceeded their powers</li>
+                  <li>Arbitrator committed misconduct</li>
+                  <li>Arbitrator made a grossly irregular decision</li>
+                  <li>Arbitrator improperly admitted or excluded evidence</li>
+                </ul>
+                <p style="margin-bottom: 0;"><strong>Warning:</strong> Labour Court is now compulsory online via Court Online. You must file electronically.</p>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;">Review Requirements Checklist</h3>
+            <ul class="adv-checklist" data-checklist-id="review_requirements">
+              <li class="adv-checklist__item" data-item-id="review_deadline">
+                <div class="adv-checklist__checkbox"></div>
+                <div>
+                  <div class="adv-checklist__text">File within 6 weeks of service date</div>
+                  <div class="adv-checklist__meta">Late applications require condonation — difficult to obtain</div>
+                </div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="review_grounds">
+                <div class="adv-checklist__checkbox"></div>
+                <div>
+                  <div class="adv-checklist__text">Identify specific review grounds</div>
+                  <div class="adv-checklist__meta">Vague complaints will be dismissed</div>
+                </div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="review_record">
+                <div class="adv-checklist__checkbox"></div>
+                <div>
+                  <div class="adv-checklist__text">Request arbitration record from CCMA</div>
+                  <div class="adv-checklist__meta">You need the full transcript to identify errors</div>
+                </div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="review_court_online">
+                <div class="adv-checklist__checkbox"></div>
+                <div>
+                  <div class="adv-checklist__text">Register on Court Online</div>
+                  <div class="adv-checklist__meta">Labour Court filings are compulsory online</div>
+                </div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="review_affidavit">
+                <div class="adv-checklist__checkbox"></div>
+                <div>
+                  <div class="adv-checklist__text">Draft founding affidavit</div>
+                  <div class="adv-checklist__meta">Set out facts, legal grounds, and relief sought</div>
+                </div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="review_fee">
+                <div class="adv-checklist__checkbox"></div>
+                <div>
+                  <div class="adv-checklist__text">Pay Labour Court filing fee</div>
+                  <div class="adv-checklist__meta">R0 for disputes under R50,000; higher for larger claims</div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="adv-text-center adv-mt-2">
+              <a href="ccma-review.html" class="adv-btn adv-btn--accent adv-btn--lg">
+                Start Review Application
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">6-Week Countdown</h3>
+        <div id="sidebar-countdown">
+          <div class="adv-deadline">
+            <div class="adv-deadline__label">Enter service date above</div>
+            <div class="adv-deadline__date">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Understanding Your Award</h3>
+        <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 0.75rem;">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">Reinstatement</div>
+            If reinstated, you return to your job with back pay from dismissal date.
+          </div>
+        </div>
+        <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 0.75rem;">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">Compensation</div>
+            Capped at 12 months' remuneration for ordinary dismissal; 24 months for automatically unfair dismissal.
+          </div>
+        </div>
+        <div class="adv-alert adv-alert--info adv-alert--minimal">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">No Order as to Costs</div>
+            Each party usually pays their own costs. The CCMA does not award costs against the losing party.
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="award_help">
+        <h3 class="adv-sidebar__widget-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </h3>
+        <div class="adv-chat__messages" role="log" aria-live="polite">
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about enforcing awards, review grounds, or Labour Court procedures.</div>
+        </div>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
+          <button class="adv-chat__send" aria-label="Send message">Send</button>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="arbitration.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Arbitration
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="ccma-review.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            Review Application
+          </a>
+        </div>
+        <div>
+          <a href="https://courtonline.co.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Court Online Portal
+          </a>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Fee Estimate</h3>
+        <div class="adv-fee-meter">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Saved so far</span>
+          <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 65%;"></div></div>
+          <span class="adv-fee-meter__amount">R22,500</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 0;">Attorney estimate for award review: R25,000 — R50,000</p>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- BOTTOM ZONE -->
+  <div class="adv-bottom-zone">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div class="adv-fee-meter" style="flex: 1; max-width: 400px;">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Saved vs attorney</span>
+        <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 65%;"></div></div>
+        <span class="adv-fee-meter__amount">R22,500</span>
+      </div>
+      <div class="adv-savings adv-savings--small">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        You've saved <span class="adv-savings__amount">R22,500</span> vs. attorney fees
+      </div>
+    </div>
+
+    <div class="adv-compliance" role="contentinfo">
+      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
+    </div>
+
+    <nav class="adv-nav-footer" aria-label="Page navigation">
+      <a href="arbitration.html" class="adv-nav-footer__prev">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back: Arbitration
+      </a>
+      <a href="ccma-review.html" class="adv-nav-footer__next">
+        Challenge: Review Application
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </nav>
   </div>
 
-  <!-- Timeline -->
-  <div class="timeline">
-    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step active"><span class="num">2</span>Award</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">3</span>Review Decision</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">4</span>Motion & Affidavit</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">5</span>Record</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">6</span>Heads</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">8</span>Finalisation</div>
-  </div>
-
-  <!-- Health Meter -->
-  <div class="meter-container">
-    <div class="meter-header">
-      <span class="meter-label">Award Readiness</span>
-      <span class="meter-value" style="color:var(--warning);">65%</span>
-    </div>
-    <div class="meter-bar-bg">
-      <div class="meter-bar-fill medium" style="width:65%"></div>
-    </div>
-    <div class="meter-status attention">
-      <span>⚠️</span> Award received — decision required
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <!-- Award Summary -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
-        Award Summary
-      </div>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-box checked"></div>
-          <div class="checklist-text done">Award copy received</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Service date recorded</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Written reasons requested</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Outcome summary captured</div>
-        </div>
-      </div>
-      <div class="mt-2">
-        <span class="pill pill-amber">Service date pending</span>
-        <span class="pill pill-neutral">Reasons pending</span>
-      </div>
-    </div>
-
-    <!-- Six-Week Clock -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#fde8e8;color:#c01c28;">⏰</span>
-        Review Deadline
-      </div>
-      <p style="font-size:14px;color:var(--text);margin-bottom:12px;">
-        <strong>6-week review clock</strong> runs from the date the award was served on you.
-      </p>
-      <div style="background:var(--bg);border-radius:8px;padding:16px;">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-          <span style="font-size:13px;color:var(--text-muted);">Service date</span>
-          <span style="font-size:13px;font-weight:600;">Not recorded</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-          <span style="font-size:13px;color:var(--text-muted);">Days elapsed</span>
-          <span style="font-size:13px;font-weight:600;color:var(--danger);">—</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;">
-          <span style="font-size:13px;color:var(--text-muted);">Days remaining</span>
-          <span style="font-size:13px;font-weight:600;color:var(--secondary);">42 days</span>
-        </div>
-      </div>
-      <div class="section-34 mt-2">
-        <strong>Section 34 — Access to Justice</strong><br>
-        Every person has the right to have any dispute that can be resolved by law decided in a fair public hearing. The review process exists to protect that right when the award is flawed.
-      </div>
-    </div>
-  </div>
-
-  <!-- Decision Gate — THE CRITICAL BRANCH -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#fef3cd;color:#856404;">⚖️</span>
-      Decision Gate: Are you happy with the award?
-    </div>
-    <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">
-      This decision determines the entire next phase of your matter. Choose carefully — the review clock is running.
+  <!-- FOOTER -->
+  <footer class="adv-footer" role="contentinfo">
+    <p style="margin-bottom: 0.5rem;">
+      <a href="index.html">Home</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Attorneys</a>
     </p>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
+    </p>
+  </footer>
 
-    <div class="route-cards">
-      <div class="route-card" onclick="selectRoute('accept')">
-        <div class="route-card-icon">✅</div>
-        <div class="route-card-title">Accept the Award</div>
-        <div class="route-card-desc">
-          You are satisfied with the commissioner's decision. The matter will move to closure and finalisation.
+  <script src="shared-scripts.js"></script>
+  <script>
+  // Page-specific: 6-week countdown
+  (function() {
+    const serviceDate = document.getElementById('service-date');
+    const countdownDisplay = document.getElementById('countdown-display');
+    const sidebarCountdown = document.getElementById('sidebar-countdown');
+
+    function updateCountdown() {
+      const dateVal = serviceDate.value;
+      if (!dateVal) {
+        countdownDisplay.innerHTML = `
+          <div class="adv-deadline">
+            <div class="adv-deadline__label">Enter service date to see countdown</div>
+            <div class="adv-deadline__date" style="font-size: 1.25rem;">—</div>
+          </div>
+        `;
+        sidebarCountdown.innerHTML = `
+          <div class="adv-deadline">
+            <div class="adv-deadline__label">Enter service date above</div>
+            <div class="adv-deadline__date">—</div>
+          </div>
+        `;
+        return;
+      }
+
+      const start = new Date(dateVal);
+      const deadline = new Date(start);
+      deadline.setDate(deadline.getDate() + 42); // 6 weeks = 42 days
+
+      const today = new Date();
+      const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+      const fmt = d => d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' });
+
+      let statusClass = 'adv-deadline__safe';
+      let statusText = remaining + ' days remaining';
+
+      if (remaining < 0) {
+        statusClass = 'adv-deadline__urgent';
+        statusText = 'DEADLINE EXPIRED — ' + Math.abs(remaining) + ' days ago';
+      } else if (remaining <= 7) {
+        statusClass = 'adv-deadline__urgent';
+        statusText = 'CRITICAL: ' + remaining + ' days left';
+      } else if (remaining <= 14) {
+        statusText = remaining + ' days left — Urgent';
+      }
+
+      countdownDisplay.innerHTML = `
+        <div class="adv-deadline">
+          <div class="adv-deadline__label">Challenge deadline: ${fmt(deadline)}</div>
+          <div class="adv-deadline__date">${statusText}</div>
+          <span class="${statusClass}" style="display: inline-block; margin-top: 0.5rem;">${remaining > 0 ? remaining + ' days to file review' : 'Deadline has passed'}</span>
         </div>
-        <a href="labour-finalisation.html?route=accept" class="btn btn-success btn-lg mt-2" style="width:100%;">
-          Proceed to Finalisation
-        </a>
-      </div>
+      `;
 
-      <div class="route-card" onclick="selectRoute('challenge')">
-        <div class="route-card-icon">⚔️</div>
-        <div class="route-card-title">Challenge the Award</div>
-        <div class="route-card-desc">
-          You believe the award is flawed. Open the Section 145 review path: motion, record, heads, set-down, and Labour Court hearing.
+      sidebarCountdown.innerHTML = `
+        <div class="adv-deadline">
+          <div class="adv-deadline__label">File by: ${fmt(deadline)}</div>
+          <div class="adv-deadline__date">${remaining > 0 ? remaining + ' days left' : 'Expired'}</div>
+          <span class="${statusClass}">${remaining > 0 ? (remaining <= 7 ? 'URGENT' : 'ON TRACK') : 'EXPIRED'}</span>
         </div>
-        <a href="ccma-review.html" class="btn btn-primary btn-lg mt-2" style="width:100%;">
-          Open Review Decision
-        </a>
-      </div>
-    </div>
-  </div>
+      `;
 
-  <!-- Missing Documents -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#fde8e8;color:#c01c28;">📎</span>
-      Missing Items
-    </div>
-    <div class="checklist">
-      <div class="checklist-item">
-        <div class="checklist-box"></div>
-        <div class="checklist-text">Award copy (upload PDF)</div>
-      </div>
-      <div class="checklist-item">
-        <div class="checklist-box"></div>
-        <div class="checklist-text">Written reasons or notes</div>
-      </div>
-      <div class="checklist-item">
-        <div class="checklist-box"></div>
-        <div class="checklist-text">Service date confirmation</div>
-      </div>
-    </div>
-  </div>
+      // Save
+      Advome?.storage?.set('award_service_date', dateVal);
+    }
 
-  <!-- Questions -->
-  <div class="questions-panel">
-    <h3>Questions About the Award</h3>
-    <div class="question-item">
-      <div class="question-q">What did the award say?</div>
-      <div class="question-a">Capture the result in a short summary: was the dismissal upheld, compensation ordered, or reinstatement granted?</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">When was it served?</div>
-      <div class="question-a">The review clock starts from service, not the date on the award. Record this accurately.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">Do you want to challenge it?</div>
-      <div class="question-a">If the award is wrong on law, fact, or procedure, the review path is available within 6 weeks of service.</div>
-    </div>
-  </div>
+    serviceDate.addEventListener('change', updateCountdown);
 
-  <div class="disclaimer">
-    <strong>Disclaimer</strong>
-    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. Users remain responsible for checking the rules and directives of the Labour Court and CCMA.
-    <div class="access-message">
-      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information.
-    </div>
-  </div>
-
-</div>
-
-<script>
-function selectRoute(route) {
-  document.querySelectorAll('.route-card').forEach(c => c.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-}
-</script>
-
+    // Restore
+    const saved = Advome?.storage?.get('award_service_date');
+    if (saved) {
+      serviceDate.value = saved;
+      updateCountdown();
+    }
+  })();
+  </script>
 </body>
 </html>
