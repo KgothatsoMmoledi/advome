@@ -1,1126 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCMA & Labour Court — Advome</title>
-    <link rel="stylesheet" href="shared-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* CCMA Page Specific Styles */
-        .ccma-hero {
-            background: linear-gradient(135deg, #0a2a5a 0%, #1a4a8a 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        .ccma-hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .ccma-hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Start your CCMA dispute resolution. File disputes, prepare for conciliation and arbitration, and navigate South African labour law with Advome's assistance platform.">
+  <title>CCMA Dispute Resolution | Advome</title>
 
-        .progress-tracker {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1.5rem 2rem;
-            background: #f8fafc;
-            border-bottom: 1px solid #e2e8f0;
-            flex-wrap: wrap;
-        }
-        .progress-step {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: #64748b;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            background: white;
-            border: 2px solid #e2e8f0;
-        }
-        .progress-step.active {
-            background: #1a4a8a;
-            color: white;
-            border-color: #1a4a8a;
-        }
-        .progress-step.completed {
-            background: #10b981;
-            color: white;
-            border-color: #10b981;
-        }
-        .progress-step i { font-size: 0.75rem; }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .content-section {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .warning-box {
-            background: #fff7ed;
-            border-left: 4px solid #f59e0b;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .warning-box strong { color: #92400e; }
-        .warning-box i { color: #f59e0b; margin-right: 0.5rem; }
-
-        .info-box {
-            background: #eff6ff;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .info-box i { color: #3b82f6; margin-right: 0.5rem; }
-
-        .success-box {
-            background: #f0fdf4;
-            border-left: 4px solid #22c55e;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .success-box i { color: #22c55e; margin-right: 0.5rem; }
-
-        .court-online-banner {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .court-online-banner i { font-size: 2.5rem; opacity: 0.9; }
-        .court-online-banner h3 { margin: 0 0 0.3rem 0; font-size: 1.2rem; }
-        .court-online-banner p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
-        .court-online-banner .btn-small {
-            background: white;
-            color: #1e3a5f;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-left: auto;
-            white-space: nowrap;
-        }
-
-        .wizard-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 1px solid #e2e8f0;
-        }
-        .wizard-card h2 {
-            color: #1a4a8a;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .wizard-card h2 .step-number {
-            background: #1a4a8a;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .tip-box {
-            background: #f8fafc;
-            border: 1px dashed #94a3b8;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            font-size: 0.95rem;
-        }
-        .tip-box i { color: #64748b; margin-right: 0.5rem; }
-
-        .template-form label {
-            display: block;
-            margin: 1rem 0 0.4rem 0;
-            font-weight: 600;
-            color: #334155;
-            font-size: 0.95rem;
-        }
-        .template-form input,
-        .template-form select,
-        .template-form textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: inherit;
-            box-sizing: border-box;
-        }
-        .template-form textarea { min-height: 100px; resize: vertical; }
-        .template-form .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        @media (max-width: 600px) {
-            .template-form .form-row { grid-template-columns: 1fr; }
-        }
-
-        .btn-primary {
-            background: #1a4a8a;
-            color: white;
-            border: none;
-            padding: 0.9rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn-primary:hover { background: #0f2d5c; }
-        .btn-secondary {
-            background: #f1f5f9;
-            color: #334155;
-            border: 1px solid #d1d5db;
-            padding: 0.9rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-        .btn-secondary:hover { background: #e2e8f0; }
-
-        .document-upload {
-            border: 2px dashed #d1d5db;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #fafafa;
-        }
-        .document-upload:hover {
-            border-color: #1a4a8a;
-            background: #f0f7ff;
-        }
-        .document-upload i { font-size: 2.5rem; color: #94a3b8; margin-bottom: 1rem; }
-        .document-upload h3 { margin: 0 0 0.5rem 0; color: #334155; }
-        .document-upload p { margin: 0; color: #64748b; font-size: 0.9rem; }
-
-        .savings-calculator {
-            background: linear-gradient(135deg, #0f2d5c 0%, #1a4a8a 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-        .savings-calculator h2 {
-            margin: 0 0 1rem 0;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .savings-calculator .calc-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.95rem;
-        }
-        .savings-calculator .calc-row.total {
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-bottom: none;
-            padding-top: 1rem;
-        }
-        .savings-calculator .calc-row .amount { font-weight: 600; }
-        .savings-calculator .savings-highlight {
-            background: rgba(255,255,255,0.15);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        .savings-calculator .savings-highlight strong {
-            color: #4ade80;
-            font-size: 1.3rem;
-        }
-
-        .disclaimer-bar {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #991b1b;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-        .disclaimer-bar i { margin-right: 0.5rem; }
-
-        .faq-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            margin: 0.75rem 0;
-            overflow: hidden;
-        }
-        .faq-question {
-            padding: 1rem 1.5rem;
-            background: #f8fafc;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: #334155;
-        }
-        .faq-question:hover { background: #f1f5f9; }
-        .faq-answer {
-            padding: 1rem 1.5rem;
-            display: none;
-            color: #475569;
-            line-height: 1.6;
-            border-top: 1px solid #e2e8f0;
-        }
-        .faq-answer.active { display: block; }
-
-        /* AI Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-        }
-        .chat-toggle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #1a4a8a;
-            color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-size: 1.5rem;
-            transition: transform 0.2s;
-        }
-        .chat-toggle:hover { transform: scale(1.05); }
-        .chat-panel {
-            position: absolute;
-            bottom: 75px;
-            right: 0;
-            width: 380px;
-            max-height: 500px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-        .chat-panel.active { display: flex; }
-        .chat-header {
-            background: #1a4a8a;
-            color: white;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .chat-header h3 { margin: 0; font-size: 1rem; }
-        .chat-header .close-chat {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            max-height: 350px;
-        }
-        .chat-message {
-            margin: 0.5rem 0;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            max-width: 85%;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        .chat-message.user {
-            background: #1a4a8a;
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-        }
-        .chat-message.bot {
-            background: #f1f5f9;
-            color: #334155;
-            border-bottom-left-radius: 4px;
-        }
-        .chat-message.bot .disclaimer {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-        .chat-input-area {
-            padding: 1rem;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            gap: 0.5rem;
-        }
-        .chat-input-area input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        .chat-input-area button {
-            background: #1a4a8a;
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .chat-suggestions {
-            padding: 0 1rem 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .chat-suggestion {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            padding: 0.4rem 0.8rem;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            color: #334155;
-            transition: all 0.2s;
-        }
-        .chat-suggestion:hover {
-            background: #e2e8f0;
-            border-color: #1a4a8a;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .find-attorney-box {
-            background: #fffbeb;
-            border: 1px solid #fcd34d;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        .find-attorney-box h3 { margin: 0 0 0.5rem 0; color: #92400e; }
-        .find-attorney-box p { margin: 0 0 1rem 0; color: #78350f; }
-
-        .ccma-in-person-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin: 1rem 0;
-        }
-        .ccma-in-person-badge i { font-size: 1rem; }
-
-        @media (max-width: 768px) {
-            .chat-panel { width: calc(100vw - 2rem); right: -1rem; }
-            .court-online-banner { flex-direction: column; text-align: center; }
-            .court-online-banner .btn-small { margin-left: 0; }
-            .progress-tracker { gap: 0.3rem; }
-            .progress-step { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
-        }
-    </style>
+  <link rel="stylesheet" href="shared-styles.css">
 <base target="_blank">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-brand">
-            <a href="index.html"><i class="fas fa-balance-scale"></i> Advome</a>
-        </div>
-        <div class="nav-links">
-            <a href="start.html">Get Started</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="documents.html">Documents</a>
-            <a href="attorney.html">Attorneys</a>
-        </div>
+
+  <!-- HEADER -->
+  <header class="adv-header" role="banner">
+    <a href="index.html" class="adv-header__logo" aria-label="Advome Home">
+      Ad<span>vome</span>
+    </a>
+    <nav class="adv-header__nav" role="navigation" aria-label="Main navigation">
+      <a href="ccma.html" style="color: white; font-weight: 700;">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Find Attorney</a>
     </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar" aria-label="User profile">U</div>
+      <span>My Cases</span>
+    </div>
+    <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="ccma-hero">
-        <h1><i class="fas fa-gavel"></i> CCMA & Labour Court Workflow</h1>
-        <p>Step-by-step guidance for unfair dismissal, unfair labour practice, and discrimination disputes. You have rights — let's help you exercise them.</p>
-    </section>
+  <!-- PROGRESS BAR -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="ccma" role="navigation" aria-label="Workflow progress"></div>
 
-    <!-- Progress Tracker -->
-    <div class="progress-tracker">
-        <div class="progress-step active">
-            <i class="fas fa-circle"></i> CCMA Entry
+  <!-- HERO -->
+  <section class="adv-hero" aria-labelledby="page-title">
+    <div class="adv-hero__content">
+      <h1 id="page-title">CCMA Dispute Resolution</h1>
+      <p>Navigate your workplace dispute from referral to resolution</p>
+    </div>
+    <div class="adv-hero__badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Free Conciliation
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="adv-container" id="main-content">
+    <div class="adv-workspace">
+
+      <!-- PRIMARY: Document Upload -->
+      <section class="adv-card adv-card--primary" aria-labelledby="upload-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="upload-title" class="adv-card__title">Upload Your Documents</h2>
+            <p class="adv-card__subtitle">We will detect your stage and guide you forward</p>
+          </div>
         </div>
-        <div class="progress-step">
-            <i class="fas fa-circle"></i> Referral
+        <div class="adv-card__body">
+          <div class="adv-upload" data-detect="true" role="button" tabindex="0" aria-label="Upload documents">
+            <svg class="adv-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <div class="adv-upload__text">Drop documents here or click to browse</div>
+            <div class="adv-upload__hint">Dismissal letter, payslips, contract, or any CCMA form</div>
+          </div>
+
+          <div class="adv-text-center adv-mt-2">
+            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">— or —</p>
+            <a href="referral.html" class="adv-btn adv-btn--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.3rem;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Start from Scratch
+            </a>
+          </div>
         </div>
-        <div class="progress-step">
-            <i class="fas fa-circle"></i> Conciliation
+      </section>
+
+      <!-- 3 PATH CARDS -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem;" aria-label="Choose your path">
+        <a href="referral.html" class="adv-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+          <div style="width: 40px; height: 40px; background: rgba(197,48,48,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c53030" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">I Was Dismissed</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">File a referral within 30 days. We will help you complete LRA Form 7.11.</p>
+        </a>
+
+        <a href="conciliation.html" class="adv-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+          <div style="width: 40px; height: 40px; background: rgba(214,158,46,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d69e2e" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">I Have a Dispute</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Already referred? Prepare for conciliation or arbitration.</p>
+        </a>
+
+        <a href="#help" class="adv-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+          <div style="width: 40px; height: 40px; background: rgba(26,54,93,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a365d" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">I Need Help</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Not sure where to start? Use our AI assistant or browse resources.</p>
+        </a>
+      </section>
+
+      <!-- PREP: What is CCMA? -->
+      <section class="adv-mt-3" aria-label="About the CCMA">
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>What is the CCMA?</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <p>The <strong>Commission for Conciliation, Mediation and Arbitration (CCMA)</strong> is a South African dispute resolution body established under the Labour Relations Act. It helps employees and employers resolve workplace disputes without going to court.</p>
+            <p style="margin-bottom: 0.5rem;"><strong>Key facts:</strong></p>
+            <ul style="margin-left: 1.25rem; color: var(--text-body);">
+              <li>Conciliation is <strong>free</strong> for all parties</li>
+              <li>You must file a referral within <strong>30 days</strong> of dismissal</li>
+              <li>No lawyers are required — you can represent yourself</li>
+              <li>CCMA has offices in all major cities</li>
+              <li>Most disputes resolve at conciliation stage</li>
+            </ul>
+          </div>
         </div>
-        <div class="progress-step">
-            <i class="fas fa-circle"></i> Arbitration
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>The CCMA Process (8 Steps)</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <ol style="margin-left: 1.25rem; color: var(--text-body);">
+              <li><strong>Referral</strong> — File LRA Form 7.11 within 30 days</li>
+              <li><strong>Conciliation</strong> — Attempt settlement with commissioner</li>
+              <li><strong>Arbitration</strong> — Formal hearing if no settlement</li>
+              <li><strong>Award</strong> — Arbitrator issues binding decision</li>
+              <li><strong>Review</strong> — Challenge award in Labour Court (6 weeks)</li>
+              <li><strong>Motion</strong> — Apply for leave to appeal</li>
+              <li><strong>Record</strong> — Request arbitration record</li>
+              <li><strong>Finalisation</strong> — Enforce or conclude</li>
+            </ol>
+          </div>
         </div>
-        <div class="progress-step">
-            <i class="fas fa-circle"></i> Award
-        </div>
-        <div class="progress-step">
-            <i class="fas fa-circle"></i> Labour Court
-        </div>
-        <div class="progress-step">
-            <i class="fas fa-circle"></i> Finalisation
-        </div>
+      </section>
+
     </div>
 
-    <div class="content-section">
+    <!-- SIDEBAR -->
+    <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
 
-        <!-- CCMA IN-PERSON Badge -->
-        <div class="ccma-in-person-badge">
-            <i class="fas fa-users"></i> CCMA is IN-PERSON — not online
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="ccma_entry">
+        <h3 class="adv-sidebar__widget-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </h3>
+        <div class="adv-chat__messages" role="log" aria-live="polite">
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Hi! Ask me about CCMA deadlines, documents, or procedures.</div>
         </div>
-
-        <!-- Court Online Banner (Labour Court Path) -->
-        <div class="court-online-banner">
-            <i class="fas fa-laptop"></i>
-            <div>
-                <h3>Labour Court is Online (Court Online)</h3>
-                <p>If you challenge a CCMA award, Labour Court matters are <strong>COMPULSORY</strong> via Court Online. We guide you through registration and e-filing.</p>
-            </div>
-            <a href="court-online.html" class="btn-small">Court Online Guide <i class="fas fa-arrow-right"></i></a>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
+          <button class="adv-chat__send" aria-label="Send message">Send</button>
         </div>
+      </div>
 
-        <!-- Disclaimer -->
-        <div class="disclaimer-bar">
-            <i class="fas fa-exclamation-triangle"></i>
-            <strong>Important:</strong> Advome provides procedural assistance and legal information only. We do not give legal advice. You are responsible for all decisions and filings. This is not a substitute for an attorney. Advome is not a law firm. No attorney-client relationship is created. Review all documents before filing. <a href="terms.html" style="color:#991b1b; text-decoration:underline;">Read full Terms</a>.
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="referral.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            File a Referral
+          </a>
         </div>
-
-        <!-- Document Detection -->
-        <div class="wizard-card">
-            <h2><span class="step-number">1</span> <i class="fas fa-file-upload"></i> Upload Your Documents</h2>
-            <p style="color:#64748b; margin-bottom:1rem;">Already have a dismissal letter, CCMA award, or other labour document? Upload it and we'll detect the type, stage, and suggest next steps.</p>
-
-            <div class="document-upload" id="documentUpload" onclick="document.getElementById('fileInput').click()">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <h3>Drag & drop or click to upload</h3>
-                <p>Supports PDF, Word, JPG, PNG (max 10MB)</p>
-                <input type="file" id="fileInput" style="display:none" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="handleFileUpload(this)">
-            </div>
-            <div id="uploadResult" style="margin-top:1rem; display:none;"></div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="ccma-offices.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Find CCMA Office
+          </a>
         </div>
-
-        <!-- Step 2: What Happened -->
-        <div class="wizard-card">
-            <h2><span class="step-number">2</span> <i class="fas fa-question-circle"></i> What Happened to You?</h2>
-            <p style="color:#64748b; margin-bottom:1.5rem;">Select the type of dispute so we can guide you to the right process and forms.</p>
-
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1rem;">
-                <div class="dispute-type" style="border:2px solid #e2e8f0; border-radius:10px; padding:1.5rem; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#1a4a8a'; this.style.background='#f0f7ff';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';" onclick="selectDispute('dismissal')">
-                    <i class="fas fa-user-times" style="font-size:1.5rem; color:#1a4a8a; margin-bottom:0.5rem;"></i>
-                    <h4 style="margin:0 0 0.3rem 0;">I Was Dismissed / Fired</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">Unfair dismissal, retrenchment, constructive dismissal</p>
-                </div>
-                <div class="dispute-type" style="border:2px solid #e2e8f0; border-radius:10px; padding:1.5rem; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#1a4a8a'; this.style.background='#f0f7ff';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';" onclick="selectDispute('unfair_practice')">
-                    <i class="fas fa-hand-paper" style="font-size:1.5rem; color:#1a4a8a; margin-bottom:0.5rem;"></i>
-                    <h4 style="margin:0 0 0.3rem 0;">Unfair Labour Practice</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">Unfair suspension, demotion, benefit denial</p>
-                </div>
-                <div class="dispute-type" style="border:2px solid #e2e8f0; border-radius:10px; padding:1.5rem; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#1a4a8a'; this.style.background='#f0f7ff';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';" onclick="selectDispute('discrimination')">
-                    <i class="fas fa-equals" style="font-size:1.5rem; color:#1a4a8a; margin-bottom:0.5rem;"></i>
-                    <h4 style="margin:0 0 0.3rem 0;">Discrimination</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">Race, gender, age, disability, pregnancy, etc.</p>
-                </div>
-            </div>
-            <div id="disputeResult" style="margin-top:1.5rem; display:none;"></div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="calculator.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14"/><path d="M8 14h.01"/><path d="M8 18h.01"/><path d="M12 14h.01"/><path d="M12 18h.01"/></svg>
+            Fee Calculator
+          </a>
         </div>
-
-        <!-- Step 3: LRA Form 7.11 Template Generator -->
-        <div class="wizard-card" id="referralSection">
-            <h2><span class="step-number">3</span> <i class="fas fa-file-alt"></i> Generate CCMA Referral (LRA Form 7.11)</h2>
-            <p style="color:#64748b; margin-bottom:1.5rem;">Complete the form below to generate a customized LRA Form 7.11 referral. You can edit it before filing. <strong>You must file this within 30 days of the dismissal.</strong></p>
-
-            <div class="warning-box">
-                <i class="fas fa-clock"></i>
-                <strong>Deadline Warning:</strong> You have <strong>30 days</strong> from the date of dismissal to refer a dispute to the CCMA. For unfair labour practice, you have <strong>90 days</strong>. Don't miss these deadlines — late referrals may be dismissed unless condonation is granted.
-            </div>
-
-            <form class="template-form" id="referralForm" onsubmit="generateReferral(event)">
-                <div class="form-row">
-                    <div>
-                        <label for="employeeName">Your Full Name (Employee)</label>
-                        <input type="text" id="employeeName" required placeholder="e.g. John Smith">
-                    </div>
-                    <div>
-                        <label for="employeeId">ID Number</label>
-                        <input type="text" id="employeeId" required placeholder="e.g. 8501011234087">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="employerName">Employer Name</label>
-                        <input type="text" id="employerName" required placeholder="e.g. ABC Company (Pty) Ltd">
-                    </div>
-                    <div>
-                        <label for="employerContact">Employer Contact Person</label>
-                        <input type="text" id="employerContact" placeholder="e.g. HR Manager">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="disputeType">Dispute Type</label>
-                        <select id="disputeType" required>
-                            <option value="">Select...</option>
-                            <option value="unfair_dismissal">Unfair Dismissal</option>
-                            <option value="unfair_labour_practice">Unfair Labour Practice</option>
-                            <option value="discrimination">Discrimination</option>
-                            <option value="constructive_dismissal">Constructive Dismissal</option>
-                            <option value="retrenchment">Retrenchment</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="dateOfDismissal">Date of Dismissal / Incident</label>
-                        <input type="date" id="dateOfDismissal" required>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="remedy">What Do You Want? (Remedy Sought)</label>
-                    <select id="remedy" required>
-                        <option value="">Select...</option>
-                        <option value="reinstatement">Reinstatement with back pay</option>
-                        <option value="compensation">Compensation only</option>
-                        <option value="reinstatement_alt">Reinstatement with alternative compensation</option>
-                        <option value="other">Other (specify below)</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="disputeDetails">Briefly Describe What Happened</label>
-                    <textarea id="disputeDetails" required placeholder="Describe the events leading to your dismissal or dispute. Keep it factual and chronological. This will help draft your referral."></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="ccmaOffice">Preferred CCMA Office</label>
-                        <select id="ccmaOffice" required>
-                            <option value="">Select nearest office...</option>
-                            <option value="johannesburg">Johannesburg</option>
-                            <option value="pretoria">Pretoria</option>
-                            <option value="cape_town">Cape Town</option>
-                            <option value="durban">Durban</option>
-                            <option value="port_elizabeth">Port Elizabeth (Gqeberha)</option>
-                            <option value="bloemfontein">Bloemfontein</option>
-                            <option value="polokwane">Polokwane</option>
-                            <option value="nelspruit">Nelspruit (Mbombela)</option>
-                            <option value="rustenburg">Rustenburg</option>
-                            <option value="kimberley">Kimberley</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="contactPhone">Your Contact Number</label>
-                        <input type="tel" id="contactPhone" required placeholder="e.g. 071 234 5678">
-                    </div>
-                </div>
-
-                <div style="margin-top:1.5rem;">
-                    <button type="submit" class="btn-primary">
-                        <i class="fas fa-magic"></i> Generate LRA Form 7.11 Draft
-                    </button>
-                    <a href="referral.html" class="btn-secondary" style="margin-left:0.5rem;">
-                        <i class="fas fa-info-circle"></i> Full Referral Guide
-                    </a>
-                </div>
-            </form>
-
-            <div id="generatedDocument" style="margin-top:2rem; display:none;"></div>
+        <div>
+          <a href="https://www.ccma.org.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            CCMA Official Site
+          </a>
         </div>
+      </div>
 
-        <!-- Step 4: What to Expect -->
-        <div class="wizard-card">
-            <h2><span class="step-number">4</span> <i class="fas fa-map-signs"></i> What Happens Next?</h2>
-
-            <div class="info-box">
-                <i class="fas fa-info-circle"></i>
-                <strong>CCMA is IN-PERSON.</strong> You will attend a hearing at a CCMA office or venue. CCMA does not use Court Online. Bring your ID, any relevant documents, and be prepared to discuss the dispute face-to-face.
-            </div>
-
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1rem;">
-                <div style="background:#f8fafc; padding:1.5rem; border-radius:10px; border:1px solid #e2e8f0;">
-                    <div style="background:#1a4a8a; color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:0.75rem;">1</div>
-                    <h4 style="margin:0 0 0.5rem 0;">Referral Filed</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">CCMA receives your LRA Form 7.11 and assigns a case number.</p>
-                </div>
-                <div style="background:#f8fafc; padding:1.5rem; border-radius:10px; border:1px solid #e2e8f0;">
-                    <div style="background:#1a4a8a; color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:0.75rem;">2</div>
-                    <h4 style="margin:0 0 0.5rem 0;">Notice of Set-Down</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">You receive a notice with date, time, and venue for conciliation.</p>
-                </div>
-                <div style="background:#f8fafc; padding:1.5rem; border-radius:10px; border:1px solid #e2e8f0;">
-                    <div style="background:#1a4a8a; color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:0.75rem;">3</div>
-                    <h4 style="margin:0 0 0.5rem 0;">Conciliation</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">A commissioner tries to help both parties reach a settlement.</p>
-                </div>
-                <div style="background:#f8fafc; padding:1.5rem; border-radius:10px; border:1px solid #e2e8f0;">
-                    <div style="background:#1a4a8a; color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:0.75rem;">4</div>
-                    <h4 style="margin:0 0 0.5rem 0;">Arbitration (if needed)</h4>
-                    <p style="margin:0; font-size:0.85rem; color:#64748b;">If no settlement, a formal hearing decides the outcome.</p>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <i class="fas fa-lightbulb"></i>
-                <strong>Helpful Tip:</strong> You may record conversations you are part of for your personal records. This can help you remember what was said. However, always inform the other party if you plan to record — transparency is best.
-            </div>
-
-            <div class="warning-box">
-                <i class="fas fa-exclamation-circle"></i>
-                <strong>Don't Settle Under Pressure:</strong> At conciliation, the commissioner may encourage settlement. Only agree if the terms are fair and you fully understand them. You have the right to take the matter to arbitration if you are not satisfied. Take your time — you can ask for a break to think.
-            </div>
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Important Deadlines</h3>
+        <div class="adv-alert adv-alert--warning adv-alert--minimal" style="margin-bottom: 0.75rem;">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">30-Day Rule</div>
+            File your referral within 30 days of dismissal. Late referrals need condonation.
+          </div>
         </div>
-
-        <!-- Step 5: Savings Calculator -->
-        <div class="savings-calculator">
-            <h2><i class="fas fa-calculator"></i> Fee Meter — What You Could Save</h2>
-            <p style="opacity:0.9; margin-bottom:1.5rem; font-size:0.95rem;">This is a comparative illustration only — not a bill. Based on typical attorney fees for labour disputes (2x court tariff estimate).</p>
-
-            <div class="calc-row">
-                <span>Attorney consultation & advice</span>
-                <span class="amount">R2,500 – R5,000</span>
-            </div>
-            <div class="calc-row">
-                <span>CCMA referral & preparation</span>
-                <span class="amount">R3,000 – R6,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Conciliation attendance (per session)</span>
-                <span class="amount">R2,500 – R4,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Arbitration preparation & attendance</span>
-                <span class="amount">R8,000 – R15,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Labour Court review (if needed)</span>
-                <span class="amount">R15,000 – R40,000</span>
-            </div>
-            <div class="calc-row total">
-                <span>Estimated Total Attorney Cost</span>
-                <span class="amount">R31,000 – R70,000+</span>
-            </div>
-            <div class="calc-row" style="border-bottom:none; opacity:0.8;">
-                <span>Advome Platform Cost (1 month)</span>
-                <span class="amount">R30</span>
-            </div>
-
-            <div class="savings-highlight">
-                By self-representing with Advome's guidance, you could save approximately <strong>R30,000 – R70,000+</strong> in legal fees.
-            </div>
-            <p style="font-size:0.8rem; opacity:0.7; margin-top:0.75rem; text-align:center;">
-                *Illustrative only. Actual attorney fees vary. Some matters may require an attorney. This is not legal advice.
-            </p>
+        <div class="adv-alert adv-alert--danger adv-alert--minimal">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">6-Week Challenge</div>
+            Challenge an award within 6 weeks of service date.
+          </div>
         </div>
+      </div>
 
-        <!-- FAQ -->
-        <div class="wizard-card">
-            <h2><i class="fas fa-question-circle"></i> Common Questions</h2>
+    </aside>
+  </main>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    What is the CCMA and what does it do?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    The Commission for Conciliation, Mediation and Arbitration (CCMA) is a free dispute resolution body in South Africa. It handles unfair dismissal, unfair labour practice, and discrimination disputes. The CCMA tries to resolve disputes through conciliation (settlement talks) and, if that fails, arbitration (a formal hearing where a commissioner makes a binding decision).
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Is the CCMA online or in-person?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <strong>CCMA is IN-PERSON.</strong> You must physically attend hearings at a CCMA office or designated venue. Some CCMA offices offer hybrid hearings (partially virtual), but you should expect to attend in person. CCMA does NOT use Court Online — that system is only for the Labour Court. Bring your ID and all relevant documents to every hearing.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    What happens if I miss the 30-day deadline?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    If you miss the 30-day deadline for unfair dismissal (or 90 days for unfair labour practice), you can apply for <strong>condonation</strong> — asking the CCMA to accept your late referral. You must explain why you were late and show that you have a good case. Condonation is not guaranteed, so file on time if at all possible. Advome can help you draft a condonation application if needed.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Can I challenge a CCMA award in the Labour Court?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes. You have <strong>6 weeks</strong> from the date of the award to apply for a review in the Labour Court. This is done via a Section 145 review. <strong>Important:</strong> Labour Court matters are <strong>COMPULSORY online</strong> through Court Online. You must register on Court Online and file all documents electronically. Advome guides you through this process — <a href="court-online.html">see our Court Online guide</a>.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Do I need an attorney?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    No — you can represent yourself at the CCMA. Many people do so successfully. However, complex matters (especially Labour Court reviews) may benefit from legal representation. Advome is designed to help you self-represent, but we also offer a "Find an Attorney" feature if you decide you need one. We are not in competition with attorneys — we complement their services.
-                </div>
-            </div>
-        </div>
-
-        <!-- Find an Attorney -->
-        <div class="find-attorney-box">
-            <h3><i class="fas fa-user-tie"></i> Not Sure About Self-Representing?</h3>
-            <p>Some matters are complex and may benefit from an attorney. You can connect with a labour law attorney through our platform at any stage.</p>
-            <a href="attorney.html" class="btn-primary" style="text-decoration:none;">
-                <i class="fas fa-search"></i> Find a Labour Attorney
-            </a>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="nav-buttons">
-            <a href="start.html" class="btn-secondary">
-                <i class="fas fa-arrow-left"></i> Back to Matter Selection
-            </a>
-            <a href="referral.html" class="btn-primary" style="text-decoration:none;">
-                Next: Referral Guide <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-
-        <!-- Bottom Disclaimer -->
-        <div class="disclaimer-bar">
-            <i class="fas fa-shield-alt"></i>
-            <strong>Compliance Notice:</strong> Advome does not provide legal advice. All content is procedural assistance and legal information only. Users take full responsibility for all decisions and filings. Review all documents before filing. Advome is not a law firm. No attorney-client relationship is created by using this platform. This platform is compliant with the Labour Relations Act, CCMA Rules, and South African law. For legal advice, consult a qualified attorney. <a href="terms.html" style="color:#991b1b; text-decoration:underline;">Terms & Conditions</a> | <a href="privacy.html" style="color:#991b1b; text-decoration:underline;">Privacy Policy</a>
-        </div>
+  <!-- BOTTOM ZONE -->
+  <div class="adv-bottom-zone">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: flex-end;">
+      <div class="adv-savings adv-savings--small">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        You've saved <span class="adv-savings__amount">R0</span> vs. attorney fees
+      </div>
     </div>
 
-    <!-- AI Chat Widget -->
-    <div class="chat-widget">
-        <div class="chat-panel" id="chatPanel">
-            <div class="chat-header">
-                <h3><i class="fas fa-robot"></i> Advome Assistant</h3>
-                <button class="close-chat" onclick="toggleChat()"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="chat-message bot">
-                    Hello! I'm your Advome assistant. I can answer procedural questions about CCMA and labour disputes in plain language. What would you like to know?
-                    <div class="disclaimer">This is helpful information, not legal advice.</div>
-                </div>
-            </div>
-            <div class="chat-suggestions">
-                <span class="chat-suggestion" onclick="sendSuggestion('What does conciliation mean?')">What does conciliation mean?</span>
-                <span class="chat-suggestion" onclick="sendSuggestion('What should I bring to the hearing?')">What should I bring?</span>
-                <span class="chat-suggestion" onclick="sendSuggestion('How long does CCMA take?')">How long does CCMA take?</span>
-                <span class="chat-suggestion" onclick="sendSuggestion('What is Court Online?')">What is Court Online?</span>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="Ask a procedural question..." onkeypress="if(event.key==='Enter') sendMessage()">
-                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-        <button class="chat-toggle" onclick="toggleChat()">
-            <i class="fas fa-comment-dots"></i>
-        </button>
+    <div class="adv-compliance" role="contentinfo">
+      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
     </div>
 
-    <!-- Footer -->
-    <footer style="background:#0f172a; color:#94a3b8; padding:2rem; text-align:center; margin-top:3rem;">
-        <p style="margin:0 0 0.5rem 0;"><strong style="color:white;">Advome</strong> — Access to Justice for Every South African</p>
-        <p style="margin:0; font-size:0.85rem;">Section 34 of the Constitution | Not legal advice | POPIA Compliant</p>
-        <p style="margin-top:1rem; font-size:0.8rem;">
-            <a href="terms.html" style="color:#94a3b8; text-decoration:none; margin:0 0.5rem;">Terms</a>
-            <a href="privacy.html" style="color:#94a3b8; text-decoration:none; margin:0 0.5rem;">Privacy</a>
-            <a href="pricing.html" style="color:#94a3b8; text-decoration:none; margin:0 0.5rem;">Pricing</a>
-        </p>
-    </footer>
+    <nav class="adv-nav-footer" aria-label="Page navigation">
+      <a href="index.html" class="adv-nav-footer__prev">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to Home
+      </a>
+      <a href="referral.html" class="adv-nav-footer__next">
+        Start: File Dispute
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </nav>
+  </div>
 
-    <script>
-        // Document Upload Handler
-        function handleFileUpload(input) {
-            const file = input.files[0];
-            if (!file) return;
+  <!-- FOOTER -->
+  <footer class="adv-footer" role="contentinfo">
+    <p style="margin-bottom: 0.5rem;">
+      <a href="index.html">Home</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Attorneys</a>
+    </p>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
+    </p>
+  </footer>
 
-            const resultDiv = document.getElementById('uploadResult');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '<p style="color:#1a4a8a;"><i class="fas fa-spinner fa-spin"></i> Analyzing document...</p>';
-
-            // Simulate AI detection (in production, this would call the backend)
-            setTimeout(() => {
-                const docTypes = [
-                    { type: 'CCMA Award', stage: 'award', next: 'You may challenge this award in the Labour Court within 6 weeks. See our <a href="award.html">Award Guide</a>.' },
-                    { type: 'Dismissal Letter', stage: 'entry', next: 'You need to file a CCMA referral within 30 days. Use the form below to generate LRA Form 7.11.' },
-                    { type: 'Notice of Set-Down', stage: 'conciliation', next: 'Your conciliation hearing is scheduled. See our <a href="conciliation.html">Conciliation Prep Guide</a>.' },
-                    { type: 'Labour Court Judgment', stage: 'finalisation', next: 'Review the judgment and next steps. See our <a href="labour-finalisation.html">Finalisation Guide</a>.' }
-                ];
-                const detected = docTypes[Math.floor(Math.random() * docTypes.length)];
-
-                resultDiv.innerHTML = `
-                    <div class="success-box">
-                        <i class="fas fa-check-circle"></i>
-                        <strong>Document Detected:</strong> ${detected.type}<br>
-                        <strong>Current Stage:</strong> ${detected.stage}<br>
-                        <strong>Next Steps:</strong> ${detected.next}
-                    </div>
-                `;
-            }, 1500);
-        }
-
-        // Dispute Type Selection
-        function selectDispute(type) {
-            const resultDiv = document.getElementById('disputeResult');
-            resultDiv.style.display = 'block';
-
-            const info = {
-                dismissal: {
-                    title: 'Unfair Dismissal',
-                    desc: 'You believe your employer dismissed you unfairly. This includes misconduct dismissals, incapacity, operational requirements (retrenchment), or constructive dismissal.',
-                    deadline: '30 days from dismissal date',
-                    form: 'LRA Form 7.11',
-                    next: 'referral.html'
-                },
-                unfair_practice: {
-                    title: 'Unfair Labour Practice',
-                    desc: 'Your employer acted unfairly regarding your employment conditions, benefits, promotion, demotion, or suspension.',
-                    deadline: '90 days from the incident',
-                    form: 'LRA Form 7.11',
-                    next: 'referral.html'
-                },
-                discrimination: {
-                    title: 'Discrimination',
-                    desc: 'You were treated unfairly based on race, gender, sex, pregnancy, marital status, ethnic or social origin, colour, sexual orientation, age, disability, religion, conscience, belief, culture, language, or birth.',
-                    deadline: '6 months from the incident',
-                    form: 'LRA Form 7.11',
-                    next: 'referral.html'
-                }
-            };
-
-            const data = info[type] || info.dismissal;
-            resultDiv.innerHTML = `
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i>
-                    <strong>${data.title}</strong><br>
-                    ${data.desc}<br><br>
-                    <strong>Filing Deadline:</strong> ${data.deadline}<br>
-                    <strong>Required Form:</strong> ${data.form}<br><br>
-                    <a href="${data.next}" class="btn-primary" style="text-decoration:none;">Go to Referral Guide <i class="fas fa-arrow-right"></i></a>
-                </div>
-            `;
-
-            // Scroll to referral form
-            document.getElementById('referralSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // LRA Form 7.11 Generator
-        function generateReferral(e) {
-            e.preventDefault();
-
-            const employeeName = document.getElementById('employeeName').value;
-            const employeeId = document.getElementById('employeeId').value;
-            const employerName = document.getElementById('employerName').value;
-            const employerContact = document.getElementById('employerContact').value;
-            const disputeType = document.getElementById('disputeType').value;
-            const dateOfDismissal = document.getElementById('dateOfDismissal').value;
-            const remedy = document.getElementById('remedy').value;
-            const disputeDetails = document.getElementById('disputeDetails').value;
-            const ccmaOffice = document.getElementById('ccmaOffice').value;
-            const contactPhone = document.getElementById('contactPhone').value;
-
-            const disputeLabels = {
-                unfair_dismissal: 'Unfair Dismissal',
-                unfair_labour_practice: 'Unfair Labour Practice',
-                discrimination: 'Discrimination',
-                constructive_dismissal: 'Constructive Dismissal',
-                retrenchment: 'Retrenchment'
-            };
-
-            const remedyLabels = {
-                reinstatement: 'Reinstatement with back pay',
-                compensation: 'Compensation only',
-                reinstatement_alt: 'Reinstatement with alternative compensation',
-                other: 'Other remedy (to be specified)'
-            };
-
-            const officeLabels = {
-                johannesburg: 'Johannesburg CCMA Office',
-                pretoria: 'Pretoria CCMA Office',
-                cape_town: 'Cape Town CCMA Office',
-                durban: 'Durban CCMA Office',
-                port_elizabeth: 'Port Elizabeth (Gqeberha) CCMA Office',
-                bloemfontein: 'Bloemfontein CCMA Office',
-                polokwane: 'Polokwane CCMA Office',
-                nelspruit: 'Nelspruit (Mbombela) CCMA Office',
-                rustenburg: 'Rustenburg CCMA Office',
-                kimberley: 'Kimberley CCMA Office'
-            };
-
-            const today = new Date().toLocaleDateString('en-ZA');
-
-            const docHtml = `
-                <div class="wizard-card" style="border:2px solid #1a4a8a;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-                        <h3 style="margin:0; color:#1a4a8a;"><i class="fas fa-file-alt"></i> LRA Form 7.11 — Draft</h3>
-                        <span style="background:#fef3c7; color:#92400e; padding:0.3rem 0.8rem; border-radius:4px; font-size:0.8rem; font-weight:600;">DRAFT — Review Before Filing</span>
-                    </div>
-
-                    <div class="warning-box">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <strong>REVIEW BEFORE FILING:</strong> This is a generated draft based on your answers. You must review, edit, and verify all information before submitting to the CCMA. Advome is not responsible for errors in this document.
-                    </div>
-
-                    <div style="background:#f8fafc; padding:1.5rem; border-radius:8px; font-family: 'Courier New', monospace; font-size:0.9rem; line-height:1.8; white-space:pre-wrap;">
-<strong>COMMISSION FOR CONCILIATION, MEDIATION AND ARBITRATION</strong>
-<strong>REFERRAL OF DISPUTE TO THE CCMA</strong>
-<strong>LRA Form 7.11</strong>
-
-<strong>1. DETAILS OF EMPLOYEE / APPLICANT</strong>
-Name: ${employeeName}
-ID Number: ${employeeId}
-Contact Number: ${contactPhone}
-
-<strong>2. DETAILS OF EMPLOYER / RESPONDENT</strong>
-Name: ${employerName}
-Contact Person: ${employerContact || 'N/A'}
-
-<strong>3. DETAILS OF DISPUTE</strong>
-Type of Dispute: ${disputeLabels[disputeType] || disputeType}
-Date of Dismissal / Incident: ${dateOfDismissal}
-
-<strong>4. DETAILS OF DISPUTE</strong>
-${disputeDetails}
-
-<strong>5. REMEDY SOUGHT</strong>
-${remedyLabels[remedy] || remedy}
-
-<strong>6. CCMA OFFICE</strong>
-Preferred Office: ${officeLabels[ccmaOffice] || ccmaOffice}
-
-<strong>7. DECLARATION</strong>
-I, ${employeeName}, declare that the information provided above is true and correct to the best of my knowledge.
-
-Date: ${today}
-Signature: _________________________
-
-<strong>IMPORTANT NOTES:</strong>
-- File this form at the CCMA office within 30 days of dismissal (or 90 days for unfair labour practice)
-- Bring a copy of your ID
-- Keep a copy for your records
-- CCMA is IN-PERSON — you will attend hearings at the CCMA office
-                    </div>
-
-                    <div style="margin-top:1.5rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-                        <button class="btn-primary" onclick="alert('In production, this would download the document as PDF/Word.')">
-                            <i class="fas fa-download"></i> Download Draft
-                        </button>
-                        <button class="btn-secondary" onclick="alert('In production, this would print the document.')">
-                            <i class="fas fa-print"></i> Print
-                        </button>
-                        <button class="btn-secondary" onclick="document.getElementById('generatedDocument').style.display='none'">
-                            <i class="fas fa-edit"></i> Edit Answers
-                        </button>
-                    </div>
-
-                    <div class="disclaimer-bar" style="margin-top:1.5rem; margin-bottom:0;">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        This document was generated by Advome as a procedural aid only. It does not constitute legal advice. You must review all content, ensure accuracy, and verify compliance with current CCMA rules before filing. Advome is not a law firm and assumes no liability for the use of this document.
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('generatedDocument').innerHTML = docHtml;
-            document.getElementById('generatedDocument').style.display = 'block';
-            document.getElementById('generatedDocument').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // FAQ Toggle
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
-            answer.classList.toggle('active');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
-        }
-
-        // Chat Widget
-        function toggleChat() {
-            document.getElementById('chatPanel').classList.toggle('active');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-
-            addMessage(message, 'user');
-            input.value = '';
-
-            // Simulate AI response (in production, this would call Gemini API)
-            setTimeout(() => {
-                const responses = [
-                    "Conciliation is an informal meeting where a CCMA commissioner helps you and your employer try to reach a settlement. It's not a formal hearing — think of it as a facilitated discussion. You can agree to settle or refuse if the terms aren't fair. Only settle if you're truly satisfied.",
-                    "Bring your ID, any employment contract, dismissal letter, payslips, and any evidence supporting your case. Also bring a notebook to take notes. You may record the conversation for your personal records if you inform the other party.",
-                    "CCMA timelines vary. Conciliation is usually scheduled within 30 days of referral. If unresolved, arbitration may be scheduled 30-60 days later. Simple cases can conclude in 2-3 months; complex ones may take 6+ months.",
-                    "Court Online (courtonline.co.za) is the official electronic filing system for the Labour Court. All Labour Court matters — including Section 145 reviews of CCMA awards — must be filed online. You need to register, upload documents, and attend virtual hearings. Advome provides a step-by-step guide."
-                ];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                addMessage(randomResponse, 'bot');
-            }, 1000);
-        }
-
+  <script src="shared-scripts.js"></script>
+</body>
+</html>
         function sendSuggestion(text) {
             document.getElementById('chatInput').value = text;
             sendMessage();
