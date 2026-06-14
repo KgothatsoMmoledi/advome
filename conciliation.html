@@ -1,388 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conciliation Preparation | Advome</title>
-    <meta name="description" content="Step-by-step guide to preparing for your in-person CCMA conciliation hearing.">
-    <link rel="stylesheet" href="shared-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1e40af; --primary-light: #3b82f6; --primary-dark: #1e3a8a;
-            --secondary: #f8fafc; --accent: #0ea5e9; --warning: #f59e0b; --warning-light: #fffbeb;
-            --danger: #dc2626; --danger-light: #fef2f2; --success: #059669; --success-light: #ecfdf5;
-            --text: #0f172a; --text-light: #64748b; --border: #e2e8f0; --white: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--secondary); line-height: 1.6; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
-        .progress-tracker { background: var(--white); border-bottom: 1px solid var(--border); padding: 1.5rem 0; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
-        .progress-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .progress-steps { display: flex; justify-content: space-between; align-items: center; position: relative; }
-        .progress-steps::before { content: ''; position: absolute; top: 20px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 0; }
-        .progress-line-fill { position: absolute; top: 20px; left: 0; width: 50%; height: 2px; background: var(--primary); z-index: 1; }
-        .step { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; background: var(--white); padding: 0 0.5rem; }
-        .step-number { width: 40px; height: 40px; border-radius: 50%; background: var(--white); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; }
-        .step.active .step-number { background: var(--primary); border-color: var(--primary); color: var(--white); box-shadow: 0 0 0 4px rgba(30,64,175,0.1); }
-        .step.completed .step-number { background: var(--success); border-color: var(--success); color: var(--white); }
-        .step-label { margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: var(--text-light); text-align: center; max-width: 100px; }
-        .step.active .step-label { color: var(--primary); font-weight: 600; }
-        .hero { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: var(--white); padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: rgba(255,255,255,0.03); border-radius: 50%; }
-        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
-        .hero-subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 300; }
-        .in-person-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 50px; font-weight: 600; font-size: 0.875rem; border: 1px solid rgba(255,255,255,0.2); margin-top: 1rem; }
-        .in-person-badge i { color: #fbbf24; }
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
-        .section { background: var(--white); border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s ease forwards; }
-        .section:nth-child(1) { animation-delay: 0.1s; }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.3s; }
-        .section:nth-child(4) { animation-delay: 0.4s; }
-        .section:nth-child(5) { animation-delay: 0.5s; }
-        .section:nth-child(6) { animation-delay: 0.6s; }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
-        .section-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: var(--white); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
-        .section h2 { font-size: 1.75rem; color: var(--primary-dark); }
-        .warning-box { background: var(--warning-light); border-left: 4px solid var(--warning); padding: 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; display: flex; gap: 1rem; }
-        .warning-box.danger { background: var(--danger-light); border-left-color: var(--danger); }
-        .warning-box.success { background: var(--success-light); border-left-color: var(--success); }
-        .warning-icon { font-size: 1.25rem; color: var(--warning); flex-shrink: 0; }
-        .warning-box.danger .warning-icon { color: var(--danger); }
-        .warning-box.success .warning-icon { color: var(--success); }
-        .warning-content h4 { font-family: 'Inter', sans-serif; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
-        .warning-content p { font-size: 0.875rem; color: var(--text-light); margin: 0; }
-        .checklist { list-style: none; margin: 1.5rem 0; }
-        .checklist li { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: var(--secondary); border-radius: 8px; margin-bottom: 0.75rem; transition: all 0.2s ease; cursor: pointer; }
-        .checklist li:hover { background: #e0e7ff; transform: translateX(4px); }
-        .checklist li input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
-        .checklist-text { flex: 1; }
-        .checklist-text strong { display: block; color: var(--text); margin-bottom: 0.25rem; }
-        .checklist-text span { font-size: 0.875rem; color: var(--text-light); }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
-        .info-card { background: var(--secondary); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); transition: all 0.3s ease; }
-        .info-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--primary-light); }
-        .info-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .info-card p { font-size: 0.875rem; color: var(--text-light); }
-        .process-steps { display: flex; flex-direction: column; gap: 1.5rem; margin: 1.5rem 0; }
-        .process-step { display: flex; gap: 1.5rem; position: relative; }
-        .process-step:not(:last-child)::before { content: ''; position: absolute; left: 20px; top: 48px; width: 2px; height: calc(100% + 1.5rem); background: var(--border); }
-        .step-badge { width: 40px; height: 40px; background: var(--primary); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; flex-shrink: 0; z-index: 1; }
-        .step-content { flex: 1; background: var(--secondary); padding: 1.25rem; border-radius: 12px; }
-        .step-content h4 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
-        .step-content p { font-size: 0.875rem; color: var(--text-light); }
-        .calculator-container { background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%); border-radius: 16px; padding: 2rem; margin: 1.5rem 0; }
-        .calculator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-        .calc-input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .calc-input-group label { font-size: 0.875rem; font-weight: 600; color: var(--text); }
-        .calc-input-group input { padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: 'Inter', sans-serif; }
-        .calc-input-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(30,64,175,0.1); }
-        .calc-result { background: var(--white); border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: var(--shadow); }
-        .calc-result h3 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-light); margin-bottom: 0.5rem; }
-        .calc-result .amount { font-size: 2.5rem; font-weight: 700; color: var(--primary); font-family: 'Playfair Display', serif; }
-        .conarb-notice { background: linear-gradient(135deg, var(--danger-light) 0%, #fff5f5 100%); border: 2px solid var(--danger); border-radius: 16px; padding: 2rem; margin: 2rem 0; text-align: center; }
-        .conarb-notice h3 { color: var(--danger); font-size: 1.5rem; margin-bottom: 1rem; }
-        .conarb-notice p { color: var(--text); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .attorney-cta { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); border-radius: 16px; padding: 2rem; text-align: center; margin: 2rem 0; }
-        .attorney-cta h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-        .attorney-cta p { opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; font-size: 1rem; font-family: 'Inter', sans-serif; }
-        .btn-primary { background: var(--white); color: var(--primary); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.5); }
-        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
-        .page-navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border); }
-        .nav-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: all 0.2s ease; }
-        .nav-link:hover { color: var(--primary-dark); transform: translateX(4px); }
-        .nav-link.prev:hover { transform: translateX(-4px); }
-        .disclaimer { background: #f1f5f9; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; font-size: 0.875rem; color: var(--text-light); border: 1px solid var(--border); }
-        .disclaimer strong { color: var(--text); display: block; margin-bottom: 0.5rem; }
-        .chat-widget { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; }
-        .chat-button { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: var(--white); border-radius: 50%; border: none; cursor: pointer; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.3s ease; }
-        .chat-button:hover { transform: scale(1.1) rotate(10deg); }
-        .chat-panel { position: absolute; bottom: 80px; right: 0; width: 350px; height: 500px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-lg); display: none; flex-direction: column; overflow: hidden; border: 1px solid var(--border); }
-        .chat-panel.active { display: flex; }
-        .chat-header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .chat-header h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; }
-        .chat-close { background: none; border: none; color: var(--white); cursor: pointer; font-size: 1.25rem; }
-        .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-        .chat-message { max-width: 80%; padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.875rem; line-height: 1.5; }
-        .chat-message.bot { background: var(--secondary); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
-        .chat-message.user { background: var(--primary); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
-        .chat-input-area { padding: 1rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; }
-        .chat-input { flex: 1; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; }
-        .chat-input:focus { outline: none; border-color: var(--primary); }
-        .chat-send { background: var(--primary); color: var(--white); border: none; border-radius: 8px; padding: 0.75rem 1rem; cursor: pointer; transition: all 0.2s ease; }
-        .chat-send:hover { background: var(--primary-dark); }
-        .tooltip { position: relative; display: inline-block; border-bottom: 1px dashed var(--primary); cursor: help; color: var(--primary); }
-        .tooltip .tooltiptext { visibility: hidden; width: 250px; background-color: var(--text); color: var(--white); text-align: left; border-radius: 8px; padding: 0.75rem; position: absolute; z-index: 10; bottom: 125%; left: 50%; margin-left: -125px; font-size: 0.875rem; line-height: 1.4; opacity: 0; transition: opacity 0.3s; }
-        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
-        .recording-tip { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; gap: 1rem; align-items: flex-start; }
-        .recording-tip i { color: var(--primary); font-size: 1.5rem; flex-shrink: 0; }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .section { padding: 1.5rem; }
-            .progress-steps { overflow-x: auto; padding-bottom: 1rem; }
-            .step-label { font-size: 0.625rem; max-width: 60px; }
-            .chat-panel { width: calc(100vw - 2rem); right: -1rem; }
-            .page-navigation { flex-direction: column; gap: 1rem; text-align: center; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prepare for your CCMA conciliation hearing. Interactive checklist, settlement calculator, and what-to-expect guidance.">
+  <title>Prepare for Conciliation | CCMA | Advome</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
 
-    <div class="progress-tracker">
-        <div class="progress-container">
-            <div class="progress-steps">
-                <div class="progress-line-fill"></div>
-                <div class="step completed"><div class="step-number"><i class="fas fa-check"></i></div><div class="step-label">Start</div></div>
-                <div class="step completed"><div class="step-number"><i class="fas fa-check"></i></div><div class="step-label">CCMA Overview</div></div>
-                <div class="step completed"><div class="step-number"><i class="fas fa-check"></i></div><div class="step-label">File Referral</div></div>
-                <div class="step active"><div class="step-number">3</div><div class="step-label">Conciliation</div></div>
-                <div class="step"><div class="step-number">4</div><div class="step-label">Arbitration</div></div>
-                <div class="step"><div class="step-number">5</div><div class="step-label">Resolution</div></div>
-            </div>
+  <!-- HEADER -->
+  <header class="adv-header" role="banner">
+    <a href="index.html" class="adv-header__logo" aria-label="Advome Home">
+      Ad<span>vome</span>
+    </a>
+    <nav class="adv-header__nav" role="navigation" aria-label="Main navigation">
+      <a href="ccma.html" style="color: white; font-weight: 700;">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Find Attorney</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar" aria-label="User profile">U</div>
+      <span>My Cases</span>
+    </div>
+    <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </header>
+
+  <!-- PROGRESS BAR -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="conciliation" role="navigation" aria-label="Workflow progress"></div>
+
+  <!-- HERO -->
+  <section class="adv-hero" aria-labelledby="page-title">
+    <div class="adv-hero__content">
+      <h1 id="page-title">Prepare for Conciliation</h1>
+      <p>Get ready for your settlement hearing with the CCMA commissioner</p>
+    </div>
+    <div class="adv-hero__badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      In-Person Hearing
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="adv-container" id="main-content">
+    <div class="adv-workspace">
+
+      <!-- PRIMARY: Interactive Checklist -->
+      <section class="adv-card adv-card--primary" aria-labelledby="checklist-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="checklist-title" class="adv-card__title">Conciliation Checklist</h2>
+            <p class="adv-card__subtitle">Check off items as you prepare — your progress saves automatically</p>
+          </div>
+          <span class="adv-checklist__progress" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">0/8 (0%)</span>
         </div>
+        <div class="adv-card__body">
+          <ul class="adv-checklist" data-checklist-id="conciliation_prep">
+            <li class="adv-checklist__item" data-item-id="id_document">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Original ID document or certified copy</div>
+                <div class="adv-checklist__meta">Must be valid and not expired</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="case_number">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">CCMA case number and notice of set down</div>
+                <div class="adv-checklist__meta">Check your SMS or email from CCMA</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="referral_copy">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Copy of your LRA 7.11 referral form</div>
+                <div class="adv-checklist__meta">Bring the exact form you submitted</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="contract_copy">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Employment contract and payslips</div>
+                <div class="adv-checklist__meta">Last 3 months at minimum</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="dismissal_evidence">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Dismissal letter and disciplinary records</div>
+                <div class="adv-checklist__meta">Any written warnings, minutes, emails</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="settlement_amount">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Calculated your settlement demand</div>
+                <div class="adv-checklist__meta">Use the calculator in the sidebar →</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="opening_statement">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Prepared opening statement (2-3 minutes)</div>
+                <div class="adv-checklist__meta">What happened, what you want, why it's fair</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="arrive_early">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Plan to arrive 30 minutes early</div>
+                <div class="adv-checklist__meta">CCMA offices can be hard to find; parking takes time</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="adv-btn adv-btn--accent adv-btn--block" id="ready-btn" type="button">
+            I'm Ready — Next: Arbitration
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <div class="adv-text-center adv-mt-1">
+            <a href="arbitration.html" class="adv-btn adv-btn--ghost adv-btn--sm" style="margin-top: 0.5rem;">
+              Skip to Arbitration Prep
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PREP CARDS -->
+      <section class="adv-mt-3" aria-label="Preparation resources">
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>What to Expect at Conciliation</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <p><strong>The conciliation process is informal and confidential.</strong> What is said here cannot be used in arbitration later.</p>
+            <p style="margin-bottom: 0.5rem;"><strong>Typical flow:</strong></p>
+            <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
+              <li>Commissioner introduces themselves and explains the process</li>
+              <li>Each party tells their side (5-10 minutes each)</li>
+              <li>Commissioner asks clarifying questions</li>
+              <li>Private caucuses — commissioner speaks to each side separately</li>
+              <li>Settlement negotiations begin</li>
+              <li>If settled: sign a binding settlement agreement</li>
+              <li>If not settled: commissioner issues a certificate and the matter proceeds to arbitration</li>
+            </ol>
+            <p style="margin-bottom: 0;"><strong>Duration:</strong> Usually 2-4 hours. Some resolve in 30 minutes; others take a full day.</p>
+          </div>
+        </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>How to Behave at Conciliation</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <ul style="margin-left: 1.25rem; color: var(--text-body);">
+              <li><strong>Be respectful</strong> — even if you feel wronged, aggression hurts your case</li>
+              <li><strong>Stick to facts</strong> — avoid emotional language or personal attacks</li>
+              <li><strong>Listen carefully</strong> — the employer may reveal useful information</li>
+              <li><strong>Be flexible</strong> — settlement is about compromise, not winning everything</li>
+              <li><strong>Do not interrupt</strong> — let the commissioner manage the process</li>
+              <li><strong>Bring a support person</strong> — you are allowed one observer (not a lawyer at conciliation)</li>
+              <li><strong>Dress professionally</strong> — business casual is appropriate</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>Settlement Agreement Template</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <p>If you reach settlement, the CCMA commissioner will draft the agreement. But you should know what to expect:</p>
+            <ul style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
+              <li>Names of parties and case number</li>
+              <li>Amount and payment terms (lump sum or installments)</li>
+              <li>Payment deadline (usually 30-60 days)</li>
+              <li>Confidentiality clause (if requested)</li>
+              <li>Reinstatement terms (if applicable)</li>
+              <li>Reference letter terms (if applicable)</li>
+              <li>Clause stating "this settles all disputes between the parties"</li>
+            </ul>
+            <div class="adv-alert adv-alert--warning adv-alert--minimal">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">Important</div>
+                Once signed, a settlement agreement is binding and enforceable as if it were a court order. You cannot later claim you did not understand it.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="in-person-badge"><i class="fas fa-building"></i><span>IN-PERSON HEARING AT CCMA OFFICES</span></div>
-            <h1>Prepare for Your Conciliation</h1>
-            <p class="hero-subtitle">You filed your CCMA referral (LRA Form 7.11). Now learn exactly what to expect, what to bring, and how to make informed decisions at your in-person conciliation hearing.</p>
+    <!-- SIDEBAR -->
+    <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Settlement Calculator</h3>
+        <form data-form-id="settlement_calc" id="settlement-form">
+          <div class="adv-form-group" style="margin-bottom: 0.75rem;">
+            <label style="font-size: 0.85rem;">Monthly Salary (Gross)</label>
+            <input type="number" class="adv-input" name="monthly_salary" placeholder="e.g., 15000" min="0" step="100">
+          </div>
+          <div class="adv-form-group" style="margin-bottom: 0.75rem;">
+            <label style="font-size: 0.85rem;">Months Employed</label>
+            <input type="number" class="adv-input" name="months_employed" placeholder="e.g., 24" min="0">
+          </div>
+          <div class="adv-form-group" style="margin-bottom: 0.75rem;">
+            <label style="font-size: 0.85rem;">Months Since Dismissal</label>
+            <input type="number" class="adv-input" name="months_dismissed" placeholder="e.g., 3" min="0">
+          </div>
+          <div class="adv-form-group" style="margin-bottom: 0.75rem;">
+            <label style="font-size: 0.85rem;">Reinstatement?</label>
+            <select class="adv-select" name="reinstatement">
+              <option value="no">No — compensation only</option>
+              <option value="yes">Yes — reinstatement preferred</option>
+            </select>
+          </div>
+        </form>
+        <div style="background: var(--bg-page); padding: 1rem; border-radius: 6px; margin-top: 0.75rem; text-align: center;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem;">Suggested Demand</div>
+          <div id="settlement-amount" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--accent);">R0</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Based on 12-month cap for compensation</div>
         </div>
-    </section>
+      </div>
 
-    <main class="main-content">
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-handshake"></i></div><h2>What is Conciliation?</h2></div>
-            <p style="margin-bottom: 1rem;">Conciliation is the first formal step in resolving your workplace dispute. It is a <strong>compulsory, confidential, and without-prejudice</strong> process where a neutral CCMA commissioner helps you and your employer find common ground without escalating to arbitration or court. <span class="tooltip">Without prejudice<span class="tooltiptext">Means anything you say or offer during conciliation cannot be used against you later in arbitration or court if no settlement is reached.</span></span></p>
-            <div class="info-grid">
-                <div class="info-card"><h4><i class="fas fa-bullseye" style="color: var(--primary);"></i> The Goal</h4><p>Reach a mutually acceptable settlement agreement. The commissioner does not impose a decision—you and your employer control the outcome.</p></div>
-                <div class="info-card"><h4><i class="fas fa-user-tie" style="color: var(--primary);"></i> The Commissioner</h4><p>Acts as a neutral facilitator, not a judge. They clarify issues, explore solutions, and may meet with parties separately (caucus) or together.</p></div>
-                <div class="info-card"><h4><i class="fas fa-clock" style="color: var(--primary);"></i> Timeframe</h4><p>The commissioner must attempt to resolve the dispute within <strong>30 days</strong> from the date you referred it to the CCMA.</p></div>
-                <div class="info-card"><h4><i class="fas fa-gavel" style="color: var(--primary);"></i> Not a Trial</h4><p>No formal evidence is led under oath. You do not cross-examine witnesses. It is an informal, discussion-based process focused on settlement.</p></div>
-            </div>
-            <div class="warning-box"><i class="fas fa-info-circle warning-icon"></i><div class="warning-content"><h4>How Conciliation Differs from Arbitration & Court</h4><p><strong>Conciliation:</strong> Informal, voluntary settlement, you control the outcome, no evidence under oath, commissioner facilitates only.<br><strong>Arbitration:</strong> Formal hearing, evidence under oath, witnesses testify, commissioner decides the winner and loser, binding award.<br><strong>Labour Court:</strong> Formal litigation, legal representation standard, review of arbitration awards, typically longer and more expensive.</p></div></div>
-            <div class="disclaimer"><strong>Procedural Guidance Only</strong>Advome provides procedural assistance to help you navigate the CCMA process. This is not legal advice. The conciliation process is governed by the Labour Relations Act 66 of 1995 and CCMA Rules. Users take full responsibility for their decisions and statements at the hearing.</div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-building"></i></div><h2>CCMA is IN-PERSON</h2></div>
-            <div class="warning-box danger"><i class="fas fa-exclamation-triangle warning-icon"></i><div class="warning-content"><h4>Important: Physical Attendance Required</h4><p>Conciliation hearings are held <strong>in person at CCMA offices</strong> (unless specifically arranged otherwise by the CCMA). You must attend physically. Failure to attend may result in your referral being deemed abandoned.</p></div></div>
-            <div class="process-steps">
-                <div class="process-step"><div class="step-badge">1</div><div class="step-content"><h4>Arrival & Security</h4><p>Arrive at least 30 minutes early. Bring your ID and your set-down notice. CCMA offices have security screening (bag checks, metal detectors). Allow extra time for queues. Dress professionally—business casual is appropriate.</p></div></div>
-                <div class="process-step"><div class="step-badge">2</div><div class="step-content"><h4>Waiting Area</h4><p>You will wait in a public waiting area until the commissioner calls you. You may see your employer or their representative here. <strong>Do not discuss your case with them</strong> in the waiting area—anything you say could be used later. Stay calm and review your notes.</p></div></div>
-                <div class="process-step"><div class="step-badge">3</div><div class="step-content"><h4>The Hearing Room</h4><p>The commissioner will escort you to a private hearing room. These are typically small conference rooms with a table and chairs. The setting is informal—not like a courtroom. The commissioner sits at the head, parties on opposite sides.</p></div></div>
-                <div class="process-step"><div class="step-badge">4</div><div class="step-content"><h4>Duration</h4><p>Conciliation can take anywhere from 30 minutes to several hours depending on the complexity of the dispute and willingness to negotiate. Schedule your entire day if possible. Bring water and snacks for the waiting period.</p></div></div>
-            </div>
-            <div class="recording-tip"><i class="fas fa-microphone"></i><div><h4 style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.5rem;">Recording for Personal Records</h4><p style="font-size: 0.875rem; color: var(--text-light);">Under South African law (single-party consent), <strong>you may record conversations you are part of</strong> for your personal records. However, conciliation is confidential and without prejudice. Recording is for your memory aid only—you cannot use it to prove what was said in later proceedings unless all parties agree. Be discreet and respectful if you choose to record.</p></div></div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-clipboard-list"></i></div><h2>What to Bring — Checklist</h2></div>
-            <p style="margin-bottom: 1rem;">Even though conciliation is informal, arriving with organized documents shows you are serious and helps you negotiate from a position of strength. Use this interactive checklist:</p>
-            <ul class="checklist" id="bringChecklist">
-                <li><input type="checkbox" id="item1"><div class="checklist-text"><strong>Original ID Document</strong><span>Required for security and verification. Passport, driver's license, or smart ID card.</span></div></li>
-                <li><input type="checkbox" id="item2"><div class="checklist-text"><strong>CCMA Set-Down Notice</strong><span>The official notice with your case number, date, time, and venue. You received this after filing Form 7.11.</span></div></li>
-                <li><input type="checkbox" id="item3"><div class="checklist-text"><strong>Employment Contract & Job Description</strong><span>Proves your terms of employment, role, and responsibilities.</span></div></li>
-                <li><input type="checkbox" id="item4"><div class="checklist-text"><strong>Payslips & Proof of Earnings</strong><span>Last 3–6 months of payslips and bank statements. Critical for calculating compensation or settlement amounts.</span></div></li>
-                <li><input type="checkbox" id="item5"><div class="checklist-text"><strong>Dismissal Letter / Termination Notice</strong><span>The official document stating why you were dismissed. If verbal, bring any follow-up emails or messages confirming it.</span></div></li>
-                <li><input type="checkbox" id="item6"><div class="checklist-text"><strong>Disciplinary Records & Warnings</strong><span>Any prior warnings, disciplinary hearing minutes, or performance improvement plans.</span></div></li>
-                <li><input type="checkbox" id="item7"><div class="checklist-text"><strong>Witness Statements (if any)</strong><span>Written statements from colleagues who saw what happened. Witnesses do not typically testify at conciliation, but their statements support your position.</span></div></li>
-                <li><input type="checkbox" id="item8"><div class="checklist-text"><strong>Evidence Bundle</strong><span>Organized copies of emails, WhatsApp messages, photos, or documents that support your case. Number your pages and bring a copy for the commissioner and one for the employer.</span></div></li>
-                <li><input type="checkbox" id="item9"><div class="checklist-text"><strong>Pen, Paper & Notepad</strong><span>Take notes during the hearing. Write down settlement offers, deadlines, and next steps.</span></div></li>
-                <li><input type="checkbox" id="item10"><div class="checklist-text"><strong>Water & Snacks</strong><span>Waiting times can be long. Stay hydrated and maintain your energy.</span></div></li>
-                <li><input type="checkbox" id="item11"><div class="checklist-text"><strong>Settlement Calculation</strong><span>Use our calculator below to know your bottom line before you arrive. Know what you will accept and what you will reject.</span></div></li>
-            </ul>
-            <div class="warning-box"><i class="fas fa-lightbulb warning-icon"></i><div class="warning-content"><h4>Pro Tip: The "Conciliation Bundle"</h4><p>While you don't need a full arbitration bundle, bring a simple 5-page summary: (1) Timeline of events, (2) Key documents, (3) Your desired outcome, (4) Minimum settlement you will accept, (5) List of strengths and weaknesses in your case. This keeps you focused during negotiations.</p></div></div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-user-check"></i></div><h2>How to Behave at Conciliation</h2></div>
-            <div class="info-grid">
-                <div class="info-card"><h4><i class="fas fa-tie" style="color: var(--primary);"></i> Professional Conduct</h4><p>Dress neatly (business casual). Address the commissioner as "Commissioner" or "Sir/Madam." Stand when the commissioner enters the room. Turn your phone off completely. Do not interrupt when others are speaking.</p></div>
-                <div class="info-card"><h4><i class="fas fa-comments" style="color: var(--primary);"></i> Speaking to the Employer</h4><p>Speak through the commissioner, not directly to the employer, unless the commissioner invites direct discussion. Never argue, shout, or make personal attacks. Stick to facts, not emotions. Say: "The facts show..." not "You always..."</p></div>
-                <div class="info-card"><h4><i class="fas fa-brain" style="color: var(--primary);"></i> Emotional Management</h4><p>It is normal to feel angry or anxious. If you feel overwhelmed, ask the commissioner for a short break. Take deep breaths. Remember: conciliation is about negotiation, not confrontation. You can ask for a private caucus if emotions run high.</p></div>
-                <div class="info-card"><h4><i class="fas fa-hand-paper" style="color: var(--primary);"></i> Ask for Clarification</h4><p>If you do not understand a legal term or process, ask the commissioner to explain it in plain language. It is better to ask than to agree to something you do not understand. Say: "Commissioner, could you please explain what that means?"</p></div>
-            </div>
-            <div class="warning-box danger"><i class="fas fa-ban warning-icon"></i><div class="warning-content"><h4>What NOT to Do</h4><p>Do not threaten the employer or commissioner. Do not bring unauthorized people into the hearing room (only you, your representative, or the parties listed in Rule 7.2 are permitted). Do not discuss the case in public waiting areas. Do not sign anything you have not read or do not understand.</p></div></div>
-            <div class="disclaimer"><strong>Representation Rules</strong>At conciliation, you may appear in person or be represented by a co-employee, a trade union official, or a registered employer's organisation official. Legal practitioners (attorneys/advocates) are generally NOT allowed to represent you at conciliation unless the commissioner and all parties agree. Advome is not a law firm and cannot represent you at the CCMA.</div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-stream"></i></div><h2>What to Expect During the Hearing</h2></div>
-            <div class="process-steps">
-                <div class="process-step"><div class="step-badge">1</div><div class="step-content"><h4>Introduction & Opening Statements</h4><p>The commissioner introduces themselves and explains the process. They confirm the nature of the dispute. Both parties are invited to give a brief opening statement (5–10 minutes). State the facts simply: what happened, when, and what you want. Do not argue—just outline your position.</p></div></div>
-                <div class="process-step"><div class="step-badge">2</div><div class="step-content"><h4>Issue Clarification</h4><p>The commissioner identifies the key issues in dispute. If there is disagreement about the nature of the dispute, the commissioner may decide how to categorize it. This affects what happens next, so pay close attention.</p></div></div>
-                <div class="process-step"><div class="step-badge">3</div><div class="step-content"><h4>Private Caucus (Separate Meetings)</h4><p>The commissioner may meet with each party privately. This is called a <span class="tooltip">caucus<span class="tooltiptext">A private meeting between the commissioner and one party, without the other party present. What you say in caucus is confidential unless you authorize the commissioner to share it.</span></span>. Be honest with the commissioner about your settlement range. They cannot force you to settle, but they can reality-test your position.</p></div></div>
-                <div class="process-step"><div class="step-badge">4</div><div class="step-content"><h4>Settlement Discussions</h4><p>The commissioner shuttles between rooms, conveying offers and counter-offers. This is where negotiation happens. Stay patient—this can take time. Do not feel rushed. Ask for time to think if you need it.</p></div></div>
-                <div class="process-step"><div class="step-badge">5</div><div class="step-content"><h4>Commissioner's Role</h4><p>The commissioner is neutral. They may suggest solutions or highlight weaknesses in your case (reality testing). They cannot give legal advice to either side. They cannot force a settlement. Their job is to help you reach your own agreement.</p></div></div>
-                <div class="process-step"><div class="step-badge">6</div><div class="step-content"><h4>Confidentiality</h4><p>Everything said during conciliation is confidential and without prejudice. If no settlement is reached, the commissioner cannot tell the arbitration commissioner what was discussed or offered. This allows open negotiation.</p></div></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-balance-scale"></i></div><h2>The Settlement Decision</h2></div>
-            <div class="warning-box danger"><i class="fas fa-exclamation-circle warning-icon"></i><div class="warning-content"><h4>Critical Warning: Don't Feel Pressured to Settle</h4><p>You are NEVER required to settle. If the offer is not fair, you have the right to walk away. The commissioner may pressure you to compromise—that is their job. But the final decision is yours alone. Do not sign anything under duress.</p></div></div>
-            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">How to Evaluate a Settlement Offer</h3>
-            <div class="info-grid">
-                <div class="info-card"><h4><i class="fas fa-calculator" style="color: var(--primary);"></i> Financial Reality</h4><p>Calculate your actual losses: lost wages, benefits, pension contributions. Compare the offer to what you might win at arbitration (which is uncertain). A guaranteed smaller amount today may be better than a risky larger amount later.</p></div>
-                <div class="info-card"><h4><i class="fas fa-clock" style="color: var(--primary);"></i> Time & Stress</h4><p>Arbitration can take months and causes significant stress. Consider whether the settlement offer compensates you fairly for the certainty and closure it provides.</p></div>
-                <div class="info-card"><h4><i class="fas fa-briefcase" style="color: var(--primary);"></i> Reinstatement</h4><p>If you want your job back, is the employer offering reinstatement or re-employment? If not, is the compensation enough to bridge you to new employment?</p></div>
-                <div class="info-card"><h4><i class="fas fa-file-contract" style="color: var(--primary);"></i> Non-Financial Terms</h4><p>Consider reference letters, confidentiality clauses, non-disparagement agreements, and payment timelines. A good reference may be worth more than extra money.</p></div>
-            </div>
-            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">What to Ask For</h3>
-            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li style="margin-bottom: 0.5rem;">Clear payment amount and deadline (e.g., "R50,000 within 14 days of signing")</li>
-                <li style="margin-bottom: 0.5rem;">UIF and tax clarity—who handles deductions?</li>
-                <li style="margin-bottom: 0.5rem;">Reference letter wording (get it attached to the agreement)</li>
-                <li style="margin-bottom: 0.5rem;">Reinstatement date and terms if applicable</li>
-                <li style="margin-bottom: 0.5rem;">Confidentiality—who can talk about the settlement?</li>
-                <li style="margin-bottom: 0.5rem;">What happens if the employer breaches the agreement?</li>
-            </ul>
-            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">When to Walk Away</h3>
-            <div class="warning-box"><i class="fas fa-door-open warning-icon"></i><div class="warning-content"><h4>Red Flags — Reject the Offer If:</h4><p>The offer is significantly less than 3 months' wages without good reason. The payment terms are vague ("we'll pay when we can"). The employer refuses to put the agreement in writing. You feel bullied or the commissioner is pushing too hard. You have strong evidence and a high chance of winning at arbitration. You want reinstatement and the employer refuses to discuss it.</p></div></div>
-            <div class="calculator-container">
-                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-dark);">Settlement Calculator</h3>
-                <div class="calculator-grid">
-                    <div class="calc-input-group"><label>Monthly Gross Salary (R)</label><input type="number" id="monthlySalary" placeholder="e.g., 15000" oninput="calculateSettlement()"></div>
-                    <div class="calc-input-group"><label>Months Since Dismissal</label><input type="number" id="monthsSince" placeholder="e.g., 3" oninput="calculateSettlement()"></div>
-                    <div class="calc-input-group"><label>Additional Claims (R)</label><input type="number" id="additionalClaims" placeholder="e.g., 5000" oninput="calculateSettlement()"></div>
-                    <div class="calc-input-group"><label>Legal Costs Saved (R)</label><input type="number" id="legalCosts" placeholder="e.g., 10000" oninput="calculateSettlement()"></div>
-                </div>
-                <div class="calc-result"><h3>Reasonable Settlement Range</h3><div class="amount" id="settlementRange">R 0</div><p style="font-size: 0.875rem; color: var(--text-light); margin-top: 0.5rem;">This is a guideline only. Actual settlement depends on case strength, employer willingness, and your priorities.</p></div>
-            </div>
-            <div class="attorney-cta"><h3>Unsure About the Offer?</h3><p>Settlement agreements are legally binding. Once signed, you typically cannot reopen the dispute. If the offer is complex or involves significant money, speak to an attorney before signing.</p><a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Find a Labour Attorney</a></div>
-            <div class="disclaimer"><strong>Not a Substitute for an Attorney</strong>This calculator provides a rough estimate based on common compensation formulas. It does not account for tax, UIF, or specific case merits. Advome does not provide legal advice. For complex settlements or high-value claims, consult a qualified labour law attorney before signing any agreement.</div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-file-signature"></i></div><h2>If Settlement is Reached</h2></div>
-            <div class="warning-box success"><i class="fas fa-check-circle warning-icon"></i><div class="warning-content"><h4>Congratulations — But Read Before You Sign</h4><p>A settlement agreement is a legally binding contract. The commissioner will draft it and both parties must sign. Once signed, the dispute is resolved and you generally cannot take it further.</p></div></div>
-            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">Key Settlement Agreement Terms</h3>
-            <div class="info-grid">
-                <div class="info-card"><h4><i class="fas fa-money-bill-wave" style="color: var(--success);"></i> Payment Terms</h4><p>Exact amount, payment date, and method. Include a penalty clause for late payment (e.g., interest at prime rate). Specify if it is gross or net of tax.</p></div>
-                <div class="info-card"><h4><i class="fas fa-lock" style="color: var(--success);"></i> Confidentiality</h4><p>Who must keep the settlement secret? Often mutual. Ensure you understand if you can tell family or future employers. Get a written reference attached.</p></div>
-                <div class="info-card"><h4><i class="fas fa-gavel" style="color: var(--success);"></i> Binding Nature</h4><p>The agreement is enforceable as if it were an arbitration award. If the employer breaches it, you can have it made an order of the Labour Court and enforce via the sheriff.</p></div>
-                <div class="info-card"><h4><i class="fas fa-ban" style="color: var(--success);"></i> Non-Admission</h4><p>Most settlements state the employer "does not admit liability." This is standard. It means they are paying to resolve the dispute, not admitting they broke the law.</p></div>
-            </div>
-            <div class="warning-box"><i class="fas fa-eye warning-icon"></i><div class="warning-content"><h4>Before You Leave the CCMA Office</h4><p>Ensure you receive a signed copy of the settlement agreement before you leave. Check that all pages are initialed and the last page is fully signed by both parties and the commissioner. Verify the case number is correct. Take a photo of the signed agreement with your phone as backup.</p></div></div>
-        </section>
-
-        <section class="section">
-            <div class="section-header"><div class="section-icon"><i class="fas fa-times-circle"></i></div><h2>If No Settlement is Reached</h2></div>
-            <p style="margin-bottom: 1rem;">If you and your employer cannot agree, the commissioner will issue a <span class="tooltip">Certificate of Non-Resolution<span class="tooltiptext">Also called a "Certificate of Outcome" or "CNR." It is an official document stating the dispute remains unresolved after conciliation. It is required to proceed to the next step.</span></span>. This is not a loss—it simply means the dispute moves to the next phase.</p>
-            <div class="process-steps">
-                <div class="process-step"><div class="step-badge">1</div><div class="step-content"><h4>Certificate of Non-Resolution Issued</h4><p>The commissioner will issue this certificate immediately or send it within a few days. It is sent to both parties. Keep this document safe—you cannot proceed without it.</p></div></div>
-                <div class="process-step"><div class="step-badge">2</div><div class="step-content"><h4>Next Step: Arbitration (Form 7.13)</h4><p>For most disputes (unfair dismissal, unfair labour practice, individual retrenchment), you must complete <strong>LRA Form 7.13</strong> to request arbitration. This must be done within the timeframes specified by the CCMA (usually 90 days from the certificate date, but check your certificate).</p></div></div>
-                <div class="process-step"><div class="step-badge">3</div><div class="step-content"><h4>Labour Court Path</h4><p>For automatically unfair dismissals, discrimination claims above the BCEA threshold, or retrenchment disputes, the certificate allows you to proceed to the Labour Court instead of arbitration. These paths are more complex and legal representation is strongly advised.</p></div></div>
-            </div>
-            <div class="warning-box"><i class="fas fa-clock warning-icon"></i><div class="warning-content"><h4>Watch Your Deadlines</h4><p>Missing the deadline to request arbitration or file in the Labour Court can result in your dispute being dismissed. Mark the dates on your calendar as soon as you receive the certificate. If you are late, you may need a condonation application with good cause.</p></div></div>
-        </section>
-
-        <section class="section">
-            <div class="conarb-notice"><i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--danger); margin-bottom: 1rem;"></i><h3>Con-Arb Warning</h3><p>If <strong>con-arb</strong> (conciliation-arbitration) was not objected to when the referral was filed, arbitration may follow <strong>immediately</strong> if conciliation fails. This means you could go straight from settlement talks into a formal hearing on the same day.</p><div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: left;"><h4 style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--danger); margin-bottom: 0.5rem;">Be Prepared for Both:</h4><ul style="margin-left: 1.5rem; font-size: 0.875rem; color: var(--text);"><li>Bring all evidence and witnesses as if arbitration is happening today</li><li>Dress and prepare for a formal hearing, not just a chat</li><li>If you are not ready for con-arb, you may request a postponement, but this is not guaranteed</li><li>Employers often object to con-arb—check your set-down notice carefully</li></ul></div><a href="arbitration.html" class="btn btn-outline" style="margin-top: 1rem;">Learn About Arbitration Prep</a></div>
-        </section>
-
-        <div class="page-navigation">
-            <a href="referral.html" class="nav-link prev"><i class="fas fa-arrow-left"></i>Back to Referral Guide</a>
-            <a href="arbitration.html" class="nav-link">Next: Arbitration Preparation<i class="fas fa-arrow-right"></i></a>
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="conciliation_help">
+        <h3 class="adv-sidebar__widget-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </h3>
+        <div class="adv-chat__messages" role="log" aria-live="polite">
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about settlement amounts, what to bring, or how conciliation works.</div>
         </div>
-
-        <div class="disclaimer" style="margin-top: 3rem;"><strong>Important Legal Disclaimers</strong><p>Advome is a procedural assistance platform and is not a law firm. None of the content on this page constitutes legal advice. The information provided is for procedural guidance only to help self-represented litigants navigate the CCMA process. Users take full responsibility for their own cases, statements, and decisions. Advome does not provide legal representation. Always consult a qualified labour law attorney for advice specific to your situation. While we strive for accuracy, laws and CCMA rules change. Verify all information with the official CCMA website or legal practitioner.</p></div>
-
-    </main>
-
-    <div class="chat-widget">
-        <div class="chat-panel" id="chatPanel">
-            <div class="chat-header"><h4><i class="fas fa-robot"></i> Advome AI Assistant</h4><button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button></div>
-            <div class="chat-messages" id="chatMessages"><div class="chat-message bot">Hello! I'm your Advome assistant. I can help you prepare for conciliation. Ask me about what to bring, how to behave, or settlement tips. <strong>Note: I provide procedural guidance only, not legal advice.</strong></div></div>
-            <div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="Ask about conciliation..." onkeypress="if(event.key==='Enter')sendMessage()"><button class="chat-send" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button></div>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
+          <button class="adv-chat__send" aria-label="Send message">Send</button>
         </div>
-        <button class="chat-button" onclick="toggleChat()"><i class="fas fa-comments"></i></button>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="referral.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Referral
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="arbitration.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            Skip to Arbitration
+          </a>
+        </div>
+        <div>
+          <a href="ccma-offices.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Find CCMA Office
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- BOTTOM ZONE -->
+  <div class="adv-bottom-zone">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div class="adv-fee-meter" style="flex: 1; max-width: 400px;">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Saved vs attorney</span>
+        <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 30%;"></div></div>
+        <span class="adv-fee-meter__amount">R8,500</span>
+      </div>
+      <div class="adv-savings adv-savings--small">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        You've saved <span class="adv-savings__amount">R8,500</span> vs. attorney fees
+      </div>
     </div>
 
-    <script>
-        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
-            const id = checkbox.id;
-            const saved = localStorage.getItem('conciliation_' + id);
-            if (saved === 'true') checkbox.checked = true;
-            checkbox.addEventListener('change', function() {
-                localStorage.setItem('conciliation_' + this.id, this.checked);
-                this.closest('li').style.background = this.checked ? '#e0e7ff' : '';
-            });
-            if (checkbox.checked) checkbox.closest('li').style.background = '#e0e7ff';
-        });
+    <div class="adv-compliance" role="contentinfo">
+      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
+    </div>
 
-        function calculateSettlement() {
-            const salary = parseFloat(document.getElementById('monthlySalary').value) || 0;
-            const months = parseFloat(document.getElementById('monthsSince').value) || 0;
-            const additional = parseFloat(document.getElementById('additionalClaims').value) || 0;
-            const costs = parseFloat(document.getElementById('legalCosts').value) || 0;
-            const min = Math.round((salary * 2) + additional + costs);
-            const max = Math.round((salary * 6) + additional + costs);
-            const formatter = new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR', minimumFractionDigits: 0 });
-            document.getElementById('settlementRange').textContent = formatter.format(min) + ' – ' + formatter.format(max);
-        }
+    <nav class="adv-nav-footer" aria-label="Page navigation">
+      <a href="referral.html" class="adv-nav-footer__prev">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back: File Dispute
+      </a>
+      <a href="arbitration.html" class="adv-nav-footer__next">
+        I'm Ready — Next: Arbitration
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </nav>
+  </div>
 
-        function toggleChat() {
-            document.getElementById('chatPanel').classList.toggle('active');
-        }
+  <!-- FOOTER -->
+  <footer class="adv-footer" role="contentinfo">
+    <p style="margin-bottom: 0.5rem;">
+      <a href="index.html">Home</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Attorneys</a>
+    </p>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
+    </p>
+  </footer>
 
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const messages = document.getElementById('chatMessages');
-            const text = input.value.trim();
-            if (!text) return;
-            const userDiv = document.createElement('div');
-            userDiv.className = 'chat-message user';
-            userDiv.textContent = text;
-            messages.appendChild(userDiv);
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-            setTimeout(() => {
-                const botDiv = document.createElement('div');
-                botDiv.className = 'chat-message bot';
-                const responses = {
-                    'bring': "Bring your ID, set-down notice, employment contract, payslips, dismissal letter, any warnings, witness statements, and an organized evidence bundle. Also bring pen, paper, water, and your settlement calculations.",
-                    'settlement': "Never settle under pressure. Calculate your minimum acceptable amount before arriving. Consider not just money but also references, reinstatement, and payment deadlines. A settlement is final and binding.",
-                    'behave': "Dress professionally, address the commissioner respectfully, speak through the commissioner (not directly to the employer unless invited), stay calm, and ask for breaks if needed. No shouting or threats.",
-                    'record': "Under SA law, you may record conversations you're part of for personal records. However, conciliation is confidential and without prejudice. Recordings are for your memory only and generally cannot be used in later proceedings.",
-                    'conarb': "Con-arb means conciliation and arbitration on the same day. If not objected to, be prepared to go straight into arbitration if conciliation fails. Bring all evidence and witnesses as if it's arbitration day.",
-                    'certificate': "If no settlement is reached, the commissioner issues a Certificate of Non-Resolution. You need this to proceed to arbitration (Form 7.13) or Labour Court. Keep it safe and watch your deadlines.",
-                    'default': "I can help with what to bring, how to behave, settlement tips, recording rules, con-arb preparation, or what happens if there's no settlement. What would you like to know?"
-                };
-                let response = responses.default;
-                const lower = text.toLowerCase();
-                if (lower.includes('bring') || lower.includes('documents') || lower.includes('checklist')) response = responses.bring;
-                else if (lower.includes('settle') || lower.includes('offer') || lower.includes('money')) response = responses.settlement;
-                else if (lower.includes('behave') || lower.includes('conduct') || lower.includes('dress')) response = responses.behave;
-                else if (lower.includes('record')) response = responses.record;
-                else if (lower.includes('conarb') || lower.includes('con-arb')) response = responses.conarb;
-                else if (lower.includes('certificate') || lower.includes('next step')) response = responses.certificate;
-                botDiv.innerHTML = response + '<br><br><em style="font-size: 0.8em; opacity: 0.7;">This is procedural guidance only. For legal advice, consult an attorney.</em>';
-                messages.appendChild(botDiv);
-                messages.scrollTop = messages.scrollHeight;
-            }, 800);
-        }
+  <script src="shared-scripts.js"></script>
+  <script>
+  // Page-specific: Settlement calculator
+  (function() {
+    const form = document.getElementById('settlement-form');
+    const display = document.getElementById('settlement-amount');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    function calculate() {
+      const salary = parseFloat(form.querySelector('[name="monthly_salary"]').value) || 0;
+      const monthsEmployed = parseFloat(form.querySelector('[name="months_employed"]').value) || 0;
+      const monthsDismissed = parseFloat(form.querySelector('[name="months_dismissed"]').value) || 0;
+      const reinstatement = form.querySelector('[name="reinstatement"]').value === 'yes';
 
-        document.querySelectorAll('.section').forEach(section => observer.observe(section));
-    </script>
+      let amount = 0;
+
+      if (reinstatement) {
+        // Back pay calculation
+        amount = salary * monthsDismissed;
+      } else {
+        // Compensation: capped at 12 months remuneration
+        const maxComp = salary * 12;
+        // Rough estimate: 1-3 months per year of service, plus back pay
+        const serviceFactor = Math.min(monthsEmployed / 12, 10); // cap at 10 years
+        amount = Math.min((salary * serviceFactor * 1.5) + (salary * monthsDismissed), maxComp);
+      }
+
+      display.textContent = 'R' + Math.round(amount).toLocaleString('en-ZA');
+    }
+
+    form.addEventListener('input', calculate);
+    form.addEventListener('change', calculate);
+
+    // Calculate on load if data exists
+    const saved = Advome?.storage?.get('form_settlement_calc', {});
+    if (saved.monthly_salary) calculate();
+  })();
+  </script>
 </body>
 </html>
