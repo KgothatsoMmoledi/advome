@@ -81,7 +81,7 @@
         <div class="adv-card__header">
           <div>
             <h2 id="decision-title" class="adv-card__title">Your Decision</h2>
-            <p class="adv-card__subtitle">Choose one path. You cannot undo this decision.</p>
+            <p class="adv-card__subtitle">Choose one path. You may be able tonot undo this decision.</p>
           </div>
         </div>
         <div class="adv-card__body">
@@ -155,11 +155,11 @@
             <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;">Step 1: Tell Us What Happened</h3>
             <form data-form-id="review_grounds" id="grounds-form">
               <div class="adv-form-group">
-                <label>Did you record the arbitration hearing?</label>
+                <label>Did you make a recording of the arbitration hearing?</label>
                 <select class="adv-select" name="recorded_hearing" id="recorded-hearing">
                   <option value="">Select...</option>
-                  <option value="yes">Yes, I have an audio recording</option>
-                  <option value="no">No, I did not record it</option>
+                  <option value="yes">Yes, I made an audio recording</option>
+                  <option value="no">No, I did not make a recording</option>
                   <option value="dont_know">I am not sure</option>
                 </select>
               </div>
@@ -180,7 +180,7 @@
                 <div class="adv-alert adv-alert--info adv-alert--minimal">
                   <div class="adv-alert__content">
                     <div class="adv-alert__title">Reassurance: The Audio Exists</div>
-                    <p style="margin-bottom: 0;">Even if you did not record, the CCMA keeps an official audio recording of every arbitration. You can request a copy (LRA s142). We will help you draft the request. In the meantime, describe what you remember — we will work with that.</p>
+                    <p style="margin-bottom: 0;">If you did not make your own recording, the CCMA may have an official audio recording of the arbitration. You may be able to request a copy (LRA s142). We can help you draft a request letter. In the meantime, describing what you remember is still useful.</p>
                   </div>
                 </div>
               </div>
@@ -338,7 +338,7 @@
           AI Assistant
         </h3>
         <div class="adv-chat__messages" role="log" aria-live="polite">
-          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about review grounds, LRA s145, Labour Court procedures, or case law. I can help you understand your options.</div>
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about review grounds, LRA s145, Labour Court procedures, or case law. This platform may assist you with understand your options.</div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
@@ -429,34 +429,34 @@
   <script src="shared-scripts.js"></script>
   <script>
   // Page-specific: 6-week countdown + grounds finder
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const serviceDate = document.getElementById('service-date');
     const countdownDisplay = document.getElementById('countdown-display');
     const sidebarCountdown = document.getElementById('sidebar-countdown');
 
+    if (!serviceDate) {
+      console.error('service-date input not found');
+      return;
+    }
+
     function updateCountdown() {
       const dateVal = serviceDate.value;
       if (!dateVal) {
-        countdownDisplay.innerHTML = `
-          <div class="adv-deadline">
-            <div class="adv-deadline__label">Enter service date to see countdown</div>
-            <div class="adv-deadline__date" style="font-size: 1.25rem;">—</div>
-          </div>
-        `;
-        sidebarCountdown.innerHTML = `
-          <div class="adv-deadline">
-            <div class="adv-deadline__label">Enter service date above</div>
-            <div class="adv-deadline__date">—</div>
-          </div>
-        `;
+        if (countdownDisplay) {
+          countdownDisplay.innerHTML = '<div class="adv-deadline"><div class="adv-deadline__label">Enter service date to see countdown</div><div class="adv-deadline__date" style="font-size: 1.25rem;">—</div></div>';
+        }
+        if (sidebarCountdown) {
+          sidebarCountdown.innerHTML = '<div class="adv-deadline"><div class="adv-deadline__label">Enter service date above</div><div class="adv-deadline__date">—</div></div>';
+        }
         return;
       }
 
-      const start = new Date(dateVal);
+      const start = new Date(dateVal + 'T00:00:00');
       const deadline = new Date(start);
       deadline.setDate(deadline.getDate() + 42);
 
       const today = new Date();
+      today.setHours(0,0,0,0);
       const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
       const fmt = d => d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' });
 
@@ -473,168 +473,135 @@
         statusText = remaining + ' days left — Urgent';
       }
 
-      countdownDisplay.innerHTML = `
-        <div class="adv-deadline">
-          <div class="adv-deadline__label">Challenge deadline: ${fmt(deadline)}</div>
-          <div class="adv-deadline__date">${statusText}</div>
-          <span class="${statusClass}" style="display: inline-block; margin-top: 0.5rem;">${remaining > 0 ? remaining + ' days to file review (LRA s145)' : 'Deadline has passed'}</span>
-        </div>
-      `;
+      if (countdownDisplay) {
+        countdownDisplay.innerHTML = '<div class="adv-deadline"><div class="adv-deadline__label">Challenge deadline: ' + fmt(deadline) + '</div><div class="adv-deadline__date">' + statusText + '</div><span class="' + statusClass + '" style="display: inline-block; margin-top: 0.5rem;">' + (remaining > 0 ? remaining + ' days to file review (LRA s145)' : 'Deadline has passed') + '</span></div>';
+      }
 
-      sidebarCountdown.innerHTML = `
-        <div class="adv-deadline">
-          <div class="adv-deadline__label">File by: ${fmt(deadline)}</div>
-          <div class="adv-deadline__date">${remaining > 0 ? remaining + ' days left' : 'Expired'}</div>
-          <span class="${statusClass}">${remaining > 0 ? (remaining <= 7 ? 'URGENT' : 'ON TRACK') : 'EXPIRED'}</span>
-        </div>
-      `;
+      if (sidebarCountdown) {
+        sidebarCountdown.innerHTML = '<div class="adv-deadline"><div class="adv-deadline__label">File by: ' + fmt(deadline) + '</div><div class="adv-deadline__date">' + (remaining > 0 ? remaining + ' days left' : 'Expired') + '</div><span class="' + statusClass + '">' + (remaining > 0 ? (remaining <= 7 ? 'URGENT' : 'ON TRACK') : 'EXPIRED') + '</span></div>';
+      }
 
-      Advome?.storage?.set('award_service_date', dateVal);
+      // Save to localStorage if available
+      try {
+        localStorage.setItem('advome_award_service_date', dateVal);
+      } catch(e) {}
     }
 
     serviceDate.addEventListener('change', updateCountdown);
+    serviceDate.addEventListener('input', updateCountdown); // Also trigger on input for better UX
 
-    const saved = Advome?.storage?.get('award_service_date');
-    if (saved) {
-      serviceDate.value = saved;
-      updateCountdown();
-    }
+    // Restore from localStorage
+    try {
+      const saved = localStorage.getItem('advome_award_service_date');
+      if (saved) {
+        serviceDate.value = saved;
+        updateCountdown();
+      }
+    } catch(e) {}
 
     // Grounds finder: show/hide sections based on recording status
-    document.getElementById('recorded-hearing').addEventListener('change', function() {
-      const val = this.value;
-      document.getElementById('audio-upload-section').style.display = val === 'yes' ? 'block' : 'none';
-      document.getElementById('no-recording-reassurance').style.display = (val === 'no' || val === 'dont_know') ? 'block' : 'none';
-    });
+    const recordedSelect = document.getElementById('recorded-hearing');
+    if (recordedSelect) {
+      recordedSelect.addEventListener('change', function() {
+        const val = this.value;
+        const audioSection = document.getElementById('audio-upload-section');
+        const noRecording = document.getElementById('no-recording-reassurance');
+        if (audioSection) audioSection.style.display = val === 'yes' ? 'block' : 'none';
+        if (noRecording) noRecording.style.display = (val === 'no' || val === 'dont_know') ? 'block' : 'none';
+      });
+    }
 
     // Grounds finder: generate results
-    document.getElementById('find-grounds-btn').addEventListener('click', function() {
-      const form = document.getElementById('grounds-form');
-      const description = form.querySelector('[name="hearing_description"]').value.trim();
-      const outcome = form.querySelector('[name="award_outcome"]').value;
-      const grounds = Array.from(form.querySelectorAll('[name="grounds"]:checked')).map(cb => cb.value);
+    const findGroundsBtn = document.getElementById('find-grounds-btn');
+    if (findGroundsBtn) {
+      findGroundsBtn.addEventListener('click', function() {
+        const form = document.getElementById('grounds-form');
+        if (!form) return;
 
-      if (!description || !outcome) {
-        Advome?.toast?.show('Please describe what happened and select the award outcome', 'warning');
-        return;
-      }
+        const description = form.querySelector('[name="hearing_description"]')?.value?.trim() || '';
+        const outcome = form.querySelector('[name="award_outcome"]')?.value || '';
+        const grounds = Array.from(form.querySelectorAll('[name="grounds"]:checked')).map(cb => cb.value);
 
-      const groundsMap = {
-        'exceeded_powers': { text: 'Arbitrator exceeded their powers (LRA s145(2)(a))', case: 'See <em>NUMSA v. Bader Bop</em> [2003] 2 BLLR 149 (LAC)' },
-        'misconduct': { text: 'Arbitrator committed misconduct (LRA s145(2)(b))', case: 'See <em>Steenkamp v. Edcon</em> [2006] 3 BLLR 234 (LAC)' },
-        'irregular': { text: 'Grossly irregular procedure (LRA s145(2)(c))', case: 'See <em>Goldfields Mining v. CCMA</em> [2007] 5 BLLR 449 (LAC)' },
-        'evidence_error': { text: 'Evidence improperly admitted or excluded (LRA s145(2)(d))', case: 'See <em>SA Rugby v. CCMA</em> [2006] 8 BLLR 743 (LAC)' },
-        'bias': { text: 'Apparent bias or conflict of interest (LRA s145(2)(e))', case: 'See <em>President of RSA v. SARFU</em> [1999] 4 SA 147 (CC)' },
-        'not_sure': { text: 'Grounds to be identified from hearing description', case: 'We will analyse your description against LRA s145 and relevant case law' }
-      };
-
-      const groundsContent = document.getElementById('grounds-content');
-      let groundsHtml = '<ul style="margin-left: 1.25rem; margin-bottom: 1rem;">';
-
-      if (grounds.length === 0 || grounds.includes('not_sure')) {
-        // Auto-identify from description
-        const lowerDesc = description.toLowerCase();
-        const identified = [];
-
-        if (lowerDesc.includes('not allowed') || lowerDesc.includes('interrupted') || lowerDesc.includes('cut off') || lowerDesc.includes('wouldn't let')) {
-          identified.push(groundsMap.irregular);
-        }
-        if (lowerDesc.includes('bias') || lowerDesc.includes('favour') || lowerDesc.includes('sided') || lowerDesc.includes('unfair')) {
-          identified.push(groundsMap.bias);
-        }
-        if (lowerDesc.includes('evidence') || lowerDesc.includes('document') || lowerDesc.includes('refused') || lowerDesc.includes('rejected')) {
-          identified.push(groundsMap.evidence_error);
-        }
-        if (lowerDesc.includes('power') || lowerDesc.includes('authority') || lowerDesc.includes('jurisdiction')) {
-          identified.push(groundsMap.exceeded_powers);
-        }
-        if (lowerDesc.includes('misconduct') || lowerDesc.includes('rude') || lowerDesc.includes('shouted') || lowerDesc.includes('insult')) {
-          identified.push(groundsMap.misconduct);
+        if (!description || !outcome) {
+          alert('Please describe what happened and select the award outcome');
+          return;
         }
 
-        if (identified.length === 0) {
-          identified.push(groundsMap.irregular);
-        }
+        const groundsMap = {
+          'exceeded_powers': { text: 'Arbitrator exceeded their powers (LRA s145(2)(a))', case: 'See NUMSA v. Bader Bop [2003] 2 BLLR 149 (LAC)' },
+          'misconduct': { text: 'Arbitrator committed misconduct (LRA s145(2)(b))', case: 'See Steenkamp v. Edcon [2006] 3 BLLR 234 (LAC)' },
+          'irregular': { text: 'Grossly irregular procedure (LRA s145(2)(c))', case: 'See Goldfields Mining v. CCMA [2007] 5 BLLR 449 (LAC)' },
+          'evidence_error': { text: 'Evidence improperly admitted or excluded (LRA s145(2)(d))', case: 'See SA Rugby v. CCMA [2006] 8 BLLR 743 (LAC)' },
+          'bias': { text: 'Apparent bias or conflict of interest (LRA s145(2)(e))', case: 'See President of RSA v. SARFU [1999] 4 SA 147 (CC)' },
+          'not_sure': { text: 'Grounds to be identified from hearing description', case: 'Analysis against LRA s145 and relevant case law' }
+        };
 
-        identified.forEach(g => {
-          groundsHtml += `<li style="margin-bottom: 0.75rem;"><strong>${g.text}</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">${g.case}</span></li>`;
-        });
-      } else {
-        grounds.forEach(g => {
-          if (groundsMap[g]) {
-            groundsHtml += `<li style="margin-bottom: 0.75rem;"><strong>${groundsMap[g].text}</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">${groundsMap[g].case}</span></li>`;
+        const groundsContent = document.getElementById('grounds-content');
+        let groundsHtml = '<ul style="margin-left: 1.25rem; margin-bottom: 1rem;">';
+
+        if (grounds.length === 0 || grounds.includes('not_sure')) {
+          const lowerDesc = description.toLowerCase();
+          const identified = [];
+
+          if (lowerDesc.includes('not allowed') || lowerDesc.includes('interrupted') || lowerDesc.includes('cut off') || lowerDesc.includes('wouldn't let') || lowerDesc.includes('prevented')) {
+            identified.push(groundsMap.irregular);
           }
-        });
-      }
+          if (lowerDesc.includes('bias') || lowerDesc.includes('favour') || lowerDesc.includes('sided') || lowerDesc.includes('unfair') || lowerDesc.includes('prejudice')) {
+            identified.push(groundsMap.bias);
+          }
+          if (lowerDesc.includes('evidence') || lowerDesc.includes('document') || lowerDesc.includes('refused') || lowerDesc.includes('rejected') || lowerDesc.includes('excluded')) {
+            identified.push(groundsMap.evidence_error);
+          }
+          if (lowerDesc.includes('power') || lowerDesc.includes('authority') || lowerDesc.includes('jurisdiction') || lowerDesc.includes('scope')) {
+            identified.push(groundsMap.exceeded_powers);
+          }
+          if (lowerDesc.includes('misconduct') || lowerDesc.includes('rude') || lowerDesc.includes('shouted') || lowerDesc.includes('insult') || lowerDesc.includes('hostile')) {
+            identified.push(groundsMap.misconduct);
+          }
 
-      groundsHtml += '</ul>';
-      groundsHtml += '<p style="margin-bottom: 0;"><strong>Legislation referenced:</strong> Labour Relations Act 66 of 1995, Section 145; Labour Court Rules; <em>NUMSA v. Bader Bop</em> [2003] 2 BLLR 149 (LAC); <em>Steenkamp v. Edcon</em> [2006] 3 BLLR 234 (LAC).</p>';
-      groundsContent.innerHTML = groundsHtml;
+          if (identified.length === 0) {
+            identified.push(groundsMap.irregular);
+          }
 
-      // Draft motion
-      const motionContent = document.getElementById('motion-content');
-      motionContent.innerHTML = `
-        <p><strong>IN THE LABOUR COURT OF SOUTH AFRICA</strong></p>
-        <p style="margin-bottom: 1.5rem;"><strong>Case No:</strong> [To be assigned by Court Online]</p>
+          identified.forEach(g => {
+            groundsHtml += '<li style="margin-bottom: 0.75rem;"><strong>' + g.text + '</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">' + g.case + '</span></li>';
+          });
+        } else {
+          grounds.forEach(g => {
+            if (groundsMap[g]) {
+              groundsHtml += '<li style="margin-bottom: 0.75rem;"><strong>' + groundsMap[g].text + '</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">' + groundsMap[g].case + '</span></li>';
+            }
+          });
+        }
 
-        <p><strong>REVIEW APPLICATION</strong></p>
-        <p style="margin-bottom: 1rem;">In terms of Section 145 of the Labour Relations Act 66 of 1995</p>
+        groundsHtml += '</ul>';
+        groundsHtml += '<p style="margin-bottom: 0;"><strong>Legislation referenced:</strong> Labour Relations Act 66 of 1995, Section 145; Labour Court Rules; NUMSA v. Bader Bop [2003] 2 BLLR 149 (LAC); Steenkamp v. Edcon [2006] 3 BLLR 234 (LAC).</p>';
+        if (groundsContent) groundsContent.innerHTML = groundsHtml;
 
-        <p><strong>APPLICANT:</strong> [Your Full Name]</p>
-        <p style="margin-bottom: 1rem;"><strong>RESPONDENT:</strong> [Employer Name] and the CCMA</p>
+        // Draft motion
+        const motionContent = document.getElementById('motion-content');
+        const today = new Date().toLocaleDateString('en-ZA');
+        if (motionContent) {
+          motionContent.innerHTML = '<p><strong>IN THE LABOUR COURT OF SOUTH AFRICA</strong></p><p style="margin-bottom: 1.5rem;"><strong>Case No:</strong> [To be assigned by Court Online]</p><p><strong>REVIEW APPLICATION</strong></p><p style="margin-bottom: 1rem;">In terms of Section 145 of the Labour Relations Act 66 of 1995</p><p><strong>APPLICANT:</strong> [Your Full Name]</p><p style="margin-bottom: 1rem;"><strong>RESPONDENT:</strong> [Employer Name] and the CCMA</p><p><strong>1. INTRODUCTION</strong></p><p>The applicant hereby applies for the review and setting aside of the arbitration award issued by the CCMA in Case No [CASE NUMBER] on [DATE], on the grounds set out below.</p><p><strong>2. GROUNDS FOR REVIEW</strong></p><p>The applicant submits that the arbitrator committed the following irregularities:</p><p>[Grounds to be inserted from analysis above]</p><p><strong>3. RELIEF SOUGHT</strong></p><p>The applicant prays that this Honourable Court:</p><ol style="margin-left: 1.25rem; margin-bottom: 1rem;"><li>Review and set aside the arbitration award;</li><li>Remit the matter for rehearing before a different arbitrator; or</li><li>Grant such other relief as the Court deems fit.</li></ol><p><strong>4. URGENCY</strong></p><p>This application is filed within the 6-week period prescribed by LRA s145. The applicant respectfully requests expedited hearing given the time-sensitive nature of the relief sought.</p><p style="margin-top: 2rem;">_________________________<br>Applicant<br>Date: ' + today + '</p>';
+        }
 
-        <p><strong>1. INTRODUCTION</strong></p>
-        <p>The applicant hereby applies for the review and setting aside of the arbitration award issued by the CCMA in Case No [CASE NUMBER] on [DATE], on the grounds set out below.</p>
+        // Draft affidavit
+        const affidavitContent = document.getElementById('affidavit-content');
+        if (affidavitContent) {
+          affidavitContent.innerHTML = '<p><strong>FOUNDING AFFIDAVIT</strong></p><p style="margin-bottom: 1rem;">I, the undersigned [YOUR FULL NAME], do hereby make oath and state:</p><p><strong>1. INTRODUCTION AND CAPACITY</strong></p><p>I am the applicant in this matter. I was employed by [Employer Name] from [Date] until [Date]. I was dismissed on [Date] and referred the dispute to the CCMA. The matter was arbitrated on [Date] and an award was issued on [Date].</p><p><strong>2. FACTUAL BACKGROUND</strong></p><p>' + description.replace(/
+/g, '<br>') + '</p><p><strong>3. LEGAL GROUNDS</strong></p><p>Based on the above, I respectfully submit that the arbitrator's award is reviewable on the following grounds:</p><p>[Grounds to be inserted from analysis above]</p><p>These grounds fall within the limited grounds for review set out in LRA s145(2).</p><p><strong>4. RELIEF SOUGHT</strong></p><p>I pray that this Honourable Court review and set aside the arbitration award and remit the matter for rehearing.</p><p><strong>5. VERIFICATION</strong></p><p>I verify that the contents of this affidavit are true and correct to the best of my knowledge and belief.</p><p style="margin-top: 2rem;">_________________________<br>[Your Full Name]<br>Date: ' + today + '<br>At: [City]</p>';
+        }
 
-        <p><strong>2. GROUNDS FOR REVIEW</strong></p>
-        <p>The applicant submits that the arbitrator committed the following irregularities:</p>
-        <p>[Grounds to be inserted from analysis above]</p>
+        const groundsResults = document.getElementById('grounds-results');
+        if (groundsResults) {
+          groundsResults.style.display = 'block';
+          groundsResults.scrollIntoView({ behavior: 'smooth' });
+        }
 
-        <p><strong>3. RELIEF SOUGHT</strong></p>
-        <p>The applicant prays that this Honourable Court:</p>
-        <ol style="margin-left: 1.25rem; margin-bottom: 1rem;">
-          <li>Review and set aside the arbitration award;</li>
-          <li>Remit the matter for rehearing before a different arbitrator; or</li>
-          <li>Grant such other relief as the Court deems fit.</li>
-        </ol>
-
-        <p><strong>4. URGENCY</strong></p>
-        <p>This application is filed within the 6-week period prescribed by LRA s145. The applicant respectfully requests expedited hearing given the time-sensitive nature of the relief sought.</p>
-
-        <p style="margin-top: 2rem;">_________________________<br>Applicant<br>Date: ${new Date().toLocaleDateString('en-ZA')}</p>
-      `;
-
-      // Draft affidavit
-      const affidavitContent = document.getElementById('affidavit-content');
-      affidavitContent.innerHTML = `
-        <p><strong>FOUNDING AFFIDAVIT</strong></p>
-        <p style="margin-bottom: 1rem;">I, the undersigned [YOUR FULL NAME], do hereby make oath and state:</p>
-
-        <p><strong>1. INTRODUCTION AND CAPACITY</strong></p>
-        <p>I am the applicant in this matter. I was employed by [Employer Name] from [Date] until [Date]. I was dismissed on [Date] and referred the dispute to the CCMA. The matter was arbitrated on [Date] and an award was issued on [Date].</p>
-
-        <p><strong>2. FACTUAL BACKGROUND</strong></p>
-        <p>${description.replace(/\n/g, '<br>')}</p>
-
-        <p><strong>3. LEGAL GROUNDS</strong></p>
-        <p>Based on the above, I respectfully submit that the arbitrator's award is reviewable on the following grounds:</p>
-        <p>[Grounds to be inserted from analysis above]</p>
-        <p>These grounds fall within the limited grounds for review set out in LRA s145(2).</p>
-
-        <p><strong>4. RELIEF SOUGHT</strong></p>
-        <p>I pray that this Honourable Court review and set aside the arbitration award and remit the matter for rehearing.</p>
-
-        <p><strong>5. VERIFICATION</strong></p>
-        <p>I verify that the contents of this affidavit are true and correct to the best of my knowledge and belief.</p>
-
-        <p style="margin-top: 2rem;">_________________________<br>[Your Full Name]<br>Date: ${new Date().toLocaleDateString('en-ZA')}<br>At: [City]</p>
-      `;
-
-      document.getElementById('grounds-results').style.display = 'block';
-      document.getElementById('grounds-results').scrollIntoView({ behavior: 'smooth' });
-      Advome?.toast?.show('Review grounds identified and documents drafted — review and edit before filing', 'success');
-    });
-  })();
+        alert('Review grounds identified and documents drafted — please review and edit before filing');
+      });
+    }
+  });
   </script>
 </body>
 </html>

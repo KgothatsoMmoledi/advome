@@ -422,78 +422,101 @@
   <script src="shared-scripts.js"></script>
   <script>
   // Page-specific: Deadline calculator sync
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const mainDate = document.getElementById('dismissal-date');
     const sidebarDate = document.getElementById('sidebar-dismissal-date');
     const display = document.getElementById('deadline-display');
     const status = document.getElementById('deadline-status');
     const sidebarDisplay = document.getElementById('sidebar-deadline-display');
 
-    function calculateDeadline(dateVal, days = 30) {
-      if (!dateVal) return null;
-      const start = new Date(dateVal);
-      const deadline = new Date(start);
-      deadline.setDate(deadline.getDate() + days);
-      const today = new Date();
-      const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-      return { deadline, remaining, start };
+    if (!mainDate) {
+      console.error('dismissal-date input not found');
+      return;
     }
 
-    function updateDisplay(dateVal, days = 30) {
-      const result = calculateDeadline(dateVal, days);
+    function calculateDeadline(dateVal, days) {
+      if (!dateVal) return null;
+      days = days || 30;
+      var start = new Date(dateVal + 'T00:00:00');
+      var deadline = new Date(start);
+      deadline.setDate(deadline.getDate() + days);
+      var today = new Date();
+      today.setHours(0,0,0,0);
+      var remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+      return { deadline: deadline, remaining: remaining, start: start };
+    }
+
+    function updateDisplay(dateVal, days) {
+      days = days || 30;
+      var result = calculateDeadline(dateVal, days);
       if (!result) {
-        display.textContent = 'Select a date to see your deadline';
-        status.textContent = 'Enter date above';
-        status.style.background = 'var(--text-muted)';
+        if (display) display.textContent = 'Select a date to see your deadline';
+        if (status) {
+          status.textContent = 'Enter date above';
+          status.style.background = '#718096';
+        }
         return;
       }
 
-      const { deadline, remaining } = result;
-      const fmt = d => d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' });
+      var deadline = result.deadline;
+      var remaining = result.remaining;
+      var fmt = function(d) { return d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }); };
 
-      display.textContent = fmt(deadline);
+      if (display) display.textContent = fmt(deadline);
 
-      if (remaining < 0) {
-        status.textContent = Math.abs(remaining) + ' DAYS OVERDUE — Apply for condonation (LRA s191)';
-        status.style.background = 'var(--danger)';
-      } else if (remaining <= 7) {
-        status.textContent = 'URGENT: ' + remaining + ' days left';
-        status.style.background = 'var(--danger)';
-      } else if (remaining <= 14) {
-        status.textContent = remaining + ' days left — File soon';
-        status.style.background = 'var(--warning)';
-      } else {
-        status.textContent = remaining + ' days remaining';
-        status.style.background = 'var(--success)';
+      if (status) {
+        if (remaining < 0) {
+          status.textContent = Math.abs(remaining) + ' DAYS OVERDUE — Apply for condonation (LRA s191)';
+          status.style.background = '#c53030';
+        } else if (remaining <= 7) {
+          status.textContent = 'URGENT: ' + remaining + ' days left';
+          status.style.background = '#c53030';
+        } else if (remaining <= 14) {
+          status.textContent = remaining + ' days left — File soon';
+          status.style.background = '#d69e2e';
+        } else {
+          status.textContent = remaining + ' days remaining';
+          status.style.background = '#38a169';
+        }
       }
 
       if (sidebarDisplay) {
-        sidebarDisplay.innerHTML = `
-          <div class="adv-deadline__label">File by: ${fmt(deadline)}</div>
-          <div class="adv-deadline__date">${remaining > 0 ? remaining + ' days left' : Math.abs(remaining) + ' days overdue'}</div>
-          <span class="${remaining < 0 ? 'adv-deadline__urgent' : remaining <= 7 ? 'adv-deadline__urgent' : 'adv-deadline__safe'}">
-            ${remaining < 0 ? 'OVERDUE' : remaining <= 7 ? 'URGENT' : 'ON TRACK'}
-          </span>
-        `;
+        var statusClass = remaining < 0 ? 'adv-deadline__urgent' : remaining <= 7 ? 'adv-deadline__urgent' : 'adv-deadline__safe';
+        var statusText = remaining < 0 ? 'OVERDUE' : remaining <= 7 ? 'URGENT' : 'ON TRACK';
+        sidebarDisplay.innerHTML = '<div class="adv-deadline__label">File by: ' + fmt(deadline) + '</div><div class="adv-deadline__date">' + (remaining > 0 ? remaining + ' days left' : Math.abs(remaining) + ' days overdue') + '</div><span class="' + statusClass + '">' + statusText + '</span>';
       }
     }
 
-    mainDate.addEventListener('change', e => {
-      sidebarDate.value = e.target.value;
-      updateDisplay(e.target.value);
-    });
-    sidebarDate.addEventListener('change', e => {
-      mainDate.value = e.target.value;
+    mainDate.addEventListener('change', function(e) {
+      if (sidebarDate) sidebarDate.value = e.target.value;
       updateDisplay(e.target.value);
     });
 
-    const saved = Advome?.storage?.get('form_referral_wizard', {});
-    if (saved.dispute_date) {
-      mainDate.value = saved.dispute_date;
-      sidebarDate.value = saved.dispute_date;
-      updateDisplay(saved.dispute_date);
+    mainDate.addEventListener('input', function(e) {
+      if (sidebarDate) sidebarDate.value = e.target.value;
+      updateDisplay(e.target.value);
+    });
+
+    if (sidebarDate) {
+      sidebarDate.addEventListener('change', function(e) {
+        mainDate.value = e.target.value;
+        updateDisplay(e.target.value);
+      });
     }
-  })();
+
+    // Restore from localStorage
+    try {
+      var saved = localStorage.getItem('advome_form_referral_wizard');
+      if (saved) {
+        var parsed = JSON.parse(saved);
+        if (parsed.dispute_date) {
+          mainDate.value = parsed.dispute_date;
+          if (sidebarDate) sidebarDate.value = parsed.dispute_date;
+          updateDisplay(parsed.dispute_date);
+        }
+      }
+    } catch(e) {}
+  });
   </script>
 </body>
 </html>
