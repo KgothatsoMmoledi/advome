@@ -652,3 +652,163 @@
                 </p>
             </div>
         </article>
+                <!-- Next Steps -->
+        <article class="content-card fade-in">
+            <div class="card-header">
+                <div class="card-icon"><i class="fas fa-arrow-right"></i></div>
+                <div>
+                    <h2 class="card-title">What Happens After You File</h2>
+                    <p class="card-subtitle">The CCMA process continues — know what to expect next</p>
+                </div>
+            </div>
+            
+            <div class="timeline" style="margin: 1.5rem 0;">
+                <div class="timeline-item completed">
+                    <div class="timeline-title">Referral Filed</div>
+                    <div class="timeline-desc">You submit LRA Form 7.11 to the CCMA</div>
+                    <div class="timeline-time">Today</div>
+                </div>
+                <div class="timeline-item current">
+                    <div class="timeline-title">Notice of Set-Down</div>
+                    <div class="timeline-desc">CCMA sends date, time, and venue for conciliation</div>
+                    <div class="timeline-time">Within 30 days</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">Conciliation</div>
+                    <div class="timeline-desc">Settlement meeting with a commissioner</div>
+                    <div class="timeline-time">Scheduled date</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">Arbitration (if needed)</div>
+                    <div class="timeline-desc">Formal hearing if no settlement reached</div>
+                    <div class="timeline-time">After conciliation fails</div>
+                </div>
+            </div>
+            
+            <div class="warning-box success" style="background: #e8f6f3; border-color: #1abc9c;">
+                <i class="fas fa-check-circle" style="color: #1abc9c;"></i>
+                <div>
+                    <h4 style="color: #15803d;">You Are Now Ready for Conciliation</h4>
+                    <p>Once you receive your Notice of Set-Down, use our Conciliation Preparation Guide to prepare for your hearing.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="conciliation.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+                    <i class="fas fa-arrow-right"></i> Next: Conciliation Preparation
+                </a>
+            </div>
+        </article>
+        
+        <!-- Navigation -->
+        <div style="display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-light);">
+            <a href="ccma.html" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary-blue); text-decoration: none; font-weight: 600;">
+                <i class="fas fa-arrow-left"></i> Back to CCMA Overview
+            </a>
+            <a href="conciliation.html" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary-blue); text-decoration: none; font-weight: 600;">
+                Next: Conciliation Preparation <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <!-- Disclaimer -->
+        <div class="disclaimer-box" style="margin-top: 3rem;">
+            <h4><i class="fas fa-shield-alt"></i> Important Legal Disclaimers</h4>
+            <p>Advome is a procedural assistance platform and is not a law firm. None of the content on this page constitutes legal advice. The information provided is for procedural guidance only. Users take full responsibility for their own cases, statements, and decisions. Always consult a qualified labour law attorney for advice specific to your situation.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <div class="footer-container">
+            <div class="disclaimer-box">
+                <h4><i class="fas fa-balance-scale"></i> Section 34 — Access to Justice</h4>
+                <p>Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="ccma.html">CCMA Overview</a>
+                <a href="conciliation.html">Conciliation</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-header">
+                <h4><i class="fas fa-robot"></i> Advome Assistant</h4>
+                <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">Hello! I can help with your CCMA referral. Ask about deadlines, filing methods, or what happens next. <strong>This is procedural guidance only, not legal advice.</strong></div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Ask a question..." onkeypress="if(event.key==='Enter')sendMessage()">
+                <button class="chat-send" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chat-toggle" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></button>
+    </div>
+
+    <script>
+        // Deadline calculator
+        function calculateDeadline() {
+            const dismissalDate = document.getElementById('dismissalDate').value;
+            const disputeType = document.getElementById('disputeType').value;
+            if (!dismissalDate || !disputeType) return;
+            
+            const date = new Date(dismissalDate);
+            const days = parseInt(disputeType);
+            const deadline = new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
+            
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('deadlineDate').textContent = deadline.toLocaleDateString('en-ZA', options);
+            document.getElementById('deadlineResult').style.display = 'block';
+            
+            const today = new Date();
+            const diff = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            const status = document.getElementById('deadlineStatus');
+            if (diff < 0) {
+                status.innerHTML = '<span style="color: #c0392b;"><strong>DEADLINE PASSED</strong> — You need condonation. See the condonation section above.</span>';
+            } else if (diff <= 7) {
+                status.innerHTML = '<span style="color: #c0392b;"><strong>URGENT:</strong> ' + diff + ' days remaining. File immediately.</span>';
+            } else {
+                status.innerHTML = '<span style="color: #27ae60;">' + diff + ' days remaining. File as soon as possible.</span>';
+            }
+        }
+
+        // Chat functions
+        function toggleChat() {
+            document.getElementById('chatPanel').classList.toggle('active');
+        }
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += '<div class="chat-message user">' + text + '</div>';
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+            setTimeout(() => {
+                const responses = {
+                    'deadline': 'You have 30 days for unfair dismissal, 90 days for unfair labour practice. Calculate your exact deadline using the calculator above.',
+                    'file': 'File at the CCMA office where the dispute arose. Hand-deliver, email, fax, or send registered post. Keep proof of filing.',
+                    'form': 'LRA Form 7.11 is the official referral form. You can download it from ccma.org.za or get it at any CCMA office.',
+                    'conciliation': 'Conciliation is a settlement meeting. If it fails, you get a Certificate of Non-Resolution and can proceed to arbitration.',
+                    'default': 'I can help with deadlines, filing methods, form completion, or what happens next. What would you like to know?'
+                };
+                let response = responses.default;
+                const lower = text.toLowerCase();
+                if (lower.includes('deadline') || lower.includes('days')) response = responses.deadline;
+                else if (lower.includes('file') || lower.includes('submit')) response = responses.file;
+                else if (lower.includes('form') || lower.includes('7.11')) response = responses.form;
+                else if (lower.includes('conciliation') || lower.includes('next')) response = responses.conciliation;
+                messages.innerHTML += '<div class="chat-message bot">' + response + '<br><br><em style="font-size: 0.8em; opacity: 0.7;">This is procedural guidance only. For legal advice, consult an attorney.</em></div>';
+                messages.scrollTop = messages.scrollHeight;
+            }, 800);
+        }
+    </script>
+</body>
+</html>
