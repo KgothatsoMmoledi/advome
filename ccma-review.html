@@ -1,288 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Review Decision</title>
-<link rel="stylesheet" href="shared-styles.css">
-<base target="_blank">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply for review of your CCMA arbitration award in the Labour Court. Court Online filing guidance, document generators, and procedural assistance.">
+  <title>Review Application | Labour Court | Advome</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="shared-styles.css">
 </head>
 <body>
 
-<header class="site-header">
-  <a href="index.html" class="brand">
-    <div class="brand-mark">A</div>
-    <div>
-      <div class="brand-text">Advome</div>
-      <div class="brand-sub">Self-representation assistance</div>
+  <!-- HEADER -->
+  <header class="adv-header" role="banner">
+    <a href="index.html" class="adv-header__logo" aria-label="Advome Home">
+      Ad<span>vome</span>
+    </a>
+    <nav class="adv-header__nav" role="navigation" aria-label="Main navigation">
+      <a href="ccma.html" style="color: white; font-weight: 700;">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Find Attorney</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar" aria-label="User profile">U</div>
+      <span>My Cases</span>
     </div>
-  </a>
-  <nav class="main-nav">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="start.html" class="nav-link">Start</a>
-    <a href="dashboard.html" class="nav-link">Dashboard</a>
-    <a href="ccma.html" class="nav-link">CCMA</a>
-    <a href="award.html" class="nav-link">Award</a>
-    <a href="ccma-review.html" class="nav-link active">Review</a>
-    <a href="divorce.html" class="nav-link">Divorce</a>
-    <a href="estates-hub.html" class="nav-link">Estates</a>
-    <a href="attorney.html" class="nav-link">Attorney</a>
-    <a href="pricing.html" class="nav-premium">Pricing</a>
-  </nav>
-</header>
+    <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </header>
 
-<div class="container">
+  <!-- PROGRESS BAR -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="review" role="navigation" aria-label="Workflow progress"></div>
 
-  <div class="page-header">
-    <h1>Review Decision</h1>
-    <p>Decide whether to challenge the CCMA award. If you proceed, the Section 145 review path opens: motion, record, heads, set-down, and Labour Court finalisation.</p>
-  </div>
-
-  <!-- Compliance Banner -->
-  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
-    <div class="card-title">
-      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
-      Important: This Is a Procedural Decision, Not Legal Advice
+  <!-- HERO -->
+  <section class="adv-hero" aria-labelledby="page-title">
+    <div class="adv-hero__content">
+      <h1 id="page-title">Labour Court Review</h1>
+      <p>Challenge your CCMA arbitration award through the Labour Court review process</p>
     </div>
-    <p style="font-size:14px;color:#713f12;">
-      Advome cannot tell you whether your award is legally challengeable. We can only show you the procedural path, the deadline, and the documents you will need. 
-      <strong>If you are unsure whether to challenge the award, consult an attorney before the 6-week deadline expires.</strong>
-    </p>
-  </div>
-
-  <!-- Timeline — CORRECTED SEQUENCE -->
-  <div class="timeline">
-    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">2</span>Award</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step active"><span class="num">3</span>Review Decision</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">4</span>Motion & Affidavit</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">5</span>Record</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">6</span>Heads</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">8</span>Finalisation</div>
-  </div>
-
-  <!-- Health Meter -->
-  <div class="meter-container">
-    <div class="meter-header">
-      <span class="meter-label">Review Decision Readiness</span>
-      <span class="meter-value" style="color:var(--warning);">40%</span>
+    <div class="adv-hero__badge adv-hero__badge--critical">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      6-Week Deadline (LRA s145)
     </div>
-    <div class="meter-bar-bg">
-      <div class="meter-bar-fill medium" style="width:40%"></div>
-    </div>
-    <div class="meter-status attention">
-      <span>⚠️</span> Decision made — review grounds needed
-    </div>
-  </div>
+  </section>
 
-  <div class="grid-2">
-    <!-- Review Details -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
-        Review Details
-      </div>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-box checked"></div>
-          <div class="checklist-text done">Award served date recorded</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Grounds of review identified</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Record requested from CCMA</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Relief sought defined</div>
+  <!-- MAIN CONTAINER -->
+  <main class="adv-container" id="main-content">
+    <div class="adv-workspace">
+
+      <!-- COURT ONLINE ALERT — Prominent -->
+      <div class="adv-alert adv-alert--danger" style="margin-bottom: 1.5rem;">
+        <svg class="adv-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div class="adv-alert__content">
+          <div class="adv-alert__title">Compulsory Online Filing</div>
+          <p style="margin-bottom: 0;">The Labour Court now requires ALL filings to be submitted electronically via <strong>Court Online</strong> (https://courtonline.co.za). Paper filings are no longer accepted. You must register for an account, verify your identity, and file your review application online. We can help you prepare your documents before you upload them.</p>
         </div>
       </div>
-      <div class="mt-2">
-        <span class="pill pill-amber">Grounds pending</span>
-        <span class="pill pill-neutral">Record not requested</span>
-      </div>
-    </div>
 
-    <!-- Deadline Warning -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#fde8e8;color:#c01c28;">⏰</span>
-        Critical Deadline
-      </div>
-      <p style="font-size:14px;color:var(--text);margin-bottom:12px;">
-        <strong>Section 145(1) of the LRA</strong> — A review application must be lodged within <strong>6 weeks</strong> of the award being served.
-      </p>
-      <div style="background:var(--bg);border-radius:8px;padding:16px;">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-          <span style="font-size:13px;color:var(--text-muted);">Service date</span>
-          <span style="font-size:13px;font-weight:600;">Not recorded</span>
+      <!-- DEADLINE BANNER -->
+      <div class="adv-deadline" style="margin-bottom: 1.5rem;">
+        <div class="adv-deadline__label">Service date of the arbitration award</div>
+        <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; margin: 0.75rem 0; flex-wrap: wrap;">
+          <input type="date" class="adv-input" id="service-date" style="max-width: 200px; text-align: center;" aria-label="Date of service">
         </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-          <span style="font-size:13px;color:var(--text-muted);">Review window</span>
-          <span style="font-size:13px;font-weight:600;color:var(--danger);">42 days</span>
+        <div id="countdown-display" class="adv-deadline__date">Select a date to see your deadline</div>
+        <span id="deadline-status" style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; background: var(--text-muted); color: white;">Enter date above</span>
+      </div>
+
+      <!-- PRIMARY: Court Online Filing Prep -->
+      <section class="adv-card adv-card--primary" aria-labelledby="filing-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="filing-title" class="adv-card__title">Prepare Your Review Application</h2>
+            <p class="adv-card__subtitle">We will help you draft the documents needed for Court Online filing</p>
+          </div>
         </div>
-        <div style="display:flex;justify-content:space-between;">
-          <span style="font-size:13px;color:var(--text-muted);">Urgency</span>
-          <span class="pill pill-red">HIGH</span>
+        <div class="adv-card__body">
+
+          <div class="adv-alert adv-alert--info" style="margin-bottom: 1rem;">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">What You Need for Court Online</div>
+              <p style="margin-bottom: 0.5rem;">Before you can file, you will need:</p>
+              <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 0;">
+                <li>Court Online account (register at courtonline.co.za)</li>
+                <li>Verified identity (ID document upload)</li>
+                <li>Review application (Form 1) — we draft this below</li>
+                <li>Founding affidavit — we draft this below</li>
+                <li>Arbitration award (scanned PDF)</li>
+                <li>Proof of service of the award (email receipt, registered mail slip)</li>
+                <li>Filing fee payment (R0 for disputes under R50,000)</li>
+              </ol>
+            </div>
+          </div>
+
+          <form data-form-id="review_application" id="review-form">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="adv-form-group">
+                <label>Your Full Name <span class="required">*</span></label>
+                <input type="text" class="adv-input" name="applicant_name" placeholder="e.g., John Dumisani Nkosi" required>
+              </div>
+              <div class="adv-form-group">
+                <label>ID Number <span class="required">*</span></label>
+                <input type="text" class="adv-input" name="applicant_id" placeholder="e.g., 850101 1234 087" required>
+              </div>
+            </div>
+
+            <div class="adv-form-group">
+              <label>CCMA Case Number <span class="required">*</span></label>
+              <input type="text" class="adv-input" name="case_number" placeholder="e.g., GAJB1234/2026" required>
+            </div>
+
+            <div class="adv-form-group">
+              <label>Date of Arbitration Award <span class="required">*</span></label>
+              <input type="date" class="adv-input" name="award_date" required>
+            </div>
+
+            <div class="adv-form-group">
+              <label>Date You Were Served the Award <span class="required">*</span></label>
+              <input type="date" class="adv-input" name="service_date" required>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+
+            <div class="adv-form-group">
+              <label>Grounds for Review (Check all that apply) <span class="required">*</span></label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                  <input type="checkbox" name="review_grounds" value="exceeded_powers" style="width: auto;"> Arbitrator exceeded powers (LRA s145(2)(a))
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                  <input type="checkbox" name="review_grounds" value="misconduct" style="width: auto;"> Misconduct by arbitrator (LRA s145(2)(b))
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                  <input type="checkbox" name="review_grounds" value="irregular" style="width: auto;"> Grossly irregular procedure (LRA s145(2)(c))
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                  <input type="checkbox" name="review_grounds" value="evidence_error" style="width: auto;"> Evidence improperly handled (LRA s145(2)(d))
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                  <input type="checkbox" name="review_grounds" value="bias" style="width: auto;"> Apparent bias (LRA s145(2)(e))
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                  <input type="checkbox" name="review_grounds" value="not_sure" style="width: auto;"> Not sure — help me identify
+                </label>
+              </div>
+            </div>
+
+            <div class="adv-form-group">
+              <label>Describe what happened at arbitration <span class="required">*</span></label>
+              <textarea class="adv-textarea" name="hearing_description" rows="5" placeholder="Describe the arbitration hearing in detail: What did the employer say? What evidence did they present? Were you allowed to present all your evidence? Did the arbitrator make any comments that suggested bias? Were there procedural irregularities? Be as detailed as possible." required></textarea>
+            </div>
+
+            <div class="adv-form-group">
+              <label>Relief Sought <span class="required">*</span></label>
+              <select class="adv-select" name="relief_sought" required>
+                <option value="">Select relief...</option>
+                <option value="set_aside">Set aside award and remit for rehearing</option>
+                <option value="substitute">Substitute the arbitrator's decision with my own</option>
+                <option value="amend">Amend the award</option>
+                <option value="costs">Set aside + costs against respondent</option>
+              </select>
+            </div>
+
+            <div class="adv-form-group">
+              <label>Do you have the arbitration record?</label>
+              <select class="adv-select" name="has_record">
+                <option value="no">No — I need to request it</option>
+                <option value="yes">Yes — I have a copy</option>
+                <option value="pending">I have requested it, waiting for CCMA</option>
+              </select>
+            </div>
+          </form>
+
+          <div id="document-preview" style="display: none; margin-top: 1.5rem;">
+            <div class="adv-card" style="border-left: 4px solid var(--accent);">
+              <div class="adv-card__header">
+                <h3 class="adv-card__title">Draft Review Application</h3>
+              </div>
+              <div class="adv-card__body" id="review-doc-content" style="font-family: var(--font-body); line-height: 1.8; max-height: 400px; overflow-y: auto;">
+                <!-- Populated by JS -->
+              </div>
+              <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                <button class="adv-btn adv-btn--primary" type="button" onclick="copyToClipboard('review-doc-content')">Copy to Clipboard</button>
+                <button class="adv-btn adv-btn--secondary" type="button">Download as Document</button>
+              </div>
+            </div>
+
+            <div class="adv-card adv-mt-2" style="border-left: 4px solid var(--primary);">
+              <div class="adv-card__header">
+                <h3 class="adv-card__title">Draft Founding Affidavit</h3>
+              </div>
+              <div class="adv-card__body" id="affidavit-doc-content" style="font-family: var(--font-body); line-height: 1.8; max-height: 400px; overflow-y: auto;">
+                <!-- Populated by JS -->
+              </div>
+              <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                <button class="adv-btn adv-btn--primary" type="button" onclick="copyToClipboard('affidavit-doc-content')">Copy to Clipboard</button>
+                <button class="adv-btn adv-btn--secondary" type="button">Download as Document</button>
+              </div>
+            </div>
+
+            <div class="adv-card adv-mt-2" style="border-left: 4px solid var(--success);">
+              <div class="adv-card__header">
+                <h3 class="adv-card__title">Request for Arbitration Record</h3>
+              </div>
+              <div class="adv-card__body" id="record-request-content" style="font-family: var(--font-body); line-height: 1.8;">
+                <!-- Populated by JS -->
+              </div>
+              <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                <button class="adv-btn adv-btn--primary" type="button" onclick="copyToClipboard('record-request-content')">Copy to Clipboard</button>
+                <button class="adv-btn adv-btn--secondary" type="button">Download as Document</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="adv-btn adv-btn--accent adv-btn--block" id="generate-docs-btn" type="button">
+            Generate My Review Documents
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- PREP: Court Online Guide -->
+      <section class="adv-mt-3" aria-label="Court Online guidance">
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>How to Register on Court Online</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <ol style="margin-left: 1.25rem; color: var(--text-body);">
+              <li>Visit <a href="https://courtonline.co.za" target="_blank" rel="noopener">courtonline.co.za</a></li>
+              <li>Click "Register" and select "Individual"</li>
+              <li>Enter your ID number and personal details</li>
+              <li>Upload a certified copy of your ID</li>
+              <li>Verify your email address (click the link sent to you)</li>
+              <li>Wait for verification (usually 24-48 hours)</li>
+              <li>Once verified, log in and select "Labour Court"</li>
+              <li>Click "File New Case" and follow the prompts</li>
+            </ol>
+            <div class="adv-alert adv-alert--warning adv-alert--minimal" style="margin-top: 1rem;">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">Important</div>
+                Court Online verification can take 24-48 hours. If your 6-week deadline is approaching, register immediately. Do not wait until the last day.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>Understanding LRA Section 145 Review Grounds</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <p>Section 145 of the Labour Relations Act limits review to five specific grounds. The Labour Court <strong>cannot</strong> simply rehear the case or substitute its own decision based on what it thinks is "fair."</p>
+            <ul style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
+              <li><strong>(a) Exceeded powers:</strong> The arbitrator decided something they had no authority to decide</li>
+              <li><strong>(b) Misconduct:</strong> The arbitrator behaved improperly (e.g., accepted bribes, was intoxicated)</li>
+              <li><strong>(c) Gross irregularity:</strong> The procedure was so flawed it compromised fairness (e.g., refused to hear evidence, prevented cross-examination)</li>
+              <li><strong>(d) Evidence error:</strong> The arbitrator improperly admitted or excluded critical evidence</li>
+              <li><strong>(e) Apparent bias:</strong> A reasonable observer would think the arbitrator was biased (e.g., personal relationship with a party, pre-judgment comments)</li>
+            </ul>
+            <div class="adv-alert adv-alert--info adv-alert--minimal">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">Note</div>
+                "The arbitrator got the facts wrong" or "I disagree with the outcome" are <strong>not</strong> valid review grounds. The Labour Court only reviews the <em>process</em>, not the <em>merits</em>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>Filing Fees and Costs</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 0.5rem;">Dispute under R50,000</td>
+                <td style="padding: 0.5rem; font-weight: 600;">R0</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 0.5rem;">R50,001 — R100,000</td>
+                <td style="padding: 0.5rem; font-weight: 600;">R500</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 0.5rem;">R100,001 — R200,000</td>
+                <td style="padding: 0.5rem; font-weight: 600;">R1,000</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 0.5rem;">R200,001 — R500,000</td>
+                <td style="padding: 0.5rem; font-weight: 600;">R2,000</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.5rem;">Over R500,000</td>
+                <td style="padding: 0.5rem; font-weight: 600;">R3,000</td>
+              </tr>
+            </table>
+            <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.85rem; color: var(--text-muted);">Payment is made online via Court Online using credit card or EFT. Keep the receipt.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">6-Week Countdown</h3>
+        <div id="sidebar-countdown">
+          <div class="adv-deadline">
+            <div class="adv-deadline__label">Enter service date above</div>
+            <div class="adv-deadline__date">—</div>
+          </div>
         </div>
       </div>
-      <div class="section-34 mt-2">
-        <strong>Section 34 — Access to Justice</strong><br>
-        The right to a fair hearing includes the right to challenge decisions that are unlawful or procedurally unfair. The review mechanism exists to protect that right.
-      </div>
-    </div>
-  </div>
 
-  <!-- Grounds of Review -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#fef3cd;color:#856404;">⚖️</span>
-      Grounds of Review (Section 145 LRA)
-    </div>
-    <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">
-      These are the legal grounds on which a CCMA award may be challenged in the Labour Court. 
-      <strong>Advome provides these categories for information only. We do not assess whether your specific award falls into any category.</strong>
-    </p>
-    <div class="grid-3">
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title">Misconduct</div>
-        <p style="font-size:13px;color:var(--text-muted);">Something improper happened in the arbitration process — bias, conflict of interest, or procedural violation.</p>
-        <div class="mt-2"><span class="pill pill-neutral">Information only</span></div>
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Court Online Checklist</h3>
+        <ul class="adv-checklist" data-checklist-id="court_online_prep">
+          <li class="adv-checklist__item" data-item-id="register"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Registered on Court Online</div></div></li>
+          <li class="adv-checklist__item" data-item-id="verify"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Identity verified (24-48 hour wait)</div></div></li>
+          <li class="adv-checklist__item" data-item-id="documents"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">All documents prepared and reviewed</div></div></li>
+          <li class="adv-checklist__item" data-item-id="award"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Arbitration award scanned (PDF)</div></div></li>
+          <li class="adv-checklist__item" data-item-id="proof"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Proof of service attached</div></div></li>
+          <li class="adv-checklist__item" data-item-id="fee"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Filing fee paid</div></div></li>
+        </ul>
       </div>
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title">Gross Irregularity</div>
-        <p style="font-size:13px;color:var(--text-muted);">The hearing procedure was fundamentally unfair — evidence excluded, no right to reply, or commissioner overstepped.</p>
-        <div class="mt-2"><span class="pill pill-neutral">Information only</span></div>
-      </div>
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title">Excess of Powers</div>
-        <p style="font-size:13px;color:var(--text-muted);">The commissioner made a decision they had no legal authority to make, or ignored binding precedent.</p>
-        <div class="mt-2"><span class="pill pill-neutral">Information only</span></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Legislation Reference -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📚</span>
-      Relevant Legislation
-    </div>
-    <div class="legal-card">
-      <div class="legal-card-header">
-        <span class="legal-card-title">Labour Relations Act 66 of 1995</span>
-        <span class="legal-card-citation">Section 145</span>
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="review_help">
+        <h3 class="adv-sidebar__widget-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </h3>
+        <div class="adv-chat__messages" role="log" aria-live="polite">
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about Court Online, LRA s145 grounds, review procedures, or case law.</div>
+        </div>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
+          <button class="adv-chat__send" aria-label="Send message">Send</button>
+        </div>
       </div>
-      <div class="legal-card-text">
-        Provides for the review of arbitration awards by the Labour Court on grounds of misconduct, gross irregularity, or excess of powers. 
-        The application must be lodged within 6 weeks of the award being served.
-      </div>
-      <div class="legal-card-tags">
-        <span class="pill pill-blue">Primary Legislation</span>
-        <span class="pill pill-neutral">Labour Court</span>
-      </div>
-    </div>
-    <div class="legal-card">
-      <div class="legal-card-header">
-        <span class="legal-card-title">Labour Court Rules</span>
-        <span class="legal-card-citation">Rule 37</span>
-      </div>
-      <div class="legal-card-text">
-        Governs the preparation, pagination, indexing, and filing of the review record. Rule 37(12) deals with necessary portions vs complete record. Rule 37(13) governs Court Online upload.
-      </div>
-      <div class="legal-card-tags">
-        <span class="pill pill-blue">Court Rules</span>
-        <span class="pill pill-neutral">Procedure</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- Evidence Centre -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📎</span>
-      Evidence Centre
-    </div>
-    <div class="checklist">
-      <div class="checklist-item">
-        <div class="checklist-box checked"></div>
-        <div class="checklist-text done">Award copy uploaded</div>
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="award.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Award
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="motion.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            Next: Motion for Leave
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="https://courtonline.co.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Court Online Portal
+          </a>
+        </div>
+        <div>
+          <a href="record.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Request Arbitration Record
+          </a>
+        </div>
       </div>
-      <div class="checklist-item">
-        <div class="checklist-box"></div>
-        <div class="checklist-text">Written reasons or explanation</div>
-      </div>
-      <div class="checklist-item">
-        <div class="checklist-box"></div>
-        <div class="checklist-text">Audio recording or hearing notes</div>
-      </div>
-      <div class="checklist-item">
-        <div class="checklist-box"></div>
-        <div class="checklist-text">Transcript requested from CCMA</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Next Step — THE CRITICAL LINK -->
-  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
-    <div class="card-title">
-      <span class="icon" style="background:var(--primary);color:white;">🚀</span>
-      Next Step: Launch the Review Application
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Fee Estimate</h3>
+        <div class="adv-fee-meter">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Saved so far</span>
+          <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 75%;"></div></div>
+          <span class="adv-fee-meter__amount">R30,000</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 0;">Attorney estimate for Labour Court review: R30,000 — R60,000</p>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- BOTTOM ZONE -->
+  <div class="adv-bottom-zone">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div class="adv-fee-meter" style="flex: 1; max-width: 400px;">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Saved vs attorney</span>
+        <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 75%;"></div></div>
+        <span class="adv-fee-meter__amount">R30,000</span>
+      </div>
+      <div class="adv-savings adv-savings--small">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        You've saved <span class="adv-savings__amount">R30,000</span> vs. attorney fees
+      </div>
     </div>
-    <p style="font-size:14px;color:var(--text);margin-bottom:16px;">
-      Once you have identified your grounds and gathered initial evidence, the next legal step is to file the <strong>Notice of Motion and Founding Affidavit</strong> in the Labour Court. This formally commences the Section 145 review.
-    </p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="motion.html" class="btn btn-primary btn-lg">
-        Proceed to Motion & Founding Affidavit →
+
+    <div class="adv-compliance" role="contentinfo">
+      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
+    </div>
+
+    <nav class="adv-nav-footer" aria-label="Page navigation">
+      <a href="award.html" class="adv-nav-footer__prev">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back: The Award
       </a>
-      <a href="award.html" class="btn btn-secondary btn-lg">
-        ← Back to Award
+      <a href="motion.html" class="adv-nav-footer__next">
+        Next: Motion for Leave
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="attorney.html" class="btn btn-outline btn-lg">
-        👔 Find an Attorney
-      </a>
-    </div>
+    </nav>
   </div>
 
-  <!-- Questions -->
-  <div class="questions-panel">
-    <h3>Review Questions</h3>
-    <div class="question-item">
-      <div class="question-q">What happened in the award?</div>
-      <div class="question-a">Summarise the result in plain language: compensation, reinstatement, dismissal upheld, or partial relief.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">Do you want to challenge it?</div>
-      <div class="question-a">If the answer is no, return to the Award page and accept. If yes, identify your grounds and proceed to motion. Consult an attorney if unsure.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">What documents are missing?</div>
-      <div class="question-a">Flag the record, reasons, and dates. The motion page will track these as you progress.</div>
-    </div>
-  </div>
+  <!-- FOOTER -->
+  <footer class="adv-footer" role="contentinfo">
+    <p style="margin-bottom: 0.5rem;">
+      <a href="index.html">Home</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Attorneys</a>
+    </p>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
+    </p>
+  </footer>
 
-  <div class="disclaimer">
-    <strong>Disclaimer</strong>
-    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. Users remain responsible for complying with the Labour Relations Act, Labour Court Rules, and CCMA directives. 
-    <strong>Consult an attorney if you are unsure whether to challenge your award.</strong>
-    <div class="access-message">
-      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
-    </div>
-  </div>
+  <script src="shared-scripts.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 6-week countdown
+    var serviceDate = document.getElementById('service-date');
+    var countdownDisplay = document.getElementById('countdown-display');
+    var deadlineStatus = document.getElementById('deadline-status');
+    var sidebarCountdown = document.getElementById('sidebar-countdown');
 
-</div>
+    function updateCountdown() {
+      var dateVal = serviceDate ? serviceDate.value : '';
+      if (!dateVal) {
+        if (countdownDisplay) countdownDisplay.textContent = 'Select a date to see your deadline';
+        if (deadlineStatus) { deadlineStatus.textContent = 'Enter date above'; deadlineStatus.style.background = '#718096'; }
+        if (sidebarCountdown) sidebarCountdown.innerHTML = '<div class="adv-deadline"><div class="adv-deadline__label">Enter service date above</div><div class="adv-deadline__date">—</div></div>';
+        return;
+      }
 
+      var start = new Date(dateVal + 'T00:00:00');
+      var deadline = new Date(start);
+      deadline.setDate(deadline.getDate() + 42);
+
+      var today = new Date();
+      today.setHours(0,0,0,0);
+      var remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+      var fmt = function(d) { return d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }); };
+
+      var statusText, statusBg;
+      if (remaining < 0) { statusText = 'DEADLINE EXPIRED'; statusBg = '#c53030'; }
+      else if (remaining <= 7) { statusText = 'CRITICAL: ' + remaining + ' days left'; statusBg = '#c53030'; }
+      else if (remaining <= 14) { statusText = remaining + ' days left — Urgent'; statusBg = '#d69e2e'; }
+      else { statusText = remaining + ' days remaining'; statusBg = '#38a169'; }
+
+      if (countdownDisplay) countdownDisplay.textContent = fmt(deadline);
+      if (deadlineStatus) { deadlineStatus.textContent = statusText; deadlineStatus.style.background = statusBg; }
+
+      var sidebarStatus = remaining < 0 ? 'adv-deadline__urgent' : remaining <= 7 ? 'adv-deadline__urgent' : 'adv-deadline__safe';
+      var sidebarText = remaining < 0 ? 'EXPIRED' : remaining <= 7 ? 'URGENT' : 'ON TRACK';
+      if (sidebarCountdown) sidebarCountdown.innerHTML = '<div class="adv-deadline"><div class="adv-deadline__label">File by: ' + fmt(deadline) + '</div><div class="adv-deadline__date">' + (remaining > 0 ? remaining + ' days left' : 'Expired') + '</div><span class="' + sidebarStatus + '">' + sidebarText + '</span></div>';
+
+      try { localStorage.setItem('advome_review_service_date', dateVal); } catch(e) {}
+    }
+
+    if (serviceDate) {
+      serviceDate.addEventListener('change', updateCountdown);
+      serviceDate.addEventListener('input', updateCountdown);
+      try {
+        var saved = localStorage.getItem('advome_review_service_date');
+        if (saved) { serviceDate.value = saved; updateCountdown(); }
+      } catch(e) {}
+    }
+
+    // Document generator
+    var generateBtn = document.getElementById('generate-docs-btn');
+    if (generateBtn) {
+      generateBtn.addEventListener('click', function() {
+        var form = document.getElementById('review-form');
+        if (!form) return;
+
+        var name = form.querySelector('[name="applicant_name"]')?.value?.trim() || '';
+        var caseNum = form.querySelector('[name="case_number"]')?.value?.trim() || '';
+        var awardDate = form.querySelector('[name="award_date"]')?.value || '';
+        var serviceDate = form.querySelector('[name="service_date"]')?.value || '';
+        var description = form.querySelector('[name="hearing_description"]')?.value?.trim() || '';
+        var relief = form.querySelector('[name="relief_sought"]')?.value || '';
+        var grounds = Array.from(form.querySelectorAll('[name="review_grounds"]:checked')).map(function(cb) { return cb.value; });
+
+        if (!name || !caseNum || !description || !relief) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        var groundsMap = {
+          'exceeded_powers': 'The arbitrator exceeded their powers in terms of LRA s145(2)(a)',
+          'misconduct': 'The arbitrator committed misconduct in terms of LRA s145(2)(b)',
+          'irregular': 'The arbitrator committed a grossly irregular procedural error in terms of LRA s145(2)(c)',
+          'evidence_error': 'The arbitrator improperly admitted or excluded evidence in terms of LRA s145(2)(d)',
+          'bias': 'The arbitrator displayed apparent bias in terms of LRA s145(2)(e)'
+        };
+
+        var groundsText = grounds.map(function(g) { return groundsMap[g] || ''; }).filter(Boolean).join('; ');
+        if (!groundsText) groundsText = 'The arbitrator committed irregularities falling within LRA s145(2)';
+
+        var reliefMap = {
+          'set_aside': 'That the arbitration award be reviewed and set aside, and the matter remitted for rehearing before a different arbitrator',
+          'substitute': 'That the Court substitute its own decision for that of the arbitrator',
+          'amend': 'That the Court amend the arbitration award',
+          'costs': 'That the arbitration award be set aside, the matter remitted for rehearing, and costs awarded against the respondent'
+        };
+
+        var today = new Date().toLocaleDateString('en-ZA');
+
+        // Review Application
+        var reviewContent = document.getElementById('review-doc-content');
+        if (reviewContent) {
+          reviewContent.innerHTML = '<p><strong>IN THE LABOUR COURT OF SOUTH AFRICA</strong></p><p><strong>HELD AT JOHANNESBURG</strong></p><p style="margin-bottom: 1.5rem;"><strong>Case No:</strong> [To be assigned by Court Online]</p><p><strong>REVIEW APPLICATION</strong></p><p>In terms of Section 145 of the Labour Relations Act 66 of 1995</p><p style="margin-bottom: 1rem;"><strong>APPLICANT:</strong> ' + name + '</p><p style="margin-bottom: 1rem;"><strong>RESPONDENT:</strong> [Employer Name]</p><p><strong>SECOND RESPONDENT:</strong> The Commission for Conciliation, Mediation and Arbitration (CCMA)</p><p><strong>1. INTRODUCTION</strong></p><p>The applicant hereby applies for the review and setting aside of the arbitration award issued by the CCMA in Case No ' + caseNum + ' on ' + awardDate + '.</p><p><strong>2. GROUNDS FOR REVIEW</strong></p><p>The applicant submits that: ' + groundsText + '.</p><p><strong>3. FACTUAL BACKGROUND</strong></p><p>' + description.replace(/
+/g, '<br>') + '</p><p><strong>4. RELIEF SOUGHT</strong></p><p>' + (reliefMap[relief] || 'Appropriate relief') + '.</p><p><strong>5. URGENCY</strong></p><p>This application is filed within the 6-week period prescribed by LRA s145. The applicant respectfully requests an expedited hearing.</p><p style="margin-top: 2rem;">_________________________<br>' + name + '<br>Applicant<br>Date: ' + today + '</p>';
+        }
+
+        // Founding Affidavit
+        var affidavitContent = document.getElementById('affidavit-doc-content');
+        if (affidavitContent) {
+          affidavitContent.innerHTML = '<p><strong>FOUNDING AFFIDAVIT</strong></p><p>I, the undersigned ' + name + ', do hereby make oath and state:</p><p><strong>1. INTRODUCTION AND CAPACITY</strong></p><p>I am the applicant in this matter. I was employed by [Employer Name] and referred a dispute to the CCMA. The matter was arbitrated and an award was issued on ' + awardDate + '.</p><p><strong>2. FACTUAL BACKGROUND</strong></p><p>' + description.replace(/
+/g, '<br>') + '</p><p><strong>3. LEGAL GROUNDS</strong></p><p>The applicant submits that the arbitrator's award is reviewable on the following grounds: ' + groundsText + '.</p><p><strong>4. RELIEF SOUGHT</strong></p><p>' + (reliefMap[relief] || 'Appropriate relief') + '.</p><p><strong>5. VERIFICATION</strong></p><p>I verify that the contents of this affidavit are true and correct to the best of my knowledge and belief.</p><p style="margin-top: 2rem;">_________________________<br>' + name + '<br>Date: ' + today + '<br>At: [City]</p>';
+        }
+
+        // Record Request
+        var recordContent = document.getElementById('record-request-content');
+        if (recordContent) {
+          recordContent.innerHTML = '<p><strong>REQUEST FOR ARBITRATION RECORD</strong></p><p><strong>To:</strong> The Regional Director, CCMA [Office]</p><p><strong>From:</strong> ' + name + '</p><p><strong>Date:</strong> ' + today + '</p><p><strong>Re:</strong> Request for audio recording of arbitration hearing — Case No ' + caseNum + '</p><p>I hereby request a copy of the audio recording of the arbitration hearing held in the above matter. In terms of LRA s142, I am entitled to request the record of proceedings.</p><p>Please provide the recording in electronic format (MP3 or CD) at your earliest convenience.</p><p style="margin-top: 2rem;">Yours faithfully,</p><p>_________________________<br>' + name + '<br>Contact: [Phone/Email]</p>';
+        }
+
+        var preview = document.getElementById('document-preview');
+        if (preview) {
+          preview.style.display = 'block';
+          preview.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        alert('Documents generated — please review and edit before uploading to Court Online');
+      });
+    }
+
+    // Copy to clipboard helper
+    window.copyToClipboard = function(elementId) {
+      var el = document.getElementById(elementId);
+      if (!el) return;
+      var text = el.innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        alert('Copied to clipboard');
+      }).catch(function() {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('Copied to clipboard');
+      });
+    };
+  });
+  </script>
 </body>
 </html>
