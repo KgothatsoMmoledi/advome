@@ -1,926 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arbitration Preparation | Advome</title>
-<meta name="description" content="Step-by-step guide to preparing for your in-person CCMA arbitration hearing.">
-<link rel="stylesheet" href="shared-styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root {
-    --primary: #1a365d; --primary-light: #2c5282; --primary-dark: #0f2744;
-    --secondary: #2d6a4f; --secondary-light: #40916c;
-    --accent: #c9a227; --accent-light: #e9c46a;
-    --danger: #c53030; --danger-light: #fc8181; --danger-bg: #fef2f2;
-    --warning: #d69e2e; --warning-light: #fef3cd; --warning-bg: #fffbeb;
-    --success: #38a169; --success-light: #9ae6b4; --success-bg: #e6f4ea;
-    --info: #3182ce; --info-light: #90cdf4; --info-bg: #eff6ff;
-    --text: #1a202c; --text-secondary: #4a5568; --text-muted: #718096;
-    --border: #e2e8f0; --border-medium: #cbd5e0;
-    --bg: #f7fafc; --bg-white: #ffffff;
-    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
-    --radius: 8px; --radius-lg: 12px; --radius-xl: 16px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
-h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prepare for your CCMA arbitration hearing. Build your evidence bundle, manage witnesses, and get day-of hearing guidance.">
+  <title>Prepare for Arbitration | CCMA | Advome</title>
 
-.site-header {
-    background: var(--bg-white); border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow);
-}
-.header-inner {
-    max-width: 1200px; margin: 0 auto; padding: 0 24px;
-    display: flex; align-items: center; justify-content: space-between; height: 72px;
-}
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand-mark {
-    width: 44px; height: 44px; background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    color: white; border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 20px;
-}
-.brand-text { font-size: 22px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
-.brand-sub { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; }
-.main-nav { display: flex; align-items: center; gap: 4px; }
-.nav-link {
-    padding: 8px 16px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
-    color: var(--text-secondary); text-decoration: none; transition: all 0.2s; white-space: nowrap;
-}
-.nav-link:hover { background: var(--bg); color: var(--primary); }
-.nav-link.active { background: var(--primary); color: white; }
-.nav-premium {
-    background: var(--accent); color: var(--primary-dark) !important; font-weight: 600;
-    padding: 8px 20px; border-radius: 999px; margin-left: 8px;
-}
-.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; font-size: 20px; }
-@media (max-width: 1024px) {
-    .main-nav { display: none; position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-white); flex-direction: column; padding: 16px; box-shadow: var(--shadow-lg); border-top: 1px solid var(--border); }
-    .main-nav.open { display: flex; }
-    .mobile-menu-btn { display: block; }
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-.timeline-container {
-    background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 24px 0;
-    position: sticky; top: 72px; z-index: 100; box-shadow: var(--shadow);
-}
-.timeline-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.timeline { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding: 8px 0; }
-.timeline-step {
-    display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
-    font-size: 13px; font-weight: 600; white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
-}
-.timeline-step .num {
-    width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700;
-}
-.timeline-step.completed { background: var(--success-light); color: var(--success); }
-.timeline-step.completed .num { background: var(--success); color: white; }
-.timeline-step.active { background: var(--primary); color: white; box-shadow: var(--shadow); }
-.timeline-step.active .num { background: white; color: var(--primary); }
-.timeline-step.pending { background: var(--bg); color: var(--text-muted); }
-.timeline-step.pending .num { background: var(--border-medium); color: var(--text-muted); }
-.timeline-arrow { color: var(--text-muted); font-size: 14px; flex-shrink: 0; }
-
-.hero {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-    color: white; padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden;
-}
-.hero::before {
-    content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px;
-    background: rgba(255,255,255,0.03); border-radius: 50%;
-}
-.hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-.in-person-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem;
-    border-radius: 50px; font-weight: 600; font-size: 0.875rem; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1.5rem;
-}
-.in-person-badge i { color: #fbbf24; }
-.hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
-.hero-subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 300; }
-
-.main-content { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
-
-.card {
-    background: var(--bg-white); border-radius: var(--radius-xl); padding: 2.5rem;
-    margin-bottom: 2rem; box-shadow: var(--shadow); border: 1px solid var(--border);
-    opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s ease forwards;
-}
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
-.card:nth-child(7) { animation-delay: 0.7s; }
-.card:nth-child(8) { animation-delay: 0.8s; }
-@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-
-.card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
-.card-icon {
-    width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
-    color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    font-size: 1.25rem; flex-shrink: 0;
-}
-.card h2 { font-size: 1.75rem; color: var(--primary-dark); }
-.card h3 { font-size: 1.25rem; color: var(--primary-dark); margin: 1.5rem 0 1rem; }
-
-.warning-box {
-    background: var(--warning-bg); border-left: 4px solid var(--warning); padding: 1.25rem;
-    border-radius: 0 8px 8px 0; margin: 1.5rem 0; display: flex; gap: 1rem;
-}
-.warning-box.danger { background: var(--danger-bg); border-left-color: var(--danger); }
-.warning-box.success { background: var(--success-bg); border-left-color: var(--success); }
-.warning-box.info { background: var(--info-bg); border-left-color: var(--info); }
-.warning-icon { font-size: 1.25rem; color: var(--warning); flex-shrink: 0; margin-top: 2px; }
-.warning-box.danger .warning-icon { color: var(--danger); }
-.warning-box.success .warning-icon { color: var(--success); }
-.warning-box.info .warning-icon { color: var(--info); }
-.warning-content h4 { font-family: 'Inter', sans-serif; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
-.warning-content p { font-size: 0.875rem; color: var(--text-secondary); margin: 0; }
-
-.checklist { list-style: none; margin: 1.5rem 0; }
-.checklist li {
-    display: flex; align-items: flex-start; gap: 1rem; padding: 1rem;
-    background: var(--bg); border-radius: 8px; margin-bottom: 0.75rem;
-    transition: all 0.2s ease; cursor: pointer;
-}
-.checklist li:hover { background: #e0e7ff; transform: translateX(4px); }
-.checklist li input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
-.checklist-text { flex: 1; }
-.checklist-text strong { display: block; color: var(--text); margin-bottom: 0.25rem; }
-.checklist-text span { font-size: 0.875rem; color: var(--text-muted); }
-
-.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
-.info-card {
-    background: var(--bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border);
-    transition: all 0.3s ease;
-}
-.info-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--info); }
-.info-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-.info-card p { font-size: 0.875rem; color: var(--text-secondary); }
-
-.process-steps { display: flex; flex-direction: column; gap: 1.5rem; margin: 1.5rem 0; }
-.process-step { display: flex; gap: 1.5rem; position: relative; }
-.process-step:not(:last-child)::before {
-    content: ''; position: absolute; left: 20px; top: 48px; width: 2px;
-    height: calc(100% + 1.5rem); background: var(--border);
-}
-.step-badge {
-    width: 40px; height: 40px; background: var(--primary); color: white;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 0.875rem; flex-shrink: 0; z-index: 1;
-}
-.step-content { flex: 1; background: var(--bg); padding: 1.25rem; border-radius: 12px; }
-.step-content h4 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
-.step-content p { font-size: 0.875rem; color: var(--text-secondary); }
-
-.tooltip { position: relative; display: inline-block; border-bottom: 1px dashed var(--primary); cursor: help; color: var(--primary); }
-.tooltip .tooltiptext {
-    visibility: hidden; width: 250px; background-color: var(--text); color: white;
-    text-align: left; border-radius: 8px; padding: 0.75rem; position: absolute;
-    z-index: 10; bottom: 125%; left: 50%; margin-left: -125px; font-size: 0.875rem;
-    line-height: 1.4; opacity: 0; transition: opacity 0.3s;
-}
-.tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
-
-.calculator-container {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
-    border-radius: 16px; padding: 2rem; margin: 1.5rem 0;
-}
-.calculator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-.calc-input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-.calc-input-group label { font-size: 0.875rem; font-weight: 600; color: var(--text); }
-.calc-input-group input { padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: 'Inter', sans-serif; }
-.calc-input-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,54,93,0.1); }
-.calc-result {
-    background: var(--bg-white); border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: var(--shadow);
-}
-.calc-result h3 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-.calc-result .amount { font-size: 2.5rem; font-weight: 700; color: var(--primary); font-family: 'Playfair Display', serif; }
-
-.attorney-cta {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white; border-radius: 16px; padding: 2rem; text-align: center; margin: 2rem 0;
-}
-.attorney-cta h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-.attorney-cta p { opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-.btn {
-    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;
-    border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;
-    border: none; cursor: pointer; font-size: 1rem; font-family: 'Inter', sans-serif;
-}
-.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn-primary { background: var(--bg-white); color: var(--primary); }
-.btn-primary:hover { background: var(--bg); }
-.btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
-.btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
-.btn-secondary:hover { background: var(--border); }
-.btn-lg { padding: 1rem 2.5rem; font-size: 1.1rem; }
-
-.page-navigation {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border);
-}
-.nav-link-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: all 0.2s ease; }
-.nav-link-btn:hover { color: var(--primary-dark); transform: translateX(4px); }
-.nav-link-btn.prev:hover { transform: translateX(-4px); }
-
-.disclaimer {
-    background: var(--bg); border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
-    font-size: 0.875rem; color: var(--text-muted); border: 1px solid var(--border);
-}
-.disclaimer strong { color: var(--text); display: block; margin-bottom: 0.5rem; }
-
-.chat-widget { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; }
-.chat-button {
-    width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: white; border-radius: 50%; border: none; cursor: pointer; box-shadow: var(--shadow-lg);
-    display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.3s ease;
-}
-.chat-button:hover { transform: scale(1.1) rotate(10deg); }
-.chat-panel {
-    position: absolute; bottom: 80px; right: 0; width: 350px; height: 500px;
-    background: var(--bg-white); border-radius: 16px; box-shadow: var(--shadow-lg);
-    display: none; flex-direction: column; overflow: hidden; border: 1px solid var(--border);
-}
-.chat-panel.active { display: flex; }
-.chat-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
-}
-.chat-header h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; }
-.chat-close { background: none; border: none; color: white; cursor: pointer; font-size: 1.25rem; }
-.chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-.chat-message { max-width: 80%; padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.875rem; line-height: 1.5; }
-.chat-message.bot { background: var(--bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
-.chat-message.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-.chat-input-area { padding: 1rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; }
-.chat-input { flex: 1; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; }
-.chat-input:focus { outline: none; border-color: var(--primary); }
-.chat-send { background: var(--primary); color: white; border: none; border-radius: 8px; padding: 0.75rem 1rem; cursor: pointer; transition: all 0.2s ease; }
-.chat-send:hover { background: var(--primary-dark); }
-
-.conarb-notice {
-    background: linear-gradient(135deg, var(--danger-bg) 0%, #fff5f5 100%);
-    border: 2px solid var(--danger); border-radius: 16px; padding: 2rem; margin: 2rem 0; text-align: center;
-}
-.conarb-notice h3 { color: var(--danger); font-size: 1.5rem; margin-bottom: 1rem; }
-.conarb-notice p { color: var(--text); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-.recording-tip {
-    background: var(--info-bg); border: 1px solid var(--info-light); border-radius: 12px;
-    padding: 1.5rem; margin: 1.5rem 0; display: flex; gap: 1rem; align-items: flex-start;
-}
-.recording-tip i { color: var(--info); font-size: 1.5rem; flex-shrink: 0; }
-
-.savings-calculator {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-    color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;
-}
-.savings-calculator h2 { margin: 0 0 1rem 0; font-size: 1.3rem; display: flex; align-items: center; gap: 0.75rem; }
-.savings-calculator .calc-row {
-    display: flex; justify-content: space-between; padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.2); font-size: 0.95rem;
-}
-.savings-calculator .calc-row.total { font-size: 1.1rem; font-weight: 700; border-bottom: none; padding-top: 1rem; }
-.savings-calculator .calc-row .amount { font-weight: 600; }
-.savings-calculator .savings-highlight {
-    background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 8px;
-    margin-top: 1rem; text-align: center; font-size: 1.1rem;
-}
-.savings-calculator .savings-highlight strong { color: var(--accent-light); font-size: 1.3rem; }
-
-@media (max-width: 768px) {
-    .hero h1 { font-size: 2rem; }
-    .card { padding: 1.5rem; }
-    .timeline { overflow-x: auto; padding-bottom: 0.5rem; }
-    .chat-panel { width: calc(100vw - 2rem); right: -1rem; }
-    .page-navigation { flex-direction: column; gap: 1rem; text-align: center; }
-    .calculator-grid { grid-template-columns: 1fr; }
-}
-</style>
+  <link rel="stylesheet" href="shared-styles.css">
+<base target="_blank">
 </head>
 <body>
 
-<!-- Header -->
-<header class="site-header">
-    <div class="header-inner">
-        <a href="index.html" class="brand">
-            <div class="brand-mark">A</div>
-            <div>
-                <div class="brand-text">Advome</div>
-                <div class="brand-sub">Self-representation assistance</div>
-            </div>
-        </a>
-        <nav class="main-nav" id="mainNav">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="start.html" class="nav-link">Start</a>
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="ccma.html" class="nav-link">CCMA</a>
-            <a href="divorce.html" class="nav-link">Divorce</a>
-            <a href="estates-hub.html" class="nav-link">Estates</a>
-            <a href="attorney.html" class="nav-link">Attorney</a>
-            <a href="pricing.html" class="nav-premium">Pricing</a>
-        </nav>
-        <button class="mobile-menu-btn" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+  <!-- HEADER -->
+  <header class="adv-header" role="banner">
+    <a href="index.html" class="adv-header__logo" aria-label="Advome Home">
+      Ad<span>vome</span>
+    </a>
+    <nav class="adv-header__nav" role="navigation" aria-label="Main navigation">
+      <a href="ccma.html" style="color: white; font-weight: 700;">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Find Attorney</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar" aria-label="User profile">U</div>
+      <span>My Cases</span>
     </div>
-</header>
+    <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </header>
 
-<!-- Timeline -->
-<div class="timeline-container">
-    <div class="timeline-inner">
-        <div class="timeline">
-            <div class="timeline-step completed"><span class="num">1</span>CCMA Entry</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step completed"><span class="num">2</span>Referral</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step completed"><span class="num">3</span>Conciliation</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step active"><span class="num">4</span>Arbitration</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step pending"><span class="num">5</span>Award</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step pending"><span class="num">6</span>Review</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step pending"><span class="num">7</span>Labour Court</div>
-            <div class="timeline-arrow">→</div>
-            <div class="timeline-step pending"><span class="num">8</span>Finalisation</div>
-        </div>
+  <!-- PROGRESS BAR -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="arbitration" role="navigation" aria-label="Workflow progress"></div>
+
+  <!-- HERO -->
+  <section class="adv-hero" aria-labelledby="page-title">
+    <div class="adv-hero__content">
+      <h1 id="page-title">Prepare for Arbitration</h1>
+      <p>Build your evidence bundle and prepare for your formal CCMA hearing</p>
     </div>
-</div>
-
-<!-- Hero -->
-<section class="hero">
-    <div class="hero-content">
-        <div class="in-person-badge"><i class="fas fa-building"></i><span>IN-PERSON HEARING AT CCMA OFFICES</span></div>
-        <h1>Prepare for Your Arbitration</h1>
-        <p class="hero-subtitle">Conciliation failed. You have a Certificate of Non-Resolution. Now you face a formal hearing where a commissioner will decide your case. This is the most important stage.</p>
+    <div class="adv-hero__badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Formal Hearing
     </div>
-</section>
+  </section>
 
-<!-- Main Content -->
-<main class="main-content">
+  <!-- MAIN CONTAINER -->
+  <main class="adv-container" id="main-content">
+    <div class="adv-workspace">
 
-    <!-- What is Arbitration -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-gavel"></i></div>
-            <h2>What is Arbitration?</h2>
+      <!-- PRIMARY: Evidence Bundle Builder -->
+      <section class="adv-card adv-card--primary" aria-labelledby="evidence-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="evidence-title" class="adv-card__title">Evidence Bundle Builder</h2>
+            <p class="adv-card__subtitle">Upload and organize your documents — auto-numbered and ready for the hearing</p>
+          </div>
         </div>
-        <p style="margin-bottom: 1rem;">Arbitration is a <strong>formal legal hearing</strong> — much more serious than conciliation. Think of it as a simplified court trial:</p>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4><i class="fas fa-balance-scale" style="color: var(--primary);"></i> A Real Hearing</h4>
-                <p>You and your employer present evidence under oath. Witnesses testify. The commissioner acts like a judge.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-file-contract" style="color: var(--primary);"></i> Binding Decision</h4>
-                <p>The commissioner issues a written award deciding who wins and who loses. The award is legally binding and enforceable.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-user-shield" style="color: var(--primary);"></i> Legal Representation Allowed</h4>
-                <p>Unlike conciliation, you may bring an attorney or representative. But many people still self-represent successfully.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-clock" style="color: var(--primary);"></i> 14-Day Award</h4>
-                <p>The commissioner must issue the written award within 14 days of the hearing ending. It is enforceable as a Labour Court order.</p>
-            </div>
-        </div>
-        <div class="warning-box danger">
-            <i class="fas fa-exclamation-triangle warning-icon"></i>
-            <div class="warning-content">
-                <h4>CCMA is IN-PERSON — Not Online</h4>
-                <p>Arbitration hearings are held <strong>physically at CCMA offices</strong> unless specifically arranged otherwise. You must attend in person. Bring your ID. Dress professionally. This is a courtroom-style setup — formal seating, the commissioner at the head, parties on opposite sides. <strong>Do not treat this like a casual meeting.</strong></p>
-            </div>
-        </div>
-        <div class="disclaimer"><strong>Procedural Guidance Only</strong>Advome provides procedural assistance to help you navigate the CCMA process. This is not legal advice. The arbitration process is governed by the Labour Relations Act 66 of 1995 and CCMA Rules. Users take full responsibility for their decisions and statements at the hearing.</div>
-    </div>
+        <div class="adv-card__body">
+          <div class="adv-upload" data-detect="true" role="button" tabindex="0" aria-label="Upload evidence documents">
+            <svg class="adv-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <div class="adv-upload__text">Drop evidence documents here</div>
+            <div class="adv-upload__hint">Contracts, emails, payslips, photos, disciplinary records</div>
+          </div>
 
-    <!-- Con-Arb Warning -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon" style="background: linear-gradient(135deg, var(--danger), #9b2c2c);"><i class="fas fa-exclamation-triangle"></i></div>
-            <h2>Con-Arb Warning</h2>
-        </div>
-        <div class="conarb-notice">
-            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--danger); margin-bottom: 1rem;"></i>
-            <h3>Same-Day Arbitration Possible</h3>
-            <p>If <strong>con-arb</strong> (conciliation-arbitration) was not objected to when you filed your referral, arbitration may follow <strong>immediately</strong> if conciliation fails today. This means you could go straight from settlement talks into a formal hearing on the same day.</p>
-            <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: left;">
-                <h4 style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--danger); margin-bottom: 0.5rem;">Be Prepared for Both:</h4>
-                <ul style="margin-left: 1.5rem; font-size: 0.875rem; color: var(--text);">
-                    <li>Bring all evidence and witnesses as if arbitration is happening today</li>
-                    <li>Dress and prepare for a formal hearing, not just a chat</li>
-                    <li>If you are not ready for con-arb, you may request a postponement, but this is not guaranteed</li>
-                    <li>Employers often object to con-arb — check your set-down notice carefully</li>
-                </ul>
+          <div id="evidence-list" style="margin-top: 1rem;">
+            <!-- Dynamically populated -->
+            <div style="text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom: 0.5rem; opacity: 0.5;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <p style="margin-bottom: 0;">No documents uploaded yet. Use the zone above or add manually below.</p>
             </div>
-        </div>
-        <div class="disclaimer"><strong>Not a Substitute for an Attorney</strong>If you are facing con-arb and are unprepared, strongly consider requesting a postponement or consulting an attorney. Advome does not provide legal representation.</div>
-    </div>
+          </div>
 
-    <!-- What to Bring -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
-            <h2>What to Bring — Checklist</h2>
-        </div>
-        <p style="margin-bottom: 1rem;">Arbitration requires <strong>complete preparation</strong>. Missing documents can weaken your case. Use this checklist:</p>
-        <ul class="checklist" id="bringChecklist">
-            <li><input type="checkbox" id="item1"><div class="checklist-text"><strong>Original ID Document</strong><span>Required for security and verification. Passport, driver's license, or smart ID card.</span></div></li>
-            <li><input type="checkbox" id="item2"><div class="checklist-text"><strong>CCMA Set-Down Notice</strong><span>The official notice with your case number, date, time, and venue. You received this after requesting arbitration.</span></div></li>
-            <li><input type="checkbox" id="item3"><div class="checklist-text"><strong>Employment Contract & Job Description</strong><span>Proves your terms of employment, role, and responsibilities.</span></div></li>
-            <li><input type="checkbox" id="item4"><div class="checklist-text"><strong>Payslips & Proof of Earnings (Last 3–6 months)</strong><span>Critical for calculating compensation or reinstatement back pay.</span></div></li>
-            <li><input type="checkbox" id="item5"><div class="checklist-text"><strong>Dismissal Letter / Termination Notice</strong><span>The official document stating why you were dismissed. If verbal, bring any follow-up emails or messages.</span></div></li>
-            <li><input type="checkbox" id="item6"><div class="checklist-text"><strong>Disciplinary Records & Warnings</strong><span>Any prior warnings, disciplinary hearing minutes, or performance improvement plans.</span></div></li>
-            <li><input type="checkbox" id="item7"><div class="checklist-text"><strong>ALL Evidence Supporting Your Case</strong><span>Emails, WhatsApp messages, photos, videos, timesheets, attendance records — everything relevant.</span></div></li>
-            <li><input type="checkbox" id="item8"><div class="checklist-text"><strong>Witness Statements (Signed & Dated)</strong><span>Written statements from colleagues who saw what happened. Include their full names, contact numbers, and what they will testify about.</span></div></li>
-            <li><input type="checkbox" id="item9"><div class="checklist-text"><strong>Witness Contact Details</strong><span>Phone numbers and addresses for all witnesses. The commissioner may need to contact them.</span></div></li>
-            <li><input type="checkbox" id="item10"><div class="checklist-text"><strong>Evidence Bundle (Numbered, Indexed, 3 Copies)</strong><span>Organize all documents into a bundle with page numbers and an index. Bring one copy for you, one for the commissioner, and one for the employer.</span></div></li>
-            <li><input type="checkbox" id="item11"><div class="checklist-text"><strong>Pen, Paper & Notepad</strong><span>Take notes during the hearing. Write down questions, objections, and the employer's arguments.</span></div></li>
-            <li><input type="checkbox" id="item12"><div class="checklist-text"><strong>Water & Snacks</strong><span>Arbitration can take hours. Stay hydrated and maintain your energy.</span></div></li>
-            <li><input type="checkbox" id="item13"><div class="checklist-text"><strong>Recording Device (Phone with voice recorder)</strong><span>Under South African law, you may record proceedings you are part of for personal records. See recording section below.</span></div></li>
-        </ul>
-        <div class="warning-box">
-            <i class="fas fa-lightbulb warning-icon"></i>
-            <div class="warning-content">
-                <h4>Pro Tip: The "Arbitration Bundle"</h4>
-                <p>Your evidence bundle is your most important tool. Organize it as: (1) Index, (2) Chronology of events, (3) Employment documents, (4) Dismissal documents, (5) Supporting evidence, (6) Witness statements, (7) Legal arguments summary. Number every page. Use dividers. The commissioner and employer each get an identical copy.</p>
+          <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="adv-form-group" style="margin-bottom: 0;">
+              <input type="text" class="adv-input" id="doc-name" placeholder="Document name (e.g., Email 15 March)">
             </div>
+            <div class="adv-form-group" style="margin-bottom: 0;">
+              <select class="adv-select" id="doc-type">
+                <option value="">Select type...</option>
+                <option value="contract">Employment Contract</option>
+                <option value="payslip">Payslip</option>
+                <option value="dismissal">Dismissal Letter</option>
+                <option value="disciplinary">Disciplinary Record</option>
+                <option value="email">Email / Correspondence</option>
+                <option value="witness">Witness Statement</option>
+                <option value="photo">Photo / Video</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="adv-btn adv-btn--secondary adv-btn--sm" style="margin-top: 0.75rem;" id="add-doc-btn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.3rem;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add to Bundle
+          </button>
         </div>
-    </div>
+        <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="adv-btn adv-btn--accent adv-btn--block" id="generate-bundle-btn" type="button">
+            Generate My Evidence Index
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </button>
+        </div>
+      </section>
 
-    <!-- How to Behave -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-user-check"></i></div>
-            <h2>How to Behave at Arbitration</h2>
+      <!-- WITNESS MANAGER -->
+      <section class="adv-card adv-mt-2" aria-labelledby="witness-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="witness-title" class="adv-card__title">Witness Manager</h2>
+            <p class="adv-card__subtitle">Add witnesses — we will generate subpoena requests and contact lists</p>
+          </div>
         </div>
-        <p style="margin-bottom: 1rem;">Arbitration is <strong>more formal than conciliation</strong>. The commissioner has authority to control the hearing. Your conduct affects their impression of your credibility.</p>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4><i class="fas fa-tie" style="color: var(--primary);"></i> Professional Dress & Conduct</h4>
-                <p>Dress neatly (business casual minimum). Address the commissioner as "Commissioner" or "Sir/Madam." <strong>Stand when the commissioner enters the room.</strong> Turn your phone off completely. Do not interrupt when others are speaking.</p>
+        <div class="adv-card__body">
+          <div id="witness-list">
+            <div style="text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+              No witnesses added yet.
             </div>
-            <div class="info-card">
-                <h4><i class="fas fa-comments" style="color: var(--primary);"></i> Speaking Only When Called Upon</h4>
-                <p>Unlike conciliation, you do not speak freely. The commissioner controls who speaks when. Wait to be asked. When testifying, speak clearly and directly answer the question. Do not argue with the employer during their presentation.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-brain" style="color: var(--primary);"></i> Emotional Management Under Pressure</h4>
-                <p>Cross-examination can feel aggressive. The employer's representative may challenge your honesty. <strong>Stay calm.</strong> If you feel overwhelmed, ask the commissioner for a short break. Take deep breaths. Do not shout, cry, or walk out.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-hand-paper" style="color: var(--primary);"></i> Cross-Examination Etiquette</h4>
-                <p>When the employer questions you: listen carefully, answer truthfully, and do not guess. If you don't know, say "I don't know." If you don't understand a question, ask for clarification. <strong>Never lie.</strong> Perjury is a criminal offence.</p>
-            </div>
-        </div>
-        <div class="warning-box danger">
-            <i class="fas fa-ban warning-icon"></i>
-            <div class="warning-content">
-                <h4>What NOT to Do</h4>
-                <p>Do not threaten the employer, commissioner, or witnesses. Do not bring unauthorized people into the hearing room. Do not discuss the case in public waiting areas. Do not falsify documents or lie under oath. Do not refuse to answer questions without legal grounds. Do not record secretly if the commissioner has prohibited it.</p>
-            </div>
-        </div>
-        <div class="disclaimer"><strong>Representation Rules</strong>At arbitration, you may appear in person or be represented by a co-employee, trade union official, employer's organisation official, or legal practitioner (attorney/advocate). Advome is not a law firm and cannot represent you at the CCMA.</div>
-    </div>
+          </div>
 
-    <!-- What to Expect -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-stream"></i></div>
-            <h2>What to Expect During the Hearing</h2>
+          <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="adv-form-group" style="margin-bottom: 0;">
+              <input type="text" class="adv-input" id="witness-name" placeholder="Witness full name">
+            </div>
+            <div class="adv-form-group" style="margin-bottom: 0;">
+              <input type="tel" class="adv-input" id="witness-phone" placeholder="Contact number">
+            </div>
+          </div>
+          <div class="adv-form-group" style="margin-top: 0.75rem; margin-bottom: 0;">
+            <input type="text" class="adv-input" id="witness-rel" placeholder="Relationship to case (e.g., 'Saw the incident', 'Colleague who heard...')">
+          </div>
+          <button class="adv-btn adv-btn--secondary adv-btn--sm" style="margin-top: 0.75rem;" id="add-witness-btn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.3rem;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Witness
+          </button>
         </div>
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-badge">1</div>
-                <div class="step-content">
-                    <h4>Opening Statements</h4>
-                    <p>The commissioner introduces themselves and explains the procedure. Both parties give brief opening statements (5–10 minutes) outlining what they will prove. State the facts simply: what happened, when, and what you want. Do not argue — just outline your case.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">2</div>
-                <div class="step-content">
-                    <h4>Leading Evidence (Your Case)</h4>
-                    <p>You present your evidence first (since you are the applicant). You may testify yourself and call witnesses. For each witness: you ask questions first (examination-in-chief), then the employer cross-examines, then you may re-examine.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">3</div>
-                <div class="step-content">
-                    <h4>Witness Testimony</h4>
-                    <p>Each witness takes an oath or affirmation to tell the truth. They tell their story, then face cross-examination from the other side, then brief re-examination from you. Prepare your witnesses thoroughly — they must know what they can and cannot say.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">4</div>
-                <div class="step-content">
-                    <h4>Employer's Case</h4>
-                    <p>The employer presents their evidence and witnesses. You have the right to cross-examine their witnesses. Listen carefully and take notes. Look for contradictions, missing documents, or witnesses who cannot support the employer's version.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">5</div>
-                <div class="step-content">
-                    <h4>Commissioner's Questions</h4>
-                    <p>The commissioner may ask questions of any witness at any time. They are trying to understand the facts. Answer directly and respectfully. The commissioner is not against you — they are gathering information to make a fair decision.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">6</div>
-                <div class="step-content">
-                    <h4>Closing Arguments</h4>
-                    <p>After all evidence is presented, both parties make closing arguments. Summarize the key facts, highlight the evidence that supports your case, and explain why the law supports your position. Do not introduce new evidence at this stage.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+      </section>
 
-    <!-- Recording -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-microphone"></i></div>
-            <h2>Recording the Arbitration</h2>
+      <!-- DAY-OF CHECKLIST -->
+      <section class="adv-card adv-mt-2" aria-labelledby="dayof-title">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="dayof-title" class="adv-card__title">Day-of Hearing Checklist</h2>
+            <p class="adv-checklist__progress" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">0/6 (0%)</p>
+          </div>
         </div>
-        <div class="recording-tip">
-            <i class="fas fa-info-circle"></i>
-            <div>
-                <h4 style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.5rem;">Single-Party Consent (South African Law)</h4>
-                <p style="font-size: 0.875rem; color: var(--text-secondary);">Under South African law, <strong>you may record a conversation you are part of</strong> without telling the other party, for your personal records. This is called "single-party consent." However, arbitration is a formal legal proceeding with different etiquette.</p>
-            </div>
+        <div class="adv-card__body">
+          <ul class="adv-checklist" data-checklist-id="arbitration_dayof">
+            <li class="adv-checklist__item" data-item-id="wake_early">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Wake up 2 hours before hearing time</div>
+                <div class="adv-checklist__meta">Allow for traffic, parking, and security</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="dress_properly">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Dress professionally (business attire)</div>
+                <div class="adv-checklist__meta">First impressions matter to the arbitrator</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="evidence_copies">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Bring 3 copies of every document</div>
+                <div class="adv-checklist__meta">One for you, one for arbitrator, one for employer</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="witnesses_ready">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Confirm witnesses are attending</div>
+                <div class="adv-checklist__meta">Call them the night before</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="opening_ready">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Opening statement printed and rehearsed</div>
+                <div class="adv-checklist__meta">5 minutes max — state facts, not emotions</div>
+              </div>
+            </li>
+            <li class="adv-checklist__item" data-item-id="questions_ready">
+              <div class="adv-checklist__checkbox"></div>
+              <div>
+                <div class="adv-checklist__text">Prepare questions for employer's witnesses</div>
+                <div class="adv-checklist__meta">Focus on inconsistencies and missing facts</div>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4><i class="fas fa-check" style="color: var(--success);"></i> What You CAN Do</h4>
-                <p>Record the proceedings for your personal memory aid. Use your phone's voice recorder app. Place it on the table in front of you — do not hide it. The recording helps you remember what was said, especially for a potential review.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-times" style="color: var(--danger);"></i> What You SHOULD NOT Do</h4>
-                <p>Do not record secretly if the commissioner has prohibited recording. Do not publish or share the recording online. Do not use it to intimidate anyone. The recording is for your personal legal records only.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-broadcast-tower" style="color: var(--primary);"></i> CCMA Recording Equipment</h4>
-                <p>The CCMA typically records all arbitration proceedings digitally. You may request a copy of the official recording from the CCMA office after the hearing. This is the preferred record for any Labour Court review.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-balance-scale" style="color: var(--primary);"></i> For Review Purposes</h4>
-                <p>If you plan to challenge the award in the Labour Court, you will need the official CCMA recording (or transcript) as part of the review record. Your personal recording is a backup, not the official record.</p>
-            </div>
+      </section>
+
+      <!-- PREP CARDS -->
+      <section class="adv-mt-3" aria-label="Arbitration guidance">
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>What to Expect at Arbitration</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <p>Arbitration is a <strong>formal hearing</strong> where an arbitrator hears evidence and makes a binding decision (an "award"). Unlike conciliation, arbitration follows court-like procedures.</p>
+            <p style="margin-bottom: 0.5rem;"><strong>Typical structure:</strong></p>
+            <ol style="margin-left: 1.25rem; color: var(--text-body); margin-bottom: 1rem;">
+              <li><strong>Opening statements</strong> — Each party outlines their case (5-10 min)</li>
+              <li><strong>Applicant's evidence</strong> — You testify, present documents, call witnesses</li>
+              <li><strong>Cross-examination</strong> — Employer questions your witnesses</li>
+              <li><strong>Respondent's evidence</strong> — Employer presents their case</li>
+              <li><strong>Cross-examination</strong> — You question employer's witnesses</li>
+              <li><strong>Closing arguments</strong> — Summarize key points and legal arguments</li>
+              <li><strong>Arbitrator's award</strong> — Issued within 14 days (usually)</li>
+            </ol>
+            <p style="margin-bottom: 0;"><strong>Duration:</strong> Usually 1-3 days. Complex cases may take longer.</p>
+          </div>
         </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>Recording the Hearing</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <div class="adv-alert adv-alert--info adv-alert--minimal" style="margin-bottom: 1rem;">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">Your Right to Record</div>
+                You are entitled to record the arbitration hearing. You must notify the CCMA and the other party in advance. Bring your own recording device.
+              </div>
+            </div>
+            <p style="margin-bottom: 0;"><strong>Tip:</strong> A digital voice recorder (R300-R800) is sufficient. Test it before the hearing. Bring spare batteries or a power bank.</p>
+          </div>
+        </div>
+
+        <div class="adv-accordion" data-group="prep">
+          <button class="adv-accordion__header" aria-expanded="false">
+            <span>Evidence Rules</span>
+            <svg class="adv-accordion__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="adv-accordion__body">
+            <ul style="margin-left: 1.25rem; color: var(--text-body);">
+              <li><strong>Relevance only</strong> — Evidence must relate directly to the dispute</li>
+              <li><strong>Original documents preferred</strong> — Bring originals, keep copies</li>
+              <li><strong>Chain of custody</strong> — Be able to explain where each document came from</li>
+              <li><strong>Witnesses must attend</strong> — Written statements alone are weak; live testimony is stronger</li>
+              <li><strong>Hearsay is limited</strong> — What someone told you is generally not admissible unless they testify</li>
+              <li><strong>Subpoenas available</strong> — If a witness refuses, request a subpoena from the CCMA</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
     </div>
 
-    <!-- Evidence Rules -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
-            <h2>Evidence Rules — Explained Simply</h2>
+    <!-- SIDEBAR -->
+    <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Hearing Timeline</h3>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px;">
+            <div style="width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">08:00</div>
+            <div style="font-size: 0.85rem;"><strong>Arrive</strong><br><span style="color: var(--text-muted);">30 min early</span></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px;">
+            <div style="width: 32px; height: 32px; background: var(--primary-light); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">09:00</div>
+            <div style="font-size: 0.85rem;"><strong>Hearing Starts</strong><br><span style="color: var(--text-muted);">Opening statements</span></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px;">
+            <div style="width: 32px; height: 32px; background: var(--warning); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">12:00</div>
+            <div style="font-size: 0.85rem;"><strong>Lunch Break</strong><br><span style="color: var(--text-muted);">1 hour</span></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px;">
+            <div style="width: 32px; height: 32px; background: var(--primary-light); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">13:00</div>
+            <div style="font-size: 0.85rem;"><strong>Evidence Continues</strong><br><span style="color: var(--text-muted);">Witnesses, cross-exam</span></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; background: var(--bg-page); border-radius: 6px;">
+            <div style="width: 32px; height: 32px; background: var(--success); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">16:00</div>
+            <div style="font-size: 0.85rem;"><strong>Closing Arguments</strong><br><span style="color: var(--text-muted);">Final submissions</span></div>
+          </div>
         </div>
-        <p style="margin-bottom: 1rem;">Arbitration has formal evidence rules. You do not need to be a lawyer, but you must understand the basics:</p>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4><i class="fas fa-bullseye" style="color: var(--primary);"></i> Relevance</h4>
-                <p>Only evidence that relates directly to your dispute is allowed. The commissioner will stop you if you bring up unrelated matters. Stick to: your employment, your dismissal, and the fairness of both the procedure and the reason.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-stamp" style="color: var(--primary);"></i> Authenticity</h4>
-                <p>Documents must be genuine. If the employer disputes a document, you may need to prove it is real. Bring original documents where possible. Certified copies are acceptable for most purposes.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-ear-listen" style="color: var(--primary);"></i> Hearsay</h4>
-                <p>Hearsay is when you repeat what someone else said, and that person is not present to testify. Generally, hearsay is not allowed. However, there are exceptions — ask the commissioner if you are unsure.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-hand-holding-heart" style="color: var(--primary);"></i> Documents Under Oath</h4>
-                <p>When you testify, you swear an oath to tell the truth. Everything you say is under oath. If you present documents, you may need to confirm they are true. Lying under oath is perjury — a criminal offence.</p>
-            </div>
+      </div>
+
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="arbitration_help">
+        <h3 class="adv-sidebar__widget-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </h3>
+        <div class="adv-chat__messages" role="log" aria-live="polite">
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">Ask me about evidence rules, witness preparation, or what to expect at arbitration.</div>
         </div>
-        <div class="warning-box info">
-            <i class="fas fa-lightbulb warning-icon"></i>
-            <div class="warning-content">
-                <h4>Bundle Preparation Tips</h4>
-                <p><strong>Number every page</strong> from 1 to the end. Create an index showing what document is on which page. Use dividers between sections. Bring <strong>three copies</strong>: one for you, one for the commissioner, one for the employer. Organize chronologically (oldest to newest). Label exhibits clearly (Exhibit A, B, C). Practice referring to your bundle so you can find documents quickly during the hearing.</p>
-            </div>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
+          <button class="adv-chat__send" aria-label="Send message">Send</button>
         </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="conciliation.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Conciliation
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="award.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            After Hearing: The Award
+          </a>
+        </div>
+        <div>
+          <a href="ccma-offices.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Find CCMA Office
+          </a>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Fee Estimate</h3>
+        <div class="adv-fee-meter">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Saved so far</span>
+          <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 50%;"></div></div>
+          <span class="adv-fee-meter__amount">R15,000</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 0;">Attorney estimate for arbitration prep: R15,000 — R25,000</p>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- BOTTOM ZONE -->
+  <div class="adv-bottom-zone">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div class="adv-fee-meter" style="flex: 1; max-width: 400px;">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Saved vs attorney</span>
+        <div class="adv-fee-meter__bar"><div class="adv-fee-meter__fill" style="width: 50%;"></div></div>
+        <span class="adv-fee-meter__amount">R15,000</span>
+      </div>
+      <div class="adv-savings adv-savings--small">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        You've saved <span class="adv-savings__amount">R15,000</span> vs. attorney fees
+      </div>
     </div>
 
-    <!-- Witnesses -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-users"></i></div>
-            <h2>Witnesses</h2>
-        </div>
-        <p style="margin-bottom: 1rem;">Witnesses can make or break your case. Prepare them carefully:</p>
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-badge">1</div>
-                <div class="step-content">
-                    <h4>Choosing Witnesses</h4>
-                    <p>Select witnesses who <strong>saw what happened</strong> directly — not someone who heard about it second-hand. Colleagues who witnessed the dismissal, the disciplinary hearing, or your performance are ideal. Character witnesses (who say you are a "good person") are less useful than factual witnesses.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">2</div>
-                <div class="step-content">
-                    <h4>Preparing Your Witnesses</h4>
-                    <p>Meet with each witness before the hearing. Explain what will happen (oath, questions, cross-examination). Review their statement with them. Ensure they know what they can and <strong>cannot</strong> say. They must stick to facts they personally know. They cannot give legal opinions.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">3</div>
-                <div class="step-content">
-                    <h4>What Witnesses Can/Cannot Say</h4>
-                    <p><strong>Can say:</strong> "I saw the manager shout at the employee on 15 March."<br><strong>Cannot say:</strong> "I think the manager was unfair." (That's a legal conclusion)<br><strong>Can say:</strong> "The disciplinary hearing lasted 10 minutes and the employee was not allowed to speak."<br><strong>Cannot say:</strong> "The company always treats people badly." (Too general)</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">4</div>
-                <div class="step-content">
-                    <h4>If Employer Witnesses Won't Attend</h4>
-                    <p>If you need a witness who works for the employer and they refuse to attend, you can request a subpoena from the CCMA. Apply at least 7 days before the hearing. The subpoena compels attendance. If the witness still refuses, the commissioner may draw an inference against the employer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="warning-box">
-            <i class="fas fa-exclamation-circle warning-icon"></i>
-            <div class="warning-content">
-                <h4>Witness Availability</h4>
-                <p>Confirm with your witnesses the date, time, and venue. Give them your phone number. Ask them to arrive 30 minutes early. If a witness cannot attend, inform the CCMA immediately — you may be able to reschedule or use their written statement (with the commissioner's permission).</p>
-            </div>
-        </div>
+    <div class="adv-compliance" role="contentinfo">
+      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
     </div>
 
-    <!-- The Award -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-file-signature"></i></div>
-            <h2>The Award</h2>
-        </div>
-        <div class="warning-box success">
-            <i class="fas fa-check-circle warning-icon"></i>
-            <div class="warning-content">
-                <h4>The Commissioner Decides</h4>
-                <p>After the hearing, the commissioner issues a <strong>written award</strong> within 14 days. The award is a formal legal document that decides the winner and loser. It is <strong>binding and enforceable</strong> as if it were an order of the Labour Court.</p>
-            </div>
-        </div>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4><i class="fas fa-calendar-check" style="color: var(--success);"></i> 14-Day Deadline</h4>
-                <p>The commissioner must issue the award within 14 days of the hearing ending. If the matter is complex, they may request an extension, but this is rare.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-gavel" style="color: var(--success);"></i> Binding & Enforceable</h4>
-                <p>The award is legally binding on both parties. If the employer does not comply, you can have the award made an order of the Labour Court and enforced by the sheriff.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-file-export" style="color: var(--success);"></i> Service of Award</h4>
-                <p>The CCMA serves the award on both parties. The date you receive it is the <strong>service date</strong> — this starts the 6-week clock for a Labour Court review if you want to challenge it.</p>
-            </div>
-            <div class="info-card">
-                <h4><i class="fas fa-balance-scale-right" style="color: var(--success);"></i> Written Reasons</h4>
-                <p>If the award is brief, you may request written reasons within a short period. This helps you understand the commissioner's reasoning and decide whether to challenge the award.</p>
-            </div>
-        </div>
-    </div>
+    <nav class="adv-nav-footer" aria-label="Page navigation">
+      <a href="conciliation.html" class="adv-nav-footer__prev">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back: Conciliation
+      </a>
+      <a href="award.html" class="adv-nav-footer__next">
+        Hearing Complete — Next: Award
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </nav>
+  </div>
 
-    <!-- If You Win -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon" style="background: linear-gradient(135deg, var(--success), var(--secondary));"><i class="fas fa-trophy"></i></div>
-            <h2>If You Win</h2>
-        </div>
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-badge">1</div>
-                <div class="step-content">
-                    <h4>Award Enforcement</h4>
-                    <p>If the award orders reinstatement or compensation, the employer must comply. If they refuse, you can apply to the Labour Court to have the award made an order of court. The court can then enforce it via the sheriff (seizing assets, garnishing wages, etc.).</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">2</div>
-                <div class="step-content">
-                    <h4>Payment Timelines</h4>
-                    <p>The award usually specifies a payment deadline (e.g., "within 14 days of the award"). If no deadline is specified, payment is due immediately. If the employer delays, contact the CCMA first, then the Labour Court if necessary.</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">3</div>
-                <div class="step-content">
-                    <h4>What If the Employer Doesn't Pay?</h4>
-                    <p>First, send a formal written demand. If still no payment, apply to the Labour Court for enforcement. You may need to provide the employer's banking details or assets information. The sheriff can execute against the employer's property. <strong>You may need an attorney for enforcement.</strong></p>
-                </div>
-            </div>
-        </div>
-        <div class="attorney-cta">
-            <h3>Need Help Enforcing the Award?</h3>
-            <p>Enforcement can be complex, especially if the employer resists. An attorney can help you navigate the Labour Court enforcement process.</p>
-            <a href="attorney.html" class="btn btn-primary"><i class="fas fa-search"></i> Find a Labour Attorney</a>
-        </div>
-    </div>
+  <!-- FOOTER -->
+  <footer class="adv-footer" role="contentinfo">
+    <p style="margin-bottom: 0.5rem;">
+      <a href="index.html">Home</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Attorneys</a>
+    </p>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
+    </p>
+  </footer>
 
-    <!-- If You Lose -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon" style="background: linear-gradient(135deg, var(--danger), #9b2c2c);"><i class="fas fa-exclamation-triangle"></i></div>
-            <h2>If You Lose</h2>
-        </div>
-        <div class="warning-box danger">
-            <i class="fas fa-clock warning-icon"></i>
-            <div class="warning-content">
-                <h4>6-Week Deadline — Do Not Miss It</h4>
-                <p>You have <strong>6 weeks from the date the award was served on you</strong> to challenge it in the Labour Court via a Section 145 review. This is a strict deadline. If you miss it, you may lose your right to challenge forever.</p>
-            </div>
-        </div>
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-badge">1</div>
-                <div class="step-content">
-                    <h4>Section 145 Review</h4>
-                    <p>The Labour Relations Act allows you to challenge the award on three grounds: (1) <strong>Misconduct</strong> by the commissioner (bias, conflict of interest), (2) <strong>Gross irregularity</strong> in the proceedings (unfair procedure, excluded evidence), or (3) <strong>Excess of powers</strong> (the commissioner made a decision they had no legal authority to make).</p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">2</div>
-                <div class="step-content">
-                    <h4>Court Online Registration — Compulsory</h4>
-                    <p>All Labour Court matters must be filed via <strong>Court Online</strong> (courtonline.co.za). You must register, create an account, and file all documents electronically. Paper filing is not accepted for most matters. <strong>This is compulsory.</strong></p>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-badge">3</div>
-                <div class="step-content">
-                    <h4>Condonation If Late</h4>
-                    <p>If you miss the 6-week deadline, you can apply for condonation — but this is risky and not guaranteed. You need "good cause" for the delay. Do not miss the deadline.</p>
-                </div>
-            </div>
-        </div>
-        <div class="attorney-cta">
-            <h3>Challenging an Award Is Complex</h3>
-            <p>A Section 145 review requires legal documents (Notice of Motion, Founding Affidavit), the arbitration record, and legal argument. This is the stage where most self-represented litigants need an attorney.</p>
-            <a href="ccma-review.html" class="btn btn-primary" style="margin-right: 1rem;"><i class="fas fa-arrow-right"></i> Start Review Process</a>
-            <a href="attorney.html" class="btn btn-outline"><i class="fas fa-search"></i> Find an Attorney</a>
-        </div>
-    </div>
+  <script src="shared-scripts.js"></script>
+  <script>
+  // Page-specific: Evidence bundle and witness manager
+  (function() {
+    let evidenceCount = 0;
+    let witnessCount = 0;
+    const evidenceList = document.getElementById('evidence-list');
+    const witnessList = document.getElementById('witness-list');
 
-    <!-- Savings Calculator -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon"><i class="fas fa-calculator"></i></div>
-            <h2>Arbitration Savings Calculator</h2>
-        </div>
-        <div class="savings-calculator">
-            <h2><i class="fas fa-calculator"></i> Fee Meter — Arbitration Stage</h2>
-            <p style="opacity:0.9; margin-bottom:1.5rem; font-size:0.95rem;">Arbitration is the highest-stakes stage. Attorney fees here are significant. This is a comparative illustration only.</p>
-            <div class="calc-row">
-                <span>Attorney consultation & case assessment</span>
-                <span class="amount">R3,500 – R7,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Arbitration preparation (evidence, witnesses, bundle)</span>
-                <span class="amount">R5,000 – R12,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Arbitration attendance (per day)</span>
-                <span class="amount">R4,000 – R8,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Post-hearing brief and award analysis</span>
-                <span class="amount">R2,500 – R5,000</span>
-            </div>
-            <div class="calc-row">
-                <span>Labour Court review (if needed)</span>
-                <span class="amount">R15,000 – R40,000</span>
-            </div>
-            <div class="calc-row total">
-                <span>Estimated Total Attorney Cost (Arbitration + Review)</span>
-                <span class="amount">R30,000 – R72,000+</span>
-            </div>
-            <div class="calc-row" style="border-bottom:none; opacity:0.8;">
-                <span>Advome Platform Cost (1 month)</span>
-                <span class="amount">R30</span>
-            </div>
-            <div class="savings-highlight">
-                By self-representing at arbitration with Advome's guidance, you could save approximately <strong>R30,000 – R72,000+</strong> in legal fees.
-            </div>
-            <p style="font-size:0.8rem; opacity:0.7; margin-top:0.75rem; text-align:center;">
-                *Illustrative only. Actual attorney fees vary. Complex matters may require an attorney. This is not legal advice.
-            </p>
-        </div>
-    </div>
+    // Evidence bundle
+    document.getElementById('add-doc-btn').addEventListener('click', function() {
+      const name = document.getElementById('doc-name').value.trim();
+      const type = document.getElementById('doc-type').value;
+      if (!name || !type) {
+        Advome?.toast?.show('Please enter a document name and type', 'warning');
+        return;
+      }
 
-    <!-- Navigation -->
-    <div class="page-navigation">
-        <a href="conciliation.html" class="nav-link-btn prev"><i class="fas fa-arrow-left"></i>Back to Conciliation</a>
-        <a href="award.html" class="nav-link-btn">Next: The Award<i class="fas fa-arrow-right"></i></a>
-    </div>
+      evidenceCount++;
+      const typeLabels = {
+        contract: 'Employment Contract',
+        payslip: 'Payslip',
+        dismissal: 'Dismissal Letter',
+        disciplinary: 'Disciplinary Record',
+        email: 'Email / Correspondence',
+        witness: 'Witness Statement',
+        photo: 'Photo / Video',
+        other: 'Other'
+      };
 
-    <!-- Disclaimer -->
-    <div class="disclaimer" style="margin-top: 3rem;">
-        <strong>Important Legal Disclaimers</strong>
-        <p>Advome is a procedural assistance platform and is not a law firm. None of the content on this page constitutes legal advice. The information provided is for procedural guidance only to help self-represented litigants navigate the CCMA arbitration process. Users take full responsibility for their own cases, statements, and decisions. Advome does not provide legal representation. Always consult a qualified labour law attorney for advice specific to your situation. While we strive for accuracy, laws and CCMA rules change. Verify all information with the official CCMA website or legal practitioner.</p>
-        <p style="margin-top: 1rem;"><strong>Key Points:</strong> This page does not provide legal advice. Procedural assistance only. Users take full responsibility. Not a substitute for an attorney. Advome is not a law firm. No attorney-client relationship is created.</p>
-    </div>
+      if (evidenceCount === 1) evidenceList.innerHTML = '';
 
-</main>
-
-<!-- Chat Widget -->
-<div class="chat-widget">
-    <div class="chat-panel" id="chatPanel">
-        <div class="chat-header">
-            <h4><i class="fas fa-robot"></i> Advome AI Assistant</h4>
-            <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+      const item = document.createElement('div');
+      item.style.cssText = 'display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--bg-page); border-radius: 6px; margin-bottom: 0.5rem;';
+      item.innerHTML = `
+        <div style="width: 28px; height: 28px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">${evidenceCount}</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${name}</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">${typeLabels[type] || type}</div>
         </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="chat-message bot">Hello! I'm your Advome assistant. I can help you prepare for arbitration. Ask me about evidence rules, witness preparation, what to expect, or how to behave. <strong>Note: I provide procedural guidance only, not legal advice.</strong></div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Ask about arbitration..." onkeypress="if(event.key==='Enter')sendMessage()">
-            <button class="chat-send" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-    <button class="chat-button" onclick="toggleChat()"><i class="fas fa-comments"></i></button>
-</div>
+        <button class="adv-btn adv-btn--ghost adv-btn--sm" onclick="this.parentElement.remove(); evidenceCount--;" style="flex-shrink: 0;">Remove</button>
+      `;
+      evidenceList.appendChild(item);
 
-<script>
-    // Checklist persistence
-    document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
-        const id = checkbox.id;
-        const saved = localStorage.getItem('arbitration_' + id);
-        if (saved === 'true') checkbox.checked = true;
-        checkbox.addEventListener('change', function() {
-            localStorage.setItem('arbitration_' + this.id, this.checked);
-            this.closest('li').style.background = this.checked ? '#e0e7ff' : '';
-        });
-        if (checkbox.checked) checkbox.closest('li').style.background = '#e0e7ff';
+      document.getElementById('doc-name').value = '';
+      document.getElementById('doc-type').value = '';
+      Advome?.toast?.show('Document added to bundle', 'success');
     });
 
-    function toggleChat() {
-        document.getElementById('chatPanel').classList.toggle('active');
-    }
+    // Witness manager
+    document.getElementById('add-witness-btn').addEventListener('click', function() {
+      const name = document.getElementById('witness-name').value.trim();
+      const phone = document.getElementById('witness-phone').value.trim();
+      const rel = document.getElementById('witness-rel').value.trim();
+      if (!name) {
+        Advome?.toast?.show('Please enter a witness name', 'warning');
+        return;
+      }
 
-    function sendMessage() {
-        const input = document.getElementById('chatInput');
-        const messages = document.getElementById('chatMessages');
-        const text = input.value.trim();
-        if (!text) return;
-        const userDiv = document.createElement('div');
-        userDiv.className = 'chat-message user';
-        userDiv.textContent = text;
-        messages.appendChild(userDiv);
-        input.value = '';
-        messages.scrollTop = messages.scrollHeight;
-        setTimeout(() => {
-            const botDiv = document.createElement('div');
-            botDiv.className = 'chat-message bot';
-            const responses = {
-                'evidence': "Bring all relevant documents: employment contract, payslips, dismissal letter, disciplinary records, emails, and witness statements. Organize them into a numbered bundle with 3 copies.",
-                'witness': "Choose witnesses who saw events directly. Prepare them by explaining the oath, examination-in-chief, cross-examination, and re-examination process. They must stick to facts, not opinions.",
-                'behave': "Dress professionally, stand when the commissioner enters, speak only when called upon, and stay calm during cross-examination. Never lie under oath.",
-                'record': "You may record for personal records under single-party consent law. The CCMA also records digitally. Request the official recording from the CCMA office after the hearing.",
-                'award': "The commissioner issues a written award within 14 days. It is binding and enforceable. If you lose, you have 6 weeks from service to challenge via Section 145 review.",
-                'default': "I can help with evidence rules, witness prep, conduct, recording, or the award. What would you like to know?"
-            };
-            let response = responses.default;
-            const lower = text.toLowerCase();
-            if (lower.includes('evidence') || lower.includes('document') || lower.includes('bundle')) response = responses.evidence;
-            else if (lower.includes('witness')) response = responses.witness;
-            else if (lower.includes('behave') || lower.includes('conduct') || lower.includes('dress')) response = responses.behave;
-            else if (lower.includes('record')) response = responses.record;
-            else if (lower.includes('award') || lower.includes('lose') || lower.includes('win')) response = responses.award;
-            botDiv.innerHTML = response + '<br><br><em style="font-size: 0.8em; opacity: 0.7;">This is procedural guidance only. For legal advice, consult an attorney.</em>';
-            messages.appendChild(botDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }, 800);
-    }
+      witnessCount++;
+      if (witnessCount === 1) witnessList.innerHTML = '';
 
-    // Close chat when clicking outside
-    document.addEventListener('click', function(e) {
-        const widget = document.querySelector('.chat-widget');
-        const panel = document.getElementById('chatPanel');
-        if (!widget.contains(e.target) && panel.classList.contains('active')) {
-            panel.classList.remove('active');
-        }
+      const item = document.createElement('div');
+      item.style.cssText = 'padding: 0.75rem; background: var(--bg-page); border-radius: 6px; margin-bottom: 0.5rem;';
+      item.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-heading);">${name}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">${phone || 'No phone'} · ${rel || 'No description'}</div>
+          </div>
+          <button class="adv-btn adv-btn--ghost adv-btn--sm" onclick="this.closest('div').parentElement.remove(); witnessCount--;" style="flex-shrink: 0;">Remove</button>
+        </div>
+      `;
+      witnessList.appendChild(item);
+
+      document.getElementById('witness-name').value = '';
+      document.getElementById('witness-phone').value = '';
+      document.getElementById('witness-rel').value = '';
+      Advome?.toast?.show('Witness added', 'success');
     });
-
-    // Fade-in animation observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.card').forEach(card => observer.observe(card));
-</script>
-
+  })();
+  </script>
 </body>
 </html>
