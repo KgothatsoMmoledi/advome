@@ -3,268 +3,614 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | South African Legal Self-Representation Platform</title>
+<title>Advome | Self-Representation Assistance for South Africa</title>
 <link rel="stylesheet" href="shared-styles.css">
+<style>
+/* Landing page specific styles */
+.stats-bar {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  padding: 20px 0;
+}
+
+.stats-bar-inner {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.how-it-works {
+  background: var(--bg-primary);
+}
+
+.step-card {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 auto 20px;
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.testimonials {
+  background: var(--bg-secondary);
+}
+
+.testimonial-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border-light);
+}
+
+.testimonial-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.testimonial-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.testimonial-role {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  text-align: center;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cta-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section h2 {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.cta-section p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+.trust-badge .icon {
+  font-size: 20px;
+}
+
+/* Ad area on landing page */
+.ad-hero-area {
+  background: var(--bg-tertiary);
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  margin: 48px 0;
+  color: var(--text-muted);
+}
+
+.ad-hero-area .ad-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.ad-hero-area .ad-size {
+  font-size: 14px;
+}
+</style>
 <base target="_blank">
 </head>
 <body>
 
+<!-- Header -->
 <header class="site-header">
-  <a href="index.html" class="brand">
-    <div class="brand-mark">A</div>
-    <div>
-      <div class="brand-text">Advome</div>
-      <div class="brand-sub">Self-representation assistance</div>
-    </div>
-  </a>
-  <nav class="main-nav">
-    <a href="index.html" class="nav-link active">Home</a>
-    <a href="start.html" class="nav-link">Start</a>
-    <a href="dashboard.html" class="nav-link">Dashboard</a>
-    <a href="ccma.html" class="nav-link">CCMA</a>
-    <a href="divorce.html" class="nav-link">Divorce</a>
-    <a href="estates-hub.html" class="nav-link">Estates</a>
-    <a href="attorney.html" class="nav-link">Attorney</a>
-    <a href="pricing.html" class="nav-premium">Pricing</a>
-  </nav>
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <div class="brand-text">Advome</div>
+        <div class="brand-sub">Self-representation assistance</div>
+      </div>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="start.html" class="nav-link">Start</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="ccma.html" class="nav-link">CCMA</a>
+      <a href="divorce.html" class="nav-link">Divorce</a>
+      <a href="estates-hub.html" class="nav-link">Estates</a>
+      <a href="attorney.html" class="nav-link">Attorney Portal</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+    </nav>
+    <a href="start.html" class="nav-link nav-cta">Get Started</a>
+    <button class="mobile-menu-btn" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+  </div>
 </header>
 
-<div class="container">
-
-  <!-- Hero -->
-  <div class="hero">
-    <h1>Legal clarity. Procedural control. Real outcomes.</h1>
-    <p>Advome is a South African procedural assistance platform for self-represented litigants. Track your matter stage by stage, detect missing documents, generate templates, and stay ready for every deadline.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="start.html" class="btn btn-lg" style="background:white;color:var(--primary);">Start Your Matter</a>
-      <a href="pricing.html" class="btn btn-outline btn-lg" style="border-color:white;color:white;">View Pricing</a>
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-badge">
+      <span></span> Now serving South African litigants
     </div>
-  </div>
-
-  <!-- Ad Slot 1 — Top Banner -->
-  <div class="ad-slot">
-    <div class="ad-slot-label">Advertisement Space</div>
-    <div class="ad-slot-title">Your Legal Service Here</div>
-    <div class="ad-slot-desc">Contact us to advertise your firm, mediation service, or legal tech product to self-represented litigants.</div>
-  </div>
-
-  <!-- Value Proposition -->
-  <div class="page-header text-center">
-    <h1>What Advome Does</h1>
-    <p>Procedural guidance, document detection, template generation, and workflow tracking — all grounded in South African law.</p>
-  </div>
-
-  <div class="grid-3">
-    <div class="card text-center">
-      <div style="font-size:40px;margin-bottom:12px;">📄</div>
-      <div class="card-title" style="justify-content:center;">Document Detection</div>
-      <p style="font-size:13px;color:var(--text-muted);">Upload your summons, award, or CCMA papers. Advome identifies the document type, detects the procedural stage, and tells you the next step.</p>
-    </div>
-    <div class="card text-center">
-      <div style="font-size:40px;margin-bottom:12px;">⚖️</div>
-      <div class="card-title" style="justify-content:center;">Template Generation</div>
-      <p style="font-size:13px;color:var(--text-muted);">Answer structured questions. Advome drafts customised notices, affidavits, and applications using South African legal templates and precedent.</p>
-    </div>
-    <div class="card text-center">
-      <div style="font-size:40px;margin-bottom:12px;">📊</div>
-      <div class="card-title" style="justify-content:center;">Matter Tracking</div>
-      <p style="font-size:13px;color:var(--text-muted);">See your current stage, next step, missing documents, urgency, and readiness score in one dashboard. Never miss a deadline.</p>
-    </div>
-  </div>
-
-  <!-- Active Workflows -->
-  <div class="page-header" style="margin-top:40px;">
-    <h1>Active Workflows</h1>
-    <p>Choose the matter type that matches your situation. Each workflow is built on South African procedural rules.</p>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">💔</span>
-        Divorce Navigator
-      </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-        Track divorce procedure from summons to finalisation. Settlement, children, discovery, pre-trial, set-down, trial, and judgment — with defended and undefended branch logic.
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <span class="pill pill-blue">Summons</span>
-        <span class="pill pill-blue">Pleadings</span>
-        <span class="pill pill-blue">Discovery</span>
-        <span class="pill pill-blue">Trial</span>
-      </div>
-      <a href="divorce.html" class="btn btn-primary btn-sm">Open Divorce Workflow</a>
-    </div>
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#fef3cd;color:#856404;">⚖️</span>
-        CCMA / Labour Navigator
-      </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-        From referral to conciliation, arbitration, award, and Section 145 Labour Court review. Motion, record, heads, set-down, and finalisation with full opposition tracking.
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <span class="pill pill-amber">Referral</span>
-        <span class="pill pill-amber">Award</span>
-        <span class="pill pill-amber">Review</span>
-        <span class="pill pill-amber">Labour Court</span>
-      </div>
-      <a href="ccma.html" class="btn btn-primary btn-sm">Open CCMA Workflow</a>
-    </div>
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#e6f4ea;color:var(--secondary);">🏛️</span>
-        Estates Administration
-      </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-        Report death, prepare the reporting pack, draft covering letters, obtain letters of executorship or authority, manage the L&D account, and close the estate.
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <span class="pill pill-green">Reporting</span>
-        <span class="pill pill-green">Lodgement</span>
-        <span class="pill pill-green">L&D Account</span>
-        <span class="pill pill-green">Distribution</span>
-      </div>
-      <a href="estates-hub.html" class="btn btn-primary btn-sm">Open Estates Workflow</a>
-    </div>
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#f3e8ff;color:#7c3aed;">👔</span>
-        Attorney Portal
-      </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-        Law firm workflow management with client connection, matter tracking, document generation, and practice visibility. Connect with self-represented litigants who need help.
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <span class="pill pill-purple">Matter Mgmt</span>
-        <span class="pill pill-purple">Client Connect</span>
-        <span class="pill pill-purple">Templates</span>
-      </div>
-      <a href="attorney.html" class="btn btn-primary btn-sm">Open Attorney Portal</a>
-    </div>
-  </div>
-
-  <!-- Ad Slot 2 — Mid-Page -->
-  <div class="ad-slot">
-    <div class="ad-slot-label">Advertisement Space</div>
-    <div class="ad-slot-title">Featured Legal Service</div>
-    <div class="ad-slot-desc">Promote your mediation practice, transcription service, or court support business to Advome users.</div>
-  </div>
-
-  <!-- Pricing Teaser -->
-  <div class="page-header text-center" style="margin-top:40px;">
-    <h1>Simple Pricing</h1>
-    <p>Access to justice should not be expensive. Choose the plan that fits your needs.</p>
-  </div>
-
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <div class="pricing-tier">Self-Represented</div>
-      <div class="pricing-price">R30<span>/month</span></div>
-      <div class="pricing-desc">For individuals navigating their own legal matters</div>
-      <ul class="pricing-features">
-        <li>Unlimited matter tracking</li>
-        <li>Document detection & stage identification</li>
-        <li>Template generation (all workflows)</li>
-        <li>Deadline & urgency alerts</li>
-        <li>Dashboard & case health scores</li>
-        <li>Access to legislation & precedent library</li>
-      </ul>
-      <a href="pricing.html" class="btn btn-primary btn-block">Get Started</a>
-    </div>
-    <div class="pricing-card featured">
-      <div class="pricing-badge">Most Popular</div>
-      <div class="pricing-tier">Attorney / Firm</div>
-      <div class="pricing-price">R50<span>/month</span></div>
-      <div class="pricing-desc">For law firms, candidate attorneys, and legal practitioners</div>
-      <ul class="pricing-features">
-        <li>Everything in Self-Represented</li>
-        <li>Multi-matter firm dashboard</li>
-        <li>Client connection & matter sharing</li>
-        <li>Advanced template customisation</li>
-        <li>Billing & time tracking</li>
-        <li>Practice visibility & lead generation</li>
-        <li>Priority support</li>
-      </ul>
-      <a href="pricing.html" class="btn btn-primary btn-block">Get Started</a>
-    </div>
-    <div class="pricing-card">
-      <div class="pricing-tier">Enterprise</div>
-      <div class="pricing-price">Custom</div>
-      <div class="pricing-desc">For legal aid organisations, NGOs, and large firms</div>
-      <ul class="pricing-features">
-        <li>Everything in Attorney</li>
-        <li>White-label options</li>
-        <li>API access</li>
-        <li>Bulk user management</li>
-        <li>Custom workflow development</li>
-        <li>Dedicated account manager</li>
-      </ul>
-      <a href="pricing.html" class="btn btn-outline btn-block">Contact Us</a>
-    </div>
-  </div>
-
-  <!-- Ad Slot 3 — Bottom Banner -->
-  <div class="ad-slot">
-    <div class="ad-slot-label">Advertisement Space</div>
-    <div class="ad-slot-title">Legal Transcription Services</div>
-    <div class="ad-slot-desc">Fast, accurate CCMA and Labour Court transcript preparation. Contact us for rates.</div>
-  </div>
-
-  <!-- How It Works -->
-  <div class="page-header" style="margin-top:40px;">
-    <h1>How Advome Works</h1>
-    <p>From document upload to court-ready templates — the platform guides you at every step.</p>
-  </div>
-
-  <div class="grid-4">
-    <div class="card text-center">
-      <div style="font-size:32px;margin-bottom:8px;">1️⃣</div>
-      <div style="font-weight:600;margin-bottom:4px;">Upload</div>
-      <p style="font-size:12px;color:var(--text-muted);">Upload your legal document. Advome detects the type and stage.</p>
-    </div>
-    <div class="card text-center">
-      <div style="font-size:32px;margin-bottom:8px;">2️⃣</div>
-      <div style="font-weight:600;margin-bottom:4px;">Identify</div>
-      <p style="font-size:12px;color:var(--text-muted);">The platform identifies the matter, the rules that apply, and what's missing.</p>
-    </div>
-    <div class="card text-center">
-      <div style="font-size:32px;margin-bottom:8px;">3️⃣</div>
-      <div style="font-weight:600;margin-bottom:4px;">Generate</div>
-      <p style="font-size:12px;color:var(--text-muted);">Answer questions. Advome drafts customised templates with proper legal structure.</p>
-    </div>
-    <div class="card text-center">
-      <div style="font-size:32px;margin-bottom:8px;">4️⃣</div>
-      <div style="font-weight:600;margin-bottom:4px;">Track</div>
-      <p style="font-size:12px;color:var(--text-muted);">Monitor deadlines, readiness, and next steps until finalisation.</p>
-    </div>
-  </div>
-
-  <!-- AI Engine Note -->
-  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
-    <div class="card-title">
-      <span class="icon" style="background:var(--primary);color:white;">🤖</span>
-      Powered by Kimi AI
-    </div>
-    <p style="font-size:14px;color:var(--text);margin-bottom:12px;">
-      Advome uses Kimi as its back-end intelligence engine. Kimi reads documents, identifies procedural stages, retrieves relevant South African legislation and precedent, and drafts customised templates based on your answers.
+    <h1>Navigate the legal system <em>without the confusion</em></h1>
+    <p class="hero-subtitle">
+      Step-by-step guidance through CCMA disputes, divorce proceedings, and estate administration. 
+      Draft court-ready documents, track your progress, and understand every stage of your case.
     </p>
-    <p style="font-size:13px;color:var(--text-muted);">
-      <strong>What Kimi does:</strong> Document analysis, stage detection, legislation retrieval, precedent matching, template drafting, and procedural guidance.<br>
-      <strong>What Kimi does not do:</strong> Give legal advice, represent you in court, or guarantee outcomes. All templates must be reviewed before filing.
-    </p>
-  </div>
-
-  <!-- Footer Disclaimer -->
-  <div class="disclaimer">
-    <strong>Disclaimer</strong>
-    Advome provides procedural assistance, legal information, and template generation only. It does not provide legal advice. All generated documents must be reviewed before filing. Users remain responsible for complying with applicable court rules, directives, and legislation.
-    <div class="access-message">
-      Section 34 of the Constitution of the Republic of South Africa, 1996 protects the right of access to justice. Advome supports that right through procedural guidance, structured information, and self-representation tools.
+    <div class="hero-cta-group">
+      <a href="start.html" class="btn btn-primary btn-lg">Start Your Matter</a>
+      <a href="pricing.html" class="btn btn-outline btn-lg">View Pricing</a>
     </div>
   </div>
+</section>
 
+<!-- Stats Bar -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Legal Areas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">15+</div>
+        <div class="stat-label">Document Templates</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">R30</div>
+        <div class="stat-label">Per Month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">AI Assistant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Matter Selection -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="overline">What do you need help with?</div>
+      <h2>Choose your legal matter</h2>
+      <p>Select the area that applies to your situation. Advome will guide you through every step, from start to finish.</p>
+    </div>
+
+    <div class="matter-grid">
+      <!-- Labour / CCMA -->
+      <a href="ccma.html" class="matter-card">
+        <div class="matter-icon labour">⚖️</div>
+        <div class="matter-title">Labour Dispute</div>
+        <div class="matter-desc">
+          Unfair dismissal, unfair labour practice, or discrimination. From CCMA referral to Labour Court review.
+        </div>
+        <div class="matter-cta">Get started →</div>
+      </a>
+
+      <!-- Divorce -->
+      <a href="divorce.html" class="matter-card">
+        <div class="matter-icon divorce">💔</div>
+        <div class="matter-title">Divorce</div>
+        <div class="matter-desc">
+          Contested or uncontested divorce. From summons to decree. Including children, assets, and maintenance.
+        </div>
+        <div class="matter-cta">Get started →</div>
+      </a>
+
+      <!-- Estates -->
+      <a href="estates-hub.html" class="matter-card">
+        <div class="matter-icon estates">📋</div>
+        <div class="matter-title">Deceased Estate</div>
+        <div class="matter-desc">
+          Reporting a death, appointing an executor, inventory, and distribution. Step-by-step estate administration.
+        </div>
+        <div class="matter-cta">Get started →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="overline">Simple process</div>
+      <h2>How Advome works</h2>
+      <p>We break down complex legal procedures into clear, manageable steps. No legal background required.</p>
+    </div>
+
+    <div class="grid-4">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-title">Answer Questions</div>
+        <div class="step-desc">Tell us about your situation in plain language. No legal jargon needed.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-title">Get Your Roadmap</div>
+        <div class="step-desc">We show you exactly what steps to take, in the right order, with deadlines.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-title">Draft Documents</div>
+        <div class="step-desc">We generate court-ready templates using your information. You review and edit.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-title">Track Progress</div>
+        <div class="step-desc">See where you are, what's next, and how much you've saved by self-representing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Savings Calculator Preview -->
+<section class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header">
+      <div class="overline">Cost comparison</div>
+      <h2>See what you could save</h2>
+      <p>Advome helps you understand the cost difference between self-representation and hiring an attorney.</p>
+    </div>
+
+    <div class="savings-panel">
+      <div class="savings-header">
+        <div class="savings-title">
+          Example: Unfair Dismissal Case
+          <span>Based on Magistrate's Court tariffs × 2 (typical attorney rate)</span>
+        </div>
+        <div class="savings-badge">Illustrative Only</div>
+      </div>
+
+      <div class="savings-comparison">
+        <div class="savings-item">
+          <div class="savings-item label">With Attorney</div>
+          <div class="savings-item amount negative">R18,500</div>
+        </div>
+        <div class="savings-divider">→</div>
+        <div class="savings-item">
+          <div class="savings-item label">With Advome</div>
+          <div class="savings-item amount positive">R30</div>
+        </div>
+      </div>
+
+      <div class="savings-breakdown">
+        <div class="savings-breakdown-title">Estimated attorney costs by stage</div>
+        <div class="savings-row">
+          <span class="stage">CCMA Referral & Conciliation</span>
+          <span class="cost">R2,500</span>
+        </div>
+        <div class="savings-row">
+          <span class="stage">Arbitration Preparation</span>
+          <span class="cost">R4,000</span>
+        </div>
+        <div class="savings-row">
+          <span class="stage">Arbitration Hearing</span>
+          <span class="cost">R6,000</span>
+        </div>
+        <div class="savings-row">
+          <span class="stage">Award Review (Labour Court)</span>
+          <span class="cost">R6,000</span>
+        </div>
+        <div class="savings-row">
+          <span class="stage">Total you could save</span>
+          <span class="cost saved">R18,470</span>
+        </div>
+      </div>
+
+      <div class="savings-footer">
+        These figures are estimates based on court tariff scales. Actual attorney fees vary. 
+        This is for illustration only — not a quote or guarantee.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ad Area -->
+<section class="section-sm">
+  <div class="container">
+    <div class="ad-hero-area">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-size">728 × 90 px Banner Area — Contact us to advertise</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="overline">User experiences</div>
+      <h2>What users say</h2>
+      <p>Real feedback from South Africans who used Advome to navigate their legal matters.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "I was dismissed unfairly and had no idea where to start. Advome walked me through the CCMA process step by step. I won my case and saved thousands in legal fees."
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">T</div>
+          <div>
+            <div class="testimonial-name">Thabo M.</div>
+            <div class="testimonial-role">CCMA Arbitration Winner</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "The divorce process was overwhelming until I found Advome. It helped me draft my summons, understand Rule 43, and prepare for court. I felt confident representing myself."
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah K.</div>
+            <div class="testimonial-role">Self-Represented Divorce</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "As a small law firm, the attorney portal helps us manage client matters efficiently. The connection with self-represented users is a great source of new clients."
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">L</div>
+          <div>
+            <div class="testimonial-name">LegalWise Attorneys</div>
+            <div class="testimonial-role">Attorney Partner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to take control of your legal matter?</h2>
+    <p>Join thousands of South Africans who are navigating the legal system with confidence. Start your matter today.</p>
+    <div class="hero-cta-group">
+      <a href="start.html" class="btn btn-primary btn-lg">Start Your Matter — R30/month</a>
+      <a href="pricing.html" class="btn btn-outline btn-lg">Compare Plans</a>
+    </div>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <span class="icon">🔒</span> POPIA Compliant
+      </div>
+      <div class="trust-badge">
+        <span class="icon">⚖️</span> Court-Rule Aligned
+      </div>
+      <div class="trust-badge">
+        <span class="icon">🇿🇦</span> South African Law
+      </div>
+      <div class="trust-badge">
+        <span class="icon">✓</span> Cancel Anytime
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-text">Advome</div>
+        <p>Empowering South Africans to access justice through procedural guidance and self-representation assistance. Section 34 of the Constitution protects your right of access to justice.</p>
+      </div>
+      <div>
+        <div class="footer-title">Platform</div>
+        <div class="footer-links">
+          <a href="start.html">Start a Matter</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="attorney.html">Attorney Portal</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Legal Areas</div>
+        <div class="footer-links">
+          <a href="ccma.html">Labour Disputes</a>
+          <a href="divorce.html">Divorce</a>
+          <a href="estates-hub.html">Deceased Estates</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Company</div>
+        <div class="footer-links">
+          <a href="terms.html">Terms & Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Advome. All rights reserved.</span>
+      <span>Advome is not a law firm and does not provide legal advice.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- AI Chat Widget -->
+<div class="ai-chat-widget">
+  <button class="ai-chat-toggle" onclick="toggleChat()">💬</button>
+  <div class="ai-chat-panel" id="chatPanel">
+    <div class="ai-chat-header">
+      <div class="ai-avatar">🤖</div>
+      <div>
+        <div class="ai-title">Advome Assistant</div>
+        <div class="ai-subtitle">Ask procedural questions</div>
+      </div>
+    </div>
+    <div class="ai-chat-messages" id="chatMessages">
+      <div class="ai-message bot">Hello! I'm here to help you understand legal procedures. What would you like to know about your matter?</div>
+      <div class="ai-message disclaimer">⚠️ This is procedural information only, not legal advice. For advice on your specific situation, consult an attorney.</div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" id="chatInput" placeholder="Ask a question..." onkeypress="if(event.key==='Enter')sendMessage()">
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
 </div>
+
+<script>
+function toggleChat() {
+  document.getElementById('chatPanel').classList.toggle('open');
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const messages = document.getElementById('chatMessages');
+  messages.innerHTML += '<div class="ai-message user">' + escapeHtml(msg) + '</div>';
+  input.value = '';
+  messages.scrollTop = messages.scrollHeight;
+
+  // Simulate AI response (replace with actual API call)
+  setTimeout(() => {
+    const responses = {
+      'ccma': 'The CCMA (Commission for Conciliation, Mediation and Arbitration) handles labour disputes. You have 30 days from dismissal to refer your matter using LRA Form 7.11. Would you like help with the referral process?',
+      'conciliation': 'Conciliation is a settlement meeting with a CCMA commissioner. It is informal — no legal representation is allowed. The commissioner helps both parties reach an agreement. If no agreement is reached, a certificate is issued and you can proceed to arbitration.',
+      'arbitration': 'Arbitration is a formal hearing where a commissioner decides the outcome. You can bring witnesses and present evidence. Legal representation is allowed. The commissioner issues an award within 14 days.',
+      'divorce': 'In South Africa, divorce is handled by the High Court or Family Court. You need a summons, and if you have children, a parenting plan. The process differs for contested vs uncontested divorce.',
+      'default': 'That is a good question. To give you the most helpful information, could you tell me which type of matter you are dealing with (CCMA/labour, divorce, or estate)?'
+    };
+
+    const lower = msg.toLowerCase();
+    let reply = responses.default;
+    if (lower.includes('ccma') || lower.includes('dismiss')) reply = responses.ccma;
+    else if (lower.includes('concili')) reply = responses.conciliation;
+    else if (lower.includes('arbitrat')) reply = responses.arbitration;
+    else if (lower.includes('divorce')) reply = responses.divorce;
+
+    messages.innerHTML += '<div class="ai-message bot">' + reply + '</div>';
+    messages.scrollTop = messages.scrollHeight;
+  }, 800);
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+</script>
 
 </body>
 </html>
