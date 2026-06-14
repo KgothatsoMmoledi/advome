@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCMA Referral Guide — LRA Form 7.11 | Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1a3a5c; --secondary-blue: #2c5f8a; --accent-blue: #3d8fd1;
+            --light-blue: #e8f2fa; --ultra-light-blue: #f5f9fd;
+            --warning-red: #c0392b; --warning-bg: #fdf2f2; --warning-border: #e74c3c;
+            --success-green: #27ae60; --success-bg: #eafaf1; --success-border: #2ecc71;
+            --text-dark: #1a1a2e; --text-medium: #4a4a5a; --text-light: #6b6b7b;
+            --border-light: #e0e4e8; --white: #ffffff;
+            --shadow-soft: 0 4px 20px rgba(26, 58, 92, 0.08);
+            --shadow-medium: 0 8px 30px rgba(26, 58, 92, 0.12);
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--ultra-light-blue); color: var(--text-dark); line-height: 1.6; }
+        .top-nav { background: var(--white); border-bottom: 1px solid var(--border-light); padding: 0.75rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-soft); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo i { color: var(--accent-blue); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-medium); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-cta { background: var(--primary-blue); color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: var(--radius-sm); font-weight: 600; }
+        .progress-section { background: var(--white); padding: 1.5rem 0; border-bottom: 1px solid var(--border-light); }
+        .progress-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        .progress-tracker { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .progress-tracker::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border-light); z-index: 0; transform: translateY(-50%); }
+        .progress-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; background: var(--white); padding: 0 0.5rem; }
+        .step-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem; border: 2px solid var(--border-light); background: var(--white); color: var(--text-light); transition: all 0.3s; }
+        .step-circle.completed { background: var(--success-green); border-color: var(--success-green); color: var(--white); }
+        .step-circle.active { background: var(--primary-blue); border-color: var(--primary-blue); color: var(--white); box-shadow: 0 0 0 4px rgba(26, 58, 92, 0.15); }
+        .step-label { font-size: 0.75rem; font-weight: 500; color: var(--text-light); white-space: nowrap; }
+        .step-label.active { color: var(--primary-blue); font-weight: 600; }
+        .hero-section { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: var(--white); padding: 3rem 0 4rem; position: relative; overflow: hidden; }
+        .hero-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: rgba(255,255,255,0.03); border-radius: 50%; }
+        .hero-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 1.5rem; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+        .hero-subtitle { font-size: 1.1rem; opacity: 0.9; max-width: 600px; line-height: 1.6; }
+        .deadline-banner { background: var(--warning-bg); border-left: 4px solid var(--warning-border); padding: 1.5rem 2rem; margin: 2rem auto; max-width: 900px; border-radius: 0 var(--radius-md) var(--radius-md) 0; display: flex; align-items: center; gap: 1.5rem; box-shadow: var(--shadow-soft); }
+        .deadline-icon { font-size: 2rem; color: var(--warning-border); flex-shrink: 0; }
+        .deadline-content h3 { color: var(--warning-red); font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .deadline-content p { color: var(--text-medium); font-size: 0.95rem; }
+        .deadline-timer { display: flex; gap: 1rem; margin-top: 0.75rem; }
+        .timer-box { background: var(--white); border: 1px solid var(--warning-border); border-radius: var(--radius-sm); padding: 0.5rem 1rem; text-align: center; min-width: 70px; }
+        .timer-number { font-size: 1.5rem; font-weight: 700; color: var(--warning-red); line-height: 1; }
+        .timer-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+        .main-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .content-card { background: var(--white); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); }
+        .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--light-blue); }
+        .card-icon { width: 48px; height: 48px; background: var(--light-blue); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--primary-blue); flex-shrink: 0; }
+        .card-title { font-size: 1.4rem; font-weight: 700; color: var(--primary-blue); }
+        .card-subtitle { font-size: 0.9rem; color: var(--text-light); margin-top: 0.25rem; }
+        .form-field { background: var(--ultra-light-blue); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1rem; border-left: 3px solid var(--accent-blue); transition: all 0.2s; }
+        .form-field:hover { background: var(--light-blue); transform: translateX(4px); }
+        .field-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .field-number { background: var(--primary-blue); color: var(--white); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+        .field-name { font-weight: 600; color: var(--text-dark); font-size: 1rem; flex: 1; margin-left: 0.75rem; }
+        .field-tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 50px; font-weight: 600; }
+        .tag-required { background: var(--warning-bg); color: var(--warning-red); }
+        .tag-optional { background: var(--light-blue); color: var(--secondary-blue); }
+        .tag-critical { background: var(--warning-bg); color: var(--warning-red); border: 1px solid var(--warning-border); }
+        .field-description { color: var(--text-medium); font-size: 0.95rem; line-height: 1.6; margin-left: 2.5rem; }
+        .field-tip { display: flex; align-items: flex-start; gap: 0.5rem; margin-top: 0.75rem; margin-left: 2.5rem; padding: 0.75rem; background: var(--white); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-light); }
+        .field-tip i { color: var(--accent-blue); margin-top: 0.15rem; }
+        .warning-box { background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: var(--radius-md); padding: 1.25rem; margin: 1.5rem 0; display: flex; gap: 1rem; }
+        .warning-box i { color: var(--warning-red); font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .warning-box h4 { color: var(--warning-red); margin-bottom: 0.5rem; font-size: 1rem; }
+        .warning-box p { color: var(--text-medium); font-size: 0.9rem; line-height: 1.5; }
+        .success-box { background: var(--success-bg); border: 1px solid var(--success-border); border-radius: var(--radius-md); padding: 1.25rem; margin: 1.5rem 0; display: flex; gap: 1rem; }
+        .success-box i { color: var(--success-green); font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .success-box h4 { color: var(--success-green); margin-bottom: 0.5rem; }
+        .info-box { background: var(--light-blue); border-left: 4px solid var(--accent-blue); padding: 1.25rem; margin: 1.5rem 0; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+        .info-box h4 { color: var(--primary-blue); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .info-box p { color: var(--text-medium); font-size: 0.9rem; }
+        .office-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .office-card { background: var(--ultra-light-blue); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; transition: all 0.2s; }
+        .office-card:hover { box-shadow: var(--shadow-soft); border-color: var(--accent-blue); transform: translateY(-2px); }
+        .office-name { font-weight: 600; color: var(--primary-blue); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .office-detail { font-size: 0.85rem; color: var(--text-medium); margin-bottom: 0.35rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .office-detail i { color: var(--accent-blue); font-size: 0.8rem; margin-top: 0.2rem; width: 16px; }
+        .timeline { position: relative; padding-left: 2rem; margin: 1.5rem 0; }
+        .timeline::before { content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0; width: 2px; background: var(--border-light); }
+        .timeline-item { position: relative; padding-bottom: 1.5rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -1.85rem; top: 0.35rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-blue); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--accent-blue); }
+        .timeline-item.completed::before { background: var(--success-green); box-shadow: 0 0 0 2px var(--success-green); }
+        .timeline-item.current::before { background: var(--warning-red); box-shadow: 0 0 0 2px var(--warning-red); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .timeline-title { font-weight: 600; color: var(--text-dark); margin-bottom: 0.25rem; }
+        .timeline-desc { font-size: 0.9rem; color: var(--text-medium); }
+        .timeline-time { font-size: 0.8rem; color: var(--accent-blue); font-weight: 500; margin-top: 0.25rem; }
+        .condonation-steps { counter-reset: step; margin-top: 1.5rem; }
+        .condonation-step { display: flex; gap: 1rem; margin-bottom: 1.5rem; padding: 1.25rem; background: var(--ultra-light-blue); border-radius: var(--radius-md); border-left: 3px solid var(--accent-blue); }
+        .condonation-step::before { counter-increment: step; content: counter(step); width: 32px; height: 32px; background: var(--primary-blue); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .condonation-content h4 { font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .condonation-content p { font-size: 0.9rem; color: var(--text-medium); line-height: 1.6; }
+        .template-section { background: linear-gradient(135deg, var(--light-blue) 0%, var(--ultra-light-blue) 100%); border-radius: var(--radius-lg); padding: 2rem; margin-top: 1.5rem; border: 1px solid var(--border-light); }
+        .template-form { display: grid; gap: 1rem; margin-top: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group label { font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
+        .form-group input, .form-group textarea, .form-group select { padding: 0.75rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(61, 143, 209, 0.15); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .btn-primary { background: var(--primary-blue); color: var(--white); border: none; padding: 0.875rem 2rem; border-radius: var(--radius-sm); font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        .btn-primary:hover { background: var(--secondary-blue); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+        .btn-secondary { background: var(--white); color: var(--primary-blue); border: 1px solid var(--primary-blue); padding: 0.875rem 2rem; border-radius: var(--radius-sm); font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        .btn-secondary:hover { background: var(--light-blue); }
+        .btn-group { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .savings-calculator { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: var(--white); border-radius: var(--radius-lg); padding: 2rem; margin: 2rem 0; position: relative; overflow: hidden; }
+        .savings-calculator::before { content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+        .savings-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .savings-header h3 { font-size: 1.2rem; }
+        .savings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; z-index: 1; }
+        .savings-item { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; }
+        .savings-item.highlight { background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.3); }
+        .savings-label { font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem; }
+        .savings-amount { font-size: 1.75rem; font-weight: 700; }
+        .savings-note { font-size: 0.8rem; opacity: 0.8; margin-top: 1rem; text-align: center; }
+        .chat-widget { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; }
+        .chat-toggle { width: 60px; height: 60px; border-radius: 50%; background: var(--primary-blue); color: var(--white); border: none; cursor: pointer; box-shadow: var(--shadow-medium); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.3s; }
+        .chat-toggle:hover { transform: scale(1.1); background: var(--secondary-blue); }
+        .chat-panel { position: absolute; bottom: 70px; right: 0; width: 350px; max-height: 500px; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-medium); display: none; flex-direction: column; overflow: hidden; border: 1px solid var(--border-light); }
+        .chat-panel.active { display: flex; }
+        .chat-header { background: var(--primary-blue); color: var(--white); padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+        .chat-close { background: none; border: none; color: var(--white); cursor: pointer; font-size: 1.25rem; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+        .chat-message { max-width: 85%; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.5; }
+        .chat-message.bot { background: var(--light-blue); color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-message.user { background: var(--primary-blue); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-input-area { padding: 1rem; border-top: 1px solid var(--border-light); display: flex; gap: 0.5rem; }
+        .chat-input { flex: 1; padding: 0.6rem 1rem; border: 1px solid var(--border-light); border-radius: 50px; font-family: inherit; font-size: 0.9rem; }
+        .chat-input:focus { outline: none; border-color: var(--accent-blue); }
+        .chat-send { width: 36px; height: 36px; border-radius: 50%; background: var(--primary-blue); color: var(--white); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .upload-zone { border: 2px dashed var(--border-light); border-radius: var(--radius-md); padding: 2rem; text-align: center; background: var(--ultra-light-blue); transition: all 0.2s; cursor: pointer; margin-top: 1rem; }
+        .upload-zone:hover { border-color: var(--accent-blue); background: var(--light-blue); }
+        .upload-zone i { font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 0.75rem; }
+        .upload-zone h4 { color: var(--primary-blue); margin-bottom: 0.5rem; }
+        .upload-zone p { font-size: 0.85rem; color: var(--text-light); }
+        .page-footer { background: var(--primary-blue); color: var(--white); padding: 3rem 0 2rem; margin-top: 3rem; }
+        .footer-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        .disclaimer-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; }
+        .disclaimer-box h4 { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; font-size: 1rem; }
+        .disclaimer-box p { font-size: 0.85rem; line-height: 1.6; opacity: 0.9; }
+        .footer-links { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--white); }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 1.75rem; }
+            .content-card { padding: 1.5rem; }
+            .savings-grid { grid-template-columns: 1fr; }
+            .office-grid { grid-template-columns: 1fr; }
+            .deadline-banner { flex-direction: column; text-align: center; }
+            .chat-panel { width: calc(100vw - 2rem); right: -1rem; }
+            .btn-group { flex-direction: column; }
+            .btn-group .btn-primary, .btn-group .btn-secondary { width: 100%; justify-content: center; }
+        }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-balance-scale"></i>
+                Advome
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="documents.html">Documents</a>
+                <a href="attorney.html">Find Attorney</a>
+                <a href="pricing.html" class="nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="progress-section">
+        <div class="progress-container">
+            <div class="progress-tracker">
+                <div class="progress-step">
+                    <div class="step-circle completed"><i class="fas fa-check"></i></div>
+                    <span class="step-label">Identify</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle active">2</div>
+                    <span class="step-label active">Referral</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Conciliation</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Arbitration</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">5</div>
+                    <span class="step-label">Award</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">6</div>
+                    <span class="step-label">Finalise</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-gavel"></i>
+                Step 2 of 6 — CCMA Workflow
+            </div>
+            <h1 class="hero-title">File Your CCMA Referral</h1>
+            <p class="hero-subtitle">
+                Complete LRA Form 7.11 and file your dispute with the Commission for Conciliation, Mediation and Arbitration. 
+                Time is critical — do not miss your deadline.
+            </p>
+        </div>
+    </section>
+
+    <div class="deadline-banner">
+        <div class="deadline-icon">
+            <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="deadline-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> Critical Deadline Warning</h3>
+            <p>
+                <strong>Unfair dismissal:</strong> 30 days from date of dismissal. 
+                <strong>Unfair labour practice:</strong> 90 days from the act or omission. 
+                All days count — including weekends and public holidays.
+            </p>
+            <div class="deadline-timer" id="deadlineTimer">
+                <div class="timer-box">
+                    <div class="timer-number" id="timerDays">--</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-number" id="timerHours">--</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-number" id="timerMinutes">--</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-light);">
+                <i class="fas fa-info-circle"></i> 
+                Enter your dismissal date below to calculate your exact deadline.
+            </p>
+        </div>
+    </div>
+
+    <main class="main-content">
+
+        <article class="content-card fade-in">
+            <div class="card-header">
+                <div class="card-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                    <h2 class="card-title">Understanding Your Deadline</h2>
+                    <p class="card-subtitle">The most common reason CCMA cases fail — missing the deadline</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <i class="fas fa-exclamation-circle"></i>
+                <div>
+                    <h4>30-Day Rule for Unfair Dismissal</h4>
+                    <p>
+                        You have <strong>30 calendar days</strong> from the date of dismissal to refer your dispute to the CCMA. 
+                        This includes weekends and public holidays. The clock starts the day <em>after</em> your dismissal date. 
+                        If the 30th day falls on a Sunday or public holiday, the deadline extends to the next working day.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> What counts as the "date of dismissal"?</h4>
+                <p>
+                    <strong>With notice:</strong> The date your notice period expired, or the date you were paid all outstanding salary — whichever is earlier.<br>
+                    <strong>Without notice:</strong> The date your contract terminated or the date you left the employer's service — whichever is earlier.<br>
+                    <strong>Constructive dismissal:</strong> The date you resigned due to the employer's conduct.<br>
+                    <strong>After appeal:</strong> The date the employer made the final decision to uphold the dismissal.
+                </p>
+            </div>
+
+            <div class="warning-box" style="background: #fff8e1; border-color: #f39c12;">
+                <i class="fas fa-calendar-alt" style="color: #f39c12;"></i>
+                <div>
+                    <h4 style="color: #d68910;">90-Day Rule for Unfair Labour Practice</h4>
+                    <p>
+                        If your dispute is about an <strong>unfair labour practice</strong> (e.g., unfair suspension, demotion, 
+                        discrimination, benefits dispute) — not a dismissal — you have <strong>90 days</strong> from the date of the 
+                        act or omission to refer the dispute.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box" style="background: #e8f6f3; border-left-color: #1abc9c;">
+                <h4><i class="fas fa-calculator"></i> Calculate Your Deadline</h4>
+                <p>
+                    Use the calculator below to determine your exact filing deadline. Enter your dismissal date or the date 
+                    the unfair labour practice occurred.
+                </p>
+                <div class="template-form" style="margin-top: 1rem; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Date of Dismissal / Event</label>
+                        <input type="date" id="dismissalDate" onchange="calculateDeadline()">
+                    </div>
+                    <div class="form-group">
+                        <label>Dispute Type</label>
+                        <select id="disputeType" onchange="calculateDeadline()">
+                            <option value="30">Unfair Dismissal (30 days)</option>
+                            <option value="90">Unfair Labour Practice (90 days)</option>
+                            <option value="180">Unfair Discrimination (6 months)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="deadlineResult" style="margin-top: 1rem; padding: 1rem; background: var(--white); border-radius: var(--radius-sm); display: none;">
+                    <p style="font-weight: 600; color: var(--primary-blue);">
+                        <i class="fas fa-calendar-check"></i> Your filing deadline: <span id="deadlineDate"></span>
+                    </p>
+                    <p id="deadlineStatus" style="margin-top: 0.5rem; font-size: 0.9rem;"></p>
+                </div>
+            </div>
+        </article>
+
+        <article class="content-card fade-in">
+            <div class="card-header">
+                <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                <div>
+                    <h2 class="card-title">LRA Form 7.11 — Field-by-Field Guide</h2>
+                    <p class="card-subtitle">Plain-language explanations for every section of the referral form</p>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 1.5rem; color: var(--text-medium);">
+                LRA Form 7.11 is the official form used to refer a dispute to the CCMA for conciliation (and potentially con-arb). 
+                It is a 5-page form. Below is a simplified guide to completing each section correctly. 
+                <strong>You can download the official form from the <a href="https://www.ccma.org.za" target="_blank" style="color: var(--accent-blue);">CCMA website</a> or obtain it at any CCMA office.</strong>
+            </p>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">1</span>
+                    <span class="field-name">Details of Party Referring the Dispute</span>
+                    <span class="field-tag tag-required">Required</span>
+                </div>
+                <p class="field-description">
+                    Fill in your full name, ID number, postal address, and contact details. If you are a trade union or employer's organisation referring on behalf of a member, provide the organisation's details here. <strong>Tip:</strong> Use a permanent address where you can reliably receive mail — the CCMA will send notices to this address.
+                </p>
+                <div class="field-tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Provide an alternative contact (friend, family member, or union rep) in case you change your phone number.</span>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">2</span>
+                    <span class="field-name">Details of the Other Party</span>
+                    <span class="field-tag tag-required">Required</span>
+                </div>
+                <p class="field-description">
+                    Provide the full legal name of your employer, their registered address, and contact details. If you are unsure of the exact registered name, check your payslip, employment contract, or letter of appointment. If there are multiple parties (e.g., a labour broker and client), list all of them.
+                </p>
+                <div class="field-tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Double-check the employer's registered name on CIPC (Companies and Intellectual Property Commission) if you are unsure — using the wrong name can cause delays.</span>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">3</span>
+                    <span class="field-name">Nature of the Dispute</span>
+                    <span class="field-tag tag-critical">Critical</span>
+                </div>
+                <p class="field-description">
+                    <strong>Tick only ONE box.</strong> This determines the entire path of your case. Options include:
+                </p>
+                <ul style="margin-left: 2.5rem; margin-top: 0.5rem; color: var(--text-medium); font-size: 0.95rem; line-height: 1.8;">
+                    <li><strong>Unfair dismissal</strong> — You were fired, retrenched, or forced to resign (constructive dismissal)</li>
+                    <li><strong>Unfair labour practice</strong> — Suspension, demotion, unfair benefits, etc. (not a dismissal)</li>
+                    <li><strong>Unfair discrimination</strong> — Discrimination based on race, gender, pregnancy, disability, etc.</li>
+                    <li><strong>Organisational rights</strong> — Trade union access, stop-order facilities, etc.</li>
+                    <li><strong>Refusal to bargain</strong> — Employer refuses to negotiate with a recognised union</li>
+                    <li><strong>Severance pay / S41 BCEA</strong> — Dispute about severance pay under the Basic Conditions of Employment Act</li>
+                </ul>
+                <div class="field-tip">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Choosing the wrong category can get your case dismissed.</strong> If you are unsure, use the AI chat assistant below or consult an attorney.</span>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">4</span>
+                    <span class="field-name">Summary of the Facts</span>
+                    <span class="field-tag tag-required">Required</span>
+                </div>
+                <p class="field-description">
+                    Write a brief, factual summary of what happened. Stick to the key facts: dates, what occurred, and why you believe it was unfair. Avoid emotional language or legal arguments — you will have a chance to present your full case later. Keep it under 200 words if possible.
+                </p>
+                <div class="field-tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Example: "I was dismissed on 15 March 2026. I was accused of theft. No disciplinary hearing was held. I was told to leave immediately. I deny the allegation and was never given a chance to respond."</span>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">5</span>
+                    <span class="field-name">Date the Dispute Arose</span>
+                    <span class="field-tag tag-critical">Critical</span>
+                </div>
+                <p class="field-description">
+                    This is the date that starts the clock for your deadline. For unfair dismissal, this is the date of dismissal. For unfair labour practice, it is the date the unfair act occurred. <strong>This date must match your supporting documents.</strong>
+                </p>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">6</span>
+                    <span class="field-name">Details of Dispute Procedures Followed</span>
+                    <span class="field-tag tag-required">Required</span>
+                </div>
+                <p class="field-description">
+                    State whether you followed any internal grievance or disciplinary appeal procedures before coming to the CCMA. If yes, describe the steps you took and the outcome. If no, explain why (e.g., no internal procedure existed, or the employer refused to entertain an appeal).
+                </p>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">7</span>
+                    <span class="field-name">Outcome Required</span>
+                    <span class="field-tag tag-required">Required</span>
+                </div>
+                <p class="field-description">
+                    State what remedy you are seeking. Common options:
+                </p>
+                <ul style="margin-left: 2.5rem; margin-top: 0.5rem; color: var(--text-medium); font-size: 0.95rem; line-height: 1.8;">
+                    <li><strong>Reinstatement</strong> — Get your job back with full back pay (most common for unfair dismissal)</li>
+                    <li><strong>Re-employment</strong> — Get your job back but on new terms</li>
+                    <li><strong>Compensation</strong> — Money award (capped at 12 months remuneration for ordinary unfair dismissal; up to 24 months for automatically unfair dismissal)</li>
+                    <li><strong>Other</strong> — E.g., withdrawal of warning, restoration of benefits, etc.</li>
+                </ul>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">8</span>
+                    <span class="field-name">Sector / Industry</span>
+                    <span class="field-tag tag-optional">Optional</span>
+                </div>
+                <p class="field-description">
+                    Indicate the sector in which you worked (e.g., retail, mining, domestic, public service). This helps the CCMA assign a commissioner with relevant experience and ensures the correct bargaining council is identified if applicable.
+                </p>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">9</span>
+                    <span class="field-name">Interpretation Services</span>
+                    <span class="field-tag tag-optional">Optional</span>
+                </div>
+                <p class="field-description">
+                    If you require an interpreter (for any of South Africa's 11 official languages), tick "Yes" and specify the language. The CCMA provides interpreters free of charge for official languages. If you need an interpreter for a non-official language, you may bring one at your own cost.
+                </p>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">10</span>
+                    <span class="field-name">Objection to Con-Arb</span>
+                    <span class="field-tag tag-optional">Optional</span>
+                </div>
+                <p class="field-description">
+                    <strong>Con-arb</strong> means conciliation followed immediately by arbitration on the same day if conciliation fails. If you want to <strong>object</strong> to con-arb (giving you more time to prepare for arbitration), tick the box and sign. You cannot object in certain disputes (e.g., dismissal for misconduct, incapacity, or operational requirements under Section 191(5A)).
+                </p>
+                <div class="field-tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <span><strong>Should you object?</strong> If your case is complex, you need more witnesses, or you want time to gather more evidence after conciliation, consider objecting. If your case is straightforward and you want a faster resolution, allow con-arb.</span>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div class="field-header">
+                    <span class="field-number">11</span>
+                    <span class="field-name">Part B — Dismissal Details (if applicable)</span>
+                    <span class="field-tag tag-required">If Dismissal</span>
+                </div>
+                <p class="field-description">
+                    If your dispute is about unfair dismissal, you must complete Part B (page 5 of the form). This includes:
+                </p>
+                <ul style="margin-left: 2.5rem; margin-top: 0.5rem; color: var(--text-medium); font-size: 0.95rem; line-height: 1.8;">
+                    <li><strong>Date of employment commencement</strong> — When you started working</li>
+                    <li><strong>Notice of dismissal</strong> — How you were informed (in writing, orally, or other)</li>
+                    <li><strong>Reason for dismissal</strong> — Misconduct, incapacity, operational requirements (retrenchment), unknown, or constructive dismissal</li>
+                    <li><strong>Procedural fairness</strong> — Was a fair procedure followed? (Yes/No + explanation)</li>
+                    <li><strong>Substantive fairness</strong> — Was the reason for dismissal fair? (Yes/No + explanation)</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <i class="fas fa-signature"></i>
+                <div>
+                    <h4>Signature Requirements</h4>
+                    <p>
+                        The form must be <strong>signed by the referring party</strong> (you, the employee). If a trade union or employer's organisation is referring on your behalf, they must sign. If there are multiple employees in the same dispute and no union is involved, each employee must sign a separate page attached to the form. Electronic signatures are accepted for online filings.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <article class="content-card fade-in">
+            <div class="card-header">
+                <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                    <h2 class="card-title">Where to File Your Referral</h2>
+                    <p class="card-subtitle">CCMA is IN-PERSON — file at the correct regional office</p>
+                </div>
+            </div>
+
+            <div class="warning-box" style="background: #fff3cd; border-color: #ffc107;">
+                <i class="fas fa-hand-paper" style="color: #f39c12;"></i>
+                <div>
+                    <h4 style="color: #d68910;">CCMA is IN-PERSON</h4>
+                    <p>
+                        The CCMA does not have a fully online filing system for all matters. You must either 
+                        <strong>hand-deliver</strong> your form to the CCMA office, <strong>fax</strong> it, 
+                        <strong>email</strong> it to the correct regional office, or send it by <strong>registered post</strong>. 
+                        Online filing is available via the CCMA's electronic portal for some matters, but you should 
+                        confirm receipt. Always keep proof of filing.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> Filing Methods</h4>
+                <p>
+                    <strong>1. Hand delivery:</strong> Take the form to the CCMA regional office where the dispute arose. Get a stamped receipt.<br>
+                    <strong>2. Email:</strong> Scan and email to the relevant regional office email address (see below). Request a read receipt.<br>
+                    <strong>3. Fax:</strong> Fax to the regional office fax number. Keep the fax transmission slip.<br>
+                    <strong>4. Registered post:</strong> Send to the regional office postal address. Keep the postal receipt. Presumed received 7 days after posting.<br>
+                    <strong>5. Online:</strong> Use the CCMA electronic referral portal at <a href="https://cmonline.ccma.org.za" target="_blank" style="color: var(--accent-blue);">cmonline.ccma.org.za</a> (confirm availability for your dispute type).
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4>Proof of Service on the Employer is MANDATORY</h4>
+                    <p>
+                        You <strong>must</strong> serve a copy of the completed referral form (and condonation application, if applicable) on the employer 
+                        <em>before</em> or <em>at the same time</em> as filing with the CCMA. You must attach proof of service to your CCMA filing. 
+                        Acceptable proof: registered mail receipt, fax confirmation slip, email read receipt, signed hand-delivery receipt, or an affidavit of service.
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--primary-blue); font-size: 1.2rem;">
+                <i class="fas fa-building"></i> CCMA Regional Offices
+            </h3>
+            <p style="margin-bottom: 1rem; color: var(--text-medium); font-size: 0.9rem;">
+                File at the CCMA office in the province where the dispute arose (usually where you worked).
+            </p>
+
+            <div class="office-grid">
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Gauteng — Johannesburg</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> 127 Fox Street, Johannesburg, 2001</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (011) 220-5000</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> johannesburg@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Gauteng — Tshwane (Pretoria)</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> Metro Park Building, 351 Schoeman Street, Pretoria</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (012) 392-9700</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> pretoria@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Western Cape — Cape Town</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, 78 Darling Street, Cape Town, 8001</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (021) 469-0111</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> ctn@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> KwaZulu-Natal — Durban</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> Embassy Building, 199 Smith Street, Durban</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (031) 362-2300</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> kzn@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Eastern Cape — Gqeberha (PE)</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, 107 Govan Mbeki Avenue, Gqeberha</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (041) 505-4300</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> pe@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Free State — Bloemfontein</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, Cnr Elizabeth & West Burger Streets</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (051) 505-4400</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> blm@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Limpopo — Polokwane</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, 104 Hans van Rensburg Street, Polokwane</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (015) 297-5010</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> ptb@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Mpumalanga — Witbank</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, Diedericks Street, Witbank</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (013) 656-2800</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> wtb@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> North West — Klerksdorp</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, 47 Siddle Street, Klerksdorp</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (018) 464-0700</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> kdp@ccma.org.za</div>
+                </div>
+                <div class="office-card">
+                    <div class="office-name"><i class="fas fa-map-pin"></i> Northern Cape — Kimberley</div>
+                    <div class="office-detail"><i class="fas fa-location-arrow"></i> CCMA House, 5-13 Compound Street, Kimberley</div>
+                    <div class="office-detail"><i class="fas fa-phone"></i> (053) 831-6780</div>
+                    <div class="office-detail"><i class="fas fa-envelope"></i> kmb@ccma.org.za</div>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 1.5rem;">
+                <h4><i class="fas fa-phone-alt"></i> CCMA Call Centre</h4>
+                <p>
+                    <strong>National:</strong> 011 220-5080<br>
+                    <strong>Fraud Hotline:</strong> 0860 666 348<br>
+                    <strong>General Email:</strong> info@ccma.org.za<br>
+                    <strong>Hours:</strong> Monday to Friday, 08:30 to 16:30 (excluding public holidays)
+                </p>
+            </div>
+        </article>
