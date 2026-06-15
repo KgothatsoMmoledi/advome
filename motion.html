@@ -44,7 +44,7 @@
   <main class="adv-container" id="main-content" role="main">
     <div class="adv-workspace">
 
-      <!-- 6-WEEK DEADLINE CALCULATOR (Sticky at top) -->
+      <!-- 6-WEEK DEADLINE CALCULATOR -->
       <section class="adv-card" style="border-left: 4px solid #d69e2e; margin-bottom: 1.5rem;" aria-labelledby="deadline-title">
         <div class="adv-card__header">
           <div>
@@ -69,21 +69,19 @@
         </div>
       </section>
 
-      <!-- TAB NAVIGATION -->
+      <!-- TAB NAVIGATION -- No locks, all freely accessible -->
       <div class="adv-tabs" role="tablist" aria-label="Motion workflow tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0;">
         <button class="adv-tab" id="tab-btn-1" role="tab" aria-selected="true" aria-controls="tab-panel-1" onclick="switchTab(1)" style="flex: 1; padding: 1rem 1.5rem; background: white; border: none; border-bottom: 3px solid #1a365d; font-weight: 600; color: #1a365d; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
           <span style="width: 28px; height: 28px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">1</span>
           <span>Motion & Affidavit</span>
         </button>
-        <button class="adv-tab" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #a0aec0; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
-          <span style="width: 28px; height: 28px; background: #a0aec0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">2</span>
+        <button class="adv-tab" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #4a5568; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+          <span style="width: 28px; height: 28px; background: #4a5568; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">2</span>
           <span>Court Online</span>
-          <span id="tab-lock-2" style="font-size: 1rem;" title="Viewable - complete Tab 1 to unlock">🔒</span>
         </button>
-        <button class="adv-tab" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #a0aec0; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
-          <span style="width: 28px; height: 28px; background: #a0aec0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">3</span>
+        <button class="adv-tab" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #4a5568; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+          <span style="width: 28px; height: 28px; background: #4a5568; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">3</span>
           <span>Responding</span>
-          <span id="tab-lock-3" style="font-size: 1rem;" title="Viewable - complete Tab 2 to unlock">🔒</span>
         </button>
       </div>
 
@@ -99,7 +97,7 @@
           </div>
 
           <div class="adv-card__body">
-            <!-- Party Structure Table -->
+            <!-- Party Structure -->
             <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
               <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Party Structure</h4>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem;">
@@ -122,7 +120,6 @@
               </div>
             </div>
 
-            <!-- Party Details -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
               <div class="adv-form-group">
                 <label class="adv-label" for="app-name">Applicant Full Name (You)</label>
@@ -190,33 +187,31 @@
               </select>
             </div>
 
-            <!-- Grounds for Review -->
             <div style="margin-bottom: 1.5rem;">
               <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Grounds for Review (LRA s145(2))</h3>
               <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1rem;">Select all applicable grounds. The new 2024 Rules require a <em>concise</em> statement. State specifically what the commissioner did wrong.</p>
-
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-                <label class="adv-checklist__item" style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                   <input type="checkbox" id="ground-gross-irregularity" data-storage-key="motion_ground_gross_irregularity" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">Gross irregularity in the proceedings (s145(2)(c))</span>
                 </label>
-                <label class="adv-checklist__item" style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                   <input type="checkbox" id="ground-excess-power" data-storage-key="motion_ground_excess_power" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">Excess of power / lack of jurisdiction (s145(2)(a))</span>
                 </label>
-                <label class="adv-checklist__item" style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                   <input type="checkbox" id="ground-unreasonable" data-storage-key="motion_ground_unreasonable" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">Unreasonable decision (Sidumo test) (s145(2)(a))</span>
                 </label>
-                <label class="adv-checklist__item" style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                   <input type="checkbox" id="ground-misconduct" data-storage-key="motion_ground_misconduct" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">Commissioner misconduct / bias (s145(2)(b))</span>
                 </label>
-                <label class="adv-checklist__item" style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                   <input type="checkbox" id="ground-improperly-obtained" data-storage-key="motion_ground_improperly_obtained" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">Award improperly obtained / fraud (s145(2)(d))</span>
                 </label>
-                <label class="adv-checklist__item" style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                   <input type="checkbox" id="ground-other" data-storage-key="motion_ground_other" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">Other (specify below)</span>
                 </label>
@@ -233,7 +228,6 @@
               <textarea class="adv-input" id="relief-sought" rows="3" placeholder="e.g. Review and set aside the arbitration award. Order the respondent to reinstate the applicant with retrospective effect." data-storage-key="motion_relief"></textarea>
             </div>
 
-            <!-- Critical Warnings -->
             <div style="padding: 1rem; background: #fff5f5; border-left: 4px solid #c53030; border-radius: 4px; margin-bottom: 1rem;">
               <strong style="color: #742a2a; font-size: 1rem;">⚠ CRITICAL: Reference Number ≠ Case Number</strong>
               <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;"><strong>Do NOT write the reference number on any court document.</strong> Upload <strong>ONLY</strong> the Notice of Motion to Court Online first. The Registrar will issue an official case number. The affidavit comes AFTER the case is issued. (Directive 1 of 2025)</p>
@@ -281,14 +275,6 @@
             </div>
           </div>
         </section>
-
-        <!-- Tab 1 Completion -->
-        <div style="margin-top: 1.5rem; padding: 1.5rem; background: #f0fff4; border-radius: 8px; border: 1px solid #9ae6b4; text-align: center;" id="tab1-complete-section">
-          <p style="margin: 0 0 1rem 0; font-size: 1rem; color: #22543d; font-weight: 500;">Have you generated and saved your documents?</p>
-          <button class="adv-btn adv-btn--accent" onclick="completeTab(1)" id="tab1-complete-btn">
-            I have generated and saved my documents → Unlock Tab 2
-          </button>
-        </div>
       </div><!-- /tab-panel-1 -->
 
       <!-- TAB PANEL 2: Court Online Registration & Filing -->
@@ -303,7 +289,6 @@
           </div>
 
           <div class="adv-card__body">
-            <!-- Step-by-Step Guide -->
             <div style="margin-bottom: 1.5rem;">
               <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a365d;">8 Steps to File on Court Online</h3>
               <div style="display: grid; gap: 0.75rem;">
@@ -366,7 +351,6 @@
               </div>
             </div>
 
-            <!-- Fee Table -->
             <div style="margin-bottom: 1.5rem;">
               <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Estimated Filing Costs</h3>
               <div style="overflow-x: auto;">
@@ -384,7 +368,6 @@
               <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #718096;"><strong>Indigent status:</strong> Rule 70 — If you cannot afford fees, contact the Registrar with proof of income (payslip, bank statement, or affidavit) to apply for a fee waiver.</p>
             </div>
 
-            <!-- Court Online Help Desk -->
             <div style="margin-bottom: 1.5rem;">
               <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Court Online Help Desk Contacts</h3>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
@@ -414,10 +397,9 @@
               </div>
             </div>
 
-            <!-- Service Confirmation -->
             <div style="padding: 1rem; background: #f0fff4; border-radius: 8px; border: 1px solid #9ae6b4;">
               <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #22543d;">Service Confirmation</h4>
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
                 <input type="checkbox" id="service-confirm" data-storage-key="motion_service_confirm" style="width: 18px; height: 18px; flex-shrink: 0;">
                 <span style="font-size: 0.9rem; color: #1a202c;">I have served the Notice of Motion on all respondents by email</span>
               </label>
@@ -428,14 +410,6 @@
             </div>
           </div>
         </section>
-
-        <!-- Tab 2 Completion -->
-        <div style="margin-top: 1.5rem; padding: 1.5rem; background: #f0fff4; border-radius: 8px; border: 1px solid #9ae6b4; text-align: center;" id="tab2-complete-section">
-          <p style="margin: 0 0 1rem 0; font-size: 1rem; color: #22543d; font-weight: 500;">Have you filed on Court Online and served all respondents?</p>
-          <button class="adv-btn adv-btn--accent" onclick="completeTab(2)" id="tab2-complete-btn">
-            I have filed and served → Unlock Tab 3
-          </button>
-        </div>
       </div><!-- /tab-panel-2 -->
 
       <!-- TAB PANEL 3: Responding Affidavit -->
@@ -444,7 +418,7 @@
         <section class="adv-card adv-card--primary" aria-labelledby="tab3-action-title">
           <div class="adv-card__header">
             <div>
-              <h2 id="tab3-action-title" class="adv-card__title">Responding Affidavit (10 Days After Service)</h2>
+              <h2 id="tab3-action-title" class="adv-card__title">Responding Affidavit (10 Working Days After Service)</h2>
               <p class="adv-card__subtitle">The respondent has 10 working days after service to file a Notice of Intention to Oppose and an Answering Affidavit. Determine if your review is defended or undefended.</p>
             </div>
           </div>
@@ -511,12 +485,6 @@ Deponent
 
 SWORN TO before me...</pre>
                 </div>
-
-                <div style="text-align: center; margin-bottom: 1rem;">
-                  <a href="record.html" class="adv-btn adv-btn--accent" style="text-decoration: none; display: inline-flex;" onclick="markTab3Complete()">
-                    Proceed to Record & Transcription →
-                  </a>
-                </div>
               </div>
             </div>
 
@@ -573,7 +541,6 @@ _____________________
 Commissioner of Oaths</pre>
                 </div>
 
-                <!-- Replying Affidavit Generator -->
                 <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
                   <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Generate Your Replying Affidavit (Rule 7(5)(a))</h4>
                   <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: #718096;">Address ONLY new issues raised in the answering affidavit. No new facts. No repetition of your founding affidavit.</p>
@@ -602,16 +569,10 @@ Commissioner of Oaths</pre>
                   <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">You must file your replying affidavit within <strong>5 working days</strong> of receiving the answering affidavit. Failure to do so may result in the court considering the matter on the respondent's version alone. File on Court Online under "My Case Documents" and serve all parties by email.</p>
                 </div>
 
-                <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                   <input type="checkbox" id="replying-filed" data-storage-key="motion_replying_filed" style="width: 18px; height: 18px; flex-shrink: 0;">
                   <span style="font-size: 0.9rem; color: #1a202c;">I have sent my replying affidavit to all respondents and filed it on Court Online</span>
                 </label>
-
-                <div style="text-align: center;">
-                  <a href="record.html" class="adv-btn adv-btn--accent" style="text-decoration: none; display: inline-flex;" onclick="markTab3Complete()">
-                    Proceed to Record & Transcription →
-                  </a>
-                </div>
               </div>
             </div>
 
@@ -779,17 +740,10 @@ Commissioner of Oaths</pre>
   <script src="shared-scripts.js"></script>
   <script>
 
-    // ─── TAB SYSTEM ───
+    // ─── TAB SYSTEM ─── All tabs freely accessible, no locks
     var currentTab = 1;
-    var tabComplete = {
-      1: localStorage.getItem('motion_tab1_complete') === 'true',
-      2: localStorage.getItem('motion_tab2_complete') === 'true',
-      3: localStorage.getItem('motion_tab3_complete') === 'true'
-    };
 
     function switchTab(n) {
-      // Allow viewing any tab, but show a warning if previous not completed
-      var canComplete = (n === 1) || tabComplete[n - 1];
       currentTab = n;
       // Update tab buttons
       for (var i = 1; i <= 3; i++) {
@@ -802,75 +756,29 @@ Commissioner of Oaths</pre>
           btn.style.borderBottom = '3px solid #1a365d';
           btn.style.fontWeight = '600';
           btn.style.color = '#1a365d';
+          // Active circle
+          var circle = btn.querySelector('span:first-child');
+          if (circle) { circle.style.background = '#1a365d'; }
           panel.style.display = 'block';
         } else {
           btn.setAttribute('aria-selected', 'false');
           btn.style.background = '#f7fafc';
           btn.style.borderBottom = '3px solid transparent';
           btn.style.fontWeight = '400';
-          btn.style.color = '#a0aec0';
+          btn.style.color = '#4a5568';
+          // Inactive circle
+          var circle = btn.querySelector('span:first-child');
+          if (circle) { circle.style.background = '#4a5568'; }
           panel.style.display = 'none';
         }
       }
       localStorage.setItem('motion_current_tab', n);
     }
 
-    function completeTab(n) {
-      // Check if previous tab is completed
-      if (n > 1 && !tabComplete[n - 1]) {
-        alert('Please complete Tab ' + (n - 1) + ' first before marking this step complete.');
-        return;
-      }
-      tabComplete[n] = true;
-      localStorage.setItem('motion_tab' + n + '_complete', 'true');
-      // Unlock next tab
-      if (n < 3) {
-        var nextBtn = document.getElementById('tab-btn-' + (n + 1));
-        var nextLock = document.getElementById('tab-lock-' + (n + 1));
-        if (nextBtn) {
-          nextBtn.disabled = false;
-          nextBtn.style.cursor = 'pointer';
-          nextBtn.style.color = '#1a365d';
-        }
-        if (nextLock) nextLock.style.display = 'none';
-      }
-      // Hide completion button section
-      var completeSection = document.getElementById('tab' + n + '-complete-section');
-      if (completeSection) {
-        completeSection.innerHTML = '<p style="margin:0; color:#38a169; font-weight:600; font-size:1.1rem;">✓ Tab ' + n + ' completed. Move to the next tab above.</p>';
-      }
-      // Auto-switch to next tab
-      if (n < 3) switchTab(n + 1);
-    }
-
-    function markTab3Complete() {
-      tabComplete[3] = true;
-      localStorage.setItem('motion_tab3_complete', 'true');
-    }
-
     // ─── LOCALSTORAGE PERSISTENCE ───
     document.addEventListener('DOMContentLoaded', function() {
-      // Restore tab completion status
-      for (var i = 1; i <= 3; i++) {
-        if (tabComplete[i]) {
-          var nextBtn = document.getElementById('tab-btn-' + (i + 1));
-          var nextLock = document.getElementById('tab-lock-' + (i + 1));
-          if (nextBtn && i < 3) {
-            nextBtn.disabled = false;
-            nextBtn.style.cursor = 'pointer';
-            nextBtn.style.color = '#1a365d';
-          }
-          if (nextLock) nextLock.style.display = 'none';
-          var completeSection = document.getElementById('tab' + i + '-complete-section');
-          if (completeSection) {
-            completeSection.innerHTML = '<p style="margin:0; color:#38a169; font-weight:600; font-size:1.1rem;">✓ Tab ' + i + ' completed.</p>';
-          }
-        }
-      }
-
       // Restore current tab
       var savedTab = parseInt(localStorage.getItem('motion_current_tab')) || 1;
-      if (savedTab > 1 && !tabComplete[savedTab - 1]) savedTab = 1;
       switchTab(savedTab);
 
       // Load saved form values
@@ -1168,7 +1076,6 @@ Commissioner of Oaths</pre>
       document.getElementById('motion-preview-card').scrollIntoView({ behavior: 'smooth' });
       showDocument('notice');
 
-      // Save generated docs
       localStorage.setItem('motion_notice_of_motion', generatedNotice);
       localStorage.setItem('motion_founding_affidavit', generatedAffidavit);
     }
@@ -1223,11 +1130,9 @@ Commissioner of Oaths</pre>
       var btnDef = document.getElementById('btn-defended');
       if (btnUndef) {
         btnUndef.className = (branch === 'undefended') ? 'adv-btn adv-btn--primary' : 'adv-btn adv-btn--secondary';
-        btnUndef.style.height = 'auto';
       }
       if (btnDef) {
         btnDef.className = (branch === 'defended') ? 'adv-btn adv-btn--primary' : 'adv-btn adv-btn--secondary';
-        btnDef.style.height = 'auto';
       }
       localStorage.setItem('motion_responding_branch', branch);
     }
