@@ -75,15 +75,15 @@
           <span style="width: 28px; height: 28px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">1</span>
           <span>Motion & Affidavit</span>
         </button>
-        <button class="adv-tab" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)" disabled style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #a0aec0; cursor: not-allowed; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+        <button class="adv-tab" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #a0aec0; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
           <span style="width: 28px; height: 28px; background: #a0aec0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">2</span>
           <span>Court Online</span>
-          <span id="tab-lock-2" style="font-size: 1rem;">🔒</span>
+          <span id="tab-lock-2" style="font-size: 1rem;" title="Viewable - complete Tab 1 to unlock">🔒</span>
         </button>
-        <button class="adv-tab" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)" disabled style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #a0aec0; cursor: not-allowed; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+        <button class="adv-tab" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #a0aec0; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
           <span style="width: 28px; height: 28px; background: #a0aec0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">3</span>
           <span>Responding</span>
-          <span id="tab-lock-3" style="font-size: 1rem;">🔒</span>
+          <span id="tab-lock-3" style="font-size: 1rem;" title="Viewable - complete Tab 2 to unlock">🔒</span>
         </button>
       </div>
 
@@ -788,7 +788,8 @@ Commissioner of Oaths</pre>
     };
 
     function switchTab(n) {
-      if (n > 1 && !tabComplete[n - 1]) return;
+      // Allow viewing any tab, but show a warning if previous not completed
+      var canComplete = (n === 1) || tabComplete[n - 1];
       currentTab = n;
       // Update tab buttons
       for (var i = 1; i <= 3; i++) {
@@ -815,6 +816,11 @@ Commissioner of Oaths</pre>
     }
 
     function completeTab(n) {
+      // Check if previous tab is completed
+      if (n > 1 && !tabComplete[n - 1]) {
+        alert('Please complete Tab ' + (n - 1) + ' first before marking this step complete.');
+        return;
+      }
       tabComplete[n] = true;
       localStorage.setItem('motion_tab' + n + '_complete', 'true');
       // Unlock next tab
