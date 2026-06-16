@@ -291,11 +291,44 @@
       const track = document.createElement('div');
       track.className = 'adv-progress__track';
 
+      const currentIndex = steps.findIndex(s => s.id === currentId);
+      if (currentIndex === -1) return;
+
+      // Sliding window: show current + 2 before + 2 after = 5 steps max
+      const windowSize = 2; // steps on each side of current
+      let startIndex = Math.max(0, currentIndex - windowSize);
+      let endIndex = Math.min(steps.length - 1, currentIndex + windowSize);
+
+      // Adjust window to always show 5 steps when possible
+      if (endIndex - startIndex < windowSize * 2) {
+        if (startIndex === 0) {
+          endIndex = Math.min(steps.length - 1, windowSize * 2);
+        } else if (endIndex === steps.length - 1) {
+          startIndex = Math.max(0, steps.length - 1 - windowSize * 2);
+        }
+      }
+
+      // Add left arrow if there are hidden steps before
+      if (startIndex > 0) {
+        const leftArrow = document.createElement('div');
+        leftArrow.className = 'adv-progress__nav-arrow';
+        leftArrow.innerHTML = '‹';
+        leftArrow.title = 'Previous steps';
+        leftArrow.style.cssText = 'cursor:pointer; color:var(--primary-light); font-size:1.2rem; padding:0 0.5rem; user-select:none; flex-shrink:0;';
+        leftArrow.addEventListener('click', () => {
+          // Navigate to the step just before the window
+          const prevStep = steps[startIndex - 1];
+          if (prevStep) window.location.href = prevStep.path;
+        });
+        track.appendChild(leftArrow);
+      }
+
       let currentReached = false;
 
-      steps.forEach((step, index) => {
-        const isCompleted = !currentReached && step.id !== currentId;
-        const isActive = step.id === currentId;
+      for (let i = startIndex; i <= endIndex; i++) {
+        const step = steps[i];
+        const isCompleted = i < currentIndex;
+        const isActive = i === currentIndex;
         if (isActive) currentReached = true;
 
         const stepEl = document.createElement('div');
@@ -305,20 +338,35 @@
         pill.href = step.path;
         pill.className = `adv-progress__pill adv-progress__pill--${isCompleted ? 'completed' : isActive ? 'active' : 'pending'}`;
         pill.innerHTML = `
-          <span class="step-num">${isCompleted ? '✓' : index + 1}</span>
+          <span class="step-num">${isCompleted ? '✓' : i + 1}</span>
           <span class="step-name">${step.name}</span>
         `;
 
         stepEl.appendChild(pill);
         track.appendChild(stepEl);
 
-        // Add connector if not last
-        if (index < steps.length - 1) {
+        // Add connector if not last in window AND not last overall
+        if (i < endIndex) {
           const connector = document.createElement('div');
           connector.className = `adv-progress__connector ${isCompleted ? 'adv-progress__connector--completed' : ''}`;
           track.appendChild(connector);
         }
-      });
+      }
+
+      // Add right arrow if there are hidden steps after
+      if (endIndex < steps.length - 1) {
+        const rightArrow = document.createElement('div');
+        rightArrow.className = 'adv-progress__nav-arrow';
+        rightArrow.innerHTML = '›';
+        rightArrow.title = 'Next steps';
+        rightArrow.style.cssText = 'cursor:pointer; color:var(--primary-light); font-size:1.2rem; padding:0 0.5rem; user-select:none; flex-shrink:0;';
+        rightArrow.addEventListener('click', () => {
+          // Navigate to the step just after the window
+          const nextStep = steps[endIndex + 1];
+          if (nextStep) window.location.href = nextStep.path;
+        });
+        track.appendChild(rightArrow);
+      }
 
       container.innerHTML = '';
       container.appendChild(track);
