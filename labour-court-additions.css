@@ -1,0 +1,251 @@
+/* Labour Court Additions - Minimal patch to shared-styles.css */
+/* Only adds what's strictly necessary for 16 new steps */
+
+/* Progress tracker extension for more steps */
+.progress-tracker {
+    min-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.progress-tracker::-webkit-scrollbar {
+    height: 6px;
+}
+
+.progress-tracker::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.progress-tracker::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+/* Smaller dots for longer workflow */
+.progress-step {
+    min-width: 80px;
+}
+
+.progress-step .step-dot {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+}
+
+.progress-step .step-label {
+    font-size: 10px;
+    max-width: 90px;
+}
+
+/* Court Online guide boxes */
+.court-online-step {
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.court-online-step .step-number {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-right: 12px;
+}
+
+.court-online-step h4 {
+    display: inline;
+    color: #1a3a5c;
+    font-size: 15px;
+}
+
+/* Document template preview boxes */
+.doc-preview {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 15px 0;
+}
+
+.doc-preview .doc-header {
+    text-align: center;
+    border-bottom: 2px solid #1a3a5c;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.doc-preview .doc-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1a3a5c;
+}
+
+.doc-preview .doc-field {
+    border-bottom: 1px solid #999;
+    display: inline-block;
+    min-width: 200px;
+    padding: 0 5px;
+    color: #666;
+}
+
+.doc-preview .doc-section {
+    margin: 15px 0;
+}
+
+.doc-preview .doc-section-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: #1a3a5c;
+}
+
+/* Deadline warning boxes */
+.deadline-box {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 15px 0;
+}
+
+.deadline-box .deadline-title {
+    color: #856404;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.deadline-box .deadline-text {
+    color: #856404;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.deadline-box.critical {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+
+.deadline-box.critical .deadline-title,
+.deadline-box.critical .deadline-text {
+    color: #721c24;
+}
+
+/* Service proof checklist */
+.service-checklist {
+    list-style: none;
+    padding: 0;
+}
+
+.service-checklist li {
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-checklist li input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #28a745;
+}
+
+/* File upload simulation */
+.upload-zone {
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-zone:hover {
+    background: #e7f1ff;
+    border-color: #0056b3;
+}
+
+.upload-zone .upload-icon {
+    font-size: 32px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* Hearing preparation checklist */
+.hearing-prep-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.hearing-prep-item .prep-icon {
+    font-size: 24px;
+    color: #28a745;
+    flex-shrink: 0;
+}
+
+.hearing-prep-item .prep-content h4 {
+    font-size: 14px;
+    color: #1a3a5c;
+    margin-bottom: 5px;
+}
+
+.hearing-prep-item .prep-content p {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}
+
+/* Responsive for progress tracker */
+@media (max-width: 1200px) {
+    .progress-step {
+        min-width: 70px;
+    }
+    .progress-step .step-label {
+        font-size: 9px;
+        max-width: 75px;
+    }
+}
+
+@media (max-width: 768px) {
+    .progress-tracker {
+        padding: 10px 5px;
+    }
+    .progress-step {
+        min-width: 60px;
+    }
+    .progress-step .step-dot {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+    .progress-step .step-label {
+        font-size: 8px;
+        max-width: 60px;
+    }
+}

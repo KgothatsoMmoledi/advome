@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supplementary Affidavit - Advome</title>
+  <link rel="stylesheet" href="shared-styles.css">
+  
+</head>
+<body>
+  <!-- Header -->
+  <header class="adv-header">
+    <div class="adv-header__logo">Advome<span>.</span></div>
+    <nav class="adv-header__nav">
+      <a href="ccma.html">CCMA</a>
+      <a href="motion.html">Labour Court</a>
+      <a href="#">Help</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar">SRL</div>
+    </div>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
+
+  <!-- Progress Tracker -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="supplementary"></div>
+
+  <!-- Hero -->
+  <section class="adv-hero">
+    <div class="adv-hero__content">
+      <h1>Supplementary Affidavit</h1>
+      <p>Step 12 of 21 — Labour Court Review Application</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+  </section>
+
+  <!-- Main Container -->
+  <div class="adv-container">
+    <!-- Main Content -->
+    <main>
+      <!-- Tab Buttons -->
+<div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
+  <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-when" style="border-radius:20px; font-size:0.85rem;">When to File</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-draft" style="border-radius:20px; font-size:0.85rem;">Draft Supplementary</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-notice" style="border-radius:20px; font-size:0.85rem;">Rule 37(20) Notice</button>
+</div>
+
+<!-- Tab: When to File -->
+<div id="tab-when" class="tab-content active">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Supplementary Affidavit (Optional)</div>
+        <div class="adv-card__subtitle">File within 5 days of the record being filed</div>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--info">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">📋 When to File</div>
+        <p>File within <strong>5 days</strong> of the record being filed (Rule 37(20)). This is optional — only file if the record reveals new facts or grounds not in your founding affidavit.</p>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--info">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">Common Reasons for Supplementary Affidavit</div>
+        <p>• The transcribed record reveals an error not apparent from the award<br>• New documentary evidence discovered<br>• Need to correct a factual error in founding affidavit<br>• Address a specific legal point raised in the record</p>
+      </div>
+    </div>
+
+    <div class="adv-form-group">
+      <label>Have you reviewed the complete transcribed record?</label>
+      <select class="adv-select" id="reviewedRecord">
+        <option value="no">Not yet</option>
+        <option value="yes">Yes, I have reviewed it</option>
+      </select>
+    </div>
+    <div class="adv-form-group">
+      <label>Does the record reveal new grounds for review?</label>
+      <select class="adv-select" id="newGrounds">
+        <option value="no">No, founding affidavit covers everything</option>
+        <option value="yes">Yes, new issues emerged</option>
+        <option value="unsure">Unsure — need legal advice</option>
+      </select>
+    </div>
+
+    <div class="adv-alert adv-alert--success" id="skipSupplementary" style="margin-top:1rem;">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">✅ Skip This Step</div>
+        <p>If your founding affidavit is complete and the record does not reveal new issues, you can skip the supplementary affidavit and proceed directly to the Answering Affidavit step.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Draft Supplementary -->
+<div id="tab-draft" class="tab-content" style="display:none;">
+  <div class="adv-card adv-card--primary">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Draft Supplementary Affidavit</div>
+        <div class="adv-card__subtitle">Only reply to new matters from the record</div>
+      </div>
+    </div>
+
+    <div class="adv-form-group">
+      <label>Full Name (same as founding affidavit)</label>
+      <input type="text" class="adv-input" placeholder="Your full name">
+    </div>
+    <div class="adv-form-group">
+      <label>Paragraph Reference in Founding Affidavit (if correcting)</label>
+      <input type="text" class="adv-input" placeholder="e.g. Paragraph 12">
+    </div>
+    <div class="adv-form-group">
+      <label>New Facts Revealed by Record</label>
+      <textarea class="adv-textarea" rows="5" placeholder="Set out new facts in numbered paragraphs. Reference page numbers of the transcribed record."></textarea>
+    </div>
+    <div class="adv-form-group">
+      <label>Legal Grounds (if new)</label>
+      <textarea class="adv-textarea" rows="3" placeholder="Explain the legal basis for these new grounds..."></textarea>
+    </div>
+
+    <div style="background:#f8f9fa; border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin:1rem 0; font-family:Georgia,serif; line-height:1.6;">
+      <div style="text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem;">
+        <div style="font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary);">SUPPLEMENTARY AFFIDAVIT</div>
+      </div>
+      <p>I, <span style="border-bottom:1px solid #999; display:inline-block; min-width:200px; padding:0 5px; color:#666;">[Full Name]</span>, do hereby make oath and state:</p>
+      <p>1. I am the Applicant in the above matter and deponent to the Founding Affidavit filed on <span style="border-bottom:1px solid #999; display:inline-block; min-width:100px; padding:0 5px; color:#666;">[date]</span>.</p>
+      <p>2. Since filing the Founding Affidavit, I have reviewed the transcribed record of the arbitration proceedings.</p>
+      <p>3. I wish to supplement my Founding Affidavit with the following additional facts:</p>
+      <p style="margin-left:1.5rem;">3.1 <span style="border-bottom:1px solid #999; display:inline-block; min-width:300px; padding:0 5px; color:#666;">[New fact with reference to record page]</span></p>
+      <p style="margin-left:1.5rem;">3.2 <span style="border-bottom:1px solid #999; display:inline-block; min-width:300px; padding:0 5px; color:#666;">[Additional fact]</span></p>
+      <p>4. These facts give rise to the following additional grounds for review:</p>
+      <p style="margin-left:1.5rem;">4.1 <span style="border-bottom:1px solid #999; display:inline-block; min-width:300px; padding:0 5px; color:#666;">[Legal ground]</span></p>
+    </div>
+
+    <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+      <button class="adv-btn adv-btn--primary" onclick="generateSupplementary()">Generate Supplementary Affidavit</button>
+      <button class="adv-btn adv-btn--secondary" onclick="downloadDoc('supplementary')">Download as Word</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Rule 37(20) Notice -->
+<div id="tab-notice" class="tab-content" style="display:none;">
+  <div class="adv-card adv-card--danger">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Rule 37(20) Notice</div>
+        <div class="adv-card__subtitle">Triggers the respondent's 10-day deadline</div>
+      </div>
+    </div>
+
+    <div style="background:#f8f9fa; border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin:1rem 0; font-family:Georgia,serif; line-height:1.6;">
+      <div style="text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem;">
+        <div style="font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary);">NOTICE IN TERMS OF RULE 37(20)</div>
+      </div>
+      <p>TO: <span style="border-bottom:1px solid #999; display:inline-block; min-width:200px; padding:0 5px; color:#666;">[Respondent Name]</span></p>
+      <p>AND TO: <span style="border-bottom:1px solid #999; display:inline-block; min-width:200px; padding:0 5px; color:#666;">[Arbitrator Name]</span></p>
+      <p>AND TO: The CCMA</p>
+      <p style="margin-top:1rem;">Please take notice that:</p>
+      <p>1. The transcribed record of the arbitration proceedings in the above matter has been filed on Court Online on <span style="border-bottom:1px solid #999; display:inline-block; min-width:100px; padding:0 5px; color:#666;">[date]</span>.</p>
+      <p>2. A supplementary affidavit (if applicable) has also been filed.</p>
+      <p>3. In terms of Rule 37(22), you are required to file your Answering Affidavit within <strong>10 days</strong> of this notice.</p>
+    </div>
+
+    <div class="adv-alert adv-alert--danger">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">⏰ TRIGGER DEADLINE</div>
+        <p>This notice starts the 10-day clock for the respondent's Answering Affidavit. Ensure it is served on ALL parties including the CCMA.</p>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+      <button class="adv-btn adv-btn--primary" onclick="generateNotice()">Generate Rule 37(20) Notice</button>
+      <button class="adv-btn adv-btn--secondary" onclick="downloadDoc('notice')">Download as Word</button>
+    </div>
+  </div>
+</div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="adv-sidebar">
+      <!-- Deadline Calculator Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+        <div class="adv-deadline-calculator">
+          <div class="adv-form-group">
+            <label>Start Date</label>
+            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+          </div>
+          <div class="adv-form-group">
+            <label>Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+          </div>
+          <div class="adv-deadline__display">
+            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Assistant Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+        <div class="adv-chat" data-chat-id="supplementary">
+          <div class="adv-chat__messages"></div>
+          <div class="adv-chat__input-group">
+            <input type="text" class="adv-chat__input" placeholder="Ask about this step...">
+            <button class="adv-chat__send">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+        <div class="adv-savings">
+          <span>Saved so far:</span>
+          <span class="adv-savings__amount">R0</span>
+        </div>
+        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Navigation Footer -->
+  <nav class="adv-nav-footer">
+    <div class="adv-nav-footer__prev">
+      <a href="record.html" class="adv-btn adv-btn--ghost">← Record</a>
+    </div>
+    <div class="adv-nav-footer__next">
+      <a href="answering.html" class="adv-btn adv-btn--primary">Answering →</a>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="adv-footer">
+    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  </footer>
+
+  <script src="shared-scripts.js"></script>
+  <script>
+    function generateSupplementary() {
+      Advome.toast.show('Supplementary Affidavit template generated!', 'success');
+    }
+    function generateNotice() {
+      Advome.toast.show('Rule 37(20) Notice generated!', 'success');
+    }
+    function downloadDoc(type) {
+      Advome.toast.show('Download will generate a Word document.', 'info');
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('adv-btn--primary', 'active');
+          b.classList.add('adv-btn--ghost');
+        });
+        btn.classList.remove('adv-btn--ghost');
+        btn.classList.add('adv-btn--primary', 'active');
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

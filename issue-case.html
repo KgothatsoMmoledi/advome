@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Case & Upload - Advome</title>
+  <link rel="stylesheet" href="shared-styles.css">
+  
+</head>
+<body>
+  <!-- Header -->
+  <header class="adv-header">
+    <div class="adv-header__logo">Advome<span>.</span></div>
+    <nav class="adv-header__nav">
+      <a href="ccma.html">CCMA</a>
+      <a href="motion.html">Labour Court</a>
+      <a href="#">Help</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar">SRL</div>
+    </div>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
+
+  <!-- Progress Tracker -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="issue-case"></div>
+
+  <!-- Hero -->
+  <section class="adv-hero">
+    <div class="adv-hero__content">
+      <h1>Issue Case & Upload</h1>
+      <p>Step 8 of 21 — Labour Court Review Application</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+  </section>
+
+  <!-- Main Container -->
+  <div class="adv-container">
+    <!-- Main Content -->
+    <main>
+      <!-- Tab Buttons -->
+<div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
+  <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-start" style="border-radius:20px; font-size:0.85rem;">Start Case</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-upload" style="border-radius:20px; font-size:0.85rem;">Upload Documents</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-reference" style="border-radius:20px; font-size:0.85rem;">Case Reference</button>
+</div>
+
+<!-- Tab: Start Case -->
+<div id="tab-start" class="tab-content active">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Start a Case on Court Online</div>
+        <div class="adv-card__subtitle">Create your Labour Court file and get a case number</div>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="start-steps">
+      <button class="adv-accordion__header">
+        <span>1. Log In to Court Online</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Use your registered email and password. Complete 2FA if enabled.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="start-steps">
+      <button class="adv-accordion__header">
+        <span>2. Click "Start a Case"</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>This button is on your dashboard. Select <strong>"Labour Court"</strong> as the court type.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="start-steps">
+      <button class="adv-accordion__header">
+        <span>3. Select Case Type</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Choose the appropriate category:</p>
+        <ul style="margin-left:1.5rem; line-height:1.8;">
+          <li><strong>Review of CCMA Award</strong> — Section 145 LRA</li>
+          <li><strong>Appeal on Point of Law</strong> — Section 145A LRA</li>
+          <li><strong>Reinstatement Application</strong></li>
+          <li><strong>Other Labour Court Application</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="start-steps">
+      <button class="adv-accordion__header">
+        <span>4. Enter Party Details</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Enter all parties exactly as on your Notice of Motion:</p>
+        <ul style="margin-left:1.5rem; line-height:1.8;">
+          <li>Applicant (your name)</li>
+          <li>Respondent (employer name)</li>
+          <li>Second Respondent (arbitrator name)</li>
+          <li>Third Respondent (CCMA)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="start-steps">
+      <button class="adv-accordion__header">
+        <span>5. Confirm and Submit</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Review all details. Click "Submit" to create the case. You will receive a case reference number immediately.</p>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--danger">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">⏰ CRITICAL: Case Reference Number</div>
+        <p>Write down your case reference number immediately. Format: <strong>JS1234/2024</strong>. You will need it for all future filings.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Upload Documents -->
+<div id="tab-upload" class="tab-content" style="display:none;">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Upload Your Motion Papers</div>
+        <div class="adv-card__subtitle">Each document must be a separate PDF file</div>
+      </div>
+    </div>
+
+    <div class="adv-upload" data-detect="true">
+      <div class="adv-upload__text">📁 Click to upload or drag and drop files here</div>
+      <div class="adv-upload__hint">PDF files only, max 10MB each</div>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-page); border-radius:6px; margin-bottom:0.5rem;">
+        <span>Notice of Motion</span>
+        <span id="status1" style="color:var(--text-muted); font-size:0.85rem;">⏳ Pending</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-page); border-radius:6px; margin-bottom:0.5rem;">
+        <span>Founding Affidavit</span>
+        <span id="status2" style="color:var(--text-muted); font-size:0.85rem;">⏳ Pending</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-page); border-radius:6px; margin-bottom:0.5rem;">
+        <span>Certified Award (Annexure A)</span>
+        <span id="status3" style="color:var(--text-muted); font-size:0.85rem;">⏳ Pending</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-page); border-radius:6px;">
+        <span>Annexures (if any)</span>
+        <span id="status4" style="color:var(--text-muted); font-size:0.85rem;">Optional</span>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--info" style="margin-top:1rem;">
+      <div class="adv-alert__content">
+        <strong>Naming Convention:</strong> Name files clearly: <code>Notice_of_Motion_Applicant_v_Respondent.pdf</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Case Reference -->
+<div id="tab-reference" class="tab-content" style="display:none;">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Case Reference Number</div>
+        <div class="adv-card__subtitle">Your unique identifier for all proceedings</div>
+      </div>
+    </div>
+
+    <div class="adv-form-group">
+      <label>Case Reference Number</label>
+      <input type="text" class="adv-input" id="caseRefNo" placeholder="e.g. JS1234/2024">
+    </div>
+    <div class="adv-form-group">
+      <label>Date of Issue</label>
+      <input type="date" class="adv-input" id="issueDate">
+    </div>
+    <div class="adv-form-group">
+      <label>Presiding Judge (if allocated)</label>
+      <input type="text" class="adv-input" placeholder="Leave blank if not yet allocated">
+    </div>
+
+    <div class="adv-alert adv-alert--info">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">📋 What Happens Next?</div>
+        <p>1. Registrar reviews documents<br>2. If complete, case is formally issued<br>3. Email confirmation sent<br>4. Now serve the respondent (next step)</p>
+      </div>
+    </div>
+  </div>
+</div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="adv-sidebar">
+      <!-- Deadline Calculator Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+        <div class="adv-deadline-calculator">
+          <div class="adv-form-group">
+            <label>Start Date</label>
+            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+          </div>
+          <div class="adv-form-group">
+            <label>Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+          </div>
+          <div class="adv-deadline__display">
+            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Assistant Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+        <div class="adv-chat" data-chat-id="issue-case">
+          <div class="adv-chat__messages"></div>
+          <div class="adv-chat__input-group">
+            <input type="text" class="adv-chat__input" placeholder="Ask about this step...">
+            <button class="adv-chat__send">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+        <div class="adv-savings">
+          <span>Saved so far:</span>
+          <span class="adv-savings__amount">R0</span>
+        </div>
+        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Navigation Footer -->
+  <nav class="adv-nav-footer">
+    <div class="adv-nav-footer__prev">
+      <a href="court-online.html" class="adv-btn adv-btn--ghost">← Court Online</a>
+    </div>
+    <div class="adv-nav-footer__next">
+      <a href="service.html" class="adv-btn adv-btn--primary">Service →</a>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="adv-footer">
+    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  </footer>
+
+  <script src="shared-scripts.js"></script>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('adv-btn--primary', 'active');
+          b.classList.add('adv-btn--ghost');
+        });
+        btn.classList.remove('adv-btn--ghost');
+        btn.classList.add('adv-btn--primary', 'active');
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

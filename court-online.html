@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Court Online Registration - Advome</title>
+  <link rel="stylesheet" href="shared-styles.css">
+  
+</head>
+<body>
+  <!-- Header -->
+  <header class="adv-header">
+    <div class="adv-header__logo">Advome<span>.</span></div>
+    <nav class="adv-header__nav">
+      <a href="ccma.html">CCMA</a>
+      <a href="motion.html">Labour Court</a>
+      <a href="#">Help</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar">SRL</div>
+    </div>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
+
+  <!-- Progress Tracker -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="court-online"></div>
+
+  <!-- Hero -->
+  <section class="adv-hero">
+    <div class="adv-hero__content">
+      <h1>Court Online Registration</h1>
+      <p>Step 7 of 21 — Labour Court Review Application</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+  </section>
+
+  <!-- Main Container -->
+  <div class="adv-container">
+    <!-- Main Content -->
+    <main>
+      <!-- Tab Buttons -->
+<div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
+  <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-register" style="border-radius:20px; font-size:0.85rem;">Registration</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-profile" style="border-radius:20px; font-size:0.85rem;">Profile Setup</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-troubleshoot" style="border-radius:20px; font-size:0.85rem;">Troubleshooting</button>
+</div>
+
+<!-- Tab: Registration -->
+<div id="tab-register" class="tab-content active">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Court Online Registration</div>
+        <div class="adv-card__subtitle">Compulsory electronic filing system for the Labour Court</div>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--info">
+      <div class="adv-alert__content">
+        <strong>Court Online is mandatory</strong> from 14 April 2025. All new Labour Court cases must be initiated through the portal.
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="court-steps">
+      <button class="adv-accordion__header">
+        <span>1. Visit the Portal</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Go to <a href="https://courtonline.co.za" target="_blank">courtonline.co.za</a> and click "Register"</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="court-steps">
+      <button class="adv-accordion__header">
+        <span>2. Select User Type</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Choose <strong>"Individual"</strong> if representing yourself. Choose <strong>"Organisation"</strong> if you are a legal representative or company.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="court-steps">
+      <button class="adv-accordion__header">
+        <span>3. Complete Registration Form</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Enter your personal details exactly as they appear on your ID:</p>
+        <ul style="margin-left:1.5rem; line-height:1.8;">
+          <li>Full name and surname</li>
+          <li>ID number</li>
+          <li>Cell phone number (for OTP)</li>
+          <li>Email address</li>
+          <li>Physical address</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="court-steps">
+      <button class="adv-accordion__header">
+        <span>4. Verify Your Account</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>You will receive an OTP via SMS. Enter it to verify your cell phone. Then check your email for an activation link.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="court-steps">
+      <button class="adv-accordion__header">
+        <span>5. Accept Terms & Conditions</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Read and accept the Court Online terms. This is a legal requirement before you can file any case.</p>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--warning" style="margin-top:1rem;">
+      <div class="adv-alert__content">
+        <strong>Important:</strong> Use the same email address throughout the case. All court notifications will be sent to this address.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Profile Setup -->
+<div id="tab-profile" class="tab-content" style="display:none;">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Profile Setup</div>
+        <div class="adv-card__subtitle">Complete your profile to enable case filing</div>
+      </div>
+    </div>
+
+    <div class="adv-form-group">
+      <label>Display Name</label>
+      <input type="text" class="adv-input" placeholder="As it will appear on court documents">
+    </div>
+    <div class="adv-form-group">
+      <label>Preferred Court</label>
+      <select class="adv-select">
+        <option>Johannesburg Labour Court</option>
+        <option>Cape Town Labour Court</option>
+        <option>Durban Labour Court</option>
+        <option>Gqeberha Labour Court</option>
+        <option>Bloemfontein Labour Court</option>
+      </select>
+    </div>
+    <div class="adv-form-group">
+      <label>Enable Two-Factor Authentication?</label>
+      <label style="font-weight:normal; font-size:0.9rem;"><input type="checkbox" checked> Yes — recommended for security</label>
+    </div>
+
+    <div class="adv-alert adv-alert--info">
+      <div class="adv-alert__content">
+        <strong>Digital Signature:</strong> On Court Online, type your name in <strong>UPPERCASE</strong> in the signature block. This is legally valid under the ECT Act.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Troubleshooting -->
+<div id="tab-troubleshoot" class="tab-content" style="display:none;">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Common Issues</div>
+        <div class="adv-card__subtitle">Solutions to frequent Court Online problems</div>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="troubleshoot">
+      <button class="adv-accordion__header">
+        <span>🔸 "My OTP is not arriving"</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Check that your cell number is correct. Wait 2 minutes and click "Resend OTP". If still nothing, contact Court Online support: <strong>012 492 8200</strong></p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="troubleshoot">
+      <button class="adv-accordion__header">
+        <span>🔸 "I cannot upload documents"</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Documents must be PDF format, under 10MB per file. Ensure your PDF is not password-protected or scanned at too high resolution.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="troubleshoot">
+      <button class="adv-accordion__header">
+        <span>🔸 "My ID is already registered"</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>You may have registered before. Try "Forgot Password" or contact support with your ID number to recover the account.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="troubleshoot">
+      <button class="adv-accordion__header">
+        <span>🔸 "I am locked out of my account"</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>After 3 failed login attempts, your account is locked for 30 minutes. Wait and try again, or reset your password.</p>
+      </div>
+    </div>
+  </div>
+</div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="adv-sidebar">
+      <!-- Deadline Calculator Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+        <div class="adv-deadline-calculator">
+          <div class="adv-form-group">
+            <label>Start Date</label>
+            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+          </div>
+          <div class="adv-form-group">
+            <label>Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+          </div>
+          <div class="adv-deadline__display">
+            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Assistant Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+        <div class="adv-chat" data-chat-id="court-online">
+          <div class="adv-chat__messages"></div>
+          <div class="adv-chat__input-group">
+            <input type="text" class="adv-chat__input" placeholder="Ask about this step...">
+            <button class="adv-chat__send">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+        <div class="adv-savings">
+          <span>Saved so far:</span>
+          <span class="adv-savings__amount">R0</span>
+        </div>
+        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Navigation Footer -->
+  <nav class="adv-nav-footer">
+    <div class="adv-nav-footer__prev">
+      <a href="motion.html" class="adv-btn adv-btn--ghost">← Motion & Affidavit</a>
+    </div>
+    <div class="adv-nav-footer__next">
+      <a href="issue-case.html" class="adv-btn adv-btn--primary">Issue Case →</a>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="adv-footer">
+    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  </footer>
+
+  <script src="shared-scripts.js"></script>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('adv-btn--primary', 'active');
+          b.classList.add('adv-btn--ghost');
+        });
+        btn.classList.remove('adv-btn--ghost');
+        btn.classList.add('adv-btn--primary', 'active');
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

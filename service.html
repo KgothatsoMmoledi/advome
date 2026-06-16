@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service of Application - Advome</title>
+  <link rel="stylesheet" href="shared-styles.css">
+  
+</head>
+<body>
+  <!-- Header -->
+  <header class="adv-header">
+    <div class="adv-header__logo">Advome<span>.</span></div>
+    <nav class="adv-header__nav">
+      <a href="ccma.html">CCMA</a>
+      <a href="motion.html">Labour Court</a>
+      <a href="#">Help</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar">SRL</div>
+    </div>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
+
+  <!-- Progress Tracker -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="service"></div>
+
+  <!-- Hero -->
+  <section class="adv-hero">
+    <div class="adv-hero__content">
+      <h1>Service of Application</h1>
+      <p>Step 9 of 21 — Labour Court Review Application</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+  </section>
+
+  <!-- Main Container -->
+  <div class="adv-container">
+    <!-- Main Content -->
+    <main>
+      <!-- Tab Buttons -->
+<div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
+  <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-serve" style="border-radius:20px; font-size:0.85rem;">How to Serve</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-proof" style="border-radius:20px; font-size:0.85rem;">Proof of Service</button>
+  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-return" style="border-radius:20px; font-size:0.85rem;">Return of Service</button>
+</div>
+
+<!-- Tab: How to Serve -->
+<div id="tab-serve" class="tab-content active">
+  <div class="adv-card adv-card--danger">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Service of Application</div>
+        <div class="adv-card__subtitle">Serve on all respondents within 5 days of issue</div>
+      </div>
+    </div>
+
+    <div class="adv-alert adv-alert--danger">
+      <div class="adv-alert__content">
+        <div class="adv-alert__title">⏰ CRITICAL DEADLINE</div>
+        <p>Service must be effected <strong>within 5 days</strong> of the case being issued. If serving the State, also serve the State Attorney.</p>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="serve-methods">
+      <button class="adv-accordion__header">
+        <span>📧 1. Service by Email (Recommended)</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Valid under Rule 9(1)(a)(iv). The respondent must have an email address.</p>
+        <ul style="margin-left:1.5rem; line-height:1.8;">
+          <li>Attach all documents as PDFs</li>
+          <li>Subject: <code>Service of Labour Court Application - Case No: [number]</code></li>
+          <li>Request a read receipt</li>
+          <li>Keep the sent email in your inbox</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="serve-methods">
+      <button class="adv-accordion__header">
+        <span>📮 2. Service by Registered Post</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Send to the respondent's registered address or place of business.</p>
+        <ul style="margin-left:1.5rem; line-height:1.8;">
+          <li>Use registered mail with tracking number</li>
+          <li>Keep the postal receipt</li>
+          <li>Service deemed 7 days after posting (Rule 9(3))</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adv-accordion" data-group="serve-methods">
+      <button class="adv-accordion__header">
+        <span>🤝 3. Personal Service</span>
+        <span class="adv-accordion__header-icon">▼</span>
+      </button>
+      <div class="adv-accordion__body">
+        <p>Hand documents directly to the respondent or a person apparently in charge at their place of business.</p>
+      </div>
+    </div>
+
+    <div class="adv-form-group">
+      <label>Method of Service</label>
+      <select class="adv-select" id="serviceMethod">
+        <option value="email">Email</option>
+        <option value="registered">Registered Post</option>
+        <option value="personal">Personal Service</option>
+        <option value="sheriff">Sheriff of the Court</option>
+      </select>
+    </div>
+    <div class="adv-form-group">
+      <label>Date of Service</label>
+      <input type="date" class="adv-input" id="serviceDate">
+    </div>
+    <div class="adv-form-group">
+      <label>Respondent Email (if email service)</label>
+      <input type="email" class="adv-input" id="respondentEmail" placeholder="e.g. legal@company.co.za">
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Proof of Service -->
+<div id="tab-proof" class="tab-content" style="display:none;">
+  <div class="adv-card">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Proof of Service</div>
+        <div class="adv-card__subtitle">File proof that service was effected</div>
+      </div>
+    </div>
+
+    <div class="adv-form-group">
+      <label><strong>Email Service Proof</strong></label>
+      <ul class="adv-checklist" data-checklist-id="email-proof">
+        <li class="adv-checklist__item" data-item-id="ep1">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">Screenshot of sent email showing recipient address</div>
+        </li>
+        <li class="adv-checklist__item" data-item-id="ep2">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">Read receipt or delivery confirmation</div>
+        </li>
+        <li class="adv-checklist__item" data-item-id="ep3">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">PDF copies of all attachments sent</div>
+        </li>
+        <li class="adv-checklist__item" data-item-id="ep4">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">Email has not bounced back</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="adv-form-group">
+      <label><strong>Registered Post Proof</strong></label>
+      <ul class="adv-checklist" data-checklist-id="post-proof">
+        <li class="adv-checklist__item" data-item-id="pp1">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">Postal receipt with tracking number</div>
+        </li>
+        <li class="adv-checklist__item" data-item-id="pp2">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">Copy of documents sent</div>
+        </li>
+        <li class="adv-checklist__item" data-item-id="pp3">
+          <div class="adv-checklist__checkbox"></div>
+          <div class="adv-checklist__text">Proof of delivery (if available)</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Return of Service -->
+<div id="tab-return" class="tab-content" style="display:none;">
+  <div class="adv-card adv-card--primary">
+    <div class="adv-card__header">
+      <div>
+        <div class="adv-card__title">Return of Service Affidavit</div>
+        <div class="adv-card__subtitle">File an affidavit confirming how, when, and on whom service was effected</div>
+      </div>
+    </div>
+
+    <div style="background:#f8f9fa; border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin:1rem 0; font-family:Georgia,serif; line-height:1.6;">
+      <div style="text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem;">
+        <div style="font-size:16px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; color:var(--primary);">AFFIDAVIT</div>
+        <div style="font-size:12px; margin-top:5px;">RETURN OF SERVICE</div>
+      </div>
+      <p>I, the undersigned, <span style="border-bottom:1px solid #999; display:inline-block; min-width:200px; padding:0 5px; color:#666;">[Full Name]</span>, do hereby make oath and state:</p>
+      <p>1. That I am the Applicant in the above-mentioned matter.</p>
+      <p>2. That on <span style="border-bottom:1px solid #999; display:inline-block; min-width:100px; padding:0 5px; color:#666;">[date]</span> at <span style="border-bottom:1px solid #999; display:inline-block; min-width:80px; padding:0 5px; color:#666;">[time]</span>, I served the Notice of Motion and Founding Affidavit upon the Respondent by:</p>
+      <p style="margin-left:1.5rem;">☐ Email to <span style="border-bottom:1px solid #999; display:inline-block; min-width:150px; padding:0 5px; color:#666;">[email address]</span></p>
+      <p style="margin-left:1.5rem;">☐ Registered post to <span style="border-bottom:1px solid #999; display:inline-block; min-width:150px; padding:0 5px; color:#666;">[address]</span></p>
+      <p style="margin-left:1.5rem;">☐ Personal service at <span style="border-bottom:1px solid #999; display:inline-block; min-width:150px; padding:0 5px; color:#666;">[address]</span></p>
+      <p style="margin-left:1.5rem;">☐ Sheriff of the Court</p>
+      <p>3. Attached hereto and marked Annexure "A" is proof of service.</p>
+      <div style="margin-top:2rem;">
+        <p>___________________________</p>
+        <p><span style="border-bottom:1px solid #999; display:inline-block; min-width:150px; padding:0 5px; color:#666;">[Signature]</span></p>
+        <p style="margin-top:1rem;">Date: <span style="border-bottom:1px solid #999; display:inline-block; min-width:100px; padding:0 5px; color:#666;">[date]</span></p>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+      <button class="adv-btn adv-btn--primary" onclick="generateReturnOfService()">Generate Return of Service</button>
+      <button class="adv-btn adv-btn--secondary" onclick="downloadDoc('return')">Download as Word</button>
+    </div>
+  </div>
+</div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="adv-sidebar">
+      <!-- Deadline Calculator Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+        <div class="adv-deadline-calculator">
+          <div class="adv-form-group">
+            <label>Start Date</label>
+            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+          </div>
+          <div class="adv-form-group">
+            <label>Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+          </div>
+          <div class="adv-deadline__display">
+            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Assistant Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+        <div class="adv-chat" data-chat-id="service">
+          <div class="adv-chat__messages"></div>
+          <div class="adv-chat__input-group">
+            <input type="text" class="adv-chat__input" placeholder="Ask about this step...">
+            <button class="adv-chat__send">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings Widget -->
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+        <div class="adv-savings">
+          <span>Saved so far:</span>
+          <span class="adv-savings__amount">R0</span>
+        </div>
+        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Navigation Footer -->
+  <nav class="adv-nav-footer">
+    <div class="adv-nav-footer__prev">
+      <a href="issue-case.html" class="adv-btn adv-btn--ghost">← Issue Case</a>
+    </div>
+    <div class="adv-nav-footer__next">
+      <a href="opposition.html" class="adv-btn adv-btn--primary">Opposition →</a>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="adv-footer">
+    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  </footer>
+
+  <script src="shared-scripts.js"></script>
+  <script>
+    function generateReturnOfService() {
+      Advome.toast.show('Return of Service affidavit generated!', 'success');
+    }
+    function downloadDoc(type) {
+      Advome.toast.show('Download will generate a Word document.', 'info');
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('adv-btn--primary', 'active');
+          b.classList.add('adv-btn--ghost');
+        });
+        btn.classList.remove('adv-btn--ghost');
+        btn.classList.add('adv-btn--primary', 'active');
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
