@@ -159,7 +159,7 @@
       }));
 
       if (isChecked) {
-        toast.show('Item saved ✓', 'success');
+        toast.show('Item saved OK', 'success');
       }
     },
 
@@ -336,11 +336,8 @@
 
         const pill = document.createElement('a');
         pill.href = step.path;
-        pill.className = `adv-progress__pill adv-progress__pill--${isCompleted ? 'completed' : isActive ? 'active' : 'pending'}`;
-        pill.innerHTML = `
-          <span class="step-num">${isCompleted ? '✓' : i + 1}</span>
-          <span class="step-name">${step.name}</span>
-        `;
+        pill.className = 'adv-progress__pill adv-progress__pill--' + (isCompleted ? 'completed' : isActive ? 'active' : 'pending');
+        pill.innerHTML = '<span class="step-num">' + (isCompleted ? 'OK' : i + 1) + '</span><span class="step-name">' + step.name + '</span>';
 
         stepEl.appendChild(pill);
         track.appendChild(stepEl);
@@ -348,7 +345,7 @@
         // Add connector if not last in window AND not last overall
         if (i < endIndex) {
           const connector = document.createElement('div');
-          connector.className = `adv-progress__connector ${isCompleted ? 'adv-progress__connector--completed' : ''}`;
+          connector.className = 'adv-progress__connector ' + (isCompleted ? 'adv-progress__connector--completed' : '');
           track.appendChild(connector);
         }
       }
@@ -532,13 +529,13 @@
       const lower = input.toLowerCase();
 
       if (lower.includes('deadline') || lower.includes('time') || lower.includes('days')) {
-        return "CCMA referral must be filed within 30 days of dismissal (LRA s191). For Labour Court review, you have 6 weeks from the date the award was served on you (LRA s145). Late referrals require condonation — difficult to obtain.";
+        return "CCMA referral must be filed within 30 days of dismissal (LRA s191). For Labour Court review, you have 6 weeks from the date the award was served on you (LRA s145). Late referrals require condonation - difficult to obtain.";
       }
       if (lower.includes('cost') || lower.includes('fee') || lower.includes('money') || lower.includes('price')) {
         return "CCMA conciliation is free (LRA s135). Arbitration has a small fee based on your earnings. Labour Court filing fees start at R0 for disputes under R50,000. Attorney fees for CCMA matters range from R5,000 to R50,000+ depending on complexity.";
       }
       if (lower.includes('document') || lower.includes('evidence') || lower.includes('proof')) {
-        return "For arbitration, you need: your referral form, employment contract (or proof of verbal agreement), payslips, disciplinary records, and witness statements. No written contract? Verbal agreements are valid — use payslips, bank statements, WhatsApp messages, or colleague testimony.";
+        return "For arbitration, you need: your referral form, employment contract (or proof of verbal agreement), payslips, disciplinary records, and witness statements. No written contract? Verbal agreements are valid - use payslips, bank statements, WhatsApp messages, or colleague testimony.";
       }
       if (lower.includes('contract') || lower.includes('verbal') || lower.includes('written') || lower.includes('no contract')) {
         return "Verbal employment agreements are valid and enforceable under South African common law and the LRA (s197). You may be able to prove employment with: payslips, bank deposit records, attendance registers, UIF records, colleague testimony, WhatsApp work messages, or email correspondence. The CCMA and Labour Court accept this evidence.";
@@ -556,7 +553,7 @@
         return "Unfair dismissal (LRA s188) requires both a fair reason (substantive fairness) and fair procedure (procedural fairness). The employer must prove both. If they cannot, the dismissal is unfair. Compensation is capped at 12 months (ordinary) or 24 months (automatically unfair, LRA s187).";
       }
       if (lower.includes('review') || lower.includes('appeal') || lower.includes('challenge')) {
-        return "To challenge a CCMA award, you must apply for review in the Labour Court within 6 weeks (LRA s145). Limited grounds: arbitrator exceeded powers, misconduct, gross irregularity, or improper evidence handling. Labour Court is compulsory online via Court Online. You may need the arbitration record — we can help you request it.";
+        return "To challenge a CCMA award, you must apply for review in the Labour Court within 6 weeks (LRA s145). Limited grounds: arbitrator exceeded powers, misconduct, gross irregularity, or improper evidence handling. Labour Court is compulsory online via Court Online. You may need the arbitration record - we can help you request it.";
       }
       if (lower.includes('precedent') || lower.includes('case law') || lower.includes('cases')) {
         return "Key CCMA/Labour Court precedents: NUMSA v. Bader Bop [2003] (review grounds); Steenkamp v. Edcon [2006] (arbitrator misconduct); Goldfields Mining v. CCMA [2007] (irregular procedure); SA Rugby v. CCMA [2006] (evidence errors); President of RSA v. SARFU [1999] (bias). This platform may assist you with find relevant cases for your specific situation.";
@@ -565,7 +562,7 @@
         return "Discrimination is prohibited under the Employment Equity Act 55 of 1998. Automatically unfair dismissal includes dismissal for pregnancy, union activity, whistleblowing, or protected disclosure (LRA s187). These carry up to 24 months' compensation. You may be able to refer directly to the CCMA or Labour Court.";
       }
       if (lower.includes('uif') || lower.includes('unemployment') || lower.includes('benefits')) {
-        return "If you were dismissed, apply for UIF benefits at your nearest Department of Labour office or online. You may need: ID, UI-19 form from employer (or proof of dismissal), and bank details. You have 12 months to claim. UIF and CCMA are separate processes — you can claim UIF even while disputing dismissal.";
+        return "If you were dismissed, apply for UIF benefits at your nearest Department of Labour office or online. You may need: ID, UI-19 form from employer (or proof of dismissal), and bank details. You have 12 months to claim. UIF and CCMA are separate processes - you can claim UIF even while disputing dismissal.";
       }
       return "This platform may assist with CCMA procedures, LRA sections, deadlines, document preparation, review grounds, case law, and general labour law guidance. What specific aspect would you like to know about?";
     }
@@ -672,7 +669,7 @@
         setTimeout(() => {
           const detected = this.detectType(file.name);
           uploader.innerHTML = `
-            <div class="adv-upload__text" style="color: var(--success);">✓ Detected: ${detected.type}</div>
+            <div class="adv-upload__text" style="color: var(--success);">OK Detected: ${detected.type}</div>
             <div class="adv-upload__hint">Stage: ${detected.stage} | Confidence: ${detected.confidence}%</div>
           `;
           uploader.style.borderColor = 'var(--success)';
