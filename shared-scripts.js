@@ -339,6 +339,12 @@
         pill.className = 'adv-progress__pill adv-progress__pill--' + (isCompleted ? 'completed' : isActive ? 'active' : 'pending');
         pill.innerHTML = '<span class="step-num">' + (isCompleted ? 'OK' : i + 1) + '</span><span class="step-name">' + step.name + '</span>';
 
+        // Prevent default link behavior and navigate in same tab
+        pill.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = step.path;
+        });
+
         stepEl.appendChild(pill);
         track.appendChild(stepEl);
 
