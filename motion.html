@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="shared-styles.css">
-<base target="_blank">
 </head>
 <body>
 
@@ -70,372 +69,347 @@
         </div>
       </section>
 
-      <!-- TAB NAVIGATION -->
-      <div class="adv-tabs" role="tablist" aria-label="Motion workflow sections" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0;">
-        <button class="adv-tab" id="tab-btn-1" role="tab" aria-selected="true" aria-controls="tab-panel-1" onclick="switchTab(1)" style="flex: 1; padding: 1rem 1.5rem; background: white; border: none; border-bottom: 3px solid #1a365d; font-weight: 600; color: #1a365d; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
-          <span style="width: 28px; height: 28px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">1</span>
-          <span>Motion Papers</span>
-        </button>
-        <button class="adv-tab" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #4a5568; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
-          <span style="width: 28px; height: 28px; background: #4a5568; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">2</span>
-          <span>Founding Affidavit</span>
-        </button>
-        <button class="adv-tab" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #4a5568; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
-          <span style="width: 28px; height: 28px; background: #4a5568; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">3</span>
-          <span>Document Checklist</span>
-        </button>
-      </div>
+      <!-- SECTION 1: NOTICE OF MOTION FORM -->
+      <section class="adv-card adv-card--primary" aria-labelledby="motion-heading" style="margin-bottom: 1.5rem;">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="motion-heading" class="adv-card__title">Step 1: Draft Your Notice of Motion</h2>
+            <p class="adv-card__subtitle">Generate the Notice of Motion to start your Section 145 review. Rule 37(2) compliant. The new 2024 Rules require a concise statement of grounds.</p>
+          </div>
+        </div>
 
-      <!-- TAB PANEL 1: Motion Papers -->
-      <div class="adv-tab-panel" id="tab-panel-1" role="tabpanel" aria-labelledby="tab-btn-1">
-
-        <section class="adv-card adv-card--primary" aria-labelledby="motion-heading">
-          <div class="adv-card__header">
-            <div>
-              <h2 id="motion-heading" class="adv-card__title">Draft Your Notice of Motion</h2>
-              <p class="adv-card__subtitle">Generate the Notice of Motion to start your Section 145 review. Rule 37(2) compliant. The new 2024 Rules require a concise statement of grounds.</p>
+        <div class="adv-card__body">
+          <!-- Party Structure -->
+          <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Party Structure</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem;">
+              <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #1a365d;">
+                <strong style="color: #1a365d;">Applicant</strong><br><span style="color: #4a5568;">You (the employee)</span>
+              </div>
+              <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #3182ce;">
+                <strong style="color: #2a4365;">1st Respondent</strong><br><span style="color: #4a5568;">Your employer</span>
+              </div>
+              <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #805ad5;">
+                <strong style="color: #553c9a;">2nd Respondent</strong><br><span style="color: #4a5568;">CCMA or Bargaining Council</span>
+              </div>
+              <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #d69e2e;">
+                <strong style="color: #744210;">3rd Respondent</strong><br><span style="color: #4a5568;">Commissioner (by name)</span>
+              </div>
             </div>
           </div>
 
-          <div class="adv-card__body">
-            <!-- Party Structure -->
-            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-              <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Party Structure</h4>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem;">
-                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #1a365d;">
-                  <strong style="color: #1a365d;">Applicant</strong><br><span style="color: #4a5568;">You (the employee)</span>
-                </div>
-                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #3182ce;">
-                  <strong style="color: #2a4365;">1st Respondent</strong><br><span style="color: #4a5568;">Your employer</span>
-                </div>
-                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #805ad5;">
-                  <strong style="color: #553c9a;">2nd Respondent</strong><br><span style="color: #4a5568;">CCMA or Bargaining Council</span>
-                </div>
-                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #d69e2e;">
-                  <strong style="color: #744210;">3rd Respondent</strong><br><span style="color: #4a5568;">Commissioner (by name)</span>
-                </div>
-              </div>
+          <!-- Form Fields -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="adv-form-group">
+              <label class="adv-label" for="app-name">Applicant Full Name (You)</label>
+              <input type="text" class="adv-input" id="app-name" placeholder="e.g. John Doe" data-storage-key="motion_app_name">
             </div>
-
-            <!-- Form Fields -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-              <div class="adv-form-group">
-                <label class="adv-label" for="app-name">Applicant Full Name (You)</label>
-                <input type="text" class="adv-input" id="app-name" placeholder="e.g. John Doe" data-storage-key="motion_app_name">
-              </div>
-              <div class="adv-form-group">
-                <label class="adv-label" for="resp-name">1st Respondent (Employer)</label>
-                <input type="text" class="adv-input" id="resp-name" placeholder="e.g. ABC Trading (Pty) Ltd" data-storage-key="motion_resp_name">
-              </div>
+            <div class="adv-form-group">
+              <label class="adv-label" for="resp-name">1st Respondent (Employer)</label>
+              <input type="text" class="adv-input" id="resp-name" placeholder="e.g. ABC Trading (Pty) Ltd" data-storage-key="motion_resp_name">
             </div>
+          </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-              <div class="adv-form-group">
-                <label class="adv-label" for="ccma-case-no">CCMA Case Number</label>
-                <input type="text" class="adv-input" id="ccma-case-no" placeholder="e.g. KN12345/2026" data-storage-key="motion_ccma_case">
-              </div>
-              <div class="adv-form-group">
-                <label class="adv-label" for="arb-date">Arbitration Date</label>
-                <input type="date" class="adv-input" id="arb-date" data-storage-key="motion_arb_date">
-              </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="adv-form-group">
+              <label class="adv-label" for="ccma-case-no">CCMA Case Number</label>
+              <input type="text" class="adv-input" id="ccma-case-no" placeholder="e.g. KN12345/2026" data-storage-key="motion_ccma_case">
             </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-              <div class="adv-form-group">
-                <label class="adv-label" for="commissioner">3rd Respondent — Commissioner Name</label>
-                <input type="text" class="adv-input" id="commissioner" placeholder="e.g. J. Smith" data-storage-key="motion_commissioner">
-              </div>
-              <div class="adv-form-group">
-                <label class="adv-label" for="ccma-region">CCMA Region / Bargaining Council</label>
-                <select class="adv-input" id="ccma-region" data-storage-key="motion_ccma_region">
-                  <option value="">Select region...</option>
-                  <option value="Johannesburg">Johannesburg CCMA</option>
-                  <option value="Pretoria">Pretoria CCMA</option>
-                  <option value="Durban">Durban CCMA</option>
-                  <option value="Cape Town">Cape Town CCMA</option>
-                  <option value="Gqeberha">Gqeberha CCMA</option>
-                  <option value="Bloemfontein">Bloemfontein CCMA</option>
-                  <option value="MEIBC">MEIBC (Metal & Engineering)</option>
-                  <option value="BCEA">BCEA (Building Industry)</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
+            <div class="adv-form-group">
+              <label class="adv-label" for="arb-date">Arbitration Date</label>
+              <input type="date" class="adv-input" id="arb-date" data-storage-key="motion_arb_date">
             </div>
+          </div>
 
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="app-address">Your Address for Service (Physical)</label>
-              <input type="text" class="adv-input" id="app-address" placeholder="e.g. 123 Main Street, Johannesburg, 2000" data-storage-key="motion_app_address">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="adv-form-group">
+              <label class="adv-label" for="commissioner">3rd Respondent — Commissioner Name</label>
+              <input type="text" class="adv-input" id="commissioner" placeholder="e.g. J. Smith" data-storage-key="motion_commissioner">
             </div>
-
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="app-email">Your Email for Service</label>
-              <input type="email" class="adv-input" id="app-email" placeholder="you@example.com" data-storage-key="motion_app_email">
-            </div>
-
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="award-outcome">Award Outcome</label>
-              <select class="adv-input" id="award-outcome" data-storage-key="motion_award_outcome">
-                <option value="">Select outcome...</option>
-                <option value="dismissed">Dismissal upheld (unfair dismissal claim lost)</option>
-                <option value="compensation-reduced">Compensation awarded but too low</option>
-                <option value="reinstatement-refused">Reinstatement refused</option>
-                <option value="procedural-irregularity">Procedural irregularity during arbitration</option>
-                <option value="misconduct">Commissioner misconduct</option>
-                <option value="other">Other</option>
+            <div class="adv-form-group">
+              <label class="adv-label" for="ccma-region">CCMA Region / Bargaining Council</label>
+              <select class="adv-input" id="ccma-region" data-storage-key="motion_ccma_region">
+                <option value="">Select region...</option>
+                <option value="Johannesburg">Johannesburg CCMA</option>
+                <option value="Pretoria">Pretoria CCMA</option>
+                <option value="Durban">Durban CCMA</option>
+                <option value="Cape Town">Cape Town CCMA</option>
+                <option value="Gqeberha">Gqeberha CCMA</option>
+                <option value="Bloemfontein">Bloemfontein CCMA</option>
+                <option value="MEIBC">MEIBC (Metal & Engineering)</option>
+                <option value="BCEA">BCEA (Building Industry)</option>
+                <option value="Other">Other</option>
               </select>
             </div>
+          </div>
 
-            <!-- Grounds for Review -->
-            <div style="margin-bottom: 1.5rem;">
-              <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Grounds for Review (LRA s145(2))</h3>
-              <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1rem;">Select all applicable grounds. The new 2024 Rules require a <em>concise</em> statement. State specifically what the commissioner did wrong.</p>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
-                  <input type="checkbox" id="ground-gross-irregularity" data-storage-key="motion_ground_gross_irregularity" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
-                  <span style="font-size: 0.9rem; color: #1a202c;">Gross irregularity in the proceedings (s145(2)(c))</span>
-                </label>
-                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
-                  <input type="checkbox" id="ground-excess-power" data-storage-key="motion_ground_excess_power" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
-                  <span style="font-size: 0.9rem; color: #1a202c;">Excess of power / lack of jurisdiction (s145(2)(a))</span>
-                </label>
-                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
-                  <input type="checkbox" id="ground-unreasonable" data-storage-key="motion_ground_unreasonable" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
-                  <span style="font-size: 0.9rem; color: #1a202c;">Unreasonable decision (Sidumo test) (s145(2)(a))</span>
-                </label>
-                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
-                  <input type="checkbox" id="ground-misconduct" data-storage-key="motion_ground_misconduct" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
-                  <span style="font-size: 0.9rem; color: #1a202c;">Commissioner misconduct / bias (s145(2)(b))</span>
-                </label>
-                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
-                  <input type="checkbox" id="ground-improperly-obtained" data-storage-key="motion_ground_improperly_obtained" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
-                  <span style="font-size: 0.9rem; color: #1a202c;">Award improperly obtained / fraud (s145(2)(d))</span>
-                </label>
-                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
-                  <input type="checkbox" id="ground-other" data-storage-key="motion_ground_other" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
-                  <span style="font-size: 0.9rem; color: #1a202c;">Other (specify below)</span>
-                </label>
-              </div>
-            </div>
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="app-address">Your Address for Service (Physical)</label>
+            <input type="text" class="adv-input" id="app-address" placeholder="e.g. 123 Main Street, Johannesburg, 2000" data-storage-key="motion_app_address">
+          </div>
 
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="ground-details">Specific Grounds (concise, point form)</label>
-              <textarea class="adv-input" id="ground-details" rows="6" placeholder="1. The commissioner failed to consider the applicant's evidence that...&#10;2. The commissioner misdirected herself on the burden of proof by...&#10;3. No reasonable commissioner could have found..." data-storage-key="motion_ground_details"></textarea>
-            </div>
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="app-email">Your Email for Service</label>
+            <input type="email" class="adv-input" id="app-email" placeholder="you@example.com" data-storage-key="motion_app_email">
+          </div>
 
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="relief-sought">Relief Sought</label>
-              <textarea class="adv-input" id="relief-sought" rows="3" placeholder="e.g. Review and set aside the arbitration award. Order the respondent to reinstate the applicant with retrospective effect." data-storage-key="motion_relief"></textarea>
-            </div>
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="award-outcome">Award Outcome</label>
+            <select class="adv-input" id="award-outcome" data-storage-key="motion_award_outcome">
+              <option value="">Select outcome...</option>
+              <option value="dismissed">Dismissal upheld (unfair dismissal claim lost)</option>
+              <option value="compensation-reduced">Compensation awarded but too low</option>
+              <option value="reinstatement-refused">Reinstatement refused</option>
+              <option value="procedural-irregularity">Procedural irregularity during arbitration</option>
+              <option value="misconduct">Commissioner misconduct</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-            <!-- Critical Warnings -->
-            <div class="adv-alert adv-alert--danger" style="margin-bottom: 1rem;">
-              <strong style="font-size: 1rem;">⚠ CRITICAL: Reference Number ≠ Case Number</strong>
-              <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;"><strong>Do NOT write the reference number on any court document.</strong> Upload <strong>ONLY</strong> the Notice of Motion to Court Online first. The Registrar will issue an official case number. The affidavit comes AFTER the case is issued. (Directive 1 of 2025)</p>
-            </div>
-
-            <div class="adv-alert adv-alert--info" style="margin-bottom: 1rem;">
-              <strong style="font-size: 1rem;">Service Note</strong>
-              <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;">Service for review does <strong>NOT</strong> require a sheriff. Email to a working address that respondents actually use is sufficient under Labour Court Rules.</p>
+          <!-- Grounds for Review -->
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Grounds for Review (LRA s145(2))</h3>
+            <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1rem;">Select all applicable grounds. The new 2024 Rules require a <em>concise</em> statement. State specifically what the commissioner did wrong.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+              <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="ground-gross-irregularity" data-storage-key="motion_ground_gross_irregularity" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">Gross irregularity in the proceedings (s145(2)(c))</span>
+              </label>
+              <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="ground-excess-power" data-storage-key="motion_ground_excess_power" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">Excess of power / lack of jurisdiction (s145(2)(a))</span>
+              </label>
+              <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="ground-unreasonable" data-storage-key="motion_ground_unreasonable" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">Unreasonable decision (Sidumo test) (s145(2)(a))</span>
+              </label>
+              <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="ground-misconduct" data-storage-key="motion_ground_misconduct" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">Commissioner misconduct / bias (s145(2)(b))</span>
+              </label>
+              <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="ground-improperly-obtained" data-storage-key="motion_ground_improperly_obtained" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">Award improperly obtained / fraud (s145(2)(d))</span>
+              </label>
+              <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="ground-other" data-storage-key="motion_ground_other" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">Other (specify below)</span>
+              </label>
             </div>
           </div>
 
-          <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-            <button class="adv-btn adv-btn--accent adv-btn--block" id="generate-motion-btn" type="button" onclick="generateMotion()">
-              Generate Notice of Motion & Founding Affidavit
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="ground-details">Specific Grounds (concise, point form)</label>
+            <textarea class="adv-input" id="ground-details" rows="6" placeholder="1. The commissioner failed to consider the applicant's evidence that...&#10;2. The commissioner misdirected herself on the burden of proof by...&#10;3. No reasonable commissioner could have found..." data-storage-key="motion_ground_details"></textarea>
+          </div>
+
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="relief-sought">Relief Sought</label>
+            <textarea class="adv-input" id="relief-sought" rows="3" placeholder="e.g. Review and set aside the arbitration award. Order the respondent to reinstate the applicant with retrospective effect." data-storage-key="motion_relief"></textarea>
+          </div>
+
+          <!-- Critical Warnings -->
+          <div class="adv-alert adv-alert--danger" style="margin-bottom: 1rem;">
+            <strong style="font-size: 1rem;">⚠ CRITICAL: Reference Number ≠ Case Number</strong>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;"><strong>Do NOT write the reference number on any court document.</strong> Upload <strong>ONLY</strong> the Notice of Motion to Court Online first. The Registrar will issue an official case number. The affidavit comes AFTER the case is issued. (Directive 1 of 2025)</p>
+          </div>
+
+          <div class="adv-alert adv-alert--info" style="margin-bottom: 1rem;">
+            <strong style="font-size: 1rem;">Service Note</strong>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;">Service for review does <strong>NOT</strong> require a sheriff. Email to a working address that respondents actually use is sufficient under Labour Court Rules.</p>
+          </div>
+        </div>
+
+        <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="adv-btn adv-btn--accent adv-btn--block" id="generate-motion-btn" type="button" onclick="generateMotion()">
+            Generate Notice of Motion & Founding Affidavit
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 2: GENERATED DOCUMENTS PREVIEW -->
+      <section class="adv-card" id="motion-preview-card" style="display: none; margin-bottom: 1.5rem;" aria-labelledby="preview-heading">
+        <div class="adv-card__header">
+          <h2 id="preview-heading" class="adv-card__title">Step 2: Generated Documents</h2>
+        </div>
+        <div class="adv-card__body">
+          <div style="margin-bottom: 1rem;">
+            <button class="adv-btn adv-btn--primary" onclick="showDocument('notice')" id="tab-notice" style="margin-right: 0.5rem;">Notice of Motion</button>
+            <button class="adv-btn adv-btn--secondary" onclick="showDocument('affidavit')" id="tab-affidavit">Founding Affidavit</button>
+          </div>
+          <div id="notice-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+          <div id="affidavit-preview" style="display: none; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="adv-btn adv-btn--secondary" onclick="copyCurrentDocument()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Current
+            </button>
+            <button class="adv-btn adv-btn--primary" onclick="downloadCurrentDocument()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Current
+            </button>
+            <button class="adv-btn adv-btn--accent" onclick="downloadBothDocuments()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Both
             </button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Document Preview -->
-        <section class="adv-card" id="motion-preview-card" style="display: none;" aria-labelledby="preview-heading">
-          <div class="adv-card__header">
-            <h2 id="preview-heading" class="adv-card__title">Generated Documents</h2>
+      <!-- SECTION 3: FOUNDING AFFIDAVIT FORM -->
+      <section class="adv-card adv-card--primary" aria-labelledby="affidavit-heading" style="margin-bottom: 1.5rem;">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="affidavit-heading" class="adv-card__title">Step 3: Draft Your Founding Affidavit</h2>
+            <p class="adv-card__subtitle">The Founding Affidavit supports your Notice of Motion. It must contain the facts upon which you rely for review. Fill in the details below and generate the document.</p>
           </div>
-          <div class="adv-card__body">
-            <div style="margin-bottom: 1rem;">
-              <button class="adv-btn adv-btn--primary" onclick="showDocument('notice')" id="tab-notice" style="margin-right: 0.5rem;">Notice of Motion</button>
-              <button class="adv-btn adv-btn--secondary" onclick="showDocument('affidavit')" id="tab-affidavit">Founding Affidavit</button>
-            </div>
-            <div id="notice-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
-            <div id="affidavit-preview" style="display: none; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
-            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-              <button class="adv-btn adv-btn--secondary" onclick="copyCurrentDocument()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Copy Current
-              </button>
-              <button class="adv-btn adv-btn--primary" onclick="downloadCurrentDocument()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download Current
-              </button>
-              <button class="adv-btn adv-btn--accent" onclick="downloadBothDocuments()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download Both
-              </button>
-            </div>
-          </div>
-        </section>
-      </div><!-- /tab-panel-1 -->
+        </div>
 
-      <!-- TAB PANEL 2: Founding Affidavit -->
-      <div class="adv-tab-panel" id="tab-panel-2" role="tabpanel" aria-labelledby="tab-btn-2" style="display: none;">
-
-        <section class="adv-card adv-card--primary" aria-labelledby="affidavit-heading">
-          <div class="adv-card__header">
-            <div>
-              <h2 id="affidavit-heading" class="adv-card__title">Draft Your Founding Affidavit</h2>
-              <p class="adv-card__subtitle">The Founding Affidavit supports your Notice of Motion. It must contain the facts upon which you rely for review. Fill in the details below and generate the document.</p>
-            </div>
+        <div class="adv-card__body">
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="affidavit-background">Background Facts (chronological)</label>
+            <textarea class="adv-input" id="affidavit-background" rows="6" placeholder="1. I was employed by the Respondent from [DATE] to [DATE] as [POSITION].&#10;2. On [DATE], I was dismissed for [REASON].&#10;3. I referred the dispute to the CCMA on [DATE].&#10;4. The arbitration hearing was held on [DATE] before Commissioner [NAME]." data-storage-key="motion_affidavit_background"></textarea>
           </div>
 
-          <div class="adv-card__body">
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="affidavit-background">Background Facts (chronological)</label>
-              <textarea class="adv-input" id="affidavit-background" rows="6" placeholder="1. I was employed by the Respondent from [DATE] to [DATE] as [POSITION].&#10;2. On [DATE], I was dismissed for [REASON].&#10;3. I referred the dispute to the CCMA on [DATE].&#10;4. The arbitration hearing was held on [DATE] before Commissioner [NAME]." data-storage-key="motion_affidavit_background"></textarea>
-            </div>
-
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="affidavit-evidence">Your Evidence at Arbitration (key points)</label>
-              <textarea class="adv-input" id="affidavit-evidence" rows="4" placeholder="1. I testified that [key fact].&#10;2. I submitted [document] as evidence.&#10;3. The commissioner failed to consider [specific evidence]." data-storage-key="motion_affidavit_evidence"></textarea>
-            </div>
-
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="affidavit-commissioner-errors">Commissioner's Errors (specific)</label>
-              <textarea class="adv-input" id="affidavit-commissioner-errors" rows="6" placeholder="1. The commissioner failed to apply the correct test for [issue].&#10;2. The commissioner ignored the evidence of [witness] at page [X].&#10;3. The commissioner made a finding of fact without evidence to support it." data-storage-key="motion_affidavit_errors"></textarea>
-            </div>
-
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="affidavit-legal-submissions">Legal Submissions</label>
-              <textarea class="adv-input" id="affidavit-legal-submissions" rows="4" placeholder="The commissioner erred in law by failing to apply the Sidumo test correctly. In Sidumo v Rustenburg Platinum Mines Ltd, the Constitutional Court held that..." data-storage-key="motion_affidavit_legal"></textarea>
-            </div>
-
-            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-              <label class="adv-label" for="affidavit-conclusion">Conclusion & Prayer</label>
-              <textarea class="adv-input" id="affidavit-conclusion" rows="3" placeholder="I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting review and setting aside of the award. I pray that this Honourable Court grant the relief sought in the Notice of Motion." data-storage-key="motion_affidavit_conclusion"></textarea>
-            </div>
-
-            <div class="adv-alert adv-alert--warning" style="margin-bottom: 1rem;">
-              <strong>Important:</strong> The Founding Affidavit must be sworn before a Commissioner of Oaths. You can find one at any police station, post office, or attorney's office. Bring your ID. The cost is usually R50–R100.
-            </div>
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="affidavit-evidence">Your Evidence at Arbitration (key points)</label>
+            <textarea class="adv-input" id="affidavit-evidence" rows="4" placeholder="1. I testified that [key fact].&#10;2. I submitted [document] as evidence.&#10;3. The commissioner failed to consider [specific evidence]." data-storage-key="motion_affidavit_evidence"></textarea>
           </div>
 
-          <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-            <button class="adv-btn adv-btn--accent adv-btn--block" type="button" onclick="generateAffidavitOnly()">
-              Generate Founding Affidavit
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="affidavit-commissioner-errors">Commissioner's Errors (specific)</label>
+            <textarea class="adv-input" id="affidavit-commissioner-errors" rows="6" placeholder="1. The commissioner failed to apply the correct test for [issue].&#10;2. The commissioner ignored the evidence of [witness] at page [X].&#10;3. The commissioner made a finding of fact without evidence to support it." data-storage-key="motion_affidavit_errors"></textarea>
+          </div>
+
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="affidavit-legal-submissions">Legal Submissions</label>
+            <textarea class="adv-input" id="affidavit-legal-submissions" rows="4" placeholder="The commissioner erred in law by failing to apply the Sidumo test correctly. In Sidumo v Rustenburg Platinum Mines Ltd, the Constitutional Court held that..." data-storage-key="motion_affidavit_legal"></textarea>
+          </div>
+
+          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+            <label class="adv-label" for="affidavit-conclusion">Conclusion & Prayer</label>
+            <textarea class="adv-input" id="affidavit-conclusion" rows="3" placeholder="I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting review and setting aside of the award. I pray that this Honourable Court grant the relief sought in the Notice of Motion." data-storage-key="motion_affidavit_conclusion"></textarea>
+          </div>
+
+          <div class="adv-alert adv-alert--warning" style="margin-bottom: 1rem;">
+            <strong>Important:</strong> The Founding Affidavit must be sworn before a Commissioner of Oaths. You can find one at any police station, post office, or attorney's office. Bring your ID. The cost is usually R50–R100.
+          </div>
+        </div>
+
+        <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="adv-btn adv-btn--accent adv-btn--block" type="button" onclick="generateAffidavitOnly()">
+            Generate Founding Affidavit
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 4: GENERATED AFFIDAVIT PREVIEW -->
+      <section class="adv-card" id="affidavit-only-preview-card" style="display: none; margin-bottom: 1.5rem;" aria-labelledby="affidavit-only-preview-heading">
+        <div class="adv-card__header">
+          <h2 id="affidavit-only-preview-heading" class="adv-card__title">Step 4: Generated Founding Affidavit</h2>
+        </div>
+        <div class="adv-card__body">
+          <div id="affidavit-only-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+            <button class="adv-btn adv-btn--secondary" onclick="copyAffidavitOnly()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+            <button class="adv-btn adv-btn--primary" onclick="downloadAffidavitOnly()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
             </button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Affidavit Preview -->
-        <section class="adv-card" id="affidavit-only-preview-card" style="display: none;" aria-labelledby="affidavit-only-preview-heading">
-          <div class="adv-card__header">
-            <h2 id="affidavit-only-preview-heading" class="adv-card__title">Generated Founding Affidavit</h2>
+      <!-- SECTION 5: DOCUMENT CHECKLIST -->
+      <section class="adv-card adv-card--primary" aria-labelledby="checklist-heading" style="margin-bottom: 1.5rem;">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="checklist-heading" class="adv-card__title">Step 5: Document Checklist</h2>
+            <p class="adv-card__subtitle">Before proceeding to Court Online filing, ensure all required documents are complete and ready.</p>
           </div>
-          <div class="adv-card__body">
-            <div id="affidavit-only-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
-            <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
-              <button class="adv-btn adv-btn--secondary" onclick="copyAffidavitOnly()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Copy
-              </button>
-              <button class="adv-btn adv-btn--primary" onclick="downloadAffidavitOnly()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download
-              </button>
-            </div>
-          </div>
-        </section>
-      </div><!-- /tab-panel-2 -->
+        </div>
 
-      <!-- TAB PANEL 3: Document Checklist -->
-      <div class="adv-tab-panel" id="tab-panel-3" role="tabpanel" aria-labelledby="tab-btn-3" style="display: none;">
-
-        <section class="adv-card adv-card--primary" aria-labelledby="checklist-heading">
-          <div class="adv-card__header">
-            <div>
-              <h2 id="checklist-heading" class="adv-card__title">Document Checklist</h2>
-              <p class="adv-card__subtitle">Before proceeding to Court Online filing, ensure all required documents are complete and ready.</p>
-            </div>
-          </div>
-
-          <div class="adv-card__body">
-            <div class="adv-checklist" style="margin-bottom: 1.5rem;">
-              <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a365d;">Required Documents</h3>
-
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
-                <input type="checkbox" id="check-notice" data-storage-key="motion_check_notice" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
-                <div>
-                  <strong style="font-size: 0.95rem; color: #1a202c;">Notice of Motion</strong>
-                  <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Must be complete with all party details, grounds, and relief sought. Do NOT include a case number yet.</p>
-                </div>
-              </label>
-
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
-                <input type="checkbox" id="check-affidavit" data-storage-key="motion_check_affidavit" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
-                <div>
-                  <strong style="font-size: 0.95rem; color: #1a202c;">Founding Affidavit</strong>
-                  <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Must be sworn before a Commissioner of Oaths. Include all facts, evidence, and legal submissions.</p>
-                </div>
-              </label>
-
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
-                <input type="checkbox" id="check-award" data-storage-key="motion_check_award" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
-                <div>
-                  <strong style="font-size: 0.95rem; color: #1a202c;">Copy of Arbitration Award</strong>
-                  <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Attach the full arbitration award (all pages). Ensure it is legible and complete.</p>
-                </div>
-              </label>
-
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
-                <input type="checkbox" id="check-proof-service" data-storage-key="motion_check_proof_service" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
-                <div>
-                  <strong style="font-size: 0.95rem; color: #1a202c;">Proof of Service on Respondents</strong>
-                  <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Email delivery receipts or read receipts showing service on all respondents (employer, CCMA, commissioner).</p>
-                </div>
-              </label>
-
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
-                <input type="checkbox" id="check-id" data-storage-key="motion_check_id" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
-                <div>
-                  <strong style="font-size: 0.95rem; color: #1a202c;">Copy of Your ID</strong>
-                  <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Certified copy of your South African ID or passport. Required for Court Online registration.</p>
-                </div>
-              </label>
-
-              <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
-                <input type="checkbox" id="check-deadline" data-storage-key="motion_check_deadline" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
-                <div>
-                  <strong style="font-size: 0.95rem; color: #1a202c;">6-Week Deadline Confirmed</strong>
-                  <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">You are within the 6-week LRA s145 deadline from the date you were served with the award.</p>
-                </div>
-              </label>
-            </div>
-
-            <!-- Progress Bar -->
-            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
-                <span id="checklist-progress-text">0 of 6 items complete</span>
-                <span id="checklist-progress-percent">0%</span>
+        <div class="adv-card__body">
+          <div class="adv-checklist" style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a365d;">Required Documents</h3>
+            
+            <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
+              <input type="checkbox" id="check-notice" data-storage-key="motion_check_notice" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
+              <div>
+                <strong style="font-size: 0.95rem; color: #1a202c;">Notice of Motion</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Must be complete with all party details, grounds, and relief sought. Do NOT include a case number yet.</p>
               </div>
-              <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
-                <div id="checklist-progress-bar" style="width: 0%; height: 100%; background: #38a169; border-radius: 4px; transition: width 0.3s ease;"></div>
+            </label>
+
+            <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
+              <input type="checkbox" id="check-affidavit" data-storage-key="motion_check_affidavit" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
+              <div>
+                <strong style="font-size: 0.95rem; color: #1a202c;">Founding Affidavit</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Must be sworn before a Commissioner of Oaths. Include all facts, evidence, and legal submissions.</p>
               </div>
-            </div>
+            </label>
 
-            <div class="adv-alert adv-alert--info" style="margin-bottom: 1rem;">
-              <strong>Tip:</strong> You do NOT need to upload the Founding Affidavit when you first file the Notice of Motion. The Registrar will issue a case number first. Only upload the affidavit after the case number is issued.
-            </div>
+            <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
+              <input type="checkbox" id="check-award" data-storage-key="motion_check_award" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
+              <div>
+                <strong style="font-size: 0.95rem; color: #1a202c;">Copy of Arbitration Award</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Attach the full arbitration award (all pages). Ensure it is legible and complete.</p>
+              </div>
+            </label>
 
-            <div style="text-align: center; margin-top: 1.5rem;">
-              <a href="court-online.html" class="adv-btn adv-btn--accent" id="next-court-online" style="text-decoration: none; display: inline-flex; opacity: 0.5; pointer-events: none;">
-                Proceed to Court Online Filing →
-              </a>
-              <p id="checklist-warning" style="margin-top: 0.75rem; font-size: 0.85rem; color: #c53030;">Complete all checklist items to unlock the next step.</p>
+            <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
+              <input type="checkbox" id="check-proof-service" data-storage-key="motion_check_proof_service" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
+              <div>
+                <strong style="font-size: 0.95rem; color: #1a202c;">Proof of Service on Respondents</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Email delivery receipts or read receipts showing service on all respondents (employer, CCMA, commissioner).</p>
+              </div>
+            </label>
+
+            <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
+              <input type="checkbox" id="check-id" data-storage-key="motion_check_id" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
+              <div>
+                <strong style="font-size: 0.95rem; color: #1a202c;">Copy of Your ID</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">Certified copy of your South African ID or passport. Required for Court Online registration.</p>
+              </div>
+            </label>
+
+            <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
+              <input type="checkbox" id="check-deadline" data-storage-key="motion_check_deadline" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
+              <div>
+                <strong style="font-size: 0.95rem; color: #1a202c;">6-Week Deadline Confirmed</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #718096;">You are within the 6-week LRA s145 deadline from the date you were served with the award.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Progress Bar -->
+          <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+              <span id="checklist-progress-text">0 of 6 items complete</span>
+              <span id="checklist-progress-percent">0%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+              <div id="checklist-progress-bar" style="width: 0%; height: 100%; background: #38a169; border-radius: 4px; transition: width 0.3s ease;"></div>
             </div>
           </div>
-        </section>
-      </div><!-- /tab-panel-3 -->
+
+          <div class="adv-alert adv-alert--info" style="margin-bottom: 1rem;">
+            <strong>Tip:</strong> You do NOT need to upload the Founding Affidavit when you first file the Notice of Motion. The Registrar will issue a case number first. Only upload the affidavit after the case number is issued.
+          </div>
+
+          <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="court-online.html" class="adv-btn adv-btn--accent" id="next-court-online" style="text-decoration: none; display: inline-flex; opacity: 0.5; pointer-events: none;">
+              Proceed to Court Online Filing →
+            </a>
+            <p id="checklist-warning" style="margin-top: 0.75rem; font-size: 0.85rem; color: #c53030;">Complete all checklist items to unlock the next step.</p>
+          </div>
+        </div>
+      </section>
 
     </div><!-- /adv-workspace -->
 
@@ -572,43 +546,8 @@
   <script src="shared-scripts.js"></script>
   <script>
 
-    // ─── TAB SYSTEM ─── All tabs freely accessible
-    var currentTab = 1;
-
-    function switchTab(n) {
-      currentTab = n;
-      for (var i = 1; i <= 3; i++) {
-        var btn = document.getElementById('tab-btn-' + i);
-        var panel = document.getElementById('tab-panel-' + i);
-        if (!btn || !panel) continue;
-        if (i === n) {
-          btn.setAttribute('aria-selected', 'true');
-          btn.style.background = 'white';
-          btn.style.borderBottom = '3px solid #1a365d';
-          btn.style.fontWeight = '600';
-          btn.style.color = '#1a365d';
-          var circle = btn.querySelector('span:first-child');
-          if (circle) circle.style.background = '#1a365d';
-          panel.style.display = 'block';
-        } else {
-          btn.setAttribute('aria-selected', 'false');
-          btn.style.background = '#f7fafc';
-          btn.style.borderBottom = '3px solid transparent';
-          btn.style.fontWeight = '400';
-          btn.style.color = '#4a5568';
-          var circle = btn.querySelector('span:first-child');
-          if (circle) circle.style.background = '#4a5568';
-          panel.style.display = 'none';
-        }
-      }
-      localStorage.setItem('motion_current_tab', n);
-    }
-
     // ─── LOCALSTORAGE PERSISTENCE ───
     document.addEventListener('DOMContentLoaded', function() {
-      var savedTab = parseInt(localStorage.getItem('motion_current_tab')) || 1;
-      switchTab(savedTab);
-
       document.querySelectorAll('[data-storage-key]').forEach(function(el) {
         var key = el.getAttribute('data-storage-key');
         var saved = localStorage.getItem(key);
@@ -699,198 +638,76 @@
       var secondResp = (region === 'MEIBC' || region === 'BCEA') ? region + ' Bargaining Council' : 'The Commission for Conciliation, Mediation and Arbitration (CCMA)';
       var secondRespAddress = (region === 'MEIBC' || region === 'BCEA') ? '[BARGAINING COUNCIL ADDRESS]' : '28 Harrison Street, Johannesburg, 2001';
 
-      generatedNotice = 'IN THE LABOUR COURT OF SOUTH AFRICA
-' +
-        '_________________________________________________________
-
-' +
-        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
-
-' +
-        'In the matter between:
-
-' +
-        appName + '
-' + appAddress + '
-
-' +
-        '          Applicant
-
-' +
-        'and
-
-' +
-        respName + '
-
-' +
-        '          1st Respondent
-
-' +
-        'and
-
-' +
-        secondResp + '
-' + secondRespAddress + '
-
-' +
-        '          2nd Respondent
-
-' +
-        'and
-
-' +
-        commissioner + '
-' +
-        'Commissioner, CCMA — ' + region + ' Region
-
-' +
-        '          3rd Respondent
-
-' +
-        '_________________________________________________________
-
-' +
-        'NOTICE OF MOTION
-
-' +
-        'TAKE NOTICE that the Applicant intends to apply to this Honourable Court on a date and time to be assigned by the Registrar for an order in the following terms:
-
-' +
-        '1. That the arbitration award dated ' + arbDate + ', delivered by Commissioner ' + commissioner + ' in CCMA case number ' + ccmaCase + ', be reviewed and set aside;
-
-' +
-        '2. That the 2nd Respondent, ' + secondResp + ', be directed to dispatch the complete record of the arbitration proceedings to the Registrar of this Honourable Court within 10 (ten) days of receipt of this notice of motion, and to notify the parties that this has been done, in terms of Rule 37(2)(b) of the Labour Court Rules;
-
-' +
-        '3. That the costs of this application be costs in the cause;
-
-' +
-        '4. That the Applicant be granted such further and alternative relief as this Honourable Court may deem fit.
-
-' +
-        'TAKE FURTHER NOTICE that the affidavit of ' + appName + ', annexed hereto, will be used in support of this application.
-
-' +
-        'Dated at _______________ on this ' + today + '.
-
-' +
-        '_________________________
-' +
-        appName + '
-' +
-        'Applicant
-
-' +
-        'Address for service: ' + appAddress + '
-' +
+      generatedNotice = 'IN THE LABOUR COURT OF SOUTH AFRICA\n' +
+        '_________________________________________________________\n\n' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA\n\n' +
+        'In the matter between:\n\n' +
+        appName + '\n' + appAddress + '\n\n' +
+        '          Applicant\n\n' +
+        'and\n\n' +
+        respName + '\n\n' +
+        '          1st Respondent\n\n' +
+        'and\n\n' +
+        secondResp + '\n' + secondRespAddress + '\n\n' +
+        '          2nd Respondent\n\n' +
+        'and\n\n' +
+        commissioner + '\n' +
+        'Commissioner, CCMA — ' + region + ' Region\n\n' +
+        '          3rd Respondent\n\n' +
+        '_________________________________________________________\n\n' +
+        'NOTICE OF MOTION\n\n' +
+        'TAKE NOTICE that the Applicant intends to apply to this Honourable Court on a date and time to be assigned by the Registrar for an order in the following terms:\n\n' +
+        '1. That the arbitration award dated ' + arbDate + ', delivered by Commissioner ' + commissioner + ' in CCMA case number ' + ccmaCase + ', be reviewed and set aside;\n\n' +
+        '2. That the 2nd Respondent, ' + secondResp + ', be directed to dispatch the complete record of the arbitration proceedings to the Registrar of this Honourable Court within 10 (ten) days of receipt of this notice of motion, and to notify the parties that this has been done, in terms of Rule 37(2)(b) of the Labour Court Rules;\n\n' +
+        '3. That the costs of this application be costs in the cause;\n\n' +
+        '4. That the Applicant be granted such further and alternative relief as this Honourable Court may deem fit.\n\n' +
+        'TAKE FURTHER NOTICE that the affidavit of ' + appName + ', annexed hereto, will be used in support of this application.\n\n' +
+        'Dated at _______________ on this ' + today + '.\n\n' +
+        '_________________________\n' +
+        appName + '\n' +
+        'Applicant\n\n' +
+        'Address for service: ' + appAddress + '\n' +
         'Email: ' + appEmail;
 
-      generatedAffidavit = 'IN THE LABOUR COURT OF SOUTH AFRICA
-' +
-        '_________________________________________________________
-
-' +
-        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
-
-' +
-        'In the matter between:
-
-' +
-        appName + '
-
-' +
-        '          Applicant
-
-' +
-        'and
-
-' +
-        respName + '
-
-' +
-        '          1st Respondent
-
-' +
-        'and
-
-' +
-        secondResp + '
-
-' +
-        '          2nd Respondent
-
-' +
-        'and
-
-' +
-        commissioner + ' — Commissioner
-
-' +
-        '          3rd Respondent
-
-' +
-        '_________________________________________________________
-
-' +
-        'FOUNDING AFFIDAVIT
-
-' +
-        'I, the undersigned ' + appName + ', do hereby make oath and state:
-
-' +
-        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.
-
-' +
-        '2. On ' + arbDate + ', an arbitration hearing was held before Commissioner ' + commissioner + ' at the ' + region + ' office in CCMA case number ' + ccmaCase + '.
-
-' +
-        '3. On [DATE OF AWARD], Commissioner ' + commissioner + ' delivered an arbitration award [briefly describe outcome: ' + awardOutcome + '].
-
-' +
-        '4. I was served with the award on [DATE OF SERVICE].
-
-' +
-        '5. The grounds upon which I seek review of the award are as follows:
-
-';
+      generatedAffidavit = 'IN THE LABOUR COURT OF SOUTH AFRICA\n' +
+        '_________________________________________________________\n\n' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA\n\n' +
+        'In the matter between:\n\n' +
+        appName + '\n\n' +
+        '          Applicant\n\n' +
+        'and\n\n' +
+        respName + '\n\n' +
+        '          1st Respondent\n\n' +
+        'and\n\n' +
+        secondResp + '\n\n' +
+        '          2nd Respondent\n\n' +
+        'and\n\n' +
+        commissioner + ' — Commissioner\n\n' +
+        '          3rd Respondent\n\n' +
+        '_________________________________________________________\n\n' +
+        'FOUNDING AFFIDAVIT\n\n' +
+        'I, the undersigned ' + appName + ', do hereby make oath and state:\n\n' +
+        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.\n\n' +
+        '2. On ' + arbDate + ', an arbitration hearing was held before Commissioner ' + commissioner + ' at the ' + region + ' office in CCMA case number ' + ccmaCase + '.\n\n' +
+        '3. On [DATE OF AWARD], Commissioner ' + commissioner + ' delivered an arbitration award [briefly describe outcome: ' + awardOutcome + '].\n\n' +
+        '4. I was served with the award on [DATE OF SERVICE].\n\n' +
+        '5. The grounds upon which I seek review of the award are as follows:\n\n';
 
       groundsList.forEach(function(g, i) {
-        generatedAffidavit += (i + 6) + '. ' + g + '
-
-';
+        generatedAffidavit += (i + 6) + '. ' + g + '\n\n';
       });
 
-      generatedAffidavit += '
-' + groundsDetails + '
-
-' +
-        (groundsList.length + 6) + '. I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting the review and setting aside of the award by this Honourable Court.
-
-' +
-        (groundsList.length + 7) + '. I have no other adequate remedy in the circumstances save for the relief sought herein.
-
-' +
-        (groundsList.length + 8) + '. I pray that this Honourable Court grant the following relief:
-
-' +
-        relief + '
-
-' +
-        'Dated at _______________ on this ' + today + '.
-
-' +
-        '_________________________
-' +
-        appName + '
-' +
-        'Applicant
-
-' +
-        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.
-
-' +
-        '_________________________
-' +
+      generatedAffidavit += '\n' + groundsDetails + '\n\n' +
+        (groundsList.length + 6) + '. I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting the review and setting aside of the award by this Honourable Court.\n\n' +
+        (groundsList.length + 7) + '. I have no other adequate remedy in the circumstances save for the relief sought herein.\n\n' +
+        (groundsList.length + 8) + '. I pray that this Honourable Court grant the following relief:\n\n' +
+        relief + '\n\n' +
+        'Dated at _______________ on this ' + today + '.\n\n' +
+        '_________________________\n' +
+        appName + '\n' +
+        'Applicant\n\n' +
+        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.\n\n' +
+        '_________________________\n' +
         'Commissioner of Oaths';
 
       document.getElementById('notice-preview').textContent = generatedNotice;
@@ -926,20 +743,14 @@
     }
 
     function downloadBothDocuments() {
-      var combined = '=== NOTICE OF MOTION ===
-
-' + generatedNotice + '
-
-=== FOUNDING AFFIDAVIT ===
-
-' + generatedAffidavit;
+      var combined = '=== NOTICE OF MOTION ===\n\n' + generatedNotice + '\n\n=== FOUNDING AFFIDAVIT ===\n\n' + generatedAffidavit;
       var blob = new Blob([combined], { type: 'text/plain' });
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
       a.href = url; a.download = 'Motion_and_Affidavit.txt'; a.click(); URL.revokeObjectURL(url);
     }
 
-    // ─── AFFIDAVIT-ONLY GENERATOR (Tab 2) ───
+    // ─── AFFIDAVIT-ONLY GENERATOR ───
     function generateAffidavitOnly() {
       var appName = document.getElementById('app-name').value || '[APPLICANT NAME]';
       var respName = document.getElementById('resp-name').value || '[1ST RESPONDENT NAME]';
@@ -956,107 +767,41 @@
 
       var secondResp = (region === 'MEIBC' || region === 'BCEA') ? region + ' Bargaining Council' : 'The Commission for Conciliation, Mediation and Arbitration (CCMA)';
 
-      generatedAffidavitOnly = 'IN THE LABOUR COURT OF SOUTH AFRICA
-' +
-        '_________________________________________________________
-
-' +
-        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
-
-' +
-        'In the matter between:
-
-' +
-        appName + '
-
-' +
-        '          Applicant
-
-' +
-        'and
-
-' +
-        respName + '
-
-' +
-        '          1st Respondent
-
-' +
-        'and
-
-' +
-        secondResp + '
-
-' +
-        '          2nd Respondent
-
-' +
-        'and
-
-' +
-        commissioner + ' — Commissioner
-
-' +
-        '          3rd Respondent
-
-' +
-        '_________________________________________________________
-
-' +
-        'FOUNDING AFFIDAVIT
-
-' +
-        'I, the undersigned ' + appName + ', do hereby make oath and state:
-
-' +
-        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.
-
-' +
-        '2. Background Facts:
-
-' +
-        background + '
-
-' +
-        '3. My Evidence at the Arbitration:
-
-' +
-        evidence + '
-
-' +
-        '4. The Commissioner's Errors:
-
-' +
-        errors + '
-
-' +
-        '5. Legal Submissions:
-
-' +
-        legal + '
-
-' +
-        '6. Conclusion:
-
-' +
-        conclusion + '
-
-' +
-        'Dated at _______________ on this ' + today + '.
-
-' +
-        '_________________________
-' +
-        appName + '
-' +
-        'Applicant
-
-' +
-        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.
-
-' +
-        '_________________________
-' +
+      generatedAffidavitOnly = 'IN THE LABOUR COURT OF SOUTH AFRICA\n' +
+        '_________________________________________________________\n\n' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA\n\n' +
+        'In the matter between:\n\n' +
+        appName + '\n\n' +
+        '          Applicant\n\n' +
+        'and\n\n' +
+        respName + '\n\n' +
+        '          1st Respondent\n\n' +
+        'and\n\n' +
+        secondResp + '\n\n' +
+        '          2nd Respondent\n\n' +
+        'and\n\n' +
+        commissioner + ' — Commissioner\n\n' +
+        '          3rd Respondent\n\n' +
+        '_________________________________________________________\n\n' +
+        'FOUNDING AFFIDAVIT\n\n' +
+        'I, the undersigned ' + appName + ', do hereby make oath and state:\n\n' +
+        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.\n\n' +
+        '2. Background Facts:\n\n' +
+        background + '\n\n' +
+        '3. My Evidence at the Arbitration:\n\n' +
+        evidence + '\n\n' +
+        '4. The Commissioner\'s Errors:\n\n' +
+        errors + '\n\n' +
+        '5. Legal Submissions:\n\n' +
+        legal + '\n\n' +
+        '6. Conclusion:\n\n' +
+        conclusion + '\n\n' +
+        'Dated at _______________ on this ' + today + '.\n\n' +
+        '_________________________\n' +
+        appName + '\n' +
+        'Applicant\n\n' +
+        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.\n\n' +
+        '_________________________\n' +
         'Commissioner of Oaths';
 
       document.getElementById('affidavit-only-preview').textContent = generatedAffidavitOnly;
