@@ -1,294 +1,342 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Court Online Registration - Advome</title>
-  <link rel="stylesheet" href="shared-styles.css">
-  
-</head>
-<body>
-  <!-- Header -->
-  <header class="adv-header">
-    <div class="adv-header__logo">Advome<span>.</span></div>
-    <nav class="adv-header__nav">
-      <a href="ccma.html">CCMA</a>
-      <a href="motion.html">Labour Court</a>
-      <a href="#">Help</a>
-    </nav>
-    <div class="adv-header__user">
-      <div class="adv-header__avatar">SRL</div>
-    </div>
-    <button class="adv-header__menu-toggle">☰</button>
-  </header>
+      <!-- ==================== TAB 4: HELP & CONTACTS ==================== -->
+      <div class="adv-tab-panel" id="tab-panel-4" role="tabpanel" aria-labelledby="tab-btn-4" style="display: none;">
 
-  <!-- Progress Tracker -->
-  <div class="adv-progress" data-workflow="ccma" data-current-step="court-online"></div>
-
-  <!-- Hero -->
-  <section class="adv-hero">
-    <div class="adv-hero__content">
-      <h1>Court Online Registration</h1>
-      <p>Step 7 of 21 — Labour Court Review Application</p>
-    </div>
-    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
-  </section>
-
-  <!-- Main Container -->
-  <div class="adv-container">
-    <!-- Main Content -->
-    <main>
-      <!-- Tab Buttons -->
-<div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
-  <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-register" style="border-radius:20px; font-size:0.85rem;">Registration</button>
-  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-profile" style="border-radius:20px; font-size:0.85rem;">Profile Setup</button>
-  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-troubleshoot" style="border-radius:20px; font-size:0.85rem;">Troubleshooting</button>
-</div>
-
-<!-- Tab: Registration -->
-<div id="tab-register" class="tab-content active">
-  <div class="adv-card">
-    <div class="adv-card__header">
-      <div>
-        <div class="adv-card__title">Court Online Registration</div>
-        <div class="adv-card__subtitle">Compulsory electronic filing system for the Labour Court</div>
-      </div>
-    </div>
-
-    <div class="adv-alert adv-alert--info">
-      <div class="adv-alert__content">
-        <strong>Court Online is mandatory</strong> from 14 April 2025. All new Labour Court cases must be initiated through the portal.
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="court-steps">
-      <button class="adv-accordion__header">
-        <span>1. Visit the Portal</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>Go to <a href="https://courtonline.co.za" target="_blank">courtonline.co.za</a> and click "Register"</p>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="court-steps">
-      <button class="adv-accordion__header">
-        <span>2. Select User Type</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>Choose <strong>"Individual"</strong> if representing yourself. Choose <strong>"Organisation"</strong> if you are a legal representative or company.</p>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="court-steps">
-      <button class="adv-accordion__header">
-        <span>3. Complete Registration Form</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>Enter your personal details exactly as they appear on your ID:</p>
-        <ul style="margin-left:1.5rem; line-height:1.8;">
-          <li>Full name and surname</li>
-          <li>ID number</li>
-          <li>Cell phone number (for OTP)</li>
-          <li>Email address</li>
-          <li>Physical address</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="court-steps">
-      <button class="adv-accordion__header">
-        <span>4. Verify Your Account</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>You will receive an OTP via SMS. Enter it to verify your cell phone. Then check your email for an activation link.</p>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="court-steps">
-      <button class="adv-accordion__header">
-        <span>5. Accept Terms & Conditions</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>Read and accept the Court Online terms. This is a legal requirement before you can file any case.</p>
-      </div>
-    </div>
-
-    <div class="adv-alert adv-alert--warning" style="margin-top:1rem;">
-      <div class="adv-alert__content">
-        <strong>Important:</strong> Use the same email address throughout the case. All court notifications will be sent to this address.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Tab: Profile Setup -->
-<div id="tab-profile" class="tab-content" style="display:none;">
-  <div class="adv-card">
-    <div class="adv-card__header">
-      <div>
-        <div class="adv-card__title">Profile Setup</div>
-        <div class="adv-card__subtitle">Complete your profile to enable case filing</div>
-      </div>
-    </div>
-
-    <div class="adv-form-group">
-      <label>Display Name</label>
-      <input type="text" class="adv-input" placeholder="As it will appear on court documents">
-    </div>
-    <div class="adv-form-group">
-      <label>Preferred Court</label>
-      <select class="adv-select">
-        <option>Johannesburg Labour Court</option>
-        <option>Cape Town Labour Court</option>
-        <option>Durban Labour Court</option>
-        <option>Gqeberha Labour Court</option>
-        <option>Bloemfontein Labour Court</option>
-      </select>
-    </div>
-    <div class="adv-form-group">
-      <label>Enable Two-Factor Authentication?</label>
-      <label style="font-weight:normal; font-size:0.9rem;"><input type="checkbox" checked> Yes — recommended for security</label>
-    </div>
-
-    <div class="adv-alert adv-alert--info">
-      <div class="adv-alert__content">
-        <strong>Digital Signature:</strong> On Court Online, type your name in <strong>UPPERCASE</strong> in the signature block. This is legally valid under the ECT Act.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Tab: Troubleshooting -->
-<div id="tab-troubleshoot" class="tab-content" style="display:none;">
-  <div class="adv-card">
-    <div class="adv-card__header">
-      <div>
-        <div class="adv-card__title">Common Issues</div>
-        <div class="adv-card__subtitle">Solutions to frequent Court Online problems</div>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="troubleshoot">
-      <button class="adv-accordion__header">
-        <span>🔸 "My OTP is not arriving"</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>Check that your cell number is correct. Wait 2 minutes and click "Resend OTP". If still nothing, contact Court Online support: <strong>012 492 8200</strong></p>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="troubleshoot">
-      <button class="adv-accordion__header">
-        <span>🔸 "I cannot upload documents"</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>Documents must be PDF format, under 10MB per file. Ensure your PDF is not password-protected or scanned at too high resolution.</p>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="troubleshoot">
-      <button class="adv-accordion__header">
-        <span>🔸 "My ID is already registered"</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>You may have registered before. Try "Forgot Password" or contact support with your ID number to recover the account.</p>
-      </div>
-    </div>
-
-    <div class="adv-accordion" data-group="troubleshoot">
-      <button class="adv-accordion__header">
-        <span>🔸 "I am locked out of my account"</span>
-        <span class="adv-accordion__header-icon">▼</span>
-      </button>
-      <div class="adv-accordion__body">
-        <p>After 3 failed login attempts, your account is locked for 30 minutes. Wait and try again, or reset your password.</p>
-      </div>
-    </div>
-  </div>
-</div>
-    </main>
-
-    <!-- Sidebar -->
-    <aside class="adv-sidebar">
-      <!-- Deadline Calculator Widget -->
-      <div class="adv-sidebar__widget">
-        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
-        <div class="adv-deadline-calculator">
-          <div class="adv-form-group">
-            <label>Start Date</label>
-            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+        <section class="adv-card adv-card--primary">
+          <div class="adv-card__header">
+            <div>
+              <h2 class="adv-card__title">Court Online Help Desk Contacts</h2>
+              <p class="adv-card__subtitle">Unrepresented litigants MUST be referred to the Court Online Service Desk for free assistance. This is mandatory under Directive 1 of 2025.</p>
+            </div>
           </div>
-          <div class="adv-form-group">
-            <label>Days to Add</label>
-            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+          <div class="adv-card__body">
+
+            <div class="critical-box critical-box--success">
+              <strong style="color: #22543d; font-size: 1rem;">Free Assistance for Self-Represented Litigants</strong>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #4a5568;">"Unrepresented or in-person litigants must be referred to the Court Online Service Desk located at the court, where designated court staff members can assist with case initiation." <span class="rule-reference">Directive 1.7</span></p>
+            </div>
+
+            <h3 style="font-size: 1.1rem; color: #1a365d; margin: 1.5rem 0 1rem 0;">General Court Online Support</h3>
+            <div class="contact-grid">
+              <div class="contact-card">
+                <strong>Email</strong>
+                <p>CourtOnlineSupport@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Telephone</strong>
+                <p>010 493 2600<br>Monday–Friday, 08:00–16:00</p>
+              </div>
+              <div class="contact-card">
+                <strong>Microsoft Teams</strong>
+                <p>Meeting ID: 322 085 818 456<br>Passcode: PskwC8<br>Click to join meeting</p>
+              </div>
+            </div>
+
+            <h3 style="font-size: 1.1rem; color: #1a365d; margin: 1.5rem 0 1rem 0;">Labour Court Registrar Contacts (By Seat)</h3>
+            <div class="contact-grid">
+              <div class="contact-card">
+                <strong>Johannesburg</strong>
+                <p>labourcourt-admin@judiciary.org.za<br>After hours: 081 350 4175<br>Office hours: 010 494 9253/4</p>
+              </div>
+              <div class="contact-card">
+                <strong>Cape Town</strong>
+                <p>labourcourtcapetown@judiciary.org.za<br>After hours: 072 852 1616</p>
+              </div>
+              <div class="contact-card">
+                <strong>Durban</strong>
+                <p>durbanlabourcourt@judiciary.org.za<br>After hours: 082 393 9189</p>
+              </div>
+              <div class="contact-card">
+                <strong>Gqeberha</strong>
+                <p>GqeberhaLabourCourt@judiciary.org.za<br>After hours: 072 269 1862</p>
+              </div>
+            </div>
+
+            <h3 style="font-size: 1.1rem; color: #1a365d; margin: 1.5rem 0 1rem 0;">Caselines / Bundle Contacts (For Enrolled Matters)</h3>
+            <div class="contact-grid">
+              <div class="contact-card">
+                <strong>Johannesburg Registrar</strong>
+                <p>Ms Francinah Nelisiwe Ntuli<br>Fntuli@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Durban Registrar</strong>
+                <p>Mr Siphesihle Mjwara<br>SMjwara@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Cape Town Registrar</strong>
+                <p>Ms Farzaana Ismail<br>FIsmail@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Gqeberha Registrar</strong>
+                <p>Ms Lauren Marshal-Reen<br>LMarshal-Reen@judiciary.org.za</p>
+              </div>
+            </div>
+
+            <h3 style="font-size: 1.1rem; color: #1a365d; margin: 1.5rem 0 1rem 0;">SharePoint / Record Access Issues</h3>
+            <div class="contact-grid">
+              <div class="contact-card">
+                <strong>Johannesburg</strong>
+                <p>LabourCourt-BackOffice@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Cape Town</strong>
+                <p>labourcourtcapetown@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Durban</strong>
+                <p>durbanlabourcourt@judiciary.org.za</p>
+              </div>
+              <div class="contact-card">
+                <strong>Gqeberha</strong>
+                <p>GqeberhaLabourCourt@judiciary.org.za</p>
+              </div>
+            </div>
+
+            <h3 style="font-size: 1.1rem; color: #1a365d; margin: 1.5rem 0 1rem 0;">Office Hours (All Seats)</h3>
+            <div style="padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem;">
+                <div><strong>Monday–Friday</strong></div>
+                <div>08:00–13:00 and 14:00–15:00</div>
+                <div><strong>Saturdays, Sundays</strong></div>
+                <div>Closed</div>
+                <div><strong>Public Holidays</strong></div>
+                <div>Closed</div>
+                <div><strong>16 December – 15 January</strong></div>
+                <div>Closed (court recess)</div>
+              </div>
+              <p style="margin: 0.75rem 0 0 0; font-size: 0.85rem; color: #718096;">The Judge President may direct that any document be delivered at any specific date and/or time. <span class="rule-reference">Rule 2(3)</span></p>
+            </div>
+
           </div>
-          <div class="adv-deadline__display">
-            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+        </section>
+
+        <section class="adv-card" style="margin-top: 1.5rem;">
+          <div class="adv-card__header">
+            <h2 class="adv-card__title">Frequently Asked Questions</h2>
           </div>
+          <div class="adv-card__body">
+            <div style="display: grid; gap: 1rem;">
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: Can I file manually at the court instead of using Court Online?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: No. As of 14 April 2025, Directive 1 of 2025 makes Court Online mandatory for all new Labour Court cases. Manual issuing is prohibited.</p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: What if I don't have a computer or internet access?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: Visit the Court Online Service Desk at the Labour Court. Staff will assist you with registration and filing free of charge. <span class="rule-reference">Directive 1.7</span></p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: What is the difference between the reference number and case number?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: The reference number (e.g., HCGS00363) is generated by Court Online when you click "Start a Case." The case number (e.g., J1234/2026) is issued by the Registrar after approving your Notice of Motion. Only the case number goes on court documents. <span class="rule-reference">Directive 1.8–1.10</span></p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: Can I upload the Founding Affidavit with the Notice of Motion when starting the case?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: No. Upload ONLY the Notice of Motion for issuing. The Founding Affidavit is uploaded later under "My Case Documents" after the case number is issued. Uploading the affidavit at the start will cause rejection. <span class="rule-reference">Directive 1.11</span></p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: How long does the Registrar take to issue a case number?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: Usually 1–3 business days, depending on volume and compliance. You will receive an email notification.</p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: Is there a fee for using Court Online?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: No. Registration, filing, and document uploads are free for all users. The Labour Court does not charge filing fees for review applications by self-represented litigants.</p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: What if the document type I need is not in the dropdown?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: Do NOT select "Other." Email CourtOnlineSupport@judiciary.org.za with the subject "Request to add a new document type on Court Online" and describe the document. <span class="rule-reference">Directive 1.12(d)–(e)</span></p>
+              </div>
+              <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <strong style="color: #1a365d; font-size: 0.95rem;">Q: Can I serve documents by email?</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">A: Yes. Under Labour Court Rule 9(1)(a)(iv), service by email is sufficient if the other party has an email address. You must file an affidavit of service proving delivery. <span class="rule-reference">Rule 9(1)(a)(iv)</span></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div><!-- /adv-workspace -->
+
+    <!-- SIDEBAR -->
+    <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
+
+      <!-- AI Chat Widget -->
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="court_online_guide">
+        <h3 class="adv-sidebar__widget-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </h3>
+        <div class="adv-chat__messages" role="log" aria-live="polite" aria-label="Chat messages">
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">
+            Hi! Ask me about Court Online registration, issuing, case numbers, or document filing.
+          </div>
+        </div>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
+          <button class="adv-chat__send" aria-label="Send message">Send</button>
         </div>
       </div>
 
-      <!-- AI Assistant Widget -->
+      <!-- Quick Links -->
       <div class="adv-sidebar__widget">
-        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
-        <div class="adv-chat" data-chat-id="court-online">
-          <div class="adv-chat__messages"></div>
-          <div class="adv-chat__input-group">
-            <input type="text" class="adv-chat__input" placeholder="Ask about this step...">
-            <button class="adv-chat__send">Send</button>
+        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
+        <nav aria-label="Quick links">
+          <div style="margin-bottom: 0.5rem;">
+            <a href="https://courtonline.co.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Court Online Portal
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="https://www.judiciary.org.za/images/Directives/Directives_2025/Labour%20Court%20Directive%201%20of%202025%20-%2014%20April%202025.pdf" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Directive 1 of 2025 (PDF)
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="motion.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Back to Motion & Affidavit
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="record.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Next: Record & Transcription
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="attorney.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Find an Attorney
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Legal Basis Cards -->
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">Legal Basis</h3>
+        <div style="display: grid; gap: 0.5rem; font-size: 0.85rem;">
+          <div style="padding: 0.75rem; background: #f0fff4; border-radius: 6px; border-left: 3px solid #38a169;">
+            <strong style="color: #22543d;">Directive 1/2025</strong><br><span style="color: #4a5568;">Mandatory Court Online e-filing</span>
+          </div>
+          <div style="padding: 0.75rem; background: #ebf8ff; border-radius: 6px; border-left: 3px solid #3182ce;">
+            <strong style="color: #2a4365;">Rule 7</strong><br><span style="color: #4a5568;">Issuing, case numbers, document filing</span>
+          </div>
+          <div style="padding: 0.75rem; background: #faf5ff; border-radius: 6px; border-left: 3px solid #805ad5;">
+            <strong style="color: #553c9a;">Rule 37</strong><br><span style="color: #4a5568;">Review applications procedure</span>
+          </div>
+          <div style="padding: 0.75rem; background: #fffaf0; border-radius: 6px; border-left: 3px solid #d69e2e;">
+            <strong style="color: #744210;">Rule 8</strong><br><span style="color: #4a5568;">Document formatting requirements</span>
+          </div>
+          <div style="padding: 0.75rem; background: #fff5f5; border-radius: 6px; border-left: 3px solid #c53030;">
+            <strong style="color: #742a2a;">Rule 9</strong><br><span style="color: #4a5568;">Service of documents</span>
           </div>
         </div>
       </div>
 
       <!-- Savings Widget -->
       <div class="adv-sidebar__widget">
-        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
-        <div class="adv-savings">
-          <span>Saved so far:</span>
-          <span class="adv-savings__amount">R0</span>
+        <h3 class="adv-sidebar__widget-title">Your Savings</h3>
+        <div style="padding: 1rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center;">
+          <div style="font-size: 0.85rem; color: #718096; margin-bottom: 0.5rem;">Court Online Filing Fees</div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: #1a365d;">R0</div>
+          <div style="font-size: 0.8rem; color: #38a169; margin-top: 0.5rem;">✓ Registration free<br>✓ Filing free<br>✓ Document uploads free</div>
         </div>
-        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
       </div>
+
     </aside>
+  </main>
+
+  <!-- BOTTOM ZONE -->
+  <div class="adv-bottom-zone">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: flex-end;">
+      <div class="adv-savings adv-savings--small">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        Court Online filing: <span class="adv-savings__amount">R0</span> fees (attorney fees: R15,000–R50,000)
+      </div>
+    </div>
+    <div class="adv-compliance" role="contentinfo">
+      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
+    </div>
+    <nav class="adv-nav-footer" aria-label="Page navigation">
+      <a href="motion.html" class="adv-nav-footer__prev">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Motion & Affidavit
+      </a>
+      <a href="record.html" class="adv-nav-footer__next">
+        Record & Transcription
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </nav>
   </div>
 
-  <!-- Navigation Footer -->
-  <nav class="adv-nav-footer">
-    <div class="adv-nav-footer__prev">
-      <a href="motion.html" class="adv-btn adv-btn--ghost">← Motion & Affidavit</a>
-    </div>
-    <div class="adv-nav-footer__next">
-      <a href="issue-case.html" class="adv-btn adv-btn--primary">Issue Case →</a>
-    </div>
-  </nav>
-
-  <!-- Footer -->
-  <footer class="adv-footer">
-    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
-    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  <!-- FOOTER -->
+  <footer class="adv-footer" role="contentinfo">
+    <p style="margin-bottom: 0.5rem;">
+      <a href="index.html">Home</a>
+      <a href="ccma.html">CCMA</a>
+      <a href="divorce.html">Divorce</a>
+      <a href="estates-hub.html">Estates</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="attorney.html">Attorneys</a>
+    </p>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. |
+      <a href="terms.html">Terms of Service</a> |
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="terms.html#section34">Section 34 Disclosure</a>
+    </p>
   </footer>
 
   <script src="shared-scripts.js"></script>
   <script>
-    // Tab switching
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => {
-          b.classList.remove('adv-btn--primary', 'active');
-          b.classList.add('adv-btn--ghost');
+    // ─── TAB SYSTEM ─── All tabs freely accessible, no locks
+    var currentTab = 1;
+
+    function switchTab(n) {
+      currentTab = n;
+      for (var i = 1; i <= 4; i++) {
+        var btn = document.getElementById('tab-btn-' + i);
+        var panel = document.getElementById('tab-panel-' + i);
+        if (!btn || !panel) continue;
+        if (i === n) {
+          btn.setAttribute('aria-selected', 'true');
+          btn.style.background = 'white';
+          btn.style.borderBottom = '3px solid #1a365d';
+          btn.style.fontWeight = '600';
+          btn.style.color = '#1a365d';
+          var circle = btn.querySelector('span:first-child');
+          if (circle) circle.style.background = '#1a365d';
+          panel.style.display = 'block';
+        } else {
+          btn.setAttribute('aria-selected', 'false');
+          btn.style.background = '#f7fafc';
+          btn.style.borderBottom = '3px solid transparent';
+          btn.style.fontWeight = '400';
+          btn.style.color = '#4a5568';
+          var circle = btn.querySelector('span:first-child');
+          if (circle) circle.style.background = '#4a5568';
+          panel.style.display = 'none';
+        }
+      }
+      localStorage.setItem('court_online_current_tab', n);
+    }
+
+    // ─── LOCALSTORAGE PERSISTENCE ───
+    document.addEventListener('DOMContentLoaded', function() {
+      var savedTab = parseInt(localStorage.getItem('court_online_current_tab')) || 1;
+      switchTab(savedTab);
+
+      document.querySelectorAll('[data-storage-key]').forEach(function(el) {
+        var key = el.getAttribute('data-storage-key');
+        var saved = localStorage.getItem(key);
+        if (saved !== null) {
+          if (el.type === 'checkbox') el.checked = (saved === 'true');
+          else el.value = saved;
+        }
+        el.addEventListener('input', function() {
+          if (el.type === 'checkbox') localStorage.setItem(key, el.checked);
+          else localStorage.setItem(key, el.value);
         });
-        btn.classList.remove('adv-btn--ghost');
-        btn.classList.add('adv-btn--primary', 'active');
-        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-        document.getElementById(btn.dataset.tab).style.display = 'block';
       });
     });
   </script>
