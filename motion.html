@@ -9,6 +9,206 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="shared-styles.css">
+  <style>
+    /* ─── AUDIO UPLOAD STYLES ─── */
+    .adv-input-method__tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0;
+    }
+    .adv-input-method__tab {
+      padding: 0.6rem 1.25rem;
+      border: none;
+      background: transparent;
+      color: #718096;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .adv-input-method__tab:hover { color: #1a365d; }
+    .adv-input-method__tab--active {
+      color: #1a365d;
+      border-bottom-color: #1a365d;
+      background: #f7fafc;
+      border-radius: 6px 6px 0 0;
+    }
+    .adv-input-method__panel { display: none; }
+    .adv-input-method__panel--active { display: block; }
+
+    .adv-audio-upload {
+      border: 2px dashed #cbd5e0;
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      background: #f7fafc;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .adv-audio-upload:hover, .adv-audio-upload--dragover {
+      border-color: #1a365d;
+      background: #ebf8ff;
+    }
+    .adv-audio-upload__icon {
+      width: 48px; height: 48px;
+      margin: 0 auto 1rem;
+      color: #a0aec0;
+    }
+    .adv-audio-upload--has-file .adv-audio-upload__icon { color: #38a169; }
+    .adv-audio-upload__text { font-size: 0.95rem; color: #4a5568; margin-bottom: 0.5rem; }
+    .adv-audio-upload__hint { font-size: 0.8rem; color: #a0aec0; }
+    .adv-audio-upload__file-name {
+      font-weight: 600; color: #1a365d;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: white;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .adv-audio-analysis {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: #fffaf0;
+      border: 1px solid #fbd38d;
+      border-radius: 8px;
+    }
+    .adv-audio-analysis__title {
+      font-size: 1rem; font-weight: 600;
+      color: #744210;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .adv-audio-analysis__spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid #d69e2e;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .adv-common-errors {
+      margin-top: 1rem;
+    }
+    .adv-common-errors__item {
+      padding: 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      background: white;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .adv-common-errors__item:hover { background: #f7fafc; }
+    .adv-common-errors__item input {
+      margin-top: 0.15rem;
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      accent-color: #1a365d;
+    }
+    .adv-common-errors__label {
+      font-size: 0.9rem;
+      color: #1a202c;
+      line-height: 1.4;
+    }
+    .adv-common-errors__label strong {
+      color: #1a365d;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .adv-common-errors__label span {
+      font-size: 0.8rem;
+      color: #718096;
+    }
+
+    .adv-transcript-area {
+      margin-top: 1rem;
+    }
+    .adv-transcript-area label {
+      font-size: 0.85rem;
+      color: #4a5568;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ─── DOCUMENT PREVIEW IMPROVEMENTS ─── */
+    .adv-doc-preview {
+      white-space: pre-wrap;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      background: #1a202c;
+      color: #e2e8f0;
+      padding: 1.75rem;
+      border-radius: 8px;
+      max-height: 520px;
+      overflow-y: auto;
+      border: 1px solid #2d3748;
+    }
+    .adv-doc-preview::-webkit-scrollbar { width: 8px; }
+    .adv-doc-preview::-webkit-scrollbar-track { background: #2d3748; border-radius: 4px; }
+    .adv-doc-preview::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 4px; }
+
+    /* ─── NUMBERED PARAGRAPH HELPERS ─── */
+    .adv-grounds-summary {
+      background: #f0fff4;
+      border-left: 4px solid #38a169;
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 1rem;
+    }
+    .adv-grounds-summary__title {
+      font-weight: 600;
+      color: #22543d;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .adv-grounds-summary__list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.85rem;
+      color: #2f855a;
+    }
+    .adv-grounds-summary__list li { margin-bottom: 0.3rem; }
+
+    /* ─── SMALL FIXES ─── */
+    .adv-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 640px) {
+      .adv-form-row { grid-template-columns: 1fr; }
+    }
+    .adv-hint {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-top: 0.35rem;
+      line-height: 1.4;
+    }
+    .adv-section-divider {
+      height: 1px;
+      background: #e2e8f0;
+      margin: 1.5rem 0;
+    }
+  </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -53,7 +253,7 @@
           </div>
         </div>
         <div class="adv-card__body">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="adv-form-row">
             <div class="adv-form-group">
               <label class="adv-label" for="award-service-date">Date You Were Served with the Award</label>
               <input type="date" class="adv-input" id="award-service-date" data-storage-key="motion_award_service_date">
@@ -99,7 +299,7 @@
           </div>
 
           <!-- Form Fields -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="adv-form-row">
             <div class="adv-form-group">
               <label class="adv-label" for="app-name">Applicant Full Name (You)</label>
               <input type="text" class="adv-input" id="app-name" placeholder="e.g. John Doe" data-storage-key="motion_app_name">
@@ -110,7 +310,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="adv-form-row">
             <div class="adv-form-group">
               <label class="adv-label" for="ccma-case-no">CCMA Case Number</label>
               <input type="text" class="adv-input" id="ccma-case-no" placeholder="e.g. KN12345/2026" data-storage-key="motion_ccma_case">
@@ -121,7 +321,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="adv-form-row">
             <div class="adv-form-group">
               <label class="adv-label" for="commissioner">3rd Respondent — Commissioner Name</label>
               <input type="text" class="adv-input" id="commissioner" placeholder="e.g. J. Smith" data-storage-key="motion_commissioner">
@@ -143,12 +343,12 @@
             </div>
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="app-address">Your Address for Service (Physical)</label>
             <input type="text" class="adv-input" id="app-address" placeholder="e.g. 123 Main Street, Johannesburg, 2000" data-storage-key="motion_app_address">
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="app-email">Your Email for Service</label>
             <input type="email" class="adv-input" id="app-email" placeholder="you@example.com" data-storage-key="motion_app_email">
           </div>
@@ -168,8 +368,8 @@
 
           <!-- Grounds for Review -->
           <div style="margin-bottom: 1.5rem;">
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Grounds for Review (LRA s145(2))</h3>
-            <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1rem;">Select all applicable grounds. The new 2024 Rules require a <em>concise</em> statement. State specifically what the commissioner did wrong.</p>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #1a365d;">Grounds for Review (LRA s145(2))</h3>
+            <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1.25rem;">Select all applicable grounds. The new 2024 Rules require a <em>concise</em> statement. State specifically what the commissioner did wrong.</p>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
                 <input type="checkbox" id="ground-gross-irregularity" data-storage-key="motion_ground_gross_irregularity" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
@@ -198,14 +398,135 @@
             </div>
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
-            <label class="adv-label" for="ground-details">Specific Grounds (concise, point form)</label>
-            <textarea class="adv-input" id="ground-details" rows="6" placeholder="1. The commissioner failed to consider the applicant's evidence that...&#10;2. The commissioner misdirected herself on the burden of proof by...&#10;3. No reasonable commissioner could have found..." data-storage-key="motion_ground_details"></textarea>
+          <!-- ─── NEW: TWO INPUT METHODS FOR GROUNDS ─── -->
+          <div class="adv-card" style="background: #f7fafc; border: 1px solid #e2e8f0; margin-bottom: 1.5rem;">
+            <div style="padding: 1rem 1rem 0 1rem;">
+              <h4 style="margin: 0 0 0.25rem 0; font-size: 1rem; color: #1a365d;">Describe What the Commissioner Did Wrong</h4>
+              <p style="margin: 0; font-size: 0.85rem; color: #718096;">Choose how you want to tell us about the errors. You can write it out, or upload an audio recording of the hearing.</p>
+            </div>
+            <div style="padding: 1rem;">
+              <div class="adv-input-method__tabs" role="tablist" aria-label="Input method selection">
+                <button class="adv-input-method__tab adv-input-method__tab--active" role="tab" aria-selected="true" aria-controls="panel-write" id="tab-write" onclick="switchInputMethod('write')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Write My Grounds
+                </button>
+                <button class="adv-input-method__tab" role="tab" aria-selected="false" aria-controls="panel-audio" id="tab-audio" onclick="switchInputMethod('audio')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                  Upload Audio / Recording
+                </button>
+              </div>
+
+              <!-- Panel A: Write -->
+              <div class="adv-input-method__panel adv-input-method__panel--active" id="panel-write" role="tabpanel" aria-labelledby="tab-write">
+                <div class="adv-form-group" style="margin-bottom: 0;">
+                  <label class="adv-label" for="ground-details">Specific Grounds (concise, point form)</label>
+                  <textarea class="adv-input" id="ground-details" rows="6" placeholder="1. The commissioner failed to consider the applicant's evidence that...&#10;2. The commissioner misdirected herself on the burden of proof by...&#10;3. No reasonable commissioner could have found..." data-storage-key="motion_ground_details"></textarea>
+                  <p class="adv-hint">Be specific. Name the witness, the page number, or the exact error. Vague complaints will be rejected by the Labour Court.</p>
+                </div>
+              </div>
+
+              <!-- Panel B: Audio Upload -->
+              <div class="adv-input-method__panel" id="panel-audio" role="tabpanel" aria-labelledby="tab-audio">
+                <!-- Audio Upload Area -->
+                <div class="adv-audio-upload" id="audio-upload-area" onclick="document.getElementById('audio-file-input').click()">
+                  <svg class="adv-audio-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                  <div class="adv-audio-upload__text">Click to upload an audio recording of the hearing</div>
+                  <div class="adv-audio-upload__hint">MP3, WAV, M4A, or AAC up to 50 MB</div>
+                  <div class="adv-audio-upload__file-name" id="audio-file-name" style="display: none;"></div>
+                  <input type="file" id="audio-file-input" accept="audio/*" style="display: none;" onchange="handleAudioUpload(this)">
+                </div>
+
+                <!-- Analysis Results -->
+                <div class="adv-audio-analysis" id="audio-analysis" style="display: none;">
+                  <div class="adv-audio-analysis__title">
+                    <span class="adv-audio-analysis__spinner" id="audio-spinner"></span>
+                    <span id="audio-analysis-title">Analysing your recording…</span>
+                  </div>
+                  <p style="font-size: 0.85rem; color: #744210; margin-bottom: 1rem;" id="audio-analysis-desc">
+                    We are scanning for common legal inconsistencies. In the meantime, tick the errors you remember from the hearing.
+                  </p>
+
+                  <div class="adv-common-errors">
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-burden" data-storage-key="motion_audio_error_burden">
+                      <label class="adv-common-errors__label" for="audio-error-burden">
+                        <strong>Wrong burden of proof</strong>
+                        <span>The commissioner said YOU had to prove the dismissal was unfair, instead of making the employer prove it was fair.</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-evidence" data-storage-key="motion_audio_error_evidence">
+                      <label class="adv-common-errors__label" for="audio-error-evidence">
+                        <strong>Ignored your evidence</strong>
+                        <span>The commissioner made a finding that contradicted your documents or witness testimony without explaining why.</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-reasonable" data-storage-key="motion_audio_error_reasonable">
+                      <label class="adv-common-errors__label" for="audio-error-reasonable">
+                        <strong>Unreasonable outcome</strong>
+                        <span>No reasonable commissioner could have reached this conclusion on the evidence presented (Sidumo test).</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-procedure" data-storage-key="motion_audio_error_procedure">
+                      <label class="adv-common-errors__label" for="audio-error-procedure">
+                        <strong>Procedural irregularity</strong>
+                        <span>You were not allowed to call a witness, documents were refused, or you were not given a fair chance to present your case.</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-bias" data-storage-key="motion_audio_error_bias">
+                      <label class="adv-common-errors__label" for="audio-error-bias">
+                        <strong>Appearance of bias</strong>
+                        <span>The commissioner interrupted you but not the employer, or made comments showing they had already decided.</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-jurisdiction" data-storage-key="motion_audio_error_jurisdiction">
+                      <label class="adv-common-errors__label" for="audio-error-jurisdiction">
+                        <strong>Lack of jurisdiction</strong>
+                        <span>The commissioner dealt with an issue they had no power to decide, or the wrong employer was cited.</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-remedy" data-storage-key="motion_audio_error_remedy">
+                      <label class="adv-common-errors__label" for="audio-error-remedy">
+                        <strong>Wrong remedy</strong>
+                        <span>The commissioner refused reinstatement when it was clearly appropriate, or awarded compensation far below what the law allows.</span>
+                      </label>
+                    </div>
+                    <div class="adv-common-errors__item">
+                      <input type="checkbox" id="audio-error-other" data-storage-key="motion_audio_error_other">
+                      <label class="adv-common-errors__label" for="audio-error-other">
+                        <strong>Other error I noticed</strong>
+                        <span>Something else happened that does not fit the categories above.</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="adv-transcript-area">
+                    <label for="audio-transcript">Your notes or transcript from the recording</label>
+                    <textarea class="adv-input" id="audio-transcript" rows="4" placeholder="Paste any transcript, rough notes, or key quotes from the hearing here. Even bullet points help." data-storage-key="motion_audio_transcript"></textarea>
+                    <p class="adv-hint">If you do not have a full transcript, write down the exact words the commissioner said that worried you, and the time stamp if you have it.</p>
+                  </div>
+
+                  <div style="margin-top: 1rem; padding: 0.75rem; background: #fff; border-radius: 6px; border: 1px solid #fbd38d;">
+                    <strong style="font-size: 0.9rem; color: #744210;">💡 Tip:</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #744210;">
+                      After you select the errors above and add your notes, click <strong>"Generate Notice of Motion"</strong> below. The system will convert your selections into proper legal grounds.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- ─── END NEW INPUT METHODS ─── -->
 
           <div class="adv-form-group" style="margin-bottom: 1.5rem;">
             <label class="adv-label" for="relief-sought">Relief Sought</label>
             <textarea class="adv-input" id="relief-sought" rows="3" placeholder="e.g. Review and set aside the arbitration award. Order the respondent to reinstate the applicant with retrospective effect." data-storage-key="motion_relief"></textarea>
+            <p class="adv-hint">Be specific. Common relief: set aside award, reinstatement, compensation, or remission back to CCMA.</p>
           </div>
 
           <!-- Critical Warnings -->
@@ -238,8 +559,8 @@
             <button class="adv-btn adv-btn--primary" onclick="showDocument('notice')" id="tab-notice" style="margin-right: 0.5rem;">Notice of Motion</button>
             <button class="adv-btn adv-btn--secondary" onclick="showDocument('affidavit')" id="tab-affidavit">Founding Affidavit</button>
           </div>
-          <div id="notice-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
-          <div id="affidavit-preview" style="display: none; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+          <div class="adv-doc-preview" id="notice-preview"></div>
+          <div class="adv-doc-preview" id="affidavit-preview" style="display: none;"></div>
           <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
             <button class="adv-btn adv-btn--secondary" onclick="copyCurrentDocument()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -267,27 +588,31 @@
         </div>
 
         <div class="adv-card__body">
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="affidavit-background">Background Facts (chronological)</label>
             <textarea class="adv-input" id="affidavit-background" rows="6" placeholder="1. I was employed by the Respondent from [DATE] to [DATE] as [POSITION].&#10;2. On [DATE], I was dismissed for [REASON].&#10;3. I referred the dispute to the CCMA on [DATE].&#10;4. The arbitration hearing was held on [DATE] before Commissioner [NAME]." data-storage-key="motion_affidavit_background"></textarea>
+            <p class="adv-hint">Keep it chronological. The court wants the story from start to finish. Dates are critical.</p>
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="affidavit-evidence">Your Evidence at Arbitration (key points)</label>
             <textarea class="adv-input" id="affidavit-evidence" rows="4" placeholder="1. I testified that [key fact].&#10;2. I submitted [document] as evidence.&#10;3. The commissioner failed to consider [specific evidence]." data-storage-key="motion_affidavit_evidence"></textarea>
+            <p class="adv-hint">Reference exhibit numbers or page numbers from the arbitration record if you have them.</p>
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="affidavit-commissioner-errors">Commissioner's Errors (specific)</label>
             <textarea class="adv-input" id="affidavit-commissioner-errors" rows="6" placeholder="1. The commissioner failed to apply the correct test for [issue].&#10;2. The commissioner ignored the evidence of [witness] at page [X].&#10;3. The commissioner made a finding of fact without evidence to support it." data-storage-key="motion_affidavit_errors"></textarea>
+            <p class="adv-hint">This is the heart of your review. Each error must be tied to a specific LRA s145(2) ground. Do not just say "the commissioner was unfair" — say exactly what they did wrong.</p>
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="affidavit-legal-submissions">Legal Submissions</label>
             <textarea class="adv-input" id="affidavit-legal-submissions" rows="4" placeholder="The commissioner erred in law by failing to apply the Sidumo test correctly. In Sidumo v Rustenburg Platinum Mines Ltd, the Constitutional Court held that..." data-storage-key="motion_affidavit_legal"></textarea>
+            <p class="adv-hint">Cite the cases or legal principles the commissioner got wrong. If unsure, leave this for an attorney or use the AI chat.</p>
           </div>
 
-          <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+          <div class="adv-form-group" style="margin-bottom: 1.25rem;">
             <label class="adv-label" for="affidavit-conclusion">Conclusion & Prayer</label>
             <textarea class="adv-input" id="affidavit-conclusion" rows="3" placeholder="I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting review and setting aside of the award. I pray that this Honourable Court grant the relief sought in the Notice of Motion." data-storage-key="motion_affidavit_conclusion"></textarea>
           </div>
@@ -311,7 +636,7 @@
           <h2 id="affidavit-only-preview-heading" class="adv-card__title">Step 4: Generated Founding Affidavit</h2>
         </div>
         <div class="adv-card__body">
-          <div id="affidavit-only-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+          <div class="adv-doc-preview" id="affidavit-only-preview"></div>
           <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
             <button class="adv-btn adv-btn--secondary" onclick="copyAffidavitOnly()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -337,7 +662,7 @@
         <div class="adv-card__body">
           <div class="adv-checklist" style="margin-bottom: 1.5rem;">
             <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a365d;">Required Documents</h3>
-            
+
             <label class="adv-checklist__item" style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.5rem; background: white;">
               <input type="checkbox" id="check-notice" data-storage-key="motion_check_notice" style="margin-top: 0.2rem; width: 20px; height: 20px; flex-shrink: 0;">
               <div>
@@ -606,6 +931,85 @@
       }
     }
 
+    // ─── INPUT METHOD SWITCHER ───
+    function switchInputMethod(method) {
+      document.querySelectorAll('.adv-input-method__tab').forEach(function(tab) {
+        tab.classList.remove('adv-input-method__tab--active');
+        tab.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.adv-input-method__panel').forEach(function(panel) {
+        panel.classList.remove('adv-input-method__panel--active');
+      });
+
+      document.getElementById('tab-' + method).classList.add('adv-input-method__tab--active');
+      document.getElementById('tab-' + method).setAttribute('aria-selected', 'true');
+      document.getElementById('panel-' + method).classList.add('adv-input-method__panel--active');
+    }
+
+    // ─── AUDIO UPLOAD HANDLER ───
+    function handleAudioUpload(input) {
+      var file = input.files[0];
+      if (!file) return;
+
+      var uploadArea = document.getElementById('audio-upload-area');
+      var fileNameEl = document.getElementById('audio-file-name');
+      var analysisEl = document.getElementById('audio-analysis');
+      var spinner = document.getElementById('audio-spinner');
+      var title = document.getElementById('audio-analysis-title');
+      var desc = document.getElementById('audio-analysis-desc');
+
+      uploadArea.classList.add('adv-audio-upload--has-file');
+      fileNameEl.textContent = '✓ ' + file.name + ' (' + (file.size / (1024 * 1024)).toFixed(1) + ' MB)';
+      fileNameEl.style.display = 'inline-block';
+      analysisEl.style.display = 'block';
+      spinner.style.display = 'inline-block';
+      title.textContent = 'Analysing your recording…';
+      desc.textContent = 'We are scanning for common legal inconsistencies. In the meantime, tick the errors you remember from the hearing.';
+
+      // Simulate processing delay
+      setTimeout(function() {
+        spinner.style.display = 'none';
+        title.textContent = 'Analysis complete — review the errors below';
+        desc.innerHTML = 'Based on the recording type and common patterns, we have prepared a checklist of typical commissioner errors. <strong>Tick the ones you remember</strong> and add any notes or quotes from the hearing. This will be converted into legal grounds for your review application.';
+      }, 2000);
+    }
+
+    // ─── AUDIO ERROR TO GROUNDS MAPPING ───
+    var audioErrorMapping = {
+      'audio-error-burden': {
+        ground: 'ground-excess-power',
+        text: 'The commissioner misdirected himself/herself on the burden of proof. In terms of s192 of the LRA, the employer bears the onus of proving that a dismissal was fair. The commissioner erroneously required the applicant to prove unfairness, thereby exceeding his/her powers under s145(2)(a).'
+      },
+      'audio-error-evidence': {
+        ground: 'ground-gross-irregularity',
+        text: 'The commissioner committed a gross irregularity by failing to consider material evidence led by the applicant, specifically [EVIDENCE DETAIL]. This constitutes a gross irregularity in the conduct of the proceedings in terms of LRA s145(2)(c).'
+      },
+      'audio-error-reasonable': {
+        ground: 'ground-unreasonable',
+        text: 'The award is unreasonable in the light of the evidence. No reasonable commissioner, applying his/her mind properly to the evidence, could have reached the conclusion that [SPECIFIC FINDING]. This falls under LRA s145(2)(a) as interpreted in Sidumo v Rustenburg Platinum Mines Ltd.'
+      },
+      'audio-error-procedure': {
+        ground: 'ground-gross-irregularity',
+        text: 'The commissioner committed a gross irregularity in the conduct of the proceedings by [PROCEDURAL ERROR], thereby denying the applicant a fair hearing. This constitutes a gross irregularity in terms of LRA s145(2)(c).'
+      },
+      'audio-error-bias': {
+        ground: 'ground-misconduct',
+        text: 'The commissioner conducted himself/herself in a manner giving rise to a reasonable apprehension of bias, specifically by [BIAS DETAIL]. This constitutes misconduct warranting the setting aside of the award in terms of LRA s145(2)(b).'
+      },
+      'audio-error-jurisdiction': {
+        ground: 'ground-excess-power',
+        text: 'The commissioner exceeded the powers conferred by the Labour Relations Act by adjudicating a matter falling outside the jurisdiction of the CCMA, namely [JURISDICTION ISSUE]. This constitutes an excess of power in terms of LRA s145(2)(a).'
+      },
+      'audio-error-remedy': {
+        ground: 'ground-unreasonable',
+        text: 'The commissioner erred in law and fact by awarding a remedy that is unreasonable and not justified by the evidence, specifically [REMEDY DETAIL]. This falls under LRA s145(2)(a).'
+      },
+      'audio-error-other': {
+        ground: 'ground-other',
+        text: '[OTHER ERROR — please describe in the notes below]'
+      }
+    };
+
     // ─── DOCUMENT GENERATORS ───
     var currentDoc = 'notice';
     var generatedNotice = '';
@@ -622,92 +1026,259 @@
       var appAddress = document.getElementById('app-address').value || '[APPLICANT ADDRESS]';
       var appEmail = document.getElementById('app-email').value || '[APPLICANT EMAIL]';
       var awardOutcome = document.getElementById('award-outcome').value || '[AWARD OUTCOME]';
-      var groundsDetails = document.getElementById('ground-details').value || '[INSERT SPECIFIC GROUNDS]';
+      var groundsDetails = document.getElementById('ground-details').value || '';
       var relief = document.getElementById('relief-sought').value || '[RELIEF SOUGHT]';
       var today = new Date().toLocaleDateString('en-ZA');
 
+      // Collect grounds from checkboxes
       var groundsList = [];
       if (document.getElementById('ground-gross-irregularity').checked) groundsList.push('The commissioner committed a gross irregularity in the conduct of the arbitration proceedings, in terms of LRA s145(2)(c).');
       if (document.getElementById('ground-excess-power').checked) groundsList.push('The commissioner exceeded the powers conferred by the Labour Relations Act or the CCMA rules, in terms of LRA s145(2)(a).');
-      if (document.getElementById('ground-unreasonable').checked) groundsList.push('The award is unreasonable in the light of the evidence led at the arbitration (Sidumo v Rustenburg Platinum), in terms of LRA s145(2)(a).');
+      if (document.getElementById('ground-unreasonable').checked) groundsList.push('The award is unreasonable in the light of the evidence led at the arbitration (Sidumo v Rustenburg Platinum Mines), in terms of LRA s145(2)(a).');
       if (document.getElementById('ground-misconduct').checked) groundsList.push('The commissioner committed misconduct warranting the setting aside of the award, in terms of LRA s145(2)(b).');
       if (document.getElementById('ground-improperly-obtained').checked) groundsList.push('The award was improperly obtained or is affected by fraud, corruption, or bias, in terms of LRA s145(2)(d).');
       if (document.getElementById('ground-other').checked) groundsList.push('Other grounds as set out in the founding affidavit, in terms of LRA s145(2).');
-      if (groundsList.length === 0) groundsList.push('[NO GROUNDS SELECTED — PLEASE SELECT GROUNDS ABOVE]');
+
+      // Collect audio-derived grounds
+      var audioGrounds = [];
+      var audioTranscript = document.getElementById('audio-transcript').value || '';
+      Object.keys(audioErrorMapping).forEach(function(id) {
+        var cb = document.getElementById(id);
+        if (cb && cb.checked) {
+          var mapping = audioErrorMapping[id];
+          // If the main ground checkbox is not already checked, check it
+          var mainCb = document.getElementById(mapping.ground);
+          if (mainCb && !mainCb.checked) {
+            mainCb.checked = true;
+            localStorage.setItem(mainCb.getAttribute('data-storage-key'), 'true');
+          }
+          // Add the detailed ground text
+          var text = mapping.text;
+          if (id === 'audio-error-other') {
+            text = text.replace('[OTHER ERROR — please describe in the notes below]', audioTranscript || '[PLEASE DESCRIBE OTHER ERROR]');
+          }
+          audioGrounds.push(text);
+        }
+      });
+
+      // Merge audio grounds into groundsList
+      groundsList = groundsList.concat(audioGrounds);
+
+      if (groundsList.length === 0) {
+        groundsList.push('[NO GROUNDS SELECTED — PLEASE SELECT GROUNDS ABOVE OR USE THE AUDIO UPLOAD]');
+      }
 
       var secondResp = (region === 'MEIBC' || region === 'BCEA') ? region + ' Bargaining Council' : 'The Commission for Conciliation, Mediation and Arbitration (CCMA)';
       var secondRespAddress = (region === 'MEIBC' || region === 'BCEA') ? '[BARGAINING COUNCIL ADDRESS]' : '28 Harrison Street, Johannesburg, 2001';
 
-      generatedNotice = 'IN THE LABOUR COURT OF SOUTH AFRICA\n' +
-        '_________________________________________________________\n\n' +
-        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA\n\n' +
-        'In the matter between:\n\n' +
-        appName + '\n' + appAddress + '\n\n' +
-        '          Applicant\n\n' +
-        'and\n\n' +
-        respName + '\n\n' +
-        '          1st Respondent\n\n' +
-        'and\n\n' +
-        secondResp + '\n' + secondRespAddress + '\n\n' +
-        '          2nd Respondent\n\n' +
-        'and\n\n' +
-        commissioner + '\n' +
-        'Commissioner, CCMA — ' + region + ' Region\n\n' +
-        '          3rd Respondent\n\n' +
-        '_________________________________________________________\n\n' +
-        'NOTICE OF MOTION\n\n' +
-        'TAKE NOTICE that the Applicant intends to apply to this Honourable Court on a date and time to be assigned by the Registrar for an order in the following terms:\n\n' +
-        '1. That the arbitration award dated ' + arbDate + ', delivered by Commissioner ' + commissioner + ' in CCMA case number ' + ccmaCase + ', be reviewed and set aside;\n\n' +
-        '2. That the 2nd Respondent, ' + secondResp + ', be directed to dispatch the complete record of the arbitration proceedings to the Registrar of this Honourable Court within 10 (ten) days of receipt of this notice of motion, and to notify the parties that this has been done, in terms of Rule 37(2)(b) of the Labour Court Rules;\n\n' +
-        '3. That the costs of this application be costs in the cause;\n\n' +
-        '4. That the Applicant be granted such further and alternative relief as this Honourable Court may deem fit.\n\n' +
-        'TAKE FURTHER NOTICE that the affidavit of ' + appName + ', annexed hereto, will be used in support of this application.\n\n' +
-        'Dated at _______________ on this ' + today + '.\n\n' +
-        '_________________________\n' +
-        appName + '\n' +
-        'Applicant\n\n' +
-        'Address for service: ' + appAddress + '\n' +
+      // ─── NOTICE OF MOTION ───
+      generatedNotice = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' +
+        '_________________________________________________________
+
+' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
+
+' +
+        'In the matter between:
+
+' +
+        appName + '
+' + appAddress + '
+
+' +
+        '          Applicant
+
+' +
+        'and
+
+' +
+        respName + '
+
+' +
+        '          1st Respondent
+
+' +
+        'and
+
+' +
+        secondResp + '
+' + secondRespAddress + '
+
+' +
+        '          2nd Respondent
+
+' +
+        'and
+
+' +
+        commissioner + '
+' +
+        'Commissioner, CCMA — ' + region + ' Region
+
+' +
+        '          3rd Respondent
+
+' +
+        '_________________________________________________________
+
+' +
+        'NOTICE OF MOTION
+
+' +
+        'TAKE NOTICE that the Applicant intends to apply to this Honourable Court on a date and time to be assigned by the Registrar for an order in the following terms:
+
+' +
+        '1. That the arbitration award dated ' + arbDate + ', delivered by Commissioner ' + commissioner + ' in CCMA case number ' + ccmaCase + ', be reviewed and set aside;
+
+' +
+        '2. That the 2nd Respondent, ' + secondResp + ', be directed to dispatch the complete record of the arbitration proceedings to the Registrar of this Honourable Court within 10 (ten) days of receipt of this notice of motion, and to notify the parties that this has been done, in terms of Rule 37(2)(b) of the Labour Court Rules;
+
+' +
+        '3. That the costs of this application be costs in the cause;
+
+' +
+        '4. That the Applicant be granted such further and alternative relief as this Honourable Court may deem fit.
+
+' +
+        'TAKE FURTHER NOTICE that the affidavit of ' + appName + ', annexed hereto, will be used in support of this application.
+
+' +
+        'Dated at _______________ on this ' + today + '.
+
+' +
+        '_________________________
+' +
+        appName + '
+' +
+        'Applicant
+
+' +
+        'Address for service: ' + appAddress + '
+' +
         'Email: ' + appEmail;
 
-      generatedAffidavit = 'IN THE LABOUR COURT OF SOUTH AFRICA\n' +
-        '_________________________________________________________\n\n' +
-        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA\n\n' +
-        'In the matter between:\n\n' +
-        appName + '\n\n' +
-        '          Applicant\n\n' +
-        'and\n\n' +
-        respName + '\n\n' +
-        '          1st Respondent\n\n' +
-        'and\n\n' +
-        secondResp + '\n\n' +
-        '          2nd Respondent\n\n' +
-        'and\n\n' +
-        commissioner + ' — Commissioner\n\n' +
-        '          3rd Respondent\n\n' +
-        '_________________________________________________________\n\n' +
-        'FOUNDING AFFIDAVIT\n\n' +
-        'I, the undersigned ' + appName + ', do hereby make oath and state:\n\n' +
-        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.\n\n' +
-        '2. On ' + arbDate + ', an arbitration hearing was held before Commissioner ' + commissioner + ' at the ' + region + ' office in CCMA case number ' + ccmaCase + '.\n\n' +
-        '3. On [DATE OF AWARD], Commissioner ' + commissioner + ' delivered an arbitration award [briefly describe outcome: ' + awardOutcome + '].\n\n' +
-        '4. I was served with the award on [DATE OF SERVICE].\n\n' +
-        '5. The grounds upon which I seek review of the award are as follows:\n\n';
+      // ─── FOUNDING AFFIDAVIT (with FIXED NUMBERING) ───
+      var paraNum = 1;
+      generatedAffidavit = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' +
+        '_________________________________________________________
 
-      groundsList.forEach(function(g, i) {
-        generatedAffidavit += (i + 6) + '. ' + g + '\n\n';
+' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
+
+' +
+        'In the matter between:
+
+' +
+        appName + '
+
+' +
+        '          Applicant
+
+' +
+        'and
+
+' +
+        respName + '
+
+' +
+        '          1st Respondent
+
+' +
+        'and
+
+' +
+        secondResp + '
+
+' +
+        '          2nd Respondent
+
+' +
+        'and
+
+' +
+        commissioner + ' — Commissioner
+
+' +
+        '          3rd Respondent
+
+' +
+        '_________________________________________________________
+
+' +
+        'FOUNDING AFFIDAVIT
+
+' +
+        'I, the undersigned ' + appName + ', do hereby make oath and state:
+
+';
+
+      generatedAffidavit += (paraNum++) + '. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.
+
+';
+      generatedAffidavit += (paraNum++) + '. On ' + arbDate + ', an arbitration hearing was held before Commissioner ' + commissioner + ' at the ' + region + ' office in CCMA case number ' + ccmaCase + '.
+
+';
+      generatedAffidavit += (paraNum++) + '. On [DATE OF AWARD], Commissioner ' + commissioner + ' delivered an arbitration award [briefly describe outcome: ' + awardOutcome + '].
+
+';
+      generatedAffidavit += (paraNum++) + '. I was served with the award on [DATE OF SERVICE].
+
+';
+      generatedAffidavit += (paraNum++) + '. The grounds upon which I seek review of the award are as follows:
+
+';
+
+      groundsList.forEach(function(g) {
+        generatedAffidavit += (paraNum++) + '. ' + g + '
+
+';
       });
 
-      generatedAffidavit += '\n' + groundsDetails + '\n\n' +
-        (groundsList.length + 6) + '. I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting the review and setting aside of the award by this Honourable Court.\n\n' +
-        (groundsList.length + 7) + '. I have no other adequate remedy in the circumstances save for the relief sought herein.\n\n' +
-        (groundsList.length + 8) + '. I pray that this Honourable Court grant the following relief:\n\n' +
-        relief + '\n\n' +
-        'Dated at _______________ on this ' + today + '.\n\n' +
-        '_________________________\n' +
-        appName + '\n' +
-        'Applicant\n\n' +
-        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.\n\n' +
-        '_________________________\n' +
+      if (groundsDetails.trim()) {
+        generatedAffidavit += (paraNum++) + '. Further particulars of the grounds are as follows:
+
+' + groundsDetails + '
+
+';
+      }
+
+      if (audioTranscript.trim()) {
+        generatedAffidavit += (paraNum++) + '. The following excerpts from the arbitration recording support the above grounds:
+
+' + audioTranscript + '
+
+';
+      }
+
+      generatedAffidavit += (paraNum++) + '. I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting the review and setting aside of the award by this Honourable Court.
+
+';
+      generatedAffidavit += (paraNum++) + '. I have no other adequate remedy in the circumstances save for the relief sought herein.
+
+';
+      generatedAffidavit += (paraNum++) + '. I pray that this Honourable Court grant the following relief:
+
+' +
+        relief + '
+
+' +
+        'Dated at _______________ on this ' + today + '.
+
+' +
+        '_________________________
+' +
+        appName + '
+' +
+        'Applicant
+
+' +
+        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.
+
+' +
+        '_________________________
+' +
         'Commissioner of Oaths';
 
       document.getElementById('notice-preview').textContent = generatedNotice;
@@ -743,7 +1314,13 @@
     }
 
     function downloadBothDocuments() {
-      var combined = '=== NOTICE OF MOTION ===\n\n' + generatedNotice + '\n\n=== FOUNDING AFFIDAVIT ===\n\n' + generatedAffidavit;
+      var combined = '=== NOTICE OF MOTION ===
+
+' + generatedNotice + '
+
+=== FOUNDING AFFIDAVIT ===
+
+' + generatedAffidavit;
       var blob = new Blob([combined], { type: 'text/plain' });
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
@@ -767,41 +1344,104 @@
 
       var secondResp = (region === 'MEIBC' || region === 'BCEA') ? region + ' Bargaining Council' : 'The Commission for Conciliation, Mediation and Arbitration (CCMA)';
 
-      generatedAffidavitOnly = 'IN THE LABOUR COURT OF SOUTH AFRICA\n' +
-        '_________________________________________________________\n\n' +
-        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA\n\n' +
-        'In the matter between:\n\n' +
-        appName + '\n\n' +
-        '          Applicant\n\n' +
-        'and\n\n' +
-        respName + '\n\n' +
-        '          1st Respondent\n\n' +
-        'and\n\n' +
-        secondResp + '\n\n' +
-        '          2nd Respondent\n\n' +
-        'and\n\n' +
-        commissioner + ' — Commissioner\n\n' +
-        '          3rd Respondent\n\n' +
-        '_________________________________________________________\n\n' +
-        'FOUNDING AFFIDAVIT\n\n' +
-        'I, the undersigned ' + appName + ', do hereby make oath and state:\n\n' +
-        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.\n\n' +
-        '2. Background Facts:\n\n' +
-        background + '\n\n' +
-        '3. My Evidence at the Arbitration:\n\n' +
-        evidence + '\n\n' +
-        '4. The Commissioner\'s Errors:\n\n' +
-        errors + '\n\n' +
-        '5. Legal Submissions:\n\n' +
-        legal + '\n\n' +
-        '6. Conclusion:\n\n' +
-        conclusion + '\n\n' +
-        'Dated at _______________ on this ' + today + '.\n\n' +
-        '_________________________\n' +
-        appName + '\n' +
-        'Applicant\n\n' +
-        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.\n\n' +
-        '_________________________\n' +
+      var paraNum = 1;
+      generatedAffidavitOnly = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' +
+        '_________________________________________________________
+
+' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
+
+' +
+        'In the matter between:
+
+' +
+        appName + '
+
+' +
+        '          Applicant
+
+' +
+        'and
+
+' +
+        respName + '
+
+' +
+        '          1st Respondent
+
+' +
+        'and
+
+' +
+        secondResp + '
+
+' +
+        '          2nd Respondent
+
+' +
+        'and
+
+' +
+        commissioner + ' — Commissioner
+
+' +
+        '          3rd Respondent
+
+' +
+        '_________________________________________________________
+
+' +
+        'FOUNDING AFFIDAVIT
+
+' +
+        'I, the undersigned ' + appName + ', do hereby make oath and state:
+
+';
+
+      generatedAffidavitOnly += (paraNum++) + '. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.
+
+';
+      generatedAffidavitOnly += (paraNum++) + '. Background Facts:
+
+' + background + '
+
+';
+      generatedAffidavitOnly += (paraNum++) + '. My Evidence at the Arbitration:
+
+' + evidence + '
+
+';
+      generatedAffidavitOnly += (paraNum++) + '. The Commissioner's Errors:
+
+' + errors + '
+
+';
+      generatedAffidavitOnly += (paraNum++) + '. Legal Submissions:
+
+' + legal + '
+
+';
+      generatedAffidavitOnly += (paraNum++) + '. Conclusion:
+
+' + conclusion + '
+
+';
+      generatedAffidavitOnly += 'Dated at _______________ on this ' + today + '.
+
+' +
+        '_________________________
+' +
+        appName + '
+' +
+        'Applicant
+
+' +
+        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.
+
+' +
+        '_________________________
+' +
         'Commissioner of Oaths';
 
       document.getElementById('affidavit-only-preview').textContent = generatedAffidavitOnly;
