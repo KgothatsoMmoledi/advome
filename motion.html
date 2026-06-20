@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Advome - Step-by-step guide to the Labour Court Court Online Portal. Register, issue your motion, and file documents. Directive 1/2025 compliant.">
-  <title>Court Online | Advome</title>
+  <meta name="description" content="Advome - Motion and Affidavit for Labour Court review. Draft Notice of Motion, Founding Affidavit, Court Online filing guide, and Responding Affidavit handling. LRA s145, Rule 37, Rule 7 compliant.">
+  <title>Motion & Affidavit | Section 145 Review | Advome</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="shared-styles.css">
+
 <base target="_blank">
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="adv-header" role="banner">
     <a href="index.html" class="adv-header__logo" aria-label="Advome Home">Ad<span>vome</span></a>
     <nav class="adv-header__nav" role="navigation" aria-label="Main navigation">
@@ -30,14 +30,12 @@
     <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
   </header>
 
-  <!-- PROGRESS BAR -->
-  <div class="adv-progress" data-workflow="ccma" data-current-step="court_online" role="navigation" aria-label="Workflow progress"></div>
+  <div class="adv-progress" data-workflow="ccma" data-current-step="motion" role="navigation" aria-label="Workflow progress"></div>
 
-  <!-- HERO -->
   <section class="adv-hero" aria-labelledby="page-title">
     <div class="adv-hero__content">
-      <h1 id="page-title">Court Online Portal</h1>
-      <p>Register, issue your motion, and file documents on the Labour Court's mandatory e-filing system. Effective 14 April 2025.</p>
+      <h1 id="page-title">Motion & Affidavit</h1>
+      <p>Draft your Notice of Motion and Founding Affidavit for Labour Court review. File via Court Online. Handle responding affidavits. All under LRA s145 and Labour Court Rules.</p>
     </div>
     <div class="adv-hero__badge adv-hero__badge--online" aria-label="Filing type">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -45,639 +43,590 @@
     </div>
   </section>
 
-  <!-- MAIN -->
   <main class="adv-container" id="main-content" role="main">
     <div class="adv-workspace">
 
-      <!-- TABS -->
-      <div class="adv-tabs" role="tablist" aria-label="Court Online sections">
-        <button class="adv-tab-btn adv-tab-btn--active" id="tab-btn-1" role="tab" aria-selected="true" aria-controls="tab-panel-1" onclick="switchTab(1)">
-          <span class="adv-tab-btn__num">1</span>
-          <span class="adv-tab-btn__text">Registration</span>
+      <!-- 6-WEEK DEADLINE CALCULATOR -->
+      <section class="adv-card" style="border-left: 4px solid #d69e2e; margin-bottom: 1.5rem;" aria-labelledby="deadline-heading">
+        <div class="adv-card__header">
+          <div>
+            <h2 id="deadline-heading" class="adv-card__title" style="color: #744210;">6-Week Deadline (LRA s145)</h2>
+            <p class="adv-card__subtitle">You must file your review application within 6 weeks of being served with the arbitration award.</p>
+          </div>
+        </div>
+        <div class="adv-card__body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="adv-form-group">
+              <label class="adv-label" for="award-service-date">Date You Were Served with the Award</label>
+              <input type="date" class="adv-input" id="award-service-date" data-storage-key="motion_award_service_date">
+            </div>
+            <div class="adv-form-group">
+              <label class="adv-label" for="review-deadline-display">Calculated Deadline</label>
+              <input type="text" class="adv-input" id="review-deadline-display" readonly style="font-weight: 600; color: #c53030; background: #fff5f5;">
+            </div>
+          </div>
+          <div id="review-deadline-countdown" style="margin-top: 1rem; padding: 1rem; border-radius: 6px; text-align: center; font-size: 1.1rem; font-weight: 600;">
+            Enter the award service date above to calculate your 6-week deadline.
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB NAVIGATION -- All freely clickable -->
+      <div class="adv-tabs" role="tablist" aria-label="Motion workflow sections" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0;">
+        <button class="adv-tab" id="tab-btn-1" role="tab" aria-selected="true" aria-controls="tab-panel-1" onclick="switchTab(1)" style="flex: 1; padding: 1rem 1.5rem; background: white; border: none; border-bottom: 3px solid #1a365d; font-weight: 600; color: #1a365d; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+          <span style="width: 28px; height: 28px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">1</span>
+          <span>Motion & Affidavit</span>
         </button>
-        <button class="adv-tab-btn" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)">
-          <span class="adv-tab-btn__num">2</span>
-          <span class="adv-tab-btn__text">Issuing</span>
+        <button class="adv-tab" id="tab-btn-2" role="tab" aria-selected="false" aria-controls="tab-panel-2" onclick="switchTab(2)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #4a5568; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+          <span style="width: 28px; height: 28px; background: #4a5568; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">2</span>
+          <span>Court Online</span>
         </button>
-        <button class="adv-tab-btn" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)">
-          <span class="adv-tab-btn__num">3</span>
-          <span class="adv-tab-btn__text">Filing</span>
-        </button>
-        <button class="adv-tab-btn" id="tab-btn-4" role="tab" aria-selected="false" aria-controls="tab-panel-4" onclick="switchTab(4)">
-          <span class="adv-tab-btn__num">4</span>
-          <span class="adv-tab-btn__text">Help</span>
+        <button class="adv-tab" id="tab-btn-3" role="tab" aria-selected="false" aria-controls="tab-panel-3" onclick="switchTab(3)" style="flex: 1; padding: 1rem 1.5rem; background: #f7fafc; border: none; border-bottom: 3px solid transparent; font-weight: 400; color: #4a5568; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 6px 6px 0 0;">
+          <span style="width: 28px; height: 28px; background: #4a5568; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;">3</span>
+          <span>Responding</span>
         </button>
       </div>
 
-      <!-- TAB 1: REGISTRATION -->
-      <div class="adv-tab-panel adv-tab-panel--active" id="tab-panel-1" role="tabpanel" aria-labelledby="tab-btn-1">
+      <!-- TAB PANEL 1: Motion & Affidavit -->
+      <div class="adv-tab-panel" id="tab-panel-1" role="tabpanel" aria-labelledby="tab-btn-1">
 
-        <section class="adv-card adv-card--primary">
+        <section class="adv-card adv-card--primary" aria-labelledby="motion-heading">
           <div class="adv-card__header">
             <div>
-              <h2 class="adv-card__title">Step 1: Register on Court Online</h2>
-              <p class="adv-card__subtitle">Before you can file anything, you must create a Court Online account. Mandatory from 14 April 2025.</p>
+              <h2 id="motion-heading" class="adv-card__title">Draft Your Notice of Motion & Founding Affidavit</h2>
+              <p class="adv-card__subtitle">Generate the two core documents to start your Section 145 review. Rule 37(2) compliant. The new 2024 Rules require a concise statement of grounds.</p>
             </div>
           </div>
+
           <div class="adv-card__body">
-
-            <div class="adv-alert adv-alert--warning">
-              <strong>Mandatory from 14 April 2025</strong> — No new cases may be issued manually. All applications must be initiated on the Court Online Portal. <span class="adv-rule-ref">Directive 1.1–1.2</span>
-            </div>
-
-            <div class="adv-step-list">
-              <div class="adv-step">
-                <div class="adv-step__num">1</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Go to the Court Online Portal</h3>
-                  <p class="adv-step__desc">Visit <a href="https://courtonline.judiciary.org.za" target="_blank" rel="noopener">courtonline.judiciary.org.za</a>. The portal provides FAQs, contact info, registration details, and video tutorials.</p>
-                  <div class="adv-tip-box">
-                    <strong>Tip:</strong> If you lack a computer or internet access, visit the Court Online Service Desk at the Labour Court. Staff will assist you free of charge. <span class="adv-rule-ref">Directive 1.7</span>
-                  </div>
+            <!-- Party Structure -->
+            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Party Structure</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem;">
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #1a365d;">
+                  <strong style="color: #1a365d;">Applicant</strong><br><span style="color: #4a5568;">You (the employee)</span>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">2</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Click "Register"</h3>
-                  <p class="adv-step__desc">Select the registration option for individuals (self-represented litigants). You will need your South African ID number.</p>
-                  <div class="adv-tip-box adv-tip-box--warn">
-                    <strong>Foreign nationals:</strong> Without a South African ID, contact the Court Online Helpdesk at <a href="mailto:CourtOnlineSupport@judiciary.org.za">CourtOnlineSupport@judiciary.org.za</a>. Include your LPC number if you are a registered legal practitioner. <span class="adv-rule-ref">Directive 1.4</span>
-                  </div>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #3182ce;">
+                  <strong style="color: #2a4365;">1st Respondent</strong><br><span style="color: #4a5568;">Your employer</span>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">3</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Enter Your Personal Details</h3>
-                  <p class="adv-step__desc">Complete the registration form with your full name, South African ID number, physical address, telephone number, and email address.</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Full name (as per ID)</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">South African ID number (13 digits)</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Physical residential address</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Cell phone number</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Valid email address</div></div></li>
-                  </ul>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #805ad5;">
+                  <strong style="color: #553c9a;">2nd Respondent</strong><br><span style="color: #4a5568;">CCMA or Bargaining Council</span>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">4</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Create a Secure Password</h3>
-                  <p class="adv-step__desc">Your password must meet the portal's security requirements. Write it down and store it safely.</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">At least 8 characters</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">One uppercase letter</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">One lowercase letter</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">One number</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">One special character (!@#$%^&*)</div></div></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">5</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Submit Registration</h3>
-                  <p class="adv-step__desc">Click "Register." The system validates your ID against Home Affairs data. If validation fails, check your ID number or contact the Help Desk.</p>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">6</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Activate Your Account</h3>
-                  <p class="adv-step__desc">Check your email inbox (and spam folder) for an activation email. Click the activation link to verify your account. You cannot log in until this is complete.</p>
-                  <div class="adv-tip-box adv-tip-box--warn">
-                    <strong>Important:</strong> If you do not receive the activation email within 30 minutes, contact the Helpdesk. Do not create a duplicate account. <span class="adv-rule-ref">Directive 1.6</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">7</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Complete Your Profile</h3>
-                  <p class="adv-step__desc">Log in and complete any remaining profile fields. Ensure your contact details are accurate — the Registrar and other parties will use this information.</p>
-                  <div class="adv-tip-box">
-                    <strong>Self-Represented Litigants:</strong> You are now ready to initiate your case. If you need help, you MUST be referred to the Court Online Service Desk for free assistance. <span class="adv-rule-ref">Directive 1.7</span>
-                  </div>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #d69e2e;">
+                  <strong style="color: #744210;">3rd Respondent</strong><br><span style="color: #4a5568;">Commissioner (by name)</span>
                 </div>
               </div>
             </div>
 
+            <!-- Form Fields -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="adv-form-group">
+                <label class="adv-label" for="app-name">Applicant Full Name (You)</label>
+                <input type="text" class="adv-input" id="app-name" placeholder="e.g. John Doe" data-storage-key="motion_app_name">
+              </div>
+              <div class="adv-form-group">
+                <label class="adv-label" for="resp-name">1st Respondent (Employer)</label>
+                <input type="text" class="adv-input" id="resp-name" placeholder="e.g. ABC Trading (Pty) Ltd" data-storage-key="motion_resp_name">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="adv-form-group">
+                <label class="adv-label" for="ccma-case-no">CCMA Case Number</label>
+                <input type="text" class="adv-input" id="ccma-case-no" placeholder="e.g. KN12345/2026" data-storage-key="motion_ccma_case">
+              </div>
+              <div class="adv-form-group">
+                <label class="adv-label" for="arb-date">Arbitration Date</label>
+                <input type="date" class="adv-input" id="arb-date" data-storage-key="motion_arb_date">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="adv-form-group">
+                <label class="adv-label" for="commissioner">3rd Respondent — Commissioner Name</label>
+                <input type="text" class="adv-input" id="commissioner" placeholder="e.g. J. Smith" data-storage-key="motion_commissioner">
+              </div>
+              <div class="adv-form-group">
+                <label class="adv-label" for="ccma-region">CCMA Region / Bargaining Council</label>
+                <select class="adv-input" id="ccma-region" data-storage-key="motion_ccma_region">
+                  <option value="">Select region...</option>
+                  <option value="Johannesburg">Johannesburg CCMA</option>
+                  <option value="Pretoria">Pretoria CCMA</option>
+                  <option value="Durban">Durban CCMA</option>
+                  <option value="Cape Town">Cape Town CCMA</option>
+                  <option value="Gqeberha">Gqeberha CCMA</option>
+                  <option value="Bloemfontein">Bloemfontein CCMA</option>
+                  <option value="MEIBC">MEIBC (Metal & Engineering)</option>
+                  <option value="BCEA">BCEA (Building Industry)</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+              <label class="adv-label" for="app-address">Your Address for Service (Physical)</label>
+              <input type="text" class="adv-input" id="app-address" placeholder="e.g. 123 Main Street, Johannesburg, 2000" data-storage-key="motion_app_address">
+            </div>
+
+            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+              <label class="adv-label" for="app-email">Your Email for Service</label>
+              <input type="email" class="adv-input" id="app-email" placeholder="you@example.com" data-storage-key="motion_app_email">
+            </div>
+
+            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+              <label class="adv-label" for="award-outcome">Award Outcome</label>
+              <select class="adv-input" id="award-outcome" data-storage-key="motion_award_outcome">
+                <option value="">Select outcome...</option>
+                <option value="dismissed">Dismissal upheld (unfair dismissal claim lost)</option>
+                <option value="compensation-reduced">Compensation awarded but too low</option>
+                <option value="reinstatement-refused">Reinstatement refused</option>
+                <option value="procedural-irregularity">Procedural irregularity during arbitration</option>
+                <option value="misconduct">Commissioner misconduct</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <!-- Grounds for Review -->
+            <div style="margin-bottom: 1.5rem;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Grounds for Review (LRA s145(2))</h3>
+              <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1rem;">Select all applicable grounds. The new 2024 Rules require a <em>concise</em> statement. State specifically what the commissioner did wrong.</p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                  <input type="checkbox" id="ground-gross-irregularity" data-storage-key="motion_ground_gross_irregularity" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">Gross irregularity in the proceedings (s145(2)(c))</span>
+                </label>
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                  <input type="checkbox" id="ground-excess-power" data-storage-key="motion_ground_excess_power" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">Excess of power / lack of jurisdiction (s145(2)(a))</span>
+                </label>
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                  <input type="checkbox" id="ground-unreasonable" data-storage-key="motion_ground_unreasonable" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">Unreasonable decision (Sidumo test) (s145(2)(a))</span>
+                </label>
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                  <input type="checkbox" id="ground-misconduct" data-storage-key="motion_ground_misconduct" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">Commissioner misconduct / bias (s145(2)(b))</span>
+                </label>
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                  <input type="checkbox" id="ground-improperly-obtained" data-storage-key="motion_ground_improperly_obtained" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">Award improperly obtained / fraud (s145(2)(d))</span>
+                </label>
+                <label style="cursor: pointer; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; display: flex; align-items: flex-start; gap: 0.5rem;">
+                  <input type="checkbox" id="ground-other" data-storage-key="motion_ground_other" style="margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">Other (specify below)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+              <label class="adv-label" for="ground-details">Specific Grounds (concise, point form)</label>
+              <textarea class="adv-input" id="ground-details" rows="6" placeholder="1. The commissioner failed to consider the applicant's evidence that...
+2. The commissioner misdirected herself on the burden of proof by...
+3. No reasonable commissioner could have found..." data-storage-key="motion_ground_details"></textarea>
+            </div>
+
+            <div class="adv-form-group" style="margin-bottom: 1.5rem;">
+              <label class="adv-label" for="relief-sought">Relief Sought</label>
+              <textarea class="adv-input" id="relief-sought" rows="3" placeholder="e.g. Review and set aside the arbitration award. Order the respondent to reinstate the applicant with retrospective effect." data-storage-key="motion_relief"></textarea>
+            </div>
+
+            <!-- Critical Warnings -->
+            <div style="padding: 1rem; background: #fff5f5; border-left: 4px solid #c53030; border-radius: 4px; margin-bottom: 1rem;">
+              <strong style="color: #742a2a; font-size: 1rem;">CRITICAL: Reference Number ≠ Case Number</strong>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;"><strong>Do NOT write the reference number on any court document.</strong> Upload <strong>ONLY</strong> the Notice of Motion to Court Online first. The Registrar will issue an official case number. The affidavit comes AFTER the case is issued. (Directive 1 of 2025)</p>
+            </div>
+
+            <div style="padding: 1rem; background: #ebf8ff; border-left: 4px solid #3182ce; border-radius: 4px; margin-bottom: 1rem;">
+              <strong style="color: #2a4365; font-size: 1rem;">Service Note</strong>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Service for review does <strong>NOT</strong> require a sheriff. Email to a working address that respondents actually use is sufficient under Labour Court Rules.</p>
+            </div>
+          </div>
+
+          <div class="adv-card__footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+            <button class="adv-btn adv-btn--accent adv-btn--block" id="generate-motion-btn" type="button" onclick="generateMotion()">
+              Generate Notice of Motion & Founding Affidavit
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </button>
           </div>
         </section>
 
-        <section class="adv-card">
+        <!-- Document Preview -->
+        <section class="adv-card" id="motion-preview-card" style="display: none;" aria-labelledby="preview-heading">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Registration Checklist</h2>
+            <h2 id="preview-heading" class="adv-card__title">Generated Documents</h2>
           </div>
           <div class="adv-card__body">
-            <ul class="adv-checklist" data-checklist-id="co_registration">
-              <li class="adv-checklist__item" data-item-id="co_reg_1">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Visited courtonline.judiciary.org.za</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_2">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Clicked "Register" and selected individual</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_3">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Entered all personal details correctly</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_4">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Created a secure password</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_5">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Submitted registration successfully</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_6">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Clicked activation link in email</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_7">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Logged in and completed profile</div></div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="co_reg_8">
-                <div class="adv-checklist__checkbox"></div>
-                <div><div class="adv-checklist__text">Verified email address is correct</div></div>
-              </li>
-            </ul>
+            <div style="margin-bottom: 1rem;">
+              <button class="adv-btn adv-btn--primary" onclick="showDocument('notice')" id="tab-notice" style="margin-right: 0.5rem;">Notice of Motion</button>
+              <button class="adv-btn adv-btn--secondary" onclick="showDocument('affidavit')" id="tab-affidavit">Founding Affidavit</button>
+            </div>
+            <div id="notice-preview" style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+            <div id="affidavit-preview" style="display: none; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 500px; overflow-y: auto;"></div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button class="adv-btn adv-btn--secondary" onclick="copyCurrentDocument()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Current
+              </button>
+              <button class="adv-btn adv-btn--primary" onclick="downloadCurrentDocument()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Current
+              </button>
+              <button class="adv-btn adv-btn--accent" onclick="downloadBothDocuments()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Both
+              </button>
+            </div>
           </div>
         </section>
+      </div><!-- /tab-panel-1 -->
 
-      </div>
+      <!-- TAB PANEL 2: Court Online Registration & Filing -->
+      <div class="adv-tab-panel" id="tab-panel-2" role="tabpanel" aria-labelledby="tab-btn-2" style="display: none;">
 
-      <!-- TAB 2: ISSUING -->
-      <div class="adv-tab-panel" id="tab-panel-2" role="tabpanel" aria-labelledby="tab-btn-2">
-
-        <section class="adv-card adv-card--primary">
-          <div class="adv-card__header">
-            <div>
-              <h2 class="adv-card__title">Step 2: Issue Your Motion & Obtain a Case Number</h2>
-              <p class="adv-card__subtitle">Upload ONLY your signed Notice of Motion first. The Registrar issues the official case number. Do NOT upload your Founding Affidavit at this stage.</p>
-            </div>
-          </div>
-          <div class="adv-card__body">
-
-            <div class="adv-alert adv-alert--danger">
-              <strong>CRITICAL:</strong> Upload ONLY the Notice of Motion for issuing. The Founding Affidavit comes AFTER the case number is issued. Uploading it now will cause rejection. <span class="adv-rule-ref">Directive 1.11</span>
-            </div>
-
-            <div class="adv-alert adv-alert--info">
-              <strong>Reference Number vs Case Number:</strong> When you click "Start a Case," the portal generates a <em>reference number</em> (e.g., HCGS00363). This is NOT the case number. The <em>case number</em> (e.g., J1234/2026) is issued by the Registrar after review. Only the case number goes on court documents. <span class="adv-rule-ref">Directive 1.8–1.10</span>
-            </div>
-
-            <div class="adv-step-list">
-              <div class="adv-step">
-                <div class="adv-step__num">1</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Log In to Court Online</h3>
-                  <p class="adv-step__desc">Go to <a href="https://courtonline.judiciary.org.za" target="_blank" rel="noopener">courtonline.judiciary.org.za</a> and log in with your registered email and password.</p>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">2</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Click "Start a Case"</h3>
-                  <p class="adv-step__desc">On your dashboard, click "Start a Case." The portal generates a <strong>reference number</strong> for this draft case. Remember: this is NOT your case number.</p>
-                  <div class="adv-tip-box adv-tip-box--warn">
-                    <strong>Do NOT write the reference number on any court papers.</strong> Only the official case number issued by the Registrar may be used on documents. <span class="adv-rule-ref">Directive 1.10</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">3</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Select the Correct Court and Case Type</h3>
-                  <p class="adv-step__desc">Choose the Labour Court seat (Johannesburg, Cape Town, Durban, or Gqeberha). Select the appropriate case type:</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Review Application</strong> — reviewing a CCMA or bargaining council award (Rule 37)</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Referral</strong> — referring a dispute in terms of LRA s145</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Application</strong> — other applications (e.g., interdict, contempt)</div></div></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">4</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Enter Party Details</h3>
-                  <p class="adv-step__desc">Enter the full names of all parties. For a review application:</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Applicant:</strong> Your full name (the employee)</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>First Respondent:</strong> The CCMA or bargaining council</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Second Respondent:</strong> Your employer</div></div></li>
-                  </ul>
-                  <div class="adv-tip-box">
-                    <strong>Tip:</strong> Ensure all names are spelled exactly as they appear in the arbitration award. Mismatches cause delays.
-                  </div>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">5</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Upload ONLY the Notice of Motion</h3>
-                  <p class="adv-step__desc">This is the most important step. Upload <strong>only</strong> your signed Notice of Motion as a PDF. The Notice of Motion must:</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Be in PDF format</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Be duly signed by you (the applicant)</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Call upon the respondent to show cause why the award should not be reviewed</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Call upon the CCMA/bargaining council to dispatch the complete record within 10 days</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">NOT include the Founding Affidavit at this stage</div></div></li>
-                  </ul>
-                  <div class="adv-alert adv-alert--danger">
-                    <strong>Do NOT upload the Founding Affidavit now.</strong> The affidavit is filed later under "My Case Documents" after the case number is issued. <span class="adv-rule-ref">Directive 1.11</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">6</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Submit for Issuing</h3>
-                  <p class="adv-step__desc">Click "Submit" or "Issue." Your request is sent to the Registrar for review. The portal displays your reference number and a confirmation message.</p>
-                  <div class="adv-tip-box">
-                    <strong>What happens next:</strong> The Registrar reviews your Notice of Motion for compliance. If compliant, an official case number is issued. If non-compliant, you receive an email explaining the defect. <span class="adv-rule-ref">Directive 1.9</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">7</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Wait for the Case Number</h3>
-                  <p class="adv-step__desc">The Registrar usually issues the case number within <strong>1–3 business days</strong>. You will receive an email notification.</p>
-                  <div class="adv-tip-box">
-                    <strong>Check your email and dashboard regularly.</strong> Once issued, the case number (e.g., J1234/2026) appears on your dashboard under "My Cases." This is the number you must use on all subsequent documents.
-                  </div>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">8</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Download the Issued Notice of Motion</h3>
-                  <p class="adv-step__desc">Once the case number is issued, download the stamped Notice of Motion from the portal. This is the version you must serve on the respondents. It now bears the official case number.</p>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">9</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Serve the Notice of Motion</h3>
-                  <p class="adv-step__desc">Serve the issued Notice of Motion on all respondents within the timeframes prescribed by the Labour Court Rules:</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Rule 9(1)(a)(iv):</strong> Service by email is sufficient if the respondent has an email address</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Rule 9(1)(a)(i):</strong> Personal service at the respondent's place of business or residence</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text"><strong>Rule 9(1)(a)(iii):</strong> Service by registered post</div></div></li>
-                  </ul>
-                  <div class="adv-tip-box adv-tip-box--warn">
-                    <strong>File an Affidavit of Service:</strong> After serving, you must file an affidavit confirming how, when, and on whom service was effected. Upload this to Court Online. <span class="adv-rule-ref">Rule 9</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        <section class="adv-card">
-          <div class="adv-card__header">
-            <h2 class="adv-card__title">Issuing Checklist</h2>
-          </div>
-          <div class="adv-card__body">
-            <ul class="adv-checklist" data-checklist-id="co_issuing">
-              <li class="adv-checklist__item" data-item-id="co_issue_1"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Logged in to Court Online</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_2"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Clicked "Start a Case" (reference number generated)</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_3"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Selected correct Labour Court seat</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_4"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Selected correct case type (Review/Referral/Application)</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_5"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Entered all party names correctly</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_6"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Uploaded ONLY the signed Notice of Motion (PDF)</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_7"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Did NOT upload the Founding Affidavit at this stage</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_8"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Submitted for issuing</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_9"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Received case number from Registrar</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_10"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Downloaded issued Notice of Motion</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_11"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Served Notice of Motion on all respondents</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_issue_12"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Prepared Affidavit of Service</div></div></li>
-            </ul>
-          </div>
-        </section>
-
-      </div>
-
-      <!-- TAB 3: FILING -->
-      <div class="adv-tab-panel" id="tab-panel-3" role="tabpanel" aria-labelledby="tab-btn-3">
-
-        <section class="adv-card adv-card--primary">
+        <section class="adv-card adv-card--primary" aria-labelledby="courtonline-heading">
           <div class="adv-card__header">
             <div>
-              <h2 class="adv-card__title">Step 3: File Your Documents</h2>
-              <p class="adv-card__subtitle">After the case number is issued, upload all remaining documents under "My Case Documents." All documents must be in PDF format.</p>
+              <h2 id="courtonline-heading" class="adv-card__title">Court Online Registration & Filing</h2>
+              <p class="adv-card__subtitle">Step-by-step guide to register and file your review application on the Court Online portal. Directive 1 of 2025 makes this compulsory for all Labour Court matters.</p>
             </div>
           </div>
+
           <div class="adv-card__body">
-
-            <div class="adv-alert adv-alert--warning">
-              <strong>All documents must be in PDF format.</strong> Do not upload Word, Excel, or image files. Select the correct document type from the dropdown. Do NOT select "Other" — email the Help Desk if your type is missing. <span class="adv-rule-ref">Directive 1.12(a)–(e)</span>
-            </div>
-
-            <div class="adv-step-list">
-              <div class="adv-step">
-                <div class="adv-step__num">1</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Navigate to "My Case Documents"</h3>
-                  <p class="adv-step__desc">Log in to Court Online, go to your case dashboard, and click on your case. Select "My Case Documents" to view the document upload area.</p>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">2</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Upload the Founding Affidavit</h3>
-                  <p class="adv-step__desc">Select "Founding Affidavit" from the document type dropdown. Upload your signed Founding Affidavit in PDF format.</p>
-                  <div class="adv-tip-box">
-                    <strong>Rule 37(2)(c):</strong> The Notice of Motion must be supported by an affidavit setting out the grounds on which the applicant relies to have the decision reviewed and corrected or set aside.
+            <!-- Step-by-Step Guide -->
+            <div style="margin-bottom: 1.5rem;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a365d;">8 Steps to File on Court Online</h3>
+              <div style="display: grid; gap: 0.75rem;">
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">1</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Register at courtonline.co.za</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Select "Individual". SA ID required. Foreign nationals: contact the Court Online Help Desk for manual registration.</p>
                   </div>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">3</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Upload the Affidavit of Service</h3>
-                  <p class="adv-step__desc">Select "Affidavit of Service" from the document type dropdown. Upload the affidavit confirming proper service on all respondents.</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">State the date and time of service</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">State the place of service</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">State the name of the person served (or method if email/post)</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Attach proof of service (email receipt, registered post tracking)</div></div></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">4</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Upload the Arbitration Award</h3>
-                  <p class="adv-step__desc">Select "Arbitration Award" from the document type dropdown. Upload the certified copy of the CCMA or bargaining council award you are reviewing.</p>
-                </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">5</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">CCMA Dispatches the Record (Rule 37)</h3>
-                  <p class="adv-step__desc">Upon receipt of your Notice of Motion, the CCMA or bargaining council must deliver the complete record of arbitration proceedings to the Registrar through a cloud-based service. <span class="adv-rule-ref">Directive 2.1; Rule 37(2)(b)</span></p>
-                  <div class="adv-tip-box">
-                    <strong>What you must do:</strong> The CCMA/bargaining council uploads the Rule 37(2) notice and bundle to Court Online. The Registrar retrieves the digital record and stores it on the court's SharePoint. You will receive a SharePoint link. <span class="adv-rule-ref">Directive 2.2–2.6</span>
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">2</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Verify your email</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Check your inbox for an activation link. Click it to verify your account.</p>
                   </div>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">6</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Upload the Record (If Applicable)</h3>
-                  <p class="adv-step__desc">Once you receive the SharePoint link from the Registrar, you may need to upload portions of the record to your case file. Follow the Registrar's instructions.</p>
-                  <div class="adv-tip-box">
-                    <strong>Rule 37(13):</strong> The applicant must furnish the Registrar and each other party with a copy of the record. If the respondent failed to deliver a complete record, the 60-day period for answering affidavits only starts once the complete record is delivered.
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">3</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Sign in and click "Start a Case"</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Log into your account. On the dashboard, click the "Start a Case" button.</p>
                   </div>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">7</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Upload the Answering Affidavit (If Defended)</h3>
-                  <p class="adv-step__desc">If the respondent files an answering affidavit, they must upload it to Court Online. You will be notified by email. You then have the opportunity to file a replying affidavit.</p>
-                  <div class="adv-tip-box adv-tip-box--warn">
-                    <strong>Timeframes:</strong> The respondent has 10 days after service to file an answering affidavit (Rule 37(14)). You then have 10 days to file a replying affidavit. Monitor your email and dashboard closely.
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">4</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Select "Labour Court" + correct seat</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Choose the correct Labour Court seat: Johannesburg, Cape Town, Durban, or Gqeberha. This must match where the arbitration took place or where the respondent is based.</p>
                   </div>
                 </div>
-              </div>
-
-              <div class="adv-step">
-                <div class="adv-step__num">8</div>
-                <div class="adv-step__content">
-                  <h3 class="adv-step__title">Document Formatting Requirements (Rule 8)</h3>
-                  <p class="adv-step__desc">All documents uploaded to Court Online must comply with Rule 8 of the Labour Court Rules:</p>
-                  <ul class="adv-checklist">
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">A4 size paper</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">One-sided printing</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Font size 12 or larger</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Double-spaced text</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Margins: at least 25mm on all sides</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Pages numbered consecutively</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Bound or stapled on the left margin</div></div></li>
-                    <li class="adv-checklist__item"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">PDF format only</div></div></li>
-                  </ul>
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: #fff5f5; border: 1px solid #feb2b2; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #c53030; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">5</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #742a2a;">Upload ONLY the Notice of Motion (PDF)</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;"><strong>Do NOT upload the Founding Affidavit at this stage.</strong> Uploading the affidavit now will cause the Registrar to <strong>REJECT</strong> your application. The Registrar needs the Notice of Motion first to issue a case number.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">6</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Wait for Registrar email with case number</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">The Registrar will review your Notice of Motion and issue an official case number via email (usually within 1–3 business days). This is your <strong>real</strong> case number — not a reference number.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">7</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Upload remaining documents under "My Case Documents"</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Once the case number is issued, go to "My Cases" → select your case → upload your Founding Affidavit, copy of the arbitration award, and proof of service under "My Case Documents".</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <div style="flex-shrink: 0; width: 32px; height: 32px; background: #1a365d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;">8</div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: #1a202c;">Confirm filing and serve all parties</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #4a5568;">Court Online will confirm your filing. Now email a copy of all documents to the respondent, CCMA, and commissioner. Keep proof of email delivery.</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-          </div>
-        </section>
-
-        <section class="adv-card">
-          <div class="adv-card__header">
-            <h2 class="adv-card__title">Document Type Reference</h2>
-          </div>
-          <div class="adv-card__body">
-            <div class="adv-table-wrapper">
-              <table class="adv-table">
-                <thead>
-                  <tr><th>Document</th><th>When to Upload</th><th>Document Type</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Notice of Motion</td><td>At issuing (ONLY this document)</td><td>Notice of Motion</td></tr>
-                  <tr><td>Founding Affidavit</td><td>After case number issued</td><td>Founding Affidavit</td></tr>
-                  <tr><td>Affidavit of Service</td><td>After serving Notice of Motion</td><td>Affidavit of Service</td></tr>
-                  <tr><td>Arbitration Award</td><td>After case number issued</td><td>Arbitration Award</td></tr>
-                  <tr><td>Answering Affidavit</td><td>When filed by respondent</td><td>Answering Affidavit</td></tr>
-                  <tr><td>Replying Affidavit</td><td>Within 10 days of answering</td><td>Replying Affidavit</td></tr>
-                  <tr><td>Heads of Argument</td><td>Before hearing (5 days after index)</td><td>Heads of Argument</td></tr>
-                  <tr><td>Index / Bundle</td><td>After all affidavits filed</td><td>Index</td></tr>
-                  <tr><td>Pre-Enrolment Form</td><td>When applying for hearing date</td><td>Pre-Enrolment Form</td></tr>
-                  <tr><td>Request for Enrolment Date</td><td>When matter is ripe for hearing</td><td>Application for Hearing or Trial Date</td></tr>
-                </tbody>
-              </table>
+            <!-- Filing Costs -->
+            <div style="margin-bottom: 1.5rem;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Filing Costs for Self-Represented Litigants</h3>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;">
+                  <thead><tr style="background: #1a365d; color: white;"><th style="padding: 0.75rem; text-align: left;">Item</th><th style="padding: 0.75rem; text-align: right;">Cost</th></tr></thead>
+                  <tbody>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">Court Online registration</td><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 600;">R0</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">Notice of Motion filing</td><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 600;">R0</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">Document uploads (after case issued)</td><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 600;">R0</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">Service by email</td><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 600;">R0</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">Transcription (if CCMA does not provide free, per page)</td><td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 600;">R50–R150</td></tr>
+                    <tr style="background: #f0fff4;"><td style="padding: 0.75rem; font-weight: 700;">Total Court Fees (Self-Represented)</td><td style="padding: 0.75rem; text-align: right; font-weight: 700; color: #22543d;">R0</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top: 1rem; padding: 1rem; background: #ebf8ff; border-radius: 6px; border-left: 4px solid #3182ce;">
+                <p style="margin: 0; font-size: 0.9rem; color: #2a4365;"><strong>Good news:</strong> The Labour Court does not charge filing fees for review applications filed by self-represented litigants through Court Online. Your only potential cost is transcription if the CCMA does not provide the audio record free of charge.</p>
+              </div>
             </div>
-            <div class="adv-alert adv-alert--info">
-              <strong>Missing a document type?</strong> Do NOT select "Other." Email <a href="mailto:CourtOnlineSupport@judiciary.org.za">CourtOnlineSupport@judiciary.org.za</a> with the subject "Request to add a new document type on Court Online" and describe the document. <span class="adv-rule-ref">Directive 1.12(e)</span>
+
+            <!-- Court Online Help Desk -->
+            <div style="margin-bottom: 1.5rem;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: #1a365d;">Court Online Help Desk Contacts</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
+                <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">General Support</strong>
+                  <p style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #4a5568;">010 493 2600<br>CourtOnlineSupport@judiciary.org.za</p>
+                </div>
+                <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">Johannesburg</strong>
+                  <p style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #4a5568;">labourcourt-admin@judiciary.org.za<br>After hours: 081 350 4175</p>
+                </div>
+                <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">Cape Town</strong>
+                  <p style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #4a5568;">labourcourtcapetown@judiciary.org.za<br>After hours: 072 852 1616</p>
+                </div>
+                <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">Durban</strong>
+                  <p style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #4a5568;">durbanlabourcourt@judiciary.org.za<br>After hours: 082 393 9189</p>
+                </div>
+                <div style="padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">Gqeberha</strong>
+                  <p style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #4a5568;">GqeberhaLabourCourt@judiciary.org.za<br>After hours: 072 269 1862</p>
+                </div>
+              </div>
+              <div style="margin-top: 0.75rem; padding: 0.75rem; background: #ebf8ff; border-radius: 6px; border-left: 4px solid #3182ce;">
+                <p style="margin: 0; font-size: 0.85rem; color: #2a4365;"><strong>Directive 1 of 2025 para 1.7:</strong> Unrepresented litigants <strong>MUST</strong> be referred to the Court Online Service Desk at the Labour Court for free assistance with registration and filing.</p>
+              </div>
+            </div>
+
+            <!-- Service Confirmation -->
+            <div style="padding: 1rem; background: #f0fff4; border-radius: 8px; border: 1px solid #9ae6b4;">
+              <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #22543d;">Service Confirmation</h4>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                <input type="checkbox" id="service-confirm" data-storage-key="motion_service_confirm" style="width: 18px; height: 18px; flex-shrink: 0;">
+                <span style="font-size: 0.9rem; color: #1a202c;">I have served the Notice of Motion on all respondents by email</span>
+              </label>
+              <div class="adv-form-group" style="margin-bottom: 0;">
+                <label class="adv-label" for="service-date">Date of Service</label>
+                <input type="date" class="adv-input" id="service-date" data-storage-key="motion_service_date">
+              </div>
             </div>
           </div>
         </section>
+      </div><!-- /tab-panel-2 -->
 
-        <section class="adv-card">
-          <div class="adv-card__header">
-            <h2 class="adv-card__title">Filing Checklist</h2>
-          </div>
-          <div class="adv-card__body">
-            <ul class="adv-checklist" data-checklist-id="co_filing">
-              <li class="adv-checklist__item" data-item-id="co_file_1"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Navigated to "My Case Documents"</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_2"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Uploaded Founding Affidavit (PDF, correct type)</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_3"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Uploaded Affidavit of Service (PDF, correct type)</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_4"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Uploaded Arbitration Award (PDF, correct type)</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_5"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">CCMA/bargaining council dispatched record to Registrar</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_6"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">Received SharePoint link for record access</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_7"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">All documents comply with Rule 8 formatting</div></div></li>
-              <li class="adv-checklist__item" data-item-id="co_file_8"><div class="adv-checklist__checkbox"></div><div><div class="adv-checklist__text">No document type set to "Other"</div></div></li>
-            </ul>
-          </div>
-        </section>
+      <!-- TAB PANEL 3: Responding Affidavit -->
+      <div class="adv-tab-panel" id="tab-panel-3" role="tabpanel" aria-labelledby="tab-btn-3" style="display: none;">
 
-      </div>
-
-      <!-- TAB 4: HELP -->
-      <div class="adv-tab-panel" id="tab-panel-4" role="tabpanel" aria-labelledby="tab-btn-4">
-
-        <section class="adv-card adv-card--primary">
+        <section class="adv-card adv-card--primary" aria-labelledby="responding-heading">
           <div class="adv-card__header">
             <div>
-              <h2 class="adv-card__title">Court Online Help Desk</h2>
-              <p class="adv-card__subtitle">Unrepresented litigants MUST be referred to the Court Online Service Desk for free assistance. This is mandatory under Directive 1 of 2025.</p>
+              <h2 id="responding-heading" class="adv-card__title">Responding Affidavit (10 Working Days After Service)</h2>
+              <p class="adv-card__subtitle">The respondent has 10 working days after service to file a Notice of Intention to Oppose and an Answering Affidavit. Determine if your review is defended or undefended.</p>
             </div>
           </div>
+
           <div class="adv-card__body">
+            <div style="margin-bottom: 1.5rem;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a365d;">Did you receive a responding affidavit?</h3>
+              <p style="font-size: 0.85rem; color: #718096; margin-bottom: 1rem;">Check your email and Court Online "My Case Documents" for any documents uploaded by the respondent(s) within 10 working days of service.</p>
 
-            <div class="adv-alert adv-alert--success">
-              <strong>Free Assistance for Self-Represented Litigants</strong> — "Unrepresented or in-person litigants must be referred to the Court Online Service Desk located at the court, where designated court staff members can assist with case initiation." <span class="adv-rule-ref">Directive 1.7</span>
-            </div>
-
-            <h3 class="adv-section-subtitle">General Court Online Support</h3>
-            <div class="adv-contact-grid">
-              <div class="adv-contact-card">
-                <strong>Email</strong>
-                <p>CourtOnlineSupport@judiciary.org.za</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Telephone</strong>
-                <p>010 493 2600<br>Monday–Friday, 09:00–16:00</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Microsoft Teams</strong>
-                <p>Meeting ID: 322 085 818 456<br>Passcode: PskwC8</p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <button class="adv-btn adv-btn--secondary" id="btn-undefended" onclick="showRespondingBranch('undefended')" style="padding: 1.5rem; text-align: center; flex-direction: column; gap: 0.5rem; height: auto;">
+                  <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">✗</span>
+                  <span style="font-weight: 600; display: block; margin-bottom: 0.25rem;">NO — Undefended</span>
+                  <span style="font-size: 0.8rem; font-weight: 400; display: block;">No response within 10 working days</span>
+                </button>
+                <button class="adv-btn adv-btn--secondary" id="btn-defended" onclick="showRespondingBranch('defended')" style="padding: 1.5rem; text-align: center; flex-direction: column; gap: 0.5rem; height: auto;">
+                  <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">✓</span>
+                  <span style="font-weight: 600; display: block; margin-bottom: 0.25rem;">YES — Defended</span>
+                  <span style="font-size: 0.8rem; font-weight: 400; display: block;">Received answering affidavit</span>
+                </button>
               </div>
             </div>
 
-            <h3 class="adv-section-subtitle">Labour Court Registrar Contacts (By Seat)</h3>
-            <div class="adv-contact-grid">
-              <div class="adv-contact-card">
-                <strong>Johannesburg</strong>
-                <p>labourcourt-admin@judiciary.org.za<br>After hours: 081 350 4175<br>Office hours: 010 494 9253/4</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Cape Town</strong>
-                <p>labourcourtcapetown@judiciary.org.za<br>After hours: 072 852 1616</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Durban</strong>
-                <p>durbanlabourcourt@judiciary.org.za<br>After hours: 082 393 9189</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Gqeberha</strong>
-                <p>GqeberhaLabourCourt@judiciary.org.za<br>After hours: 072 269 1862</p>
+            <!-- BRANCH A: Undefended -->
+            <div id="branch-undefended" style="display: none;">
+              <div style="padding: 1.5rem; background: #f0fff4; border-radius: 8px; border: 1px solid #9ae6b4; margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem; color: #22543d;">Your Review is Undefended</h4>
+                <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #4a5568;">The respondent has not filed a Notice of Intention to Oppose or Answering Affidavit within 10 working days of service. The matter may proceed on the <strong>unopposed roll</strong>.</p>
+                <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #4a5568;">You still need to file <strong>Heads of Argument</strong> (Rule 40) before the matter can be set down for hearing. The court will consider your review based solely on your founding papers.</p>
+
+                <div style="padding: 1rem; background: white; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 1rem;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">What a Responding/Answering Affidavit looks like (so you know what you DIDN'T receive):</strong>
+                  <pre style="margin: 0.75rem 0 0 0; font-family: 'Courier New', monospace; font-size: 0.8rem; line-height: 1.5; background: #f7fafc; padding: 1rem; border-radius: 4px; overflow-x: auto;">IN THE LABOUR COURT OF SOUTH AFRICA
+
+Case No: [CASE NUMBER]
+
+In the matter between:
+
+[EMPLOYEE NAME]          Applicant
+
+and
+
+[EMPLOYER NAME]          Respondent
+
+ANSWERING AFFIDAVIT
+
+I, the undersigned [RESPONDENT REP], state under oath:
+
+1. I am the [position] of the Respondent. I have full
+   knowledge of the facts herein.
+
+2. I deny the allegations in paragraphs [X] to [Y] of the
+   Applicant's founding affidavit.
+
+3. The commissioner correctly applied the law and the evidence
+   supports the award. [Brief reasons].
+
+4. The application for review should be dismissed with costs.
+
+Dated at ____________ on [DATE].
+
+_____________________
+Deponent
+
+SWORN TO before me...</pre>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 1rem;">
+                  <a href="record.html" class="adv-btn adv-btn--accent" style="text-decoration: none; display: inline-flex;">
+                    Proceed to Record & Transcription →
+                  </a>
+                </div>
               </div>
             </div>
 
-            <h3 class="adv-section-subtitle">Caselines / Bundle Contacts (For Enrolled Matters)</h3>
-            <div class="adv-contact-grid">
-              <div class="adv-contact-card">
-                <strong>Johannesburg Registrar</strong>
-                <p>Ms Francinah Nelisiwe Ntuli<br>Fntuli@judiciary.org.za</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Durban Registrar</strong>
-                <p>Mr Siphesihle Mjwara<br>SMjwara@judiciary.org.za</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Cape Town Registrar</strong>
-                <p>Ms Farzaana Ismail<br>FIsmail@judiciary.org.za</p>
-              </div>
-              <div class="adv-contact-card">
-                <strong>Gqeberha Registrar</strong>
-                <p>Ms Lauren Marshal-Reen<br>LMarshal-Reen@judiciary.org.za</p>
+            <!-- BRANCH B: Defended -->
+            <div id="branch-defended" style="display: none;">
+              <div style="padding: 1.5rem; background: #fffaf0; border-radius: 8px; border: 1px solid #fbd38d; margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem; color: #744210;">Your Review is Defended</h4>
+                <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #4a5568;">The respondent has filed an Answering Affidavit. You now have <strong>5 working days</strong> from receipt to file a <strong>Replying Affidavit</strong> (Rule 7(5)(a)). You may only address <strong>new issues</strong> raised in the answering affidavit — no new facts are allowed.</p>
+
+                <div style="padding: 1rem; background: white; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 1.5rem;">
+                  <strong style="font-size: 0.9rem; color: #1a202c;">Example of an Answering Affidavit Structure:</strong>
+                  <pre style="margin: 0.75rem 0 0 0; font-family: 'Courier New', monospace; font-size: 0.8rem; line-height: 1.5; background: #f7fafc; padding: 1rem; border-radius: 4px; overflow-x: auto;">IN THE LABOUR COURT OF SOUTH AFRICA
+
+_________________________________________________________
+
+In the matter between:
+
+[EMPLOYEE NAME]          Applicant
+
+and
+
+[EMPLOYER NAME]          Respondent
+
+_________________________________________________________
+
+ANSWERING AFFIDAVIT
+
+I, the undersigned [NAME], do hereby make oath and state:
+
+1. I am the [position] of the Respondent. I have full
+   knowledge of the facts herein and am duly authorised to
+   depose to this affidavit.
+
+2. I deny the allegations in paragraphs [X] to [Y] of the
+   Applicant's founding affidavit. The commissioner correctly
+   applied the test in Sidumo v Rustenburg Platinum and the
+   evidence supports the award.
+
+3. The Applicant's claim that [specific allegation] is
+   incorrect because [factual rebuttal].
+
+4. The application for review should be dismissed with costs.
+
+Dated at ____________ on [DATE].
+
+_____________________
+[NAME]
+Deponent
+
+SWORN TO before me at ____________ on [DATE], the deponent
+having acknowledged that he/she knows and understands the
+contents of this affidavit and that the facts stated herein
+are true and correct.
+
+_____________________
+Commissioner of Oaths</pre>
+                </div>
+
+                <!-- Replying Affidavit Generator -->
+                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Generate Your Replying Affidavit (Rule 7(5)(a))</h4>
+                  <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: #718096;">Address ONLY new issues raised in the answering affidavit. No new facts. No repetition of your founding affidavit.</p>
+
+                  <div class="adv-form-group" style="margin-bottom: 1rem;">
+                    <label class="adv-label" for="replying-new-issues">New Issues Raised by Respondent (point form)</label>
+                    <textarea class="adv-input" id="replying-new-issues" rows="4" placeholder="1. Respondent claims the commissioner correctly applied the Sidumo test...
+2. Respondent denies that the applicant was unfairly dismissed..." data-storage-key="motion_replying_new_issues"></textarea>
+                  </div>
+                  <div class="adv-form-group" style="margin-bottom: 1rem;">
+                    <label class="adv-label" for="replying-rebuttals">Your Rebuttals (point form)</label>
+                    <textarea class="adv-input" id="replying-rebuttals" rows="4" placeholder="1. The respondent misstates the Sidumo test. The correct test is...
+2. The respondent's denial is contradicted by [evidence] at page [X] of the record..." data-storage-key="motion_replying_rebuttals"></textarea>
+                  </div>
+                  <button class="adv-btn adv-btn--primary" onclick="generateReplyingAffidavit()">Generate Replying Affidavit</button>
+                </div>
+
+                <div id="replying-preview" style="display: none; margin-bottom: 1.5rem;">
+                  <div style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; max-height: 400px; overflow-y: auto;" id="replying-preview-content"></div>
+                  <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                    <button class="adv-btn adv-btn--secondary" onclick="copyReplyingAffidavit()">Copy</button>
+                    <button class="adv-btn adv-btn--primary" onclick="downloadReplyingAffidavit()">Download</button>
+                  </div>
+                </div>
+
+                <div style="padding: 1rem; background: #fff5f5; border-left: 4px solid #c53030; border-radius: 4px; margin-bottom: 1rem;">
+                  <strong style="color: #742a2a; font-size: 1rem;">5-Day Deadline Warning</strong>
+                  <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #4a5568;">You must file your replying affidavit within <strong>5 working days</strong> of receiving the answering affidavit. Failure to do so may result in the court considering the matter on the respondent's version alone. File on Court Online under "My Case Documents" and serve all parties by email.</p>
+                </div>
+
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                  <input type="checkbox" id="replying-filed" data-storage-key="motion_replying_filed" style="width: 18px; height: 18px; flex-shrink: 0;">
+                  <span style="font-size: 0.9rem; color: #1a202c;">I have sent my replying affidavit to all respondents and filed it on Court Online</span>
+                </label>
+
+                <div style="text-align: center;">
+                  <a href="record.html" class="adv-btn adv-btn--accent" style="text-decoration: none; display: inline-flex;">
+                    Proceed to Record & Transcription →
+                  </a>
+                </div>
               </div>
             </div>
 
-            <h3 class="adv-section-subtitle">Office Hours (All Seats)</h3>
-            <div class="adv-hours-box">
-              <div class="adv-hours-grid">
-                <div><strong>Monday–Friday</strong></div><div>08:00–13:00 and 14:00–15:00</div>
-                <div><strong>Saturdays, Sundays</strong></div><div>Closed</div>
-                <div><strong>Public Holidays</strong></div><div>Closed</div>
-                <div><strong>16 December – 15 January</strong></div><div>Closed (court recess)</div>
+            <!-- Timeline Summary -->
+            <div style="padding: 1rem; background: #f7fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #1a365d;">Timeline Summary</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.85rem;">
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #1a365d;">
+                  <strong>Day 0</strong><br>File Notice of Motion → case number issued
+                </div>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #3182ce;">
+                  <strong>Day 0–10</strong><br>Serve respondents + CCMA dispatches record
+                </div>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #d69e2e;">
+                  <strong>Day 10–20</strong><br>Respondent may file Notice of Intention to Oppose + Answering Affidavit
+                </div>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #c53030;">
+                  <strong>Day 20–25</strong><br>You may file Replying Affidavit (if defended)
+                </div>
+                <div style="padding: 0.75rem; background: white; border-radius: 6px; border-left: 3px solid #38a169;">
+                  <strong>After pleadings</strong><br>File Heads of Argument (Rule 40)
+                </div>
               </div>
-              <p class="adv-hours-note">The Judge President may direct that any document be delivered at any specific date and/or time. <span class="adv-rule-ref">Rule 2(3)</span></p>
             </div>
-
           </div>
         </section>
-
-        <section class="adv-card">
-          <div class="adv-card__header">
-            <h2 class="adv-card__title">Frequently Asked Questions</h2>
-          </div>
-          <div class="adv-card__body">
-            <div class="adv-faq-list">
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">Can I file manually at the court instead of using Court Online?</strong>
-                <p class="adv-faq-a">No. As of 14 April 2025, Directive 1 of 2025 makes Court Online mandatory for all new Labour Court cases. Manual issuing is prohibited. <span class="adv-rule-ref">Directive 1.1–1.2</span></p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">What if I don't have a computer or internet access?</strong>
-                <p class="adv-faq-a">Visit the Court Online Service Desk at the Labour Court. Staff will assist you with registration and filing free of charge. <span class="adv-rule-ref">Directive 1.7</span></p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">What is the difference between the reference number and case number?</strong>
-                <p class="adv-faq-a">The reference number (e.g., HCGS00363) is generated when you click "Start a Case." The case number (e.g., J1234/2026) is issued by the Registrar after approving your Notice of Motion. Only the case number goes on court documents. <span class="adv-rule-ref">Directive 1.8–1.10</span></p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">Can I upload the Founding Affidavit with the Notice of Motion when starting the case?</strong>
-                <p class="adv-faq-a">No. Upload ONLY the Notice of Motion for issuing. The Founding Affidavit is uploaded later under "My Case Documents" after the case number is issued. Uploading the affidavit at the start will cause rejection. <span class="adv-rule-ref">Directive 1.11</span></p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">How long does the Registrar take to issue a case number?</strong>
-                <p class="adv-faq-a">Usually 1–3 business days, depending on volume and compliance. You will receive an email notification.</p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">Is there a fee for using Court Online?</strong>
-                <p class="adv-faq-a">No. Registration, filing, and document uploads are free for all users. The Labour Court does not charge filing fees for review applications by self-represented litigants.</p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">What if the document type I need is not in the dropdown?</strong>
-                <p class="adv-faq-a">Do NOT select "Other." Email CourtOnlineSupport@judiciary.org.za with the subject "Request to add a new document type on Court Online" and describe the document. <span class="adv-rule-ref">Directive 1.12(d)–(e)</span></p>
-              </div>
-
-              <div class="adv-faq-item">
-                <strong class="adv-faq-q">Can I serve documents by email?</strong>
-                <p class="adv-faq-a">Yes. Under Labour Court Rule 9(1)(a)(iv), service by email is sufficient if the other party has an email address. You must file an affidavit of service proving delivery. <span class="adv-rule-ref">Rule 9(1)(a)(iv)</span></p>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-      </div>
+      </div><!-- /tab-panel-3 -->
 
     </div><!-- /adv-workspace -->
 
@@ -685,13 +634,15 @@
     <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
 
       <!-- AI Chat Widget -->
-      <div class="adv-sidebar__widget adv-chat" data-chat-id="court_online_guide">
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="labour_review_motion">
         <h3 class="adv-sidebar__widget-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           AI Assistant
         </h3>
         <div class="adv-chat__messages" role="log" aria-live="polite" aria-label="Chat messages">
-          <div class="adv-chat__msg">Hi! Ask me about Court Online registration, issuing, case numbers, or document filing.</div>
+          <div style="margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.85rem; color: #4a5568;">
+            Hi! Ask me about drafting grounds of review, Court Online filing, or the 6-week deadline.
+          </div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask a question..." aria-label="Chat message">
@@ -703,47 +654,54 @@
       <div class="adv-sidebar__widget">
         <h3 class="adv-sidebar__widget-title">Quick Links</h3>
         <nav aria-label="Quick links">
-          <a href="https://courtonline.judiciary.org.za" target="_blank" rel="noopener" class="adv-sidebar__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            Court Online Portal
-          </a>
-          <a href="https://www.judiciary.org.za/images/Directives/Directives_2025/Labour%20Court%20Directive%201%20of%202025%20-%2014%20April%202025.pdf" target="_blank" rel="noopener" class="adv-sidebar__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            Directive 1 of 2025 (PDF)
-          </a>
-          <a href="motion.html" class="adv-sidebar__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            Back to Motion & Affidavit
-          </a>
-          <a href="record.html" class="adv-sidebar__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            Next: Record & Transcription
-          </a>
-          <a href="attorney.html" class="adv-sidebar__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Find an Attorney
-          </a>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="https://courtonline.co.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Court Online Portal
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="https://www.judiciary.org.za/images/Directives/Directives_2025/Labour%20Court%20Directive%201%20of%202025%20-%2014%20April%202025.pdf" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Directive 1 of 2025 (PDF)
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="ccma-review.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Back to Review Decision
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="record.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Next: Record & Transcription
+            </a>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <a href="attorney.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px; transition: background 0.15s; font-size: 0.9rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Find an Attorney
+            </a>
+          </div>
         </nav>
       </div>
 
       <!-- Legal Basis Cards -->
       <div class="adv-sidebar__widget">
         <h3 class="adv-sidebar__widget-title">Legal Basis</h3>
-        <div class="adv-basis-list">
-          <div class="adv-basis-item adv-basis-item--green">
-            <strong>Directive 1/2025</strong><br><span>Mandatory Court Online e-filing</span>
+        <div style="display: grid; gap: 0.5rem; font-size: 0.85rem;">
+          <div style="padding: 0.75rem; background: #f0fff4; border-radius: 6px; border-left: 3px solid #38a169;">
+            <strong style="color: #22543d;">LRA s145</strong><br><span style="color: #4a5568;">Review of arbitration awards</span>
           </div>
-          <div class="adv-basis-item adv-basis-item--blue">
-            <strong>Rule 7</strong><br><span>Issuing, case numbers, document filing</span>
+          <div style="padding: 0.75rem; background: #ebf8ff; border-radius: 6px; border-left: 3px solid #3182ce;">
+            <strong style="color: #2a4365;">Rule 37</strong><br><span style="color: #4a5568;">Labour Court review procedure</span>
           </div>
-          <div class="adv-basis-item adv-basis-item--purple">
-            <strong>Rule 37</strong><br><span>Review applications procedure</span>
+          <div style="padding: 0.75rem; background: #faf5ff; border-radius: 6px; border-left: 3px solid #805ad5;">
+            <strong style="color: #553c9a;">Rule 7</strong><br><span style="color: #4a5568;">Pleadings and affidavits</span>
           </div>
-          <div class="adv-basis-item adv-basis-item--orange">
-            <strong>Rule 8</strong><br><span>Document formatting requirements</span>
-          </div>
-          <div class="adv-basis-item adv-basis-item--red">
-            <strong>Rule 9</strong><br><span>Service of documents</span>
+          <div style="padding: 0.75rem; background: #fffaf0; border-radius: 6px; border-left: 3px solid #d69e2e;">
+            <strong style="color: #744210;">Directive 1/2025</strong><br><span style="color: #4a5568;">Compulsory Court Online filing</span>
           </div>
         </div>
       </div>
@@ -751,10 +709,10 @@
       <!-- Savings Widget -->
       <div class="adv-sidebar__widget">
         <h3 class="adv-sidebar__widget-title">Your Savings</h3>
-        <div class="adv-savings-box">
-          <div class="adv-savings-label">Court Online Filing Fees</div>
-          <div class="adv-savings-amount">R0</div>
-          <div class="adv-savings-detail">&#10003; Registration free<br>&#10003; Filing free<br>&#10003; Document uploads free</div>
+        <div style="padding: 1rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center;">
+          <div style="font-size: 0.85rem; color: #718096; margin-bottom: 0.5rem;">Attorney Fees Avoided</div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: #1a365d;">R15,000–R50,000</div>
+          <div style="font-size: 0.8rem; color: #38a169; margin-top: 0.5rem;">✓ No court fees for self-represented</div>
         </div>
       </div>
 
@@ -763,19 +721,19 @@
 
   <!-- BOTTOM ZONE -->
   <div class="adv-bottom-zone">
-    <div class="adv-bottom-zone__inner">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: flex-end;">
       <div class="adv-savings adv-savings--small">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        Court Online filing: <span class="adv-savings__amount">R0</span> fees (attorney fees: R15,000–R50,000)
+        Self-representing: <span class="adv-savings__amount">R0</span> court fees (attorney fees: R15,000–R50,000)
       </div>
     </div>
     <div class="adv-compliance" role="contentinfo">
       <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
     </div>
     <nav class="adv-nav-footer" aria-label="Page navigation">
-      <a href="motion.html" class="adv-nav-footer__prev">
+      <a href="ccma-review.html" class="adv-nav-footer__prev">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        Motion & Affidavit
+        Review Decision
       </a>
       <a href="record.html" class="adv-nav-footer__next">
         Record & Transcription
@@ -786,7 +744,7 @@
 
   <!-- FOOTER -->
   <footer class="adv-footer" role="contentinfo">
-    <p class="adv-footer__links">
+    <p style="margin-bottom: 0.5rem;">
       <a href="index.html">Home</a>
       <a href="ccma.html">CCMA</a>
       <a href="divorce.html">Divorce</a>
@@ -794,47 +752,54 @@
       <a href="pricing.html">Pricing</a>
       <a href="attorney.html">Attorneys</a>
     </p>
-    <p class="adv-footer__copy">
-      &copy; 2026 Advome. All rights reserved. |
-      <a href="terms.html">Terms of Service</a> |
-      <a href="privacy.html">Privacy Policy</a> |
-      <a href="terms.html#section34">Section 34 Disclosure</a>
+    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
+      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
     </p>
   </footer>
 
-  <script src="shared-scripts.js"></script>
   <script>
-    // ─── TAB SYSTEM ───
+    // ─── COMPLETELY INDEPENDENT TAB SYSTEM ───
+    // No locks, no prerequisites, no  dependency
     var currentTab = 1;
+    var currentDoc = 'notice';
+    var generatedNotice = '';
+    var generatedAffidavit = '';
+    var generatedReplying = '';
 
     function switchTab(n) {
       currentTab = n;
-      for (var i = 1; i <= 4; i++) {
+      for (var i = 1; i <= 3; i++) {
         var btn = document.getElementById('tab-btn-' + i);
         var panel = document.getElementById('tab-panel-' + i);
         if (!btn || !panel) continue;
         if (i === n) {
-          btn.classList.add('adv-tab-btn--active');
           btn.setAttribute('aria-selected', 'true');
-          panel.classList.add('adv-tab-panel--active');
+          btn.style.background = 'white';
+          btn.style.borderBottom = '3px solid #1a365d';
+          btn.style.fontWeight = '600';
+          btn.style.color = '#1a365d';
+          var circle = btn.querySelector('span:first-child');
+          if (circle) circle.style.background = '#1a365d';
           panel.style.display = 'block';
         } else {
-          btn.classList.remove('adv-tab-btn--active');
           btn.setAttribute('aria-selected', 'false');
-          panel.classList.remove('adv-tab-panel--active');
+          btn.style.background = '#f7fafc';
+          btn.style.borderBottom = '3px solid transparent';
+          btn.style.fontWeight = '400';
+          btn.style.color = '#4a5568';
+          var circle = btn.querySelector('span:first-child');
+          if (circle) circle.style.background = '#4a5568';
           panel.style.display = 'none';
         }
       }
-      localStorage.setItem('court_online_current_tab', n);
+      localStorage.setItem('motion_current_tab', n);
     }
 
     // ─── LOCALSTORAGE PERSISTENCE ───
     document.addEventListener('DOMContentLoaded', function() {
-      var savedTab = parseInt(localStorage.getItem('court_online_current_tab')) || 1;
+      var savedTab = parseInt(localStorage.getItem('motion_current_tab')) || 1;
       switchTab(savedTab);
 
-      // Checklist persistence via shared-scripts.js should handle this,
-      // but we also support data-storage-key for form inputs
       document.querySelectorAll('[data-storage-key]').forEach(function(el) {
         var key = el.getAttribute('data-storage-key');
         var saved = localStorage.getItem(key);
@@ -847,8 +812,456 @@
           else localStorage.setItem(key, el.value);
         });
       });
+
+      var savedBranch = localStorage.getItem('motion_responding_branch');
+      if (savedBranch) showRespondingBranch(savedBranch);
+
+      var serviceDateInput = document.getElementById('award-service-date');
+      if (serviceDateInput) {
+        serviceDateInput.addEventListener('change', calculateReviewDeadline);
+        if (serviceDateInput.value) calculateReviewDeadline();
+      }
+    });
+
+    // ─── 6-WEEK DEADLINE CALCULATOR ───
+    function calculateReviewDeadline() {
+      var input = document.getElementById('award-service-date').value;
+      if (!input) return;
+      var start = new Date(input);
+      var deadline = new Date(start);
+      deadline.setDate(deadline.getDate() + 42);
+      var dd = String(deadline.getDate()).padStart(2, '0');
+      var mm = String(deadline.getMonth() + 1).padStart(2, '0');
+      var yyyy = deadline.getFullYear();
+      document.getElementById('review-deadline-display').value = dd + '/' + mm + '/' + yyyy;
+
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      var diffTime = deadline - today;
+      var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      var countdownEl = document.getElementById('review-deadline-countdown');
+      if (diffDays < 0) {
+        countdownEl.innerHTML = '<span style="color:#c53030;">⚠ DEADLINE PASSED ' + Math.abs(diffDays) + ' DAYS AGO</span><br><small style="font-weight:400;">Your review may be time-barred. Seek urgent legal advice or apply for condonation.</small>';
+        countdownEl.style.background = '#fff5f5'; countdownEl.style.border = '1px solid #feb2b2';
+      } else if (diffDays <= 7) {
+        countdownEl.innerHTML = '<span style="color:#c53030;">⚠ ' + diffDays + ' DAYS REMAINING — URGENT</span><br><small style="font-weight:400;">File your Notice of Motion immediately. Do not delay.</small>';
+        countdownEl.style.background = '#fff5f5'; countdownEl.style.border = '1px solid #feb2b2';
+      } else if (diffDays <= 21) {
+        countdownEl.innerHTML = '<span style="color:#d69e2e;">⚠ ' + diffDays + ' days remaining</span><br><small style="font-weight:400;">Prepare and file your application urgently.</small>';
+        countdownEl.style.background = '#fffaf0'; countdownEl.style.border = '1px solid #fbd38d';
+      } else {
+        countdownEl.innerHTML = '<span style="color:#38a169;">' + diffDays + ' days remaining</span><br><small style="font-weight:400;">You are within the 6-week LRA s145 deadline.</small>';
+        countdownEl.style.background = '#f0fff4'; countdownEl.style.border = '1px solid #9ae6b4';
+      }
+    }
+
+    // ─── DOCUMENT GENERATORS ───
+    function generateMotion() {
+      var appName = document.getElementById('app-name').value || '[APPLICANT NAME]';
+      var respName = document.getElementById('resp-name').value || '[1ST RESPONDENT NAME]';
+      var ccmaCase = document.getElementById('ccma-case-no').value || '[CCMA CASE NUMBER]';
+      var arbDate = document.getElementById('arb-date').value || '[ARBITRATION DATE]';
+      var commissioner = document.getElementById('commissioner').value || '[COMMISSIONER NAME]';
+      var region = document.getElementById('ccma-region').value || '[REGION]';
+      var appAddress = document.getElementById('app-address').value || '[APPLICANT ADDRESS]';
+      var appEmail = document.getElementById('app-email').value || '[APPLICANT EMAIL]';
+      var awardOutcome = document.getElementById('award-outcome').value || '[AWARD OUTCOME]';
+      var groundsDetails = document.getElementById('ground-details').value || '[INSERT SPECIFIC GROUNDS]';
+      var relief = document.getElementById('relief-sought').value || '[RELIEF SOUGHT]';
+      var today = new Date().toLocaleDateString('en-ZA');
+
+      var groundsList = [];
+      if (document.getElementById('ground-gross-irregularity').checked) groundsList.push('The commissioner committed a gross irregularity in the conduct of the arbitration proceedings, in terms of LRA s145(2)(c).');
+      if (document.getElementById('ground-excess-power').checked) groundsList.push('The commissioner exceeded the powers conferred by the Labour Relations Act or the CCMA rules, in terms of LRA s145(2)(a).');
+      if (document.getElementById('ground-unreasonable').checked) groundsList.push('The award is unreasonable in the light of the evidence led at the arbitration (Sidumo v Rustenburg Platinum), in terms of LRA s145(2)(a).');
+      if (document.getElementById('ground-misconduct').checked) groundsList.push('The commissioner committed misconduct warranting the setting aside of the award, in terms of LRA s145(2)(b).');
+      if (document.getElementById('ground-improperly-obtained').checked) groundsList.push('The award was improperly obtained or is affected by fraud, corruption, or bias, in terms of LRA s145(2)(d).');
+      if (document.getElementById('ground-other').checked) groundsList.push('Other grounds as set out in the founding affidavit, in terms of LRA s145(2).');
+      if (groundsList.length === 0) groundsList.push('[NO GROUNDS SELECTED — PLEASE SELECT GROUNDS ABOVE]');
+
+      var secondResp = (region === 'MEIBC' || region === 'BCEA') ? region + ' Bargaining Council' : 'The Commission for Conciliation, Mediation and Arbitration (CCMA)';
+      var secondRespAddress = (region === 'MEIBC' || region === 'BCEA') ? '[BARGAINING COUNCIL ADDRESS]' : '28 Harrison Street, Johannesburg, 2001';
+
+      generatedNotice = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' +
+        '_________________________________________________________
+
+' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
+
+' +
+        'In the matter between:
+
+' +
+        appName + '
+' + appAddress + '
+
+' +
+        '          Applicant
+
+' +
+        'and
+
+' +
+        respName + '
+
+' +
+        '          1st Respondent
+
+' +
+        'and
+
+' +
+        secondResp + '
+' + secondRespAddress + '
+
+' +
+        '          2nd Respondent
+
+' +
+        'and
+
+' +
+        commissioner + '
+' +
+        'Commissioner, CCMA — ' + region + ' Region
+
+' +
+        '          3rd Respondent
+
+' +
+        '_________________________________________________________
+
+' +
+        'NOTICE OF MOTION
+
+' +
+        'TAKE NOTICE that the Applicant intends to apply to this Honourable Court on a date and time to be assigned by the Registrar for an order in the following terms:
+
+' +
+        '1. That the arbitration award dated ' + arbDate + ', delivered by Commissioner ' + commissioner + ' in CCMA case number ' + ccmaCase + ', be reviewed and set aside;
+
+' +
+        '2. That the 2nd Respondent, ' + secondResp + ', be directed to dispatch the complete record of the arbitration proceedings to the Registrar of this Honourable Court within 10 (ten) days of receipt of this notice of motion, and to notify the parties that this has been done, in terms of Rule 37(2)(b) of the Labour Court Rules;
+
+' +
+        '3. That the costs of this application be costs in the cause;
+
+' +
+        '4. That the Applicant be granted such further and alternative relief as this Honourable Court may deem fit.
+
+' +
+        'TAKE FURTHER NOTICE that the affidavit of ' + appName + ', annexed hereto, will be used in support of this application.
+
+' +
+        'Dated at _______________ on this ' + today + '.
+
+' +
+        '_________________________
+' +
+        appName + '
+' +
+        'Applicant
+
+' +
+        'Address for service: ' + appAddress + '
+' +
+        'Email: ' + appEmail;
+
+      generatedAffidavit = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' +
+        '_________________________________________________________
+
+' +
+        'HELD AT: JOHANNESBURG / CAPE TOWN / DURBAN / GQEBERHA
+
+' +
+        'In the matter between:
+
+' +
+        appName + '
+
+' +
+        '          Applicant
+
+' +
+        'and
+
+' +
+        respName + '
+
+' +
+        '          1st Respondent
+
+' +
+        'and
+
+' +
+        secondResp + '
+
+' +
+        '          2nd Respondent
+
+' +
+        'and
+
+' +
+        commissioner + ' — Commissioner
+
+' +
+        '          3rd Respondent
+
+' +
+        '_________________________________________________________
+
+' +
+        'FOUNDING AFFIDAVIT
+
+' +
+        'I, the undersigned ' + appName + ', do hereby make oath and state:
+
+' +
+        '1. I am the Applicant in the above application. I am fully conversant with the facts deposed to herein.
+
+' +
+        '2. On ' + arbDate + ', an arbitration hearing was held before Commissioner ' + commissioner + ' at the ' + region + ' office in CCMA case number ' + ccmaCase + '.
+
+' +
+        '3. On [DATE OF AWARD], Commissioner ' + commissioner + ' delivered an arbitration award [briefly describe outcome: ' + awardOutcome + '].
+
+' +
+        '4. I was served with the award on [DATE OF SERVICE].
+
+' +
+        '5. The grounds upon which I seek review of the award are as follows:
+
+';
+
+      groundsList.forEach(function(g, i) {
+        generatedAffidavit += (i + 6) + '. ' + g + '
+
+';
+      });
+
+      generatedAffidavit += '
+' + groundsDetails + '
+
+' +
+        (groundsList.length + 6) + '. I respectfully submit that the above grounds constitute a defect in the arbitration proceedings warranting the review and setting aside of the award by this Honourable Court.
+
+' +
+        (groundsList.length + 7) + '. I have no other adequate remedy in the circumstances save for the relief sought herein.
+
+' +
+        (groundsList.length + 8) + '. I pray that this Honourable Court grant the following relief:
+
+' +
+        relief + '
+
+' +
+        'Dated at _______________ on this ' + today + '.
+
+' +
+        '_________________________
+' +
+        appName + '
+' +
+        'Applicant
+
+' +
+        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.
+
+' +
+        '_________________________
+' +
+        'Commissioner of Oaths';
+
+      document.getElementById('notice-preview').textContent = generatedNotice;
+      document.getElementById('affidavit-preview').textContent = generatedAffidavit;
+      document.getElementById('motion-preview-card').style.display = 'block';
+      document.getElementById('motion-preview-card').scrollIntoView({ behavior: 'smooth' });
+      showDocument('notice');
+
+      localStorage.setItem('motion_notice_of_motion', generatedNotice);
+      localStorage.setItem('motion_founding_affidavit', generatedAffidavit);
+
+      // Mark Tab 1 as completed in task bar
+      markStepComplete('motion');
+    }
+
+    function showDocument(doc) {
+      currentDoc = doc;
+      document.getElementById('notice-preview').style.display = (doc === 'notice') ? 'block' : 'none';
+      document.getElementById('affidavit-preview').style.display = (doc === 'affidavit') ? 'block' : 'none';
+      document.getElementById('tab-notice').className = (doc === 'notice') ? 'adv-btn adv-btn--primary' : 'adv-btn adv-btn--secondary';
+      document.getElementById('tab-affidavit').className = (doc === 'affidavit') ? 'adv-btn adv-btn--primary' : 'adv-btn adv-btn--secondary';
+    }
+
+    function copyCurrentDocument() {
+      var text = (currentDoc === 'notice') ? generatedNotice : generatedAffidavit;
+      navigator.clipboard.writeText(text).then(function() { alert('Copied to clipboard.'); });
+    }
+
+    function downloadCurrentDocument() {
+      var text = (currentDoc === 'notice') ? generatedNotice : generatedAffidavit;
+      var filename = (currentDoc === 'notice') ? 'Notice_of_Motion.txt' : 'Founding_Affidavit.txt';
+      var blob = new Blob([text], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
+    }
+
+    function downloadBothDocuments() {
+      var combined = '=== NOTICE OF MOTION ===
+
+' + generatedNotice + '
+
+=== FOUNDING AFFIDAVIT ===
+
+' + generatedAffidavit;
+      var blob = new Blob([combined], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'Motion_and_Affidavit.txt'; a.click(); URL.revokeObjectURL(url);
+    }
+
+    // ─── RESPONDING BRANCH TOGGLE ───
+    function showRespondingBranch(branch) {
+      document.getElementById('branch-undefended').style.display = (branch === 'undefended') ? 'block' : 'none';
+      document.getElementById('branch-defended').style.display = (branch === 'defended') ? 'block' : 'none';
+      var btnUndef = document.getElementById('btn-undefended');
+      var btnDef = document.getElementById('btn-defended');
+      if (btnUndef) btnUndef.className = (branch === 'undefended') ? 'adv-btn adv-btn--primary' : 'adv-btn adv-btn--secondary';
+      if (btnDef) btnDef.className = (branch === 'defended') ? 'adv-btn adv-btn--primary' : 'adv-btn adv-btn--secondary';
+      localStorage.setItem('motion_responding_branch', branch);
+    }
+
+    // ─── REPLYING AFFIDAVIT GENERATOR ───
+    function generateReplyingAffidavit() {
+      var appName = document.getElementById('app-name').value || '[APPLICANT NAME]';
+      var respName = document.getElementById('resp-name').value || '[RESPONDENT NAME]';
+      var ccmaCase = document.getElementById('ccma-case-no').value || '[CCMA CASE NUMBER]';
+      var newIssues = document.getElementById('replying-new-issues').value || '[NEW ISSUES RAISED BY RESPONDENT]';
+      var rebuttals = document.getElementById('replying-rebuttals').value || '[YOUR REBUTTALS]';
+      var today = new Date().toLocaleDateString('en-ZA');
+
+      generatedReplying = 'IN THE LABOUR COURT OF SOUTH AFRICA
+' +
+        '_________________________________________________________
+
+' +
+        'In the matter between:
+
+' +
+        appName + '
+
+' +
+        '          Applicant
+
+' +
+        'and
+
+' +
+        respName + '
+
+' +
+        '          Respondent
+
+' +
+        '_________________________________________________________
+
+' +
+        'REPLYING AFFIDAVIT
+' +
+        '(In terms of Rule 7(5)(a))
+
+' +
+        'I, the undersigned ' + appName + ', do hereby make oath and state:
+
+' +
+        '1. I am the Applicant in the above application. I have full knowledge of the facts herein.
+
+' +
+        '2. I have perused the Answering Affidavit deposed to by [RESPONDENT REP] on [DATE].
+
+' +
+        '3. The Respondent has raised the following new issues which I address herein:
+
+' +
+        newIssues + '
+
+' +
+        '4. In response to the new issues raised, I state as follows:
+
+' +
+        rebuttals + '
+
+' +
+        '5. I confirm that this replying affidavit does no more than address new issues raised in the Answering Affidavit and does not introduce any new facts not already contained in my Founding Affidavit.
+
+' +
+        '6. I pray that this Honourable Court dismiss the Respondent's opposition and grant the relief sought in the Notice of Motion.
+
+' +
+        'Dated at _______________ on this ' + today + '.
+
+' +
+        '_________________________
+' +
+        appName + '
+' +
+        'Applicant
+
+' +
+        'SWORN TO before me at _______________ on this ' + today + ', the deponent having acknowledged that he/she knows and understands the contents of this affidavit, that the facts stated herein are true and correct, and that he/she has no objection to taking the prescribed oath.
+
+' +
+        '_________________________
+' +
+        'Commissioner of Oaths';
+
+      document.getElementById('replying-preview-content').textContent = generatedReplying;
+      document.getElementById('replying-preview').style.display = 'block';
+      localStorage.setItem('motion_replying_affidavit', generatedReplying);
+    }
+
+    function copyReplyingAffidavit() {
+      navigator.clipboard.writeText(generatedReplying).then(function() { alert('Copied to clipboard.'); });
+    }
+
+    function downloadReplyingAffidavit() {
+      var blob = new Blob([generatedReplying], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'Replying_Affidavit.txt'; a.click(); URL.revokeObjectURL(url);
+    }
+
+    // ─── TASK BAR COMPLETION TRACKING ───
+    function markStepComplete(step) {
+      localStorage.setItem('advome_step_' + step, 'true');
+      updateTaskBar();
+    }
+
+    function updateTaskBar() {
+      var progressEl = document.querySelector('.adv-progress');
+      if (!progressEl) return;
+      var steps = ['referral', 'conciliation', 'arbitration', 'award', 'review', 'motion', 'record', 'heads', 'setdown', 'finalisation'];
+      steps.forEach(function(step) {
+        var stepEl = progressEl.querySelector('[data-step="' + step + '"]');
+        if (stepEl) {
+          var isCompleted = localStorage.getItem('advome_step_' + step) === 'true';
+          if (isCompleted) {
+            stepEl.classList.add('adv-progress__step--completed');
+            stepEl.classList.remove('adv-progress__step--pending');
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTaskBar();
     });
   </script>
-
 </body>
 </html>
