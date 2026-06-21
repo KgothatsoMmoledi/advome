@@ -3,11 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notice of Opposition - Advome</title>
+  <title>Notice of Opposition — Advome</title>
   <link rel="stylesheet" href="shared-styles.css">
-  
+  <style>
+    :root {
+      --primary: #1a365d;
+      --primary-light: #2c5282;
+      --accent: #d69e2e;
+      --success: #38a169;
+      --danger: #e53e3e;
+      --warning: #dd6b20;
+      --bg-page: #f7fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text: #2d3748;
+      --text-muted: #718096;
+    }
+
+    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
+    .tab-btn { border-radius:20px; font-size:0.85rem; padding:0.5rem 1rem; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; transition:all .2s; }
+    .tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:600; }
+    .tab-btn:hover:not(.active) { background:var(--bg-page); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; animation:fadeIn .3s ease; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+    .court-days-box { background:#edf2f7; border-left:4px solid var(--primary); padding:1rem 1.25rem; border-radius:6px; margin-bottom:1rem; }
+    .court-days-box h4 { margin:0 0 .4rem; color:var(--primary); font-size:1rem; }
+    .court-days-box ul { margin:.25rem 0 0; padding-left:1.2rem; }
+    .court-days-box li { margin-bottom:.25rem; font-size:0.9rem; }
+
+    .template-box { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:500px; overflow-y:auto; }
+    .template-box .doc-header { text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem; }
+    .template-box .doc-title { font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary); letter-spacing:1px; }
+    .template-box .fill { border-bottom:1px solid #999; display:inline-block; min-width:120px; padding:0 6px; color:#555; }
+    .template-box p { margin:.6rem 0; }
+
+    .upload-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin:1rem 0; }
+    .upload-card { border:2px dashed var(--border); border-radius:8px; padding:1.25rem; text-align:center; background:#fff; transition:border-color .2s; cursor:pointer; }
+    .upload-card:hover { border-color:var(--primary-light); }
+    .upload-card__icon { font-size:2rem; margin-bottom:.5rem; }
+    .upload-card__title { font-weight:600; font-size:0.9rem; margin-bottom:.25rem; }
+    .upload-card__hint { font-size:0.8rem; color:var(--text-muted); }
+
+    .step-list { counter-reset:step; list-style:none; padding:0; }
+    .step-list li { position:relative; padding-left:2.5rem; margin-bottom:1rem; }
+    .step-list li::before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:1.8rem; height:1.8rem; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; }
+
+    .badge { display:inline-block; padding:.15rem .5rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
+    .badge--success { background:#c6f6d5; color:#22543d; }
+    .badge--danger { background:#fed7d7; color:#742a2a; }
+    .badge--warning { background:#feebc8; color:#7c2d12; }
+
+    .inline-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media(max-width:600px){ .inline-form{grid-template-columns:1fr;} }
+
+    .generated-doc-actions { display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; }
+  </style>
+<base target="_blank">
 </head>
 <body>
+
   <!-- Header -->
   <header class="adv-header">
     <div class="adv-header__logo">Advome<span>.</span></div>
@@ -22,188 +78,374 @@
     <button class="adv-header__menu-toggle">☰</button>
   </header>
 
-  <!-- Progress Tracker -->
+  <!-- Progress -->
   <div class="adv-progress" data-workflow="ccma" data-current-step="opposition"></div>
 
   <!-- Hero -->
   <section class="adv-hero">
     <div class="adv-hero__content">
       <h1>Notice of Opposition</h1>
-      <p>Step 10 of 21 — Labour Court Review Application</p>
+      <p>Step 11 of 21 — Check whether the Respondent has opposed your application</p>
     </div>
     <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
   </section>
 
-  <!-- Main Container -->
   <div class="adv-container">
-    <!-- Main Content -->
     <main>
-      <!-- Tab Buttons -->
-<div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
-  <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-notice" style="border-radius:20px; font-size:0.85rem;">Notice of Opposition</button>
-  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-undefended" style="border-radius:20px; font-size:0.85rem;">Undefended Path</button>
-  <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-deadlines" style="border-radius:20px; font-size:0.85rem;">Deadline Tracker</button>
-</div>
 
-<!-- Tab: Notice of Opposition -->
-<div id="tab-notice" class="tab-content active">
-  <div class="adv-card adv-card--danger">
-    <div class="adv-card__header">
-      <div>
-        <div class="adv-card__title">Notice of Intention to Oppose</div>
-        <div class="adv-card__subtitle">Respondent's 10-day deadline to oppose</div>
+      <!-- Tabs -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="tab-status">1. Check Status</button>
+        <button class="tab-btn" data-tab="tab-unopposed">2. Unopposed Path</button>
+        <button class="tab-btn" data-tab="tab-opposed">3. Opposed Path</button>
+        <button class="tab-btn" data-tab="tab-courtdays">4. Court Days Guide</button>
       </div>
-    </div>
 
-    <div class="adv-alert adv-alert--danger">
-      <div class="adv-alert__content">
-        <div class="adv-alert__title">⏰ RESPONDENT DEADLINE</div>
-        <p>The respondent has <strong>10 days</strong> from the date of service to file a Notice of Intention to Oppose (Rule 35(6)). If they miss this deadline, the matter proceeds as undefended.</p>
-      </div>
-    </div>
+      <!-- TAB 1: STATUS CHECK -->
+      <div id="tab-status" class="tab-content active">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Opposition Status Check</div>
+              <div class="adv-card__subtitle">Determine whether the matter is opposed or unopposed</div>
+            </div>
+          </div>
 
-    <div class="adv-form-group">
-      <label><strong>What the Respondent Must File</strong></label>
-      <ul class="adv-checklist" data-checklist-id="opp-requirements">
-        <li class="adv-checklist__item" data-item-id="opp1">
-          <div class="adv-checklist__checkbox"></div>
-          <div class="adv-checklist__text">Notice of Intention to Oppose</div>
-        </li>
-        <li class="adv-checklist__item" data-item-id="opp2">
-          <div class="adv-checklist__checkbox"></div>
-          <div class="adv-checklist__text">Address for Service</div>
-        </li>
-      </ul>
-    </div>
+          <div class="court-days-box">
+            <h4>📅 What counts as a "court day"?</h4>
+            <ul>
+              <li><strong>Rule 1</strong> of the Labour Court Rules 2024 defines a <em>day</em> as any day <strong>other than</strong> Saturday, Sunday, a public holiday, or any day between <strong>16 December and 15 January</strong> (both inclusive).</li>
+              <li>When counting a prescribed number of days, you <strong>exclude the first day</strong> and <strong>include the last day</strong>.</li>
+              <li><strong>Example:</strong> If you served on a Monday, Tuesday is Day 1. The 10th day is the second Thursday. If that Thursday is a public holiday, the deadline rolls to the next court day.</li>
+            </ul>
+          </div>
 
-    <div class="adv-alert adv-alert--info">
-      <div class="adv-alert__content">
-        <strong>As the Applicant:</strong> You do not need to do anything at this stage. Wait for the 10-day period to expire. If you receive a Notice of Opposition, proceed to the "Record" step. If not, proceed to the "Undefended" path.
-      </div>
-    </div>
+          <div class="inline-form">
+            <div class="adv-form-group">
+              <label>Date of Service of Application</label>
+              <input type="date" class="adv-input" id="serviceDate" onchange="calculateOppositionDeadline()">
+            </div>
+            <div class="adv-form-group">
+              <label>Opposition Deadline (10 Court Days)</label>
+              <input type="text" class="adv-input" id="oppDeadlineDisplay" readonly style="background:#edf2f7; font-weight:600; color:var(--primary);" placeholder="Select date above">
+            </div>
+          </div>
 
-    <div class="adv-form-group">
-      <label>Did the respondent file a Notice of Opposition?</label>
-      <select class="adv-select" id="oppositionStatus" onchange="handleOppositionChange()">
-        <option value="waiting">Still within 10-day period</option>
-        <option value="yes">Yes — opposition received</option>
-        <option value="no">No — 10 days expired, no opposition</option>
-      </select>
-    </div>
-    <div class="adv-form-group">
-      <label>Date Service Was Effected</label>
-      <input type="date" class="adv-input" id="serviceDateTrack">
-    </div>
-    <div class="adv-form-group">
-      <label>Opposition Deadline</label>
-      <input type="text" class="adv-input" id="oppositionDeadline" readonly style="background:var(--bg-page);" placeholder="Calculated automatically">
-    </div>
+          <div class="adv-form-group" style="margin-top:1rem;">
+            <label>What has the Respondent filed?</label>
+            <select class="adv-select" id="oppStatus" onchange="handleStatusChange()">
+              <option value="waiting">⏳ Still waiting / within 10-day period</option>
+              <option value="notice-only">📄 Only a Notice of Intention to Oppose (no Answering Affidavit yet)</option>
+              <option value="fully-opposed">🛡️ Notice of Intention to Oppose + Answering Affidavit filed</option>
+              <option value="expired-nothing">❌ 10 court days expired — nothing received</option>
+              <option value="expired-notice-only">⏱️ 10 court days expired — only Notice received, no Answering Affidavit</option>
+            </select>
+          </div>
 
-    <div id="oppositionReceived" style="display:none; margin-top:1rem;">
-      <div class="adv-alert adv-alert--success">
-        <div class="adv-alert__content">
-          <div class="adv-alert__title">✅ Opposition Received</div>
-          <p>The respondent has filed a Notice of Intention to Oppose. You must now request the CCMA record and proceed to the next step.</p>
+          <div id="statusMessage" style="margin-top:1rem;"></div>
         </div>
       </div>
-    </div>
 
-    <div id="noOpposition" style="display:none; margin-top:1rem;">
-      <div class="adv-alert adv-alert--danger">
-        <div class="adv-alert__content">
-          <div class="adv-alert__title">⚠️ Undefended Application</div>
-          <p>No opposition was filed within 10 days. You may apply for default judgment. See the "Undefended Path" tab.</p>
+      <!-- TAB 2: UNOPPOSED PATH -->
+      <div id="tab-unopposed" class="tab-content">
+        <div class="adv-card adv-card--warning">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Unopposed Application</div>
+              <div class="adv-card__subtitle">Rule 36(1) — Registrar must enrol on the unopposed motion roll</div>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--warning">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ Two Ways a Matter Becomes Unopposed</div>
+              <p style="margin-top:.5rem;">
+                1. <strong>No Notice of Intention to Oppose</strong> is filed within 10 court days of service.<br>
+                2. A <strong>Notice of Intention to Oppose is filed</strong>, but the Respondent fails to deliver an <strong>Answering Affidavit</strong> within the prescribed time.
+              </p>
+            </div>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Your Next Steps</strong></label>
+            <ul class="adv-checklist" data-checklist-id="unopposed-steps">
+              <li class="adv-checklist__item" data-item-id="us1">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Confirm 10 court days have expired with no Answering Affidavit</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="us2">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Draft a short letter to the Registrar requesting enrolment on the unopposed motion roll (Rule 36(1))</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="us3">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Attach a Certificate of Non-Opposition (template below)</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="us4">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">File the request on Court Online (My Case Documents → Upload → "Application for Default Judgement / Unopposed Enrolment")</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="us5">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Wait for the Registrar to issue a Notice of Set Down</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Certificate of Non-Opposition</strong> <span class="badge badge--warning">Template</span></label>
+            <div class="template-box" id="certTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Certificate of Non-Opposition</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong><span class="fill">[RESPONDENT NAME]</span></strong> — Respondent</p>
+              <p>I, the undersigned <span class="fill">[FULL NAMES]</span>, do hereby certify that:</p>
+              <p>1. I am the Applicant in the above matter and duly authorised to make this certificate.</p>
+              <p>2. The application was served on the Respondent on <span class="fill">[DATE OF SERVICE]</span>.</p>
+              <p>3. More than 10 court days have elapsed since the date of service.</p>
+              <p>4. No Notice of Intention to Oppose has been received; OR a Notice of Intention to Oppose was received but no Answering Affidavit was filed within the prescribed period.</p>
+              <p>5. I therefore request that the matter be enrolled on the <strong>unopposed motion roll</strong> in terms of Rule 36(1) of the Labour Court Rules.</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+          </div>
+
+          <div class="generated-doc-actions">
+            <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('certTemplate','Certificate_of_Non_Opposition.html')">📥 Download Certificate</button>
+            <button class="adv-btn adv-btn--secondary" onclick="Advome.toast.show('Copy the text above and paste into Word','info')">📋 Copy to Word</button>
+          </div>
+
+          <div class="adv-alert adv-alert--info" style="margin-top:1rem;">
+            <div class="adv-alert__content">
+              <strong>Note:</strong> Even in unopposed matters, the Registrar may require the transcribed record (for reviews) or may set the matter down for an unopposed hearing. Prepare your bundle and be ready to argue.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<!-- Tab: Undefended Path -->
-<div id="tab-undefended" class="tab-content" style="display:none;">
-  <div class="adv-card adv-card--warning">
-    <div class="adv-card__header">
-      <div>
-        <div class="adv-card__title">Undefended Application Path</div>
-        <div class="adv-card__subtitle">No Notice of Opposition filed within 10 days</div>
-      </div>
-    </div>
+      <!-- TAB 3: OPPOSED PATH -->
+      <div id="tab-opposed" class="tab-content">
+        <div class="adv-card adv-card--danger">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Opposed Application — Replying Affidavit</div>
+              <div class="adv-card__subtitle">Rule 35(9) & Rule 37(24) — File your reply within 5 days</div>
+            </div>
+          </div>
 
-    <div class="adv-alert adv-alert--warning">
-      <div class="adv-alert__content">
-        <div class="adv-alert__title">Default Judgment Process</div>
-        <p>1. File a certificate of non-opposition (affidavit)<br>2. Apply for default judgment on Court Online<br>3. Registrar may grant judgment without a hearing<br>4. Or matter may be set down for unopposed hearing</p>
-      </div>
-    </div>
+          <div class="adv-alert adv-alert--danger">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⏰ DEADLINE: 5 Court Days</div>
+              <p>As the Applicant, you must deliver a <strong>Replying Affidavit</strong> within <strong>5 court days</strong> after receiving the Respondent's Answering Affidavit. It may only respond to <em>new matters</em> raised in the Answering Affidavit — do not repeat your founding affidavit.</p>
+            </div>
+          </div>
 
-    <div class="adv-form-group">
-      <label><strong>Certificate of Non-Opposition</strong></label>
-      <div style="background:#f8f9fa; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6;">
-        <div style="text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem;">
-          <div style="font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary);">CERTIFICATE OF NON-OPPOSITION</div>
+          <!-- Upload opponent documents -->
+          <div class="adv-form-group">
+            <label><strong>Step 1: Upload the Respondent's Documents</strong></label>
+            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.75rem;">Keep copies of everything the Respondent filed. You will need these to draft your reply.</p>
+            <div class="upload-grid">
+              <div class="upload-card" onclick="Advome.toast.show('Upload Notice of Intention to Oppose','info')">
+                <div class="upload-card__icon">📄</div>
+                <div class="upload-card__title">Notice of Intention to Oppose</div>
+                <div class="upload-card__hint">Filed by Respondent</div>
+              </div>
+              <div class="upload-card" onclick="Advome.toast.show('Upload Answering Affidavit','info')">
+                <div class="upload-card__icon">🛡️</div>
+                <div class="upload-card__title">Answering Affidavit</div>
+                <div class="upload-card__hint">Filed by Respondent</div>
+              </div>
+              <div class="upload-card" onclick="Advome.toast.show('Upload your own Notice of Motion','info')">
+                <div class="upload-card__icon">📋</div>
+                <div class="upload-card__title">Your Notice of Motion</div>
+                <div class="upload-card__hint">The one you filed</div>
+              </div>
+              <div class="upload-card" onclick="Advome.toast.show('Upload your Founding Affidavit','info')">
+                <div class="upload-card__icon">📑</div>
+                <div class="upload-card__title">Your Founding Affidavit</div>
+                <div class="upload-card__hint">The one you filed</div>
+              </div>
+            </div>
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
+
+          <!-- Template Generator -->
+          <div class="adv-form-group">
+            <label><strong>Step 2: Generate Your Replying Affidavit</strong> <span class="badge badge--danger">Editable</span></label>
+            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.75rem;">Fill in the details below, then generate and download your template. This is for a <strong>Review Application</strong> under Rule 37.</p>
+
+            <div class="inline-form" style="margin-bottom:1rem;">
+              <div class="adv-form-group">
+                <label>Labour Court Seat</label>
+                <select class="adv-input" id="genSeat">
+                  <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                </select>
+              </div>
+              <div class="adv-form-group">
+                <label>Case Number</label>
+                <input type="text" class="adv-input" id="genCaseNo" placeholder="e.g. JRB1234/2026">
+              </div>
+              <div class="adv-form-group">
+                <label>Applicant Name (You)</label>
+                <input type="text" class="adv-input" id="genAppName" placeholder="Your full name">
+              </div>
+              <div class="adv-form-group">
+                <label>Respondent Name</label>
+                <input type="text" class="adv-input" id="genRespName" placeholder="Respondent's full name">
+              </div>
+              <div class="adv-form-group">
+                <label>Your Occupation</label>
+                <input type="text" class="adv-input" id="genOccupation" placeholder="e.g. Former Employee / Self-represented Litigant">
+              </div>
+              <div class="adv-form-group">
+                <label>Respondent Deponent Name</label>
+                <input type="text" class="adv-input" id="genRespDeponent" placeholder="Name on the Answering Affidavit">
+              </div>
+              <div class="adv-form-group">
+                <label>Date of Answering Affidavit</label>
+                <input type="date" class="adv-input" id="genAnsDate">
+              </div>
+              <div class="adv-form-group">
+                <label>Date of This Affidavit</label>
+                <input type="date" class="adv-input" id="genReplyDate">
+              </div>
+            </div>
+
+            <button class="adv-btn adv-btn--primary" onclick="generateReplyingAffidavit()">⚡ Generate Replying Affidavit</button>
+          </div>
+
+          <div id="replyingAffidavitOutput" style="display:none; margin-top:1rem;">
+            <div class="template-box" id="replyingTemplate">
+              <!-- Generated by JS -->
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('replyingTemplate','Replying_Affidavit.html')">📥 Download Replying Affidavit</button>
+              <button class="adv-btn adv-btn--secondary" onclick="Advome.toast.show('Copy the text and paste into Word','info')">📋 Copy to Word</button>
+            </div>
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
+
+          <!-- Filing Notice -->
+          <div class="adv-form-group">
+            <label><strong>Step 3: Notice of Filing & Service</strong> <span class="badge badge--warning">Template</span></label>
+            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.75rem;">Use this notice to confirm you filed and served the Replying Affidavit. Adapt as needed.</p>
+            <div class="template-box" id="filingNoticeTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Notice of Filing and Service</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong><span class="fill">[RESPONDENT NAME]</span></strong> — Respondent</p>
+              <p><strong>TO:</strong> The Registrar of the Labour Court, <span class="fill">[SEAT]</span></p>
+              <p><strong>AND TO:</strong> <span class="fill">[RESPONDENT NAME / RESPONDENT'S REPRESENTATIVE]</span></p>
+              <p>TAKE NOTICE that the Applicant hereby files a <strong>Replying Affidavit</strong> in the above matter, in terms of Rule 35(9) / Rule 37(24) of the Labour Court Rules.</p>
+              <p>The document was filed electronically via the Court Online Portal on <span class="fill">[DATE]</span> and served on the Respondent by <span class="fill">[email / hand / registered post]</span> on the same date.</p>
+              <p>A proof of service affidavit is filed herewith / will be filed separately if required.</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+            <div class="generated-doc-actions" style="margin-top:.75rem;">
+              <button class="adv-btn adv-btn--secondary" onclick="downloadTemplate('filingNoticeTemplate','Notice_of_Filing.html')">📥 Download Notice</button>
+            </div>
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
+
+          <!-- Service & Filing Instructions -->
+          <div class="adv-form-group">
+            <label><strong>Step 4: Quick Service & Filing Checklist</strong></label>
+            <ul class="step-list">
+              <li><strong>File on Court Online</strong> — Log in → My Cases → Select your case → My Case Documents → Upload → Document type: "Replying Affidavit" → Attach PDF → Sign digitally → Submit. Wait for "APPROVED" or "PENDING" status.</li>
+              <li><strong>Email the Respondent</strong> — Rule 9(1)(a)(iv) allows service by email if the other party has an email address. Send the PDF with a read-receipt request. Keep the sent-mail record.</li>
+              <li><strong>Proof of Service</strong> — If you served by email, draft a short affidavit confirming the correct email address, that the whole document was sent, and that a named person acknowledged receipt (Rule 9(2)(b)).</li>
+              <li><strong>5-Day Deadline</strong> — Count 5 court days from the date you received the Answering Affidavit. Exclude the first day; include the last day. Skip weekends, public holidays, and 16 Dec – 15 Jan.</li>
+              <li><strong>Do Not Repeat</strong> — Your Replying Affidavit must only address <em>new matters</em> raised in the Answering Affidavit. Do not rehash your founding affidavit (Rule 37(24)).</li>
+              <li><strong>Wait for Set Down</strong> — Once all affidavits are filed, the Registrar will allocate a hearing date and notify the parties (Rule 35(11)).</li>
+            </ul>
+          </div>
         </div>
-        <p>I, <span style="border-bottom:1px solid #999; display:inline-block; min-width:200px; padding:0 5px; color:#666;">[Applicant Name]</span>, do hereby certify that:</p>
-        <p>1. The application in the above matter was served on the respondent on <span style="border-bottom:1px solid #999; display:inline-block; min-width:100px; padding:0 5px; color:#666;">[date]</span>.</p>
-        <p>2. More than 10 days have elapsed since the date of service.</p>
-        <p>3. No Notice of Intention to Oppose has been received from the respondent.</p>
-        <p>4. I therefore apply for the matter to be dealt with as undefended.</p>
       </div>
-    </div>
 
-    <div style="display:flex; gap:0.75rem; margin-top:1rem;">
-      <button class="adv-btn adv-btn--primary" onclick="generateCertificate()">Generate Certificate</button>
-      <button class="adv-btn adv-btn--secondary" onclick="downloadDoc('certificate')">Download as Word</button>
-    </div>
+      <!-- TAB 4: COURT DAYS GUIDE -->
+      <div id="tab-courtdays" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Court Days Calculator & Guide</div>
+              <div class="adv-card__subtitle">Labour Court Rules 2024 — Rule 1 Definitions</div>
+            </div>
+          </div>
 
-    <div class="adv-alert adv-alert--info" style="margin-top:1rem;">
-      <div class="adv-alert__content">
-        <strong>Note:</strong> Even in undefended matters, you may still need to file the transcribed record if the court requires it. Check with the Registrar.
-      </div>
-    </div>
-  </div>
-</div>
+          <div class="court-days-box">
+            <h4>📖 Legal Definition</h4>
+            <p style="font-size:0.9rem; margin:0;">"<em>Day</em> means any day other than a Saturday, Sunday, public holiday, or any day within the period between 16 December and 15 January (both dates inclusive), and when any particular number of days is prescribed for the doing of any act, the number of days must be calculated by <strong>excluding the first day</strong> and <strong>including the last day</strong>."</p>
+          </div>
 
-<!-- Tab: Deadline Tracker -->
-<div id="tab-deadlines" class="tab-content" style="display:none;">
-  <div class="adv-card">
-    <div class="adv-card__header">
-      <div>
-        <div class="adv-card__title">Deadline Tracker</div>
-        <div class="adv-card__subtitle">Calculate your key deadlines</div>
-      </div>
-    </div>
+          <div class="adv-form-group">
+            <label>Start Date (e.g., date of service)</label>
+            <input type="date" class="adv-input" id="calcStart" onchange="runCourtDayCalc()">
+          </div>
+          <div class="adv-form-group">
+            <label>Number of Court Days to Count</label>
+            <input type="number" class="adv-input" id="calcDays" value="10" min="1" max="90" onchange="runCourtDayCalc()">
+          </div>
+          <div class="adv-form-group">
+            <label>Deadline Result</label>
+            <input type="text" class="adv-input" id="calcResult" readonly style="background:#edf2f7; font-weight:700; color:var(--primary);" placeholder="Select a start date">
+          </div>
 
-    <div style="display:grid; gap:0.75rem; margin-bottom:1.5rem;">
-      <div style="display:flex; align-items:center; gap:1rem; padding:0.75rem; background:var(--bg-page); border-radius:6px;">
-        <span style="font-weight:700; color:var(--primary); min-width:80px;">Day 0</span>
-        <span>Service of Application</span>
+          <div style="margin-top:1.5rem;">
+            <h4 style="color:var(--primary); margin-bottom:.5rem;">Examples</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+              <thead>
+                <tr style="background:var(--primary); color:#fff;">
+                  <th style="padding:.5rem; text-align:left;">Event</th>
+                  <th style="padding:.5rem; text-align:left;">Rule</th>
+                  <th style="padding:.5rem; text-align:left;">Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Notice of Intention to Oppose</td>
+                  <td style="padding:.5rem;">Rule 35(7)</td>
+                  <td style="padding:.5rem;">10 court days from service</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Answering Affidavit (ordinary application)</td>
+                  <td style="padding:.5rem;">Rule 35(7)</td>
+                  <td style="padding:.5rem;">10 court days from service</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Answering Affidavit (review application)</td>
+                  <td style="padding:.5rem;">Rule 37(22)</td>
+                  <td style="padding:.5rem;">10 court days after receipt of record</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Replying Affidavit</td>
+                  <td style="padding:.5rem;">Rule 35(9)</td>
+                  <td style="padding:.5rem;">5 court days after answering affidavit</td>
+                </tr>
+                <tr>
+                  <td style="padding:.5rem;">Record for Review</td>
+                  <td style="padding:.5rem;">Rule 37(14)</td>
+                  <td style="padding:.5rem;">60 court days from date advised by Registrar</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div style="display:flex; align-items:center; gap:1rem; padding:0.75rem; background:var(--bg-page); border-radius:6px;">
-        <span style="font-weight:700; color:var(--danger); min-width:80px;">Day 10</span>
-        <span>Notice of Opposition Due (Rule 35(6))</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:1rem; padding:0.75rem; background:var(--bg-page); border-radius:6px;">
-        <span style="font-weight:700; color:var(--warning); min-width:80px;">Day 10+</span>
-        <span>If no opposition → Undefended path</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:1rem; padding:0.75rem; background:var(--bg-page); border-radius:6px;">
-        <span style="font-weight:700; color:var(--danger); min-width:80px;">Day 60</span>
-        <span>Transcribed Record must be filed (Rule 37(9))</span>
-      </div>
-    </div>
 
-    <div class="adv-form-group">
-      <label>Date of Service</label>
-      <input type="date" class="adv-input" id="calcServiceDate" onchange="calculateDeadlines()">
-    </div>
-    <div id="deadlineResults" style="margin-top:1rem;"></div>
-  </div>
-</div>
     </main>
 
     <!-- Sidebar -->
     <aside class="adv-sidebar">
-      <!-- Deadline Calculator Widget -->
       <div class="adv-sidebar__widget">
         <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
         <div class="adv-deadline-calculator">
@@ -221,7 +463,6 @@
         </div>
       </div>
 
-      <!-- AI Assistant Widget -->
       <div class="adv-sidebar__widget">
         <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
         <div class="adv-chat" data-chat-id="opposition">
@@ -233,7 +474,6 @@
         </div>
       </div>
 
-      <!-- Savings Widget -->
       <div class="adv-sidebar__widget">
         <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
         <div class="adv-savings">
@@ -255,7 +495,6 @@
     </div>
   </nav>
 
-  <!-- Footer -->
   <footer class="adv-footer">
     <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
     <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
@@ -263,39 +502,160 @@
 
   <script src="shared-scripts.js"></script>
   <script>
-    function handleOppositionChange() {
-      const status = document.getElementById('oppositionStatus').value;
-      document.getElementById('oppositionReceived').style.display = status === 'yes' ? 'block' : 'none';
-      document.getElementById('noOpposition').style.display = status === 'no' ? 'block' : 'none';
-    }
-    function calculateDeadlines() {
-      const serviceDate = new Date(document.getElementById('calcServiceDate').value);
-      if (isNaN(serviceDate)) return;
-      const oppositionDate = new Date(serviceDate);
-      oppositionDate.setDate(oppositionDate.getDate() + 10);
-      const recordDate = new Date(serviceDate);
-      recordDate.setDate(recordDate.getDate() + 60);
-      const html = `<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">📅 Calculated Deadlines</div><p><strong>Opposition Due:</strong> ${oppositionDate.toDateString()}<br><strong>Record Filing Due:</strong> ${recordDate.toDateString()}</p></div></div>`;
-      document.getElementById('deadlineResults').innerHTML = html;
-    }
-    function generateCertificate() {
-      Advome.toast.show('Certificate of Non-Opposition generated!', 'success');
-    }
-    function downloadDoc(type) {
-      Advome.toast.show('Download will generate a Word document.', 'info');
-    }
+    // Tab switching
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => {
-          b.classList.remove('adv-btn--primary', 'active');
-          b.classList.add('adv-btn--ghost');
-        });
-        btn.classList.remove('adv-btn--ghost');
-        btn.classList.add('adv-btn--primary', 'active');
-        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-        document.getElementById(btn.dataset.tab).style.display = 'block';
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
       });
     });
+
+    // Court day calculation (excluding weekends, public holidays, and 16 Dec - 15 Jan)
+    function isPublicHoliday(d) {
+      const year = d.getFullYear();
+      // Fixed public holidays South Africa
+      const holidays = [
+        new Date(year, 0, 1),  // New Year
+        new Date(year, 2, 21), // Human Rights
+        new Date(year, 3, 27), // Freedom Day
+        new Date(year, 4, 1),  // Workers Day
+        new Date(year, 5, 16), // Youth Day
+        new Date(year, 7, 9),  // Women's Day
+        new Date(year, 8, 24), // Heritage Day
+        new Date(year, 11, 16), // Day of Reconciliation
+        new Date(year, 11, 25), // Christmas
+        new Date(year, 11, 26), // Day of Goodwill
+      ];
+      // Easter and other movable holidays are complex; for this template we use fixed + Good Friday/Easter Monday approximations would need a library.
+      // We'll do a basic check against fixed list.
+      return holidays.some(h => h.getDate() === d.getDate() && h.getMonth() === d.getMonth());
+    }
+
+    function isCourtDay(d) {
+      const day = d.getDay();
+      if (day === 0 || day === 6) return false; // Sun, Sat
+      const month = d.getMonth();
+      const date = d.getDate();
+      // 16 Dec - 15 Jan inclusive
+      if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
+      if (isPublicHoliday(d)) return false;
+      return true;
+    }
+
+    function addCourtDays(startDate, days) {
+      let d = new Date(startDate);
+      let count = 0;
+      // Exclude first day per Rule 1
+      d.setDate(d.getDate() + 1);
+      while (count < days) {
+        if (isCourtDay(d)) count++;
+        if (count < days) d.setDate(d.getDate() + 1);
+      }
+      return d;
+    }
+
+    function calculateOppositionDeadline() {
+      const start = document.getElementById('serviceDate').value;
+      if (!start) return;
+      const deadline = addCourtDays(new Date(start), 10);
+      const opts = { day:'numeric', month:'long', year:'numeric' };
+      document.getElementById('oppDeadlineDisplay').value = deadline.toLocaleDateString('en-ZA', opts);
+      runCourtDayCalc();
+    }
+
+    function handleStatusChange() {
+      const val = document.getElementById('oppStatus').value;
+      const box = document.getElementById('statusMessage');
+      let html = '';
+      if (val === 'waiting') {
+        html = `<div class="adv-alert adv-alert--info"><div class="adv-alert__content">You are still within the opposition period. Do nothing yet. If the 10 court days expire with no documents, return here and select the expired option.</div></div>`;
+      } else if (val === 'notice-only') {
+        html = `<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">Notice Only Received</div><p>The Respondent has filed a Notice of Intention to Oppose but not yet an Answering Affidavit. Wait for the Answering Affidavit deadline to expire. If it is not filed, the matter becomes unopposed under <strong>Rule 36(1)</strong>.</p></div></div>`;
+      } else if (val === 'fully-opposed') {
+        html = `<div class="adv-alert adv-alert--danger"><div class="adv-alert__content"><div class="adv-alert__title">Fully Opposed</div><p>The Respondent has filed both a Notice of Intention to Oppose and an Answering Affidavit. You must now file a <strong>Replying Affidavit</strong> within 5 court days. Go to the <strong>Opposed Path</strong> tab.</p></div></div>`;
+      } else if (val === 'expired-nothing') {
+        html = `<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">Unopposed — No Response</div><p>10 court days have expired and nothing was filed. The matter is unopposed. Go to the <strong>Unopposed Path</strong> tab and request enrolment on the unopposed roll.</p></div></div>`;
+      } else if (val === 'expired-notice-only') {
+        html = `<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">Unopposed — No Answering Affidavit</div><p>A Notice of Intention to Oppose was filed, but the Answering Affidavit was not delivered in time. Under <strong>Rule 36(1)</strong>, the Registrar must enrol the matter on the unopposed motion roll at your request. Go to the <strong>Unopposed Path</strong> tab.</p></div></div>`;
+      }
+      box.innerHTML = html;
+    }
+
+    function runCourtDayCalc() {
+      const start = document.getElementById('calcStart').value;
+      const days = parseInt(document.getElementById('calcDays').value || '10', 10);
+      if (!start) return;
+      const deadline = addCourtDays(new Date(start), days);
+      const opts = { day:'numeric', month:'long', year:'numeric', weekday:'long' };
+      document.getElementById('calcResult').value = deadline.toLocaleDateString('en-ZA', opts);
+    }
+
+    function generateReplyingAffidavit() {
+      const seat = document.getElementById('genSeat').value;
+      const caseNo = document.getElementById('genCaseNo').value || '[CASE NUMBER]';
+      const appName = document.getElementById('genAppName').value || '[APPLICANT NAME]';
+      const respName = document.getElementById('genRespName').value || '[RESPONDENT NAME]';
+      const occupation = document.getElementById('genOccupation').value || '[OCCUPATION]';
+      const respDep = document.getElementById('genRespDeponent').value || '[RESPONDENT DEPONENT]';
+      const ansDate = document.getElementById('genAnsDate').value || '[DATE]';
+      const replyDate = document.getElementById('genReplyDate').value || '[DATE]';
+
+      const content = `
+        <div class="doc-header">
+          <div class="doc-title">Replying Affidavit</div>
+        </div>
+        <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT ${seat.toUpperCase()})</p>
+        <p style="text-align:center;">Case No: ${caseNo}</p>
+        <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong>${appName}</strong> — Applicant<br>and<br><strong>${respName}</strong> — Respondent</p>
+        <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">REPLYING AFFIDAVIT</p>
+        <p>I, the undersigned <span class="fill">${appName}</span>, do hereby make oath and state:</p>
+        <p><strong>1.</strong> I am the Applicant in the above matter. I am ${occupation} and reside at <span class="fill">[YOUR FULL ADDRESS]</span>. I have personal knowledge of the facts deposed to herein, except where stated otherwise or where they appear to me to be true.</p>
+        <p><strong>2.</strong> I have read the answering affidavit deposed to by <strong>${respDep}</strong> on <strong>${ansDate}</strong>, together with the annexures thereto.</p>
+        <p><strong>3.</strong> I confirm the contents of my founding affidavit and any supplementary affidavit filed herein, save where expressly amended or contradicted below.</p>
+        <p><strong>4.</strong> In response to the new matters raised in the answering affidavit:</p>
+        <p style="margin-left:1.5rem;"><strong>4.1</strong> In response to paragraph <span class="fill">[X]</span> thereof: <span class="fill">[The Respondent alleges X. This is denied / admitted. The true position is...]</span></p>
+        <p style="margin-left:1.5rem;"><strong>4.2</strong> In response to paragraph <span class="fill">[Y]</span> thereof: <span class="fill">[Address any new legal or factual allegations. Keep it concise. Do not repeat your founding affidavit.]</span></p>
+        <p style="margin-left:1.5rem;"><strong>4.3</strong> <span class="fill">[Add further paragraphs as needed for each new matter raised.]</span></p>
+        <p><strong>5.</strong> I respectfully submit that the Respondent has not raised any new facts or legal issues that justify the refusal of the relief sought in my notice of motion.</p>
+        <p><strong>6.</strong> I pray that this Honourable Court grant the application as prayed, with costs.</p>
+        <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <strong>${replyDate}</strong>.</p>
+        <p style="margin-top:2rem;">___________________________<br>Signature of Deponent</p>
+        <p><strong>${appName}</strong></p>
+        <p style="margin-top:1.5rem; font-size:0.85rem; color:#555;"><em>The deponent acknowledges that he/she knows and understands the contents of this affidavit, that the contents are true and correct, and that he/she has no objection to taking the prescribed oath / affirmation.</em></p>
+      `;
+
+      document.getElementById('replyingTemplate').innerHTML = content;
+      document.getElementById('replyingAffidavitOutput').style.display = 'block';
+      Advome.toast.show('Replying Affidavit generated! Review and download.','success');
+      document.getElementById('replyingTemplate').scrollIntoView({behavior:'smooth'});
+    }
+
+    function downloadTemplate(elementId, filename) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${filename}</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>${el.innerHTML}</body></html>`;
+      const blob = new Blob([html], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      Advome.toast.show('Download started','success');
+    }
+
+    // Auto-calculate on load if service date is present in storage
+    (function(){
+      const saved = Advome?.form?.getData?.('opposition_form');
+      if (saved && saved.serviceDate) {
+        document.getElementById('serviceDate').value = saved.serviceDate;
+        calculateOppositionDeadline();
+      }
+    })();
   </script>
 </body>
 </html>
