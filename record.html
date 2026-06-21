@@ -1,364 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Record & Transcript</title>
-<link rel="stylesheet" href="shared-styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitration Record — Advome</title>
+  <link rel="stylesheet" href="shared-styles.css">
+  <style>
+    :root {
+      --primary: #1a365d; --primary-light: #2c5282; --accent: #d69e2e;
+      --success: #38a169; --danger: #e53e3e; --warning: #dd6b20;
+      --bg-page: #f7fafc; --bg-card: #ffffff; --border: #e2e8f0;
+      --text: #2d3748; --text-muted: #718096;
+    }
+
+    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
+    .tab-btn { border-radius:20px; font-size:0.85rem; padding:0.5rem 1rem; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; transition:all .2s; }
+    .tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:600; }
+    .tab-btn:hover:not(.active) { background:var(--bg-page); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; animation:fadeIn .3s ease; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+    .template-box { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:600px; overflow-y:auto; }
+    .template-box .doc-header { text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem; }
+    .template-box .doc-title { font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary); letter-spacing:1px; }
+    .template-box .fill { border-bottom:1px solid #999; display:inline-block; min-width:120px; padding:0 6px; color:#555; }
+    .template-box p { margin:.6rem 0; }
+    .template-box .page-break { page-break-after:always; border-top:2px dashed var(--border); margin:1.5rem 0; padding-top:1rem; }
+
+    .upload-zone { border:2px dashed var(--border); border-radius:8px; padding:2rem; text-align:center; background:#fff; cursor:pointer; transition:all .2s; }
+    .upload-zone:hover { border-color:var(--primary-light); background:#f7fafc; }
+    .upload-zone__icon { font-size:2.5rem; margin-bottom:.5rem; }
+
+    .step-list { counter-reset:step; list-style:none; padding:0; }
+    .step-list li { position:relative; padding-left:2.5rem; margin-bottom:1rem; }
+    .step-list li::before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:1.8rem; height:1.8rem; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; }
+
+    .rule-box { background:#edf2f7; border-left:4px solid var(--primary); padding:1rem 1.25rem; border-radius:6px; margin-bottom:1rem; }
+    .rule-box h4 { margin:0 0 .4rem; color:var(--primary); font-size:1rem; }
+    .rule-box p, .rule-box ul { margin:.25rem 0; font-size:0.9rem; }
+
+    .generated-doc-actions { display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; }
+
+    .record-preview { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:500px; overflow-y:auto; white-space:pre-wrap; }
+
+    .badge { display:inline-block; padding:.15rem .5rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
+    .badge--danger { background:#fed7d7; color:#742a2a; }
+    .badge--warning { background:#feebc8; color:#7c2d12; }
+    .badge--success { background:#c6f6d5; color:#22543d; }
+
+    .inline-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media(max-width:600px){ .inline-form{grid-template-columns:1fr;} }
+  </style>
+<base target="_blank">
 </head>
 <body>
 
-<header class="site-header">
-  <a href="index.html" class="brand">
-    <div class="brand-mark">A</div>
-    <div>
-      <div class="brand-text">Advome</div>
-      <div class="brand-sub">Self-representation assistance</div>
+  <!-- Header -->
+  <header class="adv-header">
+    <div class="adv-header__logo">Advome<span>.</span></div>
+    <nav class="adv-header__nav">
+      <a href="ccma.html">CCMA</a>
+      <a href="motion.html">Labour Court</a>
+      <a href="#">Help</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar">SRL</div>
     </div>
-  </a>
-  <nav class="main-nav">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="start.html" class="nav-link">Start</a>
-    <a href="dashboard.html" class="nav-link">Dashboard</a>
-    <a href="ccma.html" class="nav-link">CCMA</a>
-    <a href="award.html" class="nav-link">Award</a>
-    <a href="ccma-review.html" class="nav-link">Review</a>
-    <a href="motion.html" class="nav-link">Motion</a>
-    <a href="record.html" class="nav-link active">Record</a>
-    <a href="divorce.html" class="nav-link">Divorce</a>
-    <a href="estates-hub.html" class="nav-link">Estates</a>
-    <a href="attorney.html" class="nav-link">Attorney</a>
-    <a href="pricing.html" class="nav-premium">Pricing</a>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
+
+  <!-- Progress -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="record"></div>
+
+  <!-- Hero -->
+  <section class="adv-hero">
+    <div class="adv-hero__content">
+      <h1>Arbitration Record</h1>
+      <p>Step 12 of 21 — Obtain, transcribe, format and file the CCMA record</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+  </section>
+
+  <div class="adv-container">
+    <main>
+
+      <!-- Tabs -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="tab-request">1. Request Record</button>
+        <button class="tab-btn" data-tab="tab-transcribe">2. Transcribe & Format</button>
+        <button class="tab-btn" data-tab="tab-bind">3. Paginate & Bind</button>
+        <button class="tab-btn" data-tab="tab-file">4. File & Serve</button>
+        <button class="tab-btn" data-tab="tab-deadline">5. Deadline Tracker</button>
+      </div>
+
+      <!-- TAB 1: REQUEST THE RECORD -->
+      <div id="tab-request" class="tab-content active">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Request the CCMA Record</div>
+              <div class="adv-card__subtitle">Rule 37(2) & Rule 37(8) — CCMA must file the record within 10 days</div>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 The Law</h4>
+            <p><strong>Rule 37(2)(b):</strong> Your Notice of Motion must call upon the CCMA to dispatch the <strong>complete record of the proceedings</strong> to the Registrar within <strong>10 days</strong> after receipt of the notice of motion.</p>
+            <p><strong>Rule 37(8):</strong> If the CCMA fails to comply, any interested party may apply <em>on notice</em> for an order <strong>compelling compliance</strong>.</p>
+            <p><strong>Rule 37(9):</strong> The Registrar must notify the parties when the record has been received and may be uplifted.</p>
+            <p><strong>Rule 37(10):</strong> You must collect the record within <strong>5 days</strong> of the date of notification.</p>
+          </div>
+
+          <div class="adv-alert adv-alert--info">
+            <div class="adv-alert__content">
+              <strong>Good news:</strong> In most cases, the CCMA files the record automatically once the Registrar issues the case number and the Notice of Motion is served. However, if the CCMA fails to do so, you must take steps to compel them. Use the template below.
+            </div>
+          </div>
+
+          <div class="adv-form-group">
+            <label>Has the CCMA filed the record with the Registrar?</label>
+            <select class="adv-select" id="recordStatus" onchange="handleRecordStatus()">
+              <option value="waiting">⏳ Still waiting (within 10-15 days)</option>
+              <option value="received">✅ Record received from Registrar</option>
+              <option value="expired">❌ CCMA failed to file — need to compel</option>
+              <option value="lost">🔇 Record lost / inaudible / poor quality</option>
+            </select>
+          </div>
+
+          <div id="recordStatusMsg" style="margin-top:1rem;"></div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
+
+          <div class="adv-form-group">
+            <label><strong>Template: Application to Compel CCMA to File Record</strong> <span class="badge badge--danger">Rule 37(8)</span></label>
+            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.75rem;">Use this if the CCMA has not filed the record within 10 days. File it on notice to the CCMA.</p>
+            <div class="template-box" id="compelTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Notice of Motion — Application to Compel Filing of Record</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span> — Commissioner in his/her personal capacity</p>
+              <p><strong>TO:</strong> The Registrar of the Labour Court</p>
+              <p><strong>AND TO:</strong> The First Respondent (CCMA)</p>
+              <p>TAKE NOTICE that the Applicant applies for an order in the following terms:</p>
+              <p style="margin-left:1.5rem;"><strong>1.</strong> That the First Respondent (CCMA) be directed to dispatch the <strong>complete record of the proceedings</strong> under review to the Registrar of the Labour Court within <strong>5 days</strong> of this order;</p>
+              <p style="margin-left:1.5rem;"><strong>2.</strong> That the First Respondent pay the costs of this application;</p>
+              <p style="margin-left:1.5rem;"><strong>3.</strong> Such further and/or alternative relief as this Honourable Court may deem fit.</p>
+              <p><strong>IN SUPPORT WHEREOF</strong> the Applicant relies on the following:</p>
+              <p style="margin-left:1.5rem;"><strong>a)</strong> The review application was filed on <span class="fill">[DATE]</span> and the Notice of Motion served on the First Respondent on <span class="fill">[DATE]</span>;</p>
+              <p style="margin-left:1.5rem;"><strong>b)</strong> The Notice of Motion directed the First Respondent to dispatch the complete record to the Registrar within 10 days (Rule 37(2)(b));</p>
+              <p style="margin-left:1.5rem;"><strong>c)</strong> More than 10 court days have elapsed and the First Respondent has failed to comply;</p>
+              <p style="margin-left:1.5rem;"><strong>d)</strong> The record is necessary for the determination of this review application and the delay is prejudicial to the Applicant.</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('compelTemplate','Notice_of_Motion_Compel_Record.html')">📥 Download Notice of Motion</button>
+              <button class="adv-btn adv-btn--secondary" onclick="Advome.toast.show('Copy the text and paste into Word','info')">📋 Copy to Word</button>
+            </div>
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
+
+          <div class="adv-form-group">
+            <label><strong>Supporting Affidavit</strong> <span class="badge badge--warning">Template</span></label>
+            <div class="template-box" id="compelAffidavitTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Founding Affidavit — Compel Filing of Record</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+              <p>I, the undersigned <span class="fill">[FULL NAMES]</span>, do hereby make oath and state:</p>
+              <p><strong>1.</strong> I am the Applicant in the above matter. I have personal knowledge of the facts herein.</p>
+              <p><strong>2.</strong> I filed a review application in this Honourable Court on <span class="fill">[DATE]</span>.</p>
+              <p><strong>3.</strong> The Notice of Motion called upon the First Respondent (CCMA) to dispatch the complete record of the proceedings to the Registrar within 10 days, in terms of Rule 37(2)(b).</p>
+              <p><strong>4.</strong> The Notice of Motion was served on the First Respondent on <span class="fill">[DATE]</span>.</p>
+              <p><strong>5.</strong> More than 10 court days have elapsed since service. The First Respondent has failed to dispatch the record to the Registrar.</p>
+              <p><strong>6.</strong> I have checked with the Registrar, who has confirmed that no record has been received.</p>
+              <p><strong>7.</strong> Without the record, I cannot prosecute this review application. The delay is prejudicial.</p>
+              <p><strong>8.</strong> I therefore apply for an order compelling the First Respondent to file the record, in terms of Rule 37(8).</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--secondary" onclick="downloadTemplate('compelAffidavitTemplate','Affidavit_Compel_Record.html')">📥 Download Affidavit</button>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--warning" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">🔇 Lost or Inaudible Record?</div>
+              <p><strong>Rule 37(27):</strong> If the record has been lost, or the recording is inaudible or of such poor quality that it compromises the integrity of the record, you must approach the <strong>Judge President</strong> for a direction. The Judge President will allocate the file to a judge who may direct that the matter be remitted to the CCMA for reconstruction, or that the review be heard without the record.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: TRANSCRIBE & FORMAT -->
+      <div id="tab-transcribe" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Transcribe & Format the Record</div>
+              <div class="adv-card__subtitle">Rule 37(12) & Rule 8 — Format, paginate and certify</div>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 The Law</h4>
+            <p><strong>Rule 37(12):</strong> You must transcribe and make copies of the record. File only those portions necessary for the review, <strong>unless</strong> you contend the award is unreasonable or irrational — then you must file the <strong>complete record</strong>.</p>
+            <p><strong>Rule 37(19):</strong> The costs of transcription, copying and delivery are paid by you and become <strong>costs in the cause</strong>.</p>
+            <p><strong>Rule 8:</strong> All documents must be A4, 12pt font (Arial or Times New Roman), 1.5 line spacing, 2cm margins on all sides.</p>
+          </div>
+
+          <div class="adv-alert adv-alert--warning">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ Important</div>
+              <p>This platform <strong>cannot transcribe audio files</strong>. If the CCMA provided an audio recording, you must arrange transcription through a certified transcription service or transcribe it yourself. Once you have the text, paste it below and the platform will format it according to Labour Court Rules.</p>
+            </div>
+          </div>
+
+          <div class="adv-form-group">
+            <label>Are you alleging the award is unreasonable or irrational?</label>
+            <select class="adv-select" id="irrationalityFlag">
+              <option value="no">No — I will file only the necessary portions</option>
+              <option value="yes">Yes — I must file the COMPLETE record</option>
+            </select>
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
+
+          <div class="adv-form-group">
+            <label><strong>Step 1: Upload or Paste the Raw Record</strong></label>
+            <div class="upload-zone" onclick="Advome.toast.show('Select your record file (PDF, Word, or text)','info')">
+              <div class="upload-zone__icon">📄</div>
+              <div style="font-weight:600;">Click to upload the CCMA record</div>
+              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:.25rem;">PDF, Word (.docx), or plain text</div>
+            </div>
+            <p style="text-align:center; color:var(--text-muted); font-size:0.85rem; margin:.5rem 0;">— OR —</p>
+            <label>Paste the transcribed text here</label>
+            <textarea class="adv-input" id="rawRecordText" rows="8" placeholder="Paste the complete transcribed record text here..."></textarea>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Step 2: Enter Case Details for Formatting</strong></label>
+            <div class="inline-form">
+              <div class="adv-form-group">
+                <label>Labour Court Seat</label>
+                <select class="adv-input" id="fmtSeat">
+                  <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                </select>
+              </div>
+              <div class="adv-form-group">
+                <label>Case Number</label>
+                <input type="text" class="adv-input" id="fmtCaseNo" placeholder="e.g. JRB1234/2026">
+              </div>
+              <div class="adv-form-group">
+                <label>Applicant Name</label>
+                <input type="text" class="adv-input" id="fmtAppName" placeholder="Your full name">
+              </div>
+              <div class="adv-form-group">
+                <label>First Respondent (CCMA)</label>
+                <input type="text" class="adv-input" id="fmtResp1" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+              </div>
+              <div class="adv-form-group">
+                <label>Second Respondent (Employer)</label>
+                <input type="text" class="adv-input" id="fmtResp2" placeholder="Employer name">
+              </div>
+              <div class="adv-form-group">
+                <label>Third Respondent (Commissioner)</label>
+                <input type="text" class="adv-input" id="fmtResp3" placeholder="Commissioner name">
+              </div>
+              <div class="adv-form-group">
+                <label>CCMA Case Number (original)</label>
+                <input type="text" class="adv-input" id="fmtCcmacase" placeholder="e.g. KN1234/2025">
+              </div>
+              <div class="adv-form-group">
+                <label>Date of Arbitration Award</label>
+                <input type="date" class="adv-input" id="fmtAwardDate">
+              </div>
+            </div>
+          </div>
+
+          <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="generateFormattedRecord()">⚡ Format Record per Labour Court Rules</button>
+
+          <div id="formattedRecordOutput" style="display:none; margin-top:1.5rem;">
+            <div class="adv-form-group">
+              <label><strong>Formatted Record Preview</strong> <span class="badge badge--success">Rule 8 Compliant</span></label>
+              <div class="record-preview" id="recordPreview"></div>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--primary" onclick="downloadRecord()">📥 Download Formatted Record</button>
+              <button class="adv-btn adv-btn--secondary" onclick="Advome.toast.show('Copy the text and paste into Word','info')">📋 Copy to Word</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: PAGINATE & BIND -->
+      <div id="tab-bind" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Paginate, Index & Bind</div>
+              <div class="adv-card__subtitle">Rule 29 & Rule 37(25) — Prepare the record for filing</div>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 Rule 29 — Preparation of Papers</h4>
+            <ul>
+              <li><strong>Pagination:</strong> Number all pages consecutively.</li>
+              <li><strong>Binding:</strong> Securely bind in suitable covers. Volumes must not exceed <strong>120 pages</strong> (or 200 pages in a lever arch file).</li>
+              <li><strong>Index:</strong> Each volume must have a correct and complete index of evidence and documents.</li>
+              <li><strong>Format:</strong> A4 paper, 12pt font (Arial or Times New Roman), 1.5 line spacing, 2cm margins (Rule 8).</li>
+              <li><strong>Chronological:</strong> Documents must be arranged in chronological order.</li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Record Preparation Checklist</strong></label>
+            <ul class="adv-checklist" data-checklist-id="record-prep">
+              <li class="adv-checklist__item" data-item-id="rp1">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Record is transcribed and typed in full</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp2">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Font: Arial or Times New Roman, 12pt, 1.5 line spacing, 2cm margins</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp3">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Pages numbered consecutively from page 1 to end</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp4">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Documents arranged in chronological order</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp5">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Index prepared listing all documents and evidence with page references</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp6">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Divided into volumes of max 120 pages each (or 200 in lever arch file)</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp7">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Cover page on each volume: Case name, case number, parties, volume number</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rp8">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Certification page at the end (or front) of each volume</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="adv-alert adv-alert--info" style="margin-bottom:1rem;">
+            <div class="adv-alert__content">
+              <strong>Note:</strong> The <em>record</em> is the <strong>CCMA arbitration proceedings only</strong> — the award, referral, evidence, and documents from the arbitration hearing. Your Labour Court Notice of Motion and Founding Affidavit were already filed separately and are <strong>not part of the record</strong>.
+            </div>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Index Template</strong> <span class="badge badge--warning">Template</span></label>
+            <div class="template-box" id="indexTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Index to the Record</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">INDEX TO THE RECORD<br><span class="fill">[VOLUME X OF Y]</span></p>
+              <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--primary);">
+                    <th style="text-align:left; padding:.5rem;">No.</th>
+                    <th style="text-align:left; padding:.5rem;">Description of Document</th>
+                    <th style="text-align:left; padding:.5rem;">Date</th>
+                    <th style="text-align:left; padding:.5rem;">Page</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">1.</td>
+                    <td style="padding:.5rem;">Arbitration Award</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">2.</td>
+                    <td style="padding:.5rem;">Referral Form (LRA 7.11)</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">3.</td>
+                    <td style="padding:.5rem;">Employment Contract / Proof of Employment</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">4.</td>
+                    <td style="padding:.5rem;">Disciplinary Record / Dismissal Letter</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">5.</td>
+                    <td style="padding:.5rem;">Witness Statements / Evidence Led</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">6.</td>
+                    <td style="padding:.5rem;">Payslips / Salary Records</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">7.</td>
+                    <td style="padding:.5rem;">CCMA Arbitration Hearing Transcript / Minutes</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.5rem;">8.</td>
+                    <td style="padding:.5rem;">Commissioner's Notes / Rulings (if available)</td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:.5rem;">9.</td>
+                    <td style="padding:.5rem;"><span class="fill">[Add additional documents as needed]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[DATE]</span></td>
+                    <td style="padding:.5rem;"><span class="fill">[PAGE]</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('indexTemplate','Index_to_Record.html')">📥 Download Index</button>
+            </div>
+          </div>
+
+          <div class="adv-form-group" style="margin-top:1.5rem;">
+            <label><strong>Certification of Record</strong> <span class="badge badge--success">Template</span></label>
+            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.75rem;">Rule 37(12) requires you to certify each copy as true and correct.</p>
+            <div class="template-box" id="certRecordTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Certification of Record</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">CERTIFICATION OF RECORD</p>
+              <p>I, the undersigned <span class="fill">[FULL NAMES]</span>, do hereby certify that:</p>
+              <p><strong>1.</strong> I am the Applicant in the above matter.</p>
+              <p><strong>2.</strong> I have examined the record of the proceedings in the above matter, which is annexed hereto and marked "<strong>Annexure A</strong>".</p>
+              <p><strong>3.</strong> The said record consists of <span class="fill">[NUMBER]</span> pages, numbered consecutively from page <strong>1</strong> to page <strong><span class="fill">[LAST PAGE]</span></strong>.</p>
+              <p><strong>4.</strong> I certify that the said record is a <strong>true and correct copy</strong> of the record of the proceedings before the CCMA, and that the pagination is correct.</p>
+              <p><strong>5.</strong> This certification applies to <span class="fill">[VOLUME X OF Y / the complete record]</span>.</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--secondary" onclick="downloadTemplate('certRecordTemplate','Certification_of_Record.html')">📥 Download Certification</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: FILE & SERVE -->
+      <div id="tab-file" class="tab-content">
+        <div class="adv-card adv-card--danger">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">File & Serve the Record</div>
+              <div class="adv-card__subtitle">Rule 37(12)-(14) & Rule 9 — File with Registrar and serve all Respondents</div>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--danger">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⏰ 60-DAY DEADLINE — Rule 37(14)</div>
+              <p>Transcribed records must be delivered within <strong>60 court days</strong> of the date on which the Registrar advised you that the record was received. If you miss this deadline, your application is <strong>deemed to have been withdrawn</strong> (Rule 37(15)). You can only reinstate it with a court order on good cause shown.</p>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 What You Must File & Serve</h4>
+            <ul>
+              <li><strong>Rule 37(12):</strong> File the <strong>transcribed CCMA record</strong> (or necessary portions) with the Registrar. This is the arbitration proceedings, not your Labour Court pleadings.</li>
+              <li><strong>Rule 37(13):</strong> Furnish the Registrar and <strong>each of the other parties</strong> with a copy of the record.</li>
+              <li><strong>Rule 37(25):</strong> After filing the replying affidavit (or expiry of time), index and paginate the <strong>complete file</strong> (pleadings, notices, and record) per Rule 29(3) and apply for a hearing date within <strong>10 days</strong>.</li>
+              <li><strong>Rule 9:</strong> Service may be by email if the party has an email address. Proof of service requires an affidavit.</li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Step-by-Step: File on Court Online</strong></label>
+            <ul class="step-list">
+              <li><strong>Log in</strong> to the Court Online Portal at <em>https://courtonline.co.za</em> (or the official OCJ portal).</li>
+              <li>Navigate to <strong>My Cases</strong> → Select your case → <strong>My Case Documents</strong>.</li>
+              <li>Click the <strong>Upload</strong> icon (drag & drop or browse).</li>
+              <li>Select the <strong>Document Type</strong> from the dropdown: look for "Record of Proceedings" or "Transcribed Record" or "Application for Trial/Hearing Date" (if also applying for a date).</li>
+              <li><strong>Attach your PDF</strong> — ensure it is the complete formatted record, paginated and indexed.</li>
+              <li>Enter your <strong>digital signature</strong> (type your full name in the signature block).</li>
+              <li>Click <strong>Submit</strong>. The status will show as "PENDING" until the Registrar approves it.</li>
+              <li>If the record is large, you may need to upload it in <strong>separate volumes</strong> as separate documents, clearly labelled "Volume 1 of 3", etc.</li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Step-by-Step: Serve on All Three Respondents</strong></label>
+            <ul class="step-list">
+              <li><strong>First Respondent (CCMA):</strong> Serve at the CCMA's registered address or email address. If you do not have an email, use hand delivery or registered post.</li>
+              <li><strong>Second Respondent (Employer):</strong> Serve at the employer's registered office, place of business, or email address (Rule 9(1)(b)(i)).</li>
+              <li><strong>Third Respondent (Commissioner):</strong> Serve at the <strong>same address as the CCMA</strong> unless the Commissioner has indicated a different address for service.</li>
+              <li><strong>Email Service (Rule 9(1)(a)(iv)):</strong> If the respondent has an email address, you may serve by email. Request a read receipt. Keep the sent email as proof.</li>
+              <li><strong>Proof of Service (Rule 9(2)(b)):</strong> If you served by email, draft an affidavit confirming: (a) the correct email address, (b) the whole document was sent, (c) a named person acknowledged receipt. File this with the Registrar.</li>
+              <li><strong>Hand Delivery (Rule 9(1)(a)(i)):</strong> Hand a copy to the party or a representative authorised to accept service. The recipient should sign an acknowledgement of receipt.</li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Notice of Filing & Service of Record</strong> <span class="badge badge--warning">Template</span></label>
+            <div class="template-box" id="fileRecordNoticeTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Notice of Filing and Service of Record</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+              <p><strong>TO:</strong> The Registrar of the Labour Court</p>
+              <p><strong>AND TO:</strong> All Respondents</p>
+              <p>TAKE NOTICE that the Applicant hereby files the <strong>transcribed record of the proceedings</strong> in the above matter, in terms of Rule 37(12) of the Labour Court Rules.</p>
+              <p>The record consists of <span class="fill">[X]</span> volumes, paginated and indexed, and was filed electronically via the Court Online Portal on <span class="fill">[DATE]</span>.</p>
+              <p>Copies of the record have been served on all three Respondents as follows:</p>
+              <p style="margin-left:1.5rem;"><strong>1.</strong> First Respondent (CCMA): by <span class="fill">[email / hand / post]</span> on <span class="fill">[DATE]</span>;</p>
+              <p style="margin-left:1.5rem;"><strong>2.</strong> Second Respondent (Employer): by <span class="fill">[email / hand / post]</span> on <span class="fill">[DATE]</span>;</p>
+              <p style="margin-left:1.5rem;"><strong>3.</strong> Third Respondent (Commissioner): by <span class="fill">[email / hand / post]</span> on <span class="fill">[DATE]</span> (at the same address as the CCMA unless otherwise indicated).</p>
+              <p>A proof of service affidavit is filed herewith.</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('fileRecordNoticeTemplate','Notice_Filing_Service_Record.html')">📥 Download Notice</button>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <strong>Costs Warning:</strong> The costs of transcription, copying and delivery of the record must be paid by you (the Applicant) and become costs in the cause (Rule 37(19)). Keep all receipts — you may recover these if you are successful.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: DEADLINE TRACKER -->
+      <div id="tab-deadline" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">60-Day Deadline Tracker</div>
+              <div class="adv-card__subtitle">Rule 37(14) — Don't let your review lapse</div>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--danger">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ DEEMED WITHDRAWAL</div>
+              <p>If you fail to file the transcribed record within <strong>60 court days</strong> of the date the Registrar advised you the record was received, your application is <strong>deemed withdrawn</strong> (Rule 37(15)). Reinstatement requires a court order on <strong>good cause shown</strong>.</p>
+            </div>
+          </div>
+
+          <div class="inline-form">
+            <div class="adv-form-group">
+              <label>Date Registrar Advised Record Was Received</label>
+              <input type="date" class="adv-input" id="recordReceivedDate" onchange="calculateRecordDeadline()">
+            </div>
+            <div class="adv-form-group">
+              <label>60-Court-Day Deadline</label>
+              <input type="text" class="adv-input" id="recordDeadlineDisplay" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
+            </div>
+          </div>
+
+          <div class="adv-form-group" style="margin-top:1rem;">
+            <label>Days Remaining</label>
+            <input type="text" class="adv-input" id="daysRemaining" readonly style="background:#edf2f7; font-weight:700;" placeholder="Calculated automatically">
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <h4 style="color:var(--primary); margin-bottom:.5rem;">Key Record Deadlines</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+              <thead>
+                <tr style="background:var(--primary); color:#fff;">
+                  <th style="padding:.5rem; text-align:left;">Event</th>
+                  <th style="padding:.5rem; text-align:left;">Rule</th>
+                  <th style="padding:.5rem; text-align:left;">Deadline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">CCMA to file record with Registrar</td>
+                  <td style="padding:.5rem;">Rule 37(2)(b)</td>
+                  <td style="padding:.5rem;">10 days from receipt of Notice of Motion</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Applicant to collect record from Registrar</td>
+                  <td style="padding:.5rem;">Rule 37(10)</td>
+                  <td style="padding:.5rem;">5 days from date of notification</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Applicant to file transcribed record</td>
+                  <td style="padding:.5rem;">Rule 37(14)</td>
+                  <td style="padding:.5rem;"><strong>60 court days</strong> from date Registrar advised record received</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Apply for hearing date (after indexing)</td>
+                  <td style="padding:.5rem;">Rule 37(25)</td>
+                  <td style="padding:.5rem;">10 days after indexing and paginating</td>
+                </tr>
+                <tr>
+                  <td style="padding:.5rem;">Consent to extend time (before expiry)</td>
+                  <td style="padding:.5rem;">Rule 37(15)</td>
+                  <td style="padding:.5rem;">Before 60 days expire — must be in writing</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="adv-alert adv-alert--warning" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">📝 Need More Time?</div>
+              <p><strong>Rule 37(15):</strong> Before the 60 days expire, you may request the Respondent's consent for an extension. Consent must be <strong>in writing</strong> and filed with the Registrar. If consent is refused, you may apply to the Judge President on notice for an extension.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="adv-sidebar">
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+        <div class="adv-deadline-calculator">
+          <div class="adv-form-group">
+            <label>Start Date</label>
+            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+          </div>
+          <div class="adv-form-group">
+            <label>Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" value="60" min="1">
+          </div>
+          <div class="adv-deadline__display">
+            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+        <div class="adv-chat" data-chat-id="record">
+          <div class="adv-chat__messages"></div>
+          <div class="adv-chat__input-group">
+            <input type="text" class="adv-chat__input" placeholder="Ask about the record step...">
+            <button class="adv-chat__send">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+        <div class="adv-savings">
+          <span>Saved so far:</span>
+          <span class="adv-savings__amount">R0</span>
+        </div>
+        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Navigation Footer -->
+  <nav class="adv-nav-footer">
+    <div class="adv-nav-footer__prev">
+      <a href="opposition.html" class="adv-btn adv-btn--ghost">← Opposition</a>
+    </div>
+    <div class="adv-nav-footer__next">
+      <a href="supplementary.html" class="adv-btn adv-btn--primary">Supplementary →</a>
+    </div>
   </nav>
-</header>
 
-<div class="container">
+  <footer class="adv-footer">
+    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  </footer>
 
-  <div class="page-header">
-    <h1>Record & Transcript</h1>
-    <p>Manage the review record under Labour Court Rule 37(12) and Rule 37(13). The record is the foundation of your review argument.</p>
-  </div>
+  <script src="shared-scripts.js"></script>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
 
-  <!-- Compliance Banner -->
-  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
-    <div class="card-title">
-      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
-      Record Requirements Under Labour Court Rules
-    </div>
-    <p style="font-size:14px;color:#713f12;">
-      Advome provides the procedural framework for record preparation. You remain responsible for ensuring the record complies with 
-      <strong>Rule 37(12)</strong> (necessary portions vs complete record) and <strong>Rule 37(13)</strong> (Court Online upload requirements). 
-      Check the current version of the Labour Court Rules before filing.
-    </p>
-  </div>
+    // Court day calculation (same as opposition.html)
+    function isPublicHoliday(d) {
+      const year = d.getFullYear();
+      const holidays = [
+        new Date(year, 0, 1), new Date(year, 2, 21), new Date(year, 3, 27),
+        new Date(year, 4, 1), new Date(year, 5, 16), new Date(year, 7, 9),
+        new Date(year, 8, 24), new Date(year, 11, 16), new Date(year, 11, 25), new Date(year, 11, 26)
+      ];
+      return holidays.some(h => h.getDate() === d.getDate() && h.getMonth() === d.getMonth());
+    }
+    function isCourtDay(d) {
+      const day = d.getDay();
+      if (day === 0 || day === 6) return false;
+      const month = d.getMonth(); const date = d.getDate();
+      if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
+      if (isPublicHoliday(d)) return false;
+      return true;
+    }
+    function addCourtDays(startDate, days) {
+      let d = new Date(startDate);
+      d.setDate(d.getDate() + 1); // exclude first day
+      let count = 0;
+      while (count < days) {
+        if (isCourtDay(d)) count++;
+        if (count < days) d.setDate(d.getDate() + 1);
+      }
+      return d;
+    }
 
-  <!-- Timeline — CORRECTED: Record is step 5 -->
-  <div class="timeline">
-    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">2</span>Award</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">3</span>Review Decision</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">4</span>Motion & Affidavit</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step active"><span class="num">5</span>Record</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">6</span>Heads</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">8</span>Finalisation</div>
-  </div>
+    function handleRecordStatus() {
+      const val = document.getElementById('recordStatus').value;
+      const box = document.getElementById('recordStatusMsg');
+      let html = '';
+      if (val === 'waiting') {
+        html = `<div class="adv-alert adv-alert--info"><div class="adv-alert__content">The CCMA has 10 court days from receipt of the Notice of Motion to file the record. Wait for the Registrar to notify you. If nothing happens after 15 court days, consider applying to compel.</div></div>`;
+      } else if (val === 'received') {
+        html = `<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">✅ Record Received</div><p>You have 5 days to collect the record from the Registrar. Once collected, proceed to the <strong>Transcribe & Format</strong> tab.</p></div></div>`;
+      } else if (val === 'expired') {
+        html = `<div class="adv-alert adv-alert--danger"><div class="adv-alert__content"><div class="adv-alert__title">❌ CCMA Failed to File</div><p>Download the <strong>Notice of Motion</strong> and <strong>Supporting Affidavit</strong> templates above to apply for an order compelling the CCMA to file the record (Rule 37(8)). File this on notice to the CCMA.</p></div></div>`;
+      } else if (val === 'lost') {
+        html = `<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">🔇 Lost or Inaudible Record</div><p>Under <strong>Rule 37(27)</strong>, approach the Judge President for a direction. The judge may order remittal to the CCMA for reconstruction, or direct that the review proceed without the record. You will need a letter/motivated application to the Judge President.</p></div></div>`;
+      }
+      box.innerHTML = html;
+    }
 
-  <!-- Health Meter -->
-  <div class="meter-container">
-    <div class="meter-header">
-      <span class="meter-label">Record Readiness</span>
-      <span class="meter-value" style="color:var(--warning);">45%</span>
-    </div>
-    <div class="meter-bar-bg">
-      <div class="meter-bar-fill medium" style="width:45%"></div>
-    </div>
-    <div class="meter-status attention">
-      <span>⚠️</span> Audio received — transcript pending
-    </div>
-  </div>
+    function generateFormattedRecord() {
+      const seat = document.getElementById('fmtSeat').value;
+      const caseNo = document.getElementById('fmtCaseNo').value || '[CASE NUMBER]';
+      const appName = document.getElementById('fmtAppName').value || '[APPLICANT NAME]';
+      const resp1 = document.getElementById('fmtResp1').value || '[CCMA]';
+      const resp2 = document.getElementById('fmtResp2').value || '[EMPLOYER NAME]';
+      const resp3 = document.getElementById('fmtResp3').value || '[COMMISSIONER NAME]';
+      const ccmacase = document.getElementById('fmtCcmacase').value || '[CCMA CASE NUMBER]';
+      const awardDate = document.getElementById('fmtAwardDate').value || '[DATE]';
+      const rawText = document.getElementById('rawRecordText').value || '[PASTE THE TRANSCRIBED RECORD TEXT HERE]';
+      const irrational = document.getElementById('irrationalityFlag').value === 'yes';
 
-  <div class="grid-2">
-    <!-- Rule 37 Workflow -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📋</span>
-        Rule 37 Record Requirements
-      </div>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-box checked"></div>
-          <div class="checklist-text done">Audio recording received from CCMA</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Transcription completed (Rule 37(12))</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Necessary portions identified</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Complete record prepared (if required)</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Pagination and indexing complete</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Uploaded to Court Online (Rule 37(13))</div>
-        </div>
-      </div>
-      <div class="mt-2">
-        <span class="pill pill-amber">Transcript pending</span>
-        <span class="pill pill-neutral">Index missing</span>
-      </div>
-    </div>
+      const header = `IN THE LABOUR COURT OF SOUTH AFRICA
+(HELD AT ${seat.toUpperCase()})
 
-    <!-- Transcript Centre -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#fef3cd;color:#856404;">🎙️</span>
-        Transcript Centre
-      </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-        The Commissioner's digital recording is the base material. It must be transcribed, edited, and certified.
-      </p>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-box checked"></div>
-          <div class="checklist-text done">Audio file uploaded</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Transcription ordered or completed</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Transcript edited and cleaned</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Certified true and correct</div>
-        </div>
-      </div>
-      <div class="mt-2">
-        <button class="btn btn-secondary btn-sm">Upload Audio</button>
-        <button class="btn btn-outline btn-sm">Order Transcription</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Document Detector for Record -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#fef3cd;color:#856404;">📄</span>
-      Detect Record Documents
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-      Upload your transcript, index, or pagination file to verify completeness and detect missing items.
-    </p>
-    <div class="doc-detector" onclick="document.getElementById('recordUpload').click()">
-      <div class="doc-detector-icon">📤</div>
-      <div class="doc-detector-title">Upload Record Document</div>
-      <div class="doc-detector-sub">Transcript, index, or pagination proof</div>
-      <input type="file" id="recordUpload" class="doc-detector-input" accept=".pdf,.doc,.docx" onchange="handleRecordUpload(this)">
-    </div>
-    <div id="recordResult" class="doc-result">
-      <div class="doc-result-header">
-        <span class="doc-result-badge detected" id="recordBadge">DETECTED</span>
-        <span class="doc-result-title" id="recordTitle">Document Type</span>
-      </div>
-      <div class="doc-result-meta" id="recordMeta"></div>
-      <div class="doc-next-steps">
-        <div class="doc-next-steps-title">Detected Status</div>
-        <div id="recordNextSteps"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Record Index Generator -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📑</span>
-      Record Index Generator
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-      Generate a standard index for your review record. Add your documents and the index will auto-number.
-    </p>
-    <div class="template-engine">
-      <div class="template-field">
-        <label>Case Number</label>
-        <input type="text" id="idxCaseNo" placeholder="e.g. JR1234/26">
-      </div>
-      <div class="template-field">
-        <label>Parties</label>
-        <input type="text" id="idxParties" placeholder="e.g. Applicant v Respondent">
-      </div>
-      <div class="template-field">
-        <label>Documents in Record (one per line)</label>
-        <textarea id="idxDocs" rows="4" placeholder="Notice of Motion&#10;Founding Affidavit&#10;Annexure A: Award&#10;Annexure B: Transcript"></textarea>
-      </div>
-      <button class="btn btn-primary" onclick="generateIndex()">Generate Index</button>
-      <div id="idxOutput" class="template-output hidden"></div>
-    </div>
-  </div>
-
-  <!-- Fee Meter -->
-  <div class="fee-meter">
-    <div class="fee-meter-header">
-      <div class="fee-meter-title">
-        <span>💰</span> Record Preparation Costs
-      </div>
-      <div class="fee-total">R 3,500</div>
-    </div>
-    <div class="fee-breakdown">
-      <div class="fee-item paid">
-        <div class="fee-item-label">CCMA Audio Request</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-      <div class="fee-item estimated">
-        <div class="fee-item-label">Transcription</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-      <div class="fee-item pending">
-        <div class="fee-item-label">Certification</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-      <div class="fee-item pending">
-        <div class="fee-item-label">Court Online Upload</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Next Step -->
-  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
-    <div class="card-title">
-      <span class="icon" style="background:var(--primary);color:white;">🚀</span>
-      Next Step: Heads of Argument
-    </div>
-    <p style="font-size:14px;color:var(--text);margin-bottom:16px;">
-      Once the record is properly prepared, paginated, and uploaded, the workflow moves to <strong>heads of argument and authorities</strong>. 
-      This is where legal argument is structured and case law is attached.
-    </p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="heads.html" class="btn btn-primary btn-lg">
-        Proceed to Heads of Argument →
-      </a>
-      <a href="motion.html" class="btn btn-secondary btn-lg">
-        ← Back to Motion
-      </a>
-      <a href="attorney.html" class="btn btn-outline btn-lg">
-        👔 Find an Attorney
-      </a>
-    </div>
-  </div>
-
-  <!-- Questions -->
-  <div class="questions-panel">
-    <h3>Record Questions</h3>
-    <div class="question-item">
-      <div class="question-q">Was the arbitration recorded?</div>
-      <div class="question-a">CCMA arbitrations are digitally recorded. Request the audio from the CCMA regional office.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">Do I need the full record or necessary portions?</div>
-      <div class="question-a">Rule 37(12): necessary portions for ordinary review issues. Complete record if arguing unreasonableness or irrationality.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">Has the transcript been edited?</div>
-      <div class="question-a">The draft transcript must be checked for accuracy, especially witness names, dates, and technical terms.</div>
-    </div>
-  </div>
-
-  <div class="disclaimer">
-    <strong>Disclaimer</strong>
-    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. Users remain responsible for complying with Labour Court Rules and the Labour Relations Act. 
-    <strong>Verify all record requirements against the current version of the Labour Court Rules before filing.</strong>
-    <div class="access-message">
-      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
-    </div>
-  </div>
-
-</div>
-
-<script>
-function handleRecordUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const resultDiv = document.getElementById('recordResult');
-  const fname = file.name.toLowerCase();
-  let docType = 'Record Document';
-  let status = 'Uploaded';
-  let nextSteps = [];
-
-  if (fname.includes('transcript')) {
-    docType = 'Arbitration Transcript';
-    nextSteps = ['Check for accuracy', 'Edit names and dates', 'Certify true and correct'];
-  } else if (fname.includes('index')) {
-    docType = 'Record Index';
-    nextSteps = ['Verify page numbers', 'Link to transcript sections', 'Check annexure references'];
-  } else if (fname.includes('paginat')) {
-    docType = 'Pagination Proof';
-    nextSteps = ['Verify continuous numbering', 'Check Court Online requirements', 'Upload to system'];
-  } else {
-    docType = 'Record-Related Document';
-    nextSteps = ['Review document type', 'Check completeness', 'Link to record workflow'];
-  }
-
-  document.getElementById('recordTitle').textContent = docType;
-  document.getElementById('recordMeta').innerHTML = `
-    <div class="doc-meta-item"><div class="doc-meta-label">Status</div><div class="doc-meta-value">${status}</div></div>
-    <div class="doc-meta-item"><div class="doc-meta-label">File</div><div class="doc-meta-value">${file.name}</div></div>
-    <div class="doc-meta-item"><div class="doc-meta-label">Size</div><div class="doc-meta-value">${(file.size/1024).toFixed(1)} KB</div></div>
-  `;
-  document.getElementById('recordNextSteps').innerHTML = nextSteps.map((step, i) => 
-    `<div class="doc-next-step"><span class="step-num">${i+1}</span>${step}</div>`
-  ).join('');
-  resultDiv.classList.add('show');
-}
-
-function generateIndex() {
-  const caseNo = document.getElementById('idxCaseNo').value || '[CASE NUMBER]';
-  const parties = document.getElementById('idxParties').value || '[PARTIES]';
-  const docs = document.getElementById('idxDocs').value || 'Notice of Motion
-Founding Affidavit';
-
-  const docList = docs.split('
-').filter(d => d.trim()).map((d, i) => 
-    `${(i + 1).toString().padStart(2, '0')}.  ${d.trim()} .................................................... Page ${(i * 10 + 1)}`
-  ).join('
-');
-
-  const output = `INDEX TO THE RECORD
+Case No: ${caseNo}
 
 In the matter between:
+${appName} — Applicant
+and
+First Respondent: ${resp1}
+Second Respondent: ${resp2}
+Third Respondent: ${resp3} — Commissioner in his/her personal capacity
 
-${parties}
+═══════════════════════════════════════════════════════════════
 
-Case Number: ${caseNo}
+RECORD OF PROCEEDINGS
+CCMA Case No: ${ccmacase}
+Arbitration Award Date: ${awardDate}
+${irrational ? 'COMPLETE RECORD FILED (Irrationality/Reasonableness Alleged)' : 'PORTIONS OF RECORD FILED (Necessary for Review)'}
 
-${docList}
+═══════════════════════════════════════════════════════════════
 
----
+`;
 
-⚠️ IMPORTANT: This index is generated by Advome as a template. You must verify page numbers, add annexure references, and ensure compliance with Labour Court Rule 37 before filing.`;
+      const footer = `
 
-  const outputDiv = document.getElementById('idxOutput');
-  outputDiv.textContent = output;
-  outputDiv.classList.remove('hidden');
-}
-</script>
+═══════════════════════════════════════════════════════════════
 
+END OF RECORD
+
+I, the undersigned deponent, do hereby certify that the foregoing
+pages numbered 1 to [LAST PAGE] constitute a true and correct copy
+of the record of the proceedings in the above matter.
+
+Signed at ____________________ on this ______ day of ______________ ________.
+
+___________________________
+Signature
+
+[NAME IN BLOCK LETTERS]
+
+═══════════════════════════════════════════════════════════════`;
+
+      const fullText = header + rawText + footer;
+      document.getElementById('recordPreview').textContent = fullText;
+      document.getElementById('formattedRecordOutput').style.display = 'block';
+      Advome.toast.show('Record formatted! Review and download.','success');
+      document.getElementById('recordPreview').scrollIntoView({behavior:'smooth'});
+    }
+
+    function downloadRecord() {
+      const text = document.getElementById('recordPreview').textContent;
+      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Formatted Record</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem; white-space:pre-wrap;}</style></head><body>${text.replace(/
+/g,'<br>')}</body></html>`;
+      const blob = new Blob([html], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Formatted_Record.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      Advome.toast.show('Download started','success');
+    }
+
+    function calculateRecordDeadline() {
+      const start = document.getElementById('recordReceivedDate').value;
+      if (!start) return;
+      const deadline = addCourtDays(new Date(start), 60);
+      const opts = { day:'numeric', month:'long', year:'numeric', weekday:'long' };
+      document.getElementById('recordDeadlineDisplay').value = deadline.toLocaleDateString('en-ZA', opts);
+      const today = new Date();
+      const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+      const el = document.getElementById('daysRemaining');
+      if (remaining < 0) { el.value = `${Math.abs(remaining)} days OVERDUE — RISK OF DEEMED WITHDRAWAL`; el.style.color = 'var(--danger)'; }
+      else if (remaining <= 7) { el.value = `${remaining} days left — URGENT`; el.style.color = 'var(--danger)'; }
+      else if (remaining <= 14) { el.value = `${remaining} days left — Act soon`; el.style.color = 'var(--warning)'; }
+      else { el.value = `${remaining} days remaining`; el.style.color = 'var(--success)'; }
+    }
+
+    function downloadTemplate(elementId, filename) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${filename}</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>${el.innerHTML}</body></html>`;
+      const blob = new Blob([html], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      Advome.toast.show('Download started','success');
+    }
+  </script>
 </body>
 </html>
