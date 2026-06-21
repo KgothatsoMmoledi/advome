@@ -1,8 +1,8 @@
 /**
  * ADVOME SHARED SCRIPTS
- * Version: 1.0.0
- * Date: 2026-06-14
- * 
+ * Version: 1.1.0
+ * Date: 2026-06-21
+ *
  * Provides: localStorage helpers, progress tracking, checklist state,
  * chat widget, deadline calculator, navigation, toast notifications,
  * modal system, and document detection simulation.
@@ -24,6 +24,36 @@
   };
 
   // ==========================================
+  // WORKFLOW DEFINITIONS (shared across modules)
+  // ==========================================
+  const WORKFLOWS = {
+    ccma: [
+      { id: 'ccma', name: 'CCMA Home', path: 'ccma.html' },
+      { id: 'referral', name: 'File Dispute', path: 'referral.html' },
+      { id: 'conciliation', name: 'Conciliation', path: 'conciliation.html' },
+      { id: 'arbitration', name: 'Arbitration', path: 'arbitration.html' },
+      { id: 'award', name: 'Award', path: 'award.html' },
+      { id: 'review', name: 'Review', path: 'ccma-review.html' },
+      { id: 'motion', name: 'Motion', path: 'motion.html' },
+      { id: 'court-online', name: 'Court Online', path: 'court-online.html' },
+      { id: 'issue-case', name: 'Issue Case', path: 'issue-case.html' },
+      { id: 'service', name: 'Service', path: 'service.html' },
+      { id: 'opposition', name: 'Opposition', path: 'opposition.html' },
+      { id: 'record', name: 'Record', path: 'record.html' },
+      { id: 'supplementary', name: 'Supplementary', path: 'supplementary.html' },
+      { id: 'answering', name: 'Answering', path: 'answering.html' },
+      { id: 'replying', name: 'Replying', path: 'replying.html' },
+      { id: 'pagination', name: 'Pagination', path: 'pagination.html' },
+      { id: 'heads', name: 'Heads', path: 'heads.html' },
+      { id: 'setdown', name: 'Set Down', path: 'setdown-request.html' },
+      { id: 'enrolment', name: 'Enrolment', path: 'enrolment.html' },
+      { id: 'hearing', name: 'Hearing', path: 'hearing.html' },
+      { id: 'judgment', name: 'Judgment', path: 'judgment.html' },
+      { id: 'finalisation', name: 'Finalisation', path: 'finalisation.html' }
+    ]
+  };
+
+  // ==========================================
   // UTILITY FUNCTIONS
   // ==========================================
   const utils = {
@@ -39,8 +69,8 @@
 
     formatDate: (date) => {
       const d = new Date(date);
-      return d.toLocaleDateString('en-ZA', { 
-        day: 'numeric', month: 'short', year: 'numeric' 
+      return d.toLocaleDateString('en-ZA', {
+        day: 'numeric', month: 'short', year: 'numeric'
       });
     },
 
@@ -65,6 +95,44 @@
       const div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
+    },
+
+    /**
+     * Get the current page filename from the URL.
+     * Handles query strings, hashes, and subdirectory paths.
+     */
+    getCurrentPage: () => {
+      const path = window.location.pathname;
+      const filename = path.substring(path.lastIndexOf('/') + 1);
+      return filename || 'index.html';
+    },
+
+    /**
+     * Find a step index in a workflow by its path.
+     * Tries exact match first, then fallback match ignoring query strings.
+     */
+    findStepIndexByPath: (steps, pagePath) => {
+      // Exact match
+      let idx = steps.findIndex(s => s.path === pagePath);
+      if (idx !== -1) return idx;
+
+      // Match ignoring query string / hash
+      const cleanPath = pagePath.split(/[?#]/)[0];
+      idx = steps.findIndex(s => {
+        const stepClean = s.path.split(/[?#]/)[0];
+        return stepClean === cleanPath;
+      });
+      if (idx !== -1) return idx;
+
+      // Match by id (for pages that set data-current-step)
+      return -1;
+    },
+
+    /**
+     * Find a step index in a workflow by its step id.
+     */
+    findStepIndexById: (steps, stepId) => {
+      return steps.findIndex(s => s.id === stepId);
     }
   };
 
@@ -154,8 +222,8 @@
       this.updateProgress(item.closest('.adv-checklist'));
 
       // Dispatch custom event
-      item.dispatchEvent(new CustomEvent('checklistToggle', { 
-        detail: { listId, itemId, checked: isChecked } 
+      item.dispatchEvent(new CustomEvent('checklistToggle', {
+        detail: { listId, itemId, checked: isChecked }
       }));
 
       if (isChecked) {
@@ -248,32 +316,7 @@
   // PROGRESS TRACKER
   // ==========================================
   const progressTracker = {
-    WORKFLOWS: {
-      ccma: [
-        { id: 'ccma', name: 'CCMA Home', path: 'ccma.html' },
-        { id: 'referral', name: 'File Dispute', path: 'referral.html' },
-        { id: 'conciliation', name: 'Conciliation', path: 'conciliation.html' },
-        { id: 'arbitration', name: 'Arbitration', path: 'arbitration.html' },
-        { id: 'award', name: 'Award', path: 'award.html' },
-        { id: 'review', name: 'Review', path: 'ccma-review.html' },
-        { id: 'motion', name: 'Motion', path: 'motion.html' },
-        { id: 'court-online', name: 'Court Online', path: 'court-online.html' },
-        { id: 'issue-case', name: 'Issue Case', path: 'issue-case.html' },
-        { id: 'service', name: 'Service', path: 'service.html' },
-        { id: 'opposition', name: 'Opposition', path: 'opposition.html' },
-        { id: 'record', name: 'Record', path: 'record.html' },
-        { id: 'supplementary', name: 'Supplementary', path: 'supplementary.html' },
-        { id: 'answering', name: 'Answering', path: 'answering.html' },
-        { id: 'replying', name: 'Replying', path: 'replying.html' },
-        { id: 'pagination', name: 'Pagination', path: 'pagination.html' },
-        { id: 'heads', name: 'Heads', path: 'heads.html' },
-        { id: 'setdown', name: 'Set Down', path: 'setdown-request.html' },
-        { id: 'enrolment', name: 'Enrolment', path: 'enrolment.html' },
-        { id: 'hearing', name: 'Hearing', path: 'hearing.html' },
-        { id: 'judgment', name: 'Judgment', path: 'judgment.html' },
-        { id: 'finalisation', name: 'Finalisation', path: 'finalisation.html' }
-      ]
-    },
+    WORKFLOWS: WORKFLOWS,
 
     init() {
       const progressBar = document.querySelector('.adv-progress');
@@ -283,16 +326,43 @@
       const currentStep = progressBar.dataset.currentStep;
       const steps = this.WORKFLOWS[workflow] || this.WORKFLOWS.ccma;
 
-      this.render(progressBar, steps, currentStep);
-      this.updateState(currentStep);
+      // Determine current index: prefer data-current-step, fallback to URL matching
+      let currentIndex = -1;
+      if (currentStep) {
+        currentIndex = utils.findStepIndexById(steps, currentStep);
+      }
+      if (currentIndex === -1) {
+        currentIndex = utils.findStepIndexByPath(steps, utils.getCurrentPage());
+      }
+      if (currentIndex === -1) {
+        // Can't determine position — try to match any step that might be set in storage
+        const state = this.getState();
+        for (const stepId of Object.keys(state)) {
+          const idx = utils.findStepIndexById(steps, stepId);
+          if (idx !== -1) {
+            currentIndex = idx;
+            break;
+          }
+        }
+      }
+      // Default to first step if still unknown
+      if (currentIndex === -1) {
+        currentIndex = 0;
+      }
+
+      this.render(progressBar, steps, currentIndex);
+      this.updateState(steps[currentIndex].id);
+
+      // Also update footer navigation links based on this workflow
+      this.updateFooterNav(steps, currentIndex);
     },
 
-    render(container, steps, currentId) {
+    render(container, steps, currentIndex) {
       const track = document.createElement('div');
       track.className = 'adv-progress__track';
 
-      const currentIndex = steps.findIndex(s => s.id === currentId);
-      if (currentIndex === -1) return;
+      // Store current index on container for arrow handlers
+      container.dataset.currentIndex = currentIndex;
 
       // Sliding window: show current + 2 before + 2 after = 5 steps max
       const windowSize = 2; // steps on each side of current
@@ -312,24 +382,31 @@
       if (startIndex > 0) {
         const leftArrow = document.createElement('div');
         leftArrow.className = 'adv-progress__nav-arrow';
-        leftArrow.innerHTML = '‹';
+        leftArrow.innerHTML = '&#8249;';
         leftArrow.title = 'Previous steps';
         leftArrow.style.cssText = 'cursor:pointer; color:var(--primary-light); font-size:1.2rem; padding:0 0.5rem; user-select:none; flex-shrink:0;';
         leftArrow.addEventListener('click', () => {
-          // Navigate to the step just before the window
-          const prevStep = steps[startIndex - 1];
-          if (prevStep) window.location.href = prevStep.path;
+          // Shift the window left by one step and re-render
+          const newStart = Math.max(0, startIndex - 1);
+          const newIndex = Math.min(newStart + windowSize, steps.length - 1);
+          // We keep the "current" step highlighted but shift the visible window
+          // Actually, better approach: shift window while keeping current visible when possible
+          const maxStart = Math.max(0, currentIndex - windowSize);
+          const currentWindowStart = startIndex;
+          if (currentWindowStart > 0) {
+            // Temporarily store window offset
+            const currentOffset = parseInt(container.dataset.windowOffset || '0', 10);
+            container.dataset.windowOffset = currentOffset - 1;
+            this.renderWithOffset(container, steps, currentIndex);
+          }
         });
         track.appendChild(leftArrow);
       }
-
-      let currentReached = false;
 
       for (let i = startIndex; i <= endIndex; i++) {
         const step = steps[i];
         const isCompleted = i < currentIndex;
         const isActive = i === currentIndex;
-        if (isActive) currentReached = true;
 
         const stepEl = document.createElement('div');
         stepEl.className = 'adv-progress__step';
@@ -360,13 +437,101 @@
       if (endIndex < steps.length - 1) {
         const rightArrow = document.createElement('div');
         rightArrow.className = 'adv-progress__nav-arrow';
-        rightArrow.innerHTML = '›';
+        rightArrow.innerHTML = '&#8250;';
         rightArrow.title = 'Next steps';
         rightArrow.style.cssText = 'cursor:pointer; color:var(--primary-light); font-size:1.2rem; padding:0 0.5rem; user-select:none; flex-shrink:0;';
         rightArrow.addEventListener('click', () => {
-          // Navigate to the step just after the window
-          const nextStep = steps[endIndex + 1];
-          if (nextStep) window.location.href = nextStep.path;
+          const currentOffset = parseInt(container.dataset.windowOffset || '0', 10);
+          container.dataset.windowOffset = currentOffset + 1;
+          this.renderWithOffset(container, steps, currentIndex);
+        });
+        track.appendChild(rightArrow);
+      }
+
+      container.innerHTML = '';
+      container.appendChild(track);
+    },
+
+    /**
+     * Re-render the progress bar with a given window offset.
+     * The offset shifts the visible window left (negative) or right (positive)
+     * while keeping the current step's visual state correct.
+     */
+    renderWithOffset(container, steps, currentIndex) {
+      const track = document.createElement('div');
+      track.className = 'adv-progress__track';
+
+      const windowSize = 2;
+      const rawOffset = parseInt(container.dataset.windowOffset || '0', 10);
+
+      // Calculate ideal window centered on currentIndex + offset
+      let idealStart = currentIndex - windowSize + rawOffset;
+      let startIndex = Math.max(0, idealStart);
+      let endIndex = Math.min(steps.length - 1, startIndex + windowSize * 2);
+
+      // Clamp start if end hit the boundary
+      if (endIndex === steps.length - 1) {
+        startIndex = Math.max(0, steps.length - 1 - windowSize * 2);
+      }
+
+      // Recalculate effective offset so we know if arrows are needed
+      const effectiveOffset = startIndex - (currentIndex - windowSize);
+      container.dataset.windowOffset = (rawOffset - (idealStart - startIndex)).toString();
+
+      // Left arrow: show if there are steps before startIndex
+      if (startIndex > 0) {
+        const leftArrow = document.createElement('div');
+        leftArrow.className = 'adv-progress__nav-arrow';
+        leftArrow.innerHTML = '&#8249;';
+        leftArrow.title = 'Previous steps';
+        leftArrow.style.cssText = 'cursor:pointer; color:var(--primary-light); font-size:1.2rem; padding:0 0.5rem; user-select:none; flex-shrink:0;';
+        leftArrow.addEventListener('click', () => {
+          const currentOffset = parseInt(container.dataset.windowOffset || '0', 10);
+          container.dataset.windowOffset = currentOffset - 1;
+          this.renderWithOffset(container, steps, currentIndex);
+        });
+        track.appendChild(leftArrow);
+      }
+
+      for (let i = startIndex; i <= endIndex; i++) {
+        const step = steps[i];
+        const isCompleted = i < currentIndex;
+        const isActive = i === currentIndex;
+
+        const stepEl = document.createElement('div');
+        stepEl.className = 'adv-progress__step';
+
+        const pill = document.createElement('a');
+        pill.href = step.path;
+        pill.className = 'adv-progress__pill adv-progress__pill--' + (isCompleted ? 'completed' : isActive ? 'active' : 'pending');
+        pill.innerHTML = '<span class="step-num">' + (isCompleted ? 'OK' : i + 1) + '</span><span class="step-name">' + step.name + '</span>';
+
+        pill.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = step.path;
+        });
+
+        stepEl.appendChild(pill);
+        track.appendChild(stepEl);
+
+        if (i < endIndex) {
+          const connector = document.createElement('div');
+          connector.className = 'adv-progress__connector ' + (isCompleted ? 'adv-progress__connector--completed' : '');
+          track.appendChild(connector);
+        }
+      }
+
+      // Right arrow: show if there are steps after endIndex
+      if (endIndex < steps.length - 1) {
+        const rightArrow = document.createElement('div');
+        rightArrow.className = 'adv-progress__nav-arrow';
+        rightArrow.innerHTML = '&#8250;';
+        rightArrow.title = 'Next steps';
+        rightArrow.style.cssText = 'cursor:pointer; color:var(--primary-light); font-size:1.2rem; padding:0 0.5rem; user-select:none; flex-shrink:0;';
+        rightArrow.addEventListener('click', () => {
+          const currentOffset = parseInt(container.dataset.windowOffset || '0', 10);
+          container.dataset.windowOffset = currentOffset + 1;
+          this.renderWithOffset(container, steps, currentIndex);
         });
         track.appendChild(rightArrow);
       }
@@ -387,6 +552,59 @@
 
     isCompleted(stepId) {
       return !!this.getState()[stepId]?.visited;
+    },
+
+    /**
+     * Update the footer prev/next navigation links based on the current
+     * position in the workflow. Hides buttons at the start/end.
+     */
+    updateFooterNav(steps, currentIndex) {
+      const prevLink = document.querySelector('.adv-nav-footer__prev a');
+      const nextLink = document.querySelector('.adv-nav-footer__next a');
+      const prevContainer = document.querySelector('.adv-nav-footer__prev');
+      const nextContainer = document.querySelector('.adv-nav-footer__next');
+
+      // Previous step link
+      if (currentIndex > 0) {
+        const prevStep = steps[currentIndex - 1];
+        if (prevLink) {
+          prevLink.href = prevStep.path;
+          prevLink.title = prevStep.name;
+          // Update label if it has one
+          const label = prevLink.querySelector('.adv-nav-footer__label');
+          if (label) label.textContent = prevStep.name;
+        }
+        if (prevContainer) prevContainer.style.visibility = 'visible';
+      } else {
+        if (prevLink) prevLink.href = '#';
+        if (prevContainer) prevContainer.style.visibility = 'hidden';
+      }
+
+      // Next step link
+      if (currentIndex < steps.length - 1) {
+        const nextStep = steps[currentIndex + 1];
+        if (nextLink) {
+          nextLink.href = nextStep.path;
+          nextLink.title = nextStep.name;
+          // Update label if it has one
+          const label = nextLink.querySelector('.adv-nav-footer__label');
+          if (label) label.textContent = nextStep.name;
+        }
+        if (nextContainer) nextContainer.style.visibility = 'visible';
+      } else {
+        if (nextLink) nextLink.href = '#';
+        if (nextContainer) nextContainer.style.visibility = 'hidden';
+      }
+
+      // Save state on footer nav click
+      document.querySelectorAll('.adv-nav-footer__prev a, .adv-nav-footer__next a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href && href !== '#') {
+            progressTracker.updateState(steps[currentIndex].id);
+          }
+        });
+      });
     }
   };
 
@@ -513,8 +731,8 @@
         max-width: 85%;
         font-size: 0.85rem;
         line-height: 1.4;
-        ${isUser 
-          ? 'background: #1a365d; color: white; margin-left: auto;' 
+        ${isUser
+          ? 'background: #1a365d; color: white; margin-left: auto;'
           : 'background: white; color: #4a5568; border: 1px solid #e2e8f0;'}
       `;
       msg.textContent = text;
@@ -717,22 +935,45 @@
   // ==========================================
   const navigation = {
     init() {
-      // Highlight current page in nav
-      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      // Highlight current page in header nav
+      const currentPath = window.location.pathname;
+      const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1) || 'index.html';
+
       document.querySelectorAll('.adv-header__nav a').forEach(link => {
-        if (link.getAttribute('href')?.includes(currentPath)) {
-          link.style.color = 'white';
-          link.style.fontWeight = '700';
+        const href = link.getAttribute('href');
+        if (href) {
+          const linkPage = href.substring(href.lastIndexOf('/') + 1).split(/[?#]/)[0];
+          const currentClean = currentPage.split(/[?#]/)[0];
+          if (linkPage === currentClean || href.includes(currentPage)) {
+            link.style.color = 'white';
+            link.style.fontWeight = '700';
+          }
         }
       });
 
-      // Handle nav footer buttons
+      // Progress tracker already handles footer nav setup now.
+      // This listener catches any footer clicks for state saving.
       document.querySelectorAll('.adv-nav-footer__prev a, .adv-nav-footer__next a').forEach(link => {
         link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
           if (href && !href.startsWith('#')) {
             // Save current page state before navigating
-            progressTracker.updateState(document.querySelector('.adv-progress')?.dataset.currentStep);
+            const progressBar = document.querySelector('.adv-progress');
+            if (progressBar) {
+              const workflowKey = progressBar.dataset.workflow || 'ccma';
+              const steps = WORKFLOWS[workflowKey] || WORKFLOWS.ccma;
+              const currentStep = progressBar.dataset.currentStep;
+              if (currentStep) {
+                progressTracker.updateState(currentStep);
+              } else {
+                // Fallback: find current step by URL
+                const page = utils.getCurrentPage();
+                const idx = utils.findStepIndexByPath(steps, page);
+                if (idx !== -1) {
+                  progressTracker.updateState(steps[idx].id);
+                }
+              }
+            }
           }
         });
       });
@@ -746,11 +987,11 @@
     init() {
       document.querySelectorAll('.adv-accordion__header').forEach(header => {
         header.addEventListener('click', () => {
-          const accordion = header.closest('.adv-accordion');
-          const isOpen = accordion.classList.contains('adv-accordion--open');
+          const accordionEl = header.closest('.adv-accordion');
+          const isOpen = accordionEl.classList.contains('adv-accordion--open');
 
           // Close all in same group
-          const group = accordion.dataset.group;
+          const group = accordionEl.dataset.group;
           if (group) {
             document.querySelectorAll(`.adv-accordion[data-group="${group}"]`).forEach(a => {
               a.classList.remove('adv-accordion--open');
@@ -758,7 +999,7 @@
           }
 
           // Toggle current
-          accordion.classList.toggle('adv-accordion--open', !isOpen);
+          accordionEl.classList.toggle('adv-accordion--open', !isOpen);
         });
       });
     }
@@ -802,7 +1043,7 @@
   // INITIALIZATION
   // ==========================================
   function init() {
-    utils.log('Initializing Advome shared scripts...');
+    utils.log('Initializing Advome shared scripts v1.1.0...');
 
     progressTracker.init();
     checklistManager.init();
@@ -844,7 +1085,8 @@
     modal,
     savings: savingsCalculator,
     documentDetector,
-    CONFIG
+    CONFIG,
+    WORKFLOWS
   };
 
 })();
