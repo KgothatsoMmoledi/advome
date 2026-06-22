@@ -13,48 +13,80 @@
       --text: #2d3748; --text-muted: #718096;
     }
 
-    .optional-banner { background:linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%); border:1px solid #38a169; border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; text-align:center; }
-    .optional-banner h3 { margin:0 0 .25rem; color:#22543d; font-size:1.1rem; }
-    .optional-banner p { margin:0; color:#2f855a; font-size:0.9rem; }
+    /* Tab Bar */
+    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
+    .tab-btn { border-radius:20px; font-size:0.85rem; padding:0.5rem 1rem; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; transition:all .2s; font-weight:500; }
+    .tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:600; }
+    .tab-btn:hover:not(.active) { background:var(--bg-page); }
 
+    /* Tab Content */
+    .tab-content { display:none; animation:fadeIn .3s ease; }
+    .tab-content.active { display:block; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+    /* Optional Banner */
+    .optional-banner { background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%); border: 2px solid var(--success); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+    .optional-banner h2 { color: #22543d; margin: 0 0 0.5rem; font-size: 1.25rem; }
+    .optional-banner p { color: #276749; margin: 0; font-size: 0.95rem; }
+    .skip-box { background: #fff; border: 2px dashed var(--success); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+    .skip-box p { margin: 0 0 0.5rem; color: var(--text); }
+
+    /* Template Box */
     .template-box { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:600px; overflow-y:auto; }
     .template-box .doc-header { text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem; }
     .template-box .doc-title { font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary); letter-spacing:1px; }
     .template-box .fill { border-bottom:1px solid #999; display:inline-block; min-width:120px; padding:0 6px; color:#555; }
     .template-box p { margin:.6rem 0; }
 
+    /* Upload Zone */
     .upload-zone { border:2px dashed var(--border); border-radius:8px; padding:2rem; text-align:center; background:#fff; cursor:pointer; transition:all .2s; }
     .upload-zone:hover { border-color:var(--primary-light); background:#f7fafc; }
     .upload-zone__icon { font-size:2.5rem; margin-bottom:.5rem; }
     .hidden-file-input { display:none; }
 
-    .ai-input-area { width:100%; min-height:100px; padding:0.75rem; border:1px solid var(--border); border-radius:6px; font-size:0.9rem; resize:vertical; }
-    .ai-input-area:focus { outline:none; border-color:var(--primary-light); }
-
-    .generated-doc-actions { display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; }
-
-    .rule-box { background:#edf2f7; border-left:4px solid var(--primary); padding:1rem 1.25rem; border-radius:6px; margin-bottom:1rem; }
-    .rule-box h4 { margin:0 0 .4rem; color:var(--primary); font-size:1rem; }
-    .rule-box p, .rule-box ul { margin:.25rem 0; font-size:0.9rem; }
-
-    .badge { display:inline-block; padding:.15rem .5rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
-    .badge--success { background:#c6f6d5; color:#22543d; }
-    .badge--danger { background:#fed7d7; color:#742a2a; }
-    .badge--warning { background:#feebc8; color:#7c2d12; }
-    .badge--info { background:#bee3f8; color:#2a4365; }
-
-    .skip-box { border:2px dashed var(--success); border-radius:8px; padding:1.5rem; text-align:center; background:#f0fff4; margin:1rem 0; }
-    .skip-box h4 { color:#22543d; margin:0 0 .5rem; }
-    .skip-box p { color:#2f855a; font-size:0.9rem; margin:0 0 1rem; }
-
+    /* Step Lists */
     .step-list { counter-reset:step; list-style:none; padding:0; }
     .step-list li { position:relative; padding-left:2.5rem; margin-bottom:1rem; }
     .step-list li::before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:1.8rem; height:1.8rem; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; }
 
+    /* Rule Box */
+    .rule-box { background:#edf2f7; border-left:4px solid var(--primary); padding:1rem 1.25rem; border-radius:6px; margin-bottom:1rem; }
+    .rule-box h4 { margin:0 0 .4rem; color:var(--primary); font-size:1rem; }
+    .rule-box p, .rule-box ul { margin:.25rem 0; font-size:0.9rem; }
+
+    /* Badges */
+    .badge { display:inline-block; padding:.15rem .5rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
+    .badge--danger { background:#fed7d7; color:#742a2a; }
+    .badge--warning { background:#feebc8; color:#7c2d12; }
+    .badge--success { background:#c6f6d5; color:#22543d; }
+    .badge--info { background:#bee3f8; color:#2a4365; }
+
+    /* Inline Form */
     .inline-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     @media(max-width:600px){ .inline-form{grid-template-columns:1fr;} }
 
-    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
+    /* Generated Doc Actions */
+    .generated-doc-actions { display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; }
+
+    /* Preview Area */
+    .preview-area { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:500px; overflow-y:auto; white-space:pre-wrap; }
+
+    /* Textarea */
+    .paste-area { width:100%; min-height:120px; padding:0.75rem; border:1px solid var(--border); border-radius:6px; font-family:monospace; font-size:0.85rem; resize:vertical; }
+    .paste-area:focus { outline:none; border-color:var(--primary-light); }
+
+    /* Info Grid */
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
+    @media(max-width:600px){ .info-grid{grid-template-columns:1fr;} }
+    .info-card { background:#f7fafc; border:1px solid var(--border); border-radius:8px; padding:1rem; }
+    .info-card h4 { margin:0 0 .5rem; color:var(--primary); font-size:0.95rem; }
+    .info-card p { margin:0; font-size:0.85rem; color:var(--text-muted); }
+
+    /* Next Steps Preview */
+    .next-steps { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.25rem; margin-top:1rem; }
+    .next-steps h4 { margin:0 0 .75rem; color:var(--primary); }
+    .next-steps ul { margin:0; padding-left:1.25rem; }
+    .next-steps li { margin-bottom:.5rem; font-size:0.9rem; }
   </style>
 <base target="_blank">
 </head>
@@ -78,7 +110,7 @@
   <section class="adv-hero">
     <div class="adv-hero__content">
       <h1>Supplementary Affidavit</h1>
-      <p>Step 13 of 21 — Optional: supplement your review grounds after reading the record</p>
+      <p>Step 13 of 21 — Optional: Supplement your founding affidavit or stand by it</p>
     </div>
     <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
   </section>
@@ -88,42 +120,44 @@
 
       <!-- OPTIONAL BANNER -->
       <div class="optional-banner">
-        <h3>✅ This Step is Completely Optional</h3>
-        <p>You are <strong>not required</strong> to file a Supplementary Affidavit. Under <strong>Rule 37(20)</strong>, you may simply file a <em>Notice of Standing By</em> your Notice of Motion and proceed to the next step. Skip this page if your founding affidavit already covers all your grounds.</p>
+        <h2>✅ This Step is OPTIONAL</h2>
+        <p>You are <strong>not required</strong> to file a supplementary affidavit. You may simply stand by your founding affidavit and proceed directly to the Answering Affidavit stage. All subsequent steps (Answering Affidavit, Replying Affidavit, Heads of Argument, Set Down) remain available regardless of which path you choose.</p>
+        <div class="skip-box">
+          <p><strong>Want to skip this step?</strong> Click the "Notice of Standing By" tab below, download the template, and proceed to the next step.</p>
+          <button class="adv-btn adv-btn--primary" onclick="switchTab('tab-standby')">Go to Notice of Standing By →</button>
+        </div>
       </div>
 
-      <!-- Tabs -->
+      <!-- TAB BAR -->
       <div class="tab-bar">
-        <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-decide" style="border-radius:20px; font-size:0.85rem;">1. Do I Need This?</button>
-        <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-draft" style="border-radius:20px; font-size:0.85rem;">2. AI Draft Supplementary</button>
-        <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-standby" style="border-radius:20px; font-size:0.85rem;">3. Notice of Standing By</button>
-        <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-file" style="border-radius:20px; font-size:0.85rem;">4. File & Serve</button>
+        <button class="tab-btn active" id="btn-tab-decision" onclick="switchTab('tab-decision')">1. Do I Need This?</button>
+        <button class="tab-btn" id="btn-tab-draft" onclick="switchTab('tab-draft')">2. AI Draft Supplementary</button>
+        <button class="tab-btn" id="btn-tab-standby" onclick="switchTab('tab-standby')">3. Notice of Standing By</button>
+        <button class="tab-btn" id="btn-tab-serve" onclick="switchTab('tab-serve')">4. File & Serve</button>
+        <button class="tab-btn" id="btn-tab-next" onclick="switchTab('tab-next')">5. What Comes Next</button>
       </div>
 
-      <!-- TAB 1: DECISION HELPER -->
-      <div id="tab-decide" class="tab-content" style="display:block;">
+      <!-- TAB 1: DECISION -->
+      <div id="tab-decision" class="tab-content active">
         <div class="adv-card">
           <div class="adv-card__header">
             <div>
               <div class="adv-card__title">Do I Need a Supplementary Affidavit?</div>
-              <div class="adv-card__subtitle">Rule 37(20) — Decide within 5 court days of the record being filed</div>
+              <div class="adv-card__subtitle">Rule 37(20) — You must choose ONE of two paths within 5 court days</div>
             </div>
           </div>
 
           <div class="rule-box">
             <h4>📖 The Law — Rule 37(20)</h4>
-            <p>Within <strong>5 court days</strong> after the transcribed record has been filed, the Applicant must do <strong>ONE</strong> of the following:</p>
-            <ul style="margin-left:1.2rem;">
-              <li><strong>(a)</strong> Deliver a <strong>Notice of Amendment</strong> and <strong>Supplementary Affidavit</strong> to supplement the grounds for review; <strong>OR</strong></li>
-              <li><strong>(b)</strong> Deliver a <strong>Notice that the Applicant stands by</strong> its Notice of Motion.</li>
-            </ul>
-            <p style="margin-top:0.5rem;"><strong>Rule 37(21):</strong> A supplementary affidavit may do <em>no more than</em> supplement the grounds for review recorded in the founding affidavit or abandon any one or more of them. It <strong>cannot</strong> introduce entirely new, unrelated issues.</p>
+            <p><strong>"The applicant must within 5 days after the transcribed record has been filed either:</strong></p>
+            <p style="margin-left:1rem;"><strong>(a)</strong> by delivery of a <strong>notice of amendment and supplementary affidavit</strong>, amend, add to or vary the terms of the notice of motion and supplement the supporting affidavit; <strong>OR</strong></p>
+            <p style="margin-left:1rem;"><strong>(b)</strong> deliver a <strong>notice that the applicant stands by its notice of motion</strong>."</p>
           </div>
 
           <div class="adv-alert adv-alert--warning">
             <div class="adv-alert__content">
-              <div class="adv-alert__title">⚠️ Warning: Costs Risk</div>
-              <p>An applicant who abuses the supplementary affidavit by including <strong>irrelevant or repetitive material</strong> risks an <strong>adverse order as to costs</strong> (Rule 37(21)). Only use this if the transcribed record reveals something genuinely new.</p>
+              <div class="adv-alert__title">⚠️ Rule 37(21) — Limitation & Costs Warning</div>
+              <p>A supplementary affidavit may do <strong>no more than</strong> supplement the grounds for review recorded in the founding affidavit, or <strong>abandon</strong> any one or more of them. <strong>You may NOT raise new grounds.</strong> An applicant who abuses this rule by including irrelevant or repetitive material risks an <strong>adverse order as to costs</strong>.</p>
             </div>
           </div>
 
@@ -132,174 +166,201 @@
             <ul class="adv-checklist" data-checklist-id="supp-decision">
               <li class="adv-checklist__item" data-item-id="sd1">
                 <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">I have read the complete transcribed record</div>
+                <div class="adv-checklist__text">Did the CCMA record reveal new facts that strengthen my existing review grounds?</div>
               </li>
               <li class="adv-checklist__item" data-item-id="sd2">
                 <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">The record reveals a factual error or omission not in my founding affidavit</div>
+                <div class="adv-checklist__text">Do I need to correct or clarify something in my founding affidavit?</div>
               </li>
               <li class="adv-checklist__item" data-item-id="sd3">
                 <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">I need to correct or clarify a specific paragraph in my founding affidavit</div>
+                <div class="adv-checklist__text">Do I want to abandon any review ground I previously raised?</div>
               </li>
               <li class="adv-checklist__item" data-item-id="sd4">
                 <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">I want to abandon one or more of my review grounds</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="sd5">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">The record contains evidence that strengthens an existing ground for review</div>
+                <div class="adv-checklist__text">Is the record complete and my founding affidavit already comprehensive?</div>
               </li>
             </ul>
           </div>
 
-          <div class="adv-form-group">
-            <label>Based on the above, do you need a supplementary affidavit?</label>
-            <select class="adv-select" id="needSupplementary" onchange="handleNeedChange()">
-              <option value="unsure">🤔 I'm unsure — need help deciding</option>
-              <option value="no">❌ No — my founding affidavit is complete</option>
-              <option value="yes">✅ Yes — the record reveals new facts or errors</option>
-            </select>
+          <div class="info-grid">
+            <div class="info-card">
+              <h4>📝 File Supplementary</h4>
+              <p>Choose this if the record reveals new evidence that supports your existing review grounds, or if you need to correct/clarify your founding affidavit. You must also file a Notice of Amendment.</p>
+            </div>
+            <div class="info-card">
+              <h4>✋ Stand By Notice of Motion</h4>
+              <p>Choose this if your founding affidavit is complete and you do not need to supplement or amend anything. This is the simpler, faster path and is perfectly valid.</p>
+            </div>
           </div>
 
-          <div id="needDecisionMsg" style="margin-top:1rem;"></div>
-
-          <div class="skip-box">
-            <h4>⏭️ Skip This Step</h4>
-            <p>If your founding affidavit covers everything, you do not need a supplementary affidavit.<br>You can proceed directly to the <strong>Notice of Standing By</strong> tab or go to the next step.</p>
-            <a href="answering.html" class="adv-btn adv-btn--primary">Proceed to Next Step →</a>
+          <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <strong>Remember:</strong> Whichever path you choose, the Respondent then has <strong>10 court days</strong> (Rule 37(22)) to file an Answering Affidavit. If you skip the supplementary, you simply proceed straight to the Answering Affidavit stage.
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB 2: AI DRAFT SUPPLEMENTARY -->
-      <div id="tab-draft" class="tab-content" style="display:none;">
-        <div class="adv-card adv-card--primary">
+      <!-- TAB 2: AI DRAFT -->
+      <div id="tab-draft" class="tab-content">
+        <div class="adv-card">
           <div class="adv-card__header">
             <div>
-              <div class="adv-card__title">AI-Assisted Supplementary Affidavit</div>
-              <div class="adv-card__subtitle">Rule 37(20)–(21) — Upload documents or audio and explain what the record reveals</div>
+              <div class="adv-card__title">AI Draft Supplementary Affidavit</div>
+              <div class="adv-card__subtitle">Rule 37(20)(a) & Rule 37(21) — Supplement or abandon existing grounds only</div>
             </div>
           </div>
 
-          <div class="adv-alert adv-alert--info">
+          <div class="adv-alert adv-alert--warning">
             <div class="adv-alert__content">
-              <strong>How this works:</strong> Upload the transcribed record (or audio), tell us what new facts or errors you discovered, and the platform will draft a compliant Supplementary Affidavit. Remember — it can only <strong>supplement or abandon</strong> existing grounds, not introduce entirely new ones.
+              <div class="adv-alert__title">⚠️ Important Limitation</div>
+              <p>This generator will draft a supplementary affidavit that <strong>only supplements or abandons existing grounds</strong> from your founding affidavit. It will <strong>NOT</strong> introduce new review grounds. You must review the draft carefully before filing — inclusion of irrelevant or repetitive material may expose you to an adverse costs order under Rule 37(21).</p>
             </div>
           </div>
 
           <div class="adv-form-group">
-            <label><strong>Step 1: Upload the Record or Audio</strong></label>
-            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('suppFile').click()">
-              <div class="upload-zone__icon">📄 / 🎙️</div>
+            <label><strong>Step 1: Upload the CCMA Record or Audio</strong></label>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Upload the record, award, or audio recording that reveals what you want to supplement. The AI will analyse it to ensure your supplementary affidavit stays within Rule 37(21).</p>
+            <div class="upload-zone" onclick="document.getElementById('suppFile').click()">
+              <div class="upload-zone__icon">📄</div>
               <div style="font-weight:600;">Click to upload document or audio</div>
-              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:.25rem;">PDF, Word, TXT, MP3, WAV, or M4A</div>
+              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:.25rem;">PDF, Word, MP3, WAV, or M4A</div>
             </div>
-            <input type="file" id="suppFile" class="hidden-file-input" accept=".pdf,.docx,.doc,.txt,.mp3,.wav,.m4a" onchange="handleSuppUpload(this)">
+            <input type="file" id="suppFile" class="hidden-file-input" accept=".pdf,.docx,.doc,.txt,.mp3,.wav,.m4a" onchange="handleSuppFile(this)">
             <div id="suppFileName" style="font-size:0.85rem; color:var(--success); margin-top:.25rem; display:none;"></div>
           </div>
 
           <div class="adv-form-group">
-            <label><strong>Step 2: What did the record reveal?</strong></label>
-            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.5rem;">Explain in plain language what new facts, errors, or omissions you discovered in the transcribed record. Reference specific page numbers if you can.</p>
-            <textarea class="ai-input-area" id="userConcerns" placeholder="Example: On page 45 of the record, the Commissioner incorrectly states that I was given a verbal warning on 15 March 2025. In fact, no such warning was ever issued. This contradicts the evidence of my witness, Mr. Dlamini, who testified that no warning was given. I need to supplement my founding affidavit to correct this factual error and strengthen my procedural unfairness ground."></textarea>
+            <label><strong>Step 2: Explain What the Record Reveals</strong></label>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Describe what the record shows and how it relates to your existing review grounds. Be specific — the AI will draft numbered paragraphs based on your input.</p>
+            <textarea class="paste-area" id="suppExplanation" placeholder="Example: The arbitration transcript at page 45 shows that the Commissioner refused to allow my witness to testify despite my objection. This supports my existing ground that the Commissioner committed a gross irregularity by failing to allow me to lead evidence. I also noticed the award incorrectly states my start date as 2018 instead of 2015, which I need to correct."></textarea>
           </div>
 
           <div class="adv-form-group">
-            <label><strong>Step 3: Which ground(s) does this relate to?</strong></label>
-            <p class="text-muted" style="font-size:0.85rem; margin-bottom:.5rem;">Select the review ground(s) from your founding affidavit that this supplements or corrects.</p>
-            <div style="display:flex; flex-direction:column; gap:0.5rem;">
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400; cursor:pointer;">
-                <input type="checkbox" class="supp-ground" value="procedural"> Procedural unfairness (e.g., no hearing, no right to reply)
+            <label><strong>Step 3: Which Existing Review Ground(s) Does This Relate To?</strong></label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:0.5rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundMisconduct" value="misconduct"> Misconduct not proved
               </label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400; cursor:pointer;">
-                <input type="checkbox" class="supp-ground" value="substantive"> Substantive unfairness (e.g., no valid reason for dismissal)
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundProcedure" value="procedure"> Procedural unfairness
               </label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400; cursor:pointer;">
-                <input type="checkbox" class="supp-ground" value="irrational"> Irrationality / unreasonableness of the award
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundEvidence" value="evidence"> Failure to consider evidence
               </label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400; cursor:pointer;">
-                <input type="checkbox" class="supp-ground" value="misconduct"> Misconduct / gross irregularity by the Commissioner
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundIrregularity" value="irregularity"> Gross irregularity
               </label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400; cursor:pointer;">
-                <input type="checkbox" class="supp-ground" value="evidence"> Error in handling of evidence
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundIrrational" value="irrational"> Unreasonable / irrational award
               </label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400; cursor:pointer;">
-                <input type="checkbox" class="supp-ground" value="abandon"> I want to abandon this ground
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundBias" value="bias"> Bias / conflict of interest
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundJurisdiction" value="jurisdiction"> Lack of jurisdiction
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="groundOther" value="other"> Other (specify in explanation above)
               </label>
             </div>
           </div>
 
-          <div class="inline-form" style="margin-top:1rem;">
-            <div class="adv-form-group">
-              <label>Your Full Name</label>
-              <input type="text" class="adv-input" id="draftName" placeholder="Same as founding affidavit">
-            </div>
-            <div class="adv-form-group">
-              <label>Labour Court Case Number</label>
-              <input type="text" class="adv-input" id="draftCaseNo" placeholder="e.g. JRB1234/2026">
-            </div>
-            <div class="adv-form-group">
-              <label>Labour Court Seat</label>
-              <select class="adv-input" id="draftSeat">
-                <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
-              </select>
-            </div>
-            <div class="adv-form-group">
-              <label>Date of Founding Affidavit</label>
-              <input type="date" class="adv-input" id="draftFoundingDate">
+          <div class="adv-form-group">
+            <label><strong>Step 4: Are You Abandoning Any Ground?</strong></label>
+            <select class="adv-select" id="abandonGround">
+              <option value="no">No — I am only supplementing existing grounds</option>
+              <option value="yes">Yes — I wish to abandon one or more grounds</option>
+            </select>
+            <div id="abandonDetails" style="display:none; margin-top:0.75rem;">
+              <label>Which ground(s) are you abandoning?</label>
+              <input type="text" class="adv-input" id="abandonText" placeholder="e.g. Ground 3 (bias allegation)">
             </div>
           </div>
 
-          <button class="adv-btn adv-btn--primary" style="margin-top:1.5rem;" onclick="generateSupplementary()">⚡ Generate Supplementary Affidavit</button>
+          <hr style="border:none; border-top:1px solid var(--border); margin:1.5rem 0;">
 
-          <div id="supplementaryOutput" style="display:none; margin-top:1.5rem;">
+          <div class="adv-form-group">
+            <label><strong>Step 5: Case Details</strong></label>
+            <div class="inline-form">
+              <div class="adv-form-group">
+                <label>Labour Court Seat</label>
+                <select class="adv-input" id="suppSeat">
+                  <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                </select>
+              </div>
+              <div class="adv-form-group">
+                <label>Case Number</label>
+                <input type="text" class="adv-input" id="suppCaseNo" placeholder="e.g. JRB1234/2026">
+              </div>
+              <div class="adv-form-group">
+                <label>Applicant Name</label>
+                <input type="text" class="adv-input" id="suppAppName" placeholder="Your full name">
+              </div>
+              <div class="adv-form-group">
+                <label>First Respondent (CCMA)</label>
+                <input type="text" class="adv-input" id="suppResp1" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+              </div>
+              <div class="adv-form-group">
+                <label>Second Respondent (Employer)</label>
+                <input type="text" class="adv-input" id="suppResp2" placeholder="Employer name">
+              </div>
+              <div class="adv-form-group">
+                <label>Third Respondent (Commissioner)</label>
+                <input type="text" class="adv-input" id="suppResp3" placeholder="Commissioner name">
+              </div>
+              <div class="adv-form-group">
+                <label>CCMA Case Number</label>
+                <input type="text" class="adv-input" id="suppCcmacase" placeholder="e.g. KN1234/2025">
+              </div>
+              <div class="adv-form-group">
+                <label>Date of Founding Affidavit</label>
+                <input type="date" class="adv-input" id="suppFoundingDate">
+              </div>
+            </div>
+          </div>
+
+          <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="generateSupplementary()">⚡ Generate Supplementary Affidavit</button>
+
+          <div id="suppOutput" style="display:none; margin-top:1.5rem;">
             <div class="adv-form-group">
-              <label><strong>Draft Supplementary Affidavit</strong> <span class="badge badge--warning">Review & Edit</span></label>
-              <div class="template-box" id="suppTemplate"></div>
+              <label><strong>Draft Supplementary Affidavit Preview</strong> <span class="badge badge--warning">Review Before Filing</span></label>
+              <div class="preview-area" id="suppPreview"></div>
             </div>
             <div class="generated-doc-actions">
-              <button class="adv-btn adv-btn--primary" onclick="downloadSupp()">📥 Download</button>
+              <button class="adv-btn adv-btn--primary" onclick="downloadSupp()">📥 Download Draft</button>
               <button class="adv-btn adv-btn--secondary" onclick="copySupp()">📋 Copy to Clipboard</button>
-            </div>
-            <div class="adv-alert adv-alert--warning" style="margin-top:1rem;">
-              <div class="adv-alert__content">
-                <strong>Before filing:</strong> Review this draft carefully. Ensure it only supplements or abandons grounds from your founding affidavit. Remove any irrelevant or repetitive material to avoid an adverse costs order.
-              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- TAB 3: NOTICE OF STANDING BY -->
-      <div id="tab-standby" class="tab-content" style="display:none;">
+      <div id="tab-standby" class="tab-content">
         <div class="adv-card">
           <div class="adv-card__header">
             <div>
               <div class="adv-card__title">Notice of Standing By</div>
-              <div class="adv-card__subtitle">Rule 37(20)(b) — Use this if you do NOT need a supplementary affidavit</div>
-            </div>
-          </div>
-
-          <div class="adv-alert adv-alert--success">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">✅ This is the Normal Path</div>
-              <p>Most applicants do <strong>not</strong> need a supplementary affidavit. If your founding affidavit is complete, simply file this <strong>Notice of Standing By</strong> within <strong>5 court days</strong> of the record being filed. This tells the Court and the Respondents that you rely on your founding affidavit as it stands.</p>
+              <div class="adv-card__subtitle">Rule 37(20)(b) — The simpler path when no supplement is needed</div>
             </div>
           </div>
 
           <div class="rule-box">
-            <h4>📖 Effect of Filing This Notice</h4>
-            <p>Once you file a Notice of Standing By:</p>
-            <ul style="margin-left:1.2rem;">
-              <li>The Respondent has <strong>10 court days</strong> from receipt to file an Answering Affidavit (Rule 37(22)).</li>
-              <li>You do not need to file anything further until you receive the Respondent's Answering Affidavit.</li>
-              <li>If no Answering Affidavit is filed, the matter may proceed as unopposed.</li>
-            </ul>
+            <h4>📖 The Law — Rule 37(20)(b)</h4>
+            <p>"The applicant must within 5 days after the transcribed record has been filed <strong>either</strong>... <strong>(b) deliver a notice that the applicant stands by its notice of motion.</strong>"</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 37(22):</strong> Any person wishing to oppose must, within <strong>10 days after receipt of the record and notice of amendment OR notice that the applicant stands by its notice of motion</strong>, deliver an answering affidavit.</p>
+          </div>
+
+          <div class="adv-alert adv-alert--success">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">✅ This is a Valid and Common Choice</div>
+              <p>Most applicants who are satisfied with their founding affidavit choose to stand by their notice of motion. This is <strong>not a weakness</strong> — it simply means your case is already fully pleaded and you do not need to supplement it. The Respondent still has 10 court days to file an Answering Affidavit.</p>
+            </div>
           </div>
 
           <div class="adv-form-group">
-            <label><strong>Notice of Standing By — Template</strong> <span class="badge badge--success">Rule 37(20)(b)</span></label>
+            <label><strong>Notice of Standing By Template</strong> <span class="badge badge--info">Rule 37(20)(b)</span></label>
             <div class="template-box" id="standbyTemplate">
               <div class="doc-header">
                 <div class="doc-title">Notice of Standing By Notice of Motion</div>
@@ -307,94 +368,172 @@
               <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
               <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
               <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span> — Commissioner in his/her personal capacity</p>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">NOTICE OF STANDING BY NOTICE OF MOTION</p>
               <p><strong>TO:</strong> The Registrar of the Labour Court</p>
               <p><strong>AND TO:</strong> All Respondents</p>
-              <p>TAKE NOTICE that the Applicant, in terms of <strong>Rule 37(20)(b)</strong> of the Labour Court Rules, hereby gives notice that the Applicant <strong>stands by</strong> the Notice of Motion and Founding Affidavit filed in this matter on <span class="fill">[DATE]</span>.</p>
-              <p>The Applicant does not intend to file any supplementary affidavit or notice of amendment.</p>
-              <p>The transcribed record of the proceedings was filed on <span class="fill">[DATE]</span>.</p>
-              <p>The Applicant will rely on the existing Notice of Motion and Founding Affidavit in support of this review application.</p>
+              <p>TAKE NOTICE that the Applicant hereby gives notice, in terms of <strong>Rule 37(20)(b)</strong> of the Labour Court Rules, that the Applicant <strong>stands by its notice of motion and founding affidavit</strong> filed on <span class="fill">[DATE OF FOUNDING AFFIDAVIT]</span>.</p>
+              <p>The Applicant does not intend to file a supplementary affidavit or notice of amendment.</p>
+              <p>The transcribed record of the proceedings was filed on <span class="fill">[DATE RECORD FILED]</span>.</p>
+              <p>This notice is filed together with proof of service on all Respondents.</p>
               <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
               <p style="margin-top:2rem;">___________________________<br>Signature</p>
               <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+              <p style="margin-top:1rem; font-size:0.85rem; color:#666;">Address: <span class="fill">[YOUR ADDRESS FOR SERVICE]</span></p>
+              <p style="font-size:0.85rem; color:#666;">Email: <span class="fill">[YOUR EMAIL]</span></p>
+              <p style="font-size:0.85rem; color:#666;">Tel: <span class="fill">[YOUR TEL]</span></p>
             </div>
             <div class="generated-doc-actions">
               <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('standbyTemplate','Notice_of_Standing_By.html')">📥 Download Notice</button>
-              <button class="adv-btn adv-btn--secondary" onclick="Advome.toast.show('Copy the text and paste into Word','info')">📋 Copy to Word</button>
             </div>
           </div>
 
           <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
             <div class="adv-alert__content">
-              <strong>Next Step:</strong> After filing this notice, wait for the Respondent's Answering Affidavit (10 court days). If none is filed, the matter may proceed as unopposed. If an Answering Affidavit is filed, you may file a Replying Affidavit within 5 court days (Rule 37(24)). Proceed to the <strong>Answering</strong> step.
+              <strong>What happens next?</strong> Once you file this notice and serve all three Respondents, the Respondent has <strong>10 court days</strong> to file an Answering Affidavit (Rule 37(22)). If they do not, the matter may proceed on the unopposed roll (Rule 36(1)). You do not need to do anything further until you receive (or don't receive) the Answering Affidavit.
             </div>
           </div>
         </div>
       </div>
 
       <!-- TAB 4: FILE & SERVE -->
-      <div id="tab-file" class="tab-content" style="display:none;">
+      <div id="tab-serve" class="tab-content">
         <div class="adv-card adv-card--danger">
           <div class="adv-card__header">
             <div>
               <div class="adv-card__title">File & Serve</div>
-              <div class="adv-card__subtitle">Rule 37(20) & Rule 9 — File within 5 court days of the record</div>
+              <div class="adv-card__subtitle">Rule 37(20) — 5 court days after the transcribed record is filed</div>
             </div>
           </div>
 
           <div class="adv-alert adv-alert--danger">
             <div class="adv-alert__content">
               <div class="adv-alert__title">⏰ 5-DAY DEADLINE</div>
-              <p>You must file either your <strong>Supplementary Affidavit + Notice of Amendment</strong> OR your <strong>Notice of Standing By</strong> within <strong>5 court days</strong> of the transcribed record being filed. This is not optional.</p>
+              <p>You must file either your <strong>Supplementary Affidavit + Notice of Amendment</strong> OR your <strong>Notice of Standing By</strong> within <strong>5 court days</strong> after the transcribed record has been filed. Missing this deadline may delay your matter or require condonation.</p>
             </div>
           </div>
 
           <div class="adv-form-group">
-            <label><strong>What are you filing?</strong></label>
-            <select class="adv-select" id="fileType" onchange="handleFileType()">
-              <option value="">Select one...</option>
-              <option value="supplementary">Supplementary Affidavit + Notice of Amendment</option>
+            <label>What are you filing?</label>
+            <select class="adv-select" id="filingType" onchange="updateFilingInstructions()">
+              <option value="supp">Supplementary Affidavit + Notice of Amendment</option>
               <option value="standby">Notice of Standing By</option>
             </select>
           </div>
 
-          <div id="fileInstructions" style="margin-top:1rem;"></div>
+          <div id="filingInstructions" style="margin-top:1rem;"></div>
 
           <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label><strong>Service Checklist — All Three Respondents</strong></label>
+            <label><strong>Step-by-Step: File on Court Online</strong></label>
             <ul class="step-list">
-              <li><strong>First Respondent (CCMA):</strong> Serve at the CCMA's registered address or email. The Commissioner is served at the same address unless otherwise indicated.</li>
-              <li><strong>Second Respondent (Employer):</strong> Serve at the employer's registered office, place of business, or email address (Rule 9(1)(b)(i)).</li>
-              <li><strong>Third Respondent (Commissioner):</strong> Serve at the <strong>same address as the CCMA</strong> unless a different address has been indicated.</li>
-              <li><strong>Email Service (Rule 9(1)(a)(iv)):</strong> If the respondent has an email address, serve by email. Request a read receipt. Keep the sent email.</li>
-              <li><strong>Proof of Service (Rule 9(2)(b)):</strong> Draft an affidavit confirming the correct email address, that the whole document was sent, and that a named person acknowledged receipt.</li>
-              <li><strong>Hand Delivery (Rule 9(1)(a)(i)):</strong> Hand to the party or an authorised representative. Obtain a signed acknowledgement of receipt.</li>
+              <li><strong>Log in</strong> to the Court Online Portal at <em>https://courtonline.co.za</em>.</li>
+              <li>Navigate to <strong>My Cases</strong> → Select your case → <strong>My Case Documents</strong>.</li>
+              <li>Click the <strong>Upload</strong> icon.</li>
+              <li>Select the <strong>Document Type</strong>:
+                <ul style="margin-top:0.5rem; padding-left:1.5rem;">
+                  <li>If filing supplementary: "Supplementary Affidavit" + "Notice of Amendment"</li>
+                  <li>If filing standby: "Notice" or "Other" (label clearly: "Notice of Standing By")</li>
+                </ul>
+              </li>
+              <li><strong>Attach your PDF</strong> — ensure it is paginated per Rule 29.</li>
+              <li>Enter your <strong>digital signature</strong> (type your full name).</li>
+              <li>Click <strong>Submit</strong>. Status shows "PENDING" until approved.</li>
             </ul>
           </div>
 
           <div class="adv-form-group">
-            <label><strong>Notice of Filing & Service</strong> <span class="badge badge--warning">Template</span></label>
-            <div class="template-box" id="fileNoticeTemplate">
+            <label><strong>Step-by-Step: Serve on All Three Respondents</strong></label>
+            <ul class="step-list">
+              <li><strong>First Respondent (CCMA):</strong> Serve at the CCMA's registered address or email address.</li>
+              <li><strong>Second Respondent (Employer):</strong> Serve at the employer's registered office, place of business, or email address (Rule 9(1)(b)(i)).</li>
+              <li><strong>Third Respondent (Commissioner):</strong> Serve at the <strong>same address as the CCMA</strong> unless the Commissioner has indicated a different address for service.</li>
+              <li><strong>Email Service (Rule 9(1)(a)(iv)):</strong> If the respondent has an email address, serve by email. Request a read receipt. Keep the sent email as proof.</li>
+              <li><strong>Proof of Service (Rule 9(2)(b)):</strong> Draft an affidavit confirming: (a) the correct email address, (b) the whole document was sent, and (c) a named person acknowledged receipt. File this with the Registrar.</li>
+              <li><strong>Hand Delivery (Rule 9(1)(a)(i)):</strong> Hand a copy to the party or authorised representative. Obtain a signed acknowledgement of receipt.</li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Notice of Filing & Service Template</strong> <span class="badge badge--warning">Template</span></label>
+            <div class="template-box" id="fileSuppNoticeTemplate">
               <div class="doc-header">
                 <div class="doc-title">Notice of Filing and Service</div>
               </div>
               <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
               <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
               <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">NOTICE OF FILING AND SERVICE</p>
               <p><strong>TO:</strong> The Registrar of the Labour Court</p>
               <p><strong>AND TO:</strong> All Respondents</p>
-              <p>TAKE NOTICE that the Applicant hereby files the following document(s) in the above matter:</p>
-              <p style="margin-left:1.5rem;"><strong>1.</strong> <span class="fill">[Supplementary Affidavit and Notice of Amendment / Notice of Standing By]</span></p>
-              <p>The document(s) were filed electronically via the Court Online Portal on <span class="fill">[DATE]</span> and served on all three Respondents as follows:</p>
+              <p>TAKE NOTICE that the Applicant hereby files the following document(s) in terms of <strong>Rule 37(20)</strong> of the Labour Court Rules:</p>
+              <p style="margin-left:1.5rem;"><strong>1.</strong> <span class="fill">[Supplementary Affidavit and Notice of Amendment / Notice of Standing By]</span>;</p>
+              <p style="margin-left:1.5rem;"><strong>2.</strong> Proof of Service Affidavit.</p>
+              <p>The above was filed electronically via the Court Online Portal on <span class="fill">[DATE]</span>.</p>
+              <p>Copies have been served on all three Respondents as follows:</p>
               <p style="margin-left:1.5rem;"><strong>1.</strong> First Respondent (CCMA): by <span class="fill">[email / hand / post]</span> on <span class="fill">[DATE]</span>;</p>
               <p style="margin-left:1.5rem;"><strong>2.</strong> Second Respondent (Employer): by <span class="fill">[email / hand / post]</span> on <span class="fill">[DATE]</span>;</p>
               <p style="margin-left:1.5rem;"><strong>3.</strong> Third Respondent (Commissioner): by <span class="fill">[email / hand / post]</span> on <span class="fill">[DATE]</span> (at the same address as the CCMA unless otherwise indicated).</p>
-              <p>A proof of service affidavit is filed herewith.</p>
               <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
               <p style="margin-top:2rem;">___________________________<br>Signature</p>
               <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
             </div>
             <div class="generated-doc-actions">
-              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('fileNoticeTemplate','Notice_Filing_Service.html')">📥 Download Notice</button>
+              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('fileSuppNoticeTemplate','Notice_Filing_Service_Supplementary.html')">📥 Download Notice</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: WHAT COMES NEXT -->
+      <div id="tab-next" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">What Comes Next: Answering & Replying Affidavits</div>
+              <div class="adv-card__subtitle">Rules 37(22), 37(23), 37(24) & 37(25) — The full affidavit exchange cycle</div>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 The Law — The Full Exchange Cycle</h4>
+            <p><strong>Rule 37(22):</strong> Any person wishing to oppose must, within <strong>10 days after receipt of the record and notice of amendment OR notice that the applicant stands by its notice of motion</strong>, deliver an <strong>answering affidavit</strong> in answer to the allegations made by the applicant.</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 37(23):</strong> An answering affidavit may do <strong>no more than</strong> record, in concise terms, the grounds on which the application is opposed.</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 37(24):</strong> The applicant may file a <strong>replying affidavit</strong> within <strong>5 days</strong> of receipt of an answering affidavit. A replying affidavit may do <strong>no more than respond to the grounds on which the application is opposed</strong>, <strong>without any repetition</strong> of the content of the founding and supplementary affidavits.</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 37(25):</strong> After receipt of any replying affidavit or the expiry of the time limit for filing a replying affidavit (whichever occurs first), the applicant must index and paginate the file in terms of Rule 29(3), with separate sections for pleadings/affidavits, notices, and the record, and within <strong>10 days</strong> apply to the registrar for a hearing date.</p>
+          </div>
+
+          <div class="next-steps">
+            <h4>🔄 Step-by-Step: What Happens After You File</h4>
+            <ul>
+              <li><strong>You file</strong> either (a) Supplementary Affidavit + Notice of Amendment, OR (b) Notice of Standing By (within 5 court days of filing the record).</li>
+              <li><strong>Respondent has 10 court days</strong> (Rule 37(22)) to file a <strong>Notice of Intention to Oppose</strong> + <strong>Answering Affidavit</strong> from the date they receive your filing and the record.</li>
+              <li><strong>If no Answering Affidavit is filed within 10 court days:</strong> The matter is <strong>unopposed</strong>. You may request the Registrar to enrol it on the unopposed roll (Rule 36(1)). Proceed to the <strong>Set Down</strong> step.</li>
+              <li><strong>If an Answering Affidavit IS filed:</strong> You have <strong>5 court days</strong> (Rule 37(24)) to file a <strong>Replying Affidavit</strong>. This may ONLY respond to new issues raised in the Answering Affidavit. You may NOT repeat your founding or supplementary affidavit.</li>
+              <li><strong>If you choose NOT to file a Replying Affidavit:</strong> That is also valid. You may stand by your existing pleadings and proceed to indexing and set down.</li>
+              <li><strong>After Replying Affidavit (or expiry of 5 days):</strong> Index and paginate the complete file (Rule 37(25)) and apply for a hearing date within <strong>10 days</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="info-grid" style="margin-top:1.5rem;">
+            <div class="info-card">
+              <h4>📝 Answering Affidavit (Respondent)</h4>
+              <p><strong>Deadline:</strong> 10 court days after receipt of record + your notice.<br><strong>Scope:</strong> Concise grounds of opposition only (Rule 37(23)).<br><strong>Parties:</strong> CCMA, Employer, and/or Commissioner may each file one.<br><strong>Consequence of non-filing:</strong> Unopposed enrolment (Rule 36(1)).</p>
+            </div>
+            <div class="info-card">
+              <h4>✍️ Replying Affidavit (You — Optional)</h4>
+              <p><strong>Deadline:</strong> 5 court days after receipt of Answering Affidavit.<br><strong>Scope:</strong> Respond ONLY to new issues raised. NO repetition of founding/supplementary (Rule 37(24)).<br><strong>Optional:</strong> You may choose not to file one.<br><strong>Costs risk:</strong> Repetitive material may attract adverse costs.</p>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <strong>Key Principle:</strong> The affidavit exchange is a <strong>closed cycle</strong>. Founding → (Optional Supplementary) → Answering → (Optional Replying) → Set Down. Each affidavit is limited in scope. The Answering Affidavit cannot raise new grounds not responsive to your application. The Replying Affidavit cannot introduce new facts — it only addresses what the Respondent raised.
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--warning" style="margin-top:1rem;">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ Important Note on the Fourth Affidavit</div>
+              <p>Under <strong>Rule 35(3)</strong> (general motion proceedings), the Respondent may be afforded a further 5 days to file a <strong>fourth affidavit</strong> after your replying affidavit. However, in <strong>review proceedings under Rule 37</strong>, the cycle typically ends at the replying affidavit. The parties must then proceed to index, paginate, and apply for a hearing date under Rule 37(25). If a Respondent seeks to file further affidavits beyond the replying stage, they may require leave of the court or the parties' consent.</p>
             </div>
           </div>
         </div>
@@ -407,7 +546,7 @@
         <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
         <div class="adv-deadline-calculator">
           <div class="adv-form-group">
-            <label>Start Date (date record filed)</label>
+            <label>Start Date</label>
             <input type="date" class="adv-input adv-deadline__input" name="start_date">
           </div>
           <div class="adv-form-group">
@@ -425,7 +564,7 @@
         <div class="adv-chat" data-chat-id="supplementary">
           <div class="adv-chat__messages"></div>
           <div class="adv-chat__input-group">
-            <input type="text" class="adv-chat__input" placeholder="Ask about this step...">
+            <input type="text" class="adv-chat__input" placeholder="Ask about the supplementary step...">
             <button class="adv-chat__send">Send</button>
           </div>
         </div>
@@ -458,142 +597,260 @@
 
   <script src="shared-scripts.js"></script>
   <script>
-    // Tab switching — uses inline style display (most reliable)
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        // Reset all buttons
-        document.querySelectorAll('.tab-btn').forEach(b => {
-          b.classList.remove('adv-btn--primary', 'active');
-          b.classList.add('adv-btn--ghost');
-        });
-        // Activate clicked button
-        this.classList.remove('adv-btn--ghost');
-        this.classList.add('adv-btn--primary', 'active');
-        // Hide all tab contents
-        document.querySelectorAll('.tab-content').forEach(c => {
-          c.style.display = 'none';
-        });
-        // Show target tab content
-        const targetId = this.getAttribute('data-tab');
-        const target = document.getElementById(targetId);
-        if (target) {
-          target.style.display = 'block';
-        }
-      });
-    });
-
-    function handleNeedChange() {
-      const val = document.getElementById('needSupplementary').value;
-      const box = document.getElementById('needDecisionMsg');
-      let html = '';
-      if (val === 'no') {
-        html = '<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">✅ Skip Supplementary</div><p>Your founding affidavit is complete. Go to the <strong>Notice of Standing By</strong> tab, download the template, and file it within 5 court days. Then proceed to the next step.</p></div></div>';
-      } else if (val === 'yes') {
-        html = '<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">⚠️ Proceed with Caution</div><p>Go to the <strong>AI Draft Supplementary</strong> tab. The platform will help you draft a compliant affidavit. Remember: it can only <strong>supplement or abandon</strong> existing grounds. It cannot introduce entirely new, unrelated issues.</p></div></div>';
-      } else {
-        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content">If you are unsure, the safest option is to file a <strong>Notice of Standing By</strong>. You can still argue all your existing grounds. A supplementary affidavit is only needed if the record reveals something genuinely new that strengthens or corrects your case.</div></div>';
+    // ===== RELIABLE TAB SWITCHING =====
+    function switchTab(tabId) {
+      // Hide all tab contents
+      var contents = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < contents.length; i++) {
+        contents[i].style.display = 'none';
+        contents[i].classList.remove('active');
       }
-      box.innerHTML = html;
+      // Remove active class from all buttons
+      var buttons = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      // Show selected tab
+      var selected = document.getElementById(tabId);
+      if (selected) {
+        selected.style.display = 'block';
+        selected.classList.add('active');
+      }
+      // Activate corresponding button
+      var btn = document.getElementById('btn-' + tabId);
+      if (btn) {
+        btn.classList.add('active');
+      }
+      // Scroll to top of main content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function handleSuppUpload(input) {
-      const file = input.files[0];
+    // ===== FILE UPLOAD =====
+    function handleSuppFile(input) {
+      var file = input.files[0];
       if (!file) return;
-      const display = document.getElementById('suppFileName');
+      var display = document.getElementById('suppFileName');
       display.textContent = '✅ Uploaded: ' + file.name;
       display.style.display = 'block';
-      Advome.toast.show('File uploaded: ' + file.name, 'success');
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('File uploaded: ' + file.name, 'success');
+      }
     }
 
+    // ===== ABANDON GROUND TOGGLE =====
+    document.getElementById('abandonGround').addEventListener('change', function() {
+      var details = document.getElementById('abandonDetails');
+      if (this.value === 'yes') {
+        details.style.display = 'block';
+      } else {
+        details.style.display = 'none';
+      }
+    });
+
+    // ===== GENERATE SUPPLEMENTARY AFFIDAVIT =====
     function generateSupplementary() {
-      const name = document.getElementById('draftName').value || '[YOUR FULL NAME]';
-      const caseNo = document.getElementById('draftCaseNo').value || '[CASE NUMBER]';
-      const seat = document.getElementById('draftSeat').value;
-      const foundingDate = document.getElementById('draftFoundingDate').value || '[DATE]';
-      const concerns = document.getElementById('userConcerns').value || '[EXPLAIN WHAT THE RECORD REVEALS]';
-      const grounds = Array.from(document.querySelectorAll('.supp-ground:checked')).map(cb => cb.value);
+      var seat = document.getElementById('suppSeat').value;
+      var caseNo = document.getElementById('suppCaseNo').value || '[CASE NUMBER]';
+      var appName = document.getElementById('suppAppName').value || '[APPLICANT NAME]';
+      var resp1 = document.getElementById('suppResp1').value || '[CCMA]';
+      var resp2 = document.getElementById('suppResp2').value || '[EMPLOYER NAME]';
+      var resp3 = document.getElementById('suppResp3').value || '[COMMISSIONER NAME]';
+      var ccmacase = document.getElementById('suppCcmacase').value || '[CCMA CASE NUMBER]';
+      var foundingDate = document.getElementById('suppFoundingDate').value || '[DATE]';
+      var explanation = document.getElementById('suppExplanation').value || '[NO EXPLANATION PROVIDED]';
+      var abandon = document.getElementById('abandonGround').value === 'yes';
+      var abandonText = document.getElementById('abandonText').value || '';
 
-      const groundLabels = {
-        procedural: 'procedural unfairness',
-        substantive: 'substantive unfairness',
-        irrational: 'irrationality / unreasonableness of the award',
-        misconduct: 'misconduct / gross irregularity by the Commissioner',
-        evidence: 'error in handling of evidence',
-        abandon: 'abandonment of this ground'
-      };
-      const groundText = grounds.length > 0 ? grounds.map(g => groundLabels[g] || g).join(', ') : '[SELECT GROUND(S)]';
+      // Collect selected grounds
+      var grounds = [];
+      if (document.getElementById('groundMisconduct').checked) grounds.push('misconduct not proved');
+      if (document.getElementById('groundProcedure').checked) grounds.push('procedural unfairness');
+      if (document.getElementById('groundEvidence').checked) grounds.push('failure to consider evidence');
+      if (document.getElementById('groundIrregularity').checked) grounds.push('gross irregularity');
+      if (document.getElementById('groundIrrational').checked) grounds.push('unreasonable/irrational award');
+      if (document.getElementById('groundBias').checked) grounds.push('bias/conflict of interest');
+      if (document.getElementById('groundJurisdiction').checked) grounds.push('lack of jurisdiction');
+      if (document.getElementById('groundOther').checked) grounds.push('other grounds');
 
-      const html = '<div class="doc-header">' +
-        '<div class="doc-title">Supplementary Affidavit</div>' +
-        '</div>' +
-        '<p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT ' + seat.toUpperCase() + ')</p>' +
-        '<p style="text-align:center;">Case No: ' + caseNo + '</p>' +
-        '<p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong>' + name + '</strong> — Applicant<br>and<br><strong>First Respondent:</strong> Commission for Conciliation, Mediation and Arbitration (CCMA)<br><strong>Second Respondent:</strong> [EMPLOYER NAME]<br><strong>Third Respondent:</strong> [COMMISSIONER NAME] — Commissioner in his/her personal capacity</p>' +
-        '<p style="text-align:center; font-weight:bold; margin-bottom:1rem;">SUPPLEMENTARY AFFIDAVIT</p>' +
-        '<p>I, the undersigned <strong>' + name + '</strong>, do hereby make oath and state:</p>' +
-        '<p><strong>1.</strong> I am the Applicant in the above matter and the deponent to the Founding Affidavit filed on <strong>' + foundingDate + '</strong>.</p>' +
-        '<p><strong>2.</strong> Since filing the Founding Affidavit, I have reviewed the transcribed record of the arbitration proceedings filed on <span class="fill">[DATE RECORD FILED]</span>.</p>' +
-        '<p><strong>3.</strong> The record reveals new facts that supplement the following ground(s) for review: <strong>' + groundText + '</strong>.</p>' +
-        '<p><strong>4.</strong> I wish to supplement my Founding Affidavit with the following additional facts and/or corrections:</p>' +
-        '<p style="margin-left:1.5rem; white-space:pre-wrap; background:#f8f9fa; padding:1rem; border-radius:6px; border:1px solid var(--border);">' + concerns.replace(/
-/g, '<br>') + '</p>' +
-        '<p><strong>5.</strong> These supplementary facts do not introduce any new, unrelated grounds for review. They merely supplement the grounds already recorded in my Founding Affidavit, in terms of <strong>Rule 37(21)</strong> of the Labour Court Rules.</p>' +
-        '<p><strong>6.</strong> I confirm that I do not intend to include any irrelevant or repetitive material in this supplementary affidavit.</p>' +
-        '<p><strong>7.</strong> I pray that this Honourable Court grant the application as prayed in the Notice of Motion, as supplemented herein.</p>' +
-        '<p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>' +
-        '<p style="margin-top:2rem;">___________________________<br>Signature</p>' +
-        '<p><strong>' + name + '</strong></p>' +
-        '<p style="margin-top:1.5rem; font-size:0.85rem; color:#555;"><em>The deponent acknowledges that he/she knows and understands the contents of this affidavit, that the contents are true and correct, and that he/she has no objection to taking the prescribed oath / affirmation.</em></p>';
+      var groundsText = grounds.length > 0 ? grounds.join(', ') : '[REVIEW GROUNDS]';
 
-      document.getElementById('suppTemplate').innerHTML = html;
-      document.getElementById('supplementaryOutput').style.display = 'block';
-      Advome.toast.show('Supplementary Affidavit drafted! Review carefully before filing.', 'success');
-      document.getElementById('suppTemplate').scrollIntoView({behavior: 'smooth'});
+      var doc = 'IN THE LABOUR COURT OF SOUTH AFRICA\n(HELD AT ' + seat.toUpperCase() + ')\n\n';
+      doc += 'Case No: ' + caseNo + '\n\n';
+      doc += 'In the matter between:\n' + appName + ' — Applicant\n';
+      doc += 'and\n';
+      doc += 'First Respondent: ' + resp1 + '\n';
+      doc += 'Second Respondent: ' + resp2 + '\n';
+      doc += 'Third Respondent: ' + resp3 + ' — Commissioner in his/her personal capacity\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'SUPPLEMENTARY AFFIDAVIT\n';
+      doc += '(Rule 37(20)(a) and Rule 37(21) of the Labour Court Rules)\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'I, the undersigned ' + appName + ', do hereby make oath and state:\n\n';
+      doc += '1.  I am the Applicant in the above matter. I deposed to a founding affidavit on ' + foundingDate + '.\n\n';
+      doc += '2.  The transcribed record of the CCMA arbitration proceedings (Case No: ' + ccmacase + ') has since been filed with the Registrar.\n\n';
+      doc += '3.  I hereby supplement the grounds for review recorded in my founding affidavit, which relate to the following existing review grounds: ' + groundsText + '.\n\n';
+      doc += '4.  The record reveals the following matters which supplement the aforesaid grounds:\n\n';
+
+      // Split explanation into paragraphs
+      var paras = explanation.split('\n').filter(function(p) { return p.trim().length > 0; });
+      if (paras.length === 0) paras = [explanation];
+      var paraNum = 5;
+      for (var i = 0; i < paras.length; i++) {
+        doc += paraNum + '.  ' + paras[i].trim() + '\n\n';
+        paraNum++;
+      }
+
+      if (abandon) {
+        doc += paraNum + '.  I hereby abandon the following ground(s) previously raised in my founding affidavit: ' + abandonText + '.\n\n';
+        paraNum++;
+      }
+
+      doc += paraNum + '.  I confirm that this supplementary affidavit does not introduce any new review ground not already recorded in my founding affidavit, and is filed strictly in compliance with Rule 37(21) of the Labour Court Rules.\n\n';
+      paraNum++;
+
+      doc += paraNum + '.  I pray that this Honourable Court grant the relief sought in the notice of motion, as supplemented herein.\n\n';
+
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'I, the deponent, do hereby declare that I know and understand the contents of this affidavit, that the facts stated herein are true and correct, and that I have no objection to taking the prescribed oath. I regard the oath as binding on my conscience.\n\n';
+      doc += 'Signed at ____________________ on this ______ day of ______________ ________.\n\n';
+      doc += '___________________________\nSignature\n\n';
+      doc += appName.toUpperCase() + '\n';
+      doc += 'Address: ________________________________\n';
+      doc += 'Email: ________________________________\n';
+      doc += 'Tel: ________________________________\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'COMMISSIONER OF OATHS\n\n';
+      doc += 'I, the undersigned Commissioner of Oaths, certify that the deponent has acknowledged that he/she knows and understands the contents of this affidavit, that the deponent has no objection to taking the prescribed oath, and that the deponent considers the oath binding on his/her conscience.\n\n';
+      doc += 'Signed at ____________________ on this ______ day of ______________ ________.\n\n';
+      doc += '___________________________\nSignature of Commissioner\n\n';
+      doc += 'Name: ________________________________\n';
+      doc += 'Designation: ________________________________\n';
+      doc += 'Area: ________________________________\n';
+      doc += 'Date: ________________________________\n';
+
+      document.getElementById('suppPreview').textContent = doc;
+      document.getElementById('suppOutput').style.display = 'block';
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Supplementary affidavit drafted! Review carefully before filing.', 'success');
+      }
+      document.getElementById('suppPreview').scrollIntoView({behavior: 'smooth'});
     }
 
+    // ===== DOWNLOAD SUPP =====
     function downloadSupp() {
-      const el = document.getElementById('suppTemplate');
-      const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Supplementary_Affidavit.html</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
-      const blob = new Blob([html], {type: 'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'Supplementary_Affidavit.html';
+      var text = document.getElementById('suppPreview').textContent;
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Supplementary_Affidavit</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem; white-space:pre-wrap;}</style></head><body>' + text.replace(/\n/g, '<br>') + '</body></html>';
+      var blob = new Blob([html], {type: 'text/html'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'Supplementary_Affidavit.html';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      Advome.toast.show('Download started', 'success');
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Download started', 'success');
+      }
     }
 
+    // ===== COPY SUPP =====
     function copySupp() {
-      const text = document.getElementById('suppTemplate').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        Advome.toast.show('Copied to clipboard!', 'success');
-      }).catch(() => {
-        Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
+      var text = document.getElementById('suppPreview').textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        if (typeof Advome !== 'undefined' && Advome.toast) {
+          Advome.toast.show('Copied to clipboard!', 'success');
+        } else {
+          alert('Copied to clipboard!');
+        }
+      }).catch(function() {
+        if (typeof Advome !== 'undefined' && Advome.toast) {
+          Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
+        } else {
+          alert('Copy failed — use Ctrl+C');
+        }
       });
     }
 
-    function handleFileType() {
-      const val = document.getElementById('fileType').value;
-      const box = document.getElementById('fileInstructions');
-      let html = '';
-      if (val === 'supplementary') {
-        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📤 Filing Supplementary + Notice of Amendment</div><p><strong>Court Online:</strong> My Cases → Select case → My Case Documents → Upload → Document type: "Supplementary Affidavit" → Attach PDF → Sign → Submit.<br><br><strong>Also file:</strong> A Notice of Amendment varying the terms of the Notice of Motion (if the supplementary affidavit changes the relief sought).<br><br><strong>Service:</strong> Serve on all three Respondents. The Commissioner is served at the same address as the CCMA unless otherwise indicated.</p></div></div>';
-      } else if (val === 'standby') {
-        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📤 Filing Notice of Standing By</div><p><strong>Court Online:</strong> My Cases → Select case → My Case Documents → Upload → Document type: "Notice of Standing By" or "Other" → Attach PDF → Sign → Submit.<br><br><strong>Service:</strong> Serve on all three Respondents. The Commissioner is served at the same address as the CCMA unless otherwise indicated.</p></div></div>';
-      }
-      box.innerHTML = html;
-    }
-
+    // ===== DOWNLOAD TEMPLATE =====
     function downloadTemplate(elementId, filename) {
-      const el = document.getElementById(elementId);
+      var el = document.getElementById(elementId);
       if (!el) return;
-      const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
-      const blob = new Blob([html], {type: 'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = filename;
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
+      var blob = new Blob([html], {type: 'text/html'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a'); a.href = url; a.download = filename;
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      Advome.toast.show('Download started', 'success');
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Download started', 'success');
+      }
     }
+
+    // ===== FILING INSTRUCTIONS =====
+    function updateFilingInstructions() {
+      var type = document.getElementById('filingType').value;
+      var box = document.getElementById('filingInstructions');
+      if (type === 'supp') {
+        box.innerHTML = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📄 Supplementary Affidavit + Notice of Amendment</div><p>You are filing <strong>two documents</strong>: (1) the Notice of Amendment (amending your Notice of Motion), and (2) the Supplementary Affidavit. Both must be filed together within 5 court days. Upload each as a separate document on Court Online, or combine them into one PDF clearly labelled. Remember: the supplementary may only supplement or abandon existing grounds (Rule 37(21)).</p></div></div>';
+      } else {
+        box.innerHTML = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">✋ Notice of Standing By</div><p>You are filing a single document: the Notice that you stand by your Notice of Motion and Founding Affidavit. This is the simpler path. Upload it on Court Online under "Notice" or "Other" (clearly labelled). No further action is required from you until the Respondent files (or fails to file) an Answering Affidavit.</p></div></div>';
+      }
+    }
+
+    // Initialize filing instructions
+    updateFilingInstructions();
+
+    // ===== COURT DAYS CALCULATION (for sidebar calculator) =====
+    function isPublicHoliday(d) {
+      var year = d.getFullYear();
+      var holidays = [
+        new Date(year, 0, 1), new Date(year, 2, 21), new Date(year, 3, 27),
+        new Date(year, 4, 1), new Date(year, 5, 16), new Date(year, 7, 9),
+        new Date(year, 8, 24), new Date(year, 11, 16), new Date(year, 11, 25), new Date(year, 11, 26)
+      ];
+      for (var i = 0; i < holidays.length; i++) {
+        if (holidays[i].getDate() === d.getDate() && holidays[i].getMonth() === d.getMonth()) return true;
+      }
+      return false;
+    }
+    function isCourtDay(d) {
+      var day = d.getDay();
+      if (day === 0 || day === 6) return false;
+      var month = d.getMonth(); var date = d.getDate();
+      if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
+      if (isPublicHoliday(d)) return false;
+      return true;
+    }
+    function addCourtDays(startDate, days) {
+      var d = new Date(startDate);
+      d.setDate(d.getDate() + 1);
+      var count = 0;
+      while (count < days) {
+        if (isCourtDay(d)) count++;
+        if (count < days) d.setDate(d.getDate() + 1);
+      }
+      return d;
+    }
+
+    // Wire up sidebar calculator if elements exist
+    (function() {
+      var startInput = document.querySelector('.adv-deadline__input');
+      var daysInput = document.querySelector('.adv-deadline__days');
+      var display = document.querySelector('.adv-deadline__display');
+      if (startInput && daysInput && display) {
+        function calc() {
+          var start = startInput.value;
+          var days = parseInt(daysInput.value, 10);
+          if (!start || isNaN(days) || days < 1) {
+            display.innerHTML = '<span class="adv-deadline__label">Select a date to calculate deadline</span>';
+            return;
+          }
+          var result = addCourtDays(new Date(start), days);
+          var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+          display.innerHTML = '<span class="adv-deadline__label">Deadline: <strong>' + result.toLocaleDateString('en-ZA', opts) + '</strong></span>';
+        }
+        startInput.addEventListener('change', calc);
+        daysInput.addEventListener('input', calc);
+      }
+    })();
   </script>
 </body>
 </html>
