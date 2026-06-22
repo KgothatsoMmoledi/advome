@@ -360,30 +360,71 @@
           </div>
 
           <div class="adv-form-group">
-            <label><strong>Notice of Standing By Template</strong> <span class="badge badge--info">Rule 37(20)(b)</span></label>
-            <div class="template-box" id="standbyTemplate">
-              <div class="doc-header">
-                <div class="doc-title">Notice of Standing By Notice of Motion</div>
+            <label><strong>Step 1: Enter Case Details</strong></label>
+            <div class="inline-form">
+              <div class="adv-form-group">
+                <label>Labour Court Seat</label>
+                <select class="adv-input" id="standbySeat">
+                  <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                </select>
               </div>
-              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
-              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
-              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span> — Commissioner in his/her personal capacity</p>
-              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">NOTICE OF STANDING BY NOTICE OF MOTION</p>
-              <p><strong>TO:</strong> The Registrar of the Labour Court</p>
-              <p><strong>AND TO:</strong> All Respondents</p>
-              <p>TAKE NOTICE that the Applicant hereby gives notice, in terms of <strong>Rule 37(20)(b)</strong> of the Labour Court Rules, that the Applicant <strong>stands by its notice of motion and founding affidavit</strong> filed on <span class="fill">[DATE OF FOUNDING AFFIDAVIT]</span>.</p>
-              <p>The Applicant does not intend to file a supplementary affidavit or notice of amendment.</p>
-              <p>The transcribed record of the proceedings was filed on <span class="fill">[DATE RECORD FILED]</span>.</p>
-              <p>This notice is filed together with proof of service on all Respondents.</p>
-              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
-              <p style="margin-top:2rem;">___________________________<br>Signature</p>
-              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
-              <p style="margin-top:1rem; font-size:0.85rem; color:#666;">Address: <span class="fill">[YOUR ADDRESS FOR SERVICE]</span></p>
-              <p style="font-size:0.85rem; color:#666;">Email: <span class="fill">[YOUR EMAIL]</span></p>
-              <p style="font-size:0.85rem; color:#666;">Tel: <span class="fill">[YOUR TEL]</span></p>
+              <div class="adv-form-group">
+                <label>Case Number</label>
+                <input type="text" class="adv-input" id="standbyCaseNo" placeholder="e.g. JRB1234/2026">
+              </div>
+              <div class="adv-form-group">
+                <label>Applicant Name</label>
+                <input type="text" class="adv-input" id="standbyAppName" placeholder="Your full name">
+              </div>
+              <div class="adv-form-group">
+                <label>First Respondent (CCMA)</label>
+                <input type="text" class="adv-input" id="standbyResp1" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+              </div>
+              <div class="adv-form-group">
+                <label>Second Respondent (Employer)</label>
+                <input type="text" class="adv-input" id="standbyResp2" placeholder="Employer name">
+              </div>
+              <div class="adv-form-group">
+                <label>Third Respondent (Commissioner)</label>
+                <input type="text" class="adv-input" id="standbyResp3" placeholder="Commissioner name">
+              </div>
+              <div class="adv-form-group">
+                <label>Date of Founding Affidavit</label>
+                <input type="date" class="adv-input" id="standbyFoundingDate">
+              </div>
+              <div class="adv-form-group">
+                <label>Date Record Was Filed</label>
+                <input type="date" class="adv-input" id="standbyRecordFiledDate">
+              </div>
+              <div class="adv-form-group">
+                <label>Place of Signature</label>
+                <input type="text" class="adv-input" id="standbyPlace" placeholder="e.g. Johannesburg">
+              </div>
+              <div class="adv-form-group">
+                <label>Your Address for Service</label>
+                <input type="text" class="adv-input" id="standbyAddress" placeholder="Physical address">
+              </div>
+              <div class="adv-form-group">
+                <label>Your Email</label>
+                <input type="email" class="adv-input" id="standbyEmail" placeholder="email@example.com">
+              </div>
+              <div class="adv-form-group">
+                <label>Your Telephone</label>
+                <input type="tel" class="adv-input" id="standbyTel" placeholder="012 345 6789">
+              </div>
+            </div>
+          </div>
+
+          <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="generateStandby()">⚡ Generate Notice of Standing By</button>
+
+          <div id="standbyOutput" style="display:none; margin-top:1.5rem;">
+            <div class="adv-form-group">
+              <label><strong>Draft Notice of Standing By Preview</strong> <span class="badge badge--success">Rule 37(20)(b) Compliant</span></label>
+              <div class="preview-area" id="standbyPreview"></div>
             </div>
             <div class="generated-doc-actions">
-              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('standbyTemplate','Notice_of_Standing_By.html')">📥 Download Notice</button>
+              <button class="adv-btn adv-btn--primary" onclick="downloadStandby()">📥 Download Notice</button>
+              <button class="adv-btn adv-btn--secondary" onclick="copyStandby()">📋 Copy to Clipboard</button>
             </div>
           </div>
 
@@ -851,6 +892,95 @@
         daysInput.addEventListener('input', calc);
       }
     })();
+
+    // ===== GENERATE NOTICE OF STANDING BY =====
+    function generateStandby() {
+      var seat = document.getElementById('standbySeat').value;
+      var caseNo = document.getElementById('standbyCaseNo').value || '[CASE NUMBER]';
+      var appName = document.getElementById('standbyAppName').value || '[APPLICANT NAME]';
+      var resp1 = document.getElementById('standbyResp1').value || '[CCMA]';
+      var resp2 = document.getElementById('standbyResp2').value || '[EMPLOYER NAME]';
+      var resp3 = document.getElementById('standbyResp3').value || '[COMMISSIONER NAME]';
+      var foundingDate = document.getElementById('standbyFoundingDate').value || '[DATE]';
+      var recordFiled = document.getElementById('standbyRecordFiledDate').value || '[DATE]';
+      var place = document.getElementById('standbyPlace').value || '[PLACE]';
+      var address = document.getElementById('standbyAddress').value || '[ADDRESS]';
+      var email = document.getElementById('standbyEmail').value || '[EMAIL]';
+      var tel = document.getElementById('standbyTel').value || '[TEL]';
+
+      var today = new Date();
+      var day = today.getDate();
+      var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var month = monthNames[today.getMonth()];
+      var year = today.getFullYear();
+
+      var doc = 'IN THE LABOUR COURT OF SOUTH AFRICA\n(HELD AT ' + seat.toUpperCase() + ')\n\n';
+      doc += 'Case No: ' + caseNo + '\n\n';
+      doc += 'In the matter between:\n';
+      doc += appName + ' — Applicant\n';
+      doc += 'and\n';
+      doc += 'First Respondent: ' + resp1 + '\n';
+      doc += 'Second Respondent: ' + resp2 + '\n';
+      doc += 'Third Respondent: ' + resp3 + ' — Commissioner in his/her personal capacity\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'NOTICE OF STANDING BY NOTICE OF MOTION\n';
+      doc += '(Rule 37(20)(b) of the Labour Court Rules)\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'TO: The Registrar of the Labour Court\n';
+      doc += 'AND TO: All Respondents\n\n';
+      doc += 'TAKE NOTICE that the Applicant hereby gives notice, in terms of Rule 37(20)(b) of the Labour Court Rules, that the Applicant stands by its notice of motion and founding affidavit filed on ' + foundingDate + '.\n\n';
+      doc += '1.  The Applicant does not intend to file a supplementary affidavit or notice of amendment.\n\n';
+      doc += '2.  The transcribed record of the proceedings was filed on ' + recordFiled + '.\n\n';
+      doc += '3.  This notice is filed together with proof of service on all Respondents.\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'Signed at ' + place + ' on this ' + day + ' day of ' + month + ' ' + year + '.\n\n';
+      doc += '___________________________\nSignature\n\n';
+      doc += appName.toUpperCase() + '\n';
+      doc += 'Address for service: ' + address + '\n';
+      doc += 'Email: ' + email + '\n';
+      doc += 'Tel: ' + tel + '\n\n';
+      doc += '═══════════════════════════════════════════════════════════════';
+
+      document.getElementById('standbyPreview').textContent = doc;
+      document.getElementById('standbyOutput').style.display = 'block';
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Notice of Standing By drafted! Review and download.', 'success');
+      }
+      document.getElementById('standbyPreview').scrollIntoView({behavior: 'smooth'});
+    }
+
+    // ===== DOWNLOAD STANDBY =====
+    function downloadStandby() {
+      var text = document.getElementById('standbyPreview').textContent;
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Notice_of_Standing_By</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem; white-space:pre-wrap;}</style></head><body>' + text.replace(/\n/g, '<br>') + '</body></html>';
+      var blob = new Blob([html], {type: 'text/html'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'Notice_of_Standing_By.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Download started', 'success');
+      }
+    }
+
+    // ===== COPY STANDBY =====
+    function copyStandby() {
+      var text = document.getElementById('standbyPreview').textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        if (typeof Advome !== 'undefined' && Advome.toast) {
+          Advome.toast.show('Copied to clipboard!', 'success');
+        } else {
+          alert('Copied to clipboard!');
+        }
+      }).catch(function() {
+        if (typeof Advome !== 'undefined' && Advome.toast) {
+          Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
+        } else {
+          alert('Copy failed — use Ctrl+C');
+        }
+      });
+    }
   </script>
 </body>
 </html>
