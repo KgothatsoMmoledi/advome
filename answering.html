@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Answering Affidavit — Advome</title>
+  <link rel="stylesheet" href="shared-styles.css">
+  <style>
+    :root {
+      --primary: #1a365d; --primary-light: #2c5282; --accent: #d69e2e;
+      --success: #38a169; --danger: #e53e3e; --warning: #dd6b20;
+      --bg-page: #f7fafc; --bg-card: #ffffff; --border: #e2e8f0;
+      --text: #2d3748; --text-muted: #718096;
+    }
+    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
+    .tab-btn { border-radius:20px; font-size:0.85rem; padding:0.5rem 1rem; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; transition:all .2s; font-weight:500; }
+    .tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:600; }
+    .tab-btn:hover:not(.active) { background:var(--bg-page); }
+    .tab-content { display:none; animation:fadeIn .3s ease; }
+    .tab-content.active { display:block; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+    .template-box { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:600px; overflow-y:auto; }
+    .template-box .doc-header { text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem; }
+    .template-box .doc-title { font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary); letter-spacing:1px; }
+    .template-box .fill { border-bottom:1px solid #999; display:inline-block; min-width:120px; padding:0 6px; color:#555; }
+    .template-box p { margin:.6rem 0; }
+    .upload-zone { border:2px dashed var(--border); border-radius:8px; padding:2rem; text-align:center; background:#fff; cursor:pointer; transition:all .2s; }
+    .upload-zone:hover { border-color:var(--primary-light); background:#f7fafc; }
+    .upload-zone__icon { font-size:2.5rem; margin-bottom:.5rem; }
+    .step-list { counter-reset:step; list-style:none; padding:0; }
+    .step-list li { position:relative; padding-left:2.5rem; margin-bottom:1rem; }
+    .step-list li::before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:1.8rem; height:1.8rem; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; }
+    .rule-box { background:#edf2f7; border-left:4px solid var(--primary); padding:1rem 1.25rem; border-radius:6px; margin-bottom:1rem; }
+    .rule-box h4 { margin:0 0 .4rem; color:var(--primary); font-size:1rem; }
+    .rule-box p, .rule-box ul { margin:.25rem 0; font-size:0.9rem; }
+    .badge { display:inline-block; padding:.15rem .5rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
+    .badge--danger { background:#fed7d7; color:#742a2a; }
+    .badge--warning { background:#feebc8; color:#7c2d12; }
+    .badge--success { background:#c6f6d5; color:#22543d; }
+    .badge--info { background:#bee3f8; color:#2a4365; }
+    .inline-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media(max-width:600px){ .inline-form{grid-template-columns:1fr;} }
+    .generated-doc-actions { display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; }
+    .preview-area { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:500px; overflow-y:auto; white-space:pre-wrap; }
+    .hidden-file-input { display:none; }
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
+    @media(max-width:600px){ .info-grid{grid-template-columns:1fr;} }
+    .info-card { background:#f7fafc; border:1px solid var(--border); border-radius:8px; padding:1rem; }
+    .info-card h4 { margin:0 0 .5rem; color:var(--primary); font-size:0.95rem; }
+    .info-card p { margin:0; font-size:0.85rem; color:var(--text-muted); }
+    .doc-upload-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
+    @media(max-width:600px){ .doc-upload-row{grid-template-columns:1fr;} }
+    .upload-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.25rem; }
+    .upload-card h4 { margin:0 0 .5rem; color:var(--primary); font-size:0.95rem; }
+    .upload-card p { margin:0 0 .75rem; font-size:0.85rem; color:var(--text-muted); }
+  </style>
+<base target="_blank">
+</head>
+<body>
+
+  <header class="adv-header">
+    <div class="adv-header__logo">Advome<span>.</span></div>
+    <nav class="adv-header__nav">
+      <a href="ccma.html">CCMA</a>
+      <a href="motion.html">Labour Court</a>
+      <a href="#">Help</a>
+    </nav>
+    <div class="adv-header__user">
+      <div class="adv-header__avatar">SRL</div>
+    </div>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
+
+  <div class="adv-progress" data-workflow="ccma" data-current-step="answering"></div>
+
+  <section class="adv-hero">
+    <div class="adv-hero__content">
+      <h1>Answering Affidavit Received</h1>
+      <p>Step 14 of 21 — Review the Respondent's opposition and decide your next move</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+  </section>
+
+  <div class="adv-container">
+    <main>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" id="btn-tab-status" onclick="switchTab('tab-status')">1. Status Check</button>
+        <button class="tab-btn" id="btn-tab-review" onclick="switchTab('tab-review')">2. Review & Upload</button>
+        <button class="tab-btn" id="btn-tab-unopposed" onclick="switchTab('tab-unopposed')">3. Unopposed Path</button>
+        <button class="tab-btn" id="btn-tab-opposed" onclick="switchTab('tab-opposed')">4. Opposed Path</button>
+        <button class="tab-btn" id="btn-tab-deadline" onclick="switchTab('tab-deadline')">5. Deadline Tracker</button>
+      </div>
+
+      <!-- TAB 1: STATUS CHECK -->
+      <div id="tab-status" class="tab-content active">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Has the Respondent Filed an Answering Affidavit?</div>
+              <div class="adv-card__subtitle">Rule 37(22) — 10 court days after receipt of record and your notice</div>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 The Law</h4>
+            <p><strong>Rule 37(22):</strong> Any person wishing to oppose must, within <strong>10 days after receipt of the record and notice of amendment OR notice that the applicant stands by its notice of motion</strong>, deliver an affidavit in answer to the allegations made by the applicant.</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 37(23):</strong> An answering affidavit may do <strong>no more than</strong> record, in concise terms, the grounds on which the application is opposed.</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 36(1):</strong> If the respondent delivers a notice of intention to oppose but <strong>fails to deliver an answering affidavit within the prescribed time</strong>, the registrar must at the applicant's request enrol the application on the <strong>unopposed motion roll</strong>.</p>
+          </div>
+
+          <div class="adv-form-group">
+            <label>What have you received from the Respondent(s)?</label>
+            <select class="adv-select" id="answeringStatus" onchange="handleAnsweringStatus()">
+              <option value="waiting">⏳ Still waiting (within 10-15 court days)</option>
+              <option value="notice-only">📄 Only a Notice of Intention to Oppose (no Answering Affidavit)</option>
+              <option value="received">✅ Answering Affidavit received</option>
+              <option value="expired-nothing">❌ Nothing received — 10 court days have passed</option>
+              <option value="expired-notice">❌ Only Notice of Intention received — 10 days expired</option>
+            </select>
+          </div>
+
+          <div id="answeringStatusMsg" style="margin-top:1rem;"></div>
+
+          <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <strong>Remember:</strong> The Respondent has <strong>10 court days</strong> from receipt of the record AND your notice (supplementary or standing by) to file an Answering Affidavit. If they miss this deadline, the matter becomes unopposed. Counting starts from the day <em>after</em> service and excludes weekends, public holidays, and 16 Dec – 15 Jan.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: REVIEW & UPLOAD -->
+      <div id="tab-review" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Review the Respondent's Documents</div>
+              <div class="adv-card__subtitle">Upload and analyse what the Respondent is arguing against you</div>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--warning">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ Rule 37(23) — Scope of Answering Affidavit</div>
+              <p>An Answering Affidavit may do <strong>no more than</strong> record, in concise terms, the grounds on which the application is opposed. It <strong>cannot</strong> introduce new facts unrelated to your review grounds, and it <strong>cannot</strong> be a mere repetition of the CCMA record. If the Respondent includes irrelevant material, they risk an adverse costs order.</p>
+            </div>
+          </div>
+
+          <div class="doc-upload-row">
+            <div class="upload-card">
+              <h4>📄 Notice of Intention to Oppose</h4>
+              <p>If the Respondent filed one under Rule 35(7), upload it here.</p>
+              <div class="upload-zone" style="padding:1.5rem;" onclick="document.getElementById('noticeOpposeFile').click()">
+                <div class="upload-zone__icon" style="font-size:2rem;">📤</div>
+                <div style="font-weight:600; font-size:0.9rem;">Click to upload</div>
+                <div style="font-size:0.8rem; color:var(--text-muted); margin-top:.25rem;">PDF or Word</div>
+              </div>
+              <input type="file" id="noticeOpposeFile" class="hidden-file-input" accept=".pdf,.docx,.doc" onchange="handleDocUpload(this,'noticeOpposeName')">
+              <div id="noticeOpposeName" style="font-size:0.85rem; color:var(--success); margin-top:.25rem; display:none;"></div>
+            </div>
+            <div class="upload-card">
+              <h4>📑 Answering Affidavit</h4>
+              <p>The Respondent's main opposition document under Rule 37(22).</p>
+              <div class="upload-zone" style="padding:1.5rem;" onclick="document.getElementById('answeringFile').click()">
+                <div class="upload-zone__icon" style="font-size:2rem;">📤</div>
+                <div style="font-weight:600; font-size:0.9rem;">Click to upload</div>
+                <div style="font-size:0.8rem; color:var(--text-muted); margin-top:.25rem;">PDF or Word</div>
+              </div>
+              <input type="file" id="answeringFile" class="hidden-file-input" accept=".pdf,.docx,.doc" onchange="handleDocUpload(this,'answeringFileName')">
+              <div id="answeringFileName" style="font-size:0.85rem; color:var(--success); margin-top:.25rem; display:none;"></div>
+            </div>
+          </div>
+
+          <div class="adv-form-group" style="margin-top:1.5rem;">
+            <label><strong>What is the Respondent arguing?</strong></label>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Paste key paragraphs or summarise the Respondent's main arguments. The AI will help you identify which arguments are new and need a response in your Replying Affidavit.</p>
+            <textarea class="paste-area" id="answeringSummary" placeholder="Example: The Respondent argues that the Commissioner correctly applied the test for misconduct. They claim that the evidence of the employer's witness was credible and that my dismissal was procedurally fair because I was given notice of the hearing. They also raise a new point that I failed to exhaust internal grievance procedures before referring the dispute to the CCMA."></textarea>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Which of your review grounds does the Respondent challenge?</strong></label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:0.5rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeMisconduct"> Misconduct not proved
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeProcedure"> Procedural unfairness
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeEvidence"> Failure to consider evidence
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeIrregularity"> Gross irregularity
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeIrrational"> Unreasonable / irrational award
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeBias"> Bias / conflict of interest
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeJurisdiction"> Lack of jurisdiction
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+                <input type="checkbox" id="ansChallengeNew"> Respondent raised NEW issues
+              </label>
+            </div>
+          </div>
+
+          <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="analyseAnswering()">🔍 Analyse Respondent's Arguments</button>
+
+          <div id="analysisOutput" style="display:none; margin-top:1.5rem;">
+            <div class="adv-alert adv-alert--info">
+              <div class="adv-alert__content">
+                <div class="adv-alert__title">📊 Analysis Complete</div>
+                <div id="analysisText"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: UNOPPOSED PATH -->
+      <div id="tab-unopposed" class="tab-content">
+        <div class="adv-card adv-card--success">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Unopposed Path</div>
+              <div class="adv-card__subtitle">Rule 36(1) — The Respondent failed to file an Answering Affidavit in time</div>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--success">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">✅ Your Matter is Unopposed</div>
+              <p>If the Respondent filed a Notice of Intention to Oppose but <strong>failed to deliver an Answering Affidavit within 10 court days</strong>, or if they filed nothing at all after 10 court days, the matter is <strong>unopposed</strong>. You may now request the Registrar to enrol the application on the unopposed motion roll.</p>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 Rule 36(1)</h4>
+            <p>"If the respondent has delivered a notice of intention to oppose but <strong>fails to deliver an answering affidavit within the prescribed time limit</strong>, the registrar must at the applicant's request enrol the application on the <strong>unopposed motion roll</strong> and serve a notice of set down to all parties."</p>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Step-by-Step: Enrol on the Unopposed Roll</strong></label>
+            <ul class="step-list">
+              <li><strong>Draft a short letter</strong> to the Registrar requesting enrolment on the unopposed motion roll. Include the case number and confirm that the Respondent failed to file an Answering Affidavit within 10 court days.</li>
+              <li><strong>File the letter</strong> on Court Online under "Notice" or "Other" (clearly labelled "Request for Unopposed Enrolment").</li>
+              <li><strong>Attach proof</strong> that the 10 court days have expired (e.g. your calendar calculation, proof of service of your notice/record).</li>
+              <li><strong>Serve a copy</strong> on all three Respondents (CCMA, Employer, Commissioner) by email or hand delivery (Rule 9).</li>
+              <li><strong>Wait for the Registrar</strong> to issue a notice of set down with the hearing date.</li>
+            </ul>
+          </div>
+
+          <div class="adv-form-group">
+            <label><strong>Template: Request for Unopposed Enrolment</strong> <span class="badge badge--info">Template</span></label>
+            <div class="template-box" id="unopposedRequestTemplate">
+              <div class="doc-header">
+                <div class="doc-title">Request for Unopposed Enrolment</div>
+              </div>
+              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+              <p><strong>TO:</strong> The Registrar of the Labour Court</p>
+              <p>The Applicant hereby requests, in terms of <strong>Rule 36(1)</strong> of the Labour Court Rules, that the above matter be enrolled on the <strong>unopposed motion roll</strong>.</p>
+              <p>The Respondent(s) failed to deliver an answering affidavit within the prescribed period of 10 court days from receipt of the record and the Applicant's notice.</p>
+              <p>The record was filed on <span class="fill">[DATE]</span> and the Applicant's <span class="fill">[notice of amendment and supplementary affidavit / notice of standing by]</span> was served on <span class="fill">[DATE]</span>.</p>
+              <p>The 10-court-day period expired on <span class="fill">[DATE]</span> without any answering affidavit being filed.</p>
+              <p>The Applicant prays that the matter be set down for hearing on the unopposed roll at the earliest available date.</p>
+              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+              <p style="margin-top:2rem;">___________________________<br>Signature</p>
+              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+            </div>
+            <div class="generated-doc-actions">
+              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('unopposedRequestTemplate','Request_Unopposed_Enrolment.html')">📥 Download Template</button>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--warning" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ Important</div>
+              <p>Even if the matter is unopposed, you must still <strong>index and paginate the complete file</strong> (Rule 37(25)) and apply for a hearing date. The unopposed roll means the Respondent will not argue against you, but the judge will still review your application on the papers. Ensure your founding affidavit (and supplementary, if any) is thorough and well-supported.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: OPPOSED PATH -->
+      <div id="tab-opposed" class="tab-content">
+        <div class="adv-card adv-card--danger">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Opposed Path — Decide on a Replying Affidavit</div>
+              <div class="adv-card__subtitle">Rule 37(24) — Optional 5-day replying affidavit</div>
+            </div>
+          </div>
+
+          <div class="rule-box">
+            <h4>📖 The Law</h4>
+            <p><strong>Rule 37(24):</strong> The applicant may file a <strong>replying affidavit within 5 days of receipt of an answering affidavit</strong>. A replying affidavit may do <strong>no more than respond to the grounds on which the application is opposed, without any repetition of the content of the founding and supplementary affidavits</strong>.</p>
+            <p style="margin-top:0.5rem;"><strong>Rule 37(25):</strong> After receipt of any replying affidavit or the expiry of the time limit for filing a replying affidavit (whichever occurs first), the applicant must index and paginate the file and within <strong>10 days</strong> apply to the registrar for a hearing date.</p>
+          </div>
+
+          <div class="adv-alert adv-alert--info">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">🤔 Do You Need a Replying Affidavit?</div>
+              <p>A Replying Affidavit is <strong>optional</strong>. You only need one if the Respondent's Answering Affidavit raised <strong>new issues or arguments</strong> that you did not already address in your Founding or Supplementary Affidavit. If the Respondent merely repeats the CCMA record or denies your allegations without raising anything new, you may choose to <strong>stand by your existing pleadings</strong> and proceed directly to indexing and set down.</p>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-card">
+              <h4>✅ File a Replying Affidavit</h4>
+              <p>Choose this if the Respondent raised <strong>new legal arguments</strong>, <strong>new facts</strong>, or <strong>procedural objections</strong> that you need to counter. You have <strong>5 court days</strong> from receipt of the Answering Affidavit.</p>
+            </div>
+            <div class="info-card">
+              <h4>⏭️ Skip to Set Down</h4>
+              <p>Choose this if the Answering Affidavit only denies your existing grounds or repeats the CCMA record. Your Founding (and Supplementary) Affidavit already covers everything. Proceed directly to <strong>indexing, pagination, and applying for a hearing date</strong> (Rule 37(25)).</p>
+            </div>
+          </div>
+
+          <div class="adv-form-group" style="margin-top:1.5rem;">
+            <label><strong>Quick Decision Checklist</strong></label>
+            <ul class="adv-checklist" data-checklist-id="reply-decision">
+              <li class="adv-checklist__item" data-item-id="rd1">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Did the Respondent raise a new legal argument I did not address?</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rd2">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Did the Respondent introduce new facts not in the CCMA record?</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rd3">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Did the Respondent raise a procedural objection (e.g. jurisdiction, locus standi)?</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rd4">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Is the Answering Affidavit just a denial of my existing grounds?</div>
+              </li>
+              <li class="adv-checklist__item" data-item-id="rd5">
+                <div class="adv-checklist__checkbox"></div>
+                <div class="adv-checklist__text">Do I want to address any new issues to strengthen my case?</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="adv-alert adv-alert--warning" style="margin-top:1.5rem;">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⚠️ Rule 37(24) Warning</div>
+              <p>A Replying Affidavit <strong>may NOT</strong> repeat the content of your Founding or Supplementary Affidavits. It may only respond to <strong>new matters raised in the Answering Affidavit</strong>. If you repeat yourself, you risk an adverse costs order.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem; text-align:center;">
+            <a href="replying.html" class="adv-btn adv-btn--primary" style="display:inline-block; text-decoration:none;">Go to Replying Affidavit Draft →</a>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">Or proceed directly to Set Down if you do not need a Replying Affidavit</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: DEADLINE TRACKER -->
+      <div id="tab-deadline" class="tab-content">
+        <div class="adv-card">
+          <div class="adv-card__header">
+            <div>
+              <div class="adv-card__title">Deadline Tracker</div>
+              <div class="adv-card__subtitle">Rule 37(22) & Rule 37(24) — Don't miss your window</div>
+            </div>
+          </div>
+
+          <div class="adv-alert adv-alert--danger">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">⏰ Key Deadlines</div>
+              <p><strong>Respondent:</strong> 10 court days to file Answering Affidavit from receipt of record + your notice.<br><strong>You (if replying):</strong> 5 court days to file Replying Affidavit from receipt of Answering Affidavit.<br><strong>Set Down:</strong> 10 court days after replying (or expiry) to apply for hearing date.</p>
+            </div>
+          </div>
+
+          <div class="inline-form">
+            <div class="adv-form-group">
+              <label>Date You Served Notice/Record on Respondent</label>
+              <input type="date" class="adv-input" id="serveDate" onchange="calculateAnsweringDeadline()">
+            </div>
+            <div class="adv-form-group">
+              <label>Respondent's 10-Court-Day Deadline</label>
+              <input type="text" class="adv-input" id="answeringDeadlineDisplay" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
+            </div>
+          </div>
+
+          <div class="inline-form" style="margin-top:1rem;">
+            <div class="adv-form-group">
+              <label>Date You Received Answering Affidavit</label>
+              <input type="date" class="adv-input" id="receivedAnsDate" onchange="calculateReplyingDeadline()">
+            </div>
+            <div class="adv-form-group">
+              <label>Your 5-Court-Day Replying Deadline</label>
+              <input type="text" class="adv-input" id="replyingDeadlineDisplay" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <h4 style="color:var(--primary); margin-bottom:.5rem;">Key Answering & Replying Deadlines</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+              <thead>
+                <tr style="background:var(--primary); color:#fff;">
+                  <th style="padding:.5rem; text-align:left;">Event</th>
+                  <th style="padding:.5rem; text-align:left;">Rule</th>
+                  <th style="padding:.5rem; text-align:left;">Deadline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Respondent files Answering Affidavit</td>
+                  <td style="padding:.5rem;">Rule 37(22)</td>
+                  <td style="padding:.5rem;">10 court days after receipt of record + notice</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Applicant files Replying Affidavit</td>
+                  <td style="padding:.5rem;">Rule 37(24)</td>
+                  <td style="padding:.5rem;"><strong>5 court days</strong> after receipt of Answering Affidavit</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:.5rem;">Apply for hearing date</td>
+                  <td style="padding:.5rem;">Rule 37(25)</td>
+                  <td style="padding:.5rem;">10 court days after replying or expiry</td>
+                </tr>
+                <tr>
+                  <td style="padding:.5rem;">Unopposed enrolment request</td>
+                  <td style="padding:.5rem;">Rule 36(1)</td>
+                  <td style="padding:.5rem;">After 10 court days expire with no Answering Affidavit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class="adv-sidebar">
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+        <div class="adv-deadline-calculator">
+          <div class="adv-form-group">
+            <label>Start Date</label>
+            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+          </div>
+          <div class="adv-form-group">
+            <label>Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+          </div>
+          <div class="adv-deadline__display">
+            <span class="adv-deadline__label">Select a date to calculate deadline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+        <div class="adv-chat" data-chat-id="answering">
+          <div class="adv-chat__messages"></div>
+          <div class="adv-chat__input-group">
+            <input type="text" class="adv-chat__input" placeholder="Ask about the answering step...">
+            <button class="adv-chat__send">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-sidebar__widget">
+        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+        <div class="adv-savings">
+          <span>Saved so far:</span>
+          <span class="adv-savings__amount">R0</span>
+        </div>
+        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="adv-nav-footer">
+    <div class="adv-nav-footer__prev">
+      <a href="supplementary.html" class="adv-btn adv-btn--ghost">← Supplementary</a>
+    </div>
+    <div class="adv-nav-footer__next">
+      <a href="replying.html" class="adv-btn adv-btn--primary">Replying →</a>
+    </div>
+  </nav>
+
+  <footer class="adv-footer">
+    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+  </footer>
+
+  <script src="shared-scripts.js"></script>
+  <script>
+    function switchTab(tabId) {
+      var contents = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < contents.length; i++) {
+        contents[i].style.display = 'none';
+        contents[i].classList.remove('active');
+      }
+      var buttons = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      var selected = document.getElementById(tabId);
+      if (selected) {
+        selected.style.display = 'block';
+        selected.classList.add('active');
+      }
+      var btn = document.getElementById('btn-' + tabId);
+      if (btn) {
+        btn.classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleDocUpload(input, displayId) {
+      var file = input.files[0];
+      if (!file) return;
+      var display = document.getElementById(displayId);
+      display.textContent = '✅ Uploaded: ' + file.name;
+      display.style.display = 'block';
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('File uploaded: ' + file.name, 'success');
+      }
+    }
+
+    function handleAnsweringStatus() {
+      var val = document.getElementById('answeringStatus').value;
+      var box = document.getElementById('answeringStatusMsg');
+      var html = '';
+      if (val === 'waiting') {
+        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content">The Respondent has 10 court days from receipt of the record and your notice to file an Answering Affidavit. If you served recently, wait for the deadline to pass before taking action. Keep checking Court Online for new filings.</div></div>';
+      } else if (val === 'notice-only') {
+        html = '<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">⚠️ Notice Only Received</div><p>The Respondent filed a Notice of Intention to Oppose but has not yet filed an Answering Affidavit. They still have time within the 10 court days. If the 10 days expire without an Answering Affidavit, the matter becomes unopposed under <strong>Rule 36(1)</strong>.</p></div></div>';
+      } else if (val === 'received') {
+        html = '<div class="adv-alert adv-alert--danger"><div class="adv-alert__content"><div class="adv-alert__title">✅ Answering Affidavit Received</div><p>The Respondent has filed an Answering Affidavit. You now have <strong>5 court days</strong> to decide whether to file a Replying Affidavit (Rule 37(24)). Proceed to the <strong>Review & Upload</strong> tab to analyse their arguments.</p></div></div>';
+      } else if (val === 'expired-nothing') {
+        html = '<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">✅ Unopposed — Nothing Filed</div><p>The Respondent failed to file anything within 10 court days. The matter is <strong>unopposed</strong>. You may request the Registrar to enrol it on the unopposed roll (Rule 36(1)). Proceed to the <strong>Unopposed Path</strong> tab.</p></div></div>';
+      } else if (val === 'expired-notice') {
+        html = '<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">✅ Unopposed — Notice Only</div><p>The Respondent filed a Notice of Intention to Oppose but failed to deliver an Answering Affidavit within 10 court days. Under <strong>Rule 36(1)</strong>, the matter is unopposed. Proceed to the <strong>Unopposed Path</strong> tab.</p></div></div>';
+      }
+      box.innerHTML = html;
+    }
+
+    function analyseAnswering() {
+      var summary = document.getElementById('answeringSummary').value;
+      var newIssues = document.getElementById('ansChallengeNew').checked;
+      var challenges = [];
+      if (document.getElementById('ansChallengeMisconduct').checked) challenges.push('misconduct not proved');
+      if (document.getElementById('ansChallengeProcedure').checked) challenges.push('procedural unfairness');
+      if (document.getElementById('ansChallengeEvidence').checked) challenges.push('failure to consider evidence');
+      if (document.getElementById('ansChallengeIrregularity').checked) challenges.push('gross irregularity');
+      if (document.getElementById('ansChallengeIrrational').checked) challenges.push('unreasonable/irrational award');
+      if (document.getElementById('ansChallengeBias').checked) challenges.push('bias/conflict of interest');
+      if (document.getElementById('ansChallengeJurisdiction').checked) challenges.push('lack of jurisdiction');
+
+      var analysis = '<p><strong>Grounds challenged by Respondent:</strong> ' + (challenges.length > 0 ? challenges.join(', ') : 'None selected') + '.</p>';
+      if (newIssues) {
+        analysis += '<p style="margin-top:0.5rem;"><span class="badge badge--warning">NEW ISSUES RAISED</span> The Respondent has introduced new matters. You should strongly consider filing a <strong>Replying Affidavit</strong> to address these, provided you do so within 5 court days.</p>';
+      } else if (challenges.length > 0) {
+        analysis += '<p style="margin-top:0.5rem;">The Respondent is challenging your existing review grounds. If their arguments are purely denials or rehash the CCMA record, you may not need a Replying Affidavit. If they raise new legal points or facts, consider filing one.</p>';
+      } else {
+        analysis += '<p style="margin-top:0.5rem;">No specific challenges selected. Review the Answering Affidavit carefully to determine if new issues were raised.</p>';
+      }
+      analysis += '<p style="margin-top:0.5rem;"><strong>Recommendation:</strong> ';
+      if (newIssues) {
+        analysis += 'File a Replying Affidavit. Go to the <strong>Opposed Path</strong> tab or click the Replying Affidavit link below.</p>';
+      } else {
+        analysis += 'You may stand by your existing pleadings. If unsure, consult the <strong>Opposed Path</strong> tab for guidance.</p>';
+      }
+
+      document.getElementById('analysisText').innerHTML = analysis;
+      document.getElementById('analysisOutput').style.display = 'block';
+      document.getElementById('analysisOutput').scrollIntoView({behavior: 'smooth'});
+    }
+
+    function isPublicHoliday(d) {
+      var year = d.getFullYear();
+      var holidays = [
+        new Date(year, 0, 1), new Date(year, 2, 21), new Date(year, 3, 27),
+        new Date(year, 4, 1), new Date(year, 5, 16), new Date(year, 7, 9),
+        new Date(year, 8, 24), new Date(year, 11, 16), new Date(year, 11, 25), new Date(year, 11, 26)
+      ];
+      for (var i = 0; i < holidays.length; i++) {
+        if (holidays[i].getDate() === d.getDate() && holidays[i].getMonth() === d.getMonth()) return true;
+      }
+      return false;
+    }
+    function isCourtDay(d) {
+      var day = d.getDay();
+      if (day === 0 || day === 6) return false;
+      var month = d.getMonth(); var date = d.getDate();
+      if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
+      if (isPublicHoliday(d)) return false;
+      return true;
+    }
+    function addCourtDays(startDate, days) {
+      var d = new Date(startDate);
+      d.setDate(d.getDate() + 1);
+      var count = 0;
+      while (count < days) {
+        if (isCourtDay(d)) count++;
+        if (count < days) d.setDate(d.getDate() + 1);
+      }
+      return d;
+    }
+
+    function calculateAnsweringDeadline() {
+      var start = document.getElementById('serveDate').value;
+      if (!start) return;
+      var deadline = addCourtDays(new Date(start), 10);
+      var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+      document.getElementById('answeringDeadlineDisplay').value = deadline.toLocaleDateString('en-ZA', opts);
+    }
+
+    function calculateReplyingDeadline() {
+      var start = document.getElementById('receivedAnsDate').value;
+      if (!start) return;
+      var deadline = addCourtDays(new Date(start), 5);
+      var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+      document.getElementById('replyingDeadlineDisplay').value = deadline.toLocaleDateString('en-ZA', opts);
+    }
+
+    function downloadTemplate(elementId, filename) {
+      var el = document.getElementById(elementId);
+      if (!el) return;
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
+      var blob = new Blob([html], {type: 'text/html'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a'); a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Download started', 'success');
+      }
+    }
+
+    (function() {
+      var startInput = document.querySelector('.adv-deadline__input');
+      var daysInput = document.querySelector('.adv-deadline__days');
+      var display = document.querySelector('.adv-deadline__display');
+      if (startInput && daysInput && display) {
+        function calc() {
+          var start = startInput.value;
+          var days = parseInt(daysInput.value, 10);
+          if (!start || isNaN(days) || days < 1) {
+            display.innerHTML = '<span class="adv-deadline__label">Select a date to calculate deadline</span>';
+            return;
+          }
+          var result = addCourtDays(new Date(start), days);
+          var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+          display.innerHTML = '<span class="adv-deadline__label">Deadline: <strong>' + result.toLocaleDateString('en-ZA', opts) + '</strong></span>';
+        }
+        startInput.addEventListener('change', calc);
+        daysInput.addEventListener('input', calc);
+      }
+    })();
+  </script>
+</body>
+</html>
