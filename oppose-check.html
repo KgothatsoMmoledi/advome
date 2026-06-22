@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Answering Affidavit — Advome</title>
+  <title>Oppose Check — Advome</title>
   <link rel="stylesheet" href="shared-styles.css">
   <style>
     :root {
@@ -53,6 +53,7 @@
     .upload-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.25rem; }
     .upload-card h4 { margin:0 0 .5rem; color:var(--primary); font-size:0.95rem; }
     .upload-card p { margin:0 0 .75rem; font-size:0.85rem; color:var(--text-muted); }
+      .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   </style>
 <base target="_blank">
 </head>
@@ -71,12 +72,12 @@
     <button class="adv-header__menu-toggle">☰</button>
   </header>
 
-  <div class="adv-progress" data-workflow="ccma" data-current-step="answering"></div>
+  <div class="adv-progress" data-workflow="ccma" data-current-step="oppose-check"></div>
 
   <section class="adv-hero">
     <div class="adv-hero__content">
-      <h1>Answering Affidavit Received</h1>
-      <p>Step 14 of 21 — Review the Respondent's opposition and decide your next move</p>
+      <h1>Respondent's Opposition</h1>
+      <p>Step 14 of 21 — Check if the Respondent filed an Answering Affidavit</p>
     </div>
     <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
   </section>
@@ -156,7 +157,7 @@
                 <div style="font-weight:600; font-size:0.9rem;">Click to upload</div>
                 <div style="font-size:0.8rem; color:var(--text-muted); margin-top:.25rem;">PDF or Word</div>
               </div>
-              <input type="file" id="noticeOpposeFile" class="hidden-file-input" accept=".pdf,.docx,.doc" onchange="handleDocUpload(this,'noticeOpposeName')">
+              <input type="file" id="noticeOpposeFile" name="noticeOpposeFile" class="hidden-file-input" aria-label="Upload document" accept=".pdf,.docx,.doc" onchange="handleDocUpload(this,'noticeOpposeName')">
               <div id="noticeOpposeName" style="font-size:0.85rem; color:var(--success); margin-top:.25rem; display:none;"></div>
             </div>
             <div class="upload-card">
@@ -167,7 +168,7 @@
                 <div style="font-weight:600; font-size:0.9rem;">Click to upload</div>
                 <div style="font-size:0.8rem; color:var(--text-muted); margin-top:.25rem;">PDF or Word</div>
               </div>
-              <input type="file" id="answeringFile" class="hidden-file-input" accept=".pdf,.docx,.doc" onchange="handleDocUpload(this,'answeringFileName')">
+              <input type="file" id="answeringFile" name="answeringFile" class="hidden-file-input" aria-label="Upload document" accept=".pdf,.docx,.doc" onchange="handleDocUpload(this,'answeringFileName')">
               <div id="answeringFileName" style="font-size:0.85rem; color:var(--success); margin-top:.25rem; display:none;"></div>
             </div>
           </div>
@@ -175,6 +176,7 @@
           <div class="adv-form-group" style="margin-top:1.5rem;">
             <label><strong>What is the Respondent arguing?</strong></label>
             <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Paste key paragraphs or summarise the Respondent's main arguments. The AI will help you identify which arguments are new and need a response in your Replying Affidavit.</p>
+            <label for="answeringSummary" class="visually-hidden">Summarise Respondent arguments</label>
             <textarea class="paste-area" id="answeringSummary" placeholder="Example: The Respondent argues that the Commissioner correctly applied the test for misconduct. They claim that the evidence of the employer's witness was credible and that my dismissal was procedurally fair because I was given notice of the hearing. They also raise a new point that I failed to exhaust internal grievance procedures before referring the dispute to the CCMA."></textarea>
           </div>
 
@@ -275,6 +277,64 @@
             </div>
             <div class="generated-doc-actions">
               <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('unopposedRequestTemplate','Request_Unopposed_Enrolment.html')">📥 Download Template</button>
+            </div>
+          </div>
+          <div class="adv-form-group" style="margin-top:2rem;">
+            <label><strong>Proof of Service Affidavit</strong> <span class="badge badge--warning">Required</span></label>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">Under <strong>Rule 9(2)</strong>, you must prove service by affidavit. This is essential for unopposed enrolment — the Registrar needs proof that the Respondent was duly served and had the opportunity to oppose.</p>
+
+            <div class="inline-form">
+              <div class="adv-form-group">
+                <label>Your Full Name</label>
+                <input type="text" class="adv-input" id="posAppName" placeholder="Your full name">
+              </div>
+              <div class="adv-form-group">
+                <label>Labour Court Seat</label>
+                <select class="adv-input" id="posSeat">
+                  <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                </select>
+              </div>
+              <div class="adv-form-group">
+                <label for="posCaseNo">Case Number</label>
+                <input type="text" class="adv-input" id="posCaseNo" placeholder="e.g. JRB1234/2026">
+              </div>
+              <div class="adv-form-group">
+                <label>Respondent Served (Employer Name)</label>
+                <input type="text" class="adv-input" id="posRespServed" placeholder="Employer name">
+              </div>
+              <div class="adv-form-group">
+                <label>Date of Service</label>
+                <input type="date" class="adv-input" id="posServeDate">
+              </div>
+              <div class="adv-form-group">
+                <label>Method of Service</label>
+                <select class="adv-input" id="posMethod">
+                  <option>Email</option>
+                  <option>Hand delivery</option>
+                  <option>Registered post</option>
+                </select>
+              </div>
+              <div class="adv-form-group">
+                <label for="posEmail">Email Address (if served by email)</label>
+                <input type="email" class="adv-input" id="posEmail" placeholder="respondent@example.com">
+              </div>
+              <div class="adv-form-group">
+                <label for="posAckName">Name of Person Who Acknowledged Receipt</label>
+                <input type="text" class="adv-input" id="posAckName" placeholder="e.g. John Smith, HR Manager">
+              </div>
+            </div>
+
+            <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="generateProofOfService()">⚡ Generate Proof of Service Affidavit</button>
+
+            <div id="posOutput" style="display:none; margin-top:1.5rem;">
+              <div class="adv-form-group">
+                <label><strong>Draft Proof of Service Affidavit Preview</strong></label>
+                <div class="preview-area" id="posPreview"></div>
+              </div>
+              <div class="generated-doc-actions">
+                <button class="adv-btn adv-btn--primary" onclick="downloadProofOfService()">📥 Download Affidavit</button>
+                <button class="adv-btn adv-btn--secondary" onclick="copyProofOfService()">📋 Copy to Clipboard</button>
+              </div>
             </div>
           </div>
 
@@ -380,22 +440,22 @@
 
           <div class="inline-form">
             <div class="adv-form-group">
-              <label>Date You Served Notice/Record on Respondent</label>
+              <label for="serveDate">Date You Served Notice/Record on Respondent</label>
               <input type="date" class="adv-input" id="serveDate" onchange="calculateAnsweringDeadline()">
             </div>
             <div class="adv-form-group">
-              <label>Respondent's 10-Court-Day Deadline</label>
+              <label for="answeringDeadlineDisplay">Respondent's 10-Court-Day Deadline</label>
               <input type="text" class="adv-input" id="answeringDeadlineDisplay" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
             </div>
           </div>
 
           <div class="inline-form" style="margin-top:1rem;">
             <div class="adv-form-group">
-              <label>Date You Received Answering Affidavit</label>
+              <label for="receivedAnsDate">Date You Received Answering Affidavit</label>
               <input type="date" class="adv-input" id="receivedAnsDate" onchange="calculateReplyingDeadline()">
             </div>
             <div class="adv-form-group">
-              <label>Your 5-Court-Day Replying Deadline</label>
+              <label for="replyingDeadlineDisplay">Your 5-Court-Day Replying Deadline</label>
               <input type="text" class="adv-input" id="replyingDeadlineDisplay" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
             </div>
           </div>
@@ -445,11 +505,11 @@
         <div class="adv-deadline-calculator">
           <div class="adv-form-group">
             <label>Start Date</label>
-            <input type="date" class="adv-input adv-deadline__input" name="start_date">
+            <input type="date" class="adv-input adv-deadline__input" id="deadlineStart" name="start_date">
           </div>
           <div class="adv-form-group">
-            <label>Days to Add</label>
-            <input type="number" class="adv-input adv-deadline__days" value="10" min="1">
+            <label for="deadlineDays">Days to Add</label>
+            <input type="number" class="adv-input adv-deadline__days" id="deadlineDays" name="deadline_days" value="10" min="1">
           </div>
           <div class="adv-deadline__display">
             <span class="adv-deadline__label">Select a date to calculate deadline</span>
@@ -462,7 +522,7 @@
         <div class="adv-chat" data-chat-id="answering">
           <div class="adv-chat__messages"></div>
           <div class="adv-chat__input-group">
-            <input type="text" class="adv-chat__input" placeholder="Ask about the answering step...">
+            <input type="text" class="adv-chat__input" id="chatInput" name="chat_input" aria-label="Chat message" placeholder="Ask about the answering step...">
             <button class="adv-chat__send">Send</button>
           </div>
         </div>
@@ -628,7 +688,8 @@
     function downloadTemplate(elementId, filename) {
       var el = document.getElementById(elementId);
       if (!el) return;
-      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  </style></head><body>' + el.innerHTML + '</body></html>';
       var blob = new Blob([html], {type: 'text/html'});
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a'); a.href = url; a.download = filename;
@@ -659,6 +720,106 @@
         daysInput.addEventListener('input', calc);
       }
     })();
+
+    // ===== PROOF OF SERVICE GENERATOR =====
+    function generateProofOfService() {
+      var appName = document.getElementById('posAppName').value || '[APPLICANT NAME]';
+      var seat = document.getElementById('posSeat').value;
+      var caseNo = document.getElementById('posCaseNo').value || '[CASE NUMBER]';
+      var respServed = document.getElementById('posRespServed').value || '[RESPONDENT NAME]';
+      var serveDate = document.getElementById('posServeDate').value || '[DATE]';
+      var method = document.getElementById('posMethod').value;
+      var email = document.getElementById('posEmail').value || '[EMAIL ADDRESS]';
+      var ackName = document.getElementById('posAckName').value || '[NAME]';
+
+      var today = new Date();
+      var day = today.getDate();
+      var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var month = monthNames[today.getMonth()];
+      var year = today.getFullYear();
+
+      var methodText = '';
+      if (method === 'Email') {
+        methodText = 'by emailing the document to the said Respondent at the email address ' + email + '. I confirm that the whole of the document was sent, and that ' + ackName + ' telephonically acknowledged receipt of the whole of the email.';
+      } else if (method === 'Hand delivery') {
+        methodText = 'by handing a copy of the document to ' + ackName + ', who was apparently authorised to accept service on behalf of the said Respondent.';
+      } else {
+        methodText = 'by registered post addressed to the said Respondent at its registered address. The return of service is attached hereto.';
+      }
+
+      var doc = 'IN THE LABOUR COURT OF SOUTH AFRICA\n(HELD AT ' + seat.toUpperCase() + ')\n\n';
+      doc += 'Case No: ' + caseNo + '\n\n';
+      doc += 'In the matter between:\n';
+      doc += appName + ' — Applicant\n';
+      doc += 'and\n';
+      doc += respServed + ' — Respondent\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'AFFIDAVIT OF PROOF OF SERVICE\n';
+      doc += '(Rule 9(2) of the Labour Court Rules)\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'I, the undersigned ' + appName + ', do hereby make oath and state:\n\n';
+      doc += '1.  I am the Applicant in the above matter.\n\n';
+      doc += '2.  On ' + serveDate + ', I effected service of the notice of motion and founding affidavit on the Respondent (' + respServed + ') ' + methodText + '\n\n';
+      doc += '3.  I confirm that the email address / address used for service is the correct address for service of the said Respondent.\n\n';
+      doc += '4.  I confirm that the Respondent has failed to file an answering affidavit within the prescribed period of 10 court days from the date of service.\n\n';
+      doc += '5.  This affidavit is filed in support of the Applicant's request for unopposed enrolment in terms of Rule 36(1) of the Labour Court Rules.\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'I, the deponent, do hereby declare that I know and understand the contents of this affidavit, that the facts stated herein are true and correct, and that I have no objection to taking the prescribed oath. I regard the oath as binding on my conscience.\n\n';
+      doc += 'Signed at ____________________ on this ______ day of ______________ ________.\n\n';
+      doc += '___________________________\nSignature\n\n';
+      doc += appName.toUpperCase() + '\n';
+      doc += 'Address: ________________________________\n';
+      doc += 'Email: ________________________________\n';
+      doc += 'Tel: ________________________________\n\n';
+      doc += '═══════════════════════════════════════════════════════════════\n\n';
+      doc += 'COMMISSIONER OF OATHS\n\n';
+      doc += 'I, the undersigned Commissioner of Oaths, certify that the deponent has acknowledged that he/she knows and understands the contents of this affidavit, that the deponent has no objection to taking the prescribed oath, and that the deponent considers the oath binding on his/her conscience.\n\n';
+      doc += 'Signed at ____________________ on this ______ day of ______________ ________.\n\n';
+      doc += '___________________________\nSignature of Commissioner\n\n';
+      doc += 'Name: ________________________________\n';
+      doc += 'Designation: ________________________________\n';
+      doc += 'Area: ________________________________\n';
+      doc += 'Date: ________________________________\n';
+
+      document.getElementById('posPreview').textContent = doc;
+      document.getElementById('posOutput').style.display = 'block';
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Proof of Service affidavit drafted!', 'success');
+      }
+      document.getElementById('posPreview').scrollIntoView({behavior: 'smooth'});
+    }
+
+    function downloadProofOfService() {
+      var text = document.getElementById('posPreview').textContent;
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Proof_of_Service_Affidavit</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem; white-space:pre-wrap;}    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  </style></head><body>' + text.replace(/\n/g, '<br>') + '</body></html>';
+      var blob = new Blob([html], {type: 'text/html'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'Proof_of_Service_Affidavit.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      if (typeof Advome !== 'undefined' && Advome.toast) {
+        Advome.toast.show('Download started', 'success');
+      }
+    }
+
+    function copyProofOfService() {
+      var text = document.getElementById('posPreview').textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        if (typeof Advome !== 'undefined' && Advome.toast) {
+          Advome.toast.show('Copied to clipboard!', 'success');
+        } else {
+          alert('Copied to clipboard!');
+        }
+      }).catch(function() {
+        if (typeof Advome !== 'undefined' && Advome.toast) {
+          Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
+        } else {
+          alert('Copy failed — use Ctrl+C');
+        }
+      });
+    }
   </script>
 </body>
 </html>
