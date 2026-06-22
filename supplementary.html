@@ -12,13 +12,6 @@
       --bg-page: #f7fafc; --bg-card: #ffffff; --border: #e2e8f0;
       --text: #2d3748; --text-muted: #718096;
     }
-    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
-    .tab-btn { border-radius:20px; font-size:0.85rem; padding:0.5rem 1rem; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; transition:all .2s; }
-    .tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:600; }
-    .tab-btn:hover:not(.active) { background:var(--bg-page); }
-    .tab-content { display:none; }
-    .tab-content.active { display:block; animation:fadeIn .3s ease; }
-    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
 
     .optional-banner { background:linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%); border:1px solid #38a169; border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; text-align:center; }
     .optional-banner h3 { margin:0 0 .25rem; color:#22543d; font-size:1.1rem; }
@@ -60,6 +53,8 @@
 
     .inline-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     @media(max-width:600px){ .inline-form{grid-template-columns:1fr;} }
+
+    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
   </style>
 <base target="_blank">
 </head>
@@ -99,19 +94,19 @@
 
       <!-- Tabs -->
       <div class="tab-bar">
-        <button class="tab-btn active" data-tab="tab-decide">1. Do I Need This?</button>
-        <button class="tab-btn" data-tab="tab-draft">2. AI Draft Supplementary</button>
-        <button class="tab-btn" data-tab="tab-standby">3. Notice of Standing By</button>
-        <button class="tab-btn" data-tab="tab-file">4. File & Serve</button>
+        <button class="adv-btn adv-btn--primary tab-btn active" data-tab="tab-decide" style="border-radius:20px; font-size:0.85rem;">1. Do I Need This?</button>
+        <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-draft" style="border-radius:20px; font-size:0.85rem;">2. AI Draft Supplementary</button>
+        <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-standby" style="border-radius:20px; font-size:0.85rem;">3. Notice of Standing By</button>
+        <button class="adv-btn adv-btn--ghost tab-btn" data-tab="tab-file" style="border-radius:20px; font-size:0.85rem;">4. File & Serve</button>
       </div>
 
       <!-- TAB 1: DECISION HELPER -->
-      <div id="tab-decide" class="tab-content active">
+      <div id="tab-decide" class="tab-content" style="display:block;">
         <div class="adv-card">
           <div class="adv-card__header">
             <div>
               <div class="adv-card__title">Do I Need a Supplementary Affidavit?</div>
-              <div class="adv-card__subtitle">Rule 37(20) — Decide within 5 days of the record being filed</div>
+              <div class="adv-card__subtitle">Rule 37(20) — Decide within 5 court days of the record being filed</div>
             </div>
           </div>
 
@@ -178,12 +173,12 @@
       </div>
 
       <!-- TAB 2: AI DRAFT SUPPLEMENTARY -->
-      <div id="tab-draft" class="tab-content">
+      <div id="tab-draft" class="tab-content" style="display:none;">
         <div class="adv-card adv-card--primary">
           <div class="adv-card__header">
             <div>
               <div class="adv-card__title">AI-Assisted Supplementary Affidavit</div>
-              <div class="adv-card__subtitle">Rule 37(20)-(21) — Upload documents or audio and explain what the record reveals</div>
+              <div class="adv-card__subtitle">Rule 37(20)–(21) — Upload documents or audio and explain what the record reveals</div>
             </div>
           </div>
 
@@ -277,7 +272,7 @@
       </div>
 
       <!-- TAB 3: NOTICE OF STANDING BY -->
-      <div id="tab-standby" class="tab-content">
+      <div id="tab-standby" class="tab-content" style="display:none;">
         <div class="adv-card">
           <div class="adv-card__header">
             <div>
@@ -337,7 +332,7 @@
       </div>
 
       <!-- TAB 4: FILE & SERVE -->
-      <div id="tab-file" class="tab-content">
+      <div id="tab-file" class="tab-content" style="display:none;">
         <div class="adv-card adv-card--danger">
           <div class="adv-card__header">
             <div>
@@ -463,13 +458,27 @@
 
   <script src="shared-scripts.js"></script>
   <script>
-    // Tab switching
+    // Tab switching — uses inline style display (most reliable)
     document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.getElementById(btn.dataset.tab).classList.add('active');
+      btn.addEventListener('click', function() {
+        // Reset all buttons
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('adv-btn--primary', 'active');
+          b.classList.add('adv-btn--ghost');
+        });
+        // Activate clicked button
+        this.classList.remove('adv-btn--ghost');
+        this.classList.add('adv-btn--primary', 'active');
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(c => {
+          c.style.display = 'none';
+        });
+        // Show target tab content
+        const targetId = this.getAttribute('data-tab');
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.style.display = 'block';
+        }
       });
     });
 
@@ -478,11 +487,11 @@
       const box = document.getElementById('needDecisionMsg');
       let html = '';
       if (val === 'no') {
-        html = `<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">✅ Skip Supplementary</div><p>Your founding affidavit is complete. Go to the <strong>Notice of Standing By</strong> tab, download the template, and file it within 5 court days. Then proceed to the next step.</p></div></div>`;
+        html = '<div class="adv-alert adv-alert--success"><div class="adv-alert__content"><div class="adv-alert__title">✅ Skip Supplementary</div><p>Your founding affidavit is complete. Go to the <strong>Notice of Standing By</strong> tab, download the template, and file it within 5 court days. Then proceed to the next step.</p></div></div>';
       } else if (val === 'yes') {
-        html = `<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">⚠️ Proceed with Caution</div><p>Go to the <strong>AI Draft Supplementary</strong> tab. The platform will help you draft a compliant affidavit. Remember: it can only <strong>supplement or abandon</strong> existing grounds. It cannot introduce entirely new, unrelated issues.</p></div></div>`;
+        html = '<div class="adv-alert adv-alert--warning"><div class="adv-alert__content"><div class="adv-alert__title">⚠️ Proceed with Caution</div><p>Go to the <strong>AI Draft Supplementary</strong> tab. The platform will help you draft a compliant affidavit. Remember: it can only <strong>supplement or abandon</strong> existing grounds. It cannot introduce entirely new, unrelated issues.</p></div></div>';
       } else {
-        html = `<div class="adv-alert adv-alert--info"><div class="adv-alert__content">If you are unsure, the safest option is to file a <strong>Notice of Standing By</strong>. You can still argue all your existing grounds. A supplementary affidavit is only needed if the record reveals something genuinely new that strengthens or corrects your case.</div></div>`;
+        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content">If you are unsure, the safest option is to file a <strong>Notice of Standing By</strong>. You can still argue all your existing grounds. A supplementary affidavit is only needed if the record reveals something genuinely new that strengthens or corrects your case.</div></div>';
       }
       box.innerHTML = html;
     }
@@ -514,29 +523,27 @@
       };
       const groundText = grounds.length > 0 ? grounds.map(g => groundLabels[g] || g).join(', ') : '[SELECT GROUND(S)]';
 
-      const html = `
-        <div class="doc-header">
-          <div class="doc-title">Supplementary Affidavit</div>
-        </div>
-        <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT ${seat.toUpperCase()})</p>
-        <p style="text-align:center;">Case No: ${caseNo}</p>
-        <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong>${name}</strong> — Applicant<br>and<br><strong>First Respondent:</strong> Commission for Conciliation, Mediation and Arbitration (CCMA)<br><strong>Second Respondent:</strong> [EMPLOYER NAME]<br><strong>Third Respondent:</strong> [COMMISSIONER NAME] — Commissioner in his/her personal capacity</p>
-        <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">SUPPLEMENTARY AFFIDAVIT</p>
-        <p>I, the undersigned <strong>${name}</strong>, do hereby make oath and state:</p>
-        <p><strong>1.</strong> I am the Applicant in the above matter and the deponent to the Founding Affidavit filed on <strong>${foundingDate}</strong>.</p>
-        <p><strong>2.</strong> Since filing the Founding Affidavit, I have reviewed the transcribed record of the arbitration proceedings filed on <span class="fill">[DATE RECORD FILED]</span>.</p>
-        <p><strong>3.</strong> The record reveals new facts that supplement the following ground(s) for review: <strong>${groundText}</strong>.</p>
-        <p><strong>4.</strong> I wish to supplement my Founding Affidavit with the following additional facts and/or corrections:</p>
-        <p style="margin-left:1.5rem; white-space:pre-wrap; background:#f8f9fa; padding:1rem; border-radius:6px; border:1px solid var(--border);">${concerns.replace(/
-/g, '<br>')}</p>
-        <p><strong>5.</strong> These supplementary facts do not introduce any new, unrelated grounds for review. They merely supplement the grounds already recorded in my Founding Affidavit, in terms of <strong>Rule 37(21)</strong> of the Labour Court Rules.</p>
-        <p><strong>6.</strong> I confirm that I do not intend to include any irrelevant or repetitive material in this supplementary affidavit.</p>
-        <p><strong>7.</strong> I pray that this Honourable Court grant the application as prayed in the Notice of Motion, as supplemented herein.</p>
-        <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
-        <p style="margin-top:2rem;">___________________________<br>Signature</p>
-        <p><strong>${name}</strong></p>
-        <p style="margin-top:1.5rem; font-size:0.85rem; color:#555;"><em>The deponent acknowledges that he/she knows and understands the contents of this affidavit, that the contents are true and correct, and that he/she has no objection to taking the prescribed oath / affirmation.</em></p>
-      `;
+      const html = '<div class="doc-header">' +
+        '<div class="doc-title">Supplementary Affidavit</div>' +
+        '</div>' +
+        '<p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT ' + seat.toUpperCase() + ')</p>' +
+        '<p style="text-align:center;">Case No: ' + caseNo + '</p>' +
+        '<p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong>' + name + '</strong> — Applicant<br>and<br><strong>First Respondent:</strong> Commission for Conciliation, Mediation and Arbitration (CCMA)<br><strong>Second Respondent:</strong> [EMPLOYER NAME]<br><strong>Third Respondent:</strong> [COMMISSIONER NAME] — Commissioner in his/her personal capacity</p>' +
+        '<p style="text-align:center; font-weight:bold; margin-bottom:1rem;">SUPPLEMENTARY AFFIDAVIT</p>' +
+        '<p>I, the undersigned <strong>' + name + '</strong>, do hereby make oath and state:</p>' +
+        '<p><strong>1.</strong> I am the Applicant in the above matter and the deponent to the Founding Affidavit filed on <strong>' + foundingDate + '</strong>.</p>' +
+        '<p><strong>2.</strong> Since filing the Founding Affidavit, I have reviewed the transcribed record of the arbitration proceedings filed on <span class="fill">[DATE RECORD FILED]</span>.</p>' +
+        '<p><strong>3.</strong> The record reveals new facts that supplement the following ground(s) for review: <strong>' + groundText + '</strong>.</p>' +
+        '<p><strong>4.</strong> I wish to supplement my Founding Affidavit with the following additional facts and/or corrections:</p>' +
+        '<p style="margin-left:1.5rem; white-space:pre-wrap; background:#f8f9fa; padding:1rem; border-radius:6px; border:1px solid var(--border);">' + concerns.replace(/
+/g, '<br>') + '</p>' +
+        '<p><strong>5.</strong> These supplementary facts do not introduce any new, unrelated grounds for review. They merely supplement the grounds already recorded in my Founding Affidavit, in terms of <strong>Rule 37(21)</strong> of the Labour Court Rules.</p>' +
+        '<p><strong>6.</strong> I confirm that I do not intend to include any irrelevant or repetitive material in this supplementary affidavit.</p>' +
+        '<p><strong>7.</strong> I pray that this Honourable Court grant the application as prayed in the Notice of Motion, as supplemented herein.</p>' +
+        '<p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>' +
+        '<p style="margin-top:2rem;">___________________________<br>Signature</p>' +
+        '<p><strong>' + name + '</strong></p>' +
+        '<p style="margin-top:1.5rem; font-size:0.85rem; color:#555;"><em>The deponent acknowledges that he/she knows and understands the contents of this affidavit, that the contents are true and correct, and that he/she has no objection to taking the prescribed oath / affirmation.</em></p>';
 
       document.getElementById('suppTemplate').innerHTML = html;
       document.getElementById('supplementaryOutput').style.display = 'block';
@@ -546,7 +553,7 @@
 
     function downloadSupp() {
       const el = document.getElementById('suppTemplate');
-      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Supplementary_Affidavit.html</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>${el.innerHTML}</body></html>`;
+      const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Supplementary_Affidavit.html</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
       const blob = new Blob([html], {type: 'text/html'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = 'Supplementary_Affidavit.html';
@@ -569,9 +576,9 @@
       const box = document.getElementById('fileInstructions');
       let html = '';
       if (val === 'supplementary') {
-        html = `<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📤 Filing Supplementary + Notice of Amendment</div><p><strong>Court Online:</strong> My Cases → Select case → My Case Documents → Upload → Document type: "Supplementary Affidavit" → Attach PDF → Sign → Submit.<br><br><strong>Also file:</strong> A Notice of Amendment varying the terms of the Notice of Motion (if the supplementary affidavit changes the relief sought).<br><br><strong>Service:</strong> Serve on all three Respondents. The Commissioner is served at the same address as the CCMA unless otherwise indicated.</p></div></div>`;
+        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📤 Filing Supplementary + Notice of Amendment</div><p><strong>Court Online:</strong> My Cases → Select case → My Case Documents → Upload → Document type: "Supplementary Affidavit" → Attach PDF → Sign → Submit.<br><br><strong>Also file:</strong> A Notice of Amendment varying the terms of the Notice of Motion (if the supplementary affidavit changes the relief sought).<br><br><strong>Service:</strong> Serve on all three Respondents. The Commissioner is served at the same address as the CCMA unless otherwise indicated.</p></div></div>';
       } else if (val === 'standby') {
-        html = `<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📤 Filing Notice of Standing By</div><p><strong>Court Online:</strong> My Cases → Select case → My Case Documents → Upload → Document type: "Notice of Standing By" or "Other" → Attach PDF → Sign → Submit.<br><br><strong>Service:</strong> Serve on all three Respondents. The Commissioner is served at the same address as the CCMA unless otherwise indicated.</p></div></div>`;
+        html = '<div class="adv-alert adv-alert--info"><div class="adv-alert__content"><div class="adv-alert__title">📤 Filing Notice of Standing By</div><p><strong>Court Online:</strong> My Cases → Select case → My Case Documents → Upload → Document type: "Notice of Standing By" or "Other" → Attach PDF → Sign → Submit.<br><br><strong>Service:</strong> Serve on all three Respondents. The Commissioner is served at the same address as the CCMA unless otherwise indicated.</p></div></div>';
       }
       box.innerHTML = html;
     }
@@ -579,7 +586,7 @@
     function downloadTemplate(elementId, filename) {
       const el = document.getElementById(elementId);
       if (!el) return;
-      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${filename}</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>${el.innerHTML}</body></html>`;
+      const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
       const blob = new Blob([html], {type: 'text/html'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = filename;
