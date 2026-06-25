@@ -1,944 +1,1143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagination & Index — Advome</title>
-  <link rel="stylesheet" href="shared-styles.css">
-  <style>
-    :root { --primary: #1a365d; --primary-light: #2c5282; --accent: #d69e2e; --success: #38a169; --danger: #e53e3e; --warning: #dd6b20; --bg-page: #f7fafc; --bg-card: #ffffff; --border: #e2e8f0; --text: #2d3748; --text-muted: #718096; }
-    .tab-bar { display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem; flex-wrap:wrap; }
-    .tab-btn { border-radius:20px; font-size:0.85rem; padding:0.5rem 1rem; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; transition:all .2s; font-family:inherit; }
-    .tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:600; }
-    .tab-btn:hover:not(.active) { background:var(--bg-page); }
-    .tab-content { display:none; }
-    .tab-content.active { display:block; animation:fadeIn .3s ease; }
-    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
-    .rule-box { background:#edf2f7; border-left:4px solid var(--primary); padding:1rem 1.25rem; border-radius:6px; margin-bottom:1rem; }
-    .rule-box h4 { margin:0 0 .4rem; color:var(--primary); font-size:1rem; }
-    .rule-box p, .rule-box ul { margin:.25rem 0; font-size:0.9rem; }
-    .template-box { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:600px; overflow-y:auto; }
-    .template-box .doc-header { text-align:center; border-bottom:2px solid var(--primary); padding-bottom:1rem; margin-bottom:1rem; }
-    .template-box .doc-title { font-size:14px; font-weight:bold; text-transform:uppercase; color:var(--primary); letter-spacing:1px; }
-    .template-box .fill { border-bottom:1px solid #999; display:inline-block; min-width:120px; padding:0 6px; color:#555; }
-    .template-box p { margin:.6rem 0; }
-    .badge { display:inline-block; padding:.15rem .5rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
-    .badge--danger { background:#fed7d7; color:#742a2a; }
-    .badge--warning { background:#feebc8; color:#7c2d12; }
-    .badge--success { background:#c6f6d5; color:#22543d; }
-    .badge--info { background:#bee3f8; color:#2a4365; }
-    .step-list { counter-reset:step; list-style:none; padding:0; }
-    .step-list li { position:relative; padding-left:2.5rem; margin-bottom:1rem; }
-    .step-list li::before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:1.8rem; height:1.8rem; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; }
-    .inline-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    @media(max-width:600px){ .inline-form{grid-template-columns:1fr;} }
-    .generated-doc-actions { display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; }
-    .record-preview { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-family:Georgia,serif; line-height:1.6; max-height:500px; overflow-y:auto; white-space:pre-wrap; }
-    .section-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1rem; margin-bottom:1rem; }
-    .section-card h4 { color:var(--primary); margin:0 0 .5rem; font-size:1rem; }
-    .section-card p { margin:0; font-size:0.85rem; color:var(--text-muted); }
-    .add-row-btn { background:var(--bg-page); border:1px dashed var(--border); border-radius:6px; padding:0.5rem 1rem; cursor:pointer; font-size:0.85rem; color:var(--primary); width:100%; margin-top:0.5rem; }
-    .add-row-btn:hover { background:#fff; border-color:var(--primary); }
-    .remove-row-btn { background:none; border:none; color:var(--danger); cursor:pointer; font-size:0.85rem; padding:0.25rem; }
-    .doc-row { display:grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap:0.5rem; align-items:center; margin-bottom:0.5rem; }
-    @media(max-width:600px){ .doc-row{grid-template-columns:1fr 1fr auto;} }
-    .doc-row input { padding:0.4rem; border:1px solid var(--border); border-radius:4px; font-size:0.85rem; }
-    .doc-row input:focus { outline:none; border-color:var(--primary-light); }
-    .paste-area { width:100%; min-height:80px; padding:0.75rem; border:1px solid var(--border); border-radius:6px; font-family:monospace; font-size:0.85rem; resize:vertical; }
-    .paste-area:focus { outline:none; border-color:var(--primary-light); }
-  </style>
-<!-- base target removed: all navigation stays in same window -->
-<base target="_blank">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination & Index — Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #2d3748;
+            --text-muted: #718096;
+        }
+        .tab-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            border-radius: 20px;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            cursor: pointer;
+            transition: all .2s;
+            font-family: inherit;
+            user-select: none;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            font-weight: 600;
+        }
+        .tab-btn:hover:not(.active) {
+            background: var(--bg-page);
+            border-color: var(--primary-light);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn .3s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .rule-box {
+            background: #edf2f7;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .rule-box h4 {
+            margin: 0 0 .4rem;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        .rule-box p,
+        .rule-box ul {
+            margin: .25rem 0;
+            font-size: 0.9rem;
+        }
+        .template-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .template-box .doc-header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .template-box .doc-title {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        .template-box .fill {
+            border-bottom: 1px solid #999;
+            display: inline-block;
+            min-width: 120px;
+            padding: 0 6px;
+            color: #555;
+        }
+        .template-box p {
+            margin: .6rem 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge--danger {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .badge--warning {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+        .badge--success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .badge--info {
+            background: #bee3f8;
+            color: #2a4365;
+        }
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .inline-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px) {
+            .inline-form {
+                grid-template-columns: 1fr;
+            }
+        }
+        .generated-doc-actions {
+            display: flex;
+            gap: .75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .record-preview {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .section-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .section-card h4 {
+            color: var(--primary);
+            margin: 0 0 .5rem;
+            font-size: 1rem;
+        }
+        .section-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .add-row-btn {
+            background: var(--bg-page);
+            border: 1px dashed var(--border);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--primary);
+            width: 100%;
+            margin-top: 0.5rem;
+            font-family: inherit;
+        }
+        .add-row-btn:hover {
+            background: #fff;
+            border-color: var(--primary);
+        }
+        .remove-row-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        .remove-row-btn:hover {
+            background: #fed7d7;
+        }
+        .doc-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        @media(max-width:600px) {
+            .doc-row {
+                grid-template-columns: 1fr 1fr auto;
+            }
+        }
+        .doc-row input {
+            padding: 0.4rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        .doc-row input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(44, 82, 130, 0.15);
+        }
+        .paste-area {
+            width: 100%;
+            min-height: 80px;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+        }
+        .paste-area:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+    </style>
 </head>
 <body>
 
-  <header class="adv-header">
-    <div class="adv-header__logo">Advome<span>.</span></div>
-    <nav class="adv-header__nav">
-      <a href="ccma.html">CCMA</a>
-      <a href="motion.html">Labour Court</a>
-      <a href="#">Help</a>
+    <header class="adv-header">
+        <div class="adv-header__logo">Advome<span>.</span></div>
+        <nav class="adv-header__nav">
+            <a href="ccma.html">CCMA</a>
+            <a href="motion.html">Labour Court</a>
+            <a href="#">Help</a>
+        </nav>
+        <div class="adv-header__user">
+            <div class="adv-header__avatar">SRL</div>
+        </div>
+        <button class="adv-header__menu-toggle">☰</button>
+    </header>
+
+    <div class="adv-progress" data-workflow="ccma" data-current-step="pagination"></div>
+
+    <section class="adv-hero">
+        <div class="adv-hero__content">
+            <h1>Pagination & Index</h1>
+            <p>Step 16 of 21 — Collate, number, bind and index the complete file</p>
+        </div>
+        <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+    </section>
+
+    <div class="adv-container">
+        <main>
+
+            <!-- TAB BAR — buttons use data-tab attribute -->
+            <div class="tab-bar" id="mainTabBar">
+                <button class="tab-btn active" data-tab="tab-what">1. What to Paginate</button>
+                <button class="tab-btn" data-tab="tab-draft">2. AI Draft Index</button>
+                <button class="tab-btn" data-tab="tab-checklist">3. Checklist</button>
+                <button class="tab-btn" data-tab="tab-setdown">4. Apply for Hearing Date</button>
+            </div>
+
+            <!-- TAB 1: WHAT TO PAGINATE -->
+            <div id="tab-what" class="tab-content active">
+                <div class="adv-card">
+                    <div class="adv-card__header">
+                        <div>
+                            <div class="adv-card__title">What Must Be Paginated?</div>
+                            <div class="adv-card__subtitle">Rule 37(25) & Rule 29(3) — The complete file in three sections</div>
+                        </div>
+                    </div>
+                    <div class="rule-box">
+                        <h4>📖 The Law</h4>
+                        <p><strong>Rule 37(25):</strong> After receipt of any replying affidavit or the expiry of the time limit for filing a replying affidavit (whichever occurs first), the applicant must <strong>index and paginate the file</strong> in terms of Rule 29(3) and, within <strong>10 court days</strong>, apply to the Registrar for a hearing date.</p>
+                        <p><strong>Rule 29(3):</strong> Papers must be arranged in <strong>chronological order</strong>, consecutively <strong>paginated</strong>, securely <strong>bound</strong>, and accompanied by a <strong>correct and complete index</strong> of evidence and documents.</p>
+                        <p><strong>Rule 29(4):</strong> Volumes must not exceed <strong>120 pages</strong> (or 200 pages in a lever arch file).</p>
+                        <p><strong>Rule 8:</strong> All documents must be A4, 12pt font (Arial or Times New Roman), 1.5 line spacing, 2cm margins.</p>
+                    </div>
+                    <div class="adv-alert adv-alert--info">
+                        <div class="adv-alert__content">
+                            <div class="adv-alert__title">📋 The Complete File Has Three Sections</div>
+                            <p>Under Rule 37(25), the complete file must be divided into <strong>three separate sections</strong>, each with its own index:</p>
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <h4>📁 Section A: Pleadings and Affidavits</h4>
+                        <p>All court documents filed by the parties, in chronological order:</p>
+                        <ul style="margin-top:0.5rem; padding-left:1.5rem; font-size:0.85rem; color:var(--text-muted);">
+                            <li>Notice of Motion (with all annexures)</li>
+                            <li>Founding Affidavit (with all annexures)</li>
+                            <li>Notice of Intention to Oppose (if any)</li>
+                            <li>Answering Affidavit (if any)</li>
+                            <li>Replying Affidavit (if any)</li>
+                            <li>Supplementary Affidavit (if any)</li>
+                            <li>Notice of Standing By (if any)</li>
+                            <li>Notice of Amendment (if any)</li>
+                        </ul>
+                    </div>
+                    <div class="section-card">
+                        <h4>📄 Section B: Notices and Other Documents</h4>
+                        <p>All procedural notices and correspondence, in chronological order:</p>
+                        <ul style="margin-top:0.5rem; padding-left:1.5rem; font-size:0.85rem; color:var(--text-muted);">
+                            <li>Notice of Set Down (if any)</li>
+                            <li>Notices of Filing and Service</li>
+                            <li>Proofs of Service</li>
+                            <li>Any correspondence with the Registrar</li>
+                            <li>Any consent orders or directions</li>
+                        </ul>
+                    </div>
+                    <div class="section-card">
+                        <h4>📀 Section C: The Record</h4>
+                        <p>The CCMA arbitration record, in chronological order:</p>
+                        <ul style="margin-top:0.5rem; padding-left:1.5rem; font-size:0.85rem; color:var(--text-muted);">
+                            <li>Arbitration Award</li>
+                            <li>Referral Form (LRA 7.11)</li>
+                            <li>Employment Contract / Proof of Employment</li>
+                            <li>Disciplinary Record / Dismissal Letter</li>
+                            <li>Witness Statements / Evidence Led</li>
+                            <li>Payslips / Salary Records</li>
+                            <li>Arbitration Hearing Transcript / Minutes</li>
+                            <li>Commissioner's Notes / Rulings (if available)</li>
+                        </ul>
+                    </div>
+                    <div class="adv-alert adv-alert--warning">
+                        <div class="adv-alert__content">
+                            <div class="adv-alert__title">⚠️ Important</div>
+                            <p>Each section must have its <strong>own index</strong> and <strong>own consecutive pagination</strong>. Do not paginate the entire file as one continuous document. Section A pages 1-50, Section B pages 1-20, Section C pages 1-100 (for example).</p>
+                            <p style="margin-top:0.5rem;">If any section exceeds 120 pages, split it into volumes (e.g., Section C Volume 1 of 2, Section C Volume 2 of 2).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: AI DRAFT INDEX -->
+            <div id="tab-draft" class="tab-content">
+                <div class="adv-card">
+                    <div class="adv-card__header">
+                        <div>
+                            <div class="adv-card__title">AI Draft Your Index to the Record</div>
+                            <div class="adv-card__subtitle">Rule 29(3) — Generate a complete, court-ready index in three sections</div>
+                        </div>
+                    </div>
+                    <div class="adv-alert adv-alert--info">
+                        <div class="adv-alert__content">
+                            <div class="adv-alert__title">💡 How This Works</div>
+                            <p>Enter your documents below in each section. The platform will generate a complete <strong>Index to the Record</strong> with proper Labour Court formatting, page references, and chronological ordering. You can download it as an <strong>editable Word document</strong> (.doc) or copy it to edit manually.</p>
+                        </div>
+                    </div>
+                    <div class="adv-form-group">
+                        <label><strong>Step 1: Enter Case Details</strong></label>
+                        <div class="inline-form">
+                            <div class="adv-form-group">
+                                <label for="idxSeat">Labour Court Seat</label>
+                                <select class="adv-input" id="idxSeat">
+                                    <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                                </select>
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxCaseNo">Case Number</label>
+                                <input type="text" class="adv-input" id="idxCaseNo" placeholder="e.g. JRB1234/2026">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxAppName">Applicant Name</label>
+                                <input type="text" class="adv-input" id="idxAppName" placeholder="Your full name">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxResp1">First Respondent (CCMA)</label>
+                                <input type="text" class="adv-input" id="idxResp1" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxResp2">Second Respondent (Employer)</label>
+                                <input type="text" class="adv-input" id="idxResp2" placeholder="Employer name">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxResp3">Third Respondent (Commissioner)</label>
+                                <input type="text" class="adv-input" id="idxResp3" placeholder="Commissioner name">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxVol">Volume Number</label>
+                                <input type="text" class="adv-input" id="idxVol" placeholder="e.g. 1 of 1">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="idxTotalPages">Total Pages in This Volume</label>
+                                <input type="text" class="adv-input" id="idxTotalPages" placeholder="e.g. 145">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1.5rem;">
+                        <label><strong>Step 2: Section A — Pleadings and Affidavits</strong></label>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">List all pleadings and affidavits in chronological order. Click "Add Row" for each document.</p>
+                        <div id="sectionA">
+                            <div class="doc-row">
+                                <input type="text" placeholder="Description" class="idx-desc">
+                                <input type="text" placeholder="Date" class="idx-date">
+                                <input type="text" placeholder="From Page" class="idx-from">
+                                <input type="text" placeholder="To Page" class="idx-to">
+                                <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-row-btn" onclick="addRow('sectionA')">+ Add Document</button>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1.5rem;">
+                        <label><strong>Step 3: Section B — Notices and Other Documents</strong></label>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">List all notices, proofs of service, and correspondence in chronological order.</p>
+                        <div id="sectionB">
+                            <div class="doc-row">
+                                <input type="text" placeholder="Description" class="idx-desc">
+                                <input type="text" placeholder="Date" class="idx-date">
+                                <input type="text" placeholder="From Page" class="idx-from">
+                                <input type="text" placeholder="To Page" class="idx-to">
+                                <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-row-btn" onclick="addRow('sectionB')">+ Add Document</button>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1.5rem;">
+                        <label><strong>Step 4: Section C — The Record</strong></label>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">List all CCMA record documents in chronological order.</p>
+                        <div id="sectionC">
+                            <div class="doc-row">
+                                <input type="text" placeholder="Description" class="idx-desc">
+                                <input type="text" placeholder="Date" class="idx-date">
+                                <input type="text" placeholder="From Page" class="idx-from">
+                                <input type="text" placeholder="To Page" class="idx-to">
+                                <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-row-btn" onclick="addRow('sectionC')">+ Add Document</button>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1.5rem;">
+                        <label for="idxNotes"><strong>Step 5: Additional Notes for the Index</strong></label>
+                        <textarea class="paste-area" id="idxNotes" placeholder="Any special notes, e.g. 'Section C is split into 2 volumes due to length', or 'Annexure A to Founding Affidavit spans pages 15-22'..."></textarea>
+                    </div>
+                    <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="generateIndex()">⚡ Generate Complete Index</button>
+                    <div id="idxOutput" style="display:none; margin-top:1.5rem;">
+                        <div class="adv-form-group">
+                            <label><strong>Index Preview</strong> <span class="badge badge--success">Rule 29(3) Compliant</span></label>
+                            <div class="record-preview" id="idxPreview"></div>
+                        </div>
+                        <div class="generated-doc-actions">
+                            <button class="adv-btn adv-btn--primary" onclick="downloadIndexWord()">📥 Download as Word (.doc)</button>
+                            <button class="adv-btn adv-btn--secondary" onclick="copyIndex()">📋 Copy to Clipboard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: CHECKLIST -->
+            <div id="tab-checklist" class="tab-content">
+                <div class="adv-card">
+                    <div class="adv-card__header">
+                        <div>
+                            <div class="adv-card__title">Pagination Checklist</div>
+                            <div class="adv-card__subtitle">Rule 29 & Rule 8 — Ensure your file is court-ready</div>
+                        </div>
+                    </div>
+                    <div class="rule-box">
+                        <h4>📖 Rule 29 — Preparation of Papers</h4>
+                        <ul>
+                            <li><strong>Pagination:</strong> All pages numbered consecutively within each section.</li>
+                            <li><strong>Chronological Order:</strong> Documents arranged from oldest to newest within each section.</li>
+                            <li><strong>Binding:</strong> Securely bound in suitable covers. Max 120 pages per volume (200 in lever arch).</li>
+                            <li><strong>Index:</strong> Correct and complete index of evidence and documents for each section.</li>
+                            <li><strong>Format:</strong> A4, 12pt font (Arial or Times New Roman), 1.5 line spacing, 2cm margins (Rule 8).</li>
+                        </ul>
+                    </div>
+                    <div class="adv-form-group">
+                        <label><strong>Complete Checklist</strong></label>
+                        <ul class="adv-checklist" data-checklist-id="pagination-prep">
+                            <li class="adv-checklist__item" data-item-id="pp1">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">All documents in Section A (Pleadings) are in chronological order</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp2">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">All documents in Section B (Notices) are in chronological order</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp3">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">All documents in Section C (Record) are in chronological order</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp4">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">Each section has its own consecutive page numbers (1 to end)</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp5">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">No volume exceeds 120 pages (or 200 in lever arch file)</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp6">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">Each volume has a cover page: case name, case number, parties, volume number</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp7">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">Each section has a complete index with page references</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp8">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">Font is Arial or Times New Roman, 12pt, 1.5 spacing, 2cm margins</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp9">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">All pages are A4 size</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp10">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">Documents are securely bound (stapled, comb-bound, or in lever arch file)</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp11">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">I have a separate copy for the Registrar and each Respondent</div>
+                            </li>
+                            <li class="adv-checklist__item" data-item-id="pp12">
+                                <div class="adv-checklist__checkbox"></div>
+                                <div class="adv-checklist__text">I am ready to apply for a hearing date within 10 court days</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="adv-alert adv-alert--success" style="margin-top:1.5rem;">
+                        <div class="adv-alert__content">
+                            <div class="adv-alert__title">✅ Ready for Set Down?</div>
+                            <p>Once all items are checked, proceed to <strong>Tab 4: Apply for Hearing Date</strong> to complete the set-down process.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: APPLY FOR HEARING DATE -->
+            <div id="tab-setdown" class="tab-content">
+                <div class="adv-card adv-card--danger">
+                    <div class="adv-card__header">
+                        <div>
+                            <div class="adv-card__title">Apply for Hearing Date</div>
+                            <div class="adv-card__subtitle">Rule 37(25) — 10 court days after pleadings close</div>
+                        </div>
+                    </div>
+                    <div class="adv-alert adv-alert--danger">
+                        <div class="adv-alert__content">
+                            <div class="adv-alert__title">⏰ 10-DAY DEADLINE — Rule 37(25)</div>
+                            <p>You must apply to the Registrar for a hearing date within <strong>10 court days</strong> after indexing and paginating the file. If you miss this deadline, your matter may be delayed or struck from the roll.</p>
+                        </div>
+                    </div>
+                    <div class="rule-box">
+                        <h4>📖 The Law</h4>
+                        <p><strong>Rule 37(25):</strong> After indexing and paginating, the applicant must apply to the Registrar for a hearing date within <strong>10 court days</strong>.</p>
+                        <p><strong>Rule 37(26):</strong> For unopposed matters, the applicant may apply for a hearing date within <strong>10 court days</strong> after the last day for filing an answering affidavit.</p>
+                        <p><strong>Rule 40:</strong> Heads of Argument must be filed within <strong>15 court days</strong> after pleadings close (for opposed reviews). For unopposed reviews, Heads are still required because it is a review application.</p>
+                    </div>
+                    <div class="adv-form-group">
+                        <label><strong>Step-by-Step: Apply for Hearing Date on Court Online</strong></label>
+                        <ul class="step-list">
+                            <li><strong>Log in</strong> to the Court Online Portal at <em>https://courtonline.co.za</em>.</li>
+                            <li>Navigate to <strong>My Cases</strong> → Select your case.</li>
+                            <li>Look for <strong>"Apply for Hearing Date"</strong> or <strong>"Set Down"</strong> option.</li>
+                            <li>Select the <strong>type of hearing</strong>: Unopposed Motion / Opposed Motion / Review.</li>
+                            <li>Upload the <strong>complete paginated file</strong> (all sections, properly indexed).</li>
+                            <li>Confirm that all parties have been served and the proof of service is filed.</li>
+                            <li>Enter your <strong>digital signature</strong> and submit.</li>
+                            <li>The Registrar will allocate a hearing date and notify all parties.</li>
+                        </ul>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1.5rem;">
+                        <label><strong>Request for Hearing Date Template</strong> <span class="badge badge--info">Template</span></label>
+                        <div class="template-box" id="setdownTemplate">
+                            <div class="doc-header">
+                                <div class="doc-title">Request for Hearing Date</div>
+                            </div>
+                            <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
+                            <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
+                            <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
+                            <p><strong>TO:</strong> The Registrar of the Labour Court</p>
+                            <p><strong>RE:</strong> Application for a Hearing Date in terms of Rule 37(25)</p>
+                            <p>The Applicant hereby applies for a hearing date in the above matter.</p>
+                            <p>The complete file has been indexed and paginated in terms of Rule 29(3) and Rule 37(25), consisting of:</p>
+                            <p style="margin-left:1.5rem;"><strong>Section A:</strong> Pleadings and Affidavits — <span class="fill">[X]</span> pages;</p>
+                            <p style="margin-left:1.5rem;"><strong>Section B:</strong> Notices and Other Documents — <span class="fill">[X]</span> pages;</p>
+                            <p style="margin-left:1.5rem;"><strong>Section C:</strong> The Record — <span class="fill">[X]</span> pages (Volume <span class="fill">[X]</span> of <span class="fill">[Y]</span>).</p>
+                            <p>The matter is <span class="fill">[opposed / unopposed]</span>.</p>
+                            <p>All parties have been duly served. Proof of service is filed herewith.</p>
+                            <p>The Applicant requests that the matter be set down for hearing on the earliest available date.</p>
+                            <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
+                            <p style="margin-top:2rem;">___________________________<br>Signature</p>
+                            <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
+                        </div>
+                        <div class="generated-doc-actions">
+                            <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('setdownTemplate','Request_for_Hearing_Date.html')">📥 Download</button>
+                        </div>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1.5rem;">
+                        <label><strong>10-Day Deadline Tracker</strong></label>
+                        <div class="inline-form">
+                            <div class="adv-form-group">
+                                <label for="setdownStart">Date Indexing Completed</label>
+                                <input type="date" class="adv-input" id="setdownStart" onchange="calculateSetdownDeadline()">
+                            </div>
+                            <div class="adv-form-group">
+                                <label for="setdownDeadline">10-Court-Day Deadline</label>
+                                <input type="text" class="adv-input" id="setdownDeadline" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
+                            </div>
+                        </div>
+                        <div class="adv-form-group" style="margin-top:1rem;">
+                            <label for="setdownDays">Days Remaining</label>
+                            <input type="text" class="adv-input" id="setdownDays" readonly style="background:#edf2f7; font-weight:700;" placeholder="Calculated automatically">
+                        </div>
+                    </div>
+                    <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
+                        <div class="adv-alert__content">
+                            <div class="adv-alert__title">📝 What Happens Next?</div>
+                            <p>After applying for a hearing date:</p>
+                            <ol style="margin-top:0.5rem; padding-left:1.5rem;">
+                                <li>The Registrar allocates a hearing date and notifies all parties;</li>
+                                <li>You must file <strong>Heads of Argument</strong> within 15 court days (opposed) or before the hearing (unopposed);</li>
+                                <li>Prepare your oral argument for the hearing;</li>
+                                <li>Attend the hearing on the allocated date.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <aside class="adv-sidebar">
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+                <div class="adv-deadline-calculator">
+                    <div class="adv-form-group">
+                        <label for="deadlineStart">Start Date</label>
+                        <input type="date" class="adv-input adv-deadline__input" id="deadlineStart" name="start_date">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="deadlineDays">Days to Add</label>
+                        <input type="number" class="adv-input adv-deadline__days" id="deadlineDays" value="10" min="1">
+                    </div>
+                    <div class="adv-deadline__display">
+                        <span class="adv-deadline__label">Select a date to calculate deadline</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+                <div class="adv-chat" data-chat-id="pagination">
+                    <div class="adv-chat__messages"></div>
+                    <div class="adv-chat__input-group">
+                        <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about pagination...">
+                        <button class="adv-chat__send">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+                <div class="adv-savings">
+                    <span>Saved so far:</span>
+                    <span class="adv-savings__amount">R0</span>
+                </div>
+                <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+            </div>
+        </aside>
+    </div>
+
+    <nav class="adv-nav-footer">
+        <div class="adv-nav-footer__prev">
+            <a href="replying.html" class="adv-btn adv-btn--ghost">← Replying</a>
+        </div>
+        <div class="adv-nav-footer__next">
+            <a href="setdown.html" class="adv-btn adv-btn--primary">Set Down →</a>
+        </div>
     </nav>
-    <div class="adv-header__user">
-      <div class="adv-header__avatar">SRL</div>
-    </div>
-    <button class="adv-header__menu-toggle">☰</button>
-  </header>
 
-  <div class="adv-progress" data-workflow="ccma" data-current-step="pagination"></div>
+    <footer class="adv-footer">
+        <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+        <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+    </footer>
 
-  <section class="adv-hero">
-    <div class="adv-hero__content">
-      <h1>Pagination & Index</h1>
-      <p>Step 16 of 21 — Collate, number, bind and index the complete file</p>
-    </div>
-    <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
-  </section>
+    <script src="shared-scripts.js"></script>
 
-  <div class="adv-container">
-    <main>
-
-      <div class="tab-bar">
-        <button class="tab-btn active" data-tab="tab-what">1. What to Paginate</button>
-        <button class="tab-btn" data-tab="tab-draft">2. AI Draft Index</button>
-        <button class="tab-btn" data-tab="tab-checklist">3. Checklist</button>
-        <button class="tab-btn" data-tab="tab-setdown">4. Apply for Hearing Date</button>
-      </div>
-
-      <!-- TAB 1: WHAT TO PAGINATE -->
-      <div id="tab-what" class="tab-content active">
-        <div class="adv-card">
-          <div class="adv-card__header">
-            <div>
-              <div class="adv-card__title">What Must Be Paginated?</div>
-              <div class="adv-card__subtitle">Rule 37(25) & Rule 29(3) — The complete file in three sections</div>
-            </div>
-          </div>
-
-          <div class="rule-box">
-            <h4>📖 The Law</h4>
-            <p><strong>Rule 37(25):</strong> After receipt of any replying affidavit or the expiry of the time limit for filing a replying affidavit (whichever occurs first), the applicant must <strong>index and paginate the file</strong> in terms of Rule 29(3) and, within <strong>10 court days</strong>, apply to the Registrar for a hearing date.</p>
-            <p><strong>Rule 29(3):</strong> Papers must be arranged in <strong>chronological order</strong>, consecutively <strong>paginated</strong>, securely <strong>bound</strong>, and accompanied by a <strong>correct and complete index</strong> of evidence and documents.</p>
-            <p><strong>Rule 29(4):</strong> Volumes must not exceed <strong>120 pages</strong> (or 200 pages in a lever arch file).</p>
-            <p><strong>Rule 8:</strong> All documents must be A4, 12pt font (Arial or Times New Roman), 1.5 line spacing, 2cm margins.</p>
-          </div>
-
-          <div class="adv-alert adv-alert--info">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">📋 The Complete File Has Three Sections</div>
-              <p>Under Rule 37(25), the complete file must be divided into <strong>three separate sections</strong>, each with its own index:</p>
-            </div>
-          </div>
-
-          <div class="section-card">
-            <h4>📁 Section A: Pleadings and Affidavits</h4>
-            <p>All court documents filed by the parties, in chronological order:</p>
-            <ul style="margin-top:0.5rem; padding-left:1.5rem; font-size:0.85rem; color:var(--text-muted);">
-              <li>Notice of Motion (with all annexures)</li>
-              <li>Founding Affidavit (with all annexures)</li>
-              <li>Notice of Intention to Oppose (if any)</li>
-              <li>Answering Affidavit (if any)</li>
-              <li>Replying Affidavit (if any)</li>
-              <li>Supplementary Affidavit (if any)</li>
-              <li>Notice of Standing By (if any)</li>
-              <li>Notice of Amendment (if any)</li>
-            </ul>
-          </div>
-
-          <div class="section-card">
-            <h4>📄 Section B: Notices and Other Documents</h4>
-            <p>All procedural notices and correspondence, in chronological order:</p>
-            <ul style="margin-top:0.5rem; padding-left:1.5rem; font-size:0.85rem; color:var(--text-muted);">
-              <li>Notice of Set Down (if any)</li>
-              <li>Notices of Filing and Service</li>
-              <li>Proofs of Service</li>
-              <li>Any correspondence with the Registrar</li>
-              <li>Any consent orders or directions</li>
-            </ul>
-          </div>
-
-          <div class="section-card">
-            <h4>📀 Section C: The Record</h4>
-            <p>The CCMA arbitration record, in chronological order:</p>
-            <ul style="margin-top:0.5rem; padding-left:1.5rem; font-size:0.85rem; color:var(--text-muted);">
-              <li>Arbitration Award</li>
-              <li>Referral Form (LRA 7.11)</li>
-              <li>Employment Contract / Proof of Employment</li>
-              <li>Disciplinary Record / Dismissal Letter</li>
-              <li>Witness Statements / Evidence Led</li>
-              <li>Payslips / Salary Records</li>
-              <li>Arbitration Hearing Transcript / Minutes</li>
-              <li>Commissioner's Notes / Rulings (if available)</li>
-            </ul>
-          </div>
-
-          <div class="adv-alert adv-alert--warning">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">⚠️ Important</div>
-              <p>Each section must have its <strong>own index</strong> and <strong>own consecutive pagination</strong>. Do not paginate the entire file as one continuous document. Section A pages 1-50, Section B pages 1-20, Section C pages 1-100 (for example).</p>
-              <p style="margin-top:0.5rem;">If any section exceeds 120 pages, split it into volumes (e.g., Section C Volume 1 of 2, Section C Volume 2 of 2).</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB 2: AI DRAFT INDEX -->
-      <div id="tab-draft" class="tab-content">
-        <div class="adv-card">
-          <div class="adv-card__header">
-            <div>
-              <div class="adv-card__title">AI Draft Your Index to the Record</div>
-              <div class="adv-card__subtitle">Rule 29(3) — Generate a complete, court-ready index in three sections</div>
-            </div>
-          </div>
-
-          <div class="adv-alert adv-alert--info">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">💡 How This Works</div>
-              <p>Enter your documents below in each section. The platform will generate a complete <strong>Index to the Record</strong> with proper Labour Court formatting, page references, and chronological ordering. You can download it as an <strong>editable Word document</strong> (.doc) or copy it to edit manually.</p>
-            </div>
-          </div>
-
-          <div class="adv-form-group">
-            <label><strong>Step 1: Enter Case Details</strong></label>
-            <div class="inline-form">
-              <div class="adv-form-group">
-                <label for="idxSeat">Labour Court Seat</label>
-                <select class="adv-input" id="idxSeat">
-                  <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
-                </select>
-              </div>
-              <div class="adv-form-group">
-                <label for="idxCaseNo">Case Number</label>
-                <input type="text" class="adv-input" id="idxCaseNo" placeholder="e.g. JRB1234/2026">
-              </div>
-              <div class="adv-form-group">
-                <label for="idxAppName">Applicant Name</label>
-                <input type="text" class="adv-input" id="idxAppName" placeholder="Your full name">
-              </div>
-              <div class="adv-form-group">
-                <label for="idxResp1">First Respondent (CCMA)</label>
-                <input type="text" class="adv-input" id="idxResp1" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
-              </div>
-              <div class="adv-form-group">
-                <label for="idxResp2">Second Respondent (Employer)</label>
-                <input type="text" class="adv-input" id="idxResp2" placeholder="Employer name">
-              </div>
-              <div class="adv-form-group">
-                <label for="idxResp3">Third Respondent (Commissioner)</label>
-                <input type="text" class="adv-input" id="idxResp3" placeholder="Commissioner name">
-              </div>
-              <div class="adv-form-group">
-                <label for="idxVol">Volume Number</label>
-                <input type="text" class="adv-input" id="idxVol" placeholder="e.g. 1 of 1">
-              </div>
-              <div class="adv-form-group">
-                <label for="idxTotalPages">Total Pages in This Volume</label>
-                <input type="text" class="adv-input" id="idxTotalPages" placeholder="e.g. 145">
-              </div>
-            </div>
-          </div>
-
-          <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label><strong>Step 2: Section A — Pleadings and Affidavits</strong></label>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">List all pleadings and affidavits in chronological order. Click "Add Row" for each document.</p>
-            <div id="sectionA">
-              <div class="doc-row">
-                <input type="text" placeholder="Description" class="idx-desc">
-                <input type="text" placeholder="Date" class="idx-date">
-                <input type="text" placeholder="From Page" class="idx-from">
-                <input type="text" placeholder="To Page" class="idx-to">
-                <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>
-              </div>
-            </div>
-            <button type="button" class="add-row-btn" onclick="addRow('sectionA')">+ Add Document</button>
-          </div>
-
-          <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label><strong>Step 3: Section B — Notices and Other Documents</strong></label>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">List all notices, proofs of service, and correspondence in chronological order.</p>
-            <div id="sectionB">
-              <div class="doc-row">
-                <input type="text" placeholder="Description" class="idx-desc">
-                <input type="text" placeholder="Date" class="idx-date">
-                <input type="text" placeholder="From Page" class="idx-from">
-                <input type="text" placeholder="To Page" class="idx-to">
-                <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>
-              </div>
-            </div>
-            <button type="button" class="add-row-btn" onclick="addRow('sectionB')">+ Add Document</button>
-          </div>
-
-          <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label><strong>Step 4: Section C — The Record</strong></label>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">List all CCMA record documents in chronological order.</p>
-            <div id="sectionC">
-              <div class="doc-row">
-                <input type="text" placeholder="Description" class="idx-desc">
-                <input type="text" placeholder="Date" class="idx-date">
-                <input type="text" placeholder="From Page" class="idx-from">
-                <input type="text" placeholder="To Page" class="idx-to">
-                <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>
-              </div>
-            </div>
-            <button type="button" class="add-row-btn" onclick="addRow('sectionC')">+ Add Document</button>
-          </div>
-
-          <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label for="idxNotes"><strong>Step 5: Additional Notes for the Index</strong></label>
-            <textarea class="paste-area" id="idxNotes" placeholder="Any special notes, e.g. 'Section C is split into 2 volumes due to length', or 'Annexure A to Founding Affidavit spans pages 15-22'..."></textarea>
-          </div>
-
-          <button class="adv-btn adv-btn--primary" style="margin-top:1rem;" onclick="generateIndex()">⚡ Generate Complete Index</button>
-
-          <div id="idxOutput" style="display:none; margin-top:1.5rem;">
-            <div class="adv-form-group">
-              <label><strong>Index Preview</strong> <span class="badge badge--success">Rule 29(3) Compliant</span></label>
-              <div class="record-preview" id="idxPreview"></div>
-            </div>
-            <div class="generated-doc-actions">
-              <button class="adv-btn adv-btn--primary" onclick="downloadIndexWord()">📥 Download as Word (.doc)</button>
-              <button class="adv-btn adv-btn--secondary" onclick="copyIndex()">📋 Copy to Clipboard</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB 3: CHECKLIST -->
-      <div id="tab-checklist" class="tab-content">
-        <div class="adv-card">
-          <div class="adv-card__header">
-            <div>
-              <div class="adv-card__title">Pagination Checklist</div>
-              <div class="adv-card__subtitle">Rule 29 & Rule 8 — Ensure your file is court-ready</div>
-            </div>
-          </div>
-
-          <div class="rule-box">
-            <h4>📖 Rule 29 — Preparation of Papers</h4>
-            <ul>
-              <li><strong>Pagination:</strong> All pages numbered consecutively within each section.</li>
-              <li><strong>Chronological Order:</strong> Documents arranged from oldest to newest within each section.</li>
-              <li><strong>Binding:</strong> Securely bound in suitable covers. Max 120 pages per volume (200 in lever arch).</li>
-              <li><strong>Index:</strong> Correct and complete index of evidence and documents for each section.</li>
-              <li><strong>Format:</strong> A4, 12pt font (Arial or Times New Roman), 1.5 line spacing, 2cm margins (Rule 8).</li>
-            </ul>
-          </div>
-
-          <div class="adv-form-group">
-            <label><strong>Complete Checklist</strong></label>
-            <ul class="adv-checklist" data-checklist-id="pagination-prep">
-              <li class="adv-checklist__item" data-item-id="pp1">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">All documents in Section A (Pleadings) are in chronological order</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp2">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">All documents in Section B (Notices) are in chronological order</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp3">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">All documents in Section C (Record) are in chronological order</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp4">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">Each section has its own consecutive page numbers (1 to end)</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp5">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">No volume exceeds 120 pages (or 200 in lever arch file)</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp6">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">Each volume has a cover page: case name, case number, parties, volume number</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp7">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">Each section has a complete index with page references</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp8">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">Font is Arial or Times New Roman, 12pt, 1.5 spacing, 2cm margins</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp9">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">All pages are A4 size</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp10">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">Documents are securely bound (stapled, comb-bound, or in lever arch file)</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp11">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">I have a separate copy for the Registrar and each Respondent</div>
-              </li>
-              <li class="adv-checklist__item" data-item-id="pp12">
-                <div class="adv-checklist__checkbox"></div>
-                <div class="adv-checklist__text">I am ready to apply for a hearing date within 10 court days</div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="adv-alert adv-alert--success" style="margin-top:1.5rem;">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">✅ Ready for Set Down?</div>
-              <p>Once all items are checked, proceed to <strong>Tab 4: Apply for Hearing Date</strong> to complete the set-down process.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB 4: APPLY FOR HEARING DATE -->
-      <div id="tab-setdown" class="tab-content">
-        <div class="adv-card adv-card--danger">
-          <div class="adv-card__header">
-            <div>
-              <div class="adv-card__title">Apply for Hearing Date</div>
-              <div class="adv-card__subtitle">Rule 37(25) — 10 court days after pleadings close</div>
-            </div>
-          </div>
-
-          <div class="adv-alert adv-alert--danger">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">⏰ 10-DAY DEADLINE — Rule 37(25)</div>
-              <p>You must apply to the Registrar for a hearing date within <strong>10 court days</strong> after indexing and paginating the file. If you miss this deadline, your matter may be delayed or struck from the roll.</p>
-            </div>
-          </div>
-
-          <div class="rule-box">
-            <h4>📖 The Law</h4>
-            <p><strong>Rule 37(25):</strong> After indexing and paginating, the applicant must apply to the Registrar for a hearing date within <strong>10 court days</strong>.</p>
-            <p><strong>Rule 37(26):</strong> For unopposed matters, the applicant may apply for a hearing date within <strong>10 court days</strong> after the last day for filing an answering affidavit.</p>
-            <p><strong>Rule 40:</strong> Heads of Argument must be filed within <strong>15 court days</strong> after pleadings close (for opposed reviews). For unopposed reviews, Heads are still required because it is a review application.</p>
-          </div>
-
-          <div class="adv-form-group">
-            <label><strong>Step-by-Step: Apply for Hearing Date on Court Online</strong></label>
-            <ul class="step-list">
-              <li><strong>Log in</strong> to the Court Online Portal at <em>https://courtonline.co.za</em>.</li>
-              <li>Navigate to <strong>My Cases</strong> → Select your case.</li>
-              <li>Look for <strong>"Apply for Hearing Date"</strong> or <strong>"Set Down"</strong> option.</li>
-              <li>Select the <strong>type of hearing</strong>: Unopposed Motion / Opposed Motion / Review.</li>
-              <li>Upload the <strong>complete paginated file</strong> (all sections, properly indexed).</li>
-              <li>Confirm that all parties have been served and the proof of service is filed.</li>
-              <li>Enter your <strong>digital signature</strong> and submit.</li>
-              <li>The Registrar will allocate a hearing date and notify all parties.</li>
-            </ul>
-          </div>
-
-          <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label><strong>Request for Hearing Date Template</strong> <span class="badge badge--info">Template</span></label>
-            <div class="template-box" id="setdownTemplate">
-              <div class="doc-header">
-                <div class="doc-title">Request for Hearing Date</div>
-              </div>
-              <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">IN THE LABOUR COURT OF SOUTH AFRICA<br>(HELD AT <span class="fill">[SEAT]</span>)</p>
-              <p style="text-align:center;">Case No: <span class="fill">[CASE NUMBER]</span></p>
-              <p style="text-align:center; margin-bottom:1rem;">In the matter between:<br><strong><span class="fill">[APPLICANT NAME]</span></strong> — Applicant<br>and<br><strong>First Respondent:</strong> <span class="fill">[CCMA]</span><br><strong>Second Respondent:</strong> <span class="fill">[EMPLOYER NAME]</span><br><strong>Third Respondent:</strong> <span class="fill">[COMMISSIONER NAME]</span></p>
-              <p><strong>TO:</strong> The Registrar of the Labour Court</p>
-              <p><strong>RE:</strong> Application for a Hearing Date in terms of Rule 37(25)</p>
-              <p>The Applicant hereby applies for a hearing date in the above matter.</p>
-              <p>The complete file has been indexed and paginated in terms of Rule 29(3) and Rule 37(25), consisting of:</p>
-              <p style="margin-left:1.5rem;"><strong>Section A:</strong> Pleadings and Affidavits — <span class="fill">[X]</span> pages;</p>
-              <p style="margin-left:1.5rem;"><strong>Section B:</strong> Notices and Other Documents — <span class="fill">[X]</span> pages;</p>
-              <p style="margin-left:1.5rem;"><strong>Section C:</strong> The Record — <span class="fill">[X]</span> pages (Volume <span class="fill">[X]</span> of <span class="fill">[Y]</span>).</p>
-              <p>The matter is <span class="fill">[opposed / unopposed]</span>.</p>
-              <p>All parties have been duly served. Proof of service is filed herewith.</p>
-              <p>The Applicant requests that the matter be set down for hearing on the earliest available date.</p>
-              <p style="margin-top:2rem;">Signed at <span class="fill">[PLACE]</span> on this <span class="fill">[DAY]</span> day of <span class="fill">[MONTH]</span> <span class="fill">[YEAR]</span>.</p>
-              <p style="margin-top:2rem;">___________________________<br>Signature</p>
-              <p><span class="fill">[NAME IN BLOCK LETTERS]</span></p>
-            </div>
-            <div class="generated-doc-actions">
-              <button class="adv-btn adv-btn--primary" onclick="downloadTemplate('setdownTemplate','Request_for_Hearing_Date.html')">📥 Download</button>
-            </div>
-          </div>
-
-          <div class="adv-form-group" style="margin-top:1.5rem;">
-            <label><strong>10-Day Deadline Tracker</strong></label>
-            <div class="inline-form">
-              <div class="adv-form-group">
-                <label for="setdownStart">Date Indexing Completed</label>
-                <input type="date" class="adv-input" id="setdownStart" onchange="calculateSetdownDeadline()">
-              </div>
-              <div class="adv-form-group">
-                <label for="setdownDeadline">10-Court-Day Deadline</label>
-                <input type="text" class="adv-input" id="setdownDeadline" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
-              </div>
-            </div>
-            <div class="adv-form-group" style="margin-top:1rem;">
-              <label for="setdownDays">Days Remaining</label>
-              <input type="text" class="adv-input" id="setdownDays" readonly style="background:#edf2f7; font-weight:700;" placeholder="Calculated automatically">
-            </div>
-          </div>
-
-          <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
-            <div class="adv-alert__content">
-              <div class="adv-alert__title">📝 What Happens Next?</div>
-              <p>After applying for a hearing date:</p>
-              <ol style="margin-top:0.5rem; padding-left:1.5rem;">
-                <li>The Registrar allocates a hearing date and notifies all parties;</li>
-                <li>You must file <strong>Heads of Argument</strong> within 15 court days (opposed) or before the hearing (unopposed);</li>
-                <li>Prepare your oral argument for the hearing;</li>
-                <li>Attend the hearing on the allocated date.</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </main>
-
-    <aside class="adv-sidebar">
-      <div class="adv-sidebar__widget">
-        <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
-        <div class="adv-deadline-calculator">
-          <div class="adv-form-group">
-            <label for="deadlineStart">Start Date</label>
-            <input type="date" class="adv-input adv-deadline__input" id="deadlineStart" name="start_date">
-          </div>
-          <div class="adv-form-group">
-            <label for="deadlineDays">Days to Add</label>
-            <input type="number" class="adv-input adv-deadline__days" id="deadlineDays" value="10" min="1">
-          </div>
-          <div class="adv-deadline__display">
-            <span class="adv-deadline__label">Select a date to calculate deadline</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="adv-sidebar__widget">
-        <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
-        <div class="adv-chat" data-chat-id="pagination">
-          <div class="adv-chat__messages"></div>
-          <div class="adv-chat__input-group">
-            <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about pagination...">
-            <button class="adv-chat__send">Send</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="adv-sidebar__widget">
-        <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
-        <div class="adv-savings">
-          <span>Saved so far:</span>
-          <span class="adv-savings__amount">R0</span>
-        </div>
-        <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
-      </div>
-    </aside>
-  </div>
-
-  <nav class="adv-nav-footer">
-    <div class="adv-nav-footer__prev">
-      <a href="replying.html" class="adv-btn adv-btn--ghost">← Replying</a>
-    </div>
-    <div class="adv-nav-footer__next">
-      <a href="setdown.html" class="adv-btn adv-btn--primary">Set Down →</a>
-    </div>
-  </nav>
-
-  <footer class="adv-footer">
-    <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
-    <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
-  </footer>
-
-  <script src="shared-scripts.js"></script>
-
-  <script>
-    // Court day calculation functions
-    function isPublicHoliday(d) {
-      var year = d.getFullYear();
-      var holidays = [
-        new Date(year, 0, 1), new Date(year, 2, 21), new Date(year, 3, 27),
-        new Date(year, 4, 1), new Date(year, 5, 16), new Date(year, 7, 9),
-        new Date(year, 8, 24), new Date(year, 11, 16), new Date(year, 11, 25), new Date(year, 11, 26)
-      ];
-      for (var i = 0; i < holidays.length; i++) {
-        if (holidays[i].getDate() === d.getDate() && holidays[i].getMonth() === d.getMonth()) return true;
-      }
-      return false;
-    }
-    function isCourtDay(d) {
-      var day = d.getDay();
-      if (day === 0 || day === 6) return false;
-      var month = d.getMonth(); var date = d.getDate();
-      if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
-      if (isPublicHoliday(d)) return false;
-      return true;
-    }
-    function addCourtDays(startDate, days) {
-      var d = new Date(startDate);
-      d.setDate(d.getDate() + 1);
-      var count = 0;
-      while (count < days) {
-        if (isCourtDay(d)) count++;
-        if (count < days) d.setDate(d.getDate() + 1);
-      }
-      return d;
-    }
-
-    // Add/remove rows for document lists
-    function addRow(sectionId) {
-      var section = document.getElementById(sectionId);
-      var row = document.createElement('div');
-      row.className = 'doc-row';
-      row.innerHTML = '<input type="text" placeholder="Description" class="idx-desc"> <input type="text" placeholder="Date" class="idx-date"> <input type="text" placeholder="From Page" class="idx-from"> <input type="text" placeholder="To Page" class="idx-to"> <button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>';
-      section.appendChild(row);
-    }
-
-    function removeRow(btn) {
-      var row = btn.parentNode;
-      row.parentNode.removeChild(row);
-    }
-
-    // Collect rows from a section
-    function collectRows(sectionId) {
-      var section = document.getElementById(sectionId);
-      var rows = section.querySelectorAll('.doc-row');
-      var items = [];
-      for (var i = 0; i < rows.length; i++) {
-        var desc = rows[i].querySelector('.idx-desc').value.trim();
-        var date = rows[i].querySelector('.idx-date').value.trim();
-        var fromPg = rows[i].querySelector('.idx-from').value.trim();
-        var toPg = rows[i].querySelector('.idx-to').value.trim();
-        if (desc) {
-          items.push({ desc: desc, date: date, from: fromPg, to: toPg });
+    <script>
+        // ===== COURT DAY CALCULATION =====
+        function isPublicHoliday(d) {
+            var year = d.getFullYear();
+            var holidays = [
+                new Date(year, 0, 1),
+                new Date(year, 2, 21),
+                new Date(year, 3, 27),
+                new Date(year, 4, 1),
+                new Date(year, 5, 16),
+                new Date(year, 7, 9),
+                new Date(year, 8, 24),
+                new Date(year, 11, 16),
+                new Date(year, 11, 25),
+                new Date(year, 11, 26)
+            ];
+            for (var i = 0; i < holidays.length; i++) {
+                if (holidays[i].getDate() === d.getDate() && holidays[i].getMonth() === d.getMonth())
+                    return true;
+            }
+            return false;
         }
-      }
-      return items;
-    }
 
-    function generateIndex() {
-      var seat = document.getElementById('idxSeat').value;
-      var caseNo = document.getElementById('idxCaseNo').value || '[CASE NUMBER]';
-      var appName = document.getElementById('idxAppName').value || '[APPLICANT NAME]';
-      var resp1 = document.getElementById('idxResp1').value || '[CCMA]';
-      var resp2 = document.getElementById('idxResp2').value || '[EMPLOYER NAME]';
-      var resp3 = document.getElementById('idxResp3').value || '[COMMISSIONER NAME]';
-      var vol = document.getElementById('idxVol').value || '1 of 1';
-      var totalPages = document.getElementById('idxTotalPages').value || '[TOTAL]';
-      var notes = document.getElementById('idxNotes').value || '';
-
-      var secA = collectRows('sectionA');
-      var secB = collectRows('sectionB');
-      var secC = collectRows('sectionC');
-
-      if (secA.length === 0 && secB.length === 0 && secC.length === 0) {
-        if (typeof Advome !== 'undefined' && Advome.toast) {
-          Advome.toast.show('Please add at least one document.', 'warning');
+        function isCourtDay(d) {
+            var day = d.getDay();
+            if (day === 0 || day === 6) return false;
+            var month = d.getMonth();
+            var date = d.getDate();
+            if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
+            if (isPublicHoliday(d)) return false;
+            return true;
         }
-        return;
-      }
 
-      var today = new Date();
-      var day = today.getDate();
-      var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      var month = monthNames[today.getMonth()];
-      var year = today.getFullYear();
-
-      var text = '';
-      text += 'IN THE LABOUR COURT OF SOUTH AFRICA
-';
-      text += '(HELD AT ' + seat.toUpperCase() + ')
-
-';
-      text += 'Case No: ' + caseNo + '
-
-';
-      text += 'In the matter between:
-';
-      text += appName + ' — Applicant
-';
-      text += 'and
-';
-      text += 'First Respondent: ' + resp1 + '
-';
-      text += 'Second Respondent: ' + resp2 + '
-';
-      text += 'Third Respondent: ' + resp3 + '
-
-';
-      text += '═══════════════════════════════════════════════════════════════
-
-';
-      text += 'INDEX TO THE RECORD
-';
-      text += 'Volume ' + vol + '
-';
-      text += 'Total Pages: ' + totalPages + '
-';
-      text += 'Date: ' + day + ' ' + month + ' ' + year + '
-
-';
-      text += '═══════════════════════════════════════════════════════════════
-
-';
-
-      // Section A
-      text += 'SECTION A: PLEADINGS AND AFFIDAVITS
-';
-      text += '───────────────────────────────────────────────────────────────
-';
-      if (secA.length === 0) {
-        text += '[No documents listed]
-';
-      } else {
-        for (var i = 0; i < secA.length; i++) {
-          var item = secA[i];
-          text += (i + 1) + '. ' + item.desc;
-          if (item.date) text += ' | Date: ' + item.date;
-          if (item.from || item.to) {
-            text += ' | Pages: ' + (item.from || '?') + ' — ' + (item.to || '?');
-          }
-          text += '
-';
+        function addCourtDays(startDate, days) {
+            var d = new Date(startDate);
+            d.setDate(d.getDate() + 1);
+            var count = 0;
+            while (count < days) {
+                if (isCourtDay(d)) count++;
+                if (count < days) d.setDate(d.getDate() + 1);
+            }
+            return d;
         }
-      }
-      text += '
-';
 
-      // Section B
-      text += 'SECTION B: NOTICES AND OTHER DOCUMENTS
-';
-      text += '───────────────────────────────────────────────────────────────
-';
-      if (secB.length === 0) {
-        text += '[No documents listed]
-';
-      } else {
-        for (var i = 0; i < secB.length; i++) {
-          var item = secB[i];
-          text += (i + 1) + '. ' + item.desc;
-          if (item.date) text += ' | Date: ' + item.date;
-          if (item.from || item.to) {
-            text += ' | Pages: ' + (item.from || '?') + ' — ' + (item.to || '?');
-          }
-          text += '
-';
+        // ===== ADD / REMOVE ROWS =====
+        function addRow(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (!section) return;
+            var row = document.createElement('div');
+            row.className = 'doc-row';
+            row.innerHTML =
+                '<input type="text" placeholder="Description" class="idx-desc"> ' +
+                '<input type="text" placeholder="Date" class="idx-date"> ' +
+                '<input type="text" placeholder="From Page" class="idx-from"> ' +
+                '<input type="text" placeholder="To Page" class="idx-to"> ' +
+                '<button type="button" class="remove-row-btn" onclick="removeRow(this)">✕</button>';
+            section.appendChild(row);
         }
-      }
-      text += '
-';
 
-      // Section C
-      text += 'SECTION C: THE RECORD
-';
-      text += '───────────────────────────────────────────────────────────────
-';
-      if (secC.length === 0) {
-        text += '[No documents listed]
-';
-      } else {
-        for (var i = 0; i < secC.length; i++) {
-          var item = secC[i];
-          text += (i + 1) + '. ' + item.desc;
-          if (item.date) text += ' | Date: ' + item.date;
-          if (item.from || item.to) {
-            text += ' | Pages: ' + (item.from || '?') + ' — ' + (item.to || '?');
-          }
-          text += '
-';
+        function removeRow(btn) {
+            var row = btn.parentNode;
+            if (row && row.parentNode) {
+                row.parentNode.removeChild(row);
+            }
         }
-      }
-      text += '
-';
 
-      if (notes) {
-        text += '═══════════════════════════════════════════════════════════════
-
-';
-        text += 'NOTES:
-' + notes + '
-
-';
-      }
-
-      text += '═══════════════════════════════════════════════════════════════
-
-';
-      text += 'I, the undersigned ' + appName + ', do hereby certify that the
-';
-      text += 'above index is a true and complete index of the documents
-';
-      text += 'contained in this volume, and that the pagination is correct.
-
-';
-      text += 'Signed at ____________________ on this ' + day + ' day of ' + month + ' ' + year + '.
-
-';
-      text += '___________________________
-Signature
-
-';
-      text += appName.toUpperCase() + '
-
-';
-      text += '═══════════════════════════════════════════════════════════════';
-
-      document.getElementById('idxPreview').textContent = text;
-      document.getElementById('idxOutput').style.display = 'block';
-      if (typeof Advome !== 'undefined' && Advome.toast) {
-        Advome.toast.show('Index generated! Review and download.', 'success');
-      }
-      document.getElementById('idxPreview').scrollIntoView({behavior: 'smooth'});
-    }
-
-    function downloadIndexWord() {
-      var text = document.getElementById('idxPreview').textContent;
-      var seat = document.getElementById('idxSeat').value || 'LABOUR COURT';
-      var caseNo = document.getElementById('idxCaseNo').value || 'CASE NUMBER';
-
-      // Build Word-compatible HTML with XML namespaces
-      var wordHtml = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-';
-      wordHtml += '<head>
-<meta charset="utf-8">
-<title>Index to the Record</title>
-';
-      wordHtml += '<!--[if gte mso 9]>
-<xml>
-<w:WordDocument>
-<w:View>Print</w:View>
-<w:Zoom>100</w:Zoom>
-<w:DoNotOptimizeForBrowser/>
-</w:WordDocument>
-</xml>
-<![endif]-->
-';
-      wordHtml += '<style>
-';
-      wordHtml += 'body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; max-width: 800px; margin: 2cm auto; padding: 1cm; }
-';
-      wordHtml += 'h1 { font-size: 14pt; text-align: center; text-transform: uppercase; font-weight: bold; margin-bottom: 1rem; }
-';
-      wordHtml += 'h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-';
-      wordHtml += 'p { margin: 0.3rem 0; }
-';
-      wordHtml += '.center { text-align: center; }
-';
-      wordHtml += '.bold { font-weight: bold; }
-';
-      wordHtml += '.section { margin-top: 1.5rem; }
-';
-      wordHtml += '.sig { margin-top: 3rem; }
-';
-      wordHtml += '</style>
-</head>
-<body>
-';
-
-      // Convert plain text to HTML
-      var htmlBody = text.replace(/
-/g, '<br>
-');
-      // Wrap section headers in h2 tags for Word formatting
-      htmlBody = htmlBody.replace(/SECTION A: PLEADINGS AND AFFIDAVITS/g, '<h2>SECTION A: PLEADINGS AND AFFIDAVITS</h2>');
-      htmlBody = htmlBody.replace(/SECTION B: NOTICES AND OTHER DOCUMENTS/g, '<h2>SECTION B: NOTICES AND OTHER DOCUMENTS</h2>');
-      htmlBody = htmlBody.replace(/SECTION C: THE RECORD/g, '<h2>SECTION C: THE RECORD</h2>');
-      htmlBody = htmlBody.replace(/NOTES:/g, '<h2>NOTES</h2>');
-      htmlBody = htmlBody.replace(/INDEX TO THE RECORD/g, '<h1>INDEX TO THE RECORD</h1>');
-
-      wordHtml += htmlBody;
-      wordHtml += '
-</body>
-</html>';
-
-      var blob = new Blob([wordHtml], {type: 'application/msword'});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'Index_to_the_Record_' + caseNo.replace(/\//g, '_') + '.doc';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      if (typeof Advome !== 'undefined' && Advome.toast) {
-        Advome.toast.show('Word document downloaded!', 'success');
-      }
-    }
-
-    function copyIndex() {
-      var text = document.getElementById('idxPreview').textContent;
-      navigator.clipboard.writeText(text).then(function() {
-        if (typeof Advome !== 'undefined' && Advome.toast) {
-          Advome.toast.show('Copied to clipboard!', 'success');
+        // ===== COLLECT ROWS =====
+        function collectRows(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (!section) return [];
+            var rows = section.querySelectorAll('.doc-row');
+            var items = [];
+            for (var i = 0; i < rows.length; i++) {
+                var descEl = rows[i].querySelector('.idx-desc');
+                var dateEl = rows[i].querySelector('.idx-date');
+                var fromEl = rows[i].querySelector('.idx-from');
+                var toEl = rows[i].querySelector('.idx-to');
+                var desc = descEl ? descEl.value.trim() : '';
+                var date = dateEl ? dateEl.value.trim() : '';
+                var fromPg = fromEl ? fromEl.value.trim() : '';
+                var toPg = toEl ? toEl.value.trim() : '';
+                if (desc) {
+                    items.push({ desc: desc, date: date, from: fromPg, to: toPg });
+                }
+            }
+            return items;
         }
-      }).catch(function() {
-        if (typeof Advome !== 'undefined' && Advome.toast) {
-          Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
-        }
-      });
-    }
 
-    function downloadTemplate(elementId, filename) {
-      var el = document.getElementById(elementId);
-      if (!el) return;
-      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename + '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' + el.innerHTML + '</body></html>';
-      var blob = new Blob([html], {type: 'text/html'});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a'); a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      if (typeof Advome !== 'undefined' && Advome.toast) {
-        Advome.toast.show('Download started', 'success');
-      }
-    }
+        // ===== GENERATE INDEX =====
+        function generateIndex() {
+            var seat = document.getElementById('idxSeat').value;
+            var caseNo = document.getElementById('idxCaseNo').value || '[CASE NUMBER]';
+            var appName = document.getElementById('idxAppName').value || '[APPLICANT NAME]';
+            var resp1 = document.getElementById('idxResp1').value || '[CCMA]';
+            var resp2 = document.getElementById('idxResp2').value || '[EMPLOYER NAME]';
+            var resp3 = document.getElementById('idxResp3').value || '[COMMISSIONER NAME]';
+            var vol = document.getElementById('idxVol').value || '1 of 1';
+            var totalPages = document.getElementById('idxTotalPages').value || '[TOTAL]';
+            var notes = document.getElementById('idxNotes').value || '';
 
-    function calculateSetdownDeadline() {
-      var start = document.getElementById('setdownStart').value;
-      if (!start) return;
-      var deadline = addCourtDays(new Date(start), 10);
-      var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
-      document.getElementById('setdownDeadline').value = deadline.toLocaleDateString('en-ZA', opts);
-      var today = new Date();
-      var remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-      var el = document.getElementById('setdownDays');
-      if (remaining < 0) { el.value = Math.abs(remaining) + ' days OVERDUE — URGENT'; el.style.color = 'var(--danger)'; }
-      else if (remaining <= 3) { el.value = remaining + ' days left — URGENT'; el.style.color = 'var(--danger)'; }
-      else if (remaining <= 7) { el.value = remaining + ' days left — Act soon'; el.style.color = 'var(--warning)'; }
-      else { el.value = remaining + ' days remaining'; el.style.color = 'var(--success)'; }
-    }
+            var secA = collectRows('sectionA');
+            var secB = collectRows('sectionB');
+            var secC = collectRows('sectionC');
 
-    // Ensure all internal links open in same window
-    document.addEventListener('DOMContentLoaded', function() {
-      var links = document.querySelectorAll('a');
-      for (var i = 0; i < links.length; i++) {
-        links[i].removeAttribute('target');
-      }
-    });
-  
+            if (secA.length === 0 && secB.length === 0 && secC.length === 0) {
+                if (typeof Advome !== 'undefined' && Advome.toast) {
+                    Advome.toast.show('Please add at least one document.', 'warning');
+                }
+                return;
+            }
 
-    // ===== BULLETPROOF TAB SWITCHER =====
-    // This runs after shared-scripts.js loads and overrides any broken tab behavior
-    (function() {
-      function switchTab(tabId) {
-        // Hide all tab contents
-        var contents = document.querySelectorAll('.tab-content');
-        for (var i = 0; i < contents.length; i++) {
-          contents[i].classList.remove('active');
-        }
-        // Deactivate all tab buttons
-        var buttons = document.querySelectorAll('.tab-btn');
-        for (var i = 0; i < buttons.length; i++) {
-          buttons[i].classList.remove('active');
-        }
-        // Activate target content
-        var targetContent = document.getElementById(tabId);
-        if (targetContent) {
-          targetContent.classList.add('active');
-        }
-        // Activate target button
-        var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
-        if (targetBtn) {
-          targetBtn.classList.add('active');
-        }
-      }
+            var today = new Date();
+            var day = today.getDate();
+            var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+            var month = monthNames[today.getMonth()];
+            var year = today.getFullYear();
 
-      // Attach click handlers to all tab buttons
-      var tabButtons = document.querySelectorAll('.tab-btn');
-      for (var i = 0; i < tabButtons.length; i++) {
-        // Remove any existing click listeners by cloning
-        var newBtn = tabButtons[i].cloneNode(true);
-        tabButtons[i].parentNode.replaceChild(newBtn, tabButtons[i]);
-        // Add fresh click handler
-        newBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var tabId = this.getAttribute('data-tab');
-          if (tabId) {
-            switchTab(tabId);
-          }
+            var text = '';
+            text += 'IN THE LABOUR COURT OF SOUTH AFRICA\n';
+            text += '(HELD AT ' + seat.toUpperCase() + ')\n\n';
+            text += 'Case No: ' + caseNo + '\n\n';
+            text += 'In the matter between:\n';
+            text += appName + ' — Applicant\n';
+            text += 'and\n';
+            text += 'First Respondent: ' + resp1 + '\n';
+            text += 'Second Respondent: ' + resp2 + '\n';
+            text += 'Third Respondent: ' + resp3 + '\n\n';
+            text += '═══════════════════════════════════════════════════════════════\n\n';
+            text += 'INDEX TO THE RECORD\n';
+            text += 'Volume ' + vol + '\n';
+            text += 'Total Pages: ' + totalPages + '\n';
+            text += 'Date: ' + day + ' ' + month + ' ' + year + '\n\n';
+            text += '═══════════════════════════════════════════════════════════════\n\n';
+
+            // Section A
+            text += 'SECTION A: PLEADINGS AND AFFIDAVITS\n';
+            text += '───────────────────────────────────────────────────────────────\n';
+            if (secA.length === 0) {
+                text += '[No documents listed]\n';
+            } else {
+                for (var i = 0; i < secA.length; i++) {
+                    var item = secA[i];
+                    text += (i + 1) + '. ' + item.desc;
+                    if (item.date) text += ' | Date: ' + item.date;
+                    if (item.from || item.to) {
+                        text += ' | Pages: ' + (item.from || '?') + ' — ' + (item.to || '?');
+                    }
+                    text += '\n';
+                }
+            }
+            text += '\n';
+
+            // Section B
+            text += 'SECTION B: NOTICES AND OTHER DOCUMENTS\n';
+            text += '───────────────────────────────────────────────────────────────\n';
+            if (secB.length === 0) {
+                text += '[No documents listed]\n';
+            } else {
+                for (var i = 0; i < secB.length; i++) {
+                    var item = secB[i];
+                    text += (i + 1) + '. ' + item.desc;
+                    if (item.date) text += ' | Date: ' + item.date;
+                    if (item.from || item.to) {
+                        text += ' | Pages: ' + (item.from || '?') + ' — ' + (item.to || '?');
+                    }
+                    text += '\n';
+                }
+            }
+            text += '\n';
+
+            // Section C
+            text += 'SECTION C: THE RECORD\n';
+            text += '───────────────────────────────────────────────────────────────\n';
+            if (secC.length === 0) {
+                text += '[No documents listed]\n';
+            } else {
+                for (var i = 0; i < secC.length; i++) {
+                    var item = secC[i];
+                    text += (i + 1) + '. ' + item.desc;
+                    if (item.date) text += ' | Date: ' + item.date;
+                    if (item.from || item.to) {
+                        text += ' | Pages: ' + (item.from || '?') + ' — ' + (item.to || '?');
+                    }
+                    text += '\n';
+                }
+            }
+            text += '\n';
+
+            if (notes) {
+                text += '═══════════════════════════════════════════════════════════════\n\n';
+                text += 'NOTES:\n' + notes + '\n\n';
+            }
+
+            text += '═══════════════════════════════════════════════════════════════\n\n';
+            text += 'I, the undersigned ' + appName + ', do hereby certify that the\n';
+            text += 'above index is a true and complete index of the documents\n';
+            text += 'contained in this volume, and that the pagination is correct.\n\n';
+            text += 'Signed at ____________________ on this ' + day + ' day of ' + month + ' ' + year +
+                '.\n\n';
+            text += '___________________________\nSignature\n\n';
+            text += appName.toUpperCase() + '\n\n';
+            text += '═══════════════════════════════════════════════════════════════';
+
+            document.getElementById('idxPreview').textContent = text;
+            document.getElementById('idxOutput').style.display = 'block';
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Index generated! Review and download.', 'success');
+            }
+            document.getElementById('idxPreview').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== DOWNLOAD INDEX AS WORD =====
+        function downloadIndexWord() {
+            var text = document.getElementById('idxPreview').textContent;
+            var seat = document.getElementById('idxSeat').value || 'LABOUR COURT';
+            var caseNo = document.getElementById('idxCaseNo').value || 'CASE NUMBER';
+
+            var wordHtml = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">\n';
+            wordHtml += '<head>\n<meta charset="utf-8">\n<title>Index to the Record</title>\n';
+            wordHtml += '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->\n';
+            wordHtml +=
+                '<style>\n';
+            wordHtml +=
+                'body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; max-width: 800px; margin: 2cm auto; padding: 1cm; }\n';
+            wordHtml +=
+                'h1 { font-size: 14pt; text-align: center; text-transform: uppercase; font-weight: bold; margin-bottom: 1rem; }\n';
+            wordHtml +=
+                'h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; margin-top: 1.5rem; margin-bottom: 0.5rem; }\n';
+            wordHtml += 'p { margin: 0.3rem 0; }\n';
+            wordHtml += '.center { text-align: center; }\n';
+            wordHtml += '.bold { font-weight: bold; }\n';
+            wordHtml += '.section { margin-top: 1.5rem; }\n';
+            wordHtml += '.sig { margin-top: 3rem; }\n';
+            wordHtml += '</style>\n</head>\n<body>\n';
+
+            var htmlBody = text.replace(/\n/g, '<br>\n');
+            htmlBody = htmlBody.replace(/SECTION A: PLEADINGS AND AFFIDAVITS/g,
+                '<h2>SECTION A: PLEADINGS AND AFFIDAVITS</h2>');
+            htmlBody = htmlBody.replace(/SECTION B: NOTICES AND OTHER DOCUMENTS/g,
+                '<h2>SECTION B: NOTICES AND OTHER DOCUMENTS</h2>');
+            htmlBody = htmlBody.replace(/SECTION C: THE RECORD/g, '<h2>SECTION C: THE RECORD</h2>');
+            htmlBody = htmlBody.replace(/NOTES:/g, '<h2>NOTES</h2>');
+            htmlBody = htmlBody.replace(/INDEX TO THE RECORD/g, '<h1>INDEX TO THE RECORD</h1>');
+
+            wordHtml += htmlBody;
+            wordHtml += '\n</body>\n</html>';
+
+            var blob = new Blob([wordHtml], { type: 'application/msword' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'Index_to_the_Record_' + caseNo.replace(/\//g, '_') + '.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Word document downloaded!', 'success');
+            }
+        }
+
+        // ===== COPY INDEX =====
+        function copyIndex() {
+            var text = document.getElementById('idxPreview').textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                if (typeof Advome !== 'undefined' && Advome.toast) {
+                    Advome.toast.show('Copied to clipboard!', 'success');
+                }
+            }).catch(function() {
+                if (typeof Advome !== 'undefined' && Advome.toast) {
+                    Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
+                }
+            });
+        }
+
+        // ===== DOWNLOAD TEMPLATE =====
+        function downloadTemplate(elementId, filename) {
+            var el = document.getElementById(elementId);
+            if (!el) return;
+            var html =
+                '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + filename +
+                '</title><style>body{font-family:Georgia,serif; line-height:1.6; max-width:800px; margin:2rem auto; padding:1rem;}</style></head><body>' +
+                el.innerHTML + '</body></html>';
+            var blob = new Blob([html], { type: 'text/html' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Download started', 'success');
+            }
+        }
+
+        // ===== SETDOWN DEADLINE CALCULATOR =====
+        function calculateSetdownDeadline() {
+            var start = document.getElementById('setdownStart').value;
+            if (!start) return;
+            var deadline = addCourtDays(new Date(start), 10);
+            var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+            document.getElementById('setdownDeadline').value = deadline.toLocaleDateString('en-ZA', opts);
+            var today = new Date();
+            var remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            var el = document.getElementById('setdownDays');
+            if (remaining < 0) {
+                el.value = Math.abs(remaining) + ' days OVERDUE — URGENT';
+                el.style.color = 'var(--danger)';
+            } else if (remaining <= 3) {
+                el.value = remaining + ' days left — URGENT';
+                el.style.color = 'var(--danger)';
+            } else if (remaining <= 7) {
+                el.value = remaining + ' days left — Act soon';
+                el.style.color = 'var(--warning)';
+            } else {
+                el.value = remaining + ' days remaining';
+                el.style.color = 'var(--success)';
+            }
+        }
+
+        // ===== ROBUST TAB SWITCHER (event delegation) =====
+        // This uses event delegation on the tab bar so it always works,
+        // even if shared-scripts.js does something unexpected.
+        function initTabSwitcher() {
+            var tabBar = document.getElementById('mainTabBar');
+            if (!tabBar) {
+                // Fallback: try class selector
+                tabBar = document.querySelector('.tab-bar');
+            }
+            if (!tabBar) return;
+
+            // Remove any existing click listeners by using a fresh clone
+            // (only if needed — we use event delegation so it's not strictly necessary,
+            // but it prevents double-firing from old handlers)
+            var newTabBar = tabBar.cloneNode(true);
+            tabBar.parentNode.replaceChild(newTabBar, tabBar);
+
+            // Attach event delegation
+            newTabBar.addEventListener('click', function(e) {
+                // Find the closest .tab-btn (handles clicks on child elements too)
+                var btn = e.target.closest('.tab-btn');
+                if (!btn) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                var tabId = btn.getAttribute('data-tab');
+                if (!tabId) return;
+
+                // Deactivate all tab buttons
+                var allBtns = newTabBar.querySelectorAll('.tab-btn');
+                for (var i = 0; i < allBtns.length; i++) {
+                    allBtns[i].classList.remove('active');
+                }
+
+                // Deactivate all tab contents
+                var allContents = document.querySelectorAll('.tab-content');
+                for (var j = 0; j < allContents.length; j++) {
+                    allContents[j].classList.remove('active');
+                }
+
+                // Activate clicked button
+                btn.classList.add('active');
+
+                // Activate corresponding content
+                var content = document.getElementById(tabId);
+                if (content) {
+                    content.classList.add('active');
+                }
+            });
+
+            // Store reference for debugging
+            window._advomeTabBar = newTabBar;
+        }
+
+        // ===== INITIALIZE EVERYTHING ON DOM READY =====
+        function initializePage() {
+            // Initialize tab switcher
+            initTabSwitcher();
+
+            // Remove target attributes from all links (keep navigation in same window)
+            var links = document.querySelectorAll('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].removeAttribute('target');
+            }
+
+            // If shared-scripts.js set up its own tab handlers, our event delegation
+            // on the cloned tab bar takes precedence because it's attached to a fresh element.
+        }
+
+        // Run on DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            // DOM already loaded
+            initializePage();
+        }
+
+        // Also run after a short delay to override anything from shared-scripts.js
+        // that might have loaded asynchronously
+        window.addEventListener('load', function() {
+            setTimeout(initTabSwitcher, 100);
         });
-      }
-
-      // Also fix all internal links to stay in same window
-      var links = document.querySelectorAll('a');
-      for (var i = 0; i < links.length; i++) {
-        links[i].removeAttribute('target');
-      }
-    })();
-</script>
+    </script>
 </body>
 </html>
