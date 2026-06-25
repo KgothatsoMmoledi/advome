@@ -47,6 +47,7 @@
     .paste-area { width:100%; min-height:80px; padding:0.75rem; border:1px solid var(--border); border-radius:6px; font-family:monospace; font-size:0.85rem; resize:vertical; }
     .paste-area:focus { outline:none; border-color:var(--primary-light); }
   </style>
+<!-- base target removed: all navigation stays in same window -->
 <base target="_blank">
 </head>
 <body>
@@ -887,6 +888,57 @@ Signature
         links[i].removeAttribute('target');
       }
     });
-  </script>
+  
+
+    // ===== BULLETPROOF TAB SWITCHER =====
+    // This runs after shared-scripts.js loads and overrides any broken tab behavior
+    (function() {
+      function switchTab(tabId) {
+        // Hide all tab contents
+        var contents = document.querySelectorAll('.tab-content');
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].classList.remove('active');
+        }
+        // Deactivate all tab buttons
+        var buttons = document.querySelectorAll('.tab-btn');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.remove('active');
+        }
+        // Activate target content
+        var targetContent = document.getElementById(tabId);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+        // Activate target button
+        var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+        if (targetBtn) {
+          targetBtn.classList.add('active');
+        }
+      }
+
+      // Attach click handlers to all tab buttons
+      var tabButtons = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < tabButtons.length; i++) {
+        // Remove any existing click listeners by cloning
+        var newBtn = tabButtons[i].cloneNode(true);
+        tabButtons[i].parentNode.replaceChild(newBtn, tabButtons[i]);
+        // Add fresh click handler
+        newBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var tabId = this.getAttribute('data-tab');
+          if (tabId) {
+            switchTab(tabId);
+          }
+        });
+      }
+
+      // Also fix all internal links to stay in same window
+      var links = document.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].removeAttribute('target');
+      }
+    })();
+</script>
 </body>
 </html>
