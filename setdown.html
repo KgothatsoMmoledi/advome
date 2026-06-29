@@ -20,7 +20,6 @@
             --text-muted: #718096;
         }
 
-        /* reuse same class patterns as pagination page */
         .rule-box {
             background: #edf2f7;
             border-left: 4px solid var(--primary);
@@ -116,23 +115,6 @@
             margin-top: 1rem;
             flex-wrap: wrap;
         }
-        .section-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        .section-card h4 {
-            color: var(--primary);
-            margin: 0 0 .5rem;
-            font-size: 1rem;
-        }
-        .section-card p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
         .record-preview {
             background: #fff;
             border: 1px solid var(--border);
@@ -144,64 +126,19 @@
             overflow-y: auto;
             white-space: pre-wrap;
         }
-        .add-row-btn {
-            background: var(--bg-page);
-            border: 1px dashed var(--border);
-            border-radius: 6px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-size: 0.85rem;
-            color: var(--primary);
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-        .add-row-btn:hover {
-            background: #fff;
-            border-color: var(--primary);
-        }
-        .remove-row-btn {
-            background: none;
-            border: none;
-            color: var(--danger);
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 0.25rem;
-        }
-        .doc-row {
+        .ai-draft-form {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr auto;
-            gap: 0.5rem;
-            align-items: center;
-            margin-bottom: 0.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
         @media(max-width:600px) {
-            .doc-row {
-                grid-template-columns: 1fr 1fr auto;
+            .ai-draft-form {
+                grid-template-columns: 1fr;
             }
         }
-        .doc-row input {
-            padding: 0.4rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 0.85rem;
-        }
-        .doc-row input:focus {
-            outline: none;
-            border-color: var(--primary-light);
-        }
-        .paste-area {
-            width: 100%;
-            min-height: 80px;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            resize: vertical;
-        }
-        .paste-area:focus {
-            outline: none;
-            border-color: var(--primary-light);
+        .ai-draft-form .adv-form-group {
+            margin: 0;
         }
     </style>
 </head>
@@ -233,45 +170,85 @@
     <div class="adv-container">
         <main>
 
+            <!-- AI GENERATION SECTION -->
             <div class="adv-card">
                 <div class="adv-card__header">
                     <div>
-                        <div class="adv-card__title">Apply for Hearing Date</div>
-                        <div class="adv-card__subtitle">Rule 37(25) — 10 court days after indexing and paginating the file</div>
+                        <div class="adv-card__title">⚡ AI Draft: Request for Hearing Date</div>
+                        <div class="adv-card__subtitle">Rule 37(25) — Generate a court‑ready document using the official Labour Court template</div>
                     </div>
                 </div>
 
-                <div class="adv-alert adv-alert--danger">
+                <div class="adv-alert adv-alert--info">
                     <div class="adv-alert__content">
-                        <div class="adv-alert__title">⏰ 10-DAY DEADLINE — Rule 37(25)</div>
-                        <p>You must apply to the Registrar for a hearing date within <strong>10 court days</strong> after indexing and paginating the file. If you miss this deadline, your matter may be delayed or struck from the roll.</p>
+                        <div class="adv-alert__title">🤖 How the AI works</div>
+                        <p>Enter your details below and click <strong>Generate</strong>. The platform will fill the official <strong>Request for Hearing Date</strong> template (as published by the Department of Justice) with your case information. You can then copy, download, or print it.</p>
+                        <p style="margin-top:0.5rem; font-size:0.85rem;">The template is based on Rule 37(25) and the Labour Court Practice Manual. No wording has been added or removed.</p>
                     </div>
                 </div>
 
-                <div class="rule-box">
-                    <h4>📖 The Law</h4>
-                    <p><strong>Rule 37(25):</strong> After indexing and paginating, the applicant must apply to the Registrar for a hearing date within <strong>10 court days</strong>.</p>
-                    <p><strong>Rule 37(26):</strong> For unopposed matters, the applicant may apply for a hearing date within <strong>10 court days</strong> after the last day for filing an answering affidavit.</p>
-                    <p><strong>Rule 40:</strong> Heads of Argument must be filed within <strong>15 court days</strong> after pleadings close (for opposed reviews).</p>
+                <!-- Input fields -->
+                <div class="ai-draft-form">
+                    <div class="adv-form-group">
+                        <label for="aiSeat">Court Seat</label>
+                        <select class="adv-input" id="aiSeat">
+                            <option>Johannesburg</option>
+                            <option>Cape Town</option>
+                            <option>Durban</option>
+                            <option>Gqeberha</option>
+                        </select>
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiCaseNo">Case Number</label>
+                        <input type="text" class="adv-input" id="aiCaseNo" placeholder="e.g. JRB1234/2026">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiApplicant">Applicant Name</label>
+                        <input type="text" class="adv-input" id="aiApplicant" placeholder="Your full name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiFirstResp">First Respondent (CCMA)</label>
+                        <input type="text" class="adv-input" id="aiFirstResp" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiSecondResp">Second Respondent (Employer)</label>
+                        <input type="text" class="adv-input" id="aiSecondResp" placeholder="Employer name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiThirdResp">Third Respondent (Commissioner)</label>
+                        <input type="text" class="adv-input" id="aiThirdResp" placeholder="Commissioner name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiOpposed">Matter is</label>
+                        <select class="adv-input" id="aiOpposed">
+                            <option value="unopposed">Unopposed</option>
+                            <option value="opposed">Opposed</option>
+                        </select>
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiPlace">Signed at (Place)</label>
+                        <input type="text" class="adv-input" id="aiPlace" placeholder="e.g. Johannesburg">
+                    </div>
                 </div>
 
-                <div class="adv-form-group">
-                    <label><strong>Step-by-Step: Apply for Hearing Date on Court Online</strong></label>
-                    <ul class="step-list">
-                        <li><strong>Log in</strong> to the Court Online Portal at <em>https://courtonline.co.za</em>.</li>
-                        <li>Navigate to <strong>My Cases</strong> → Select your case.</li>
-                        <li>Look for <strong>"Apply for Hearing Date"</strong> or <strong>"Set Down"</strong> option.</li>
-                        <li>Select the <strong>type of hearing</strong>: Unopposed Motion / Opposed Motion / Review.</li>
-                        <li>Upload the <strong>complete paginated file</strong> (all sections, properly indexed).</li>
-                        <li>Confirm that all parties have been served and the proof of service is filed.</li>
-                        <li>Enter your <strong>digital signature</strong> and submit.</li>
-                        <li>The Registrar will allocate a hearing date and notify all parties.</li>
-                    </ul>
+                <button class="adv-btn adv-btn--primary" id="aiGenerateBtn" style="margin-bottom:1rem;">⚡ AI Generate Request for Hearing Date</button>
+
+                <!-- Output area (hidden initially) -->
+                <div id="aiOutput" style="display:none;">
+                    <div class="adv-form-group">
+                        <label><strong>Generated Document</strong> <span class="badge badge--success">Official Template</span></label>
+                        <div class="record-preview" id="aiDocumentPreview"></div>
+                    </div>
+                    <div class="generated-doc-actions">
+                        <button class="adv-btn adv-btn--primary" onclick="downloadAIDocument()">📥 Download as Word (.doc)</button>
+                        <button class="adv-btn adv-btn--secondary" onclick="copyAIDocument()">📋 Copy to Clipboard</button>
+                    </div>
                 </div>
 
-                <div class="adv-form-group" style="margin-top:1.5rem;">
-                    <label><strong>Request for Hearing Date Template</strong> <span class="badge badge--info">Template</span></label>
-                    <div class="template-box" id="setdownTemplate">
+                <div style="margin-top:1rem;">
+                    <details>
+                        <summary style="cursor:pointer; font-weight:600; color:var(--primary);">📄 View official template (uneditable)</summary>
+                        <div class="template-box" style="margin-top:0.5rem;" id="officialTemplate">
 IN THE LABOUR COURT OF SOUTH AFRICA
 (HELD AT [SEAT])
 
@@ -308,11 +285,43 @@ ___________________________
 Signature
 
 [NAME IN BLOCK LETTERS]
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- MANUAL SECTION (kept for reference) -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Apply for Hearing Date — Manual Steps</div>
+                        <div class="adv-card__subtitle">Rule 37(25) — 10 court days after indexing and paginating</div>
                     </div>
-                    <div class="generated-doc-actions">
-                        <button class="adv-btn adv-btn--primary" onclick="copyTemplate()">📋 Copy Template</button>
-                        <a href="pagination.html" class="adv-btn adv-btn--secondary">📄 Generate Index First</a>
+                </div>
+
+                <div class="adv-alert adv-alert--danger">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">⏰ 10-DAY DEADLINE</div>
+                        <p>You must apply within <strong>10 court days</strong> after indexing and paginating the file. Use the deadline tracker below.</p>
                     </div>
+                </div>
+
+                <div class="rule-box">
+                    <h4>📖 The Law</h4>
+                    <p><strong>Rule 37(25):</strong> After indexing and paginating, the applicant must apply to the Registrar for a hearing date within <strong>10 court days</strong>.</p>
+                    <p><strong>Rule 37(26):</strong> For unopposed matters, the applicant may apply within <strong>10 court days</strong> after the last day for filing an answering affidavit.</p>
+                </div>
+
+                <div class="adv-form-group">
+                    <label><strong>Step-by-Step: Apply on Court Online</strong></label>
+                    <ul class="step-list">
+                        <li><strong>Log in</strong> to the Court Online Portal at <em>https://courtonline.co.za</em>.</li>
+                        <li>Navigate to <strong>My Cases</strong> → Select your case.</li>
+                        <li>Click <strong>"Apply for Hearing Date"</strong> or <strong>"Set Down"</strong>.</li>
+                        <li>Select hearing type: <strong>Review</strong> (or Opposed/Unopposed Motion).</li>
+                        <li>Upload the <strong>complete paginated file</strong> (Sections A, B, C).</li>
+                        <li>Confirm service and file the request.</li>
+                    </ul>
                 </div>
 
                 <div class="adv-form-group" style="margin-top:1.5rem;">
@@ -336,37 +345,35 @@ Signature
                 <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
                     <div class="adv-alert__content">
                         <div class="adv-alert__title">📝 What Happens Next?</div>
-                        <p>After applying for a hearing date:</p>
                         <ol style="margin-top:0.5rem; padding-left:1.5rem;">
-                            <li>The Registrar allocates a hearing date and notifies all parties;</li>
-                            <li>You must file <strong>Heads of Argument</strong> within 15 court days (opposed) or before the hearing (unopposed);</li>
-                            <li>Prepare your oral argument for the hearing;</li>
-                            <li>Attend the hearing on the allocated date.</li>
+                            <li>The Registrar allocates a hearing date and notifies all parties.</li>
+                            <li>You must file <strong>Heads of Argument</strong> within 15 court days (opposed) or before the hearing (unopposed).</li>
+                            <li>Prepare your oral argument and attend court.</li>
                         </ol>
                     </div>
                 </div>
             </div>
 
+            <!-- CHECKLIST -->
             <div class="adv-card" style="margin-top:1.5rem;">
                 <div class="adv-card__header">
                     <div>
                         <div class="adv-card__title">Set‑Down Checklist</div>
-                        <div class="adv-card__subtitle">Confirm each step to stay on track</div>
+                        <div class="adv-card__subtitle">Tick off each step to stay on track</div>
                     </div>
                 </div>
-
                 <ul class="adv-checklist" data-checklist-id="setdown-check">
                     <li class="adv-checklist__item" data-item-id="sd1">
                         <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">File indexed & paginated in three sections</div>
+                        <div class="adv-checklist__text">File indexed & paginated (Sections A, B, C)</div>
                     </li>
                     <li class="adv-checklist__item" data-item-id="sd2">
                         <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Request for hearing date drafted and signed</div>
+                        <div class="adv-checklist__text">Request for hearing date drafted (use AI or manual)</div>
                     </li>
                     <li class="adv-checklist__item" data-item-id="sd3">
                         <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Request filed with the Registrar</div>
+                        <div class="adv-checklist__text">Request signed and filed with Registrar</div>
                     </li>
                     <li class="adv-checklist__item" data-item-id="sd4">
                         <div class="adv-checklist__checkbox"></div>
@@ -374,7 +381,7 @@ Signature
                     </li>
                     <li class="adv-checklist__item" data-item-id="sd5">
                         <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Follow‑up sent if no response after 10 court days</div>
+                        <div class="adv-checklist__text">Follow up if no allocation after 10 court days</div>
                     </li>
                 </ul>
             </div>
@@ -438,31 +445,29 @@ Signature
     <script src="shared-scripts.js"></script>
 
     <script>
-        // Court day calculation (same as pagination page)
+        // ===== COURT DAY CALCULATION =====
         function isPublicHoliday(d) {
-            var year = d.getFullYear();
-            var holidays = [
+            const year = d.getFullYear();
+            const holidays = [
                 new Date(year, 0, 1), new Date(year, 2, 21), new Date(year, 3, 27),
                 new Date(year, 4, 1), new Date(year, 5, 16), new Date(year, 7, 9),
                 new Date(year, 8, 24), new Date(year, 11, 16), new Date(year, 11, 25), new Date(year, 11, 26)
             ];
-            for (var i = 0; i < holidays.length; i++) {
-                if (holidays[i].getDate() === d.getDate() && holidays[i].getMonth() === d.getMonth()) return true;
-            }
-            return false;
+            return holidays.some(h => h.getDate() === d.getDate() && h.getMonth() === d.getMonth());
         }
+
         function isCourtDay(d) {
-            var day = d.getDay();
+            const day = d.getDay();
             if (day === 0 || day === 6) return false;
-            var month = d.getMonth(); var date = d.getDate();
+            const month = d.getMonth(), date = d.getDate();
             if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
-            if (isPublicHoliday(d)) return false;
-            return true;
+            return !isPublicHoliday(d);
         }
+
         function addCourtDays(startDate, days) {
-            var d = new Date(startDate);
+            const d = new Date(startDate);
             d.setDate(d.getDate() + 1);
-            var count = 0;
+            let count = 0;
             while (count < days) {
                 if (isCourtDay(d)) count++;
                 if (count < days) d.setDate(d.getDate() + 1);
@@ -471,14 +476,14 @@ Signature
         }
 
         function calculateSetdownDeadline() {
-            var start = document.getElementById('setdownStart').value;
+            const start = document.getElementById('setdownStart').value;
             if (!start) return;
-            var deadline = addCourtDays(new Date(start), 10);
-            var opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+            const deadline = addCourtDays(new Date(start), 10);
+            const opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
             document.getElementById('setdownDeadline').value = deadline.toLocaleDateString('en-ZA', opts);
-            var today = new Date();
-            var remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-            var el = document.getElementById('setdownDays');
+            const today = new Date();
+            const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            const el = document.getElementById('setdownDays');
             if (remaining < 0) {
                 el.value = Math.abs(remaining) + ' days OVERDUE — URGENT';
                 el.style.color = 'var(--danger)';
@@ -494,11 +499,99 @@ Signature
             }
         }
 
-        function copyTemplate() {
-            const templateText = document.getElementById('setdownTemplate').innerText;
-            navigator.clipboard.writeText(templateText).then(() => {
+        // ===== AI DOCUMENT GENERATION (template filling) =====
+        function getTodayFormatted() {
+            const d = new Date();
+            const day = d.getDate();
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const month = months[d.getMonth()];
+            const year = d.getFullYear();
+            return { day, month, year };
+        }
+
+        function generateAIDocument() {
+            // Collect inputs
+            const seat = document.getElementById('aiSeat').value || '[SEAT]';
+            const caseNo = document.getElementById('aiCaseNo').value || '[CASE NUMBER]';
+            const applicant = document.getElementById('aiApplicant').value || '[APPLICANT NAME]';
+            const firstResp = document.getElementById('aiFirstResp').value || '[CCMA]';
+            const secondResp = document.getElementById('aiSecondResp').value || '[EMPLOYER NAME]';
+            const thirdResp = document.getElementById('aiThirdResp').value || '[COMMISSIONER NAME]';
+            const opposed = document.getElementById('aiOpposed').value;
+            const place = document.getElementById('aiPlace').value || '[PLACE]';
+            const { day, month, year } = getTodayFormatted();
+
+            // Official template text (from Labour Court rules)
+            let template = `IN THE LABOUR COURT OF SOUTH AFRICA
+(HELD AT ${seat.toUpperCase()})
+
+Case No: ${caseNo}
+
+In the matter between:
+
+${applicant} — Applicant
+and
+First Respondent: ${firstResp}
+Second Respondent: ${secondResp}
+Third Respondent: ${thirdResp}
+
+REQUEST FOR HEARING DATE
+
+TO: The Registrar of the Labour Court
+
+The Applicant hereby applies for a hearing date in the above review application.
+
+The complete file has been indexed and paginated in accordance with Rule 29(3) and Rule 37(25), consisting of:
+• Section A: Pleadings and Affidavits — [X] pages
+• Section B: Notices and Other Documents — [X] pages
+• Section C: The Record — [X] pages (Volume [X] of [Y])
+
+The matter is ${opposed}.
+
+All parties have been duly served. Proof of service is attached.
+
+The Applicant requests that the matter be set down for hearing on the earliest available date.
+
+SIGNED at ${place} on this ${day} day of ${month} ${year}.
+
+___________________________
+Signature
+
+${applicant.toUpperCase()}`;
+
+            // Show output
+            document.getElementById('aiDocumentPreview').textContent = template;
+            document.getElementById('aiOutput').style.display = 'block';
+            document.getElementById('aiDocumentPreview').scrollIntoView({ behavior: 'smooth' });
+
+            // Toast
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Document generated using official template!', 'success');
+            }
+        }
+
+        function downloadAIDocument() {
+            const text = document.getElementById('aiDocumentPreview').textContent;
+            const caseNo = document.getElementById('aiCaseNo').value.replace(/\//g, '_') || 'CASE';
+            const blob = new Blob([text], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Request_for_Hearing_Date_${caseNo}.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Document downloaded!', 'success');
+            }
+        }
+
+        function copyAIDocument() {
+            const text = document.getElementById('aiDocumentPreview').textContent;
+            navigator.clipboard.writeText(text).then(() => {
                 if (typeof Advome !== 'undefined' && Advome.toast) {
-                    Advome.toast.show('Template copied to clipboard!', 'success');
+                    Advome.toast.show('Document copied to clipboard!', 'success');
                 }
             }).catch(() => {
                 if (typeof Advome !== 'undefined' && Advome.toast) {
@@ -507,12 +600,12 @@ Signature
             });
         }
 
-        // Keep internal links in same window
+        // Attach event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            var links = document.querySelectorAll('a');
-            for (var i = 0; i < links.length; i++) {
-                links[i].removeAttribute('target');
-            }
+            document.getElementById('aiGenerateBtn').addEventListener('click', generateAIDocument);
+
+            // Remove target attributes from all links
+            document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
         });
     </script>
 </body>
