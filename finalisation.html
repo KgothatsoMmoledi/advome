@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalisation — Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #2d3748;
+            --text-muted: #718096;
+        }
+        .rule-box {
+            background: #edf2f7;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .rule-box h4 { margin: 0 0 .4rem; color: var(--primary); font-size: 1rem; }
+        .rule-box p, .rule-box ul { margin: .25rem 0; font-size: 0.9rem; }
+        .badge {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge--danger { background: #fed7d7; color: #742a2a; }
+        .badge--warning { background: #feebc8; color: #7c2d12; }
+        .badge--success { background: #c6f6d5; color: #22543d; }
+        .badge--info { background: #bee3f8; color: #2a4365; }
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 0;
+            width: 1.8rem; height: 1.8rem;
+            background: var(--primary); color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+        .inline-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px) { .inline-form { grid-template-columns: 1fr; } }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        @media(max-width:600px) { .status-grid { grid-template-columns: repeat(2, 1fr); } }
+        .status-card {
+            padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+        }
+        .status-card span { display: block; color: var(--text-muted); font-size: 0.84rem; margin-bottom: 6px; }
+        .status-card strong { font-size: 1rem; }
+        .hearing-tips {
+            background: #fff; border: 1px solid var(--border); border-radius: 8px;
+            padding: 1rem; margin-bottom: 1rem;
+        }
+        .hearing-tips h4 { color: var(--primary); margin-top: 0; }
+        .hearing-tips ul, .hearing-tips ol { padding-left: 1.5rem; }
+        .faq { display: grid; gap: 10px; }
+        .faq-item {
+            border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
+        }
+        .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
+        .faq-item p { margin: 10px 0 0; color: var(--text-muted); }
+        .meter {
+            margin-top: 14px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: white;
+            border: 1px solid #e6eef8;
+        }
+        .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
+        .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+    </style>
+</head>
+<body>
+
+    <header class="adv-header">
+        <div class="adv-header__logo">Advome<span>.</span></div>
+        <nav class="adv-header__nav">
+            <a href="ccma.html">CCMA</a>
+            <a href="motion.html">Labour Court</a>
+            <a href="#">Help</a>
+        </nav>
+        <div class="adv-header__user">
+            <div class="adv-header__avatar">SRL</div>
+        </div>
+        <button class="adv-header__menu-toggle">☰</button>
+    </header>
+
+    <div class="adv-progress" data-workflow="ccma" data-current-step="finalisation"></div>
+
+    <section class="adv-hero">
+        <div class="adv-hero__content">
+            <h1>Finalisation</h1>
+            <p>Wrap up – enforce your order, handle costs, and close the file</p>
+        </div>
+        <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+    </section>
+
+    <div class="adv-container">
+        <main>
+
+            <!-- STATUS OVERVIEW -->
+            <div class="adv-card">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Completion Status</div>
+                        <div class="adv-card__subtitle">Where your matter stands after judgment</div>
+                    </div>
+                </div>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <span>Review outcome</span>
+                        <strong>Upheld / Dismissed</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Order type</span>
+                        <strong>Remittal / Substitution</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Costs awarded</span>
+                        <strong>Yes / No</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Appeal period</span>
+                        <strong>Running / Expired</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Compliance</span>
+                        <strong>Done / Pending</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>File closure</span>
+                        <strong>Ready / Not yet</strong>
+                    </div>
+                </div>
+                <div class="meter">
+                    <strong>Overall completion</strong>
+                    <div class="meter-bar"><div style="width:80%"></div></div>
+                </div>
+            </div>
+
+            <!-- ENFORCEMENT & COMPLIANCE -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Enforcement & Compliance</div>
+                        <div class="adv-card__subtitle">What you must do now (or what you can demand from the other side)</div>
+                    </div>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>If you won (review upheld)</h4>
+                    <ul>
+                        <li><strong>Substituted order:</strong> The court's own order (e.g., reinstatement, compensation) is binding. If the other party does not comply, you may apply to the Labour Court to enforce it (contempt of court proceedings).</li>
+                        <li><strong>Remittal:</strong> The matter goes back to the CCMA for a fresh hearing. Keep in touch with the CCMA for new dates. You may need to file fresh statements or documents.</li>
+                        <li><strong>Costs:</strong> Serve the costs order on the other side and demand payment. If they don't pay, you may have to issue a warrant of execution.</li>
+                    </ul>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>If you lost (review dismissed)</h4>
+                    <ul>
+                        <li><strong>Comply with the award:</strong> You must now do what the CCMA award ordered (e.g., pay compensation, reinstate the employee).</li>
+                        <li><strong>Pay costs (if ordered):</strong> If costs were awarded against you, arrange payment promptly to avoid further legal fees.</li>
+                        <li><strong>Appeal still open:</strong> You have 21 court days from the judgment date to apply for leave to appeal. If you intend to appeal, do not delay.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-box">
+                    <h4>📖 Enforcing Labour Court Orders</h4>
+                    <p>The Labour Court can enforce its own orders. If a party fails to comply, you can bring a contempt application. The order is enforceable like any High Court order (LRA s 163).</p>
+                </div>
+            </div>
+
+            <!-- COSTS & APPEAL TRACKING -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Costs & Appeal Status</div>
+                        <div class="adv-card__subtitle">Track money owed and appeal deadlines</div>
+                    </div>
+                </div>
+                <div class="status-grid" style="grid-template-columns: repeat(2,1fr);">
+                    <div class="status-card"><span>Costs order</span><strong>Yes / No</strong></div>
+                    <div class="status-card"><span>Amount (if known)</span><strong>R ...</strong></div>
+                    <div class="status-card"><span>Appeal period</span><strong>Expires [date]</strong></div>
+                    <div class="status-card"><span>Leave to appeal filed</span><strong>No / Yes</strong></div>
+                </div>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">If the appeal period has expired without an application, the judgment is final and enforceable.</p>
+            </div>
+
+            <!-- ARCHIVE & FINAL CHECKLIST -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Archive & Close File</div>
+                        <div class="adv-card__subtitle">Checklist to finalise your matter</div>
+                    </div>
+                </div>
+                <ul class="adv-checklist" data-checklist-id="finalisation">
+                    <li class="adv-checklist__item" data-item-id="f1"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Judgment received and read carefully</div></li>
+                    <li class="adv-checklist__item" data-item-id="f2"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Compliance steps started (or enforcement launched)</div></li>
+                    <li class="adv-checklist__item" data-item-id="f3"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Costs paid / collected (or payment plan arranged)</div></li>
+                    <li class="adv-checklist__item" data-item-id="f4"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Appeal deadline noted (21 court days)</div></li>
+                    <li class="adv-checklist__item" data-item-id="f5"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">If appealing – leave to appeal drafted / filed</div></li>
+                    <li class="adv-checklist__item" data-item-id="f6"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">All documents saved & backed up</div></li>
+                    <li class="adv-checklist__item" data-item-id="f7"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Case closed – no further steps needed</div></li>
+                </ul>
+            </div>
+
+            <!-- FAQ -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Frequently Asked Questions</div>
+                        <div class="adv-card__subtitle">Post‑judgment and enforcement queries</div>
+                    </div>
+                </div>
+                <div class="faq">
+                    <details class="faq-item">
+                        <summary>How do I enforce a Labour Court order?</summary>
+                        <p>You can apply to the same Labour Court for contempt of court if the other party does not comply. The court can impose fines or imprisonment for non‑compliance.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What if the other side doesn't pay costs?</summary>
+                        <p>You can use the costs order to issue a warrant of execution against their property. It's best to first send a letter of demand.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can I still appeal after the 21‑day deadline?</summary>
+                        <p>You can apply for condonation of the late filing, but you need to show good cause for the delay. It's not guaranteed.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What happens if the matter is remitted to the CCMA?</summary>
+                        <p>The CCMA will set a new hearing date. The process starts again, but the arbitration is limited to the issues the Labour Court identified.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>When can I consider my file closed?</summary>
+                        <p>When the judgment is final (no appeal possible), all compliance steps are done, costs are resolved, and no further action is needed.</p>
+                    </details>
+                </div>
+            </div>
+
+        </main>
+
+        <aside class="adv-sidebar">
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">📅 Key Dates</div>
+                <div class="adv-form-group">
+                    <label for="finalJudgmentDate">Judgment date</label>
+                    <input type="date" class="adv-input" id="finalJudgmentDate" onchange="updateFinalDeadline()">
+                </div>
+                <div class="adv-deadline__display" id="finalDeadlineDisplay">
+                    <span class="adv-deadline__label">Enter date to see appeal deadline</span>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+                <div class="adv-chat" data-chat-id="finalisation">
+                    <div class="adv-chat__messages"></div>
+                    <div class="adv-chat__input-group">
+                        <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about finalisation...">
+                        <button class="adv-chat__send">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+                <div class="adv-savings">
+                    <span>Saved so far:</span>
+                    <span class="adv-savings__amount">R0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <nav class="adv-nav-footer">
+        <div class="adv-nav-footer__prev">
+            <a href="judgment.html" class="adv-btn adv-btn--ghost">← Judgment</a>
+        </div>
+        <div class="adv-nav-footer__next">
+            <a href="index.html" class="adv-btn adv-btn--primary">Finish & Close</a>
+        </div>
+    </nav>
+
+    <footer class="adv-footer">
+        <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+        <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+    </footer>
+
+    <script src="shared-scripts.js"></script>
+    <script>
+        function isPublicHoliday(d) {
+            const y = d.getFullYear();
+            const h = [new Date(y,0,1),new Date(y,2,21),new Date(y,3,27),new Date(y,4,1),new Date(y,5,16),new Date(y,7,9),new Date(y,8,24),new Date(y,11,16),new Date(y,11,25),new Date(y,11,26)];
+            return h.some(x => x.getDate()===d.getDate() && x.getMonth()===d.getMonth());
+        }
+        function isCourtDay(d) {
+            if(d.getDay()===0||d.getDay()===6) return false;
+            const m=d.getMonth(), dt=d.getDate();
+            if((m===11&&dt>=16)||(m===0&&dt<=15)) return false;
+            return !isPublicHoliday(d);
+        }
+        function addCourtDays(start, days) {
+            const d = new Date(start); d.setDate(d.getDate()+1);
+            let cnt=0;
+            while(cnt<days) { if(isCourtDay(d)) cnt++; if(cnt<days) d.setDate(d.getDate()+1); }
+            return d;
+        }
+
+        function updateFinalDeadline() {
+            const dateVal = document.getElementById('finalJudgmentDate').value;
+            const display = document.getElementById('finalDeadlineDisplay');
+            if(!dateVal) {
+                display.innerHTML = '<span class="adv-deadline__label">Enter date to see appeal deadline</span>';
+                return;
+            }
+            const judgmentDate = new Date(dateVal);
+            const appealDeadline = addCourtDays(judgmentDate, 21);
+            const opts = {day:'numeric', month:'long', year:'numeric', weekday:'long'};
+            const today = new Date();
+            const remaining = Math.ceil((appealDeadline - today)/(1000*60*60*24));
+            let color = remaining<=3 ? 'var(--danger)' : remaining<=7 ? 'var(--warning)' : 'var(--success)';
+            display.innerHTML = `
+                <strong>Appeal deadline:</strong> ${appealDeadline.toLocaleDateString('en-ZA',opts)}<br>
+                <span style="color:${color}; font-weight:700;">
+                    ${remaining>0 ? remaining+' days remaining' : Math.abs(remaining)+' days overdue'}
+                </span>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
+        });
+    </script>
+</body>
+</html>
