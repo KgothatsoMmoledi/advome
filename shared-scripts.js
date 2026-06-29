@@ -44,7 +44,7 @@
       { id: 'oppose-check', name: 'Oppose Check', path: 'oppose-check.html' },
       { id: 'replying', name: 'Replying', path: 'replying.html' },
       { id: 'pagination', name: 'Pagination', path: 'pagination.html' },
-      { id: 'setdown', name: 'Set Down', path: 'setdown-request.html' },
+      { id: 'setdown', name: 'Set Down', path: 'setdown.html' },
       { id: 'heads', name: 'Heads', path: 'heads.html' },
       { id: 'enrolment', name: 'Enrolment', path: 'enrolment.html' },
       { id: 'hearing', name: 'Hearing', path: 'hearing.html' },
