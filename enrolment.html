@@ -19,7 +19,6 @@
             --text: #2d3748;
             --text-muted: #718096;
         }
-
         .rule-box {
             background: #edf2f7;
             border-left: 4px solid var(--primary);
@@ -127,7 +126,7 @@
     <section class="adv-hero">
         <div class="adv-hero__content">
             <h1>Enrolment & Allocation</h1>
-            <p>Step 19 of 21 — Ensure your matter is enrolled and a hearing date is allocated</p>
+            <p>Step 19 of 21 — Apply for a hearing date, track allocation, and follow up with the Registrar</p>
         </div>
         <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
     </section>
@@ -135,129 +134,199 @@
     <div class="adv-container">
         <main>
 
-            <!-- STATUS OVERVIEW -->
+            <!-- STEP 1: APPLY FOR HEARING DATE -->
             <div class="adv-card">
                 <div class="adv-card__header">
                     <div>
-                        <div class="adv-card__title">Current Allocation Status</div>
-                        <div class="adv-card__subtitle">Rule 37(25) & Practice Manual — Track the Registrar's allocation</div>
+                        <div class="adv-card__title">1. Apply for a Hearing Date</div>
+                        <div class="adv-card__subtitle">Rule 37(25) — You must apply within 10 court days after pagination</div>
+                    </div>
+                </div>
+
+                <div class="adv-alert adv-alert--danger">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">⏰ 10‑DAY DEADLINE</div>
+                        <p>File your request for a hearing date within <strong>10 court days</strong> of completing the index and pagination. The Registrar will then allocate a date.</p>
+                    </div>
+                </div>
+
+                <div class="rule-box">
+                    <h4>📖 The Law</h4>
+                    <p><strong>Rule 37(25):</strong> After indexing and paginating the file, the applicant must <strong>index and paginate the file</strong> and, within 10 court days, apply to the Registrar for a hearing date.</p>
+                    <p><strong>Practice Manual, Section 18:</strong> The Registrar is responsible for allocating hearing dates. Once allocated, the matter is considered enrolled. The Registrar notifies all parties.</p>
+                </div>
+
+                <div class="adv-form-group">
+                    <label><strong>How to apply</strong></label>
+                    <ul class="step-list">
+                        <li><strong>Draft the request</strong> – use the template below or generate one with the AI.</li>
+                        <li><strong>Sign</strong> the document.</li>
+                        <li><strong>Submit it to the Registrar</strong> via <strong>Court Online</strong> (upload under your case) <strong>or by email</strong> (find the Registrar's email address on the court's website).</li>
+                        <li><strong>Keep proof</strong> of submission (screenshot, email copy, or confirmation).</li>
+                    </ul>
+                </div>
+
+                <!-- Official Template (same as before) -->
+                <div class="adv-form-group" style="margin-top:1.5rem;">
+                    <label><strong>Request for Hearing Date Template</strong> <span class="badge badge--info">Official</span></label>
+                    <div class="template-box" id="requestTemplate">
+IN THE LABOUR COURT OF SOUTH AFRICA
+(HELD AT [SEAT])
+
+Case No: [CASE NUMBER]
+
+In the matter between:
+
+[APPLICANT NAME] — Applicant
+and
+First Respondent: [CCMA]
+Second Respondent: [EMPLOYER NAME]
+Third Respondent: [COMMISSIONER NAME]
+
+REQUEST FOR HEARING DATE
+
+TO: The Registrar of the Labour Court
+
+The Applicant hereby applies for a hearing date in the above review application.
+
+The complete file has been indexed and paginated in accordance with Rule 29(3) and Rule 37(25), consisting of:
+• Section A: Pleadings and Affidavits — [X] pages
+• Section B: Notices and Other Documents — [X] pages
+• Section C: The Record — [X] pages (Volume [X] of [Y])
+
+The matter is [opposed / unopposed].
+
+All parties have been duly served. Proof of service is attached.
+
+The Applicant requests that the matter be set down for hearing on the earliest available date.
+
+SIGNED at [PLACE] on this [DAY] day of [MONTH] [YEAR].
+
+___________________________
+Signature
+
+[NAME IN BLOCK LETTERS]
+                    </div>
+                    <div class="generated-doc-actions">
+                        <button class="adv-btn adv-btn--primary" onclick="copyRequest()">📋 Copy Request</button>
+                        <button class="adv-btn adv-btn--secondary" onclick="downloadRequest()">📥 Download .doc</button>
+                    </div>
+                </div>
+
+                <!-- AI Email Version -->
+                <div class="adv-form-group" style="margin-top:1.5rem;">
+                    <label><strong>Or send the request by email</strong> <span class="badge badge--success">Recommended</span></label>
+                    <div class="ai-draft-form">
+                        <div class="adv-form-group">
+                            <label for="emailSeat">Court Seat</label>
+                            <select class="adv-input" id="emailSeat">
+                                <option>Johannesburg</option><option>Cape Town</option><option>Durban</option><option>Gqeberha</option>
+                            </select>
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="emailCaseNo">Case Number</label>
+                            <input type="text" class="adv-input" id="emailCaseNo" placeholder="e.g. JRB1234/2026">
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="emailApplicant">Applicant Name</label>
+                            <input type="text" class="adv-input" id="emailApplicant" placeholder="Your full name">
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="emailFirstResp">First Respondent (CCMA)</label>
+                            <input type="text" class="adv-input" id="emailFirstResp" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="emailSecondResp">Second Respondent (Employer)</label>
+                            <input type="text" class="adv-input" id="emailSecondResp" placeholder="Employer name">
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="emailThirdResp">Third Respondent (Commissioner)</label>
+                            <input type="text" class="adv-input" id="emailThirdResp" placeholder="Commissioner name">
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="emailOpposed">Matter is</label>
+                            <select class="adv-input" id="emailOpposed">
+                                <option value="unopposed">Unopposed</option>
+                                <option value="opposed">Opposed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="adv-btn adv-btn--primary" id="generateApplicationEmail">⚡ Generate Application Email</button>
+                    <div id="applicationEmailOutput" style="display:none; margin-top:1rem;">
+                        <div class="adv-form-group">
+                            <label><strong>Email Draft</strong></label>
+                            <div class="record-preview" id="applicationEmailPreview"></div>
+                        </div>
+                        <div class="generated-doc-actions">
+                            <button class="adv-btn adv-btn--primary" onclick="copyGeneratedEmail('applicationEmailPreview')">📋 Copy Email</button>
+                            <button class="adv-btn adv-btn--secondary" onclick="downloadGeneratedEmail('applicationEmailPreview')">📥 Download .txt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: TRACK ALLOCATION & FOLLOW‑UP -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">2. Track Allocation & Follow Up</div>
+                        <div class="adv-card__subtitle">Check Court Online and follow up if no date is allocated after 10 court days</div>
                     </div>
                 </div>
 
                 <div class="status-grid">
-                    <div class="status-card">
-                        <span>Request for hearing date filed</span>
-                        <strong id="statusFiled">No</strong>
-                    </div>
-                    <div class="status-card">
-                        <span>Hearing date allocated</span>
-                        <strong id="statusAllocated">No</strong>
-                    </div>
-                    <div class="status-card">
-                        <span>Days since filing</span>
-                        <strong id="statusDays">—</strong>
-                    </div>
-                    <div class="status-card">
-                        <span>Next step</span>
-                        <strong id="statusNext">Follow up with Registrar</strong>
-                    </div>
-                </div>
-
-                <div class="adv-alert adv-alert--info">
-                    <div class="adv-alert__content">
-                        <div class="adv-alert__title">📝 Practice Manual (Section 18)</div>
-                        <p>Once the Registrar allocates a hearing date, the matter is considered enrolled. The Registrar notifies all parties. If no date is allocated within a reasonable time, you must follow up.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI FOLLOW-UP EMAIL GENERATOR -->
-            <div class="adv-card" style="margin-top:1.5rem;">
-                <div class="adv-card__header">
-                    <div>
-                        <div class="adv-card__title">✉️ AI Generate Follow‑Up Email to Registrar</div>
-                        <div class="adv-card__subtitle">Use when no hearing date has been allocated after 10 court days</div>
-                    </div>
+                    <div class="status-card"><span>Request filed</span><strong id="statusFiled">Not yet</strong></div>
+                    <div class="status-card"><span>Hearing date allocated</span><strong id="statusAllocated">No</strong></div>
+                    <div class="status-card"><span>Days since filing</span><strong id="statusDays">—</strong></div>
+                    <div class="status-card"><span>Next action</span><strong id="statusNext">File the request first</strong></div>
                 </div>
 
                 <div class="adv-alert adv-alert--warning">
                     <div class="adv-alert__content">
-                        <div class="adv-alert__title">When to follow up</div>
-                        <p>If more than <strong>10 court days</strong> have passed since you applied for a hearing date and no allocation has been made, send a polite follow‑up email. If still no response after a further 5 court days, escalate to the Court Manager.</p>
+                        <div class="adv-alert__title">📧 When to follow up</div>
+                        <p>If <strong>10 court days</strong> pass without a hearing date, send a polite follow‑up email. If still no response after a further 5 court days, escalate to the <strong>Senior Registrar / Court Manager</strong>.</p>
                     </div>
                 </div>
 
-                <div class="ai-draft-form">
-                    <div class="adv-form-group">
-                        <label for="emailSeat">Court Seat</label>
-                        <select class="adv-input" id="emailSeat">
-                            <option>Johannesburg</option>
-                            <option>Cape Town</option>
-                            <option>Durban</option>
-                            <option>Gqeberha</option>
-                        </select>
+                <div class="adv-form-group">
+                    <label><strong>Follow‑Up Email Generator</strong></label>
+                    <div class="inline-form">
+                        <div class="adv-form-group">
+                            <label for="followUpDate">Date you filed the request</label>
+                            <input type="date" class="adv-input" id="followUpDate">
+                        </div>
                     </div>
-                    <div class="adv-form-group">
-                        <label for="emailCaseNo">Case Number</label>
-                        <input type="text" class="adv-input" id="emailCaseNo" placeholder="e.g. JRB1234/2026">
-                    </div>
-                    <div class="adv-form-group">
-                        <label for="emailApplicant">Applicant Name</label>
-                        <input type="text" class="adv-input" id="emailApplicant" placeholder="Your full name">
-                    </div>
-                    <div class="adv-form-group">
-                        <label for="emailDateFiled">Date you filed the request</label>
-                        <input type="date" class="adv-input" id="emailDateFiled">
-                    </div>
-                </div>
-
-                <button class="adv-btn adv-btn--primary" id="generateEmailBtn">⚡ Generate Follow‑Up Email</button>
-
-                <div id="emailOutput" style="display:none; margin-top:1rem;">
-                    <div class="adv-form-group">
-                        <label><strong>Email Draft</strong> <span class="badge badge--info">Template</span></label>
-                        <div class="record-preview" id="emailPreview"></div>
-                    </div>
-                    <div class="generated-doc-actions">
-                        <button class="adv-btn adv-btn--primary" onclick="copyEmail()">📋 Copy Email</button>
-                        <button class="adv-btn adv-btn--secondary" onclick="downloadEmail()">📥 Download .txt</button>
+                    <button class="adv-btn adv-btn--primary" id="generateFollowUpEmail" style="margin-top:0.5rem;">✉️ Generate Follow‑Up Email</button>
+                    <div id="followUpEmailOutput" style="display:none; margin-top:1rem;">
+                        <div class="adv-form-group">
+                            <label><strong>Email Draft</strong></label>
+                            <div class="record-preview" id="followUpEmailPreview"></div>
+                        </div>
+                        <div class="generated-doc-actions">
+                            <button class="adv-btn adv-btn--primary" onclick="copyGeneratedEmail('followUpEmailPreview')">📋 Copy Email</button>
+                            <button class="adv-btn adv-btn--secondary" onclick="downloadGeneratedEmail('followUpEmailPreview')">📥 Download .txt</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ENROLMENT CHECKLIST -->
+            <!-- CHECKLIST -->
             <div class="adv-card" style="margin-top:1.5rem;">
                 <div class="adv-card__header">
                     <div>
                         <div class="adv-card__title">Enrolment Checklist</div>
-                        <div class="adv-card__subtitle">Confirm each step to ensure your matter is properly enrolled</div>
+                        <div class="adv-card__subtitle">Ensure every step is completed</div>
                     </div>
                 </div>
-                <ul class="adv-checklist" data-checklist-id="enrolment-check">
-                    <li class="adv-checklist__item" data-item-id="enr1">
-                        <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Request for hearing date filed with Registrar</div>
-                    </li>
-                    <li class="adv-checklist__item" data-item-id="enr2">
-                        <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Proof of filing uploaded / retained</div>
-                    </li>
-                    <li class="adv-checklist__item" data-item-id="enr3">
-                        <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Check Court Online for allocation updates</div>
-                    </li>
-                    <li class="adv-checklist__item" data-item-id="enr4">
-                        <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Follow‑up email sent (if no allocation after 10 court days)</div>
-                    </li>
-                    <li class="adv-checklist__item" data-item-id="enr5">
-                        <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Escalation to Court Manager (if no response after further 5 court days)</div>
-                    </li>
-                    <li class="adv-checklist__item" data-item-id="enr6">
-                        <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">Hearing date allocated and all parties notified</div>
-                    </li>
+                <ul class="adv-checklist" data-checklist-id="enrolment">
+                    <li class="adv-checklist__item" data-item-id="e1"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">File indexed and paginated (Sections A, B, C)</div></li>
+                    <li class="adv-checklist__item" data-item-id="e2"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Request for hearing date drafted and signed</div></li>
+                    <li class="adv-checklist__item" data-item-id="e3"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Request filed with Registrar (Court Online or email)</div></li>
+                    <li class="adv-checklist__item" data-item-id="e4"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Proof of filing kept</div></li>
+                    <li class="adv-checklist__item" data-item-id="e5"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Check Court Online for allocation updates</div></li>
+                    <li class="adv-checklist__item" data-item-id="e6"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Follow‑up email sent (if no date after 10 court days)</div></li>
+                    <li class="adv-checklist__item" data-item-id="e7"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Escalation to Court Manager (if still no response)</div></li>
+                    <li class="adv-checklist__item" data-item-id="e8"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Hearing date allocated and all parties notified</div></li>
                 </ul>
             </div>
 
@@ -315,101 +384,149 @@
     <script src="shared-scripts.js"></script>
 
     <script>
-        // Court day functions (same as before)
+        // Court day helpers
         function isPublicHoliday(d) {
-            const year = d.getFullYear();
-            const holidays = [
-                new Date(year,0,1), new Date(year,2,21), new Date(year,3,27),
-                new Date(year,4,1), new Date(year,5,16), new Date(year,7,9),
-                new Date(year,8,24), new Date(year,11,16), new Date(year,11,25), new Date(year,11,26)
-            ];
-            return holidays.some(h => h.getDate()===d.getDate() && h.getMonth()===d.getMonth());
+            const y = d.getFullYear();
+            const h = [new Date(y,0,1),new Date(y,2,21),new Date(y,3,27),new Date(y,4,1),new Date(y,5,16),new Date(y,7,9),new Date(y,8,24),new Date(y,11,16),new Date(y,11,25),new Date(y,11,26)];
+            return h.some(x => x.getDate()===d.getDate() && x.getMonth()===d.getMonth());
         }
         function isCourtDay(d) {
             if(d.getDay()===0||d.getDay()===6) return false;
             const m=d.getMonth(), dt=d.getDate();
-            if((m===11 && dt>=16)||(m===0 && dt<=15)) return false;
+            if((m===11&&dt>=16)||(m===0&&dt<=15)) return false;
             return !isPublicHoliday(d);
         }
-        function addCourtDays(startDate, days) {
-            const d = new Date(startDate);
-            d.setDate(d.getDate()+1);
-            let count=0;
-            while(count<days) {
-                if(isCourtDay(d)) count++;
-                if(count<days) d.setDate(d.getDate()+1);
+        function addCourtDays(start, days) {
+            const d = new Date(start); d.setDate(d.getDate()+1);
+            let cnt=0;
+            while(cnt<days) {
+                if(isCourtDay(d)) cnt++;
+                if(cnt<days) d.setDate(d.getDate()+1);
             }
             return d;
         }
 
-        // Generate email
-        function generateEmail() {
+        // Copy request template
+        function copyRequest() {
+            const text = document.getElementById('requestTemplate').innerText;
+            navigator.clipboard.writeText(text).then(() => toast('Request copied!'));
+        }
+        function downloadRequest() {
+            const text = document.getElementById('requestTemplate').innerText;
+            const blob = new Blob([text],{type:'application/msword'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Request_for_Hearing_Date.doc';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        }
+
+        // Generate application email
+        function generateApplicationEmail() {
             const seat = document.getElementById('emailSeat').value;
             const caseNo = document.getElementById('emailCaseNo').value || '[Case No]';
             const applicant = document.getElementById('emailApplicant').value || '[Your Name]';
-            const dateFiled = document.getElementById('emailDateFiled').value || '[Date]';
+            const firstResp = document.getElementById('emailFirstResp').value;
+            const secondResp = document.getElementById('emailSecondResp').value || '[Employer]';
+            const thirdResp = document.getElementById('emailThirdResp').value || '[Commissioner]';
+            const opposed = document.getElementById('emailOpposed').value;
+            const today = new Date().toLocaleDateString('en-ZA',{day:'numeric',month:'long',year:'numeric'});
 
-            const today = new Date();
+            const email = `To: Registrar of the Labour Court, ${seat}
+Subject: Request for Hearing Date – Case No: ${caseNo}
+
+Dear Registrar,
+
+I am the Applicant in the above review application. The complete file has been indexed and paginated in accordance with Rule 29(3) and Rule 37(25).
+
+I hereby apply for a hearing date in terms of Rule 37(25).
+
+Details:
+• Case Number: ${caseNo}
+• Applicant: ${applicant}
+• First Respondent: ${firstResp}
+• Second Respondent: ${secondResp}
+• Third Respondent: ${thirdResp}
+• Matter is: ${opposed}
+
+All parties have been served. Proof of service is attached / already on file.
+
+Please allocate the earliest available hearing date and notify all parties.
+
+Kind regards,
+
+${applicant}
+Date: ${today}`;
+
+            document.getElementById('applicationEmailPreview').textContent = email;
+            document.getElementById('applicationEmailOutput').style.display = 'block';
+            document.getElementById('applicationEmailPreview').scrollIntoView({behavior:'smooth'});
+            toast('Application email generated!');
+        }
+
+        // Generate follow-up email
+        function generateFollowUpEmail() {
+            const dateFiled = document.getElementById('followUpDate').value;
+            if(!dateFiled) { toast('Please enter the date you filed the request.','warning'); return; }
+            const seat = document.getElementById('emailSeat').value;
+            const caseNo = document.getElementById('emailCaseNo').value || '[Case No]';
+            const applicant = document.getElementById('emailApplicant').value || '[Your Name]';
+            const today = new Date().toLocaleDateString('en-ZA',{day:'numeric',month:'long',year:'numeric'});
+
             const email = `To: Registrar of the Labour Court, ${seat}
 Subject: Follow‑up: Request for Hearing Date – Case No: ${caseNo}
 
 Dear Registrar,
 
-I refer to the above matter in which I filed a Request for Hearing Date on ${dateFiled}.
+I refer to my request for a hearing date filed on ${dateFiled}. To date, no hearing date has been allocated.
 
-To date, no hearing date has been allocated. I would be grateful if you could advise on the status of the allocation.
-
-The complete file has been indexed and paginated in accordance with the Rules. All parties have been served.
-
-Please do not hesitate to contact me should you require anything further.
+Could you please advise on the status of the allocation? The matter is ready for enrolment.
 
 Kind regards,
 
 ${applicant}
-Applicant
-Date: ${today.toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'})}`;
+Date: ${today}`;
 
-            document.getElementById('emailPreview').textContent = email;
-            document.getElementById('emailOutput').style.display = 'block';
-            document.getElementById('emailPreview').scrollIntoView({behavior:'smooth'});
-            if(window.Advome && Advome.toast) Advome.toast.show('Email generated!','success');
+            document.getElementById('followUpEmailPreview').textContent = email;
+            document.getElementById('followUpEmailOutput').style.display = 'block';
+            document.getElementById('followUpEmailPreview').scrollIntoView({behavior:'smooth'});
+            toast('Follow‑up email generated!');
         }
 
-        function copyEmail() {
-            const text = document.getElementById('emailPreview').textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                if(window.Advome && Advome.toast) Advome.toast.show('Email copied!','success');
-            });
+        function copyGeneratedEmail(previewId) {
+            const text = document.getElementById(previewId).textContent;
+            navigator.clipboard.writeText(text).then(() => toast('Email copied!'));
         }
-
-        function downloadEmail() {
-            const text = document.getElementById('emailPreview').textContent;
-            const blob = new Blob([text], {type:'text/plain'});
+        function downloadGeneratedEmail(previewId) {
+            const text = document.getElementById(previewId).textContent;
+            const blob = new Blob([text],{type:'text/plain'});
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'FollowUp_Email_Registrar.txt';
+            a.download = 'Email_to_Registrar.txt';
             document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
-        // Tracker sidebar
+        function toast(msg, type='success') {
+            if(window.Advome && Advome.toast) Advome.toast.show(msg, type);
+        }
+
+        // Sidebar tracker
         function updateTracker() {
-            const startVal = document.getElementById('trackerStart').value;
-            const display = document.getElementById('trackerDisplay');
-            if(!startVal) { display.innerHTML='<span class="adv-deadline__label">Enter date to see follow‑up deadline</span>'; return; }
-            const start = new Date(startVal);
+            const val = document.getElementById('trackerStart').value;
+            const disp = document.getElementById('trackerDisplay');
+            if(!val) { disp.innerHTML='<span class="adv-deadline__label">Enter date to see follow‑up deadline</span>'; return; }
+            const start = new Date(val);
             const followUp = addCourtDays(start, 10);
             const opts = {day:'numeric',month:'long',year:'numeric',weekday:'long'};
             const today = new Date();
             const remaining = Math.ceil((followUp - today)/(1000*60*60*24));
             let color = remaining<=3 ? 'var(--danger)' : remaining<=7 ? 'var(--warning)' : 'var(--success)';
-            display.innerHTML = `<strong>Follow‑up deadline:</strong> ${followUp.toLocaleDateString('en-ZA',opts)}<br>
+            disp.innerHTML = `<strong>Follow‑up deadline:</strong> ${followUp.toLocaleDateString('en-ZA',opts)}<br>
                 <span style="color:${color}; font-weight:700;">${remaining>0 ? remaining+' days remaining' : Math.abs(remaining)+' days overdue'}</span>`;
         }
 
-        // Initial status (could be loaded from localStorage or user input)
+        // Simulate status (you can wire this to real data later)
         function loadStatus() {
-            // Dummy – in real app, pull from saved data
-            document.getElementById('statusFiled').textContent = 'Yes (simulated)';
+            document.getElementById('statusFiled').textContent = 'Yes';
             document.getElementById('statusAllocated').textContent = 'No';
             document.getElementById('statusDays').textContent = '7';
             document.getElementById('statusNext').textContent = 'Send follow‑up soon';
@@ -417,7 +534,8 @@ Date: ${today.toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'nume
 
         document.addEventListener('DOMContentLoaded', function() {
             loadStatus();
-            document.getElementById('generateEmailBtn').addEventListener('click', generateEmail);
+            document.getElementById('generateApplicationEmail').addEventListener('click', generateApplicationEmail);
+            document.getElementById('generateFollowUpEmail').addEventListener('click', generateFollowUpEmail);
             document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
         });
     </script>
