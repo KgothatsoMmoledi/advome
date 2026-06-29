@@ -1,669 +1,1040 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Set-Down Centre</title>
-  <style>
-    :root {
-      --bg: #f4f8ff;
-      --panel: rgba(255,255,255,0.92);
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
-      --max: 1240px;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advome | Labour Court Set-Down Centre</title>
+    <style>
+        :root {
+            --bg: #f4f8ff;
+            --panel: rgba(255, 255, 255, 0.92);
+            --panel-2: #f8fbff;
+            --text: #0f172a;
+            --muted: #5b6b84;
+            --line: #dbe7f5;
+            --brand: #1e5eff;
+            --brand-2: #0f3fbf;
+            --accent: #0ea5e9;
+            --good: #0f9d58;
+            --warn: #d97706;
+            --danger: #dc2626;
+            --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+            --radius: 24px;
+            --max: 1240px;
+        }
 
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      line-height: 1.5;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
-      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky; top: 14px; z-index: 20;
-    }
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(30, 94, 255, 0.10), transparent 26%),
+                radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 22%),
+                linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+            line-height: 1.5;
+        }
 
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: white; display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
-    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .nav a {
-      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
-      border: 1px solid transparent; transition: 0.2s ease;
-    }
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
-    }
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 24px;
+        }
 
-    .hero {
-      margin-top: 28px;
-      padding: 34px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
-      border: 1px solid rgba(219,231,245,0.95);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: "";
-      position: absolute; right: -90px; top: -90px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
-      pointer-events: none;
-    }
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            border: 1px solid rgba(219, 231, 245, 0.95);
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(14px);
+            border-radius: 999px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            position: sticky;
+            top: 14px;
+            z-index: 20;
+        }
 
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
-      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
-      border: 1px solid #d6e3ff;
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
 
-    h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 14ch;
-    }
+        .brand-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            box-shadow: 0 12px 24px rgba(30, 94, 255, 0.24);
+            flex: 0 0 auto;
+        }
 
-    .subtitle {
-      max-width: 860px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
+        .brand-text strong {
+            display: block;
+            font-size: 1rem;
+            letter-spacing: -0.02em;
+        }
 
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
-      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-      white-space: nowrap;
-    }
-    .button:hover { transform: translateY(-1px); background: #f7fbff; }
-    .button.primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
+        .brand-text span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
 
-    .disclaimer {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 16px;
-      margin-top: 22px;
-    }
+        .nav a {
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            border: 1px solid transparent;
+            transition: 0.2s ease;
+        }
 
-    .panel {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
+        .nav a:hover,
+        .nav a.active {
+            color: var(--brand-2);
+            background: #eef4ff;
+            border-color: #d6e3ff;
+        }
 
-    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
-    .panel p { color: var(--muted); margin: 0; }
+        .hero {
+            margin-top: 28px;
+            padding: 34px;
+            border-radius: 30px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.93), rgba(248, 251, 255, 0.98));
+            border: 1px solid rgba(219, 231, 245, 0.95);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .status-top {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
-    }
-    .status-label {
-      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -90px;
+            top: -90px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(30, 94, 255, 0.10), rgba(30, 94, 255, 0));
+            pointer-events: none;
+        }
 
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
-    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
-    .mini strong { font-size: 1rem; }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: var(--brand-2);
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid #d6e3ff;
+        }
 
-    .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-    .section-head {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
-    }
-    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
-    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+        h1 {
+            margin: 16px 0 10px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1.02;
+            letter-spacing: -0.05em;
+            max-width: 14ch;
+        }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 18px;
-      margin-top: 18px;
-      align-items: start;
-    }
+        .subtitle {
+            max-width: 860px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.03rem;
+        }
 
-    .sidebar {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-      position: sticky;
-      top: 96px;
-    }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+        }
 
-    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
-    .sidebar p { margin: 0 0 14px; color: var(--muted); }
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 18px;
+            border-radius: 16px;
+            border: 1px solid #d7e4f8;
+            background: white;
+            color: var(--brand-2);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+            white-space: nowrap;
+        }
 
-    .timeline { display: grid; gap: 10px; }
-    .step {
-      display: flex; justify-content: space-between; gap: 10px;
-      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
-    }
-    .step .name { font-weight: 700; color: var(--text); }
-    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
-    .step.active { border-color: #cfe0ff; background: #eef4ff; }
-    .step.active .status { color: var(--brand-2); font-weight: 700; }
-    .step.done { background: #edfdf3; border-color: #caeed8; }
-    .step.done .status { color: var(--good); font-weight: 700; }
+        .button:hover {
+            transform: translateY(-1px);
+            background: #f7fbff;
+        }
 
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+        .button.primary {
+            background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 14px 24px rgba(30, 94, 255, 0.22);
+        }
 
-    .mini-card {
-      border: 1px solid #e6eef8;
-      border-radius: 18px;
-      padding: 14px;
-      background: #fff;
-    }
-    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
-    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
-    .mini-card li { margin-bottom: 6px; }
+        .button.primary:hover {
+            background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%);
+        }
 
-    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .tag {
-      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
-      font-size: 0.86rem; color: #374151; font-weight: 600;
-    }
+        .disclaimer {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e6eef8;
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
 
-    .callout {
-      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
-    }
-    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
-    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
-    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
-    .callout.green { background: #edfdf3; border-color: #caeed8; }
-    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 16px;
+            margin-top: 22px;
+        }
 
-    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .field {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
-    }
-    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
-    .field .value { font-weight: 700; color: var(--text); }
+        .panel {
+            background: var(--panel);
+            border: 1px solid rgba(219, 231, 245, 0.95);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
 
-    .checklist {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .check-item {
-      display: flex; justify-content: space-between; gap: 12px; align-items: center;
-      padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
-    }
-    .check-item strong { display: block; }
-    .check-item span { color: var(--muted); font-size: 0.9rem; }
+        .panel h2 {
+            margin: 0 0 12px;
+            letter-spacing: -0.03em;
+        }
 
-    .progress-wrap { display: grid; gap: 14px; }
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-    }
-    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
-    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
+        .panel p {
+            color: var(--muted);
+            margin: 0;
+        }
 
-    .faq { display: grid; gap: 10px; }
-    .faq-item {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
-    }
-    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
-    .faq-item p { margin: 10px 0 0; color: var(--muted); }
+        .status-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
 
-    .footer {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
+        .status-label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 700;
+        }
 
-    @media (max-width: 1100px) {
-      .hero-grid, .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
 
-    @media (max-width: 760px) {
-      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
-      .wrap { padding: 22px 5% 50px; }
-      .hero { padding: 20px; }
-      .panel, .section { padding: 18px; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      .hero-actions { flex-direction: column; }
-      .button { width: 100%; }
-    }
-  </style>
+        .pill.good {
+            background: rgba(15, 157, 88, 0.10);
+            color: var(--good);
+        }
+
+        .pill.warn {
+            background: rgba(217, 119, 6, 0.10);
+            color: var(--warn);
+        }
+
+        .pill.danger {
+            background: rgba(220, 38, 38, 0.10);
+            color: var(--danger);
+        }
+
+        .status-grid {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .mini {
+            padding: 14px;
+            border-radius: 18px;
+            background: white;
+            border: 1px solid #e6eef8;
+        }
+
+        .mini span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.84rem;
+            margin-bottom: 6px;
+        }
+
+        .mini strong {
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-top: 22px;
+            padding: 22px;
+            background: var(--panel);
+            border: 1px solid rgba(219, 231, 245, 0.95);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-head h2,
+        .section h2 {
+            margin: 0;
+            letter-spacing: -0.03em;
+        }
+
+        .section-head p {
+            margin: 0;
+            color: var(--muted);
+            max-width: 70ch;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 18px;
+            margin-top: 18px;
+            align-items: start;
+        }
+
+        .sidebar {
+            background: var(--panel);
+            border: 1px solid rgba(219, 231, 245, 0.95);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 18px;
+            position: sticky;
+            top: 96px;
+        }
+
+        .sidebar h2 {
+            margin: 0 0 10px;
+            color: var(--brand-2);
+        }
+
+        .sidebar p {
+            margin: 0 0 14px;
+            color: var(--muted);
+        }
+
+        .timeline {
+            display: grid;
+            gap: 10px;
+        }
+
+        .step {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 12px;
+            border-radius: 14px;
+            border: 1px solid #e6eef8;
+            background: #fff;
+        }
+
+        .step .name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .step .status {
+            font-size: 0.84rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .step.active {
+            border-color: #cfe0ff;
+            background: #eef4ff;
+        }
+
+        .step.active .status {
+            color: var(--brand-2);
+            font-weight: 700;
+        }
+
+        .step.done {
+            background: #edfdf3;
+            border-color: #caeed8;
+        }
+
+        .step.done .status {
+            color: var(--good);
+            font-weight: 700;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .mini-card {
+            border: 1px solid #e6eef8;
+            border-radius: 18px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .mini-card h3 {
+            margin: 0 0 8px;
+            color: var(--brand-2);
+            font-size: 1.02rem;
+        }
+
+        .mini-card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--text);
+        }
+
+        .mini-card li {
+            margin-bottom: 6px;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid #e6eef8;
+            background: #fff;
+            font-size: 0.86rem;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .callout {
+            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid #e6eef8;
+            background: #fff;
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--brand-2);
+        }
+
+        .callout.red {
+            background: #fff1f1;
+            border-color: #ffd6d6;
+        }
+
+        .callout.orange {
+            background: #fff7e8;
+            border-color: #ffe0b2;
+        }
+
+        .callout.green {
+            background: #edfdf3;
+            border-color: #caeed8;
+        }
+
+        .callout.blue {
+            background: #eef4ff;
+            border-color: #d7e4f8;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .field {
+            border: 1px solid #e6eef8;
+            border-radius: 16px;
+            padding: 13px;
+            background: #fff;
+        }
+
+        .field .label {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-bottom: 5px;
+        }
+
+        .field .value {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .checklist {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .check-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            padding: 13px 14px;
+            border: 1px solid #e6eef8;
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .check-item strong {
+            display: block;
+        }
+
+        .check-item span {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .progress-wrap {
+            display: grid;
+            gap: 14px;
+        }
+
+        .meter {
+            margin-top: 14px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: white;
+            border: 1px solid #e6eef8;
+        }
+
+        .meter-bar {
+            height: 12px;
+            border-radius: 999px;
+            background: #eaf1fb;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .meter-bar>div {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+        }
+
+        .faq {
+            display: grid;
+            gap: 10px;
+        }
+
+        .faq-item {
+            border: 1px solid #e6eef8;
+            border-radius: 16px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .faq-item p {
+            margin: 10px 0 0;
+            color: var(--muted);
+        }
+
+        .footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1100px) {
+            .hero-grid,
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .grid-2,
+            .field-grid,
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+            .wrap {
+                padding: 22px 5% 50px;
+            }
+            .hero {
+                padding: 20px;
+            }
+            .panel,
+            .section {
+                padding: 18px;
+            }
+            .topbar {
+                border-radius: 22px;
+                position: static;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .hero-actions {
+                flex-direction: column;
+            }
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>South African legal workflow intelligence</span>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="start.html">Start Matter</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="documents.html">Documents</a>
-        <a href="ccma.html">CCMA</a>
-        <a href="estates.html">Estates</a>
-        <a href="divorce.html">Divorce</a>
-        <a class="active" href="setdown.html">Set-down</a>
-        <a href="attorney.html">Attorney Portal</a>
-      </nav>
-    </header>
+    <div class="wrap">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">A</div>
+                <div class="brand-text">
+                    <strong>Advome</strong>
+                    <span>Labour Court review workflow</span>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="ccma.html">CCMA</a>
+                <a href="motion.html">Labour Court</a>
+                <a class="active" href="setdown.html">Set-down</a>
+                <a href="#">Help</a>
+            </nav>
+        </header>
 
-    <main class="hero">
-      <div>
-        <div class="eyebrow">Set-down centre</div>
-        <h1>Move the matter into allocation and hearing readiness.</h1>
-        <p class="subtitle">
-          This page comes after pre-trial. It tracks notice drafting, service, proof, registrar communication, and whether the matter has been enrolled or allocated a date.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button primary" href="#overview">View Set-down Health</a>
-          <a class="button" href="#notice">Open Notice Checklist</a>
-          <a class="button" href="#questions">Ask a Question</a>
-        </div>
-
-        <div class="disclaimer">
-          Advome provides procedural assistance and legal information. It does not provide legal advice.
-        </div>
-      </div>
-
-      <aside class="panel">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Set-down status</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Awaiting allocation</h2>
-          </div>
-          <span class="pill warn">Medium urgency</span>
-        </div>
-
-        <div class="meter">
-          <strong>Set-down readiness</strong>
-          <div class="meter-bar"><div style="width:72%"></div></div>
-        </div>
-
-        <div class="status-grid">
-          <div class="mini">
-            <span>Pre-trial complete</span>
-            <strong>Yes</strong>
-          </div>
-          <div class="mini">
-            <span>Matter ready for enrolment</span>
-            <strong>Yes</strong>
-          </div>
-          <div class="mini">
-            <span>Notice served</span>
-            <strong>No</strong>
-          </div>
-          <div class="mini">
-            <span>Trial date allocated</span>
-            <strong>No</strong>
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <section class="layout">
-      <aside class="sidebar">
-        <h2>Case timeline</h2>
-        <p>The matter has moved through pre-trial and is now waiting for set-down allocation.</p>
-
-        <div class="timeline">
-          <div class="step done"><span class="name">Summons</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Pleadings</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Settlement</span><span class="status">Tracked</span></div>
-          <div class="step done"><span class="name">Children</span><span class="status">Tracked</span></div>
-          <div class="step done"><span class="name">Discovery</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Pre-trial</span><span class="status">Done</span></div>
-          <div class="step active"><span class="name">Set-down</span><span class="status">Current</span></div>
-          <div class="step"><span class="name">Trial preparation</span><span class="status">Next</span></div>
-          <div class="step"><span class="name">Finalisation</span><span class="status">Later</span></div>
-        </div>
-
-        <div style="height:14px"></div>
-
-        <div class="callout blue">
-          <strong>Next step panel</strong>
-          The page should tell the user to draft, serve, and file the Notice of Set Down, then keep following up until allocation happens.
-        </div>
-      </aside>
-
-      <div>
-        <section class="section" id="overview">
-          <div class="section-head">
+        <main class="hero">
             <div>
-              <h2>Set-down overview</h2>
-              <p>The set-down stage is about enrolling the matter and securing hearing allocation.</p>
-            </div>
-          </div>
+                <div class="eyebrow">Step 17 of 21 · Set-down centre</div>
+                <h1>Apply for a hearing date and track allocation.</h1>
+                <p class="subtitle">
+                    After indexing and paginating the file, you must apply to the Registrar for a hearing date within 10 court days (Rule 37(25)). This page helps you complete the set-down process and monitor the allocation.
+                </p>
 
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Current position</h3>
-              <ul>
-                <li>Pre-trial complete</li>
-                <li>Matter ready for enrolment</li>
-                <li>Notice not yet served</li>
-                <li>Trial date still pending</li>
-              </ul>
+                <div class="hero-actions">
+                    <a class="button primary" href="#apply">Apply for hearing date</a>
+                    <a class="button" href="#checklist">Set-down checklist</a>
+                    <a class="button" href="#faq">Frequently asked questions</a>
+                </div>
+
+                <div class="disclaimer">
+                    Advome provides procedural assistance and legal information. It does not provide legal advice. Always verify rules and directives with the relevant Labour Court.
+                </div>
             </div>
 
-            <div class="mini-card">
-              <h3>What set-down affects</h3>
-              <ul>
-                <li>Hearing allocation</li>
-                <li>Enrolment on the roll</li>
-                <li>Judicial assignment</li>
-                <li>Trial preparation timing</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+            <aside class="panel">
+                <div class="status-top">
+                    <div>
+                        <div class="status-label">Set-down status</div>
+                        <h2 style="margin-top:6px; font-size:1.45rem;">Hearing date not yet allocated</h2>
+                    </div>
+                    <span class="pill warn">Deadline pending</span>
+                </div>
 
-        <section class="section" id="notice">
-          <div class="section-head">
+                <div class="meter">
+                    <strong>Set-down progress</strong>
+                    <div class="meter-bar"><div style="width:40%"></div></div>
+                </div>
+
+                <div class="status-grid">
+                    <div class="mini">
+                        <span>File indexed & paginated</span>
+                        <strong>Yes</strong>
+                    </div>
+                    <div class="mini">
+                        <span>10‑court‑day deadline</span>
+                        <strong>12 Aug 2026</strong>
+                    </div>
+                    <div class="mini">
+                        <span>Request for hearing date filed</span>
+                        <strong>No</strong>
+                    </div>
+                    <div class="mini">
+                        <span>Trial date allocated</span>
+                        <strong>No</strong>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <section class="layout">
+            <aside class="sidebar">
+                <h2>Review timeline</h2>
+                <p>Your Labour Court review application moves through these stages.</p>
+
+                <div class="timeline">
+                    <div class="step done"><span class="name">Notice of Motion</span><span class="status">Done</span></div>
+                    <div class="step done"><span class="name">Founding Affidavit</span><span class="status">Done</span></div>
+                    <div class="step done"><span class="name">Answering Affidavit</span><span class="status">Done</span></div>
+                    <div class="step done"><span class="name">Replying Affidavit</span><span class="status">Done</span></div>
+                    <div class="step done"><span class="name">Pagination & Index</span><span class="status">Done</span></div>
+                    <div class="step active"><span class="name">Set-down</span><span class="status">Current</span></div>
+                    <div class="step"><span class="name">Heads of Argument</span><span class="status">Next</span></div>
+                    <div class="step"><span class="name">Hearing</span><span class="status">Later</span></div>
+                    <div class="step"><span class="name">Judgment</span><span class="status">Later</span></div>
+                </div>
+
+                <div style="height:14px"></div>
+
+                <div class="callout blue">
+                    <strong>Deadline reminder</strong>
+                    You have 10 court days from the date you completed pagination to apply for a hearing date. Missing this deadline may cause delays.
+                </div>
+            </aside>
+
             <div>
-              <h2>Notice of Set Down checklist</h2>
-              <p>Show the full service chain clearly so the user can prove compliance.</p>
+                <section class="section" id="apply">
+                    <div class="section-head">
+                        <div>
+                            <h2>Apply for hearing date (Rule 37(25))</h2>
+                            <p>Complete the request and submit it to the Registrar via the Court Online portal or email.</p>
+                        </div>
+                        <span class="pill danger">Action required</span>
+                    </div>
+
+                    <div class="callout blue">
+                        <strong>Request for Hearing Date template</strong>
+                        <p style="margin-top:8px;">Use the template below, fill in your details, and file it. You can also generate a formatted version from the <a href="pagination.html" style="color:var(--brand); text-decoration:underline;">Pagination & Index</a> page.</p>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #e6eef8; border-radius:18px; padding:18px; margin-top:16px; font-family:Georgia,serif; line-height:1.5; white-space:pre-wrap;" id="requestTemplate">
+IN THE LABOUR COURT OF SOUTH AFRICA
+(HELD AT [SEAT])
+
+Case No: [CASE NUMBER]
+
+In the matter between:
+
+[APPLICANT NAME] — Applicant
+and
+First Respondent: [CCMA]
+Second Respondent: [EMPLOYER NAME]
+Third Respondent: [COMMISSIONER NAME]
+
+REQUEST FOR HEARING DATE
+
+TO: The Registrar of the Labour Court
+
+The Applicant hereby applies for a hearing date in the above review application.
+
+The complete file has been indexed and paginated in accordance with Rule 29(3) and Rule 37(25), consisting of:
+• Section A: Pleadings and Affidavits — [X] pages
+• Section B: Notices and Other Documents — [X] pages
+• Section C: The Record — [X] pages (Volume [X] of [Y])
+
+The matter is [opposed / unopposed].
+
+All parties have been duly served. Proof of service is attached.
+
+The Applicant requests that the matter be set down for hearing on the earliest available date.
+
+SIGNED at [PLACE] on this [DAY] day of [MONTH] [YEAR].
+
+___________________________
+Signature
+
+[NAME IN BLOCK LETTERS]
+                    </div>
+
+                    <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+                        <button class="button primary" onclick="copyTemplate()">📋 Copy template</button>
+                        <a class="button" href="pagination.html">📄 Generate full index first</a>
+                    </div>
+                </section>
+
+                <section class="section" id="checklist">
+                    <div class="section-head">
+                        <div>
+                            <h2>Set-down checklist</h2>
+                            <p>Ensure every step is completed before the 10‑court‑day deadline expires.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <div class="check-item"><div><strong>1. File indexed & paginated</strong><span>Confirm that the complete file (Sections A, B, C) is correctly arranged and paginated.</span></div><span>☐</span></div>
+                        <div class="check-item"><div><strong>2. Request for hearing date drafted</strong><span>Prepare the application using the template above.</span></div><span>☐</span></div>
+                        <div class="check-item"><div><strong>3. Request signed</strong><span>Sign the request before submission.</span></div><span>☐</span></div>
+                        <div class="check-item"><div><strong>4. Filed with Registrar</strong><span>Submit via Court Online or email to the Registrar.</span></div><span>☐</span></div>
+                        <div class="check-item"><div><strong>5. Proof of filing retained</strong><span>Keep a copy of the submission confirmation or email.</span></div><span>☐</span></div>
+                        <div class="check-item"><div><strong>6. Follow-up after 10 days</strong><span>If no allocation received, follow up with the Registrar.</span></div><span>☐</span></div>
+                    </div>
+
+                    <div class="callout red" style="margin-top:14px;">
+                        <strong>Deadline warning</strong>
+                        You must apply for a hearing date within 10 court days after indexing and paginating. Use the <a href="pagination.html" style="color:var(--brand); text-decoration:underline;">deadline tracker</a> to stay on track.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Trial date allocation centre</h2>
+                            <p>Allocation is handled by the Registrar. Monitor the status below.</p>
+                        </div>
+                    </div>
+
+                    <div class="field-grid">
+                        <div class="field"><div class="label">Hearing date allocated</div><div class="value">No</div></div>
+                        <div class="field"><div class="label">Court (seat)</div><div class="value">Johannesburg</div></div>
+                        <div class="field"><div class="label">Judge / Acting Judge</div><div class="value">Not assigned</div></div>
+                        <div class="field"><div class="label">Judicial case manager</div><div class="value">Not assigned</div></div>
+                        <div class="field"><div class="label">Enrolled on roll</div><div class="value">No</div></div>
+                        <div class="field"><div class="label">Allocation method</div><div class="value">Registrar-led</div></div>
+                    </div>
+
+                    <div class="callout blue" style="margin-top:14px;">
+                        <strong>Allocation information</strong>
+                        Allocation only occurs after the request is filed and the Registrar processes it. The court will notify all parties of the date.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Registrar communication log</h2>
+                            <p>Keep a record of every interaction with the Registrar.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="mini-card">
+                            <h3>Communication status</h3>
+                            <ul>
+                                <li>Request for hearing date sent: No</li>
+                                <li>Confirmation received: No</li>
+                                <li>Follow-up sent: No</li>
+                                <li>Escalation to court manager: Not yet</li>
+                            </ul>
+                        </div>
+
+                        <div class="mini-card">
+                            <h3>Deadline centre</h3>
+                            <ul>
+                                <li>Days since pagination completed: 3</li>
+                                <li>Days remaining to apply: 7 court days</li>
+                                <li>Hearing date: Not allocated</li>
+                                <li>Urgency: Medium</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Court Online status</h2>
+                            <p>Check that your case is visible and the set-down request is reflected.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="mini-card">
+                            <h3>Portal summary</h3>
+                            <ul>
+                                <li>Access confirmed</li>
+                                <li>Case visible</li>
+                                <li>Paginated file uploaded</li>
+                                <li>Set-down request submitted: Pending</li>
+                            </ul>
+                        </div>
+
+                        <div class="mini-card">
+                            <h3>What to watch</h3>
+                            <ul>
+                                <li>Ensure the correct case number is used</li>
+                                <li>Verify that all sections appear</li>
+                                <li>Monitor for allocation updates</li>
+                                <li>Bundle upload will follow later</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Escalation centre</h2>
+                            <p>If the Registrar does not respond or allocation is delayed, take the following steps.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="mini-card">
+                            <h3>After 10 court days with no response</h3>
+                            <ul>
+                                <li>Send a polite follow‑up email</li>
+                                <li>Call the Registrar’s office</li>
+                                <li>Escalate to the Senior Registrar or court manager</li>
+                            </ul>
+                        </div>
+
+                        <div class="mini-card">
+                            <h3>What to avoid</h3>
+                            <ul>
+                                <li>Missing the 10‑day deadline</li>
+                                <li>Failing to retain proof of filing</li>
+                                <li>Assuming allocation will happen automatically</li>
+                                <li>Ignoring communication from the court</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Your next step</h2>
+                            <p>The most urgent action right now.</p>
+                        </div>
+                        <span class="pill danger">Action needed</span>
+                    </div>
+
+                    <div class="callout blue">
+                        <strong>File the Request for Hearing Date immediately</strong>
+                        Use the template, attach proof of service if required, and submit it to the Registrar. Then monitor the allocation and prepare your Heads of Argument once a date is set.
+                    </div>
+                </section>
+
+                <section class="section" id="faq">
+                    <div class="section-head">
+                        <div>
+                            <h2>Frequently asked questions</h2>
+                            <p>Common queries about the Labour Court set-down process.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq">
+                        <details class="faq-item">
+                            <summary>When must I apply for a hearing date?</summary>
+                            <p>Within 10 court days after indexing and paginating the file (Rule 37(25)). The deadline is calculated using court days, excluding weekends, public holidays, and the December/January recess.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What if the matter is unopposed?</summary>
+                            <p>The same rule applies. For unopposed reviews, you may apply for a hearing date within 10 court days after the last day for filing an answering affidavit (Rule 37(26)).</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>How do I file the request?</summary>
+                            <p>You can file via the Court Online portal (upload the request under your case) or email the Registrar directly. Always keep a copy of the submission.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Do I need to serve the request on the other parties?</summary>
+                            <p>Normally, the court will notify all parties once a date is allocated. However, it is good practice to serve a copy of the request on the respondents and file proof of that service.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What if the Registrar doesn’t respond?</summary>
+                            <p>Follow up after 10 court days. If still no response, escalate to the Senior Registrar or the court manager. Keep a record of all communication.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What happens after a hearing date is allocated?</summary>
+                            <p>You must file Heads of Argument within 15 court days (opposed matters) or before the hearing (unopposed). Then prepare for the oral hearing.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Set-down summary</h2>
+                            <p>A quick overview of where you stand.</p>
+                        </div>
+                    </div>
+
+                    <p>
+                        The review file has been indexed and paginated. The next step is to apply to the Registrar for a hearing date within 10 court days. No hearing date has been allocated yet. Complete the checklist, file the request, and track the allocation on this page.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <div class="section-head">
+                        <div>
+                            <h2>Disclaimer</h2>
+                            <p>Important legal notice.</p>
+                        </div>
+                    </div>
+
+                    <p>
+                        This platform promotes access to justice and provides procedural assistance. It does not provide legal advice. Users remain responsible for complying with the Labour Court Rules, practice directives, and any applicable legislation.
+                    </p>
+                </section>
+
+                <div class="footer">
+                    Advome · Labour Court review workflow · Set-down centre. For procedural assistance only.
+                </div>
             </div>
-          </div>
-
-          <div class="checklist">
-            <div class="check-item"><div><strong>Notice drafted</strong><span>Prepare the document with correct case details.</span></div><span>☐</span></div>
-            <div class="check-item"><div><strong>Notice signed</strong><span>Confirm the notice has been signed before service.</span></div><span>☐</span></div>
-            <div class="check-item"><div><strong>Served on opponent</strong><span>Service must be completed correctly.</span></div><span>☐</span></div>
-            <div class="check-item"><div><strong>Proof of service uploaded</strong><span>Upload the affidavit or confirmation of service.</span></div><span>☐</span></div>
-            <div class="check-item"><div><strong>Filed with court</strong><span>Ensure the court receives the notice.</span></div><span>☐</span></div>
-            <div class="check-item"><div><strong>Matter enrolled</strong><span>The matter must be on the roll before allocation.</span></div><span>☐</span></div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          <div class="callout red">
-            <strong>Service warning</strong>
-            Failure to serve the Notice of Set Down correctly may affect enrolment and delay hearing allocation.
-          </div>
         </section>
+    </div>
 
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Trial date allocation centre</h2>
-              <p>Allocation should remain visible as a controlled court process, not a user-created event.</p>
-            </div>
-          </div>
-
-          <div class="field-grid">
-            <div class="field"><div class="label">Trial date allocated</div><div class="value">No</div></div>
-            <div class="field"><div class="label">Court assigned</div><div class="value">No</div></div>
-            <div class="field"><div class="label">Judge allocated</div><div class="value">No</div></div>
-            <div class="field"><div class="label">Judicial case manager</div><div class="value">No</div></div>
-            <div class="field"><div class="label">Enrolled on roll</div><div class="value">No</div></div>
-            <div class="field"><div class="label">Allocation method</div><div class="value">Registrar-led</div></div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          <div class="callout blue">
-            <strong>Allocation information</strong>
-            Allocation cannot occur until the matter is properly set down and the registrar process is completed.
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Registrar communication centre</h2>
-              <p>Keep a simple communication trail so the user knows whether follow-up is overdue.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Communication log</h3>
-              <ul>
-                <li>Email sent: No</li>
-                <li>Awaiting response: Yes</li>
-                <li>Follow-up sent: No</li>
-                <li>Escalation to court manager: Not yet</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>Deadline centre</h3>
-              <ul>
-                <li>Days since registrar email: 5</li>
-                <li>Follow-up required: Yes</li>
-                <li>Trial date: Not allocated</li>
-                <li>Urgency: Medium</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Court Online centre</h2>
-              <p>Show whether the online system reflects the file correctly.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Status</h3>
-              <ul>
-                <li>Access confirmed</li>
-                <li>Matter visible</li>
-                <li>Documents uploaded</li>
-                <li>Allocation received: Pending</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>What matters here</h3>
-              <ul>
-                <li>The matter must be visible</li>
-                <li>Uploaded papers must match the stage</li>
-                <li>Allocation should be tracked separately</li>
-                <li>Bundle upload becomes relevant later</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Escalation centre</h2>
-              <p>When delays become unreasonable, the workflow should guide the user toward proper follow-up.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>If delays continue</h3>
-              <ul>
-                <li>Send follow-up email</li>
-                <li>Contact registrar again</li>
-                <li>Escalate to court manager if needed</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>What the page should warn about</h3>
-              <ul>
-                <li>Notice not served</li>
-                <li>Proof of service missing</li>
-                <li>Allocation delayed</li>
-                <li>Roll status unclear</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Your next step</h2>
-              <p>This should be the clearest action on the page.</p>
-            </div>
-            <span class="pill danger">Action needed</span>
-          </div>
-
-          <div class="callout blue">
-            <strong>Draft and serve the Notice of Set Down</strong>
-            Required details include the case number, allocated date, opponent details, and method of service. After service, upload proof and continue following up on allocation.
-          </div>
-        </section>
-
-        <section class="section" id="questions">
-          <div class="section-head">
-            <div>
-              <h2>Questions</h2>
-              <p>The user should be able to ask practical set-down questions directly here.</p>
-            </div>
-          </div>
-
-          <div class="faq">
-            <details class="faq-item">
-              <summary>How do I draft a Notice of Set Down?</summary>
-              <p>The page should guide the user through the case number, date, parties, and service details needed for the notice.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Must the Notice of Set Down be served?</summary>
-              <p>Yes. The workflow should show service as a required step before enrolment and allocation progress.</p>
-            </details>
-            <details class="faq-item">
-              <summary>What proof of service is required?</summary>
-              <p>The page should prompt the user to upload a stamped return, affidavit, or other acceptable proof.</p>
-            </details>
-            <details class="faq-item">
-              <summary>What if the registrar ignores emails?</summary>
-              <p>The page should move to follow-up and, if needed, escalation to the court manager.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Can I speak to the court manager?</summary>
-              <p>The page should allow escalation guidance when registrar responses are delayed.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Who is the Judicial Case Manager?</summary>
-              <p>The page should keep this as an allocation field so the user sees whether a judicial manager has been assigned.</p>
-            </details>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Set-down summary</h2>
-              <p>Keep the summary short and procedural.</p>
-            </div>
-          </div>
-
-          <p>
-            The matter has progressed beyond pre-trial and is substantially ready for enrolment. A Notice of Set Down must be drafted, served and filed. Trial allocation remains outstanding and communication with the registrar should continue until a date is allocated.
-          </p>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Disclaimer</h2>
-              <p>Keep the legal disclaimer visible at the bottom of the page.</p>
-            </div>
-          </div>
-
-          <p>
-            This platform promotes access to justice and procedural assistance. It does not provide legal advice. Users remain responsible for complying with applicable rules, directives and court practices.
-          </p>
-        </section>
-
-        <div class="footer">
-          This set-down centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
-        </div>
-      </div>
-    </section>
-  </div>
+    <script>
+        function copyTemplate() {
+            const templateText = document.getElementById('requestTemplate').innerText;
+            navigator.clipboard.writeText(templateText).then(() => {
+                alert('Template copied to clipboard. Paste it into your document and fill in the details.');
+            }).catch(() => {
+                alert('Unable to copy automatically. Please select the text and copy manually.');
+            });
+        }
+    </script>
 </body>
 </html>
