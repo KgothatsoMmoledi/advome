@@ -56,22 +56,10 @@
             font-weight: 700;
             text-transform: uppercase;
         }
-        .badge--danger {
-            background: #fed7d7;
-            color: #742a2a;
-        }
-        .badge--warning {
-            background: #feebc8;
-            color: #7c2d12;
-        }
-        .badge--success {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-        .badge--info {
-            background: #bee3f8;
-            color: #2a4365;
-        }
+        .badge--danger { background: #fed7d7; color: #742a2a; }
+        .badge--warning { background: #feebc8; color: #7c2d12; }
+        .badge--success { background: #c6f6d5; color: #22543d; }
+        .badge--info { background: #bee3f8; color: #2a4365; }
         .step-list {
             counter-reset: step;
             list-style: none;
@@ -105,9 +93,7 @@
             gap: 1rem;
         }
         @media(max-width:600px) {
-            .inline-form {
-                grid-template-columns: 1fr;
-            }
+            .inline-form { grid-template-columns: 1fr; }
         }
         .generated-doc-actions {
             display: flex;
@@ -133,9 +119,22 @@
             margin-bottom: 1rem;
         }
         @media(max-width:600px) {
-            .ai-draft-form {
-                grid-template-columns: 1fr;
-            }
+            .ai-draft-form { grid-template-columns: 1fr; }
+        }
+        .supporting-docs textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+            margin-bottom: 0.5rem;
+        }
+        .supporting-docs textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
         }
     </style>
 </head>
@@ -179,8 +178,7 @@
                 <div class="adv-alert adv-alert--info">
                     <div class="adv-alert__content">
                         <div class="adv-alert__title">🤖 How the AI works</div>
-                        <p>Enter your case details and the grounds of review below. The platform will generate a complete <strong>Heads of Argument</strong> following the official Labour Court format (introduction, issues, facts, legal submissions, conclusion, and list of authorities).</p>
-                        <p style="margin-top:0.5rem; font-size:0.85rem;">The document will include placeholder citations — you must supplement them with the actual case law and statutes you intend to rely on.</p>
+                        <p>Enter your case details, grounds of review, and paste your filed pleadings below. The platform will generate a complete <strong>Heads of Argument</strong> that directly references your documents. You can then download, copy, and supplement with specific case law.</p>
                     </div>
                 </div>
 
@@ -233,6 +231,28 @@
                     <textarea class="paste-area" id="aiGrounds" rows="4" placeholder="List the key grounds of review you are relying on, e.g.&#10;1. The Commissioner committed a gross irregularity by ignoring material evidence.&#10;2. The award is unreasonable because...&#10;3. The Commissioner exceeded his powers by..."></textarea>
                 </div>
 
+                <!-- NEW: Supporting Documents Section -->
+                <div class="adv-card" style="background: #f8fbff; border: 1px solid var(--border); padding: 1rem; margin-bottom: 1.5rem;">
+                    <h3 style="margin-top:0; color: var(--primary);">📎 Supporting Documents (paste text from filed pleadings)</h3>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Paste the full text (or key excerpts) of your already‑filed documents. The AI will incorporate them into the Heads of Argument so your submissions are grounded in the record.</p>
+                    <div class="supporting-docs">
+                        <label><strong>Notice of Motion</strong></label>
+                        <textarea id="docNoticeOfMotion" placeholder="Paste the text of your Notice of Motion here..."></textarea>
+
+                        <label><strong>Founding Affidavit</strong></label>
+                        <textarea id="docFoundingAffidavit" placeholder="Paste the text of your Founding Affidavit here..."></textarea>
+
+                        <label><strong>Answering Affidavit (if any)</strong></label>
+                        <textarea id="docAnsweringAffidavit" placeholder="Paste the text of the Answering Affidavit here..."></textarea>
+
+                        <label><strong>Replying Affidavit (if any)</strong></label>
+                        <textarea id="docReplyingAffidavit" placeholder="Paste the text of the Replying Affidavit here..."></textarea>
+
+                        <label><strong>Other relevant documents</strong></label>
+                        <textarea id="docOther" placeholder="Paste any other important document text (e.g., CCMA award, contract)..."></textarea>
+                    </div>
+                </div>
+
                 <button class="adv-btn adv-btn--primary" id="aiGenerateBtn" style="margin-bottom:1rem;">⚡ AI Generate Heads of Argument</button>
 
                 <!-- Output area (hidden initially) -->
@@ -265,30 +285,13 @@ and
 HEADS OF ARGUMENT
 
 A. INTRODUCTION
-1. This is an application to review and set aside the arbitration award issued by the Third Respondent under case number [CCMA CASE NUMBER] dated [DATE].
-
 B. ISSUES TO BE DECIDED
-2. The main issues are:
-2.1 Whether the Commissioner committed a gross irregularity in the conduct of the arbitration proceedings;
-2.2 Whether the award is one that a reasonable decision‑maker could not reach;
-...
-
 C. SUMMARY OF RELEVANT FACTS
-3. [Brief factual background leading to the dismissal and arbitration.]
-
 D. LEGAL SUBMISSIONS
-4. [Detailed legal arguments, grouped under each ground of review, with references to authorities.]
-
 E. CONCLUSION
-5. In the premises, the Applicant prays that the award be reviewed and set aside and replaced with [appropriate order], alternatively that the matter be remitted to the CCMA for a fresh hearing.
-
 F. LIST OF AUTHORITIES
-[Legislation, case law, textbooks relied upon.]
 
 SIGNED at [PLACE] on [DATE].
-
-___________________________
-Counsel / Applicant
                         </div>
                     </details>
                 </div>
@@ -373,7 +376,7 @@ Counsel / Applicant
                     </li>
                     <li class="adv-checklist__item" data-item-id="h2">
                         <div class="adv-checklist__checkbox"></div>
-                        <div class="adv-checklist__text">All grounds of review clearly stated</div>
+                        <div class="adv-checklist__text">All grounds of review clearly stated and referenced to pleadings</div>
                     </li>
                     <li class="adv-checklist__item" data-item-id="h3">
                         <div class="adv-checklist__checkbox"></div>
@@ -530,6 +533,35 @@ Counsel / Applicant
                 '1. The Commissioner committed a gross irregularity by ignoring material evidence.\n2. The award is unreasonable because the decision is not one that a reasonable decision‑maker could reach.\n3. The Commissioner exceeded his powers.';
             const { day, month, year } = getTodayFormatted();
 
+            // Collect supporting documents
+            const noticeOfMotion = document.getElementById('docNoticeOfMotion').value.trim();
+            const foundingAffidavit = document.getElementById('docFoundingAffidavit').value.trim();
+            const answeringAffidavit = document.getElementById('docAnsweringAffidavit').value.trim();
+            const replyingAffidavit = document.getElementById('docReplyingAffidavit').value.trim();
+            const otherDoc = document.getElementById('docOther').value.trim();
+
+            let supportingSection = '';
+            if (noticeOfMotion || foundingAffidavit || answeringAffidavit || replyingAffidavit || otherDoc) {
+                supportingSection = '\n\nD. LEGAL SUBMISSIONS (based on filed pleadings)\n';
+                supportingSection += 'The following submissions are drawn directly from the pleadings already filed:\n\n';
+                if (noticeOfMotion) {
+                    supportingSection += 'From the Notice of Motion:\n' + noticeOfMotion + '\n\n';
+                }
+                if (foundingAffidavit) {
+                    supportingSection += 'From the Founding Affidavit:\n' + foundingAffidavit + '\n\n';
+                }
+                if (answeringAffidavit) {
+                    supportingSection += 'From the Answering Affidavit:\n' + answeringAffidavit + '\n\n';
+                }
+                if (replyingAffidavit) {
+                    supportingSection += 'From the Replying Affidavit:\n' + replyingAffidavit + '\n\n';
+                }
+                if (otherDoc) {
+                    supportingSection += 'Other relevant documents:\n' + otherDoc + '\n\n';
+                }
+                supportingSection += '[Develop your full legal arguments under each ground of review, referencing the above pleadings and the authorities listed.]\n';
+            }
+
             const documentText = `IN THE LABOUR COURT OF SOUTH AFRICA
 (HELD AT ${seat.toUpperCase()})
 
@@ -553,13 +585,7 @@ B. ISSUES TO BE DECIDED
 ${grounds.split('\n').map(line => '   ' + line.trim()).join('\n')}
 
 C. SUMMARY OF RELEVANT FACTS
-3. [Insert a brief chronological summary of the material facts leading to the dismissal and the arbitration proceedings. This should be no longer than two pages.]
-
-D. LEGAL SUBMISSIONS
-4. [Under each ground of review, set out the legal argument with reference to relevant case law and statutory provisions. For example:]
-4.1 Ground 1: Gross irregularity — the Commissioner failed to apply his mind to material evidence (see Sidumo v Rustenburg Platinum Mines [2007] 12 BLLR 1097 (CC)).
-4.2 Ground 2: Unreasonableness — the award is one that a reasonable decision‑maker could not reach (see Carephone (Pty) Ltd v Marcus NO [1998] 11 BLLR 1093 (LAC)).
-[Continue for each ground.]
+3. [Insert a brief chronological summary of the material facts leading to the dismissal and the arbitration proceedings. This should be no longer than two pages.]${supportingSection}
 
 E. CONCLUSION
 5. In the premises, the Applicant prays that:
