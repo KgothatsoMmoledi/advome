@@ -1,623 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advome | Judgment Centre</title>
-  <style>
-    :root {
-      --bg: #f4f8ff;
-      --panel: rgba(255,255,255,0.92);
-      --panel-2: #f8fbff;
-      --text: #0f172a;
-      --muted: #5b6b84;
-      --line: #dbe7f5;
-      --brand: #1e5eff;
-      --brand-2: #0f3fbf;
-      --accent: #0ea5e9;
-      --good: #0f9d58;
-      --warn: #d97706;
-      --danger: #dc2626;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(30,94,255,0.10), transparent 26%),
-        radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      line-height: 1.5;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 24px; }
-
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 14px 18px; border: 1px solid rgba(219,231,245,0.95); background: rgba(255,255,255,0.86);
-      backdrop-filter: blur(14px); border-radius: 999px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      position: sticky; top: 14px; z-index: 20;
-    }
-
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: white; display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 12px 24px rgba(30,94,255,0.24);
-      flex: 0 0 auto;
-    }
-    .brand-text strong { display: block; font-size: 1rem; letter-spacing: -0.02em; }
-    .brand-text span { display: block; color: var(--muted); font-size: 0.84rem; }
-
-    .nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .nav a {
-      padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; color: var(--muted);
-      border: 1px solid transparent; transition: 0.2s ease;
-    }
-    .nav a:hover, .nav a.active {
-      color: var(--brand-2); background: #eef4ff; border-color: #d6e3ff;
-    }
-
-    .hero {
-      margin-top: 28px;
-      padding: 34px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(248,251,255,0.98));
-      border: 1px solid rgba(219,231,245,0.95);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: "";
-      position: absolute; right: -90px; top: -90px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,94,255,0.10), rgba(30,94,255,0));
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 12px; border-radius: 999px; background: #eef4ff;
-      color: var(--brand-2); font-size: 0.85rem; font-weight: 700;
-      border: 1px solid #d6e3ff;
-    }
-
-    h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 16ch;
-    }
-
-    .subtitle {
-      max-width: 860px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 13px 18px; border-radius: 16px; border: 1px solid #d7e4f8;
-      background: white; color: var(--brand-2); font-weight: 700; cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-      white-space: nowrap;
-    }
-    .button:hover { transform: translateY(-1px); background: #f7fbff; }
-    .button.primary {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      color: #fff; border-color: transparent; box-shadow: 0 14px 24px rgba(30,94,255,0.22);
-    }
-    .button.primary:hover { background: linear-gradient(135deg, #1752ee 0%, #1597dd 100%); }
-
-    .disclaimer {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid #e6eef8;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel h2 { margin: 0 0 12px; letter-spacing: -0.03em; }
-    .panel p { color: var(--muted); margin: 0; }
-
-    .status-top {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
-    }
-    .status-label {
-      font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
-      font-size: 0.84rem; font-weight: 700;
-    }
-    .pill.good { background: rgba(15,157,88,0.10); color: var(--good); }
-    .pill.warn { background: rgba(217,119,6,0.10); color: var(--warn); }
-    .pill.danger { background: rgba(220,38,38,0.10); color: var(--danger); }
-
-    .status-grid {
-      margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
-    }
-    .mini {
-      padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
-    }
-    .mini span { display: block; color: var(--muted); font-size: 0.84rem; margin-bottom: 6px; }
-    .mini strong { font-size: 1rem; }
-
-    .section {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-    .section-head {
-      display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px;
-    }
-    .section-head h2, .section h2 { margin: 0; letter-spacing: -0.03em; }
-    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 18px;
-      margin-top: 18px;
-      align-items: start;
-    }
-
-    .sidebar {
-      background: var(--panel);
-      border: 1px solid rgba(219,231,245,0.95);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-      position: sticky;
-      top: 96px;
-    }
-
-    .sidebar h2 { margin: 0 0 10px; color: var(--brand-2); }
-    .sidebar p { margin: 0 0 14px; color: var(--muted); }
-
-    .timeline { display: grid; gap: 10px; }
-    .step {
-      display: flex; justify-content: space-between; gap: 10px;
-      padding: 12px 12px; border-radius: 14px; border: 1px solid #e6eef8; background: #fff;
-    }
-    .step .name { font-weight: 700; color: var(--text); }
-    .step .status { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
-    .step.active { border-color: #cfe0ff; background: #eef4ff; }
-    .step.active .status { color: var(--brand-2); font-weight: 700; }
-    .step.done { background: #edfdf3; border-color: #caeed8; }
-    .step.done .status { color: var(--good); font-weight: 700; }
-
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    .mini-card {
-      border: 1px solid #e6eef8;
-      border-radius: 18px;
-      padding: 14px;
-      background: #fff;
-    }
-    .mini-card h3 { margin: 0 0 8px; color: var(--brand-2); font-size: 1.02rem; }
-    .mini-card ul { margin: 0; padding-left: 18px; color: var(--text); }
-    .mini-card li { margin-bottom: 6px; }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .tag {
-      padding: 7px 10px; border-radius: 999px; border: 1px solid #e6eef8; background: #fff;
-      font-size: 0.86rem; color: #374151; font-weight: 600;
-    }
-
-    .callout {
-      padding: 14px; border-radius: 16px; border: 1px solid #e6eef8; background: #fff;
-    }
-    .callout strong { display: block; margin-bottom: 8px; color: var(--brand-2); }
-    .callout.red { background: #fff1f1; border-color: #ffd6d6; }
-    .callout.orange { background: #fff7e8; border-color: #ffe0b2; }
-    .callout.green { background: #edfdf3; border-color: #caeed8; }
-    .callout.blue { background: #eef4ff; border-color: #d7e4f8; }
-
-    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .field {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 13px; background: #fff;
-    }
-    .field .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
-    .field .value { font-weight: 700; color: var(--text); }
-
-    .checklist {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .check-item {
-      display: flex; justify-content: space-between; gap: 12px; align-items: center;
-      padding: 13px 14px; border: 1px solid #e6eef8; border-radius: 16px; background: #fff;
-    }
-    .check-item strong { display: block; }
-    .check-item span { color: var(--muted); font-size: 0.9rem; }
-
-    .meter {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e6eef8;
-    }
-    .meter-bar { height: 12px; border-radius: 999px; background: #eaf1fb; overflow: hidden; margin-top: 10px; }
-    .meter-bar > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--accent)); }
-
-    .faq { display: grid; gap: 10px; }
-    .faq-item {
-      border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
-    }
-    .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
-    .faq-item p { margin: 10px 0 0; color: var(--muted); }
-
-    .footer {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 1100px) {
-      .hero-grid, .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
-
-    @media (max-width: 760px) {
-      .grid-2, .field-grid, .status-grid { grid-template-columns: 1fr; }
-      .wrap { padding: 22px 5% 50px; }
-      .hero { padding: 20px; }
-      .panel, .section { padding: 18px; }
-      .topbar { border-radius: 22px; position: static; }
-      .nav { justify-content: flex-start; }
-      .hero-actions { flex-direction: column; }
-      .button { width: 100%; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judgment — Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #2d3748;
+            --text-muted: #718096;
+        }
+        .rule-box {
+            background: #edf2f7;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .rule-box h4 { margin: 0 0 .4rem; color: var(--primary); font-size: 1rem; }
+        .rule-box p, .rule-box ul { margin: .25rem 0; font-size: 0.9rem; }
+        .badge {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge--danger { background: #fed7d7; color: #742a2a; }
+        .badge--warning { background: #feebc8; color: #7c2d12; }
+        .badge--success { background: #c6f6d5; color: #22543d; }
+        .badge--info { background: #bee3f8; color: #2a4365; }
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 0;
+            width: 1.8rem; height: 1.8rem;
+            background: var(--primary); color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+        .inline-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px) { .inline-form { grid-template-columns: 1fr; } }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        @media(max-width:600px) { .status-grid { grid-template-columns: repeat(2, 1fr); } }
+        .status-card {
+            padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+        }
+        .status-card span { display: block; color: var(--text-muted); font-size: 0.84rem; margin-bottom: 6px; }
+        .status-card strong { font-size: 1rem; }
+        .hearing-tips {
+            background: #fff; border: 1px solid var(--border); border-radius: 8px;
+            padding: 1rem; margin-bottom: 1rem;
+        }
+        .hearing-tips h4 { color: var(--primary); margin-top: 0; }
+        .hearing-tips ul, .hearing-tips ol { padding-left: 1.5rem; }
+        .faq { display: grid; gap: 10px; }
+        .faq-item {
+            border: 1px solid #e6eef8; border-radius: 16px; padding: 14px; background: #fff;
+        }
+        .faq-item summary { cursor: pointer; font-weight: 700; color: var(--text); }
+        .faq-item p { margin: 10px 0 0; color: var(--text-muted); }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div class="brand-text">
-          <strong>Advome</strong>
-          <span>South African legal workflow intelligence</span>
+
+    <header class="adv-header">
+        <div class="adv-header__logo">Advome<span>.</span></div>
+        <nav class="adv-header__nav">
+            <a href="ccma.html">CCMA</a>
+            <a href="motion.html">Labour Court</a>
+            <a href="#">Help</a>
+        </nav>
+        <div class="adv-header__user">
+            <div class="adv-header__avatar">SRL</div>
         </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="start.html">Start Matter</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="documents.html">Documents</a>
-        <a href="trialday.html">Trial Day</a>
-        <a href="trialprep.html">Trial Prep</a>
-        <a href="setdown.html">Set-down</a>
-        <a href="estates.html">Estates</a>
-        <a href="divorce.html">Divorce</a>
-        <a class="active" href="judgment.html">Judgment</a>
-        <a href="attorney.html">Attorney Portal</a>
-      </nav>
+        <button class="adv-header__menu-toggle">☰</button>
     </header>
 
-    <main class="hero">
-      <div>
-        <div class="eyebrow">Judgment centre</div>
-        <h1>Track the outcome after the hearing.</h1>
-        <p class="subtitle">
-          This page captures whether judgment was delivered or reserved, the orders made, costs, and whether the matter is finished or still needs follow-up.
-        </p>
+    <div class="adv-progress" data-workflow="ccma" data-current-step="judgment"></div>
 
-        <div class="hero-actions">
-          <a class="button primary" href="#overview">View Judgment Status</a>
-          <a class="button" href="#orders">Open Orders</a>
-          <a class="button" href="#questions">Ask a Question</a>
+    <section class="adv-hero">
+        <div class="adv-hero__content">
+            <h1>Judgment</h1>
+            <p>Step 21 of 21 — Understanding the decision and your next steps</p>
         </div>
-
-        <div class="disclaimer">
-          Advome provides procedural assistance and legal information. It does not provide legal advice.
-        </div>
-      </div>
-
-      <aside class="panel">
-        <div class="status-top">
-          <div>
-            <div class="status-label">Outcome status</div>
-            <h2 style="margin-top:6px; font-size:1.45rem;">Judgment delivered</h2>
-          </div>
-          <span class="pill good">Outcome recorded</span>
-        </div>
-
-        <div class="meter">
-          <strong>Outcome readiness</strong>
-          <div class="meter-bar"><div style="width:100%"></div></div>
-        </div>
-
-        <div class="status-grid">
-          <div class="mini">
-            <span>Judgment</span>
-            <strong>Delivered</strong>
-          </div>
-          <div class="mini">
-            <span>Costs order</span>
-            <strong>Made</strong>
-          </div>
-          <div class="mini">
-            <span>Reasons</span>
-            <strong>Recorded</strong>
-          </div>
-          <div class="mini">
-            <span>Follow-up</span>
-            <strong>Possible</strong>
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <section class="layout">
-      <aside class="sidebar">
-        <h2>Case timeline</h2>
-        <p>The matter has moved through hearing and now sits at the judgment stage.</p>
-
-        <div class="timeline">
-          <div class="step done"><span class="name">Summons</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Pleadings</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Discovery</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Pre-trial</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Set-down</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Trial prep</span><span class="status">Done</span></div>
-          <div class="step done"><span class="name">Trial day</span><span class="status">Done</span></div>
-          <div class="step active"><span class="name">Judgment</span><span class="status">Current</span></div>
-          <div class="step"><span class="name">Finalisation</span><span class="status">Next</span></div>
-        </div>
-
-        <div style="height:14px"></div>
-
-        <div class="callout blue">
-          <strong>Next step panel</strong>
-          Judgment should show the result, any order made, and whether there are compliance or follow-up steps before finalisation.
-        </div>
-      </aside>
-
-      <div>
-        <section class="section" id="overview">
-          <div class="section-head">
-            <div>
-              <h2>Judgment overview</h2>
-              <p>The page should make the outcome obvious and easy to understand.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Current position</h3>
-              <ul>
-                <li>Judgment delivered</li>
-                <li>Costs order made</li>
-                <li>Reasons recorded</li>
-                <li>Follow-up still possible</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>What judgment affects</h3>
-              <ul>
-                <li>Who won or lost</li>
-                <li>What the court ordered</li>
-                <li>Whether compliance is needed</li>
-                <li>Whether the matter can be closed</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="orders">
-          <div class="section-head">
-            <div>
-              <h2>Orders and outcome</h2>
-              <p>Keep the key court result visible in one place.</p>
-            </div>
-          </div>
-
-          <div class="field-grid">
-            <div class="field"><div class="label">Judgment type</div><div class="value">Delivered</div></div>
-            <div class="field"><div class="label">Order made</div><div class="value">Yes</div></div>
-            <div class="field"><div class="label">Costs</div><div class="value">Yes</div></div>
-            <div class="field"><div class="label">Reasons available</div><div class="value">Yes</div></div>
-            <div class="field"><div class="label">Leave to appeal</div><div class="value">Pending / if applicable</div></div>
-            <div class="field"><div class="label">Compliance required</div><div class="value">Maybe</div></div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Possible outcomes</h3>
-              <ul>
-                <li>Claim granted</li>
-                <li>Claim dismissed</li>
-                <li>Partial relief</li>
-                <li>Reserved reasons</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>What the user should see</h3>
-              <ul>
-                <li>The result</li>
-                <li>The order</li>
-                <li>The costs position</li>
-                <li>Any follow-up requirement</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Judgment details</h2>
-              <p>Show the content of the judgment in a structured way.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>Order summary</h3>
-              <ul>
-                <li>Main order recorded</li>
-                <li>Costs order recorded</li>
-                <li>Reasons captured</li>
-                <li>Date of judgment captured</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>Compliance / follow-up</h3>
-              <ul>
-                <li>Any monetary order</li>
-                <li>Any reinstatement order</li>
-                <li>Any delivery deadline</li>
-                <li>Any later enforcement step</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Settlement and post-hearing possibilities</h2>
-              <p>Even after hearing, there may still be final steps to track.</p>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h3>What remains possible</h3>
-              <ul>
-                <li>Settlement after judgment</li>
-                <li>Compliance by the losing party</li>
-                <li>Appeal or leave to appeal</li>
-                <li>Clarification of the order</li>
-              </ul>
-            </div>
-
-            <div class="mini-card">
-              <h3>What should be visible</h3>
-              <ul>
-                <li>Whether the order is final</li>
-                <li>Whether compliance is needed</li>
-                <li>Whether the matter is ready for closure</li>
-                <li>Whether finalisation is next</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Your next step</h2>
-              <p>Keep the next instruction short and clear.</p>
-            </div>
-            <span class="pill good">Ready for finalisation</span>
-          </div>
-
-          <div class="callout blue">
-            <strong>Record the judgment and move to finalisation</strong>
-            Save the outcome, note any costs or compliance obligations, and then continue to the finalisation page.
-          </div>
-        </section>
-
-        <section class="section" id="questions">
-          <div class="section-head">
-            <div>
-              <h2>Questions</h2>
-              <p>The user should be able to ask practical judgment questions here.</p>
-            </div>
-          </div>
-
-          <div class="faq">
-            <details class="faq-item">
-              <summary>What does it mean if judgment is reserved?</summary>
-              <p>The page should show that the court has not yet given reasons and the outcome is still pending.</p>
-            </details>
-            <details class="faq-item">
-              <summary>What if there is a costs order?</summary>
-              <p>The page should record who pays costs and whether any further step is needed.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Can the matter still be settled after judgment?</summary>
-              <p>Yes. Settlement or compliance can still be tracked depending on the order.</p>
-            </details>
-            <details class="faq-item">
-              <summary>What happens after judgment?</summary>
-              <p>The workflow should move into finalisation and any follow-up or enforcement tracking.</p>
-            </details>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Judgment summary</h2>
-              <p>Keep the summary concise and procedural.</p>
-            </div>
-          </div>
-
-          <p>
-            Judgment has been delivered and the order has been recorded. Costs and reasons are captured, and the matter can now move into finalisation or any required compliance step.
-          </p>
-        </section>
-
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>Disclaimer</h2>
-              <p>Keep the legal disclaimer visible at the bottom of the page.</p>
-            </div>
-          </div>
-
-          <p>
-            This platform promotes access to justice and procedural assistance. It does not provide legal advice.
-          </p>
-        </section>
-
-        <div class="footer">
-          This judgment centre supports procedural assistance and access-to-justice guidance. It does not provide legal advice.
-        </div>
-      </div>
+        <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
     </section>
-  </div>
+
+    <div class="adv-container">
+        <main>
+
+            <!-- STATUS OVERVIEW GRID (merged from old version) -->
+            <div class="adv-card">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Judgment Status</div>
+                        <div class="adv-card__subtitle">Key details of the court's decision</div>
+                    </div>
+                </div>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <span>Judgment type</span>
+                        <strong>Delivered / Reserved</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Order made</span>
+                        <strong>Review dismissed / upheld</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Costs</span>
+                        <strong>Yes / No</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Reasons available</span>
+                        <strong>Yes / No</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Leave to appeal</span>
+                        <strong>Pending / Not yet</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Compliance required</span>
+                        <strong>Yes / No</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 1: HOW JUDGMENT IS DELIVERED -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">How Judgment Is Delivered</div>
+                        <div class="adv-card__subtitle">Rule 30 — Reserved or ex tempore</div>
+                    </div>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>⚖️ Two ways judgment can be given</h4>
+                    <ul>
+                        <li><strong>Ex tempore (immediately)</strong> — The judge gives the decision orally right after the hearing. You will receive a written order later.</li>
+                        <li><strong>Reserved judgment</strong> — The judge takes time to write a full judgment. You will be notified (by email or through the court file) when it's ready. This can take weeks or even months.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-box">
+                    <h4>📖 Rule 30 (Reserved Judgment)</h4>
+                    <p>The judge may reserve judgment after hearing argument. The Registrar will inform the parties when the judgment is handed down. The written judgment must include reasons and the order.</p>
+                </div>
+
+                <p style="font-size:0.85rem; color:var(--text-muted);">The judgment will be uploaded to <strong>Court Online</strong> and/or emailed to you. Always check your case file regularly.</p>
+            </div>
+
+            <!-- CARD 2: POSSIBLE OUTCOMES -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Possible Outcomes of Your Review</div>
+                        <div class="adv-card__subtitle">What the court can order (Labour Relations Act, s 158)</div>
+                    </div>
+                </div>
+
+                <div class="status-grid" style="grid-template-columns: repeat(2,1fr);">
+                    <div class="status-card">
+                        <span>🔴 Review dismissed</span>
+                        <strong>The CCMA award stands. You must comply with it.</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>🟢 Review upheld</span>
+                        <strong>The award is set aside. The court may:</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>🔄 Remittal</span>
+                        <strong>Matter sent back to CCMA for a fresh hearing.</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>✍️ Substitution</span>
+                        <strong>The court replaces the award with its own order (e.g. reinstatement, compensation).</strong>
+                    </div>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>💰 Costs</h4>
+                    <p>The court may also make a <strong>costs order</strong>. If the review is dismissed, you might be ordered to pay the other side's costs. If you succeed, costs may be awarded in your favour. Costs follow the result unless there is a good reason not to.</p>
+                </div>
+
+                <div class="rule-box">
+                    <h4>📖 Rule 31 (Costs)</h4>
+                    <p>Costs are in the court's discretion. The court can order costs on the party‑and‑party scale (standard) or attorney‑and‑client scale (punitive).</p>
+                </div>
+            </div>
+
+            <!-- CARD 3: WHAT TO DO AFTER JUDGMENT -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Your Next Steps After Judgment</div>
+                        <div class="adv-card__subtitle">Based on the outcome, here's what you should do</div>
+                    </div>
+                </div>
+
+                <div class="adv-alert adv-alert--info">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">📝 Important Deadlines</div>
+                        <p>If you wish to appeal, you must act fast. The time limits are strict and run from the date of the judgment.</p>
+                    </div>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>If the review was <strong>dismissed</strong> (you lost)</h4>
+                    <ol>
+                        <li><strong>Read the judgment carefully.</strong> Understand why you lost.</li>
+                        <li><strong>Comply with the order.</strong> If the award is confirmed, you must follow it (e.g., pay compensation).</li>
+                        <li><strong>Consider an appeal.</strong> You have <strong>21 court days</strong> to apply for leave to appeal to the Labour Appeal Court (LAC) (Rule 32, LRA s 166). You must show reasonable prospects of success.</li>
+                        <li><strong>Request leave to appeal</strong> from the same judge first. If refused, you may petition the Judge President of the Labour Court (Rule 32(2)).</li>
+                        <li><strong>Costs:</strong> If costs were awarded against you, arrange payment or negotiate with the other side.</li>
+                    </ol>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>If the review was <strong>upheld</strong> (you won)</h4>
+                    <ol>
+                        <li><strong>Read the order carefully.</strong> Is the award set aside and remitted, or did the court substitute its own order?</li>
+                        <li><strong>If remitted:</strong> The CCMA will re‑hear the matter. You will be contacted by the CCMA about new dates.</li>
+                        <li><strong>If substituted:</strong> The court's order replaces the CCMA award. The other side must comply (e.g., reinstate you).</li>
+                        <li><strong>Enforcement:</strong> If the other side does not comply, you can apply to the Labour Court to enforce the order (contempt of court).</li>
+                        <li><strong>Costs:</strong> If costs were awarded in your favour, serve the order on the other side and demand payment.</li>
+                    </ol>
+                </div>
+
+                <!-- Added post-judgment settlement note -->
+                <div class="hearing-tips">
+                    <h4>🤝 Settlement after judgment</h4>
+                    <p>Even after judgment, parties can still settle. If both sides agree, you can enter a settlement agreement that overrides or modifies the court order — but only if the settlement is made an order of court. Speak to the other party or their attorney if you wish to explore this.</p>
+                </div>
+
+                <div class="adv-alert adv-alert--warning">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">⚠️ Appeal Warning</div>
+                        <p>Appealing a Labour Court decision is not automatic. You need <strong>leave to appeal</strong>. The test is whether another court might reasonably come to a different decision. It is a high bar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ SECTION (merged from old version) -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Frequently Asked Questions</div>
+                        <div class="adv-card__subtitle">Common questions about judgments in the Labour Court</div>
+                    </div>
+                </div>
+                <div class="faq">
+                    <details class="faq-item">
+                        <summary>What does it mean if judgment is reserved?</summary>
+                        <p>It means the judge has not yet given reasons or the final order. The outcome is still pending. The Registrar will notify you when it's ready.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What if there is a costs order against me?</summary>
+                        <p>You must pay the costs as ordered. If you can't afford it, you can try to negotiate a payment plan with the other side. Costs orders are enforceable like any other court order.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can I still settle after judgment?</summary>
+                        <p>Yes. Even after the court has given judgment, the parties can reach a settlement agreement. However, it's best to make the settlement an order of court so it can be enforced if necessary.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What happens after the judgment is delivered?</summary>
+                        <p>You should read the order and decide whether to appeal, comply, or enforce it. Then move to finalisation and close your file.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Judgment Checklist</div>
+                        <div class="adv-card__subtitle">Make sure you complete these steps after receiving the judgment</div>
+                    </div>
+                </div>
+                <ul class="adv-checklist" data-checklist-id="judgment">
+                    <li class="adv-checklist__item" data-item-id="j1"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Read the entire judgment and understand the order</div></li>
+                    <li class="adv-checklist__item" data-item-id="j2"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Note the date of judgment (important for deadlines)</div></li>
+                    <li class="adv-checklist__item" data-item-id="j3"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Decide whether to appeal (you have 21 court days)</div></li>
+                    <li class="adv-checklist__item" data-item-id="j4"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">If appealing, draft and file application for leave to appeal</div></li>
+                    <li class="adv-checklist__item" data-item-id="j5"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Comply with the order (or start enforcement if you won)</div></li>
+                    <li class="adv-checklist__item" data-item-id="j6"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Pay or collect any costs awarded</div></li>
+                    <li class="adv-checklist__item" data-item-id="j7"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Close your file and update your records</div></li>
+                </ul>
+            </div>
+
+        </main>
+
+        <aside class="adv-sidebar">
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">📅 Judgment Date Tracker</div>
+                <div class="adv-form-group">
+                    <label for="judgmentDate">Date judgment delivered</label>
+                    <input type="date" class="adv-input" id="judgmentDate" onchange="updateAppealDeadline()">
+                </div>
+                <div class="adv-deadline__display" id="appealDeadlineDisplay">
+                    <span class="adv-deadline__label">Enter date to see appeal deadline</span>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+                <div class="adv-chat" data-chat-id="judgment">
+                    <div class="adv-chat__messages"></div>
+                    <div class="adv-chat__input-group">
+                        <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about judgment...">
+                        <button class="adv-chat__send">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+                <div class="adv-savings">
+                    <span>Saved so far:</span>
+                    <span class="adv-savings__amount">R0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <nav class="adv-nav-footer">
+        <div class="adv-nav-footer__prev">
+            <a href="hearing.html" class="adv-btn adv-btn--ghost">← Hearing</a>
+        </div>
+        <div class="adv-nav-footer__next">
+            <a href="index.html" class="adv-btn adv-btn--primary">Finish & Close</a>
+        </div>
+    </nav>
+
+    <footer class="adv-footer">
+        <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+        <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+    </footer>
+
+    <script src="shared-scripts.js"></script>
+    <script>
+        // Court day helpers
+        function isPublicHoliday(d) {
+            const y = d.getFullYear();
+            const h = [new Date(y,0,1),new Date(y,2,21),new Date(y,3,27),new Date(y,4,1),new Date(y,5,16),new Date(y,7,9),new Date(y,8,24),new Date(y,11,16),new Date(y,11,25),new Date(y,11,26)];
+            return h.some(x => x.getDate()===d.getDate() && x.getMonth()===d.getMonth());
+        }
+        function isCourtDay(d) {
+            if(d.getDay()===0||d.getDay()===6) return false;
+            const m=d.getMonth(), dt=d.getDate();
+            if((m===11&&dt>=16)||(m===0&&dt<=15)) return false;
+            return !isPublicHoliday(d);
+        }
+        function addCourtDays(start, days) {
+            const d = new Date(start); d.setDate(d.getDate()+1);
+            let cnt=0;
+            while(cnt<days) { if(isCourtDay(d)) cnt++; if(cnt<days) d.setDate(d.getDate()+1); }
+            return d;
+        }
+
+        function updateAppealDeadline() {
+            const dateVal = document.getElementById('judgmentDate').value;
+            const display = document.getElementById('appealDeadlineDisplay');
+            if(!dateVal) {
+                display.innerHTML = '<span class="adv-deadline__label">Enter date to see appeal deadline</span>';
+                return;
+            }
+            const judgmentDate = new Date(dateVal);
+            const appealDeadline = addCourtDays(judgmentDate, 21);
+            const opts = {day:'numeric', month:'long', year:'numeric', weekday:'long'};
+            const today = new Date();
+            const remaining = Math.ceil((appealDeadline - today)/(1000*60*60*24));
+            let color = remaining<=3 ? 'var(--danger)' : remaining<=7 ? 'var(--warning)' : 'var(--success)';
+            display.innerHTML = `
+                <strong>Appeal deadline:</strong> ${appealDeadline.toLocaleDateString('en-ZA',opts)}<br>
+                <span style="color:${color}; font-weight:700;">
+                    ${remaining>0 ? remaining+' days remaining' : Math.abs(remaining)+' days overdue'}
+                </span>
+                <p style="font-size:0.8rem; margin-top:0.5rem; color:var(--text-muted);">
+                    File application for leave to appeal before this date.
+                </p>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
+        });
+    </script>
 </body>
 </html>
