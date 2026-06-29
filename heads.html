@@ -1,418 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advome | Heads of Argument</title>
-<link rel="stylesheet" href="shared-styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heads of Argument — Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #2d3748;
+            --text-muted: #718096;
+        }
+
+        .rule-box {
+            background: #edf2f7;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .rule-box h4 {
+            margin: 0 0 .4rem;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        .rule-box p,
+        .rule-box ul {
+            margin: .25rem 0;
+            font-size: 0.9rem;
+        }
+        .template-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge--danger {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .badge--warning {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+        .badge--success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .badge--info {
+            background: #bee3f8;
+            color: #2a4365;
+        }
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .inline-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px) {
+            .inline-form {
+                grid-template-columns: 1fr;
+            }
+        }
+        .generated-doc-actions {
+            display: flex;
+            gap: .75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .record-preview {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .ai-draft-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media(max-width:600px) {
+            .ai-draft-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header class="site-header">
-  <a href="index.html" class="brand">
-    <div class="brand-mark">A</div>
-    <div>
-      <div class="brand-text">Advome</div>
-      <div class="brand-sub">Self-representation assistance</div>
-    </div>
-  </a>
-  <nav class="main-nav">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="start.html" class="nav-link">Start</a>
-    <a href="dashboard.html" class="nav-link">Dashboard</a>
-    <a href="ccma.html" class="nav-link">CCMA</a>
-    <a href="award.html" class="nav-link">Award</a>
-    <a href="ccma-review.html" class="nav-link">Review</a>
-    <a href="motion.html" class="nav-link">Motion</a>
-    <a href="record.html" class="nav-link">Record</a>
-    <a href="heads.html" class="nav-link active">Heads</a>
-    <a href="divorce.html" class="nav-link">Divorce</a>
-    <a href="estates-hub.html" class="nav-link">Estates</a>
-    <a href="attorney.html" class="nav-link">Attorney</a>
-    <a href="pricing.html" class="nav-premium">Pricing</a>
-  </nav>
-</header>
-
-<div class="container">
-
-  <div class="page-header">
-    <h1>Heads of Argument</h1>
-    <p>Prepare the argument bundle before set-down. Turn the record into structured legal submissions with authorities.</p>
-  </div>
-
-  <!-- Compliance Banner -->
-  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
-    <div class="card-title">
-      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
-      Argument Structure Only — Not Legal Advice
-    </div>
-    <p style="font-size:14px;color:#713f12;">
-      Advome generates a structural template for heads of argument based on your inputs. 
-      <strong>We do not assess the merits of your case, select authorities for you, or guarantee that your argument will succeed.</strong> 
-      You must research and attach relevant case law and legislation. Consult an attorney if you need help with legal argument.
-    </p>
-  </div>
-
-  <!-- Timeline — CORRECTED: Heads is step 6 -->
-  <div class="timeline">
-    <div class="timeline-step completed"><span class="num">1</span>CCMA</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">2</span>Award</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">3</span>Review Decision</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">4</span>Motion & Affidavit</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step completed"><span class="num">5</span>Record</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step active"><span class="num">6</span>Heads</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">7</span>Set-Down</div>
-    <div class="timeline-arrow">→</div>
-    <div class="timeline-step"><span class="num">8</span>Finalisation</div>
-  </div>
-
-  <!-- Health Meter -->
-  <div class="meter-container">
-    <div class="meter-header">
-      <span class="meter-label">Heads Readiness</span>
-      <span class="meter-value" style="color:var(--warning);">70%</span>
-    </div>
-    <div class="meter-bar-bg">
-      <div class="meter-bar-fill medium" style="width:70%"></div>
-    </div>
-    <div class="meter-status attention">
-      <span>⚠️</span> Applicant heads drafted — authorities pending
-    </div>
-  </div>
-
-  <!-- Heads of Argument Generator -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📝</span>
-      Heads of Argument Generator
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
-      Answer the questions below. Advome will generate a structural template for your heads of argument. 
-      <strong>You must research and attach relevant authorities yourself.</strong>
-    </p>
-    <div class="template-engine">
-      <div class="grid-2">
-        <div class="template-field">
-          <label>Applicant Name</label>
-          <input type="text" id="hdApplicant" placeholder="Full name">
+    <header class="adv-header">
+        <div class="adv-header__logo">Advome<span>.</span></div>
+        <nav class="adv-header__nav">
+            <a href="ccma.html">CCMA</a>
+            <a href="motion.html">Labour Court</a>
+            <a href="#">Help</a>
+        </nav>
+        <div class="adv-header__user">
+            <div class="adv-header__avatar">SRL</div>
         </div>
-        <div class="template-field">
-          <label>Respondent Name</label>
-          <input type="text" id="hdRespondent" placeholder="Full name">
-        </div>
-      </div>
-      <div class="template-field">
-        <label>Case Number</label>
-        <input type="text" id="hdCaseNo" placeholder="e.g. JR1234/26">
-      </div>
-      <div class="template-field">
-        <label>Legal Issues (one per line)</label>
-        <textarea id="hdIssues" rows="3" placeholder="e.g. Whether the commissioner committed gross irregularity by excluding material evidence"></textarea>
-      </div>
-      <div class="template-field">
-        <label>Key Submissions (one per line)</label>
-        <textarea id="hdSubmissions" rows="4" placeholder="e.g. The commissioner erred in law by applying the wrong test for constructive dismissal"></textarea>
-      </div>
-      <div class="template-field">
-        <label>Relief Sought</label>
-        <input type="text" id="hdRelief" placeholder="e.g. Set aside the award and remit to CCMA">
-      </div>
-      <button class="btn btn-primary" onclick="generateHeads()">Generate Heads of Argument</button>
-      <div id="hdOutput" class="template-output hidden"></div>
-    </div>
-  </div>
+        <button class="adv-header__menu-toggle">☰</button>
+    </header>
 
-  <div class="grid-2">
-    <!-- Argument Cards -->
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📝</span>
-        Applicant Heads
-      </div>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-box checked"></div>
-          <div class="checklist-text done">Background drafted</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box checked"></div>
-          <div class="checklist-text done">Issues identified</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Submissions complete</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Relief clearly stated</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Record references linked</div>
-        </div>
-      </div>
-    </div>
+    <div class="adv-progress" data-workflow="ccma" data-current-step="heads"></div>
 
-    <div class="card">
-      <div class="card-title">
-        <span class="icon" style="background:#fef3cd;color:#856404;">⚖️</span>
-        Respondent Heads
-      </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
-        Track the responding argument where the matter is opposed. If unopposed, this section remains inactive.
-      </p>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Notice of intention to oppose received</div>
+    <section class="adv-hero">
+        <div class="adv-hero__content">
+            <h1>Heads of Argument</h1>
+            <p>Step 18 of 21 — Draft and file your written legal arguments</p>
         </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Answering affidavit filed</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Respondent heads filed</div>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-box"></div>
-          <div class="checklist-text">Replying affidavit (if needed)</div>
-        </div>
-      </div>
-      <div class="mt-2">
-        <span class="pill pill-neutral">Awaiting opposition status</span>
-      </div>
-    </div>
-  </div>
+        <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+    </section>
 
-  <!-- Authorities -->
-  <div class="card">
-    <div class="card-title">
-      <span class="icon" style="background:#e0f2fe;color:#1a5fb4;">📚</span>
-      Authorities & Case Law
-    </div>
-    <div class="grid-3">
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title">Legislation</div>
-        <div class="checklist">
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-text">LRA sections cited</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-text">Constitution sections cited</div>
-          </div>
-        </div>
-      </div>
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title">Case Law</div>
-        <div class="checklist">
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-text">Review precedents attached</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-text">Labour Court authorities</div>
-          </div>
-        </div>
-      </div>
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title">Record References</div>
-        <div class="checklist">
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-text">Transcript pages linked</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-text">Exhibits cross-referenced</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="adv-container">
+        <main>
 
-  <!-- Opposition Logic -->
-  <div class="card" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);border-color:#fde047;">
-    <div class="card-title">
-      <span class="icon" style="background:#fde047;color:#713f12;">⚠️</span>
-      Opposition Status Logic
-    </div>
-    <p style="font-size:14px;color:var(--text);margin-bottom:12px;">
-      <strong>Important distinction:</strong> The workflow adapts based on what the respondent actually files.
-    </p>
-    <div class="grid-2">
-      <div style="background:white;padding:16px;border-radius:8px;border:1px solid var(--border);">
-        <div style="font-weight:600;color:var(--text);margin-bottom:8px;">Notice of Intention to Oppose ONLY</div>
-        <p style="font-size:13px;color:var(--text-muted);">The respondent signals they may oppose, but has not yet filed an answering affidavit. The matter is <strong>not fully opposed in substance</strong>. Proceed with caution.</p>
-        <div class="mt-2"><span class="pill pill-amber">Partial opposition</span></div>
-      </div>
-      <div style="background:white;padding:16px;border-radius:8px;border:1px solid var(--border);">
-        <div style="font-weight:600;color:var(--text);margin-bottom:8px;">Answering Affidavit FILED</div>
-        <p style="font-size:13px;color:var(--text-muted);">The respondent has filed a substantive response. The matter is <strong>properly opposed</strong>. Prepare respondent heads and consider replying affidavit.</p>
-        <div class="mt-2"><span class="pill pill-red">Fully opposed</span></div>
-      </div>
-    </div>
-  </div>
+            <!-- AI GENERATION SECTION -->
+            <div class="adv-card">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">⚡ AI Draft: Heads of Argument</div>
+                        <div class="adv-card__subtitle">Rule 40 & Practice Manual — Generate a structured, court‑ready Heads of Argument</div>
+                    </div>
+                </div>
 
-  <!-- Fee Meter -->
-  <div class="fee-meter">
-    <div class="fee-meter-header">
-      <div class="fee-meter-title">
-        <span>💰</span> Heads of Argument Costs
-      </div>
-      <div class="fee-total">R 1,500</div>
-    </div>
-    <div class="fee-breakdown">
-      <div class="fee-item pending">
-        <div class="fee-item-label">Drafting</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-      <div class="fee-item pending">
-        <div class="fee-item-label">Research & Authorities</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-      <div class="fee-item pending">
-        <div class="fee-item-label">Filing Fee</div>
-        <div class="fee-item-value">R 0</div>
-      </div>
-    </div>
-  </div>
+                <div class="adv-alert adv-alert--info">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">🤖 How the AI works</div>
+                        <p>Enter your case details and the grounds of review below. The platform will generate a complete <strong>Heads of Argument</strong> following the official Labour Court format (introduction, issues, facts, legal submissions, conclusion, and list of authorities).</p>
+                        <p style="margin-top:0.5rem; font-size:0.85rem;">The document will include placeholder citations — you must supplement them with the actual case law and statutes you intend to rely on.</p>
+                    </div>
+                </div>
 
-  <!-- Next Step -->
-  <div class="card" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);border-color:var(--primary-light);">
-    <div class="card-title">
-      <span class="icon" style="background:var(--primary);color:white;">🚀</span>
-      Next Step: Labour Set-Down
-    </div>
-    <p style="font-size:14px;color:var(--text);margin-bottom:16px;">
-      Once heads are complete and authorities are attached, the workflow moves to <strong>set-down and hearing allocation</strong>. 
-      The Registrar will allocate a hearing date — the platform does not create dates manually.
-    </p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="labour-setdown.html" class="btn btn-primary btn-lg">
-        Proceed to Labour Set-Down →
-      </a>
-      <a href="record.html" class="btn btn-secondary btn-lg">
-        ← Back to Record
-      </a>
-      <a href="attorney.html" class="btn btn-outline btn-lg">
-        👔 Find an Attorney
-      </a>
-    </div>
-  </div>
+                <!-- Input fields -->
+                <div class="ai-draft-form">
+                    <div class="adv-form-group">
+                        <label for="aiSeat">Court Seat</label>
+                        <select class="adv-input" id="aiSeat">
+                            <option>Johannesburg</option>
+                            <option>Cape Town</option>
+                            <option>Durban</option>
+                            <option>Gqeberha</option>
+                        </select>
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiCaseNo">Case Number</label>
+                        <input type="text" class="adv-input" id="aiCaseNo" placeholder="e.g. JRB1234/2026">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiApplicant">Applicant Name</label>
+                        <input type="text" class="adv-input" id="aiApplicant" placeholder="Your full name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiFirstResp">First Respondent (CCMA)</label>
+                        <input type="text" class="adv-input" id="aiFirstResp" value="Commission for Conciliation, Mediation and Arbitration (CCMA)">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiSecondResp">Second Respondent (Employer)</label>
+                        <input type="text" class="adv-input" id="aiSecondResp" placeholder="Employer name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiThirdResp">Third Respondent (Commissioner)</label>
+                        <input type="text" class="adv-input" id="aiThirdResp" placeholder="Commissioner name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiOpposed">Matter is</label>
+                        <select class="adv-input" id="aiOpposed">
+                            <option value="unopposed">Unopposed</option>
+                            <option value="opposed">Opposed</option>
+                        </select>
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="aiPlace">Signed at (Place)</label>
+                        <input type="text" class="adv-input" id="aiPlace" placeholder="e.g. Johannesburg">
+                    </div>
+                </div>
 
-  <!-- Questions -->
-  <div class="questions-panel">
-    <h3>Heads Questions</h3>
-    <div class="question-item">
-      <div class="question-q">What are the key legal issues?</div>
-      <div class="question-a">Identify the review questions the court must decide: misconduct, gross irregularity, or excess of powers.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">Which cases or laws matter?</div>
-      <div class="question-a">Attach authorities and legislation that support each ground of review. Cross-reference to the record.</div>
-    </div>
-    <div class="question-item">
-      <div class="question-q">Is the matter opposed?</div>
-      <div class="question-a">Track whether respondent heads are expected. The workflow adapts based on answering affidavit, not just notice of intention.</div>
-    </div>
-  </div>
+                <div class="adv-form-group" style="margin-bottom:1rem;">
+                    <label for="aiGrounds"><strong>Grounds of Review / Main Arguments</strong></label>
+                    <textarea class="paste-area" id="aiGrounds" rows="4" placeholder="List the key grounds of review you are relying on, e.g.&#10;1. The Commissioner committed a gross irregularity by ignoring material evidence.&#10;2. The award is unreasonable because...&#10;3. The Commissioner exceeded his powers by..."></textarea>
+                </div>
 
-  <div class="disclaimer">
-    <strong>Disclaimer</strong>
-    This module provides procedural assistance and legal information for labour disputes. It does not provide legal advice. All generated templates must be reviewed before filing. Users remain responsible for complying with Labour Court Rules and the Labour Relations Act.
-    <div class="access-message">
-      Section 34 of the Constitution protects the right of access to justice. Advome supports that right through procedural guidance and structured information — not through the unauthorised practice of law.
-    </div>
-  </div>
+                <button class="adv-btn adv-btn--primary" id="aiGenerateBtn" style="margin-bottom:1rem;">⚡ AI Generate Heads of Argument</button>
 
-</div>
+                <!-- Output area (hidden initially) -->
+                <div id="aiOutput" style="display:none;">
+                    <div class="adv-form-group">
+                        <label><strong>Generated Document</strong> <span class="badge badge--success">Official Format</span></label>
+                        <div class="record-preview" id="aiDocumentPreview"></div>
+                    </div>
+                    <div class="generated-doc-actions">
+                        <button class="adv-btn adv-btn--primary" onclick="downloadAIDocument()">📥 Download as Word (.doc)</button>
+                        <button class="adv-btn adv-btn--secondary" onclick="copyAIDocument()">📋 Copy to Clipboard</button>
+                    </div>
+                </div>
 
-<script>
-function generateHeads() {
-  const applicant = document.getElementById('hdApplicant').value || '[APPLICANT]';
-  const respondent = document.getElementById('hdRespondent').value || '[RESPONDENT]';
-  const caseNo = document.getElementById('hdCaseNo').value || '[CASE NUMBER]';
-  const issues = document.getElementById('hdIssues').value || '[ISSUES TO BE COMPLETED]';
-  const submissions = document.getElementById('hdSubmissions').value || '[SUBMISSIONS TO BE COMPLETED]';
-  const relief = document.getElementById('hdRelief').value || '[RELIEF TO BE COMPLETED]';
+                <div style="margin-top:1rem;">
+                    <details>
+                        <summary style="cursor:pointer; font-weight:600; color:var(--primary);">📄 View the official structure (uneditable)</summary>
+                        <div class="template-box" style="margin-top:0.5rem;">
+IN THE LABOUR COURT OF SOUTH AFRICA
+(HELD AT [SEAT])
 
-  const issueList = issues.split('
-').filter(i => i.trim()).map((i, idx) => 
-    `${idx + 1}.  ${i.trim()}`
-  ).join('
-');
-
-  const subList = submissions.split('
-').filter(s => s.trim()).map((s, idx) => 
-    `${idx + 1}.  ${s.trim()}`
-  ).join('
-');
-
-  const output = `HEADS OF ARGUMENT
+Case No: [CASE NUMBER]
 
 In the matter between:
 
-${applicant}                                              Applicant
-
+[APPLICANT] — Applicant
 and
+[RESPONDENTS]
 
-${respondent}                                           Respondent
+HEADS OF ARGUMENT
 
-Case Number: ${caseNo}
+A. INTRODUCTION
+1. This is an application to review and set aside the arbitration award issued by the Third Respondent under case number [CCMA CASE NUMBER] dated [DATE].
 
----
+B. ISSUES TO BE DECIDED
+2. The main issues are:
+2.1 Whether the Commissioner committed a gross irregularity in the conduct of the arbitration proceedings;
+2.2 Whether the award is one that a reasonable decision‑maker could not reach;
+...
 
-1.  INTRODUCTION
+C. SUMMARY OF RELEVANT FACTS
+3. [Brief factual background leading to the dismissal and arbitration.]
 
-[To be completed: Brief background of the dispute, the arbitration process, and the award being reviewed.]
+D. LEGAL SUBMISSIONS
+4. [Detailed legal arguments, grouped under each ground of review, with references to authorities.]
 
-2.  ISSUES FOR DETERMINATION
+E. CONCLUSION
+5. In the premises, the Applicant prays that the award be reviewed and set aside and replaced with [appropriate order], alternatively that the matter be remitted to the CCMA for a fresh hearing.
 
-${issueList}
+F. LIST OF AUTHORITIES
+[Legislation, case law, textbooks relied upon.]
 
-3.  SUBMISSIONS
+SIGNED at [PLACE] on [DATE].
 
-${subList}
+___________________________
+Counsel / Applicant
+                        </div>
+                    </details>
+                </div>
+            </div>
 
-4.  RELIEF SOUGHT
+            <!-- MANUAL SECTION -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Heads of Argument — Manual Preparation</div>
+                        <div class="adv-card__subtitle">Rule 40 & Practice Manual — File within 15 court days</div>
+                    </div>
+                </div>
 
-${relief}
+                <div class="adv-alert adv-alert--danger">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">⏰ 15‑DAY DEADLINE (opposed matters)</div>
+                        <p>If the review is opposed, your Heads of Argument must be filed within <strong>15 court days</strong> after the pleadings close (Rule 40). For unopposed matters, they are usually filed before the hearing.</p>
+                    </div>
+                </div>
 
-5.  CONCLUSION
+                <div class="rule-box">
+                    <h4>📖 The Law</h4>
+                    <p><strong>Rule 40(1):</strong> In every opposed matter, the applicant must deliver heads of argument not later than <strong>15 court days</strong> after the close of pleadings.</p>
+                    <p><strong>Rule 40(2):</strong> The respondent must deliver heads of argument not later than <strong>10 court days</strong> before the hearing.</p>
+                    <p><strong>Practice Manual:</strong> Heads must be clear, concise, and set out the main points intended to be argued. They must list the authorities relied upon.</p>
+                </div>
 
-[To be completed: Summary of why the award should be reviewed and set aside.]
+                <div class="adv-form-group">
+                    <label><strong>Step-by-Step: Filing Heads of Argument</strong></label>
+                    <ul class="step-list">
+                        <li><strong>Draft the document</strong> using the AI generator or manually with the official structure above.</li>
+                        <li><strong>Sign</strong> the heads (counsel or self‑represented applicant).</li>
+                        <li><strong>Serve</strong> a copy on all other parties.</li>
+                        <li><strong>File</strong> the original with the Registrar (via Court Online or email).</li>
+                        <li><strong>Keep proof</strong> of filing and service.</li>
+                    </ul>
+                </div>
 
----
+                <div class="adv-form-group" style="margin-top:1.5rem;">
+                    <label><strong>15‑Day Deadline Tracker (Opposed)</strong></label>
+                    <div class="inline-form">
+                        <div class="adv-form-group">
+                            <label for="deadlineStart">Date Pleadings Closed</label>
+                            <input type="date" class="adv-input" id="deadlineStart" onchange="calculateDeadline()">
+                        </div>
+                        <div class="adv-form-group">
+                            <label for="deadlineEnd">15‑Court‑Day Deadline</label>
+                            <input type="text" class="adv-input" id="deadlineEnd" readonly style="background:#edf2f7; font-weight:700; color:var(--danger);" placeholder="Select date above">
+                        </div>
+                    </div>
+                    <div class="adv-form-group" style="margin-top:1rem;">
+                        <label for="deadlineDays">Days Remaining</label>
+                        <input type="text" class="adv-input" id="deadlineDays" readonly style="background:#edf2f7; font-weight:700;" placeholder="Calculated automatically">
+                    </div>
+                </div>
 
-LIST OF AUTHORITIES
+                <div class="adv-alert adv-alert--info" style="margin-top:1.5rem;">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">📝 What Happens Next?</div>
+                        <ol style="margin-top:0.5rem; padding-left:1.5rem;">
+                            <li>After filing, the respondent will file their heads (if opposed).</li>
+                            <li>The matter will be enrolled for hearing once allocation is complete.</li>
+                            <li>You will prepare for oral argument on the day of the hearing.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
-[To be completed: List all legislation and case law relied upon.]
+            <!-- CHECKLIST -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Heads of Argument Checklist</div>
+                        <div class="adv-card__subtitle">Tick off each step before filing</div>
+                    </div>
+                </div>
+                <ul class="adv-checklist" data-checklist-id="heads-check">
+                    <li class="adv-checklist__item" data-item-id="h1">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Heads drafted with introduction, issues, facts, legal submissions, conclusion, and list of authorities</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="h2">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">All grounds of review clearly stated</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="h3">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Authorities (case law, statutes) correctly cited</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="h4">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Document signed and dated</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="h5">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Served on all parties and filed with Registrar</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="h6">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Proof of filing and service retained</div>
+                    </li>
+                </ul>
+            </div>
 
----
+        </main>
 
-⚠️ IMPORTANT: This is a structural template generated by Advome based on your inputs. You must:
-1. Research and attach relevant South African case law and legislation
-2. Cross-reference to the arbitration record
-3. Verify compliance with current Labour Court Rules
-4. Review and edit all submissions for accuracy
+        <aside class="adv-sidebar">
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">⏰ Deadline Calculator</div>
+                <div class="adv-deadline-calculator">
+                    <div class="adv-form-group">
+                        <label for="calcStart">Start Date</label>
+                        <input type="date" class="adv-input adv-deadline__input" id="calcStart" name="start_date">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="calcDays">Days to Add</label>
+                        <input type="number" class="adv-input adv-deadline__days" id="calcDays" value="15" min="1">
+                    </div>
+                    <div class="adv-deadline__display">
+                        <span class="adv-deadline__label">Select a date to calculate deadline</span>
+                    </div>
+                </div>
+            </div>
 
-Advome does not assess the merits of your case or guarantee the success of your argument.`;
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+                <div class="adv-chat" data-chat-id="heads">
+                    <div class="adv-chat__messages"></div>
+                    <div class="adv-chat__input-group">
+                        <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about heads...">
+                        <button class="adv-chat__send">Send</button>
+                    </div>
+                </div>
+            </div>
 
-  const outputDiv = document.getElementById('hdOutput');
-  outputDiv.textContent = output;
-  outputDiv.classList.remove('hidden');
-}
-</script>
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+                <div class="adv-savings">
+                    <span>Saved so far:</span>
+                    <span class="adv-savings__amount">R0</span>
+                </div>
+                <p class="text-muted" style="font-size:0.8rem; margin-top:0.5rem;">Based on typical attorney fees for each completed step.</p>
+            </div>
+        </aside>
+    </div>
 
+    <nav class="adv-nav-footer">
+        <div class="adv-nav-footer__prev">
+            <a href="setdown.html" class="adv-btn adv-btn--ghost">← Set Down</a>
+        </div>
+        <div class="adv-nav-footer__next">
+            <a href="hearing.html" class="adv-btn adv-btn--primary">Hearing →</a>
+        </div>
+    </nav>
+
+    <footer class="adv-footer">
+        <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+        <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+    </footer>
+
+    <script src="shared-scripts.js"></script>
+
+    <script>
+        // ===== COURT DAY CALCULATION =====
+        function isPublicHoliday(d) {
+            const year = d.getFullYear();
+            const holidays = [
+                new Date(year, 0, 1), new Date(year, 2, 21), new Date(year, 3, 27),
+                new Date(year, 4, 1), new Date(year, 5, 16), new Date(year, 7, 9),
+                new Date(year, 8, 24), new Date(year, 11, 16), new Date(year, 11, 25), new Date(year, 11, 26)
+            ];
+            return holidays.some(h => h.getDate() === d.getDate() && h.getMonth() === d.getMonth());
+        }
+
+        function isCourtDay(d) {
+            const day = d.getDay();
+            if (day === 0 || day === 6) return false;
+            const month = d.getMonth(), date = d.getDate();
+            if ((month === 11 && date >= 16) || (month === 0 && date <= 15)) return false;
+            return !isPublicHoliday(d);
+        }
+
+        function addCourtDays(startDate, days) {
+            const d = new Date(startDate);
+            d.setDate(d.getDate() + 1);
+            let count = 0;
+            while (count < days) {
+                if (isCourtDay(d)) count++;
+                if (count < days) d.setDate(d.getDate() + 1);
+            }
+            return d;
+        }
+
+        function calculateDeadline() {
+            const start = document.getElementById('deadlineStart').value;
+            if (!start) return;
+            const deadline = addCourtDays(new Date(start), 15);
+            const opts = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
+            document.getElementById('deadlineEnd').value = deadline.toLocaleDateString('en-ZA', opts);
+            const today = new Date();
+            const remaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            const el = document.getElementById('deadlineDays');
+            if (remaining < 0) {
+                el.value = Math.abs(remaining) + ' days OVERDUE — URGENT';
+                el.style.color = 'var(--danger)';
+            } else if (remaining <= 3) {
+                el.value = remaining + ' days left — URGENT';
+                el.style.color = 'var(--danger)';
+            } else if (remaining <= 7) {
+                el.value = remaining + ' days left — Act soon';
+                el.style.color = 'var(--warning)';
+            } else {
+                el.value = remaining + ' days remaining';
+                el.style.color = 'var(--success)';
+            }
+        }
+
+        // ===== AI DOCUMENT GENERATION =====
+        function getTodayFormatted() {
+            const d = new Date();
+            const day = d.getDate();
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const month = months[d.getMonth()];
+            const year = d.getFullYear();
+            return { day, month, year };
+        }
+
+        function generateAIDocument() {
+            const seat = document.getElementById('aiSeat').value || '[SEAT]';
+            const caseNo = document.getElementById('aiCaseNo').value || '[CASE NUMBER]';
+            const applicant = document.getElementById('aiApplicant').value || '[APPLICANT NAME]';
+            const firstResp = document.getElementById('aiFirstResp').value || '[CCMA]';
+            const secondResp = document.getElementById('aiSecondResp').value || '[EMPLOYER NAME]';
+            const thirdResp = document.getElementById('aiThirdResp').value || '[COMMISSIONER NAME]';
+            const opposed = document.getElementById('aiOpposed').value;
+            const place = document.getElementById('aiPlace').value || '[PLACE]';
+            const grounds = document.getElementById('aiGrounds').value.trim() || 
+                '1. The Commissioner committed a gross irregularity by ignoring material evidence.\n2. The award is unreasonable because the decision is not one that a reasonable decision‑maker could reach.\n3. The Commissioner exceeded his powers.';
+            const { day, month, year } = getTodayFormatted();
+
+            const documentText = `IN THE LABOUR COURT OF SOUTH AFRICA
+(HELD AT ${seat.toUpperCase()})
+
+Case No: ${caseNo}
+
+In the matter between:
+
+${applicant} — Applicant
+and
+First Respondent: ${firstResp}
+Second Respondent: ${secondResp}
+Third Respondent: ${thirdResp}
+
+HEADS OF ARGUMENT
+
+A. INTRODUCTION
+1. This is an application to review and set aside the arbitration award issued by the Third Respondent under CCMA case number [CCMA CASE NUMBER] dated [AWARD DATE]. The Applicant submits that the award falls to be reviewed and set aside on the grounds set out below.
+
+B. ISSUES TO BE DECIDED
+2. The main issues for determination are:
+${grounds.split('\n').map(line => '   ' + line.trim()).join('\n')}
+
+C. SUMMARY OF RELEVANT FACTS
+3. [Insert a brief chronological summary of the material facts leading to the dismissal and the arbitration proceedings. This should be no longer than two pages.]
+
+D. LEGAL SUBMISSIONS
+4. [Under each ground of review, set out the legal argument with reference to relevant case law and statutory provisions. For example:]
+4.1 Ground 1: Gross irregularity — the Commissioner failed to apply his mind to material evidence (see Sidumo v Rustenburg Platinum Mines [2007] 12 BLLR 1097 (CC)).
+4.2 Ground 2: Unreasonableness — the award is one that a reasonable decision‑maker could not reach (see Carephone (Pty) Ltd v Marcus NO [1998] 11 BLLR 1093 (LAC)).
+[Continue for each ground.]
+
+E. CONCLUSION
+5. In the premises, the Applicant prays that:
+5.1 The arbitration award be reviewed and set aside;
+5.2 The matter be remitted to the CCMA for a fresh hearing before a different commissioner;
+5.3 Alternatively, the award be substituted with [appropriate order];
+5.4 Costs of this application be awarded in the Applicant's favour;
+5.5 Further and/or alternative relief.
+
+F. LIST OF AUTHORITIES
+- Labour Relations Act 66 of 1995, s 145.
+- Sidumo v Rustenburg Platinum Mines [2007] 12 BLLR 1097 (CC).
+- Carephone (Pty) Ltd v Marcus NO [1998] 11 BLLR 1093 (LAC).
+- [Add any other cases or statutes you intend to rely on.]
+
+SIGNED at ${place} on this ${day} day of ${month} ${year}.
+
+___________________________
+${applicant}
+Applicant`;
+
+            document.getElementById('aiDocumentPreview').textContent = documentText;
+            document.getElementById('aiOutput').style.display = 'block';
+            document.getElementById('aiDocumentPreview').scrollIntoView({ behavior: 'smooth' });
+
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Heads of Argument generated! Supplement with your specific case law.', 'success');
+            }
+        }
+
+        function downloadAIDocument() {
+            const text = document.getElementById('aiDocumentPreview').textContent;
+            const caseNo = document.getElementById('aiCaseNo').value.replace(/\//g, '_') || 'CASE';
+            const blob = new Blob([text], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Heads_of_Argument_${caseNo}.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show('Document downloaded!', 'success');
+            }
+        }
+
+        function copyAIDocument() {
+            const text = document.getElementById('aiDocumentPreview').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                if (typeof Advome !== 'undefined' && Advome.toast) {
+                    Advome.toast.show('Document copied to clipboard!', 'success');
+                }
+            }).catch(() => {
+                if (typeof Advome !== 'undefined' && Advome.toast) {
+                    Advome.toast.show('Copy failed — use Ctrl+C', 'warning');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('aiGenerateBtn').addEventListener('click', generateAIDocument);
+            document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
+        });
+    </script>
 </body>
 </html>
