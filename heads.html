@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heads of Argument — Advome</title>
     <link rel="stylesheet" href="shared-styles.css">
+    <!-- mammoth.js for .docx reading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <style>
         :root {
             --primary: #1a365d;
@@ -121,20 +123,70 @@
         @media(max-width:600px) {
             .ai-draft-form { grid-template-columns: 1fr; }
         }
-        .supporting-docs textarea {
+
+        /* Supporting Documents Upload Styles */
+        .supporting-docs {
+            display: grid;
+            gap: 1rem;
+        }
+        .upload-card {
+            background: #f8fbff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .upload-card label {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: var(--primary);
+        }
+        .file-input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .file-input-wrapper input[type="file"] {
+            font-size: 0.85rem;
+        }
+        .file-input-wrapper .file-name {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .file-preview {
+            margin-top: 0.5rem;
+            max-height: 120px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .file-preview.show {
+            display: block;
+        }
+        .toggle-paste {
+            font-size: 0.8rem;
+            color: var(--primary-light);
+            cursor: pointer;
+            margin-top: 0.25rem;
+            display: inline-block;
+        }
+        .paste-area {
             width: 100%;
-            min-height: 80px;
-            padding: 0.75rem;
+            min-height: 60px;
+            padding: 0.5rem;
             border: 1px solid var(--border);
             border-radius: 6px;
             font-family: monospace;
             font-size: 0.85rem;
             resize: vertical;
-            margin-bottom: 0.5rem;
-        }
-        .supporting-docs textarea:focus {
-            outline: none;
-            border-color: var(--primary-light);
+            margin-top: 0.25rem;
         }
     </style>
 </head>
@@ -171,14 +223,14 @@
                 <div class="adv-card__header">
                     <div>
                         <div class="adv-card__title">⚡ AI Draft: Heads of Argument</div>
-                        <div class="adv-card__subtitle">Rule 40 & Practice Manual — Generate a structured, court‑ready Heads of Argument</div>
+                        <div class="adv-card__subtitle">Rule 40 & Practice Manual — Upload your pleadings and let the AI build solid Heads</div>
                     </div>
                 </div>
 
                 <div class="adv-alert adv-alert--info">
                     <div class="adv-alert__content">
-                        <div class="adv-alert__title">🤖 How the AI works</div>
-                        <p>Enter your case details, grounds of review, and paste your filed pleadings below. The platform will generate a complete <strong>Heads of Argument</strong> that directly references your documents. You can then download, copy, and supplement with specific case law.</p>
+                        <div class="adv-alert__title">🤖 How it works</div>
+                        <p>Fill in the case details, list your grounds of review, and <strong>upload the text files of your filed pleadings</strong> (.txt or .docx). The AI will read them and generate Heads of Argument that directly reference your documents. You can then download, copy, and add your specific case law.</p>
                     </div>
                 </div>
 
@@ -231,25 +283,14 @@
                     <textarea class="paste-area" id="aiGrounds" rows="4" placeholder="List the key grounds of review you are relying on, e.g.&#10;1. The Commissioner committed a gross irregularity by ignoring material evidence.&#10;2. The award is unreasonable because...&#10;3. The Commissioner exceeded his powers by..."></textarea>
                 </div>
 
-                <!-- NEW: Supporting Documents Section -->
+                <!-- SUPPORTING DOCUMENTS UPLOAD SECTION -->
                 <div class="adv-card" style="background: #f8fbff; border: 1px solid var(--border); padding: 1rem; margin-bottom: 1.5rem;">
-                    <h3 style="margin-top:0; color: var(--primary);">📎 Supporting Documents (paste text from filed pleadings)</h3>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Paste the full text (or key excerpts) of your already‑filed documents. The AI will incorporate them into the Heads of Argument so your submissions are grounded in the record.</p>
-                    <div class="supporting-docs">
-                        <label><strong>Notice of Motion</strong></label>
-                        <textarea id="docNoticeOfMotion" placeholder="Paste the text of your Notice of Motion here..."></textarea>
-
-                        <label><strong>Founding Affidavit</strong></label>
-                        <textarea id="docFoundingAffidavit" placeholder="Paste the text of your Founding Affidavit here..."></textarea>
-
-                        <label><strong>Answering Affidavit (if any)</strong></label>
-                        <textarea id="docAnsweringAffidavit" placeholder="Paste the text of the Answering Affidavit here..."></textarea>
-
-                        <label><strong>Replying Affidavit (if any)</strong></label>
-                        <textarea id="docReplyingAffidavit" placeholder="Paste the text of the Replying Affidavit here..."></textarea>
-
-                        <label><strong>Other relevant documents</strong></label>
-                        <textarea id="docOther" placeholder="Paste any other important document text (e.g., CCMA award, contract)..."></textarea>
+                    <h3 style="margin-top:0; color: var(--primary);">📎 Upload Supporting Documents</h3>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+                        Upload the full text of your already‑filed pleadings (<strong>.txt</strong> or <strong>.docx</strong> files). The AI will read their content and use it to draft your Heads of Argument.
+                    </p>
+                    <div class="supporting-docs" id="supportingDocsContainer">
+                        <!-- Dynamic upload cards will be generated by JS -->
                     </div>
                 </div>
 
@@ -510,6 +551,98 @@ SIGNED at [PLACE] on [DATE].
             }
         }
 
+        // ===== FILE UPLOAD MANAGEMENT =====
+        // Structure: { docType: { file: File|null, text: string } }
+        const uploadedDocs = {};
+
+        const docTypes = [
+            { id: 'noticeOfMotion', label: 'Notice of Motion' },
+            { id: 'foundingAffidavit', label: 'Founding Affidavit' },
+            { id: 'answeringAffidavit', label: 'Answering Affidavit' },
+            { id: 'replyingAffidavit', label: 'Replying Affidavit' },
+            { id: 'otherDoc', label: 'Other Relevant Document' }
+        ];
+
+        function initUploadUI() {
+            const container = document.getElementById('supportingDocsContainer');
+            container.innerHTML = '';
+            docTypes.forEach(doc => {
+                uploadedDocs[doc.id] = { file: null, text: '' };
+                const card = document.createElement('div');
+                card.className = 'upload-card';
+                card.innerHTML = `
+                    <label>${doc.label}</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" accept=".txt,.docx" id="file-${doc.id}" data-doc-id="${doc.id}">
+                        <span class="file-name" id="file-name-${doc.id}">No file chosen</span>
+                        <button type="button" class="adv-btn adv-btn--secondary" style="padding:0.3rem 0.6rem; font-size:0.8rem;" id="clear-${doc.id}">Clear</button>
+                    </div>
+                    <div class="file-preview" id="preview-${doc.id}"></div>
+                `;
+                container.appendChild(card);
+
+                const fileInput = card.querySelector(`input[type="file"]`);
+                fileInput.addEventListener('change', handleFileSelect);
+                card.querySelector(`#clear-${doc.id}`).addEventListener('click', () => clearFile(doc.id));
+            });
+        }
+
+        function handleFileSelect(e) {
+            const docId = e.target.dataset.docId;
+            const file = e.target.files[0];
+            if (!file) return;
+            const fileNameSpan = document.getElementById(`file-name-${docId}`);
+            const previewDiv = document.getElementById(`preview-${docId}`);
+            fileNameSpan.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                if (file.name.endsWith('.docx') && typeof mammoth !== 'undefined') {
+                    mammoth.extractRawText({ arrayBuffer: ev.target.result })
+                        .then(result => {
+                            const text = result.value;
+                            uploadedDocs[docId] = { file: file, text: text };
+                            previewDiv.textContent = text.substring(0, 500) + (text.length > 500 ? '...' : '');
+                            previewDiv.classList.add('show');
+                            showToast(`"${doc.label}" text extracted successfully.`);
+                        })
+                        .catch(err => {
+                            previewDiv.textContent = 'Error reading .docx file.';
+                            previewDiv.classList.add('show');
+                            uploadedDocs[docId] = { file: file, text: '' };
+                        });
+                } else {
+                    const text = ev.target.result;
+                    uploadedDocs[docId] = { file: file, text: text };
+                    previewDiv.textContent = text.substring(0, 500) + (text.length > 500 ? '...' : '');
+                    previewDiv.classList.add('show');
+                    showToast(`"${doc.label}" text loaded.`);
+                }
+            };
+
+            if (file.name.endsWith('.docx')) {
+                reader.readAsArrayBuffer(file);
+            } else {
+                reader.readAsText(file);
+            }
+        }
+
+        function clearFile(docId) {
+            uploadedDocs[docId] = { file: null, text: '' };
+            const fileInput = document.getElementById(`file-${docId}`);
+            fileInput.value = '';
+            document.getElementById(`file-name-${docId}`).textContent = 'No file chosen';
+            const previewDiv = document.getElementById(`preview-${docId}`);
+            previewDiv.textContent = '';
+            previewDiv.classList.remove('show');
+        }
+
+        function showToast(msg) {
+            if (typeof Advome !== 'undefined' && Advome.toast) {
+                Advome.toast.show(msg, 'info');
+            }
+        }
+
         // ===== AI DOCUMENT GENERATION =====
         function getTodayFormatted() {
             const d = new Date();
@@ -533,33 +666,22 @@ SIGNED at [PLACE] on [DATE].
                 '1. The Commissioner committed a gross irregularity by ignoring material evidence.\n2. The award is unreasonable because the decision is not one that a reasonable decision‑maker could reach.\n3. The Commissioner exceeded his powers.';
             const { day, month, year } = getTodayFormatted();
 
-            // Collect supporting documents
-            const noticeOfMotion = document.getElementById('docNoticeOfMotion').value.trim();
-            const foundingAffidavit = document.getElementById('docFoundingAffidavit').value.trim();
-            const answeringAffidavit = document.getElementById('docAnsweringAffidavit').value.trim();
-            const replyingAffidavit = document.getElementById('docReplyingAffidavit').value.trim();
-            const otherDoc = document.getElementById('docOther').value.trim();
-
+            // Build supporting text from uploaded files
             let supportingSection = '';
-            if (noticeOfMotion || foundingAffidavit || answeringAffidavit || replyingAffidavit || otherDoc) {
-                supportingSection = '\n\nD. LEGAL SUBMISSIONS (based on filed pleadings)\n';
-                supportingSection += 'The following submissions are drawn directly from the pleadings already filed:\n\n';
-                if (noticeOfMotion) {
-                    supportingSection += 'From the Notice of Motion:\n' + noticeOfMotion + '\n\n';
+            let hasDocs = false;
+            docTypes.forEach(doc => {
+                if (uploadedDocs[doc.id].text) {
+                    hasDocs = true;
+                    supportingSection += `\n\nFrom the ${doc.label}:\n${uploadedDocs[doc.id].text}\n`;
                 }
-                if (foundingAffidavit) {
-                    supportingSection += 'From the Founding Affidavit:\n' + foundingAffidavit + '\n\n';
-                }
-                if (answeringAffidavit) {
-                    supportingSection += 'From the Answering Affidavit:\n' + answeringAffidavit + '\n\n';
-                }
-                if (replyingAffidavit) {
-                    supportingSection += 'From the Replying Affidavit:\n' + replyingAffidavit + '\n\n';
-                }
-                if (otherDoc) {
-                    supportingSection += 'Other relevant documents:\n' + otherDoc + '\n\n';
-                }
-                supportingSection += '[Develop your full legal arguments under each ground of review, referencing the above pleadings and the authorities listed.]\n';
+            });
+
+            if (hasDocs) {
+                supportingSection = '\n\nD. LEGAL SUBMISSIONS (based on filed pleadings)\n' +
+                    'The following submissions are drawn directly from the pleadings already filed:\n' + supportingSection +
+                    '\n[Develop your full legal arguments under each ground of review, referencing the above pleadings and the authorities listed.]\n';
+            } else {
+                supportingSection = '\n\nD. LEGAL SUBMISSIONS\n[Develop your legal arguments under each ground of review, referencing the pleadings and the authorities listed.]\n';
             }
 
             const documentText = `IN THE LABOUR COURT OF SOUTH AFRICA
@@ -585,7 +707,7 @@ B. ISSUES TO BE DECIDED
 ${grounds.split('\n').map(line => '   ' + line.trim()).join('\n')}
 
 C. SUMMARY OF RELEVANT FACTS
-3. [Insert a brief chronological summary of the material facts leading to the dismissal and the arbitration proceedings. This should be no longer than two pages.]${supportingSection}
+3. [Insert a brief chronological summary of the material facts leading to the dismissal and the arbitration proceedings.]${supportingSection}
 
 E. CONCLUSION
 5. In the premises, the Applicant prays that:
@@ -647,6 +769,7 @@ Applicant`;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            initUploadUI();
             document.getElementById('aiGenerateBtn').addEventListener('click', generateAIDocument);
             document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
         });
