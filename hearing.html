@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hearing Preparation — Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #2d3748;
+            --text-muted: #718096;
+        }
+        .rule-box {
+            background: #edf2f7;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .rule-box h4 { margin: 0 0 .4rem; color: var(--primary); font-size: 1rem; }
+        .rule-box p, .rule-box ul { margin: .25rem 0; font-size: 0.9rem; }
+        .template-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge--danger { background: #fed7d7; color: #742a2a; }
+        .badge--warning { background: #feebc8; color: #7c2d12; }
+        .badge--success { background: #c6f6d5; color: #22543d; }
+        .badge--info { background: #bee3f8; color: #2a4365; }
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 0;
+            width: 1.8rem; height: 1.8rem;
+            background: var(--primary); color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+        .inline-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px) { .inline-form { grid-template-columns: 1fr; } }
+        .generated-doc-actions {
+            display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap;
+        }
+        .record-preview {
+            background: #fff; border: 1px solid var(--border); border-radius: 8px;
+            padding: 1.5rem; font-family: Georgia, serif; line-height: 1.6;
+            max-height: 500px; overflow-y: auto; white-space: pre-wrap;
+        }
+        .ai-draft-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media(max-width:600px) { .ai-draft-form { grid-template-columns: 1fr; } }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        .status-card {
+            padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+        }
+        .status-card span { display: block; color: var(--text-muted); font-size: 0.84rem; margin-bottom: 6px; }
+        .status-card strong { font-size: 1rem; }
+        .file-upload-card {
+            background: #f8fbff; border: 1px solid var(--border); border-radius: 8px;
+            padding: 1rem; margin-bottom: 1rem;
+        }
+        .file-upload-card label { font-weight: 700; display: block; margin-bottom: 0.5rem; color: var(--primary); }
+        .file-input-wrapper { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .file-input-wrapper input[type="file"] { font-size: 0.85rem; }
+        .file-name { font-size: 0.85rem; color: var(--text-muted); }
+        .file-preview {
+            margin-top: 0.5rem; max-height: 100px; overflow-y: auto;
+            background: #fff; border: 1px solid var(--border); border-radius: 4px;
+            padding: 0.5rem; font-family: monospace; font-size: 0.8rem;
+            white-space: pre-wrap; display: none;
+        }
+        .file-preview.show { display: block; }
+        .hearing-tips {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .hearing-tips h4 { color: var(--primary); margin-top: 0; }
+        .hearing-tips ul { padding-left: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <header class="adv-header">
+        <div class="adv-header__logo">Advome<span>.</span></div>
+        <nav class="adv-header__nav">
+            <a href="ccma.html">CCMA</a>
+            <a href="motion.html">Labour Court</a>
+            <a href="#">Help</a>
+        </nav>
+        <div class="adv-header__user">
+            <div class="adv-header__avatar">SRL</div>
+        </div>
+        <button class="adv-header__menu-toggle">☰</button>
+    </header>
+
+    <div class="adv-progress" data-workflow="ccma" data-current-step="hearing"></div>
+
+    <section class="adv-hero">
+        <div class="adv-hero__content">
+            <h1>Prepare for Your Hearing</h1>
+            <p>Step 20 of 21 — Get ready for court, organize your documents, and learn what to expect</p>
+        </div>
+        <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+    </section>
+
+    <div class="adv-container">
+        <main>
+
+            <!-- CARD 1: GATHER DOCUMENTS -->
+            <div class="adv-card">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">1. Gather Your Documents</div>
+                        <div class="adv-card__subtitle">You must bring these to court</div>
+                    </div>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>📁 Required Documents</h4>
+                    <ul>
+                        <li><strong>Paginated file</strong> (Sections A, B, C) – your complete indexed bundle.</li>
+                        <li><strong>Heads of Argument</strong> – filed and served.</li>
+                        <li><strong>List of Authorities</strong> – copies of the cases/statutes you will refer to.</li>
+                        <li><strong>Practice Manual / Rules</strong> – a copy of the Labour Court Rules (for reference).</li>
+                        <li><strong>Notepad and pen</strong> – to take notes during the hearing.</li>
+                        <li><strong>Identification</strong> – your ID or driver's licence.</li>
+                        <li><strong>Proof of service & filing</strong> – for all documents.</li>
+                        <li><strong>Any correspondence</strong> with the Registrar or other parties.</li>
+                    </ul>
+                </div>
+
+                <p style="font-size:0.85rem; color:var(--text-muted);">Also bring a copy for yourself, one for the judge, and one for each respondent (unless the court provides copies).</p>
+            </div>
+
+            <!-- CARD 2: AI SPEAKING NOTES -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">2. Prepare Your Oral Argument (AI Speaking Notes)</div>
+                        <div class="adv-card__subtitle">Upload your Heads of Argument to generate a simple outline for court</div>
+                    </div>
+                </div>
+
+                <div class="adv-alert adv-alert--info">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">🗣️ How to use this</div>
+                        <p>Upload your filed <strong>Heads of Argument</strong> (.txt or .docx) or paste the text below. The AI will create a simplified speaking outline you can use during the hearing.</p>
+                    </div>
+                </div>
+
+                <div class="file-upload-card">
+                    <label>Upload Heads of Argument</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="headsFile" accept=".txt,.docx">
+                        <span class="file-name" id="headsFileName">No file chosen</span>
+                        <button type="button" class="adv-btn adv-btn--secondary" id="clearHeadsFile" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Clear</button>
+                    </div>
+                    <div class="file-preview" id="headsFilePreview"></div>
+                </div>
+
+                <div class="adv-form-group">
+                    <label for="headsPaste">Or paste text here</label>
+                    <textarea class="paste-area" id="headsPaste" rows="6" placeholder="Paste your Heads of Argument here..."></textarea>
+                </div>
+
+                <button class="adv-btn adv-btn--primary" id="generateOutline">⚡ Generate Speaking Outline</button>
+
+                <div id="outlineOutput" style="display:none; margin-top:1rem;">
+                    <div class="adv-form-group">
+                        <label><strong>Your Speaking Notes</strong> <span class="badge badge--success">Ready</span></label>
+                        <div class="record-preview" id="outlinePreview"></div>
+                    </div>
+                    <div class="generated-doc-actions">
+                        <button class="adv-btn adv-btn--primary" onclick="downloadOutline()">📥 Download .doc</button>
+                        <button class="adv-btn adv-btn--secondary" onclick="copyOutline()">📋 Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 3: WHAT TO EXPECT -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">3. What to Expect in Court</div>
+                        <div class="adv-card__subtitle">A simplified step‑by‑step guide for self‑represented litigants</div>
+                    </div>
+                </div>
+
+                <div class="rule-box">
+                    <h4>📖 The Process (Practice Manual & Rule 40)</h4>
+                    <p>Review hearings in the Labour Court are mostly argument‑based. There are no witnesses. You must argue why the CCMA award should be set aside based on your papers.</p>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>👔 Before the hearing</h4>
+                    <ul>
+                        <li><strong>Arrive early</strong> – at least 30 minutes before the time indicated on the roll.</li>
+                        <li><strong>Dress respectfully</strong> – formal attire is not mandatory but recommended (jacket, tie, or smart casual).</li>
+                        <li><strong>Check the court roll</strong> – ensure your matter is listed and in which courtroom.</li>
+                        <li><strong>Turn off your phone</strong> or set it to silent.</li>
+                    </ul>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>🏛️ Inside the courtroom</h4>
+                    <ul>
+                        <li><strong>Stand when the judge enters</strong> and remain standing until the judge sits.</li>
+                        <li><strong>Address the judge as "My Lord" / "My Lady"</strong> (or "Your Lordship" / "Your Ladyship").</li>
+                        <li><strong>Wait your turn</strong> – the judge will call the matter.</li>
+                        <li><strong>Introduce yourself</strong> clearly: "My Lord/Lady, I am [name], the applicant, appearing in person."</li>
+                    </ul>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>🗣️ The argument (step by step)</h4>
+                    <ol style="margin:0.5rem 0; padding-left:1.5rem;">
+                        <li><strong>You (the applicant) argue first.</strong> You present your case by referring to your Heads of Argument and the paginated file.</li>
+                        <li><strong>The respondent then argues</strong> (if opposed).</li>
+                        <li><strong>You may get a chance to reply</strong> (short response to new points raised).</li>
+                        <li><strong>The judge may ask questions</strong> – answer directly and respectfully.</li>
+                        <li><strong>Judgment may be given immediately</strong> or reserved (delivered later in writing).</li>
+                    </ol>
+                </div>
+
+                <div class="hearing-tips">
+                    <h4>💡 Practical tips</h4>
+                    <ul>
+                        <li><strong>Refer to page numbers</strong> in the paginated bundle: "At page 45, line 10…"</li>
+                        <li><strong>Stick to the grounds of review</strong> – do not re‑argue the facts of the dismissal.</li>
+                        <li><strong>Be concise</strong> – judges appreciate clear, well‑structured arguments.</li>
+                        <li><strong>If you don't know an answer</strong>, say "I will address that in my reply" or "I rely on my papers."</li>
+                        <li><strong>Never interrupt the judge.</strong></li>
+                        <li><strong>Keep calm</strong> – it's not a trial, just legal argument.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CARD 4: FINAL CHECKLIST -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">4. Final Checklist</div>
+                        <div class="adv-card__subtitle">Tick these off before you leave for court</div>
+                    </div>
+                </div>
+                <ul class="adv-checklist" data-checklist-id="hearing-prep">
+                    <li class="adv-checklist__item" data-item-id="h1"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">All documents packed (paginated file, heads, authorities, ID, pen)</div></li>
+                    <li class="adv-checklist__item" data-item-id="h2"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Speaking notes ready (printed or on tablet)</div></li>
+                    <li class="adv-checklist__item" data-item-id="h3"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Know your courtroom and arrival time</div></li>
+                    <li class="adv-checklist__item" data-item-id="h4"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Appropriate attire ready</div></li>
+                    <li class="adv-checklist__item" data-item-id="h5"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Phone charged (but will be switched off in court)</div></li>
+                    <li class="adv-checklist__item" data-item-id="h6"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Arranged transport / parking</div></li>
+                </ul>
+            </div>
+
+        </main>
+
+        <aside class="adv-sidebar">
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">📅 Hearing Details</div>
+                <div class="adv-form-group">
+                    <label for="hearingDate">Hearing Date</label>
+                    <input type="date" class="adv-input" id="hearingDate">
+                </div>
+                <div class="adv-form-group">
+                    <label for="courtroom">Courtroom</label>
+                    <input type="text" class="adv-input" id="courtroom" placeholder="e.g. Court 4B">
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+                <div class="adv-chat" data-chat-id="hearing">
+                    <div class="adv-chat__messages"></div>
+                    <div class="adv-chat__input-group">
+                        <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about the hearing...">
+                        <button class="adv-chat__send">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+                <div class="adv-savings">
+                    <span>Saved so far:</span>
+                    <span class="adv-savings__amount">R0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <nav class="adv-nav-footer">
+        <div class="adv-nav-footer__prev">
+            <a href="enrolment.html" class="adv-btn adv-btn--ghost">← Enrolment</a>
+        </div>
+        <div class="adv-nav-footer__next">
+            <a href="judgment.html" class="adv-btn adv-btn--primary">Judgment →</a>
+        </div>
+    </nav>
+
+    <footer class="adv-footer">
+        <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+        <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+    </footer>
+
+    <script src="shared-scripts.js"></script>
+
+    <script>
+        // File handling for heads upload
+        let headsText = '';
+
+        const headsFileInput = document.getElementById('headsFile');
+        const headsFileNameSpan = document.getElementById('headsFileName');
+        const headsFilePreview = document.getElementById('headsFilePreview');
+        const clearHeadsFileBtn = document.getElementById('clearHeadsFile');
+
+        headsFileInput.addEventListener('change', function() {
+            if (headsFileInput.files.length === 0) return;
+            const file = headsFileInput.files[0];
+            headsFileNameSpan.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                if (file.name.endsWith('.docx') && typeof mammoth !== 'undefined') {
+                    mammoth.extractRawText({ arrayBuffer: ev.target.result })
+                        .then(result => {
+                            headsText = result.value;
+                            headsFilePreview.textContent = headsText.substring(0, 300) + (headsText.length > 300 ? '...' : '');
+                            headsFilePreview.classList.add('show');
+                            toast('Heads text extracted from .docx');
+                        })
+                        .catch(() => {
+                            headsFilePreview.textContent = 'Error reading .docx file.';
+                            headsFilePreview.classList.add('show');
+                        });
+                } else {
+                    headsText = ev.target.result;
+                    headsFilePreview.textContent = headsText.substring(0, 300) + (headsText.length > 300 ? '...' : '');
+                    headsFilePreview.classList.add('show');
+                    toast('Heads text loaded.');
+                }
+            };
+
+            if (file.name.endsWith('.docx')) {
+                reader.readAsArrayBuffer(file);
+            } else {
+                reader.readAsText(file);
+            }
+        });
+
+        clearHeadsFileBtn.addEventListener('click', function() {
+            headsFileInput.value = '';
+            headsFileNameSpan.textContent = 'No file chosen';
+            headsFilePreview.textContent = '';
+            headsFilePreview.classList.remove('show');
+            headsText = '';
+        });
+
+        // AI Outline generation
+        function generateOutline() {
+            // Use pasted text if no file uploaded
+            const pasteText = document.getElementById('headsPaste').value.trim();
+            const sourceText = headsText || pasteText;
+
+            if (!sourceText) {
+                toast('Please upload or paste your Heads of Argument first.', 'warning');
+                return;
+            }
+
+            // Simple extraction of key sections (if they exist)
+            let intro = sourceText.match(/INTRODUCTION\s*\n([\s\S]*?)(?=ISSUES|C\.|D\.|E\.|F\.|$)/i);
+            let issues = sourceText.match(/ISSUES\s*\n([\s\S]*?)(?=SUMMARY|LEGAL|C\.|D\.|E\.|F\.|$)/i);
+            let facts = sourceText.match(/SUMMARY OF .*?FACTS\s*\n([\s\S]*?)(?=LEGAL|D\.|E\.|F\.|$)/i);
+            let submissions = sourceText.match(/LEGAL SUBMISSIONS\s*\n([\s\S]*?)(?=CONCLUSION|E\.|F\.|$)/i);
+            let conclusion = sourceText.match(/CONCLUSION\s*\n([\s\S]*?)(?=LIST|F\.|$)/i);
+
+            let outline = 'HEARING SPEAKING NOTES\n';
+            outline += '══════════════════════════════\n\n';
+
+            outline += '1. INTRODUCTION (1 minute)\n';
+            outline += '- Good morning/afternoon My Lord/Lady, I am [Your Name], the applicant in person.\n';
+            outline += '- This is an application to review and set aside the arbitration award of the [CCMA] dated [Date].\n';
+            if (intro) outline += '- Briefly: ' + intro[1].trim().split('\n')[0] + '\n';
+            outline += '\n';
+
+            outline += '2. ISSUES (1 minute)\n';
+            outline += '- The main issues are:\n';
+            if (issues) {
+                const issueLines = issues[1].trim().split('\n').filter(l => l.trim());
+                issueLines.forEach(l => outline += '  • ' + l.trim() + '\n');
+            } else {
+                outline += '  • (Refer to your Heads of Argument)\n';
+            }
+            outline += '\n';
+
+            outline += '3. RELEVANT FACTS (2 minutes)\n';
+            outline += '- Briefly summarise: what happened at the CCMA, what was ignored / misapplied.\n';
+            if (facts) {
+                const factLines = facts[1].trim().split('\n').filter(l => l.trim()).slice(0, 3);
+                factLines.forEach(l => outline += '  • ' + l.trim() + '\n');
+            }
+            outline += '- (Refer to the record at pages [X]-[Y])\n\n';
+
+            outline += '4. LEGAL ARGUMENT (5-7 minutes)\n';
+            outline += '- Take each ground of review and argue it briefly:\n';
+            if (submissions) {
+                const subLines = submissions[1].trim().split('\n').filter(l => l.trim());
+                subLines.forEach(l => outline += '  • ' + l.trim() + '\n');
+            } else {
+                outline += '  • Ground 1: ...\n  • Ground 2: ...\n  • Ground 3: ...\n';
+            }
+            outline += '- Always tie back to the record (page numbers) and the test for review (Sidumo, etc.).\n\n';
+
+            outline += '5. RELIEF SOUGHT (1 minute)\n';
+            outline += '- The award should be reviewed and set aside.\n';
+            if (conclusion) {
+                const concLines = conclusion[1].trim().split('\n').filter(l => l.trim()).slice(0, 3);
+                concLines.forEach(l => outline += '  • ' + l.trim() + '\n');
+            }
+            outline += '- Alternatively, remit the matter to the CCMA for a fresh hearing.\n';
+            outline += '- Costs (if applicable).\n\n';
+
+            outline += '6. AUTHORITIES TO HAVE AT HAND\n';
+            outline += '- Sidumo v Rustenburg Platinum Mines [2007] 12 BLLR 1097 (CC)\n';
+            outline += '- Carephone (Pty) Ltd v Marcus NO [1998] 11 BLLR 1093 (LAC)\n';
+            outline += '- Labour Relations Act, s 145\n';
+            outline += '- (Add any others you cited)\n\n';
+
+            outline += '══════════════════════════════\n';
+            outline += 'General reminders:\n';
+            outline += '- Speak slowly and clearly.\n';
+            outline += '- If the judge asks a question, pause and answer directly.\n';
+            outline += '- Do not interrupt the other side.\n';
+            outline += '- You may use the outline as a guide, but do not read it verbatim.\n';
+
+            document.getElementById('outlinePreview').textContent = outline;
+            document.getElementById('outlineOutput').style.display = 'block';
+            document.getElementById('outlinePreview').scrollIntoView({ behavior: 'smooth' });
+            toast('Speaking outline generated!');
+        }
+
+        function downloadOutline() {
+            const text = document.getElementById('outlinePreview').textContent;
+            const blob = new Blob([text], { type: 'application/msword' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Hearing_Speaking_Notes.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function copyOutline() {
+            const text = document.getElementById('outlinePreview').textContent;
+            navigator.clipboard.writeText(text).then(() => toast('Notes copied!'));
+        }
+
+        function toast(msg, type='success') {
+            if (window.Advome && Advome.toast) Advome.toast.show(msg, type);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('generateOutline').addEventListener('click', generateOutline);
+            document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
+        });
+    </script>
+</body>
+</html>
