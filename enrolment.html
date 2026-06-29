@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrolment & Allocation — Advome</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #2d3748;
+            --text-muted: #718096;
+        }
+
+        .rule-box {
+            background: #edf2f7;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .rule-box h4 { margin: 0 0 .4rem; color: var(--primary); font-size: 1rem; }
+        .rule-box p, .rule-box ul { margin: .25rem 0; font-size: 0.9rem; }
+        .template-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge--danger { background: #fed7d7; color: #742a2a; }
+        .badge--warning { background: #feebc8; color: #7c2d12; }
+        .badge--success { background: #c6f6d5; color: #22543d; }
+        .badge--info { background: #bee3f8; color: #2a4365; }
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 0;
+            width: 1.8rem; height: 1.8rem;
+            background: var(--primary); color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+        .inline-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px) { .inline-form { grid-template-columns: 1fr; } }
+        .generated-doc-actions {
+            display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap;
+        }
+        .record-preview {
+            background: #fff; border: 1px solid var(--border); border-radius: 8px;
+            padding: 1.5rem; font-family: Georgia, serif; line-height: 1.6;
+            max-height: 500px; overflow-y: auto; white-space: pre-wrap;
+        }
+        .ai-draft-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media(max-width:600px) { .ai-draft-form { grid-template-columns: 1fr; } }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        .status-card {
+            padding: 14px; border-radius: 18px; background: white; border: 1px solid #e6eef8;
+        }
+        .status-card span { display: block; color: var(--text-muted); font-size: 0.84rem; margin-bottom: 6px; }
+        .status-card strong { font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <header class="adv-header">
+        <div class="adv-header__logo">Advome<span>.</span></div>
+        <nav class="adv-header__nav">
+            <a href="ccma.html">CCMA</a>
+            <a href="motion.html">Labour Court</a>
+            <a href="#">Help</a>
+        </nav>
+        <div class="adv-header__user">
+            <div class="adv-header__avatar">SRL</div>
+        </div>
+        <button class="adv-header__menu-toggle">☰</button>
+    </header>
+
+    <div class="adv-progress" data-workflow="ccma" data-current-step="enrolment"></div>
+
+    <section class="adv-hero">
+        <div class="adv-hero__content">
+            <h1>Enrolment & Allocation</h1>
+            <p>Step 19 of 21 — Ensure your matter is enrolled and a hearing date is allocated</p>
+        </div>
+        <div class="adv-hero__badge adv-hero__badge--online">Labour Court</div>
+    </section>
+
+    <div class="adv-container">
+        <main>
+
+            <!-- STATUS OVERVIEW -->
+            <div class="adv-card">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Current Allocation Status</div>
+                        <div class="adv-card__subtitle">Rule 37(25) & Practice Manual — Track the Registrar's allocation</div>
+                    </div>
+                </div>
+
+                <div class="status-grid">
+                    <div class="status-card">
+                        <span>Request for hearing date filed</span>
+                        <strong id="statusFiled">No</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Hearing date allocated</span>
+                        <strong id="statusAllocated">No</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Days since filing</span>
+                        <strong id="statusDays">—</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Next step</span>
+                        <strong id="statusNext">Follow up with Registrar</strong>
+                    </div>
+                </div>
+
+                <div class="adv-alert adv-alert--info">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">📝 Practice Manual (Section 18)</div>
+                        <p>Once the Registrar allocates a hearing date, the matter is considered enrolled. The Registrar notifies all parties. If no date is allocated within a reasonable time, you must follow up.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI FOLLOW-UP EMAIL GENERATOR -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">✉️ AI Generate Follow‑Up Email to Registrar</div>
+                        <div class="adv-card__subtitle">Use when no hearing date has been allocated after 10 court days</div>
+                    </div>
+                </div>
+
+                <div class="adv-alert adv-alert--warning">
+                    <div class="adv-alert__content">
+                        <div class="adv-alert__title">When to follow up</div>
+                        <p>If more than <strong>10 court days</strong> have passed since you applied for a hearing date and no allocation has been made, send a polite follow‑up email. If still no response after a further 5 court days, escalate to the Court Manager.</p>
+                    </div>
+                </div>
+
+                <div class="ai-draft-form">
+                    <div class="adv-form-group">
+                        <label for="emailSeat">Court Seat</label>
+                        <select class="adv-input" id="emailSeat">
+                            <option>Johannesburg</option>
+                            <option>Cape Town</option>
+                            <option>Durban</option>
+                            <option>Gqeberha</option>
+                        </select>
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="emailCaseNo">Case Number</label>
+                        <input type="text" class="adv-input" id="emailCaseNo" placeholder="e.g. JRB1234/2026">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="emailApplicant">Applicant Name</label>
+                        <input type="text" class="adv-input" id="emailApplicant" placeholder="Your full name">
+                    </div>
+                    <div class="adv-form-group">
+                        <label for="emailDateFiled">Date you filed the request</label>
+                        <input type="date" class="adv-input" id="emailDateFiled">
+                    </div>
+                </div>
+
+                <button class="adv-btn adv-btn--primary" id="generateEmailBtn">⚡ Generate Follow‑Up Email</button>
+
+                <div id="emailOutput" style="display:none; margin-top:1rem;">
+                    <div class="adv-form-group">
+                        <label><strong>Email Draft</strong> <span class="badge badge--info">Template</span></label>
+                        <div class="record-preview" id="emailPreview"></div>
+                    </div>
+                    <div class="generated-doc-actions">
+                        <button class="adv-btn adv-btn--primary" onclick="copyEmail()">📋 Copy Email</button>
+                        <button class="adv-btn adv-btn--secondary" onclick="downloadEmail()">📥 Download .txt</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENROLMENT CHECKLIST -->
+            <div class="adv-card" style="margin-top:1.5rem;">
+                <div class="adv-card__header">
+                    <div>
+                        <div class="adv-card__title">Enrolment Checklist</div>
+                        <div class="adv-card__subtitle">Confirm each step to ensure your matter is properly enrolled</div>
+                    </div>
+                </div>
+                <ul class="adv-checklist" data-checklist-id="enrolment-check">
+                    <li class="adv-checklist__item" data-item-id="enr1">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Request for hearing date filed with Registrar</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="enr2">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Proof of filing uploaded / retained</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="enr3">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Check Court Online for allocation updates</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="enr4">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Follow‑up email sent (if no allocation after 10 court days)</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="enr5">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Escalation to Court Manager (if no response after further 5 court days)</div>
+                    </li>
+                    <li class="adv-checklist__item" data-item-id="enr6">
+                        <div class="adv-checklist__checkbox"></div>
+                        <div class="adv-checklist__text">Hearing date allocated and all parties notified</div>
+                    </li>
+                </ul>
+            </div>
+
+        </main>
+
+        <aside class="adv-sidebar">
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">⏰ Deadline Tracker</div>
+                <div class="adv-deadline-calculator">
+                    <div class="adv-form-group">
+                        <label for="trackerStart">Date request filed</label>
+                        <input type="date" class="adv-input" id="trackerStart" onchange="updateTracker()">
+                    </div>
+                    <div class="adv-deadline__display" id="trackerDisplay">
+                        <span class="adv-deadline__label">Enter date to see follow‑up deadline</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">🤖 AI Assistant</div>
+                <div class="adv-chat" data-chat-id="enrolment">
+                    <div class="adv-chat__messages"></div>
+                    <div class="adv-chat__input-group">
+                        <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask about enrolment...">
+                        <button class="adv-chat__send">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adv-sidebar__widget">
+                <div class="adv-sidebar__widget-title">💰 Savings Tracker</div>
+                <div class="adv-savings">
+                    <span>Saved so far:</span>
+                    <span class="adv-savings__amount">R0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <nav class="adv-nav-footer">
+        <div class="adv-nav-footer__prev">
+            <a href="heads.html" class="adv-btn adv-btn--ghost">← Heads of Argument</a>
+        </div>
+        <div class="adv-nav-footer__next">
+            <a href="hearing.html" class="adv-btn adv-btn--primary">Hearing →</a>
+        </div>
+    </nav>
+
+    <footer class="adv-footer">
+        <p>Advome — South African Legal Workflow Platform for Self-Represented Litigants</p>
+        <p><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></p>
+    </footer>
+
+    <script src="shared-scripts.js"></script>
+
+    <script>
+        // Court day functions (same as before)
+        function isPublicHoliday(d) {
+            const year = d.getFullYear();
+            const holidays = [
+                new Date(year,0,1), new Date(year,2,21), new Date(year,3,27),
+                new Date(year,4,1), new Date(year,5,16), new Date(year,7,9),
+                new Date(year,8,24), new Date(year,11,16), new Date(year,11,25), new Date(year,11,26)
+            ];
+            return holidays.some(h => h.getDate()===d.getDate() && h.getMonth()===d.getMonth());
+        }
+        function isCourtDay(d) {
+            if(d.getDay()===0||d.getDay()===6) return false;
+            const m=d.getMonth(), dt=d.getDate();
+            if((m===11 && dt>=16)||(m===0 && dt<=15)) return false;
+            return !isPublicHoliday(d);
+        }
+        function addCourtDays(startDate, days) {
+            const d = new Date(startDate);
+            d.setDate(d.getDate()+1);
+            let count=0;
+            while(count<days) {
+                if(isCourtDay(d)) count++;
+                if(count<days) d.setDate(d.getDate()+1);
+            }
+            return d;
+        }
+
+        // Generate email
+        function generateEmail() {
+            const seat = document.getElementById('emailSeat').value;
+            const caseNo = document.getElementById('emailCaseNo').value || '[Case No]';
+            const applicant = document.getElementById('emailApplicant').value || '[Your Name]';
+            const dateFiled = document.getElementById('emailDateFiled').value || '[Date]';
+
+            const today = new Date();
+            const email = `To: Registrar of the Labour Court, ${seat}
+Subject: Follow‑up: Request for Hearing Date – Case No: ${caseNo}
+
+Dear Registrar,
+
+I refer to the above matter in which I filed a Request for Hearing Date on ${dateFiled}.
+
+To date, no hearing date has been allocated. I would be grateful if you could advise on the status of the allocation.
+
+The complete file has been indexed and paginated in accordance with the Rules. All parties have been served.
+
+Please do not hesitate to contact me should you require anything further.
+
+Kind regards,
+
+${applicant}
+Applicant
+Date: ${today.toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'})}`;
+
+            document.getElementById('emailPreview').textContent = email;
+            document.getElementById('emailOutput').style.display = 'block';
+            document.getElementById('emailPreview').scrollIntoView({behavior:'smooth'});
+            if(window.Advome && Advome.toast) Advome.toast.show('Email generated!','success');
+        }
+
+        function copyEmail() {
+            const text = document.getElementById('emailPreview').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                if(window.Advome && Advome.toast) Advome.toast.show('Email copied!','success');
+            });
+        }
+
+        function downloadEmail() {
+            const text = document.getElementById('emailPreview').textContent;
+            const blob = new Blob([text], {type:'text/plain'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'FollowUp_Email_Registrar.txt';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        }
+
+        // Tracker sidebar
+        function updateTracker() {
+            const startVal = document.getElementById('trackerStart').value;
+            const display = document.getElementById('trackerDisplay');
+            if(!startVal) { display.innerHTML='<span class="adv-deadline__label">Enter date to see follow‑up deadline</span>'; return; }
+            const start = new Date(startVal);
+            const followUp = addCourtDays(start, 10);
+            const opts = {day:'numeric',month:'long',year:'numeric',weekday:'long'};
+            const today = new Date();
+            const remaining = Math.ceil((followUp - today)/(1000*60*60*24));
+            let color = remaining<=3 ? 'var(--danger)' : remaining<=7 ? 'var(--warning)' : 'var(--success)';
+            display.innerHTML = `<strong>Follow‑up deadline:</strong> ${followUp.toLocaleDateString('en-ZA',opts)}<br>
+                <span style="color:${color}; font-weight:700;">${remaining>0 ? remaining+' days remaining' : Math.abs(remaining)+' days overdue'}</span>`;
+        }
+
+        // Initial status (could be loaded from localStorage or user input)
+        function loadStatus() {
+            // Dummy – in real app, pull from saved data
+            document.getElementById('statusFiled').textContent = 'Yes (simulated)';
+            document.getElementById('statusAllocated').textContent = 'No';
+            document.getElementById('statusDays').textContent = '7';
+            document.getElementById('statusNext').textContent = 'Send follow‑up soon';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStatus();
+            document.getElementById('generateEmailBtn').addEventListener('click', generateEmail);
+            document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
+        });
+    </script>
+</body>
+</html>
