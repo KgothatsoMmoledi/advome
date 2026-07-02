@@ -1,14 +1,12 @@
 export async function onRequest(context) {
   const { request, env } = context;
 
-  // Quick health check (GET)
   if (request.method === 'GET') {
     return new Response('Gemini endpoint is live!', {
       headers: { 'Content-Type': 'text/plain' }
     });
   }
 
-  // Document generation (POST)
   if (request.method === 'POST') {
     try {
       const { template, userInput, fixGrammar = true } = await request.json();
