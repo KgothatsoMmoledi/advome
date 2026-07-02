@@ -4,6 +4,9 @@
    Date: 2026-06-14
    ======================================== */
 
+/* ---- FONT IMPORT (must be at the top) ---- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* ----------------------------------------
    CSS VARIABLES (Design Tokens)
    ---------------------------------------- */
@@ -80,9 +83,6 @@ body {
   min-height: 100vh;
   padding-top: calc(56px + var(--progress-height)); /* header + progress bar */
 }
-
-/* Load fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ----------------------------------------
    TYPOGRAPHY
