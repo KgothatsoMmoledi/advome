@@ -12,18 +12,16 @@
 
   <link rel="stylesheet" href="shared-styles.css">
   <style>
-    /* Global disclaimer bar */
+    /* Global disclaimer at bottom */
     .global-disclaimer {
       background: #1a365d;
       color: #fff;
-      padding: 10px 20px;
-      font-size: 0.85rem;
+      padding: 1rem 2rem;
+      font-size: 0.9rem;
       text-align: center;
-      line-height: 1.4;
-      border-bottom: 2px solid #d69e2e;
-      position: sticky;
-      top: 0;
-      z-index: 30;
+      line-height: 1.5;
+      border-top: 2px solid #d69e2e;
+      margin-top: 2rem;
     }
     .global-disclaimer strong {
       color: #f6e05e;
@@ -32,12 +30,8 @@
       color: #bee3f8;
       text-decoration: underline;
     }
-    /* Push header below disclaimer */
-    .adv-header {
-      top: 44px;
-    }
 
-    /* Wizard styles */
+    /* Wizard steps */
     .wizard-step {
       display: none;
       animation: fadeIn 0.3s ease;
@@ -76,19 +70,14 @@
       line-height: 1.5;
       white-space: pre-wrap;
     }
+
+    /* Ensure all form groups have proper spacing */
+    .adv-form-group {
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
-
-  <!-- GLOBAL DISCLAIMER BANNER -->
-  <div class="global-disclaimer">
-    ⚠️ <strong>LEGAL INFORMATION ONLY — NOT LEGAL ADVICE.</strong>  
-    This platform provides educational legal information to help you understand your rights and the legal process.  
-    Using this platform does <strong>NOT</strong> create an attorney‑client relationship.  
-    <strong>YOU</strong> are solely responsible for your legal decisions and the content of any documents you file.  
-    You should consult a qualified legal practitioner for advice specific to your situation.  
-    <a href="terms.html">Full disclaimer</a>
-  </div>
 
   <!-- HEADER -->
   <header class="adv-header" role="banner">
@@ -124,7 +113,7 @@
     </div>
   </section>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN CONTAINER -->
   <main class="adv-container" id="main-content">
     <div class="adv-workspace">
 
@@ -137,11 +126,16 @@
             <p class="adv-card__subtitle">Describe your dismissal or resignation in your own words</p>
           </div>
           <div class="adv-card__body">
-            <textarea class="adv-input" id="userStory" rows="6" placeholder="I was dismissed because... / I resigned because..."></textarea>
-            <label style="display:flex; align-items:flex-start; gap:8px; margin:1rem 0;">
-              <input type="checkbox" id="ackStep1">
-              <span style="font-size:0.9rem;">I understand that the following information is legal information, not advice. I will apply it myself.</span>
-            </label>
+            <div class="adv-form-group">
+              <label for="userStory" class="adv-label">Your story</label>
+              <textarea id="userStory" class="adv-input" rows="6" placeholder="I was dismissed because... / I resigned because..."></textarea>
+            </div>
+            <div class="adv-form-group">
+              <label style="display:flex; align-items:flex-start; gap:8px;">
+                <input type="checkbox" id="ackStep1">
+                <span style="font-size:0.9rem;">I understand that the following information is legal information, not advice. I will apply it myself.</span>
+              </label>
+            </div>
             <button class="adv-btn adv-btn--primary" id="btnAnalyze">Analyze Possible Laws</button>
             <div id="step1Loading" style="display:none; margin-top:1rem; color: var(--text-muted);">Generating…</div>
             <div id="step1Error" style="display:none; color:red;"></div>
@@ -157,10 +151,12 @@
           <div class="adv-card__body">
             <div id="lawList" class="law-list"></div>
             <div id="step2NoLaws" style="display:none; color: var(--text-muted);">No specific laws could be identified from your description. You may proceed by writing your own explanation.</div>
-            <label style="display:flex; align-items:flex-start; gap:8px; margin:1rem 0;">
-              <input type="checkbox" id="ackStep2">
-              <span style="font-size:0.9rem;">I confirm that I have selected a law based on my own analysis, not on advice from this tool.</span>
-            </label>
+            <div class="adv-form-group">
+              <label style="display:flex; align-items:flex-start; gap:8px;">
+                <input type="checkbox" id="ackStep2">
+                <span style="font-size:0.9rem;">I confirm that I have selected a law based on my own analysis, not on advice from this tool.</span>
+              </label>
+            </div>
             <button class="adv-btn adv-btn--secondary" id="btnBackToStep1">← Back</button>
             <button class="adv-btn adv-btn--primary" id="btnContinueStep3">Continue to Explanation</button>
           </div>
@@ -173,11 +169,16 @@
             <p class="adv-card__subtitle">Write your explanation in your own words. The AI will help you polish the grammar.</p>
           </div>
           <div class="adv-card__body">
-            <textarea class="adv-input" id="userExplanation" rows="6" placeholder="I believe this law was contravened because..."></textarea>
-            <label style="display:flex; align-items:flex-start; gap:8px; margin:1rem 0;">
-              <input type="checkbox" id="ackStep3">
-              <span style="font-size:0.9rem;">I understand that the AI will only correct grammar and clarity. It will NOT add legal arguments.</span>
-            </label>
+            <div class="adv-form-group">
+              <label for="userExplanation" class="adv-label">Your explanation</label>
+              <textarea id="userExplanation" class="adv-input" rows="6" placeholder="I believe this law was contravened because..."></textarea>
+            </div>
+            <div class="adv-form-group">
+              <label style="display:flex; align-items:flex-start; gap:8px;">
+                <input type="checkbox" id="ackStep3">
+                <span style="font-size:0.9rem;">I understand that the AI will only correct grammar and clarity. It will NOT add legal arguments.</span>
+              </label>
+            </div>
             <button class="adv-btn adv-btn--primary" id="btnPolish">Polish My Explanation</button>
             <div id="polishedContainer" style="display:none; margin-top:1rem;">
               <div class="polished-output" id="polishedText"></div>
@@ -196,34 +197,34 @@
           </div>
           <div class="adv-card__body">
             <div class="adv-form-group">
-              <label>Full Name</label>
-              <input type="text" class="adv-input" id="fullName">
+              <label for="fullName" class="adv-label">Full Name</label>
+              <input type="text" class="adv-input" id="fullName" autocomplete="name">
             </div>
             <div class="adv-form-group">
-              <label>Cell Phone Number</label>
-              <input type="tel" class="adv-input" id="cellPhone">
+              <label for="cellPhone" class="adv-label">Cell Phone Number</label>
+              <input type="tel" class="adv-input" id="cellPhone" autocomplete="tel">
             </div>
             <div class="adv-form-group">
-              <label>Email</label>
-              <input type="email" class="adv-input" id="email">
+              <label for="email" class="adv-label">Email</label>
+              <input type="email" class="adv-input" id="email" autocomplete="email">
             </div>
             <div class="adv-form-group">
-              <label>Employer Name (as on payslip/contract)</label>
-              <input type="text" class="adv-input" id="employerName">
+              <label for="employerName" class="adv-label">Employer Name (as on payslip/contract)</label>
+              <input type="text" class="adv-input" id="employerName" autocomplete="organization">
             </div>
+            <fieldset class="adv-form-group">
+              <legend>Nature of Dispute</legend>
+              <label for="disputeUnfairDismissal"><input type="checkbox" id="disputeUnfairDismissal" class="disputeType" value="Unfair Dismissal"> Unfair Dismissal</label>
+              <label for="disputeUnfairLabour"><input type="checkbox" id="disputeUnfairLabour" class="disputeType" value="Unfair Labour Practice"> Unfair Labour Practice</label>
+              <label for="disputeConstructive"><input type="checkbox" id="disputeConstructive" class="disputeType" value="Constructive Dismissal"> Constructive Dismissal</label>
+              <label for="disputeOther"><input type="checkbox" id="disputeOther" class="disputeType" value="Other"> Other</label>
+            </fieldset>
             <div class="adv-form-group">
-              <label>Nature of Dispute</label>
-              <div>
-                <label><input type="checkbox" class="disputeType" value="Unfair Dismissal"> Unfair Dismissal</label>
-                <label><input type="checkbox" class="disputeType" value="Unfair Labour Practice"> Unfair Labour Practice</label>
-                <label><input type="checkbox" class="disputeType" value="Constructive Dismissal"> Constructive Dismissal</label>
-                <label><input type="checkbox" class="disputeType" value="Other"> Other</label>
-              </div>
+              <label style="display:flex; align-items:flex-start; gap:8px;">
+                <input type="checkbox" id="ackStep4">
+                <span style="font-size:0.9rem;">I confirm that all information is accurate to the best of my knowledge.</span>
+              </label>
             </div>
-            <label style="display:flex; align-items:flex-start; gap:8px; margin:1rem 0;">
-              <input type="checkbox" id="ackStep4">
-              <span style="font-size:0.9rem;">I confirm that all information is accurate to the best of my knowledge.</span>
-            </label>
             <button class="adv-btn adv-btn--primary" id="btnGenerateSummary">Generate Summary</button>
           </div>
         </div>
@@ -244,7 +245,7 @@
 
     </div>
 
-    <!-- SIDEBAR (same as before, with AI assistant) -->
+    <!-- SIDEBAR -->
     <aside class="adv-sidebar" role="complementary" aria-label="Tools and assistance">
 
       <div class="adv-sidebar__widget adv-chat" id="aiChatWidget">
@@ -256,20 +257,41 @@
           <div class="chat-message assistant">Hi! I can provide <strong>legal information</strong> about CCMA processes. I cannot give legal advice. What would you like to know?</div>
         </div>
         <div class="adv-chat__input-group">
-          <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask a question..." aria-label="Chat message">
+          <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask a question..." aria-label="Chat message" autocomplete="off">
           <button class="adv-chat__send" id="chatSend" aria-label="Send message">Send</button>
         </div>
       </div>
 
-      <!-- Quick links & deadlines remain unchanged -->
+      <!-- Quick Links -->
       <div class="adv-sidebar__widget">
         <h3 class="adv-sidebar__widget-title">Quick Links</h3>
-        <div style="margin-bottom: 0.5rem;"><a href="referral.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">… File a Referral</a></div>
-        <div style="margin-bottom: 0.5rem;"><a href="ccma-offices.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">… Find CCMA Office</a></div>
-        <div style="margin-bottom: 0.5rem;"><a href="calculator.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">… Fee Calculator</a></div>
-        <div><a href="https://www.ccma.org.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">… CCMA Official Site</a></div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="referral.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            File a Referral
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="ccma-offices.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Find CCMA Office
+          </a>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <a href="calculator.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14"/><path d="M8 14h.01"/><path d="M8 18h.01"/><path d="M12 14h.01"/><path d="M12 18h.01"/></svg>
+            Fee Calculator
+          </a>
+        </div>
+        <div>
+          <a href="https://www.ccma.org.za" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            CCMA Official Site
+          </a>
+        </div>
       </div>
 
+      <!-- Deadlines -->
       <div class="adv-sidebar__widget">
         <h3 class="adv-sidebar__widget-title">Important Deadlines</h3>
         <div class="adv-alert adv-alert--warning adv-alert--minimal" style="margin-bottom: 0.75rem;">
@@ -289,7 +311,7 @@
     </aside>
   </main>
 
-  <!-- BOTTOM ZONE & FOOTER (same as before) -->
+  <!-- BOTTOM ZONE with disclaimer -->
   <div class="adv-bottom-zone">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: flex-end;">
       <div class="adv-savings adv-savings--small">
@@ -297,15 +319,28 @@
         You've saved <span class="adv-savings__amount">R0</span> vs. attorney fees
       </div>
     </div>
+
     <div class="adv-compliance" role="contentinfo">
       <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. Advome is not a law firm and is not a substitute for an attorney. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
     </div>
+
     <nav class="adv-nav-footer" aria-label="Page navigation">
       <a href="index.html" class="adv-nav-footer__prev">← Back to Home</a>
       <a href="referral.html" class="adv-nav-footer__next">Start: File Dispute →</a>
     </nav>
+
+    <!-- GLOBAL DISCLAIMER AT BOTTOM -->
+    <div class="global-disclaimer">
+      ⚠️ <strong>LEGAL INFORMATION ONLY — NOT LEGAL ADVICE.</strong>  
+      This platform provides educational legal information to help you understand your rights and the legal process.  
+      Using this platform does <strong>NOT</strong> create an attorney‑client relationship.  
+      <strong>YOU</strong> are solely responsible for your legal decisions and the content of any documents you file.  
+      You should consult a qualified legal practitioner for advice specific to your situation.  
+      <a href="terms.html">Full disclaimer</a>
+    </div>
   </div>
 
+  <!-- FOOTER -->
   <footer class="adv-footer" role="contentinfo">
     <p style="margin-bottom: 0.5rem;">
       <a href="index.html">Home</a>
@@ -327,7 +362,7 @@
       const chatMessages = document.getElementById('chatMessages');
       const chatInput = document.getElementById('chatInput');
       const chatSend = document.getElementById('chatSend');
-      const SYSTEM_PROMPT = `You are a South African legal information assistant. ...`; // same as before
+      const SYSTEM_PROMPT = `You are a South African legal information assistant. You provide ONLY general legal information, never legal advice. Never tell the user what they should do, apply law to facts, or make legal judgments. Present legal principles neutrally, and always encourage consulting a qualified legal practitioner.`;
 
       async function sendMessage() {
         const userText = chatInput.value.trim();
@@ -345,7 +380,11 @@
         chatMessages.appendChild(typingDiv);
 
         try {
-          const response = await fetch('/api/chat', { /* same as before */ });
+          const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: [{ role: 'user', content: userText }], systemPrompt: SYSTEM_PROMPT })
+          });
           const data = await response.json();
           typingDiv.textContent = data.reply || 'I am unable to answer that right now.';
         } catch (err) {
@@ -358,7 +397,7 @@
     })();
 
     // ===== WIZARD LOGIC =====
-    let selectedLawText = ''; // the law the user clicked on
+    let selectedLawText = '';
     let polishedExplanation = '';
 
     function showStep(stepId) {
@@ -366,7 +405,6 @@
       document.getElementById(stepId).classList.add('active');
     }
 
-    // Step 1: Analyze
     document.getElementById('btnAnalyze').addEventListener('click', async () => {
       if (!document.getElementById('ackStep1').checked) {
         alert('Please acknowledge the disclaimer.');
@@ -387,7 +425,6 @@
         const data = await res.json();
         const result = data.result;
 
-        // Parse result into a list
         const lawListDiv = document.getElementById('lawList');
         lawListDiv.innerHTML = '';
         const lines = result.split('\n').filter(l => l.trim());
@@ -416,7 +453,7 @@
     });
 
     document.getElementById('btnContinueStep3').addEventListener('click', () => {
-      if (!selectedLawText && !document.getElementById('step2NoLaws').style.display !== 'none') {
+      if (!selectedLawText && document.getElementById('step2NoLaws').style.display === 'none') {
         alert('Please select a law.');
         return;
       }
@@ -429,7 +466,6 @@
 
     document.getElementById('btnBackToStep1').addEventListener('click', () => showStep('step1'));
 
-    // Step 3: Polish
     document.getElementById('btnPolish').addEventListener('click', async () => {
       if (!document.getElementById('ackStep3').checked) {
         alert('Please acknowledge the disclaimer.');
@@ -454,8 +490,7 @@
     });
 
     document.getElementById('btnEditPolish').addEventListener('click', () => {
-      const current = document.getElementById('polishedText').textContent;
-      document.getElementById('userExplanation').value = current;
+      document.getElementById('userExplanation').value = polishedExplanation;
       document.getElementById('polishedContainer').style.display = 'none';
     });
 
@@ -466,7 +501,6 @@
 
     document.getElementById('btnBackToStep2').addEventListener('click', () => showStep('step2'));
 
-    // Step 4: Generate Summary
     document.getElementById('btnGenerateSummary').addEventListener('click', () => {
       if (!document.getElementById('ackStep4').checked) {
         alert('Please confirm the disclaimer.');
