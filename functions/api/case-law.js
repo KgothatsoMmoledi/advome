@@ -1,31 +1,9 @@
 export async function onRequestPost({ request, env }) {
-  const { type, userText } = await request.json();
+  const { type, userText, debug } = await request.json();
 
-  let systemPrompt = '';
-  if (type === 'analyze') {
-    systemPrompt = `You are a South African labour law information tool.
-The user will describe a workplace situation (dismissal, resignation, etc.).
-Your job is to list **possible** laws (from the Labour Relations Act, Basic Conditions of Employment Act, Employment Equity Act, etc.) that *could* relate to the situation.
-For each law, give:
-- The name and section number (if known)
-- A short, neutral summary of what the law says
-Do NOT:
-- Say which law applies
-- Give advice
-- Evaluate the situation
-Output ONLY a numbered list (one law per line). If no law seems relevant, say "No specific law identified."`;
-  } else if (type === 'polish') {
-    systemPrompt = `You are a legal writing assistant.
-The user will provide a personal explanation of why they think a certain law applies.
-Your only job is to improve the grammar, spelling, sentence structure, and clarity.
-Do NOT:
-- Add legal arguments, advice, or new content
-- Change the meaning
-- Add citations or references
-Output only the polished version of the user's text.`;
-  } else {
-    return new Response(JSON.stringify({ error: 'Invalid type' }), { status: 400 });
-  }
+  const systemPrompt = type === 'analyze'
+    ? `List possible South African labour laws (with section numbers if known) that could relate to the following workplace situation. Describe each law neutrally in one sentence. Do not apply the law, do not give advice. Output a numbered list.`
+    : `Improve the grammar, spelling, and clarity of the following text. Do not add or change the meaning. Output only the corrected text.`;
 
   const userMessage = `User input:\n${userText}`;
 
@@ -42,12 +20,16 @@ Output only the polished version of the user's text.`;
     );
 
     const data = await geminiResponse.json();
-    // Gemini sometimes wraps output in code blocks; extract clean text
-    let generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-    // Remove markdown fences if present
-    generatedText = generatedText.replace(/```[^]*?```/g, '').trim();
+    // If debug mode, return the full response
+    if (debug) {
+      return new Response(JSON.stringify({ debugData: data }), {
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      });
+    }
 
+    // Extract text normally
+    const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     return new Response(JSON.stringify({ result: generatedText }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
