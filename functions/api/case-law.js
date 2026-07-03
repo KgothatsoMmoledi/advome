@@ -7,9 +7,12 @@ export async function onRequestPost({ request, env }) {
 
   const userMessage = `User input:\n${userText}`;
 
+  // Correct model name – latest stable Gemini 1.5 Flash
+  const model = 'gemini-1.5-flash-latest';
+
   try {
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -21,14 +24,12 @@ export async function onRequestPost({ request, env }) {
 
     const data = await geminiResponse.json();
 
-    // If debug mode, return the full response
     if (debug) {
       return new Response(JSON.stringify({ debugData: data }), {
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
 
-    // Extract text normally
     const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     return new Response(JSON.stringify({ result: generatedText }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
