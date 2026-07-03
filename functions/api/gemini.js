@@ -53,8 +53,9 @@ HOW YOU MUST OUTPUT:
         userMessage += 'Fill the template exactly as is. Do not correct any language.';
       }
 
+      const model = 'gemini-3.5-flash';
       const geminiResponse = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${env.GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
