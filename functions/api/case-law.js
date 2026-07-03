@@ -7,8 +7,7 @@ export async function onRequestPost({ request, env }) {
 
   const userMessage = `User input:\n${userText}`;
 
-  // Correct model name – latest stable Gemini 1.5 Flash
-  const model = 'gemini-1.5-flash-latest';
+  const model = 'gemini-3.5-flash';
 
   try {
     const geminiResponse = await fetch(
