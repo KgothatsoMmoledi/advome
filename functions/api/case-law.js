@@ -13,11 +13,11 @@ export async function onRequestPost({ request, env }) {
   }
 
   const userMessage = `User input:\n${userText}`;
-  const model = 'gemini-2.5-pro';   // stable free model
+  const model = 'gemini-2.0-flash';   // stable free model
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
 
     const geminiResponse = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`,
