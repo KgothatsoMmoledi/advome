@@ -24,10 +24,10 @@
     .issue-item {
       border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.75rem;
       margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s; cursor: pointer;
     }
     .issue-item.selected { border-color: #38a169; background: #f0fff4; }
-    .issue-item label { flex: 1; cursor: pointer; }
+    .issue-item input[type="checkbox"] { margin-top: 0.25rem; }
 
     .polished-output {
       background: #f8fbff; border: 1px solid #e2e8f0; border-radius: 8px;
@@ -67,7 +67,6 @@
 
   <main class="adv-container">
     <div class="adv-workspace">
-
       <div class="adv-card" id="wizardCard">
 
         <!-- STEP 1: Personal & Employer Details -->
@@ -77,8 +76,7 @@
             <p class="adv-card__subtitle">This information goes directly onto Form 7.11.</p>
           </div>
           <div class="adv-card__body">
-            <fieldset>
-              <legend>Employee Details</legend>
+            <fieldset><legend>Employee Details</legend>
               <div class="adv-form-group"><label for="fullName">Full Name</label><input type="text" class="adv-input" id="fullName" autocomplete="name" /></div>
               <div class="adv-form-group"><label for="idNumber">ID Number</label><input type="text" class="adv-input" id="idNumber" /></div>
               <div class="adv-form-group"><label for="cellPhone">Cell Phone</label><input type="tel" class="adv-input" id="cellPhone" autocomplete="tel" /></div>
@@ -87,16 +85,13 @@
               <div class="adv-form-group"><label for="salaryGross">Gross Salary (per month)</label><input type="text" class="adv-input" id="salaryGross" placeholder="R" /></div>
               <div class="adv-form-group"><label for="salaryNet">Net Salary (per month)</label><input type="text" class="adv-input" id="salaryNet" placeholder="R" /></div>
             </fieldset>
-
-            <fieldset>
-              <legend>Employer Details</legend>
+            <fieldset><legend>Employer Details</legend>
               <div class="adv-form-group"><label for="employerName">Company / Employer Name</label><input type="text" class="adv-input" id="employerName" autocomplete="organization" /></div>
               <div class="adv-form-group"><label for="employerContactPerson">Contact Person</label><input type="text" class="adv-input" id="employerContactPerson" /></div>
               <div class="adv-form-group"><label for="employerAddress">Physical Address</label><input type="text" class="adv-input" id="employerAddress" autocomplete="street-address" /></div>
               <div class="adv-form-group"><label for="employerPhone">Phone</label><input type="tel" class="adv-input" id="employerPhone" autocomplete="tel" /></div>
               <div class="adv-form-group"><label for="employerEmployees">Approx. Number of Employees</label><input type="text" class="adv-input" id="employerEmployees" /></div>
             </fieldset>
-
             <button class="adv-btn adv-btn--primary" id="btnStep1Next">Next: About Your Dismissal</button>
           </div>
         </div>
@@ -112,7 +107,6 @@
               <label for="dismissalDate">Date of dismissal</label>
               <input type="date" class="adv-input" id="dismissalDate" required />
             </div>
-
             <fieldset>
               <legend>How were you informed of your dismissal?</legend>
               <label><input type="checkbox" class="informedMethod" value="By letter" /> By letter</label>
@@ -121,7 +115,6 @@
               <label><input type="checkbox" class="informedMethod" value="Constructive/resigned" /> Constructive/resigned</label>
               <label><input type="checkbox" class="informedMethod" value="Other" /> Other</label>
             </fieldset>
-
             <fieldset>
               <legend>Reason for dismissal (as given by employer)</legend>
               <label><input type="radio" name="dismissalReason" value="Misconduct" /> Misconduct</label>
@@ -130,13 +123,11 @@
               <label><input type="radio" name="dismissalReason" value="Unknown" /> Unknown (employer did not give a reason)</label>
               <label><input type="radio" name="dismissalReason" value="Other" /> Other</label>
             </fieldset>
-
             <div class="adv-form-group">
               <label>Was the dismissal related to probation?</label>
               <label><input type="radio" name="probation" value="Yes" /> Yes</label>
               <label><input type="radio" name="probation" value="No" checked /> No</label>
             </div>
-
             <button class="adv-btn adv-btn--secondary" id="btnBackToStep1">← Back</button>
             <button class="adv-btn adv-btn--primary" id="btnStep2Next">Next: Your Story</button>
           </div>
@@ -164,7 +155,7 @@
         <div class="wizard-step" id="step4">
           <div class="adv-card__header">
             <h2 class="adv-card__title">Possible Procedural & Substantive Issues</h2>
-            <p class="adv-card__subtitle">Tick the issues that you think apply to your case. They are separated into process problems (procedural) and reasons/wrongness (substantive).</p>
+            <p class="adv-card__subtitle">Tick the issues that you think apply. <strong>Procedural</strong> = process problems. <strong>Substantive</strong> = the reason or punishment was wrong.</p>
           </div>
           <div class="adv-card__body">
             <div id="issuesContainer"></div>
@@ -182,12 +173,8 @@
             <h2 class="adv-card__title">Explain Why Each Issue Applies</h2>
             <p class="adv-card__subtitle">For each issue you selected, write a short explanation. The AI will help you polish them.</p>
           </div>
-          <div class="adv-card__body" id="explainContainer">
-            <!-- dynamically generated textareas -->
-          </div>
-          <div class="adv-form-group">
-            <label><input type="checkbox" id="ackPolish" /> I understand the AI will only correct grammar.</label>
-          </div>
+          <div class="adv-card__body" id="explainContainer"></div>
+          <div class="adv-form-group"><label><input type="checkbox" id="ackPolish" /> I understand the AI will only correct grammar.</label></div>
           <button class="adv-btn adv-btn--secondary" id="btnBackToStep4">← Back</button>
           <button class="adv-btn adv-btn--primary" id="btnPolishAll">Polish All Explanations</button>
           <div id="polishOutput" style="display:none;">
@@ -250,7 +237,6 @@
     </aside>
   </main>
 
-  <!-- Footer/Disclaimer unchanged -->
   <div class="adv-bottom-zone">
     <div class="adv-compliance">Advome provides procedural assistance only. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a></div>
     <div class="global-disclaimer">
@@ -321,9 +307,8 @@
     }
 
     // ----- Wizard state -----
-    let selectedIssues = []; // { text, type (procedural/substantive) }
-    let explanations = {};   // key: issue text, value: user explanation
-    let polishedExplanations = {};
+    let selectedIssues = [];
+    let explanations = {};
 
     function showStep(id) {
       document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
@@ -333,10 +318,8 @@
     // Navigation buttons
     document.getElementById('btnStep1Next').addEventListener('click', () => showStep('step2'));
     document.getElementById('btnBackToStep1').addEventListener('click', () => showStep('step1'));
-
     document.getElementById('btnStep2Next').addEventListener('click', () => showStep('step3'));
     document.getElementById('btnBackToStep2').addEventListener('click', () => showStep('step2'));
-
     document.getElementById('btnBackToStep3').addEventListener('click', () => showStep('step3'));
 
     // Analyze story
@@ -365,7 +348,6 @@
       container.innerHTML = '';
       selectedIssues = [];
 
-      // Split into procedural and substantive sections
       const procMatch = raw.match(/PROCEDURAL ISSUES:[\s\S]*?(?=SUBSTANTIVE ISSUES|$)/i);
       const subsMatch = raw.match(/SUBSTANTIVE ISSUES:[\s\S]*/i);
 
@@ -385,13 +367,13 @@
           const li = document.createElement('li');
           li.className = 'issue-item';
           li.innerHTML = `<label><input type="checkbox" class="issueCheck" data-text="${content}" data-type="${type}" /> ${content}</label>`;
-          li.addEventListener('change', e => {
-            if (e.target.checked) {
-              li.classList.add('selected');
-              selectedIssues.push({ text: content, type });
+          li.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'INPUT') {
+              const cb = li.querySelector('input');
+              cb.checked = !cb.checked;
+              updateIssueSelection(li, cb, content, type);
             } else {
-              li.classList.remove('selected');
-              selectedIssues = selectedIssues.filter(i => i.text !== content);
+              updateIssueSelection(li, e.target, content, type);
             }
           });
           ul.appendChild(li);
@@ -401,6 +383,16 @@
 
       renderSection('Procedural Issues (process was unfair)', procMatch ? procMatch[0] : '', 'procedural');
       renderSection('Substantive Issues (reason/punishment was wrong)', subsMatch ? subsMatch[0] : '', 'substantive');
+    }
+
+    function updateIssueSelection(li, checkbox, text, type) {
+      if (checkbox.checked) {
+        li.classList.add('selected');
+        selectedIssues.push({ text, type });
+      } else {
+        li.classList.remove('selected');
+        selectedIssues = selectedIssues.filter(i => i.text !== text);
+      }
     }
 
     document.getElementById('btnContinueToExplain').addEventListener('click', () => {
@@ -423,20 +415,15 @@
 
     document.getElementById('btnPolishAll').addEventListener('click', async () => {
       if (!document.getElementById('ackPolish').checked) { alert('Please acknowledge.'); return; }
-      // Collect all user explanations
       const inputs = document.querySelectorAll('.explanationInput');
       let combinedText = '';
-      inputs.forEach(txt => {
-        combinedText += txt.value.trim() + '\n\n';
-      });
+      inputs.forEach(txt => { combinedText += txt.value.trim() + '\n\n'; });
 
       try {
         const polished = await callAI('polish', combinedText);
         document.getElementById('polishedText').textContent = polished;
         document.getElementById('polishOutput').style.display = 'block';
-      } catch (err) {
-        alert('Error polishing.');
-      }
+      } catch (err) { alert('Error polishing.'); }
     });
 
     document.getElementById('btnEditPolish').addEventListener('click', () => {
@@ -446,9 +433,7 @@
     document.getElementById('btnAcceptPolish').addEventListener('click', () => {
       const polished = document.getElementById('polishedText').textContent.split('\n\n');
       const inputs = document.querySelectorAll('.explanationInput');
-      inputs.forEach((txt, i) => {
-        if (polished[i]) txt.value = polished[i].trim();
-      });
+      inputs.forEach((txt, i) => { if (polished[i]) txt.value = polished[i].trim(); });
       document.getElementById('polishOutput').style.display = 'none';
       showStep('step6');
     });
@@ -525,7 +510,6 @@ Prepared by Advome – verify before filing.`;
     });
 
     document.getElementById('btnBackToStep6').addEventListener('click', () => showStep('step6'));
-    document.getElementById('btnBackToStep7').addEventListener('click', () => showStep('step7'));
   </script>
 </body>
 </html>
