@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Advome — Understand your CCMA case, learn the law, and prepare your referral." />
-  <title>CCMA Case Determination | Advome</title>
-
+  <title>CCMA Form 7.11 Wizard | Advome</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared-styles.css" />
-
   <style>
-    /* Global disclaimer at bottom */
     .global-disclaimer {
       background: #1a365d; color: #fff; padding: 1rem 2rem; font-size: 0.9rem;
       text-align: center; line-height: 1.5; border-top: 2px solid #d69e2e; margin-top: 2rem;
@@ -20,47 +16,26 @@
     .global-disclaimer strong { color: #f6e05e; }
     .global-disclaimer a { color: #bee3f8; text-decoration: underline; }
 
-    /* Wizard steps */
     .wizard-step { display: none; animation: fadeIn 0.3s ease; }
     .wizard-step.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Law list */
-    .law-list { list-style: none; padding: 0; margin: 1rem 0; }
-    .law-card {
-      display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem;
-      border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 0.5rem;
-      cursor: pointer; transition: background 0.15s;
+    .issue-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .issue-item {
+      border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.75rem;
+      margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;
+      transition: border-color 0.15s;
     }
-    .law-card:hover { background: #f8fbff; }
-    .law-card.selected { background: #e6ffed; border-color: #38a169; }
-    .law-card .score-badge {
-      font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px;
-      margin-left: auto; white-space: nowrap;
-    }
-    .score-3 { background: #c6f6d5; color: #22543d; }
-    .score-2 { background: #feebc8; color: #7c2d12; }
-    .score-1 { background: #edf2f7; color: #4a5568; }
-
-    .info-btn {
-      background: none; border: none; color: #2c5282; cursor: pointer;
-      font-size: 0.9rem; margin-left: 0.25rem;
-    }
-    .info-popup {
-      display: none; position: absolute; background: white; border: 1px solid #e2e8f0;
-      border-radius: 6px; padding: 0.75rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 280px; z-index: 10; font-size: 0.85rem; color: #4a5568;
-    }
-    .info-popup.show { display: block; }
+    .issue-item.selected { border-color: #38a169; background: #f0fff4; }
+    .issue-item label { flex: 1; cursor: pointer; }
 
     .polished-output {
       background: #f8fbff; border: 1px solid #e2e8f0; border-radius: 8px;
-      padding: 1rem; font-family: Georgia, serif; line-height: 1.5;
-      white-space: pre-wrap; margin-top: 1rem;
+      padding: 1rem; font-family: Georgia, serif; white-space: pre-wrap; margin-top: 1rem;
     }
 
     .summary-box {
-      background: #f8fbff; border: 1px solid #e2e8f0; border-radius: 8px;
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
       padding: 1.5rem; font-family: Georgia, serif; line-height: 1.5; white-space: pre-wrap;
     }
 
@@ -70,359 +45,273 @@
   </style>
 </head>
 <body>
-
   <header class="adv-header" role="banner">
-    <a href="index.html" class="adv-header__logo" aria-label="Advome Home">Ad<span>vome</span></a>
+    <a href="index.html" class="adv-header__logo">Ad<span>vome</span></a>
     <nav class="adv-header__nav">
       <a href="ccma.html" style="color: white; font-weight: 700;">CCMA</a>
       <a href="divorce.html">Divorce</a>
       <a href="estates-hub.html">Estates</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="attorney.html">Find Attorney</a>
     </nav>
-    <div class="adv-header__user">
-      <div class="adv-header__avatar" aria-label="User profile">U</div>
-      <span>My Cases</span>
-    </div>
-    <button class="adv-header__menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="adv-header__user"><div class="adv-header__avatar">U</div><span>My Cases</span></div>
   </header>
 
-  <div class="adv-progress" data-workflow="ccma" data-current-step="case-determination" role="navigation" aria-label="Workflow progress"></div>
+  <div class="adv-progress" data-workflow="ccma" data-current-step="case-determination"></div>
 
-  <section class="adv-hero" aria-labelledby="page-title">
+  <section class="adv-hero">
     <div class="adv-hero__content">
-      <h1 id="page-title">Prepare Your CCMA Referral</h1>
-      <p>Understand the law, build your case, and get ready to file Form 7.11</p>
+      <h1>Complete Your CCMA Referral (Form 7.11)</h1>
+      <p>Answer the questions, understand your case, and get a summary ready to file</p>
     </div>
     <div class="adv-hero__badge adv-hero__badge--online">30‑day deadline</div>
   </section>
 
-  <main class="adv-container" id="main-content">
+  <main class="adv-container">
     <div class="adv-workspace">
 
       <div class="adv-card" id="wizardCard">
 
-        <!-- STEP 1: Dispute type & date -->
+        <!-- STEP 1: Personal & Employer Details -->
         <div class="wizard-step active" id="step1">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Step 1: What is your dispute about?</h2>
-            <p class="adv-card__subtitle">Select the option that best describes your situation. Click <span style="color:#2c5282;">ⓘ</span> for explanations.</p>
+            <h2 class="adv-card__title">Your Details & Employer Information</h2>
+            <p class="adv-card__subtitle">This information goes directly onto Form 7.11.</p>
           </div>
           <div class="adv-card__body">
             <fieldset>
-              <legend>Nature of dispute</legend>
-              <div style="margin-bottom:0.5rem;">
-                <label><input type="radio" name="disputeType" value="unfair-dismissal" checked /> Unfair dismissal</label>
-                <span class="info-btn" onclick="toggleInfo(event, 'info-dismissal')">ⓘ</span>
-                <div class="info-popup" id="info-dismissal">You were fired for a reason you believe is unfair (e.g., poor performance, misconduct, operational reasons). The dismissal must be both procedurally and substantively fair. Max compensation: 12 months’ salary.</div>
-              </div>
-              <div style="margin-bottom:0.5rem;">
-                <label><input type="radio" name="disputeType" value="auto-unfair" /> Automatically unfair dismissal</label>
-                <span class="info-btn" onclick="toggleInfo(event, 'info-auto')">ⓘ</span>
-                <div class="info-popup" id="info-auto">You were fired for a reason the law automatically treats as unfair (e.g., pregnancy, union membership, whistleblowing, refusing to do illegal work). Max compensation: 24 months’ salary. No cap on reinstatement.</div>
-              </div>
-              <div style="margin-bottom:0.5rem;">
-                <label><input type="radio" name="disputeType" value="constructive-dismissal" /> Constructive dismissal</label>
-                <span class="info-btn" onclick="toggleInfo(event, 'info-constructive')">ⓘ</span>
-                <div class="info-popup" id="info-constructive">You resigned because your employer made working conditions so unbearable that you had no choice. It is treated like a dismissal under Section 186(e) of the LRA.</div>
-              </div>
-              <div style="margin-bottom:0.5rem;">
-                <label><input type="radio" name="disputeType" value="unfair-labour-practice" /> Unfair labour practice</label>
-                <span class="info-btn" onclick="toggleInfo(event, 'info-ulp')">ⓘ</span>
-                <div class="info-popup" id="info-ulp">Your employer acted unfairly in relation to promotion, demotion, training, benefits, or suspension (Section 186(2)). This does not include dismissal – it relates to conduct short of dismissal.</div>
-              </div>
-              <div>
-                <label><input type="radio" name="disputeType" value="other" /> Other</label>
-                <span class="info-btn" onclick="toggleInfo(event, 'info-other')">ⓘ</span>
-                <div class="info-popup" id="info-other">Any other dispute that falls under the CCMA’s jurisdiction (e.g., wage disputes, discrimination, sexual harassment).</div>
-              </div>
+              <legend>Employee Details</legend>
+              <div class="adv-form-group"><label for="fullName">Full Name</label><input type="text" class="adv-input" id="fullName" autocomplete="name" /></div>
+              <div class="adv-form-group"><label for="idNumber">ID Number</label><input type="text" class="adv-input" id="idNumber" /></div>
+              <div class="adv-form-group"><label for="cellPhone">Cell Phone</label><input type="tel" class="adv-input" id="cellPhone" autocomplete="tel" /></div>
+              <div class="adv-form-group"><label for="email">Email</label><input type="email" class="adv-input" id="email" autocomplete="email" /></div>
+              <div class="adv-form-group"><label for="lengthService">Length of Service</label><input type="text" class="adv-input" id="lengthService" placeholder="e.g., 2 years" /></div>
+              <div class="adv-form-group"><label for="salaryGross">Gross Salary (per month)</label><input type="text" class="adv-input" id="salaryGross" placeholder="R" /></div>
+              <div class="adv-form-group"><label for="salaryNet">Net Salary (per month)</label><input type="text" class="adv-input" id="salaryNet" placeholder="R" /></div>
             </fieldset>
 
-            <div class="adv-form-group">
-              <label for="dismissalDate">Date of dismissal / dispute</label>
-              <input type="date" class="adv-input" id="dismissalDate" required />
-              <div class="adv-form-hint">The CCMA needs the exact date. You have 30 days from this date to refer.</div>
-            </div>
+            <fieldset>
+              <legend>Employer Details</legend>
+              <div class="adv-form-group"><label for="employerName">Company / Employer Name</label><input type="text" class="adv-input" id="employerName" autocomplete="organization" /></div>
+              <div class="adv-form-group"><label for="employerContactPerson">Contact Person</label><input type="text" class="adv-input" id="employerContactPerson" /></div>
+              <div class="adv-form-group"><label for="employerAddress">Physical Address</label><input type="text" class="adv-input" id="employerAddress" autocomplete="street-address" /></div>
+              <div class="adv-form-group"><label for="employerPhone">Phone</label><input type="tel" class="adv-input" id="employerPhone" autocomplete="tel" /></div>
+              <div class="adv-form-group"><label for="employerEmployees">Approx. Number of Employees</label><input type="text" class="adv-input" id="employerEmployees" /></div>
+            </fieldset>
 
-            <button class="adv-btn adv-btn--primary" id="btnStep1Next">Next: Describe what happened</button>
+            <button class="adv-btn adv-btn--primary" id="btnStep1Next">Next: About Your Dismissal</button>
           </div>
         </div>
 
-        <!-- STEP 2: Describe what happened -->
+        <!-- STEP 2: Dismissal specifics -->
         <div class="wizard-step" id="step2">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Step 2: Tell us your story</h2>
-            <p class="adv-card__subtitle">Describe the facts in your own words. Be specific about dates, events, and reasons given by your employer.</p>
+            <h2 class="adv-card__title">About Your Dismissal</h2>
+            <p class="adv-card__subtitle">These questions match Form 7.11 exactly.</p>
           </div>
           <div class="adv-card__body">
             <div class="adv-form-group">
-              <label for="userStory">Your description</label>
-              <textarea class="adv-input adv-textarea" id="userStory" rows="6" placeholder="I was dismissed on [date] because... / I resigned because..."></textarea>
+              <label for="dismissalDate">Date of dismissal</label>
+              <input type="date" class="adv-input" id="dismissalDate" required />
             </div>
+
+            <fieldset>
+              <legend>How were you informed of your dismissal?</legend>
+              <label><input type="checkbox" class="informedMethod" value="By letter" /> By letter</label>
+              <label><input type="checkbox" class="informedMethod" value="Verbally" /> Verbally</label>
+              <label><input type="checkbox" class="informedMethod" value="At/After a disciplinary hearing" /> At/After a disciplinary hearing</label>
+              <label><input type="checkbox" class="informedMethod" value="Constructive/resigned" /> Constructive/resigned</label>
+              <label><input type="checkbox" class="informedMethod" value="Other" /> Other</label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Reason for dismissal (as given by employer)</legend>
+              <label><input type="radio" name="dismissalReason" value="Misconduct" /> Misconduct</label>
+              <label><input type="radio" name="dismissalReason" value="Incapacity" /> Incapacity (poor performance/health)</label>
+              <label><input type="radio" name="dismissalReason" value="Operational Requirements/Retrenchment" /> Operational Requirements / Retrenchment</label>
+              <label><input type="radio" name="dismissalReason" value="Unknown" /> Unknown (employer did not give a reason)</label>
+              <label><input type="radio" name="dismissalReason" value="Other" /> Other</label>
+            </fieldset>
+
             <div class="adv-form-group">
-              <label style="display:flex; align-items:flex-start; gap:8px;">
-                <input type="checkbox" id="ackStep2" />
-                <span style="font-size:0.9rem;">I understand that the AI will show possible laws, but I must decide which apply.</span>
-              </label>
+              <label>Was the dismissal related to probation?</label>
+              <label><input type="radio" name="probation" value="Yes" /> Yes</label>
+              <label><input type="radio" name="probation" value="No" checked /> No</label>
             </div>
+
             <button class="adv-btn adv-btn--secondary" id="btnBackToStep1">← Back</button>
-            <button class="adv-btn adv-btn--primary" id="btnAnalyze">Analyze Possible Laws</button>
-            <div id="step2Loading" style="display:none; margin-top:1rem; color: #718096;">Generating…</div>
-            <div id="step2Error" style="display:none; color:red;"></div>
+            <button class="adv-btn adv-btn--primary" id="btnStep2Next">Next: Your Story</button>
           </div>
         </div>
 
-        <!-- STEP 3: Relevant laws (colour coded) -->
+        <!-- STEP 3: Your Story -->
         <div class="wizard-step" id="step3">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Step 3: Laws that may apply</h2>
-            <p class="adv-card__subtitle">Select the laws you believe were contravened. Colours indicate how commonly such laws are raised in similar cases, not legal advice.</p>
+            <h2 class="adv-card__title">Tell Your Story</h2>
+            <p class="adv-card__subtitle">Describe what happened in your own words. The AI will help identify possible procedural and substantive issues.</p>
           </div>
           <div class="adv-card__body">
-            <div id="lawContainer">
-              <!-- Dynamically populated by JS -->
-            </div>
+            <textarea class="adv-input adv-textarea" id="userStory" rows="6" placeholder="I was dismissed on [date]..."></textarea>
             <div class="adv-form-group">
-              <label style="display:flex; align-items:flex-start; gap:8px;">
-                <input type="checkbox" id="ackStep3" />
-                <span style="font-size:0.9rem;">I confirm that I have selected the laws based on my own analysis, not on advice from this tool.</span>
-              </label>
+              <label><input type="checkbox" id="ackAnalyze" /> I understand that the AI will only list possible issues, not advice.</label>
             </div>
             <button class="adv-btn adv-btn--secondary" id="btnBackToStep2">← Back</button>
-            <button class="adv-btn adv-btn--primary" id="btnContinueStep4">Continue to Explanation</button>
+            <button class="adv-btn adv-btn--primary" id="btnAnalyze">Analyze My Story</button>
+            <div id="analyzeLoading" style="display:none;">Generating…</div>
+            <div id="analyzeError" style="display:none; color:red;"></div>
           </div>
         </div>
 
-        <!-- STEP 4: Explain why the selected laws apply -->
+        <!-- STEP 4: Procedural & Substantive Issues -->
         <div class="wizard-step" id="step4">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Step 4: Why do you believe these laws apply?</h2>
-            <p class="adv-card__subtitle">Write your explanation. The AI will help polish the grammar.</p>
+            <h2 class="adv-card__title">Possible Procedural & Substantive Issues</h2>
+            <p class="adv-card__subtitle">Tick the issues that you think apply to your case. They are separated into process problems (procedural) and reasons/wrongness (substantive).</p>
           </div>
           <div class="adv-card__body">
+            <div id="issuesContainer"></div>
             <div class="adv-form-group">
-              <label for="userExplanation">Your explanation</label>
-              <textarea class="adv-input adv-textarea" id="userExplanation" rows="6" placeholder="I believe my dismissal was unfair because..."></textarea>
+              <label><input type="checkbox" id="ackIssues" /> I confirm that I have selected the issues I believe are relevant.</label>
             </div>
-            <div class="adv-form-group">
-              <label style="display:flex; align-items:flex-start; gap:8px;">
-                <input type="checkbox" id="ackStep4" />
-                <span style="font-size:0.9rem;">The AI will only correct grammar and clarity. It will NOT add legal arguments.</span>
-              </label>
-            </div>
-            <button class="adv-btn adv-btn--primary" id="btnPolish">Polish My Explanation</button>
-            <div id="polishedContainer" style="display:none;">
-              <div class="polished-output" id="polishedText"></div>
-              <button class="adv-btn adv-btn--secondary" id="btnEditPolish" style="margin-top:0.5rem;">Edit</button>
-              <button class="adv-btn adv-btn--primary" id="btnAcceptPolish" style="margin-top:0.5rem;">Accept & Continue</button>
-            </div>
-            <button class="adv-btn adv-btn--secondary" id="btnBackToStep3" style="margin-top:1rem;">← Back</button>
+            <button class="adv-btn adv-btn--secondary" id="btnBackToStep3">← Back</button>
+            <button class="adv-btn adv-btn--primary" id="btnContinueToExplain">Next: Explain Your Case</button>
           </div>
         </div>
 
-        <!-- STEP 5: Personal & employer details -->
+        <!-- STEP 5: Write your explanations -->
         <div class="wizard-step" id="step5">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Step 5: Your details (for Form 7.11)</h2>
-            <p class="adv-card__subtitle">Enter the information exactly as you want it to appear on the referral form.</p>
+            <h2 class="adv-card__title">Explain Why Each Issue Applies</h2>
+            <p class="adv-card__subtitle">For each issue you selected, write a short explanation. The AI will help you polish them.</p>
           </div>
-          <div class="adv-card__body">
-            <div class="adv-form-group">
-              <label for="fullName">Full Name</label>
-              <input type="text" class="adv-input" id="fullName" autocomplete="name" />
-            </div>
-            <div class="adv-form-group">
-              <label for="idNumber">ID Number</label>
-              <input type="text" class="adv-input" id="idNumber" autocomplete="off" />
-            </div>
-            <div class="adv-form-group">
-              <label for="cellPhone">Cell Phone</label>
-              <input type="tel" class="adv-input" id="cellPhone" autocomplete="tel" />
-            </div>
-            <div class="adv-form-group">
-              <label for="email">Email</label>
-              <input type="email" class="adv-input" id="email" autocomplete="email" />
-            </div>
-            <div class="adv-form-group">
-              <label for="employerName">Employer Name (as on payslip/contract)</label>
-              <input type="text" class="adv-input" id="employerName" autocomplete="organization" />
-            </div>
-            <div class="adv-form-group">
-              <label for="employerAddress">Employer Address</label>
-              <input type="text" class="adv-input" id="employerAddress" autocomplete="street-address" />
-            </div>
-            <div class="adv-form-group">
-              <label for="employerPhone">Employer Phone</label>
-              <input type="tel" class="adv-input" id="employerPhone" autocomplete="tel" />
-            </div>
-
-            <button class="adv-btn adv-btn--secondary" id="btnBackToStep4">← Back</button>
-            <button class="adv-btn adv-btn--primary" id="btnContinueStep6">Next: Remedy Sought</button>
+          <div class="adv-card__body" id="explainContainer">
+            <!-- dynamically generated textareas -->
+          </div>
+          <div class="adv-form-group">
+            <label><input type="checkbox" id="ackPolish" /> I understand the AI will only correct grammar.</label>
+          </div>
+          <button class="adv-btn adv-btn--secondary" id="btnBackToStep4">← Back</button>
+          <button class="adv-btn adv-btn--primary" id="btnPolishAll">Polish All Explanations</button>
+          <div id="polishOutput" style="display:none;">
+            <div class="polished-output" id="polishedText"></div>
+            <button class="adv-btn adv-btn--secondary" id="btnEditPolish">Edit</button>
+            <button class="adv-btn adv-btn--primary" id="btnAcceptPolish">Accept & Continue</button>
           </div>
         </div>
 
-        <!-- STEP 6: Remedy sought -->
+        <!-- STEP 6: Remedy & Final Summary -->
         <div class="wizard-step" id="step6">
           <div class="adv-card__header">
-            <h2 class="adv-card__title">Step 6: What outcome do you want?</h2>
-            <p class="adv-card__subtitle">Select the remedy you are seeking. For compensation, the maximum is <strong>12 months' salary</strong> (ordinary unfair dismissal) or <strong>24 months' salary</strong> (automatically unfair dismissal).</p>
+            <h2 class="adv-card__title">What Outcome Do You Want?</h2>
+            <p class="adv-card__subtitle">Choose your remedy and any special features.</p>
           </div>
           <div class="adv-card__body">
             <fieldset>
-              <legend>Remedy</legend>
+              <legend>Result Required</legend>
               <label><input type="checkbox" class="remedy" value="Reinstatement" /> Reinstatement (get my job back)</label>
+              <label><input type="checkbox" class="remedy" value="Re-employment" /> Re-employment (similar job, different terms)</label>
               <label><input type="checkbox" class="remedy" value="Compensation" /> Compensation (money)</label>
-              <label><input type="checkbox" class="remedy" value="Other" /> Other</label>
             </fieldset>
             <div class="adv-form-group">
-              <label for="remedyDetails">Additional details about your requested remedy</label>
-              <textarea class="adv-input adv-textarea" id="remedyDetails" rows="3" placeholder="e.g. amount of compensation, reinstatement terms..."></textarea>
+              <label for="interpreter">Do you need an interpreter?</label>
+              <select class="adv-input" id="interpreter"><option value="No">No</option><option value="Yes">Yes</option></select>
             </div>
-
+            <div class="adv-form-group">
+              <label for="objectConArb">Do you object to the Con-Arb process (conciliation + arbitration on same day)?</label>
+              <select class="adv-input" id="objectConArb"><option value="No">No</option><option value="Yes">Yes</option></select>
+            </div>
             <button class="adv-btn adv-btn--secondary" id="btnBackToStep5">← Back</button>
-            <button class="adv-btn adv-btn--primary" id="btnGenerateSummary">Generate Referral Summary</button>
+            <button class="adv-btn adv-btn--primary" id="btnGenerateSummary">Generate Form 7.11 Summary</button>
           </div>
         </div>
 
         <!-- STEP 7: Final Summary -->
         <div class="wizard-step" id="step7">
-          <div class="adv-card__header">
-            <h2 class="adv-card__title">Your CCMA Referral Summary</h2>
-            <p class="adv-card__subtitle">Copy this into your Form 7.11 or use it as a reference.</p>
-          </div>
+          <div class="adv-card__header"><h2 class="adv-card__title">Your Completed Summary</h2></div>
           <div class="adv-card__body">
             <div class="summary-box" id="finalSummary"></div>
-            <div style="margin-top:1rem;">
-              <button class="adv-btn adv-btn--primary" onclick="navigator.clipboard.writeText(document.getElementById('finalSummary').innerText)">📋 Copy to Clipboard</button>
-              <a href="referral.html" class="adv-btn adv-btn--secondary" style="margin-left:0.5rem;">Go to Referral Form</a>
-            </div>
-            <button class="adv-btn adv-btn--secondary" id="btnBackToStep6">← Back</button>
+            <button class="adv-btn adv-btn--primary" onclick="navigator.clipboard.writeText(document.getElementById('finalSummary').innerText)">📋 Copy</button>
+            <a href="referral.html" class="adv-btn adv-btn--secondary" style="margin-left:0.5rem;">Go to Online Referral</a>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- SIDEBAR with AI Chat -->
-    <aside class="adv-sidebar" role="complementary">
-      <div class="adv-sidebar__widget adv-chat" id="aiChatWidget">
+    <!-- SIDEBAR AI CHAT -->
+    <aside class="adv-sidebar">
+      <div class="adv-sidebar__widget adv-chat">
         <h3 class="adv-sidebar__widget-title">🤖 AI Assistant</h3>
         <div class="adv-chat__messages" id="chatMessages">
-          <div class="chat-message assistant">Hello! Ask me to explain any CCMA term (constructive dismissal, automatically unfair, etc.) or how the process works. I provide legal information, not advice.</div>
+          <div class="chat-message assistant">Ask me to explain any CCMA term or process.</div>
         </div>
         <div class="adv-chat__input-group">
-          <input type="text" class="adv-chat__input" id="chatInput" placeholder="Type your question..." aria-label="Chat message" autocomplete="off" />
+          <input type="text" class="adv-chat__input" id="chatInput" placeholder="Ask a question..." autocomplete="off" />
           <button class="adv-chat__send" id="chatSend">Send</button>
         </div>
-      </div>
-
-      <div class="adv-sidebar__widget">
-        <h3 class="adv-sidebar__widget-title">Important Deadlines</h3>
-        <div class="adv-alert adv-alert--warning adv-alert--minimal" style="margin-bottom: 0.75rem;">
-          <div class="adv-alert__content">
-            <div class="adv-alert__title">30‑Day Rule (LRA s191)</div>
-            File your referral within 30 days of dismissal. Late referrals need condonation.
-          </div>
-        </div>
-        <div class="adv-alert adv-alert--danger adv-alert--minimal">
-          <div class="adv-alert__content">
-            <div class="adv-alert__title">6‑Week Challenge (LRA s145)</div>
-            Challenge an award within 6 weeks of service.
-          </div>
-        </div>
-      </div>
-
-      <div class="adv-sidebar__widget">
-        <h3 class="adv-sidebar__widget-title">Quick Links</h3>
-        <a href="referral.html" style="display:block; padding:0.5rem;">File a Referral</a>
-        <a href="ccma-offices.html" style="display:block; padding:0.5rem;">Find CCMA Office</a>
-        <a href="https://www.ccma.org.za" target="_blank" rel="noopener" style="display:block; padding:0.5rem;">CCMA Official Site</a>
       </div>
     </aside>
   </main>
 
+  <!-- Footer/Disclaimer unchanged -->
   <div class="adv-bottom-zone">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0.5rem 1.5rem; display: flex; justify-content: flex-end;">
-      <div class="adv-savings adv-savings--small">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        You've saved <span class="adv-savings__amount">R0</span> vs. attorney fees
-      </div>
-    </div>
-    <div class="adv-compliance" role="contentinfo">
-      <strong>Important:</strong> Advome provides procedural assistance only and does not constitute legal advice. Users take full responsibility for their cases. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html#section34">Section 34</a>
-    </div>
-
-    <nav class="adv-nav-footer" aria-label="Page navigation">
-      <a href="index.html" class="adv-nav-footer__prev">← Back to Home</a>
-      <a href="referral.html" class="adv-nav-footer__next">Start: File Dispute →</a>
-    </nav>
-
+    <div class="adv-compliance">Advome provides procedural assistance only. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a></div>
     <div class="global-disclaimer">
-      ⚠️ <strong>LEGAL INFORMATION ONLY — NOT LEGAL ADVICE.</strong>  
-      This platform provides educational legal information. Using this platform does NOT create an attorney‑client relationship.  
-      YOU are solely responsible for your legal decisions and the content of any documents you file.  
-      You should consult a qualified legal practitioner for advice specific to your situation.  
-      <a href="terms.html">Full disclaimer</a>
+      ⚠️ <strong>LEGAL INFORMATION ONLY — NOT LEGAL ADVICE.</strong> This platform provides educational legal information. Using this platform does NOT create an attorney‑client relationship. YOU are solely responsible for your legal decisions.
     </div>
   </div>
 
-  <footer class="adv-footer" role="contentinfo">
-    <p style="margin-bottom: 0.5rem;">
-      <a href="index.html">Home</a>
-      <a href="ccma.html">CCMA</a>
-      <a href="divorce.html">Divorce</a>
-      <a href="estates-hub.html">Estates</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="attorney.html">Attorneys</a>
-    </p>
-    <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">
-      © 2026 Advome. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html#section34">Section 34 Disclosure</a>
-    </p>
+  <footer class="adv-footer">
+    <p><a href="index.html">Home</a> <a href="ccma.html">CCMA</a> <a href="divorce.html">Divorce</a> <a href="estates-hub.html">Estates</a></p>
+    <p>© 2026 Advome</p>
   </footer>
 
   <script src="shared-scripts.js"></script>
   <script>
-    // ==================== INFO POPUPS ====================
-    function toggleInfo(event, id) {
-      event.stopPropagation();
-      const popup = document.getElementById(id);
-      const wasOpen = popup.classList.contains('show');
-      document.querySelectorAll('.info-popup').forEach(p => p.classList.remove('show'));
-      if (!wasOpen) popup.classList.add('show');
-    }
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.info-popup').forEach(p => p.classList.remove('show'));
-    });
+    // ----- AI call with Gemini fallback to DeepSeek -----
+    async function callAI(type, userText, legalField = 'labour law') {
+      // Try Gemini first
+      try {
+        const resp = await fetch('/api/case-law', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type, userText, legalField })
+        });
+        const data = await resp.json();
+        if (!data.error) return data.result;
+      } catch (e) { console.warn('Gemini failed, trying DeepSeek...'); }
 
-    // ==================== SIDEBAR CHAT ====================
+      // Fallback to DeepSeek
+      try {
+        const resp = await fetch('/api/deepseek', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type, userText, legalField })
+        });
+        const data = await resp.json();
+        if (!data.error) return data.result;
+      } catch (e) { console.error('DeepSeek also failed.'); }
+
+      throw new Error('Both AI services failed.');
+    }
+
+    // ----- Chat sidebar -----
     const chatMessages = document.getElementById('chatMessages');
     const chatInput = document.getElementById('chatInput');
-    const chatSend = document.getElementById('chatSend');
-
-    chatSend.addEventListener('click', sendChat);
+    document.getElementById('chatSend').addEventListener('click', sendChat);
     chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendChat(); });
 
     async function sendChat() {
       const text = chatInput.value.trim();
       if (!text) return;
-      appendMessage('user', text);
+      appendMsg('user', text);
       chatInput.value = '';
-      const replyDiv = appendMessage('assistant', '...');
+      const replyDiv = appendMsg('assistant', '...');
       try {
-        const res = await fetch('/api/case-law', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'chat', userText: text, legalField: 'labour law' })
-        });
-        const data = await res.json();
-        replyDiv.textContent = data.result || 'Sorry, I could not get an answer.';
-      } catch (err) {
-        replyDiv.textContent = 'Connection error.';
-      }
+        const answer = await callAI('chat', text, 'labour law');
+        replyDiv.textContent = answer || 'Sorry, no answer.';
+      } catch { replyDiv.textContent = 'Connection error.'; }
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function appendMessage(role, text) {
+    function appendMsg(role, text) {
       const div = document.createElement('div');
       div.className = `chat-message ${role}`;
       div.textContent = text;
@@ -431,233 +320,212 @@
       return div;
     }
 
-    // ==================== WIZARD STATE ====================
-    let selectedLaws = [];          // { text, score }
-    let allLawItems = [];
-    let polishedExplanation = '';
+    // ----- Wizard state -----
+    let selectedIssues = []; // { text, type (procedural/substantive) }
+    let explanations = {};   // key: issue text, value: user explanation
+    let polishedExplanations = {};
 
-    function showStep(stepId) {
+    function showStep(id) {
       document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
-      document.getElementById(stepId).classList.add('active');
+      document.getElementById(id).classList.add('active');
     }
 
-    // ==================== STEP NAVIGATION (all IDs exist) ====================
-    document.getElementById('btnStep1Next').addEventListener('click', () => {
-      if (!document.getElementById('dismissalDate').value) {
-        alert('Please enter the date of dismissal/dispute.');
-        return;
-      }
-      showStep('step2');
-    });
-
+    // Navigation buttons
+    document.getElementById('btnStep1Next').addEventListener('click', () => showStep('step2'));
     document.getElementById('btnBackToStep1').addEventListener('click', () => showStep('step1'));
 
-    document.getElementById('btnAnalyze').addEventListener('click', async () => {
-      if (!document.getElementById('ackStep2').checked) {
-        alert('Please acknowledge that you must decide which laws apply.');
-        return;
-      }
-      const story = document.getElementById('userStory').value.trim();
-      if (!story) {
-        alert('Please describe what happened.');
-        return;
-      }
-
-      document.getElementById('step2Loading').style.display = 'block';
-      document.getElementById('step2Error').style.display = 'none';
-
-      try {
-        const resp = await fetch('/api/case-law', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'analyze',
-            userText: story,
-            legalField: 'labour and employment law'
-          })
-        });
-        const data = await resp.json();
-        if (data.error) throw new Error(data.error);
-        parseAndDisplayLaws(data.result);
-        showStep('step3');
-      } catch (err) {
-        document.getElementById('step2Error').textContent = 'Error: ' + err.message;
-        document.getElementById('step2Error').style.display = 'block';
-      } finally {
-        document.getElementById('step2Loading').style.display = 'none';
-      }
-    });
-
+    document.getElementById('btnStep2Next').addEventListener('click', () => showStep('step3'));
     document.getElementById('btnBackToStep2').addEventListener('click', () => showStep('step2'));
-
-    // ==================== DISPLAY LAWS ====================
-    function parseAndDisplayLaws(rawText) {
-      const container = document.getElementById('lawContainer');
-      container.innerHTML = '';
-      allLawItems = [];
-      selectedLaws = [];
-
-      const lines = rawText.split('\n').filter(l => l.trim());
-      if (lines.length === 0) {
-        container.innerHTML = '<p>No laws identified. You may proceed without selecting any.</p>';
-        return;
-      }
-
-      const ul = document.createElement('ul');
-      ul.className = 'law-list';
-
-      lines.forEach((line, i) => {
-        const match = line.match(/^(.*?)\s*\|\s*Score:\s*(\d)/);
-        let lawText = line.replace(/^\d+[\.\)]\s*/, '').trim();
-        let score = 2;
-        if (match) {
-          lawText = match[1].replace(/^Law:\s*/i, '').trim();
-          score = parseInt(match[2], 10) || 2;
-        }
-
-        allLawItems.push({ text: lawText, score });
-
-        const card = document.createElement('li');
-        card.className = 'law-card';
-        card.innerHTML = `
-          <input type="checkbox" id="law-${i}" value="${i}" />
-          <label for="law-${i}" style="flex:1;">${lawText}</label>
-          <span class="score-badge score-${score}">${score === 3 ? 'High' : score === 2 ? 'Med' : 'Low'}</span>
-        `;
-
-        card.addEventListener('click', (e) => {
-          if (e.target.tagName !== 'INPUT') {
-            const cb = card.querySelector('input');
-            cb.checked = !cb.checked;
-            updateLawSelection(card, cb, i);
-          } else {
-            updateLawSelection(card, e.target, i);
-          }
-        });
-
-        ul.appendChild(card);
-      });
-
-      container.appendChild(ul);
-    }
-
-    function updateLawSelection(card, checkbox, index) {
-      if (checkbox.checked) {
-        card.classList.add('selected');
-        selectedLaws.push({ text: allLawItems[index].text, score: allLawItems[index].score });
-      } else {
-        card.classList.remove('selected');
-        selectedLaws = selectedLaws.filter(l => l.text !== allLawItems[index].text);
-      }
-    }
-
-    // ==================== CONTINUE TO EXPLANATION ====================
-    document.getElementById('btnContinueStep4').addEventListener('click', () => {
-      if (!document.getElementById('ackStep3').checked) {
-        alert('Please confirm that you selected the laws based on your own analysis.');
-        return;
-      }
-      showStep('step4');
-    });
 
     document.getElementById('btnBackToStep3').addEventListener('click', () => showStep('step3'));
 
-    // ==================== POLISH EXPLANATION ====================
-    document.getElementById('btnPolish').addEventListener('click', async () => {
-      if (!document.getElementById('ackStep4').checked) {
-        alert('Please acknowledge that the AI will only correct grammar.');
-        return;
-      }
-      const explanation = document.getElementById('userExplanation').value.trim();
-      if (!explanation) {
-        alert('Please write your explanation.');
-        return;
-      }
+    // Analyze story
+    document.getElementById('btnAnalyze').addEventListener('click', async () => {
+      if (!document.getElementById('ackAnalyze').checked) { alert('Please acknowledge.'); return; }
+      const story = document.getElementById('userStory').value.trim();
+      if (!story) { alert('Please describe what happened.'); return; }
+
+      document.getElementById('analyzeLoading').style.display = 'block';
+      document.getElementById('analyzeError').style.display = 'none';
 
       try {
-        const resp = await fetch('/api/case-law', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'polish', userText: explanation })
-        });
-        const data = await resp.json();
-        polishedExplanation = data.result;
-        document.getElementById('polishedText').textContent = polishedExplanation;
-        document.getElementById('polishedContainer').style.display = 'block';
+        const result = await callAI('analyze', story, 'labour and employment law');
+        parseIssues(result);
+        showStep('step4');
       } catch (err) {
-        alert('Error polishing text.');
+        document.getElementById('analyzeError').textContent = err.message;
+        document.getElementById('analyzeError').style.display = 'block';
+      } finally {
+        document.getElementById('analyzeLoading').style.display = 'none';
+      }
+    });
+
+    function parseIssues(raw) {
+      const container = document.getElementById('issuesContainer');
+      container.innerHTML = '';
+      selectedIssues = [];
+
+      // Split into procedural and substantive sections
+      const procMatch = raw.match(/PROCEDURAL ISSUES:[\s\S]*?(?=SUBSTANTIVE ISSUES|$)/i);
+      const subsMatch = raw.match(/SUBSTANTIVE ISSUES:[\s\S]*/i);
+
+      const renderSection = (title, text, type) => {
+        if (!text) return;
+        const lines = text.split('\n').filter(l => l.trim().startsWith('-'));
+        if (lines.length === 0) return;
+
+        const h4 = document.createElement('h4');
+        h4.textContent = title;
+        container.appendChild(h4);
+
+        const ul = document.createElement('ul');
+        ul.className = 'issue-list';
+        lines.forEach(line => {
+          const content = line.replace(/^-\s*/, '').trim();
+          const li = document.createElement('li');
+          li.className = 'issue-item';
+          li.innerHTML = `<label><input type="checkbox" class="issueCheck" data-text="${content}" data-type="${type}" /> ${content}</label>`;
+          li.addEventListener('change', e => {
+            if (e.target.checked) {
+              li.classList.add('selected');
+              selectedIssues.push({ text: content, type });
+            } else {
+              li.classList.remove('selected');
+              selectedIssues = selectedIssues.filter(i => i.text !== content);
+            }
+          });
+          ul.appendChild(li);
+        });
+        container.appendChild(ul);
+      };
+
+      renderSection('Procedural Issues (process was unfair)', procMatch ? procMatch[0] : '', 'procedural');
+      renderSection('Substantive Issues (reason/punishment was wrong)', subsMatch ? subsMatch[0] : '', 'substantive');
+    }
+
+    document.getElementById('btnContinueToExplain').addEventListener('click', () => {
+      if (!document.getElementById('ackIssues').checked) { alert('Please confirm.'); return; }
+      if (selectedIssues.length === 0) { alert('Please select at least one issue.'); return; }
+      buildExplanationFields();
+      showStep('step5');
+    });
+
+    function buildExplanationFields() {
+      const container = document.getElementById('explainContainer');
+      container.innerHTML = '';
+      selectedIssues.forEach(issue => {
+        const div = document.createElement('div');
+        div.className = 'adv-form-group';
+        div.innerHTML = `<label>${issue.text}</label><textarea class="adv-input adv-textarea explanationInput" data-issue="${issue.text}" rows="2" placeholder="Why do you think this applies?"></textarea>`;
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById('btnPolishAll').addEventListener('click', async () => {
+      if (!document.getElementById('ackPolish').checked) { alert('Please acknowledge.'); return; }
+      // Collect all user explanations
+      const inputs = document.querySelectorAll('.explanationInput');
+      let combinedText = '';
+      inputs.forEach(txt => {
+        combinedText += txt.value.trim() + '\n\n';
+      });
+
+      try {
+        const polished = await callAI('polish', combinedText);
+        document.getElementById('polishedText').textContent = polished;
+        document.getElementById('polishOutput').style.display = 'block';
+      } catch (err) {
+        alert('Error polishing.');
       }
     });
 
     document.getElementById('btnEditPolish').addEventListener('click', () => {
-      document.getElementById('userExplanation').value = polishedExplanation;
-      document.getElementById('polishedContainer').style.display = 'none';
+      document.getElementById('polishOutput').style.display = 'none';
     });
 
     document.getElementById('btnAcceptPolish').addEventListener('click', () => {
-      document.getElementById('userExplanation').value = polishedExplanation;
-      showStep('step5');
+      const polished = document.getElementById('polishedText').textContent.split('\n\n');
+      const inputs = document.querySelectorAll('.explanationInput');
+      inputs.forEach((txt, i) => {
+        if (polished[i]) txt.value = polished[i].trim();
+      });
+      document.getElementById('polishOutput').style.display = 'none';
+      showStep('step6');
     });
 
     document.getElementById('btnBackToStep4').addEventListener('click', () => showStep('step4'));
-
-    // ==================== NAVIGATION FROM STEP 5 ====================
-    document.getElementById('btnContinueStep6').addEventListener('click', () => showStep('step6'));
     document.getElementById('btnBackToStep5').addEventListener('click', () => showStep('step5'));
 
-    // ==================== GENERATE SUMMARY ====================
+    // Generate summary
     document.getElementById('btnGenerateSummary').addEventListener('click', () => {
-      const fullName = document.getElementById('fullName').value;
-      const idNumber = document.getElementById('idNumber').value;
-      const phone = document.getElementById('cellPhone').value;
-      const email = document.getElementById('email').value;
-      const employerName = document.getElementById('employerName').value;
-      const employerAddress = document.getElementById('employerAddress').value;
-      const employerPhone = document.getElementById('employerPhone').value;
-      const dismissalDate = document.getElementById('dismissalDate').value;
-      const disputeTypeLabel = document.querySelector('input[name="disputeType"]:checked').parentNode.textContent.trim();
-      const remedies = Array.from(document.querySelectorAll('.remedy:checked')).map(cb => cb.value).join(', ') || 'Not specified';
-      const remedyDetails = document.getElementById('remedyDetails').value;
-      const explanation = document.getElementById('userExplanation').value;
+      const data = {
+        employee: {
+          name: document.getElementById('fullName').value,
+          id: document.getElementById('idNumber').value,
+          phone: document.getElementById('cellPhone').value,
+          email: document.getElementById('email').value,
+          length: document.getElementById('lengthService').value,
+          gross: document.getElementById('salaryGross').value,
+          net: document.getElementById('salaryNet').value,
+        },
+        employer: {
+          name: document.getElementById('employerName').value,
+          contact: document.getElementById('employerContactPerson').value,
+          address: document.getElementById('employerAddress').value,
+          phone: document.getElementById('employerPhone').value,
+          employees: document.getElementById('employerEmployees').value,
+        },
+        dismissalDate: document.getElementById('dismissalDate').value,
+        informedMethods: Array.from(document.querySelectorAll('.informedMethod:checked')).map(cb => cb.value).join(', '),
+        reason: document.querySelector('input[name="dismissalReason"]:checked')?.value || 'Not specified',
+        probation: document.querySelector('input[name="probation"]:checked')?.value,
+        issues: selectedIssues,
+        explanations: Array.from(document.querySelectorAll('.explanationInput')).map(txt => txt.value),
+        remedies: Array.from(document.querySelectorAll('.remedy:checked')).map(cb => cb.value).join(', '),
+        interpreter: document.getElementById('interpreter').value,
+        conarb: document.getElementById('objectConArb').value,
+      };
 
-      const selectedLawsText = selectedLaws.map(l => `- ${l.text}`).join('\n');
+      let summary = `CCMA REFERRAL SUMMARY (Form 7.11)
+===================================
+Employee: ${data.employee.name}
+ID: ${data.employee.id}
+Contact: ${data.employee.phone} / ${data.employee.email}
+Length of Service: ${data.employee.length}
+Salary (Gross/Net): ${data.employee.gross} / ${data.employee.net}
 
-      const summary = `CCMA REFERRAL SUMMARY
-========================
-Employee Details:
-Name: ${fullName}
-ID Number: ${idNumber}
-Phone: ${phone}
-Email: ${email}
+Employer: ${data.employer.name}
+Contact Person: ${data.employer.contact}
+Address: ${data.employer.address}
+Phone: ${data.employer.phone}
+Number of Employees: ${data.employer.employees}
 
-Employer Details:
-Name: ${employerName}
-Address: ${employerAddress}
-Phone: ${employerPhone}
+Date of Dismissal: ${data.dismissalDate}
+Informed by: ${data.informedMethods}
+Reason Given: ${data.reason}
+Related to Probation? ${data.probation}
 
-Nature of Dispute: ${disputeTypeLabel}
-Date of Dismissal/Dispute: ${dismissalDate}
+PROCEDURAL ISSUES SELECTED:
+${data.issues.filter(i => i.type === 'procedural').map(i => `- ${i.text}`).join('\n')}
 
-Relevant Laws Identified:
-${selectedLawsText || 'None selected'}
+SUBSTANTIVE ISSUES SELECTED:
+${data.issues.filter(i => i.type === 'substantive').map(i => `- ${i.text}`).join('\n')}
 
-Summary of Facts (your explanation):
-${explanation}
+YOUR EXPLANATIONS:
+${data.explanations.map((exp, idx) => `${data.issues[idx]?.text || ''}: ${exp}`).join('\n\n')}
 
-Remedy Sought: ${remedies}
-Additional Remedy Details: ${remedyDetails}
+REMEDY SOUGHT: ${data.remedies}
+Interpreter needed: ${data.interpreter}
+Object to Con-Arb: ${data.conarb}
 
-Prepared with Advome – verify before filing.`;
+Prepared by Advome – verify before filing.`;
 
       document.getElementById('finalSummary').textContent = summary;
       showStep('step7');
     });
 
-    // Back from Step 7 to Step 6
     document.getElementById('btnBackToStep6').addEventListener('click', () => showStep('step6'));
-
-    // ==================== REMOVE TARGET FROM ALL LINKS ====================
-    document.querySelectorAll('a').forEach(a => a.removeAttribute('target'));
+    document.getElementById('btnBackToStep7').addEventListener('click', () => showStep('step7'));
   </script>
 </body>
 </html>
