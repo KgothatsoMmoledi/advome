@@ -13,11 +13,11 @@ export async function onRequestPost({ request, env }) {
   }
 
   const userMessage = `User input:\n${userText}`;
-  const model = 'gemini-1.5-flash';   // Most generous free model
+  const model = 'gemini-3.5-flash';   // Correct free model
 
-  try {
+  async function callGemini(retry = true) {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
 
     const geminiResponse = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`,
@@ -34,6 +34,18 @@ export async function onRequestPost({ request, env }) {
 
     const data = await geminiResponse.json();
 
+    // Retry on rate limit (429) – wait 5 seconds and try once more
+    if (data.error && data.error.code === 429 && retry) {
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      return callGemini(false);
+    }
+
+    return data;
+  }
+
+  try {
+    const data = await callGemini(true);
+
     if (debug) {
       return new Response(JSON.stringify({ debugData: data }), {
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
@@ -41,7 +53,7 @@ export async function onRequestPost({ request, env }) {
     }
 
     if (data.error) {
-      return new Response(JSON.stringify({ error: data.error.message }), { status: 500 });
+      return new Response(JSON.stringify({ error: data.error.message }), { status: data.error.code || 500 });
     }
 
     const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -49,7 +61,7 @@ export async function onRequestPost({ request, env }) {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   } catch (error) {
-    const message = error.name === 'AbortError' ? 'AI took too long, try again' : error.message;
+    const message = error.name === 'AbortError' ? 'The AI took too long to respond. Please try again.' : error.message;
     return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
 }
