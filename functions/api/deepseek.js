@@ -6,7 +6,7 @@ export async function onRequestPost({ request, env }) {
     systemPrompt = `You are a South African labour law assistant. Based on the user's story, identify:
 1. Possible procedural unfairness issues (process problems). 
 2. Possible substantive unfairness issues (reasons were wrong, punishment too harsh, etc.).
-For each, give a short plain‑language explanation that a non‑lawyer can understand. 
+For each, give a short plain-language explanation that a non-lawyer can understand. 
 Format your response exactly like this:
 PROCEDURAL ISSUES:
 - [Issue 1]: [explanation]
@@ -49,6 +49,7 @@ Do not give legal advice. Do not apply the law. Only list possible issues.`;
 
     const data = await response.json();
     const generatedText = data.choices?.[0]?.message?.content || '';
+
     return new Response(JSON.stringify({ result: generatedText }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
