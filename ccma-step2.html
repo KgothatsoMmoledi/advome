@@ -1,0 +1,62 @@
+<section class="adv-card adv-card--primary">
+
+    <div class="adv-card__header">
+
+        <div>
+
+            <div class="adv-card__title">
+                Employment Information
+            </div>
+
+            <div class="adv-card__subtitle">
+                Tell us about your employment relationship.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="adv-form-group">
+
+        <label>What happened?</label>
+
+        <select class="adv-select" id="dismissalType">
+
+            <option value="">Select one...</option>
+
+            <option value="misconduct">Dismissed for Misconduct</option>
+
+            <option value="incapacity">Dismissed for Incapacity</option>
+
+            <option value="retrenchment">Retrenched</option>
+
+            <option value="constructive">Constructive Dismissal</option>
+
+            <option value="automatic">Automatically Unfair Dismissal</option>
+
+            <option value="unknown">I'm Not Sure</option>
+
+        </select>
+
+    </div>
+
+
+    <div id="dynamicQuestions"></div>
+
+    <div class="adv-mt-3">
+
+        <button class="adv-btn adv-btn--secondary" onclick="previousStep()">
+
+            ← Previous
+
+        </button>
+
+        <button class="adv-btn adv-btn--accent" onclick="nextStep()">
+
+            Continue →
+
+        </button>
+
+    </div>
+
+</section>
