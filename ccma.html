@@ -1,343 +1,494 @@
-<header class="adv-header">
-    <div class="adv-header__logo">
-        Adv<span>ome</span>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCMA Referral | Advome</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    :root {
+      --step-count: 6;
+    }
+    .wizard-step {
+      display: none;
+    }
+    .wizard-step.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .compensation-box {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .compensation-amount {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    .strength-meter {
+      height: 12px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .strength-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
 
+  <!-- Header -->
+  <header class="adv-header">
+    <a href="index.html" class="adv-header__logo">Ad<span>vome</span></a>
     <nav class="adv-header__nav">
-        <a href="#">Dashboard</a>
-        <a href="#">My Cases</a>
-        <a href="#">Templates</a>
-        <a href="#">Documents</a>
-        <a href="#">Support</a>
+      <a href="ccma.html" class="active">CCMA</a>
+      <a href="#">Labour Court</a>
+      <a href="#">Civil</a>
+      <a href="#">Contracts</a>
+      <a href="#">Wills</a>
     </nav>
-
     <div class="adv-header__user">
-        <div class="adv-header__avatar">KM</div>
-        Welcome Back
+      <div class="adv-header__avatar">U</div>
+      <span>My Cases</span>
     </div>
-</header>
+    <button class="adv-header__menu-toggle">☰</button>
+  </header>
 
-<div class="adv-progress">
+  <!-- Progress Bar (custom 6-step) -->
+  <div class="adv-progress" id="ccmaProgress">
+    <div class="adv-progress__track" id="progressTrack"></div>
+  </div>
 
-    <div class="adv-progress__track">
-
-        <div class="adv-progress__step">
-            <div class="adv-progress__pill adv-progress__pill--active">
-                <span class="step-num">1</span>
-                <span class="step-name">Employment</span>
-            </div>
-        </div>
-
-        <div class="adv-progress__connector"></div>
-
-        <div class="adv-progress__step">
-            <div class="adv-progress__pill adv-progress__pill--pending">
-                <span class="step-num">2</span>
-                <span class="step-name">Jurisdiction</span>
-            </div>
-        </div>
-
-        <div class="adv-progress__connector"></div>
-
-        <div class="adv-progress__step">
-            <div class="adv-progress__pill adv-progress__pill--pending">
-                <span class="step-num">3</span>
-                <span class="step-name">Dismissal</span>
-            </div>
-        </div>
-
-        <div class="adv-progress__connector"></div>
-
-        <div class="adv-progress__step">
-            <div class="adv-progress__pill adv-progress__pill--pending">
-                <span class="step-num">4</span>
-                <span class="step-name">Evidence</span>
-            </div>
-        </div>
-
-        <div class="adv-progress__connector"></div>
-
-        <div class="adv-progress__step">
-            <div class="adv-progress__pill adv-progress__pill--pending">
-                <span class="step-num">5</span>
-                <span class="step-name">Review</span>
-            </div>
-        </div>
-
-        <div class="adv-progress__connector"></div>
-
-        <div class="adv-progress__step">
-            <div class="adv-progress__pill adv-progress__pill--pending">
-                <span class="step-num">6</span>
-                <span class="step-name">Generate</span>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-
-<section class="adv-hero">
-
+  <!-- Hero -->
+  <section class="adv-hero">
     <div class="adv-hero__content">
+      <h1>CCMA Referral Wizard</h1>
+      <p>Complete your referral in 6 steps – we save as you go</p>
+    </div>
+    <div class="adv-hero__badge adv-hero__badge--online">Auto‑save active</div>
+  </section>
 
-        <h1>CCMA Referral Assistant</h1>
+  <!-- Main -->
+  <main class="adv-container">
+    <div class="adv-workspace">
 
-        <p>
-            Answer a few questions and Advome prepares your CCMA referral,
-            evidence checklist and legal documents automatically.
-        </p>
+      <!-- STEP 1: Employee Details -->
+      <div class="adv-card wizard-step active" id="step1">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">1. Your Details</h2>
+          <p class="adv-card__subtitle">Information about you, the employee</p>
+        </div>
+        <div class="adv-form-group">
+          <label for="empFullName">Full name</label>
+          <input type="text" id="empFullName" class="adv-input" autocomplete="name">
+        </div>
+        <div class="adv-form-group">
+          <label for="empID">SA ID number</label>
+          <input type="text" id="empID" class="adv-input">
+        </div>
+        <div class="adv-form-group">
+          <label for="empPhone">Phone number</label>
+          <input type="tel" id="empPhone" class="adv-input" autocomplete="tel">
+        </div>
+        <div class="adv-form-group">
+          <label for="empEmail">Email</label>
+          <input type="email" id="empEmail" class="adv-input" autocomplete="email">
+        </div>
+        <button class="adv-btn adv-btn--primary adv-mt-2" onclick="goToStep(2)">Continue →</button>
+      </div>
+
+      <!-- STEP 2: Employer Details -->
+      <div class="adv-card wizard-step" id="step2">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">2. Employer Details</h2>
+          <p class="adv-card__subtitle">Who you worked for</p>
+        </div>
+        <div class="adv-form-group">
+          <label for="empName">Employer / Company name</label>
+          <input type="text" id="empName" class="adv-input">
+        </div>
+        <div class="adv-form-group">
+          <label for="empAddress">Employer address</label>
+          <textarea id="empAddress" class="adv-textarea" rows="2"></textarea>
+        </div>
+        <div class="adv-form-group">
+          <label for="empContact">Contact person / HR</label>
+          <input type="text" id="empContact" class="adv-input">
+        </div>
+        <div class="adv-flex adv-justify-between">
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(1)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Employment & Dispute -->
+      <div class="adv-card wizard-step" id="step3">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">3. Employment & Dispute</h2>
+          <p class="adv-card__subtitle">What happened and when</p>
+        </div>
+        <div class="adv-form-group">
+          <label for="salary">Monthly salary (R)</label>
+          <input type="number" id="salary" class="adv-input" placeholder="e.g. 8500">
+        </div>
+        <div class="adv-form-group">
+          <label for="startDate">Employment start date</label>
+          <input type="date" id="startDate" class="adv-input">
+        </div>
+        <div class="adv-form-group">
+          <label for="dismissalType">Type of dispute</label>
+          <select id="dismissalType" class="adv-select">
+            <option value="">Select...</option>
+            <option value="misconduct">Dismissed for misconduct</option>
+            <option value="incapacity">Incapacity / poor performance</option>
+            <option value="retrenchment">Retrenchment</option>
+            <option value="constructive">Constructive dismissal</option>
+            <option value="automatic">Automatically unfair</option>
+            <option value="other">Other / unsure</option>
+          </select>
+        </div>
+        <div class="adv-form-group">
+          <label for="dismissalDate">Date of dismissal / resignation</label>
+          <input type="date" id="dismissalDate" class="adv-input">
+        </div>
+        <div class="adv-form-group">
+          <label for="disputeReason">Brief reason for dispute</label>
+          <textarea id="disputeReason" class="adv-textarea" rows="3" placeholder="Describe what happened..."></textarea>
+        </div>
+        <div class="adv-flex adv-justify-between">
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(2)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(4)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Evidence & Witnesses -->
+      <div class="adv-card wizard-step" id="step4">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">4. Evidence & Witnesses</h2>
+          <p class="adv-card__subtitle">What proof do you have?</p>
+        </div>
+        <div class="adv-form-group">
+          <label>Select evidence you have</label>
+          <div class="adv-checklist" id="evidenceChecklist">
+            <div class="adv-checklist__item" data-value="contract"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Employment contract</div></div>
+            <div class="adv-checklist__item" data-value="payslips"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Payslips</div></div>
+            <div class="adv-checklist__item" data-value="dismissal_letter"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Dismissal letter</div></div>
+            <div class="adv-checklist__item" data-value="emails"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Emails / messages</div></div>
+            <div class="adv-checklist__item" data-value="witness_statement"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Witness statement</div></div>
+            <div class="adv-checklist__item" data-value="medical"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Medical certificate</div></div>
+          </div>
+        </div>
+        <div class="adv-form-group">
+          <label for="witnessName">Witness name (if any)</label>
+          <input type="text" id="witnessName" class="adv-input" placeholder="Full name">
+          <button class="adv-btn adv-btn--sm adv-btn--secondary adv-mt-1" id="addWitnessBtn">+ Add witness</button>
+          <div id="witnessList" class="adv-mt-1"></div>
+        </div>
+        <div class="adv-flex adv-justify-between">
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(3)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(5)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Outcome & Compensation -->
+      <div class="adv-card wizard-step" id="step5">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">5. Outcome & Compensation</h2>
+          <p class="adv-card__subtitle">What do you want to achieve?</p>
+        </div>
+        <div class="adv-form-group">
+          <label for="desiredOutcome">Desired outcome</label>
+          <select id="desiredOutcome" class="adv-select">
+            <option value="">Select...</option>
+            <option value="reinstatement">Reinstatement (get job back)</option>
+            <option value="compensation">Compensation (money)</option>
+            <option value="both">Both</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="compensation-box adv-mt-2" id="compensationBox">
+          <div class="compensation-amount" id="compAmount">R 0</div>
+          <div style="opacity:0.8;">Estimated maximum compensation</div>
+        </div>
+        <div class="adv-form-group adv-mt-2">
+          <label>Case strength estimate</label>
+          <div class="strength-meter">
+            <div class="strength-fill" id="strengthFill" style="width:0%; background: var(--danger);"></div>
+          </div>
+          <div class="text-muted" id="strengthText">0% – add evidence to improve</div>
+        </div>
+        <div class="adv-flex adv-justify-between">
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(4)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(6)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 6: Review & Finalise -->
+      <div class="adv-card wizard-step" id="step6">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">6. Review & Finalise</h2>
+          <p class="adv-card__subtitle">Check your information before generating the referral</p>
+        </div>
+        <div id="reviewSummary" class="adv-mb-2"></div>
+        <div class="adv-alert adv-alert--info">
+          <div class="adv-alert__content">
+            <div class="adv-alert__title">Next steps</div>
+            <p>After reviewing, you can generate the LRA Form 7.11 and submit it to the CCMA.</p>
+          </div>
+        </div>
+        <button class="adv-btn adv-btn--accent adv-btn--lg adv-w-full" id="generateBtn">Generate Referral Form</button>
+        <button class="adv-btn adv-btn--ghost adv-mt-1" onclick="goToStep(5)">← Back</button>
+        <div id="generatedOutput" class="adv-mt-2" style="display:none;"></div>
+      </div>
 
     </div>
 
-    <div class="adv-hero__badge adv-hero__badge--online">
-        ● AI Assistant Online
+    <!-- Sidebar -->
+    <aside class="adv-sidebar">
+      <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">📊 Case Snapshot</h3>
+        <div id="sidebarInfo">
+          <p class="text-muted">Complete the steps to see details</p>
+        </div>
+      </div>
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="ccma_main">
+        <h3 class="adv-sidebar__widget-title">🤖 AI Assistant</h3>
+        <div class="adv-chat__messages">
+          <div class="chat-message assistant">I can explain terms, check your information, and help you prepare. Ask me anything.</div>
+        </div>
+        <div class="adv-chat__input-group">
+          <input type="text" class="adv-chat__input" placeholder="Ask...">
+          <button class="adv-chat__send">Send</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <div class="adv-bottom-zone">
+    <div style="max-width:1200px;margin:0 auto;padding:0.5rem 1.5rem;display:flex;justify-content:flex-end;">
+      <div class="adv-savings">Saved <span class="adv-savings__amount">R0</span></div>
     </div>
-
-</section>
-
-
-<div class="adv-container">
-
-<main>
-
-<div class="adv-card adv-card--primary">
-
-<div class="adv-card__header">
-
-<div>
-
-<div class="adv-card__title">
-Start Your CCMA Referral
-</div>
-
-<div class="adv-card__subtitle">
-Complete the information below to prepare your referral.
-</div>
-
-</div>
-
-</div>
-
-<div class="adv-form-group">
-<label>Employer Name</label>
-<input class="adv-input" placeholder="ABC (Pty) Ltd">
-</div>
-
-<div class="adv-form-group">
-<label>Your Position</label>
-<input class="adv-input" placeholder="Sales Representative">
-</div>
-
-<div class="adv-form-group">
-<label>Monthly Salary</label>
-<input class="adv-input" placeholder="R18 500">
-</div>
-
-<div class="adv-form-group">
-<label>Date Employment Started</label>
-<input class="adv-input" type="date">
-</div>
-
-<div class="adv-form-group">
-<label>Date Employment Ended</label>
-<input class="adv-input" type="date">
-</div>
-
-<div class="adv-form-group">
-<label>Province</label>
-
-<select class="adv-select">
-
-<option>Select Province</option>
-
-<option>Gauteng</option>
-
-<option>Western Cape</option>
-
-<option>KwaZulu-Natal</option>
-
-<option>Free State</option>
-
-<option>Mpumalanga</option>
-
-<option>North West</option>
-
-<option>Limpopo</option>
-
-<option>Eastern Cape</option>
-
-<option>Northern Cape</option>
-
-</select>
-
-</div>
-
-<button class="adv-btn adv-btn--accent adv-btn--block">
-Continue →
-</button>
-
-</div>
-
-</main>
-
-<aside class="adv-sidebar">
-
-<div class="adv-sidebar__widget">
-
-<div class="adv-sidebar__widget-title">
-Case Status
-</div>
-
-<div class="adv-deadline">
-
-<div class="adv-deadline__label">
-
-Referral Deadline
-
-</div>
-
-<div class="adv-deadline__date">
-
-26 Days Remaining
-
-</div>
-
-<div class="adv-deadline__safe">
-
-Within Time Limit
-
-</div>
-
-</div>
-
-</div>
-
-<div class="adv-sidebar__widget">
-
-<div class="adv-sidebar__widget-title">
-
-Preparation Checklist
-
-</div>
-
-<ul class="adv-checklist">
-
-<li class="adv-checklist__item">
-
-<div class="adv-checklist__checkbox"></div>
-
-<div>
-
-<div class="adv-checklist__text">
-
-Employment Contract
-
-</div>
-
-</div>
-
-</li>
-
-<li class="adv-checklist__item">
-
-<div class="adv-checklist__checkbox"></div>
-
-<div>
-
-<div class="adv-checklist__text">
-
-Latest Payslip
-
-</div>
-
-</div>
-
-</li>
-
-<li class="adv-checklist__item">
-
-<div class="adv-checklist__checkbox"></div>
-
-<div>
-
-<div class="adv-checklist__text">
-
-Dismissal Letter
-
-</div>
-
-</div>
-
-</li>
-
-<li class="adv-checklist__item">
-
-<div class="adv-checklist__checkbox"></div>
-
-<div>
-
-<div class="adv-checklist__text">
-
-WhatsApp Messages
-
-</div>
-
-</div>
-
-</li>
-
-<li class="adv-checklist__item">
-
-<div class="adv-checklist__checkbox"></div>
-
-<div>
-
-<div class="adv-checklist__text">
-
-Witness Details
-
-</div>
-
-</div>
-
-</li>
-
-</ul>
-
-</div>
-
-<div class="adv-sidebar__widget">
-
-<div class="adv-sidebar__widget-title">
-
-Advome AI
-
-</div>
-
-<div class="adv-alert adv-alert--info">
-
-<div class="adv-alert__content">
-
-<strong>Tip</strong>
-
-<br><br>
-
-The more information you provide, the stronger your referral documents become.
-
-</div>
-
-</div>
-
-<button class="adv-btn adv-btn--primary adv-btn--block">
-
-Ask AI
-
-</button>
-
-</div>
-
-</aside>
-
-</div>
+    <div class="adv-compliance">Legal information only — not legal advice. <a href="#">Terms</a> · <a href="#">Privacy</a></div>
+    <nav class="adv-nav-footer">
+      <a href="index.html" class="adv-nav-footer__prev">← Home</a>
+      <span class="adv-nav-footer__next">CCMA Referral</span>
+    </nav>
+  </div>
+
+  <footer class="adv-footer">
+    <p><a href="#">Home</a> <a href="#">CCMA</a> <a href="#">Divorce</a> <a href="#">Estates</a></p>
+    <p style="font-size:0.75rem;opacity:0.7;">© 2026 Advome</p>
+  </footer>
+
+  <script src="js/matter-manager.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    // ======================
+    // CCMA WIZARD LOGIC
+    // ======================
+    const TOTAL_STEPS = 6;
+    let currentStep = 1;
+
+    // Get or create matter
+    let matter = AdvomeMatter.current();
+    if (!matter || matter.type !== 'ccma') {
+      matter = AdvomeMatter.create('ccma');
+    }
+
+    // Build progress pills
+    function buildProgress() {
+      const track = document.getElementById('progressTrack');
+      const stepNames = ['Employee','Employer','Dispute','Evidence','Outcome','Review'];
+      track.innerHTML = '';
+      stepNames.forEach((name, i) => {
+        const pill = document.createElement('span');
+        pill.className = 'adv-progress__pill';
+        pill.innerHTML = `<span class="step-num">${i+1}</span> <span class="step-name">${name}</span>`;
+        if (i+1 < currentStep) pill.classList.add('adv-progress__pill--completed');
+        else if (i+1 === currentStep) pill.classList.add('adv-progress__pill--active');
+        else pill.classList.add('adv-progress__pill--pending');
+        track.appendChild(pill);
+        if (i < stepNames.length-1) {
+          const conn = document.createElement('span');
+          conn.className = 'adv-progress__connector' + (i+1 < currentStep ? ' adv-progress__connector--completed' : '');
+          track.appendChild(conn);
+        }
+      });
+    }
+
+    function goToStep(step) {
+      // Optional validation could go here
+      currentStep = step;
+      document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+      document.getElementById(`step${step}`).classList.add('active');
+      buildProgress();
+      updateSidebar();
+      if (step === 5) calculateCompensation();
+      if (step === 6) generateReview();
+    }
+
+    // Save all form fields to Matter on every input
+    document.addEventListener('input', function(e) {
+      if (!e.target.closest('#step1,#step2,#step3,#step4,#step5')) return;
+      saveFormData();
+    });
+
+    function saveFormData() {
+      matter.applicant = {
+        fullName: document.getElementById('empFullName')?.value || '',
+        id: document.getElementById('empID')?.value || '',
+        phone: document.getElementById('empPhone')?.value || '',
+        email: document.getElementById('empEmail')?.value || ''
+      };
+      matter.respondent = {
+        name: document.getElementById('empName')?.value || '',
+        address: document.getElementById('empAddress')?.value || '',
+        contact: document.getElementById('empContact')?.value || ''
+      };
+      matter.employment = {
+        salary: document.getElementById('salary')?.value || 0,
+        startDate: document.getElementById('startDate')?.value || '',
+        dismissalType: document.getElementById('dismissalType')?.value || '',
+        dismissalDate: document.getElementById('dismissalDate')?.value || '',
+        reason: document.getElementById('disputeReason')?.value || ''
+      };
+      // Evidence is handled separately via checkboxes
+      AdvomeMatter.save(matter);
+    }
+
+    // Evidence checkboxes
+    const evidenceItems = document.querySelectorAll('#evidenceChecklist .adv-checklist__item');
+    evidenceItems.forEach(item => {
+      item.addEventListener('click', function() {
+        this.classList.toggle('adv-checklist__item--checked');
+        saveEvidence();
+      });
+    });
+
+    function saveEvidence() {
+      matter.evidence = [];
+      evidenceItems.forEach(item => {
+        if (item.classList.contains('adv-checklist__item--checked')) {
+          matter.evidence.push(item.dataset.value);
+        }
+      });
+      AdvomeMatter.save(matter);
+    }
+
+    // Witnesses
+    let witnesses = [];
+    document.getElementById('addWitnessBtn').addEventListener('click', function() {
+      const nameInput = document.getElementById('witnessName');
+      const name = nameInput.value.trim();
+      if (!name) return;
+      witnesses.push(name);
+      nameInput.value = '';
+      renderWitnesses();
+      matter.witnesses = witnesses;
+      AdvomeMatter.save(matter);
+    });
+
+    function renderWitnesses() {
+      const list = document.getElementById('witnessList');
+      list.innerHTML = witnesses.map((w,i) => `<span class="adv-tag">${w} <button class="adv-btn--sm" onclick="removeWitness(${i})" style="background:none;border:none;color:var(--danger);cursor:pointer;">✕</button></span>`).join('');
+    }
+
+    window.removeWitness = function(i) {
+      witnesses.splice(i,1);
+      renderWitnesses();
+      matter.witnesses = witnesses;
+      AdvomeMatter.save(matter);
+    };
+
+    // Compensation calculation (simplified)
+    function calculateCompensation() {
+      const salary = parseFloat(document.getElementById('salary')?.value) || 0;
+      const type = document.getElementById('dismissalType')?.value;
+      let months = 0;
+      if (type === 'misconduct') months = 6;
+      else if (type === 'incapacity') months = 8;
+      else if (type === 'retrenchment' || type === 'constructive') months = 12;
+      else if (type === 'automatic') months = 24;
+      const comp = salary * months;
+      document.getElementById('compAmount').innerText = 'R ' + comp.toLocaleString();
+      // Strength
+      let strength = 0;
+      if (salary > 0) strength += 15;
+      if (type) strength += 20;
+      if (matter.evidence.length > 0) strength += 30;
+      if (witnesses.length > 0) strength += 20;
+      strength = Math.min(strength, 100);
+      const fill = document.getElementById('strengthFill');
+      fill.style.width = strength + '%';
+      fill.style.background = strength >= 70 ? 'var(--success)' : strength >= 40 ? 'var(--warning)' : 'var(--danger)';
+      document.getElementById('strengthText').innerText = strength + '% – ' + (strength >= 70 ? 'Strong' : strength >= 40 ? 'Moderate' : 'Needs evidence');
+      matter.strength = strength;
+      AdvomeMatter.save(matter);
+    }
+
+    // Review step
+    function generateReview() {
+      const summary = document.getElementById('reviewSummary');
+      const a = matter.applicant, r = matter.respondent, e = matter.employment;
+      summary.innerHTML = `
+        <div class="adv-card__title">Summary</div>
+        <p><strong>Applicant:</strong> ${a.fullName || '(not set)'}</p>
+        <p><strong>Employer:</strong> ${r.name || '(not set)'}</p>
+        <p><strong>Salary:</strong> R ${e.salary || 0}</p>
+        <p><strong>Dismissal type:</strong> ${e.dismissalType || '(not set)'}</p>
+        <p><strong>Date:</strong> ${e.dismissalDate || '(not set)'}</p>
+        <p><strong>Reason:</strong> ${e.reason || '(not set)'}</p>
+        <p><strong>Evidence:</strong> ${matter.evidence.length} items</p>
+        <p><strong>Witnesses:</strong> ${witnesses.length}</p>
+      `;
+    }
+
+    // Generate LRA 7.11 output (basic HTML)
+    document.getElementById('generateBtn').addEventListener('click', function() {
+      const a = matter.applicant, r = matter.respondent, e = matter.employment;
+      const output = document.getElementById('generatedOutput');
+      const form = `
+        <h3>LRA Form 7.11 – Referral Summary</h3>
+        <p><strong>Employee:</strong> ${a.fullName} (ID: ${a.id})</p>
+        <p><strong>Contact:</strong> ${a.phone}, ${a.email}</p>
+        <p><strong>Employer:</strong> ${r.name}, ${r.address}</p>
+        <p><strong>Dispute:</strong> ${e.dismissalType} on ${e.dismissalDate}</p>
+        <p><strong>Reason:</strong> ${e.reason}</p>
+        <p><strong>Evidence:</strong> ${matter.evidence.join(', ')}</p>
+        <p><strong>Witnesses:</strong> ${witnesses.join(', ') || 'None'}</p>
+        <p><strong>Desired outcome:</strong> ${document.getElementById('desiredOutcome')?.value || ''}</p>
+        <button class="adv-btn adv-btn--primary" onclick="window.print()">Print</button>
+      `;
+      output.innerHTML = form;
+      output.style.display = 'block';
+    });
+
+    // Sidebar update
+    function updateSidebar() {
+      const info = document.getElementById('sidebarInfo');
+      const a = matter.applicant, e = matter.employment;
+      info.innerHTML = `
+        <p><strong>Applicant:</strong> ${a.fullName || '...'}</p>
+        <p><strong>Salary:</strong> R ${e.salary || 0}</p>
+        <p><strong>Evidence:</strong> ${matter.evidence.length} items</p>
+        <p><strong>Deadline:</strong> ${e.dismissalDate ? (()=>{ const d=new Date(e.dismissalDate); d.setDate(d.getDate()+30); return d.toLocaleDateString('en-ZA'); })() : '...'}</p>
+      `;
+    }
+
+    // Initialize
+    buildProgress();
+    updateSidebar();
+  </script>
+</body>
+</html>
