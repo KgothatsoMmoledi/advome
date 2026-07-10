@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advome CCMA Referral — Complete your dispute referral with AI assistance.">
   <title>CCMA Referral | Advome</title>
   <link rel="stylesheet" href="css/shared.css">
   <style>
-    :root {
-      --step-count: 6;
-    }
+    /* ensure the wizard steps use the fade animation */
     .wizard-step {
       display: none;
     }
@@ -20,36 +19,87 @@
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .compensation-box {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: #fff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
+
+    /* AI analysis list */
+    .law-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
     }
-    .compensation-amount {
-      font-family: var(--font-heading);
-      font-size: 2.5rem;
+    .law-list li {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+    .law-list li:hover {
+      background: var(--bg-page);
+    }
+    .law-list li.selected {
+      background: rgba(44,82,130,0.05);
+      border-color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .polished-output {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: Georgia, serif;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      margin: 1rem 0;
+    }
+
+    /* Overall timeline sidebar */
+    .timeline-mini {
+      list-style: none;
+      padding: 0;
+    }
+    .timeline-mini li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0;
+      font-size: var(--small-size);
+      color: var(--text-muted);
+    }
+    .timeline-mini li.completed {
+      color: var(--success);
+      font-weight: 600;
+    }
+    .timeline-mini li.current {
+      color: var(--primary);
       font-weight: 700;
     }
-    .strength-meter {
-      height: 12px;
-      border-radius: 6px;
-      background: #e2e8f0;
-      overflow: hidden;
-      margin: 0.5rem 0;
+    .timeline-mini .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
     }
-    .strength-fill {
-      height: 100%;
-      border-radius: 6px;
-      transition: width 0.3s;
+    .timeline-mini .dot.completed {
+      background: var(--success);
+    }
+    .timeline-mini .dot.current {
+      background: var(--primary);
+      box-shadow: 0 0 0 2px rgba(26,54,93,0.2);
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
     }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header class="adv-header">
+  <header class="adv-header" role="banner">
     <a href="index.html" class="adv-header__logo">Ad<span>vome</span></a>
     <nav class="adv-header__nav">
       <a href="ccma.html" class="active">CCMA</a>
@@ -62,10 +112,10 @@
       <div class="adv-header__avatar">U</div>
       <span>My Cases</span>
     </div>
-    <button class="adv-header__menu-toggle">☰</button>
+    <button class="adv-header__menu-toggle" aria-label="Toggle menu">☰</button>
   </header>
 
-  <!-- Progress Bar (custom 6-step) -->
+  <!-- Top Progress Bar (internal 6-step) -->
   <div class="adv-progress" id="ccmaProgress">
     <div class="adv-progress__track" id="progressTrack"></div>
   </div>
@@ -74,20 +124,83 @@
   <section class="adv-hero">
     <div class="adv-hero__content">
       <h1>CCMA Referral Wizard</h1>
-      <p>Complete your referral in 6 steps – we save as you go</p>
+      <p>Complete your dispute referral with AI guidance – we auto‑save as you go</p>
     </div>
-    <div class="adv-hero__badge adv-hero__badge--online">Auto‑save active</div>
+    <div class="adv-hero__badge adv-hero__badge--online">Free to file</div>
   </section>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <main class="adv-container">
     <div class="adv-workspace">
 
-      <!-- STEP 1: Employee Details -->
+      <!-- STEP 1: CASE DETERMINATION (AI) -->
       <div class="adv-card wizard-step active" id="step1">
         <div class="adv-card__header">
-          <h2 class="adv-card__title">1. Your Details</h2>
-          <p class="adv-card__subtitle">Information about you, the employee</p>
+          <h2 class="adv-card__title">Step 1: Analyse Your Case</h2>
+          <p class="adv-card__subtitle">We'll help you identify the relevant laws and articulate your argument</p>
+        </div>
+
+        <!-- Sub-step A: Describe incident -->
+        <div id="substep1a">
+          <div class="adv-form-group">
+            <label for="userStory">Describe what happened</label>
+            <textarea id="userStory" class="adv-textarea" rows="5" placeholder="I was dismissed because... / I resigned because..."></textarea>
+            <div class="adv-form-hint">Tell us the facts – we'll use this to suggest possible laws.</div>
+          </div>
+          <div class="adv-alert adv-alert--warning">
+            <div class="adv-alert__content">
+              <div class="adv-alert__title">Legal information only</div>
+              <p>The following suggestions are educational. You must decide which law applies to your situation.</p>
+            </div>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:1rem;">
+            <input type="checkbox" id="ackStep1a">
+            <span style="font-size:0.9rem;">I understand this is not legal advice and I am responsible for my own case.</span>
+          </label>
+          <button class="adv-btn adv-btn--primary" id="btnAnalyze">Analyse Possible Laws</button>
+          <div id="analyzeLoading" style="display:none;margin-top:1rem;color:var(--text-muted);">Generating…</div>
+          <div id="analyzeError" style="display:none;color:var(--danger);margin-top:0.5rem;"></div>
+        </div>
+
+        <!-- Sub-step B: Law selection -->
+        <div id="substep1b" style="display:none;">
+          <h3 style="margin-top:0;">Possible laws that may relate</h3>
+          <p class="text-muted">Select the law you believe was contravened.</p>
+          <ul id="lawList" class="law-list"></ul>
+          <div id="noLawsFound" style="display:none; color:var(--text-muted);">No specific laws were identified. You can still write your own explanation.</div>
+          <label style="display:flex;align-items:flex-start;gap:8px;margin:1rem 0;">
+            <input type="checkbox" id="ackStep1b">
+            <span style="font-size:0.9rem;">I confirm I have selected a law based on my own analysis.</span>
+          </label>
+          <button class="adv-btn adv-btn--secondary" id="btnBackToStory">← Edit Story</button>
+          <button class="adv-btn adv-btn--primary" id="btnContinueToExplanation">Continue to Explanation</button>
+        </div>
+
+        <!-- Sub-step C: User explanation & AI polish -->
+        <div id="substep1c" style="display:none;">
+          <h3 style="margin-top:0;">Explain why the law applies</h3>
+          <div class="adv-form-group">
+            <label for="userExplanation">Your explanation</label>
+            <textarea id="userExplanation" class="adv-textarea" rows="5" placeholder="I believe this law was contravened because..."></textarea>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:1rem;">
+            <input type="checkbox" id="ackStep1c">
+            <span style="font-size:0.9rem;">The AI will only polish grammar and clarity. It will not add legal arguments.</span>
+          </label>
+          <button class="adv-btn adv-btn--primary" id="btnPolish">Polish My Explanation</button>
+          <div id="polishContainer" style="display:none; margin-top:1rem;">
+            <div class="polished-output" id="polishedText"></div>
+            <button class="adv-btn adv-btn--secondary" id="btnEditPolish">Edit</button>
+            <button class="adv-btn adv-btn--primary" id="btnAcceptPolish">Accept & Continue</button>
+          </div>
+          <button class="adv-btn adv-btn--ghost" id="btnBackToLaws" style="margin-top:0.5rem;">← Back to laws</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Employee Details -->
+      <div class="adv-card wizard-step" id="step2">
+        <div class="adv-card__header">
+          <h2 class="adv-card__title">Step 2: Your Details</h2>
         </div>
         <div class="adv-form-group">
           <label for="empFullName">Full name</label>
@@ -98,24 +211,26 @@
           <input type="text" id="empID" class="adv-input">
         </div>
         <div class="adv-form-group">
-          <label for="empPhone">Phone number</label>
+          <label for="empPhone">Phone</label>
           <input type="tel" id="empPhone" class="adv-input" autocomplete="tel">
         </div>
         <div class="adv-form-group">
           <label for="empEmail">Email</label>
           <input type="email" id="empEmail" class="adv-input" autocomplete="email">
         </div>
-        <button class="adv-btn adv-btn--primary adv-mt-2" onclick="goToStep(2)">Continue →</button>
+        <div class="adv-flex adv-justify-between">
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(1)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(3)">Continue →</button>
+        </div>
       </div>
 
-      <!-- STEP 2: Employer Details -->
-      <div class="adv-card wizard-step" id="step2">
+      <!-- STEP 3: Employer Details -->
+      <div class="adv-card wizard-step" id="step3">
         <div class="adv-card__header">
-          <h2 class="adv-card__title">2. Employer Details</h2>
-          <p class="adv-card__subtitle">Who you worked for</p>
+          <h2 class="adv-card__title">Step 3: Employer Details</h2>
         </div>
         <div class="adv-form-group">
-          <label for="empName">Employer / Company name</label>
+          <label for="empName">Employer / Company</label>
           <input type="text" id="empName" class="adv-input">
         </div>
         <div class="adv-form-group">
@@ -127,16 +242,15 @@
           <input type="text" id="empContact" class="adv-input">
         </div>
         <div class="adv-flex adv-justify-between">
-          <button class="adv-btn adv-btn--ghost" onclick="goToStep(1)">← Back</button>
-          <button class="adv-btn adv-btn--primary" onclick="goToStep(3)">Continue →</button>
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(2)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(4)">Continue →</button>
         </div>
       </div>
 
-      <!-- STEP 3: Employment & Dispute -->
-      <div class="adv-card wizard-step" id="step3">
+      <!-- STEP 4: Employment & Dispute -->
+      <div class="adv-card wizard-step" id="step4">
         <div class="adv-card__header">
-          <h2 class="adv-card__title">3. Employment & Dispute</h2>
-          <p class="adv-card__subtitle">What happened and when</p>
+          <h2 class="adv-card__title">Step 4: Employment & Dispute</h2>
         </div>
         <div class="adv-form-group">
           <label for="salary">Monthly salary (R)</label>
@@ -164,22 +278,21 @@
         </div>
         <div class="adv-form-group">
           <label for="disputeReason">Brief reason for dispute</label>
-          <textarea id="disputeReason" class="adv-textarea" rows="3" placeholder="Describe what happened..."></textarea>
+          <textarea id="disputeReason" class="adv-textarea" rows="3" placeholder="Additional context..."></textarea>
         </div>
         <div class="adv-flex adv-justify-between">
-          <button class="adv-btn adv-btn--ghost" onclick="goToStep(2)">← Back</button>
-          <button class="adv-btn adv-btn--primary" onclick="goToStep(4)">Continue →</button>
+          <button class="adv-btn adv-btn--ghost" onclick="goToStep(3)">← Back</button>
+          <button class="adv-btn adv-btn--primary" onclick="goToStep(5)">Continue →</button>
         </div>
       </div>
 
-      <!-- STEP 4: Evidence & Witnesses -->
-      <div class="adv-card wizard-step" id="step4">
+      <!-- STEP 5: Evidence & Witnesses -->
+      <div class="adv-card wizard-step" id="step5">
         <div class="adv-card__header">
-          <h2 class="adv-card__title">4. Evidence & Witnesses</h2>
-          <p class="adv-card__subtitle">What proof do you have?</p>
+          <h2 class="adv-card__title">Step 5: Evidence & Witnesses</h2>
         </div>
         <div class="adv-form-group">
-          <label>Select evidence you have</label>
+          <label>Select the evidence you have</label>
           <div class="adv-checklist" id="evidenceChecklist">
             <div class="adv-checklist__item" data-value="contract"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Employment contract</div></div>
             <div class="adv-checklist__item" data-value="payslips"><div class="adv-checklist__checkbox"></div><div class="adv-checklist__text">Payslips</div></div>
@@ -190,43 +303,10 @@
           </div>
         </div>
         <div class="adv-form-group">
-          <label for="witnessName">Witness name (if any)</label>
+          <label for="witnessName">Witness name</label>
           <input type="text" id="witnessName" class="adv-input" placeholder="Full name">
           <button class="adv-btn adv-btn--sm adv-btn--secondary adv-mt-1" id="addWitnessBtn">+ Add witness</button>
           <div id="witnessList" class="adv-mt-1"></div>
-        </div>
-        <div class="adv-flex adv-justify-between">
-          <button class="adv-btn adv-btn--ghost" onclick="goToStep(3)">← Back</button>
-          <button class="adv-btn adv-btn--primary" onclick="goToStep(5)">Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 5: Outcome & Compensation -->
-      <div class="adv-card wizard-step" id="step5">
-        <div class="adv-card__header">
-          <h2 class="adv-card__title">5. Outcome & Compensation</h2>
-          <p class="adv-card__subtitle">What do you want to achieve?</p>
-        </div>
-        <div class="adv-form-group">
-          <label for="desiredOutcome">Desired outcome</label>
-          <select id="desiredOutcome" class="adv-select">
-            <option value="">Select...</option>
-            <option value="reinstatement">Reinstatement (get job back)</option>
-            <option value="compensation">Compensation (money)</option>
-            <option value="both">Both</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="compensation-box adv-mt-2" id="compensationBox">
-          <div class="compensation-amount" id="compAmount">R 0</div>
-          <div style="opacity:0.8;">Estimated maximum compensation</div>
-        </div>
-        <div class="adv-form-group adv-mt-2">
-          <label>Case strength estimate</label>
-          <div class="strength-meter">
-            <div class="strength-fill" id="strengthFill" style="width:0%; background: var(--danger);"></div>
-          </div>
-          <div class="text-muted" id="strengthText">0% – add evidence to improve</div>
         </div>
         <div class="adv-flex adv-justify-between">
           <button class="adv-btn adv-btn--ghost" onclick="goToStep(4)">← Back</button>
@@ -234,21 +314,22 @@
         </div>
       </div>
 
-      <!-- STEP 6: Review & Finalise -->
+      <!-- STEP 6: Review & Outcome -->
       <div class="adv-card wizard-step" id="step6">
         <div class="adv-card__header">
-          <h2 class="adv-card__title">6. Review & Finalise</h2>
-          <p class="adv-card__subtitle">Check your information before generating the referral</p>
+          <h2 class="adv-card__title">Step 6: Review & Finalise</h2>
         </div>
         <div id="reviewSummary" class="adv-mb-2"></div>
+
         <div class="adv-alert adv-alert--info">
           <div class="adv-alert__content">
             <div class="adv-alert__title">Next steps</div>
             <p>After reviewing, you can generate the LRA Form 7.11 and submit it to the CCMA.</p>
           </div>
         </div>
+
         <button class="adv-btn adv-btn--accent adv-btn--lg adv-w-full" id="generateBtn">Generate Referral Form</button>
-        <button class="adv-btn adv-btn--ghost adv-mt-1" onclick="goToStep(5)">← Back</button>
+        <button class="adv-btn adv-btn--ghost" onclick="goToStep(5)" style="margin-top:0.5rem;">← Back</button>
         <div id="generatedOutput" class="adv-mt-2" style="display:none;"></div>
       </div>
 
@@ -257,15 +338,28 @@
     <!-- Sidebar -->
     <aside class="adv-sidebar">
       <div class="adv-sidebar__widget">
+        <h3 class="adv-sidebar__widget-title">🗺️ Overall Journey</h3>
+        <ul class="timeline-mini" id="macroTimeline">
+          <li class="current"><span class="dot current"></span> Case Analysis</li>
+          <li><span class="dot"></span> Your Details</li>
+          <li><span class="dot"></span> Employer</li>
+          <li><span class="dot"></span> Dispute</li>
+          <li><span class="dot"></span> Evidence</li>
+          <li><span class="dot"></span> Review & File</li>
+        </ul>
+      </div>
+
+      <div class="adv-sidebar__widget">
         <h3 class="adv-sidebar__widget-title">📊 Case Snapshot</h3>
         <div id="sidebarInfo">
           <p class="text-muted">Complete the steps to see details</p>
         </div>
       </div>
-      <div class="adv-sidebar__widget adv-chat" data-chat-id="ccma_main">
-        <h3 class="adv-sidebar__widget-title">🤖 AI Assistant</h3>
+
+      <div class="adv-sidebar__widget adv-chat" data-chat-id="ccma_wizard">
+        <h3 class="adv-sidebar__widget-title">🤖 Ask Advome AI</h3>
         <div class="adv-chat__messages">
-          <div class="chat-message assistant">I can explain terms, check your information, and help you prepare. Ask me anything.</div>
+          <div class="chat-message assistant">I can explain legal terms, check your information, and help you prepare.</div>
         </div>
         <div class="adv-chat__input-group">
           <input type="text" class="adv-chat__input" placeholder="Ask...">
@@ -275,11 +369,14 @@
     </aside>
   </main>
 
+  <!-- Bottom Zone -->
   <div class="adv-bottom-zone">
     <div style="max-width:1200px;margin:0 auto;padding:0.5rem 1.5rem;display:flex;justify-content:flex-end;">
-      <div class="adv-savings">Saved <span class="adv-savings__amount">R0</span></div>
+      <div class="adv-savings adv-savings--small">Saved <span class="adv-savings__amount">R0</span></div>
     </div>
-    <div class="adv-compliance">Legal information only — not legal advice. <a href="#">Terms</a> · <a href="#">Privacy</a></div>
+    <div class="adv-compliance">
+      <strong>Legal information only — not legal advice.</strong> Advome provides procedural assistance. You are responsible for your case. <a href="#">Terms</a> · <a href="#">Privacy</a>
+    </div>
     <nav class="adv-nav-footer">
       <a href="index.html" class="adv-nav-footer__prev">← Home</a>
       <span class="adv-nav-footer__next">CCMA Referral</span>
@@ -295,10 +392,13 @@
   <script src="js/shared.js"></script>
   <script>
     // ======================
-    // CCMA WIZARD LOGIC
+    // WIZARD CONTROL
     // ======================
     const TOTAL_STEPS = 6;
     let currentStep = 1;
+    let selectedLaw = '';
+    let polishedExplanation = '';
+    const witnesses = [];
 
     // Get or create matter
     let matter = AdvomeMatter.current();
@@ -307,9 +407,9 @@
     }
 
     // Build progress pills
+    const stepNames = ['Case Analysis','Your Details','Employer','Dispute','Evidence','Review'];
     function buildProgress() {
       const track = document.getElementById('progressTrack');
-      const stepNames = ['Employee','Employer','Dispute','Evidence','Outcome','Review'];
       track.innerHTML = '';
       stepNames.forEach((name, i) => {
         const pill = document.createElement('span');
@@ -328,46 +428,125 @@
     }
 
     function goToStep(step) {
-      // Optional validation could go here
-      currentStep = step;
       document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
       document.getElementById(`step${step}`).classList.add('active');
+      currentStep = step;
       buildProgress();
       updateSidebar();
-      if (step === 5) calculateCompensation();
       if (step === 6) generateReview();
     }
 
-    // Save all form fields to Matter on every input
-    document.addEventListener('input', function(e) {
-      if (!e.target.closest('#step1,#step2,#step3,#step4,#step5')) return;
-      saveFormData();
+    // -----------------------------
+    // STEP 1: AI ANALYSIS
+    // -----------------------------
+    document.getElementById('btnAnalyze').addEventListener('click', async () => {
+      if (!document.getElementById('ackStep1a').checked) {
+        alert('Please acknowledge the disclaimer.');
+        return;
+      }
+      const story = document.getElementById('userStory').value.trim();
+      if (!story) { alert('Please describe what happened.'); return; }
+
+      document.getElementById('analyzeLoading').style.display = 'block';
+      document.getElementById('analyzeError').style.display = 'none';
+
+      try {
+        const res = await fetch('/api/case-law', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'analyze', userText: story })
+        });
+        const data = await res.json();
+        const result = data.result;
+
+        const lawList = document.getElementById('lawList');
+        lawList.innerHTML = '';
+        const lines = result.split('\n').filter(l => l.trim());
+        if (lines.length === 0) {
+          document.getElementById('noLawsFound').style.display = 'block';
+        } else {
+          document.getElementById('noLawsFound').style.display = 'none';
+          lines.forEach(line => {
+            const li = document.createElement('li');
+            li.textContent = line;
+            li.addEventListener('click', () => {
+              document.querySelectorAll('#lawList li').forEach(el => el.classList.remove('selected'));
+              li.classList.add('selected');
+              selectedLaw = line;
+            });
+            lawList.appendChild(li);
+          });
+        }
+
+        document.getElementById('substep1a').style.display = 'none';
+        document.getElementById('substep1b').style.display = 'block';
+        document.getElementById('analyzeLoading').style.display = 'none';
+      } catch (err) {
+        document.getElementById('analyzeError').textContent = 'Connection error. Please try again.';
+        document.getElementById('analyzeError').style.display = 'block';
+        document.getElementById('analyzeLoading').style.display = 'none';
+      }
     });
 
-    function saveFormData() {
-      matter.applicant = {
-        fullName: document.getElementById('empFullName')?.value || '',
-        id: document.getElementById('empID')?.value || '',
-        phone: document.getElementById('empPhone')?.value || '',
-        email: document.getElementById('empEmail')?.value || ''
-      };
-      matter.respondent = {
-        name: document.getElementById('empName')?.value || '',
-        address: document.getElementById('empAddress')?.value || '',
-        contact: document.getElementById('empContact')?.value || ''
-      };
-      matter.employment = {
-        salary: document.getElementById('salary')?.value || 0,
-        startDate: document.getElementById('startDate')?.value || '',
-        dismissalType: document.getElementById('dismissalType')?.value || '',
-        dismissalDate: document.getElementById('dismissalDate')?.value || '',
-        reason: document.getElementById('disputeReason')?.value || ''
-      };
-      // Evidence is handled separately via checkboxes
-      AdvomeMatter.save(matter);
-    }
+    document.getElementById('btnBackToStory').addEventListener('click', () => {
+      document.getElementById('substep1b').style.display = 'none';
+      document.getElementById('substep1a').style.display = 'block';
+    });
 
-    // Evidence checkboxes
+    document.getElementById('btnContinueToExplanation').addEventListener('click', () => {
+      if (!selectedLaw && document.getElementById('noLawsFound').style.display === 'none') {
+        alert('Please select a law.');
+        return;
+      }
+      if (!document.getElementById('ackStep1b').checked) {
+        alert('Please confirm your analysis.');
+        return;
+      }
+      document.getElementById('substep1b').style.display = 'none';
+      document.getElementById('substep1c').style.display = 'block';
+    });
+
+    document.getElementById('btnPolish').addEventListener('click', async () => {
+      if (!document.getElementById('ackStep1c').checked) {
+        alert('Please acknowledge the disclaimer.');
+        return;
+      }
+      const explanation = document.getElementById('userExplanation').value.trim();
+      if (!explanation) { alert('Please write your explanation.'); return; }
+
+      try {
+        const res = await fetch('/api/case-law', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'polish', userText: explanation })
+        });
+        const data = await res.json();
+        polishedExplanation = data.result;
+        document.getElementById('polishedText').textContent = polishedExplanation;
+        document.getElementById('polishContainer').style.display = 'block';
+      } catch (err) {
+        alert('Error connecting to AI.');
+      }
+    });
+
+    document.getElementById('btnEditPolish').addEventListener('click', () => {
+      document.getElementById('userExplanation').value = polishedExplanation;
+      document.getElementById('polishContainer').style.display = 'none';
+    });
+
+    document.getElementById('btnAcceptPolish').addEventListener('click', () => {
+      document.getElementById('userExplanation').value = polishedExplanation;
+      goToStep(2); // move to employee details
+    });
+
+    document.getElementById('btnBackToLaws').addEventListener('click', () => {
+      document.getElementById('substep1c').style.display = 'none';
+      document.getElementById('substep1b').style.display = 'block';
+    });
+
+    // -----------------------------
+    // OTHER STEPS: Evidence, Witnesses, etc.
+    // -----------------------------
     const evidenceItems = document.querySelectorAll('#evidenceChecklist .adv-checklist__item');
     evidenceItems.forEach(item => {
       item.addEventListener('click', function() {
@@ -386,9 +565,7 @@
       AdvomeMatter.save(matter);
     }
 
-    // Witnesses
-    let witnesses = [];
-    document.getElementById('addWitnessBtn').addEventListener('click', function() {
+    document.getElementById('addWitnessBtn').addEventListener('click', () => {
       const nameInput = document.getElementById('witnessName');
       const name = nameInput.value.trim();
       if (!name) return;
@@ -401,94 +578,120 @@
 
     function renderWitnesses() {
       const list = document.getElementById('witnessList');
-      list.innerHTML = witnesses.map((w,i) => `<span class="adv-tag">${w} <button class="adv-btn--sm" onclick="removeWitness(${i})" style="background:none;border:none;color:var(--danger);cursor:pointer;">✕</button></span>`).join('');
+      list.innerHTML = witnesses.map((w, i) =>
+        `<span class="adv-tag">${w} <button onclick="removeWitness(${i})" style="background:none;border:none;color:var(--danger);cursor:pointer;font-weight:bold;">×</button></span>`
+      ).join('');
     }
 
     window.removeWitness = function(i) {
-      witnesses.splice(i,1);
+      witnesses.splice(i, 1);
       renderWitnesses();
       matter.witnesses = witnesses;
       AdvomeMatter.save(matter);
     };
 
-    // Compensation calculation (simplified)
-    function calculateCompensation() {
-      const salary = parseFloat(document.getElementById('salary')?.value) || 0;
-      const type = document.getElementById('dismissalType')?.value;
-      let months = 0;
-      if (type === 'misconduct') months = 6;
-      else if (type === 'incapacity') months = 8;
-      else if (type === 'retrenchment' || type === 'constructive') months = 12;
-      else if (type === 'automatic') months = 24;
-      const comp = salary * months;
-      document.getElementById('compAmount').innerText = 'R ' + comp.toLocaleString();
-      // Strength
-      let strength = 0;
-      if (salary > 0) strength += 15;
-      if (type) strength += 20;
-      if (matter.evidence.length > 0) strength += 30;
-      if (witnesses.length > 0) strength += 20;
-      strength = Math.min(strength, 100);
-      const fill = document.getElementById('strengthFill');
-      fill.style.width = strength + '%';
-      fill.style.background = strength >= 70 ? 'var(--success)' : strength >= 40 ? 'var(--warning)' : 'var(--danger)';
-      document.getElementById('strengthText').innerText = strength + '% – ' + (strength >= 70 ? 'Strong' : strength >= 40 ? 'Moderate' : 'Needs evidence');
-      matter.strength = strength;
+    // Auto-save form fields
+    document.addEventListener('input', function(e) {
+      if (!e.target.closest('#step2,#step3,#step4')) return;
+      matter.applicant = {
+        fullName: document.getElementById('empFullName')?.value || '',
+        id: document.getElementById('empID')?.value || '',
+        phone: document.getElementById('empPhone')?.value || '',
+        email: document.getElementById('empEmail')?.value || ''
+      };
+      matter.respondent = {
+        name: document.getElementById('empName')?.value || '',
+        address: document.getElementById('empAddress')?.value || '',
+        contact: document.getElementById('empContact')?.value || ''
+      };
+      matter.employment = {
+        salary: document.getElementById('salary')?.value || 0,
+        startDate: document.getElementById('startDate')?.value || '',
+        dismissalType: document.getElementById('dismissalType')?.value || '',
+        dismissalDate: document.getElementById('dismissalDate')?.value || '',
+        reason: document.getElementById('disputeReason')?.value || ''
+      };
       AdvomeMatter.save(matter);
-    }
+      updateSidebar();
+    });
 
     // Review step
     function generateReview() {
-      const summary = document.getElementById('reviewSummary');
       const a = matter.applicant, r = matter.respondent, e = matter.employment;
+      const summary = document.getElementById('reviewSummary');
       summary.innerHTML = `
-        <div class="adv-card__title">Summary</div>
+        <h3>Summary of Your Referral</h3>
         <p><strong>Applicant:</strong> ${a.fullName || '(not set)'}</p>
         <p><strong>Employer:</strong> ${r.name || '(not set)'}</p>
-        <p><strong>Salary:</strong> R ${e.salary || 0}</p>
-        <p><strong>Dismissal type:</strong> ${e.dismissalType || '(not set)'}</p>
-        <p><strong>Date:</strong> ${e.dismissalDate || '(not set)'}</p>
-        <p><strong>Reason:</strong> ${e.reason || '(not set)'}</p>
-        <p><strong>Evidence:</strong> ${matter.evidence.length} items</p>
-        <p><strong>Witnesses:</strong> ${witnesses.length}</p>
+        <p><strong>Dispute:</strong> ${e.dismissalType || '(not set)'} on ${e.dismissalDate || '(not set)'}</p>
+        <p><strong>Law relied on:</strong> ${selectedLaw || 'None selected'}</p>
+        <p><strong>Explanation:</strong> ${polishedExplanation || document.getElementById('userExplanation')?.value || '...'}</p>
+        <p><strong>Evidence:</strong> ${matter.evidence.join(', ') || 'None'}</p>
+        <p><strong>Witnesses:</strong> ${witnesses.join(', ') || 'None'}</p>
       `;
     }
 
-    // Generate LRA 7.11 output (basic HTML)
-    document.getElementById('generateBtn').addEventListener('click', function() {
+    // Generate LRA 7.11 output
+    document.getElementById('generateBtn').addEventListener('click', () => {
       const a = matter.applicant, r = matter.respondent, e = matter.employment;
       const output = document.getElementById('generatedOutput');
       const form = `
-        <h3>LRA Form 7.11 – Referral Summary</h3>
-        <p><strong>Employee:</strong> ${a.fullName} (ID: ${a.id})</p>
-        <p><strong>Contact:</strong> ${a.phone}, ${a.email}</p>
-        <p><strong>Employer:</strong> ${r.name}, ${r.address}</p>
-        <p><strong>Dispute:</strong> ${e.dismissalType} on ${e.dismissalDate}</p>
-        <p><strong>Reason:</strong> ${e.reason}</p>
-        <p><strong>Evidence:</strong> ${matter.evidence.join(', ')}</p>
-        <p><strong>Witnesses:</strong> ${witnesses.join(', ') || 'None'}</p>
-        <p><strong>Desired outcome:</strong> ${document.getElementById('desiredOutcome')?.value || ''}</p>
-        <button class="adv-btn adv-btn--primary" onclick="window.print()">Print</button>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+          <h3>LRA Form 7.11 — Referral Summary</h3>
+          <p><strong>Employee:</strong> ${a.fullName} (ID: ${a.id})</p>
+          <p><strong>Contact:</strong> ${a.phone}, ${a.email}</p>
+          <p><strong>Employer:</strong> ${r.name}, ${r.address}</p>
+          <p><strong>Dispute:</strong> ${e.dismissalType} on ${e.dismissalDate}</p>
+          <p><strong>Legal basis:</strong> ${selectedLaw}</p>
+          <p><strong>Factual summary:</strong> ${polishedExplanation || document.getElementById('userExplanation')?.value || ''}</p>
+          <p><strong>Evidence:</strong> ${matter.evidence.join(', ') || 'None'}</p>
+          <p><strong>Witnesses:</strong> ${witnesses.join(', ') || 'None'}</p>
+          <button class="adv-btn adv-btn--primary" onclick="window.print()">Print</button>
+        </div>
       `;
       output.innerHTML = form;
       output.style.display = 'block';
     });
 
-    // Sidebar update
+    // Sidebar snapshot
     function updateSidebar() {
-      const info = document.getElementById('sidebarInfo');
       const a = matter.applicant, e = matter.employment;
+      const info = document.getElementById('sidebarInfo');
       info.innerHTML = `
         <p><strong>Applicant:</strong> ${a.fullName || '...'}</p>
-        <p><strong>Salary:</strong> R ${e.salary || 0}</p>
-        <p><strong>Evidence:</strong> ${matter.evidence.length} items</p>
+        <p><strong>Employer:</strong> ${matter.respondent.name || '...'}</p>
+        <p><strong>Dispute type:</strong> ${e.dismissalType || '...'}</p>
         <p><strong>Deadline:</strong> ${e.dismissalDate ? (()=>{ const d=new Date(e.dismissalDate); d.setDate(d.getDate()+30); return d.toLocaleDateString('en-ZA'); })() : '...'}</p>
       `;
     }
 
+    // Macro timeline update
+    function updateMacroTimeline() {
+      const items = document.querySelectorAll('#macroTimeline li');
+      items.forEach((li, index) => {
+        const dot = li.querySelector('.dot');
+        li.className = '';
+        dot.className = 'dot';
+        if (index + 1 < currentStep) {
+          li.classList.add('completed');
+          dot.classList.add('completed');
+        } else if (index + 1 === currentStep) {
+          li.classList.add('current');
+          dot.classList.add('current');
+        }
+      });
+    }
+
+    const origGoToStep = goToStep;
+    goToStep = function(step) {
+      origGoToStep(step);
+      updateMacroTimeline();
+    };
+
     // Initialize
     buildProgress();
     updateSidebar();
+    updateMacroTimeline();
   </script>
 </body>
 </html>
