@@ -7,7 +7,7 @@
   <title>CCMA Referral | Advome</title>
   <link rel="stylesheet" href="css/shared.css">
   <style>
-    /* ensure the wizard steps use the fade animation */
+    /* Internal wizard steps fade */
     .wizard-step {
       display: none;
     }
@@ -20,7 +20,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* AI analysis list */
+    /* AI law list */
     .law-list {
       list-style: none;
       padding: 0;
@@ -54,7 +54,7 @@
       margin: 1rem 0;
     }
 
-    /* Overall timeline sidebar */
+    /* Mini timeline sidebar */
     .timeline-mini {
       list-style: none;
       padding: 0;
@@ -88,12 +88,6 @@
       background: var(--primary);
       box-shadow: 0 0 0 2px rgba(26,54,93,0.2);
     }
-
-    .step-indicator {
-      display: flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
   </style>
 </head>
 <body>
@@ -115,10 +109,8 @@
     <button class="adv-header__menu-toggle" aria-label="Toggle menu">☰</button>
   </header>
 
-  <!-- Top Progress Bar (internal 6-step) -->
-  <div class="adv-progress" id="ccmaProgress">
-    <div class="adv-progress__track" id="progressTrack"></div>
-  </div>
+  <!-- GLOBAL PROGRESS BAR (from shared.js workflow) -->
+  <div class="adv-progress" data-workflow="ccma" data-current-step="ccma"></div>
 
   <!-- Hero -->
   <section class="adv-hero">
@@ -406,39 +398,19 @@
       matter = AdvomeMatter.create('ccma');
     }
 
-    // Build progress pills
-    const stepNames = ['Case Analysis','Your Details','Employer','Dispute','Evidence','Review'];
-    function buildProgress() {
-      const track = document.getElementById('progressTrack');
-      track.innerHTML = '';
-      stepNames.forEach((name, i) => {
-        const pill = document.createElement('span');
-        pill.className = 'adv-progress__pill';
-        pill.innerHTML = `<span class="step-num">${i+1}</span> <span class="step-name">${name}</span>`;
-        if (i+1 < currentStep) pill.classList.add('adv-progress__pill--completed');
-        else if (i+1 === currentStep) pill.classList.add('adv-progress__pill--active');
-        else pill.classList.add('adv-progress__pill--pending');
-        track.appendChild(pill);
-        if (i < stepNames.length-1) {
-          const conn = document.createElement('span');
-          conn.className = 'adv-progress__connector' + (i+1 < currentStep ? ' adv-progress__connector--completed' : '');
-          track.appendChild(conn);
-        }
-      });
-    }
-
+    // Internal wizard step switching
     function goToStep(step) {
       document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
       document.getElementById(`step${step}`).classList.add('active');
       currentStep = step;
-      buildProgress();
       updateSidebar();
+      updateMacroTimeline();
       if (step === 6) generateReview();
     }
 
-    // -----------------------------
+    // ============================
     // STEP 1: AI ANALYSIS
-    // -----------------------------
+    // ============================
     document.getElementById('btnAnalyze').addEventListener('click', async () => {
       if (!document.getElementById('ackStep1a').checked) {
         alert('Please acknowledge the disclaimer.');
@@ -544,9 +516,9 @@
       document.getElementById('substep1b').style.display = 'block';
     });
 
-    // -----------------------------
-    // OTHER STEPS: Evidence, Witnesses, etc.
-    // -----------------------------
+    // ============================
+    // EVIDENCE & WITNESSES
+    // ============================
     const evidenceItems = document.querySelectorAll('#evidenceChecklist .adv-checklist__item');
     evidenceItems.forEach(item => {
       item.addEventListener('click', function() {
@@ -665,7 +637,7 @@
       `;
     }
 
-    // Macro timeline update
+    // Macro timeline update (sidebar)
     function updateMacroTimeline() {
       const items = document.querySelectorAll('#macroTimeline li');
       items.forEach((li, index) => {
@@ -682,14 +654,7 @@
       });
     }
 
-    const origGoToStep = goToStep;
-    goToStep = function(step) {
-      origGoToStep(step);
-      updateMacroTimeline();
-    };
-
     // Initialize
-    buildProgress();
     updateSidebar();
     updateMacroTimeline();
   </script>
