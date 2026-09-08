@@ -1,6 +1,6 @@
 /* ========================================
    ADVOME SHARED SCRIPTS
-   Version: 1.0.1
+   Version: 1.0.2
    ======================================== */
 
 (function() {
@@ -70,18 +70,24 @@
 
     const workflow = progressBar.dataset.workflow || 'ccma';
     const steps = WORKFLOWS[workflow] || WORKFLOWS.ccma;
-    const currentStepId = progressBar.dataset.currentStep || getCurrentPage();
-
+    
+    // Get the current step ID from data attribute
+    const currentStepId = progressBar.dataset.currentStep;
+    
+    // Find the current index by matching the ID
     let currentIndex = steps.findIndex(s => s.id === currentStepId);
+    
+    // If still not found, fall back to URL matching
     if (currentIndex === -1) {
-      currentIndex = steps.findIndex(s => s.path === currentStepId);
+      const currentPage = getCurrentPage();
+      currentIndex = steps.findIndex(s => s.path === currentPage);
     }
+    
+    // Final fallback
     if (currentIndex === -1) currentIndex = 0;
 
-    // Mark current step as visited (not completed)
+    // Load progress state
     const progress = getFromStorage(CONFIG.PROGRESS_KEY, {});
-    progress[currentStepId] = { visited: true };
-    setToStorage(CONFIG.PROGRESS_KEY, progress);
 
     renderProgress(progressBar, steps, currentIndex, progress);
   }
@@ -91,10 +97,9 @@
     track.className = 'adv-progress__track';
 
     steps.forEach((step, i) => {
-      const isVisited = !!progress[step.id]?.visited;
       const isActive = i === currentIndex;
       // A step is completed only if it was visited AND is before the current step
-      const isCompleted = isVisited && i < currentIndex;
+      const isCompleted = i < currentIndex && !!progress[step.id]?.visited;
 
       const pill = document.createElement('a');
       pill.href = step.path;
@@ -106,6 +111,9 @@
       pill.innerHTML = `<span class="step-num">${isCompleted ? 'OK' : i + 1}</span><span class="step-name">${step.name}</span>`;
       pill.addEventListener('click', (e) => {
         e.preventDefault();
+        // Mark current step as visited before navigating
+        progress[steps[currentIndex].id] = { visited: true };
+        setToStorage(CONFIG.PROGRESS_KEY, progress);
         window.location.href = step.path;
       });
 
@@ -121,6 +129,10 @@
 
     container.innerHTML = '';
     container.appendChild(track);
+
+    // Mark current step as visited
+    progress[steps[currentIndex].id] = { visited: true };
+    setToStorage(CONFIG.PROGRESS_KEY, progress);
   }
 
   // ---------- CHECKLIST ----------
