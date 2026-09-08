@@ -1,6 +1,6 @@
 /* ========================================
    ADVOME SHARED SCRIPTS
-   Version: 1.0.2
+   Version: 1.0.3 – Bulletproof progress bar
    ======================================== */
 
 (function() {
@@ -9,7 +9,7 @@
   const CONFIG = {
     STORAGE_PREFIX: 'advome_',
     PROGRESS_KEY: 'advome_progress',
-    DEBUG: false
+    DEBUG: true   // set to false in production
   };
 
   const WORKFLOWS = {
@@ -70,21 +70,25 @@
 
     const workflow = progressBar.dataset.workflow || 'ccma';
     const steps = WORKFLOWS[workflow] || WORKFLOWS.ccma;
-    
-    // Get the current step ID from data attribute
+
+    // 1. Get current step from data-current-step attribute
     const currentStepId = progressBar.dataset.currentStep;
-    
-    // Find the current index by matching the ID
+    log('data-current-step:', currentStepId);
+
+    // 2. Find index by ID
     let currentIndex = steps.findIndex(s => s.id === currentStepId);
-    
-    // If still not found, fall back to URL matching
+    log('Index by ID:', currentIndex);
+
+    // 3. If not found, fall back to URL path
     if (currentIndex === -1) {
       const currentPage = getCurrentPage();
       currentIndex = steps.findIndex(s => s.path === currentPage);
+      log('Index by path:', currentIndex);
     }
-    
-    // Final fallback
+
+    // 4. Final fallback to first step
     if (currentIndex === -1) currentIndex = 0;
+    log('Final current index:', currentIndex);
 
     // Load progress state
     const progress = getFromStorage(CONFIG.PROGRESS_KEY, {});
@@ -98,7 +102,6 @@
 
     steps.forEach((step, i) => {
       const isActive = i === currentIndex;
-      // A step is completed only if it was visited AND is before the current step
       const isCompleted = i < currentIndex && !!progress[step.id]?.visited;
 
       const pill = document.createElement('a');
@@ -109,6 +112,7 @@
       else pill.classList.add('adv-progress__pill--pending');
 
       pill.innerHTML = `<span class="step-num">${isCompleted ? 'OK' : i + 1}</span><span class="step-name">${step.name}</span>`;
+
       pill.addEventListener('click', (e) => {
         e.preventDefault();
         // Mark current step as visited before navigating
