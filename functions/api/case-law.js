@@ -1,67 +1,68 @@
 export async function onRequestPost({ request, env }) {
-  const { type, userText, legalField = 'South African law', debug } = await request.json();
+  const { type, userText } = await request.json();
+
+  const GEMINI_MODEL = 'gemini-3.8-flash-latest';   // ✅ Correct model
+  const DEEPSEEK_MODEL = 'deepseek-chat';
 
   let systemPrompt = '';
   if (type === 'analyze') {
-    systemPrompt = `List possible South African laws (with section numbers if known) that could relate to the following workplace situation. Describe each law neutrally in one sentence. Do not apply the law, do not give advice. Output a numbered list.`;
+    systemPrompt = `You are a South African labour law information tool. A user describes what happened at work. Provide a list of possible laws that *could* relate to the situation. For each, give a short neutral explanation. Do NOT apply law to facts. Do NOT give advice. Output as a numbered list.`;
   } else if (type === 'polish') {
-    systemPrompt = `Improve the grammar, spelling, and clarity of the following text. Do not add or change the meaning. Output only the corrected text.`;
-  } else if (type === 'chat') {
-    systemPrompt = `You are a South African legal information assistant. Answer with general legal information, plain language explanations, and definitions. Do not give legal advice. Keep answers concise.`;
+    systemPrompt = `You are a legal writing assistant. Improve grammar, spelling, and sentence structure for clarity. Do NOT add legal arguments, advice, or new content. Preserve meaning exactly. Output only the polished text.`;
   } else {
     return new Response(JSON.stringify({ error: 'Invalid type' }), { status: 400 });
   }
 
   const userMessage = `User input:\n${userText}`;
-  const model = 'gemini-3.5-flash';   // Correct free model
 
-  async function callGemini(retry = true) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
-
+  // Try Gemini first
+  try {
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${env.GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: systemPrompt }, { text: userMessage }] }]
-        }),
-        signal: controller.signal
+        })
       }
     );
-    clearTimeout(timeoutId);
 
-    const data = await geminiResponse.json();
-
-    // Retry on rate limit (429) – wait 5 seconds and try once more
-    if (data.error && data.error.code === 429 && retry) {
-      await new Promise(resolve => setTimeout(resolve, 5000));
-      return callGemini(false);
-    }
-
-    return data;
-  }
-
-  try {
-    const data = await callGemini(true);
-
-    if (debug) {
-      return new Response(JSON.stringify({ debugData: data }), {
+    if (geminiResponse.ok) {
+      const data = await geminiResponse.json();
+      const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      return new Response(JSON.stringify({ result: generatedText }), {
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
+  } catch (e) {
+    console.log('Gemini failed, trying DeepSeek...');
+  }
 
-    if (data.error) {
-      return new Response(JSON.stringify({ error: data.error.message }), { status: data.error.code || 500 });
-    }
+  // Fallback to DeepSeek
+  try {
+    const deepseekResponse = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: DEEPSEEK_MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userMessage }
+        ],
+        temperature: 0.2
+      })
+    });
 
-    const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const data = await deepseekResponse.json();
+    const generatedText = data.choices?.[0]?.message?.content || '';
     return new Response(JSON.stringify({ result: generatedText }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
-  } catch (error) {
-    const message = error.name === 'AbortError' ? 'The AI took too long to respond. Please try again.' : error.message;
-    return new Response(JSON.stringify({ error: message }), { status: 500 });
+  } catch (e) {
+    return new Response(JSON.stringify({ error: 'All AI providers failed. Please try again later.' }), { status: 500 });
   }
 }
