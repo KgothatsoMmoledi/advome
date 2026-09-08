@@ -1,19 +1,17 @@
 /* ========================================
    ADVOME SHARED SCRIPTS
-   Version: 1.0.0
+   Version: 1.0.1
    ======================================== */
 
 (function() {
   'use strict';
 
-  // ---------- CONFIG ----------
   const CONFIG = {
     STORAGE_PREFIX: 'advome_',
     PROGRESS_KEY: 'advome_progress',
     DEBUG: false
   };
 
-  // ---------- WORKFLOW DEFINITIONS ----------
   const WORKFLOWS = {
     ccma: [
       { id: 'ccma', name: 'CCMA Home', path: 'ccma.html' },
@@ -41,7 +39,6 @@
     ]
   };
 
-  // ---------- UTILITIES ----------
   function log(...args) {
     if (CONFIG.DEBUG) console.log('[Advome]', ...args);
   }
@@ -73,24 +70,31 @@
 
     const workflow = progressBar.dataset.workflow || 'ccma';
     const steps = WORKFLOWS[workflow] || WORKFLOWS.ccma;
-    const currentStep = progressBar.dataset.currentStep || getCurrentPage();
+    const currentStepId = progressBar.dataset.currentStep || getCurrentPage();
 
-    let currentIndex = steps.findIndex(s => s.id === currentStep);
+    let currentIndex = steps.findIndex(s => s.id === currentStepId);
     if (currentIndex === -1) {
-      currentIndex = steps.findIndex(s => s.path === currentStep);
+      currentIndex = steps.findIndex(s => s.path === currentStepId);
     }
     if (currentIndex === -1) currentIndex = 0;
 
-    renderProgress(progressBar, steps, currentIndex);
+    // Mark current step as visited (not completed)
+    const progress = getFromStorage(CONFIG.PROGRESS_KEY, {});
+    progress[currentStepId] = { visited: true };
+    setToStorage(CONFIG.PROGRESS_KEY, progress);
+
+    renderProgress(progressBar, steps, currentIndex, progress);
   }
 
-  function renderProgress(container, steps, currentIndex) {
+  function renderProgress(container, steps, currentIndex, progress) {
     const track = document.createElement('div');
     track.className = 'adv-progress__track';
 
     steps.forEach((step, i) => {
-      const isCompleted = i < currentIndex;
+      const isVisited = !!progress[step.id]?.visited;
       const isActive = i === currentIndex;
+      // A step is completed only if it was visited AND is before the current step
+      const isCompleted = isVisited && i < currentIndex;
 
       const pill = document.createElement('a');
       pill.href = step.path;
@@ -192,7 +196,6 @@
         messages.appendChild(userMsg);
         input.value = '';
 
-        // Simulate AI response
         setTimeout(() => {
           const aiMsg = document.createElement('div');
           aiMsg.className = 'chat-message assistant';
@@ -270,7 +273,6 @@
     init();
   }
 
-  // Expose globally
   window.Advome = {
     showToast,
     getFromStorage,
